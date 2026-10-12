@@ -26,20 +26,35 @@ struct AgnoriaApp: App {
     }
 
     var body: some Scene {
-        WindowGroup {
-            RootView()
-                .environment(model)
-                .environment(model.settings)
-                .task { await model.importBundledDataIfNeeded() }
-                #if os(macOS)
+        #if os(macOS)
+        // 1ウィンドウのアプリなので WindowGroup ではなく Window（File > New Window が付かない）
+        Window("Agnoria", id: "main") {
+            content
                 .frame(minWidth: 480, minHeight: 640)
-                #endif
         }
         .modelContainer(model.container)
-        #if os(macOS)
         .defaultSize(width: 560, height: 820)
         .windowResizability(.contentMinSize)
+        .commands {
+            // テキスト編集も独自ツールバー設定もヘルプ文書も無いので、既定メニューから外す
+            CommandGroup(replacing: .undoRedo) {}
+            CommandGroup(replacing: .pasteboard) {}
+            CommandGroup(replacing: .toolbar) {}
+            CommandGroup(replacing: .help) {}
+        }
+        #else
+        WindowGroup {
+            content
+        }
+        .modelContainer(model.container)
         #endif
+    }
+
+    private var content: some View {
+        RootView()
+            .environment(model)
+            .environment(model.settings)
+            .task { await model.importBundledDataIfNeeded() }
     }
 }
 

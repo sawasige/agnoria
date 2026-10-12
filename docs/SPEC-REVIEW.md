@@ -33,6 +33,7 @@
 - ウィンドウ最小サイズ 480×640、既定 560×820。
 - ツールバー配置は `.cancellationAction` / `.primaryAction` を使い、iOS では左上 `×`・右上ボタン群として表示。
 - App Sandbox を有効化（通信なしなので追加の entitlement は不要）。
+- 1ウィンドウのアプリなので macOS では `WindowGroup` ではなく `Window` シーン（File > New Window が付かない）。最後のウィンドウを閉じたら終了。Edit（取り消し・ペーストボード）、View > ツールバー、Help の既定メニュー項目は外す。
 
 ## D. 未解決・要判断（ユーザー向け）
 
