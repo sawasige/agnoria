@@ -1,8 +1,18 @@
 import SwiftUI
 import SwiftData
 
+#if os(macOS)
+/// 1ウィンドウで完結するアプリなので、最後のウィンドウを閉じたら終了する
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
+}
+#endif
+
 @main
 struct AgnoriaApp: App {
+    #if os(macOS)
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    #endif
     @State private var model: AppModel
 
     init() {
