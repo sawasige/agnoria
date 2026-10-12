@@ -159,7 +159,11 @@ struct PracticeQuestionView: View {
                     VStack(spacing: 10) {
                         ForEach(Array(question.choices.enumerated()), id: \.offset) { i, c in
                             ChoiceButton(label: QuizQuestion.choiceLabels[i], text: c, state: state(i)) {
-                                if chosen == nil { chosen = i }
+                                guard chosen == nil else { return }
+                                chosen = i
+                                if settings.autoSpeak, let text = question.speechText {
+                                    Speaker.shared.speak(text, rate: settings.speechRate)
+                                }
                             }
                             .disabled(chosen != nil)
                         }

@@ -58,15 +58,6 @@ struct QuizView: View {
                             .foregroundStyle(answer.isCorrect ? .green : .red)
                         ExplanationView(question: q)
                             .id(q.id)
-                        Button {
-                            if run.isLast { model.finishRun() } else { model.advance() }
-                        } label: {
-                            Text(run.isLast ? "結果を見る" : "次へ")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.large)
-                        .keyboardShortcut(.defaultAction)
                     }
                     .transition(.opacity)
                 }
@@ -76,6 +67,13 @@ struct QuizView: View {
             .frame(maxWidth: .infinity)
             .animation(.default, value: answer != nil)
         }
+        .safeAreaInset(edge: .bottom) {
+            if answer != nil {
+                actionBar(run: run, question: q)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .animation(.default, value: answer != nil)
         .navigationTitle(run.config.categoryTitle)
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
@@ -85,23 +83,6 @@ struct QuizView: View {
             ToolbarItem(placement: .cancellationAction) {
                 Button { confirmLeave = true } label: { Label("やめる", systemImage: "xmark") }
                     .keyboardShortcut(.cancelAction)
-            }
-            if answer != nil {
-                ToolbarItemGroup(placement: .primaryAction) {
-                    if let text = q.speechText, !q.isPractice || q.word != nil {
-                        Button {
-                            Speaker.shared.speak(text, rate: settings.speechRate)
-                        } label: {
-                            Label("読み上げ", systemImage: "speaker.wave.2")
-                        }
-                    }
-                    Button {
-                        model.toggleBookmark(q.itemID)
-                        bookmarked = model.isBookmarked(q.itemID)
-                    } label: {
-                        Label("ブックマーク", systemImage: bookmarked ? "bookmark.fill" : "bookmark")
-                    }
-                }
             }
         }
         .confirmationDialog("このセットをやめますか？", isPresented: $confirmLeave, titleVisibility: .visible) {
@@ -118,9 +99,57 @@ struct QuizView: View {
         }
     }
 
+    /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる
+    @ViewBuilder
+    private func actionBar(run: QuizRun, question q: QuizQuestion) -> some View {
+        VStack(spacing: 10) {
+            HStack(spacing: 10) {
+                if let text = q.speechText {
+                    Button {
+                        Speaker.shared.speak(text, rate: settings.speechRate)
+                    } label: {
+                        Label("読み上げ", systemImage: "speaker.wave.2")
+                            .frame(maxWidth: .infinity)
+                    }
+                }
+                Button {
+                    model.toggleBookmark(q.itemID)
+                    bookmarked = model.isBookmarked(q.itemID)
+                } label: {
+                    Label(bookmarked ? "ブックマーク済み" : "ブックマーク",
+                          systemImage: bookmarked ? "bookmark.fill" : "bookmark")
+                        .frame(maxWidth: .infinity)
+                }
+                .tint(bookmarked ? .orange : nil)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+
+            Button {
+                Speaker.shared.stop()
+                if run.isLast { model.finishRun() } else { model.advance() }
+            } label: {
+                Text(run.isLast ? "結果を見る" : "次へ")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .keyboardShortcut(.defaultAction)
+        }
+        .padding(.horizontal)
+        .padding(.top, 10)
+        .padding(.bottom, 6)
+        .frame(maxWidth: 720)
+        .frame(maxWidth: .infinity)
+        .background(.bar)
+    }
+
     private func select(_ index: Int) {
         guard let run = model.run, !run.isAnswered else { return }
         model.answerCurrent(index)
+        if settings.autoSpeak, let text = run.current.speechText {
+            Speaker.shared.speak(text, rate: settings.speechRate)
+        }
         if let a = run.currentAnswer {
             AccessibilityNotification.Announcement(a.isCorrect ? "正解" : "不正解。正解は \(QuizQuestion.choiceLabels[run.current.correctIndex])").post()
         }

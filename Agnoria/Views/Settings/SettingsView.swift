@@ -24,6 +24,7 @@ struct SettingsView: View {
                 }
 
                 Section("読み上げ") {
+                    Toggle("回答後に例文を自動で読み上げる", isOn: $settings.autoSpeak)
                     VStack(alignment: .leading) {
                         Slider(value: $settings.speechRate, in: AppSettings.speechRateRange, step: 0.05) {
                             Text("速度")

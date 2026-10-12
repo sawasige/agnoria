@@ -8,6 +8,7 @@ final class AppSettings {
     private enum Key {
         static let levels = "enabledLevels"
         static let speechRate = "speechRate"
+        static let autoSpeak = "autoSpeak"
         static let importedFingerprint = "importedDataFingerprint"
     }
 
@@ -20,6 +21,11 @@ final class AppSettings {
     /// AVSpeechUtterance.rate（0.0〜1.0）。デフォルトはやや遅め
     var speechRate: Double {
         didSet { defaults.set(speechRate, forKey: Key.speechRate) }
+    }
+
+    /// 回答後に例文を自動で読み上げる。デフォルト ON
+    var autoSpeak: Bool {
+        didSet { defaults.set(autoSpeak, forKey: Key.autoSpeak) }
     }
 
     var importedFingerprint: String? {
@@ -36,6 +42,7 @@ final class AppSettings {
         }
         let rate = defaults.double(forKey: Key.speechRate)
         speechRate = rate == 0 ? 0.45 : rate
+        autoSpeak = defaults.object(forKey: Key.autoSpeak) as? Bool ?? true
     }
 
     static let speechRateRange: ClosedRange<Double> = 0.3...0.6
