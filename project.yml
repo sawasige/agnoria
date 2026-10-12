@@ -33,7 +33,6 @@ targets:
         NSHumanReadableCopyright: ""
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
-        UIRequiresFullScreen: true
         ITSAppUsesNonExemptEncryption: false
     settings:
       base:
