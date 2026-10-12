@@ -25,14 +25,14 @@ final class Speaker {
         synthesizer.stopSpeaking(at: .immediate)
     }
 
-    /// サイレントモードでも鳴らす。AVAudioSession は iOS のみ。
+    /// マナーモード（サイレントスイッチ）に従う: .ambient なら消音中は鳴らない。AVAudioSession は iOS のみ。
     /// 同期の setActive はメインスレッドを止めうるので、iOS 27 の非同期 API を使う
     private func activateSessionIfNeeded() async {
         #if os(iOS)
         guard !sessionConfigured else { return }
         sessionConfigured = true
         let session = AVAudioSession.sharedInstance()
-        try? session.setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
+        try? session.setCategory(.ambient, mode: .spokenAudio, options: [.duckOthers])
         _ = try? await session.activate(options: [])
         #endif
     }

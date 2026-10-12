@@ -219,7 +219,7 @@ SessionResult
 ## 6. 音声
 - `AVSpeechSynthesizer`、`AVSpeechSynthesisVoice(language: "en-US")`
 - 例文のみ読み上げ。単語単体の読み上げは v2
-- サイレントモードでも鳴らす（`.playback` カテゴリ）。**[v1.1]** `AVAudioSession` は iOS のみなので `#if os(iOS)` で囲む
+- **[v1.1]** マナーモード（サイレントスイッチ）に従う。`.ambient` カテゴリなので消音中は鳴らない。自動読み上げをデフォルト ON にしたため、意図せず音が出る経路を無くす。`AVAudioSession` は iOS のみなので `#if os(iOS)` で囲む
 
 ---
 
