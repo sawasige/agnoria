@@ -3,456 +3,254 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 110;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		0052493345C8C86426FFFE6A /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5759AF27B37A5530B477FB0C /* QuizView.swift */; };
-		10E3AFC4B5E357E53CB6AE14 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C217608E9DB5166A949B8BC /* Models.swift */; };
-		226EF6519933F9B0177F76BD /* Streak.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D9F8633E3D42AFFDB07A12 /* Streak.swift */; };
-		26F6012E79E4EAED547AEC3E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEE9F464AE2A951D2131524 /* HomeView.swift */; };
-		2DC497A8282E60A6258C0ABC /* QuizRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2837E2EFE6484FBBFD373B /* QuizRun.swift */; };
-		2F4C63B07D6A5E0FE1413D8D /* BundleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EA9035D075877E4A3EB548 /* BundleData.swift */; };
-		3977BCDF94831B3F8C6B4BF0 /* words.json in Resources */ = {isa = PBXBuildFile; fileRef = B011B320171FECB22C95AE00 /* words.json */; };
-		4B414A136C74EB297C9A9DE5 /* PriorityAndSetBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F4FCC8E525D60458ABAD77 /* PriorityAndSetBuilderTests.swift */; };
-		4BCF098607635068AD056D90 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70047B688EE1B426C7B7B596 /* Priority.swift */; };
-		50825B42F7716EBEF6500984 /* Snapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05DC823B907CA181E9AF61 /* Snapshots.swift */; };
-		55A1E56F05256C87A4DE396B /* SetBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400822149860BFA2C56F9BAE /* SetBuilder.swift */; };
-		59E06832C12C4A15969FEC9A /* AIAssist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41B096809B8F2364454A88F /* AIAssist.swift */; };
-		7175F4E51360192CFC5CAA34 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3DAF3EA0DCE1477EEEF74D /* AppSettings.swift */; };
-		7712902255A5D8C5AF5069A0 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDBE51C4D7C6E32D753298 /* AppModel.swift */; };
-		7B1C35164B6C0C32E55140DF /* HomeStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4CC555557F339A00B4B580 /* HomeStats.swift */; };
-		80313CAF438828613499129A /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C162D2E9660E6D22DC03CD32 /* AppModelTests.swift */; };
-		8043D712C7468C2C4427DA27 /* WordQuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2E15B0A39921310E1DEC2E /* WordQuestionTests.swift */; };
-		8624ABAE5A996509F51099B1 /* QuizQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F803D9D75A94EA72FE8FCB33 /* QuizQuestion.swift */; };
-		8FC332AFF91C8D707A5D1247 /* Cloze.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB0ECC366F4B4A77A2A3F99 /* Cloze.swift */; };
-		A22D61202169B53F7A873C83 /* AgnoriaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F77CEB845EAABDF2EFC7E8 /* AgnoriaApp.swift */; };
-		A6638F680158A02896559F8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9317D9731E5F9F2021E6523F /* Assets.xcassets */; };
-		AFB1A84520A20CE3032FC19A /* grammar.json in Resources */ = {isa = PBXBuildFile; fileRef = 256258D9680B802CB67D4A1E /* grammar.json */; };
-		C05783E82CEAFF224C8367EE /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FA82733E1BE3118FCB745C /* ResultView.swift */; };
-		D1C7ACB9703A7FDD3F3FCCB7 /* ExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE63570A25E5A91DD8D436FC /* ExplanationView.swift */; };
-		D6145FB0500E838B090DCBFD /* DrillTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CD919BD0BA1C0C978E9749 /* DrillTypes.swift */; };
-		D9BC318D3A30415A81247A35 /* ChoiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2449D7CDBF670DC6F3714004 /* ChoiceButton.swift */; };
-		F1FA1576851AE73CD8F27F9F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2E24AA3F7C77FBC2C7B9A3 /* SettingsView.swift */; };
-		F21D1383BBCBBB71E3BF802E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715BA7E9D75B672A9BAEFE9 /* DataTests.swift */; };
-		FB62F942AFEEF5C9E18566BC /* DataImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC71004CCC9FA185E62B2E3 /* DataImporter.swift */; };
-		FCDF70DEF27691F1B3290A64 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFB5996E791AD1CF2952FF /* Speaker.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
-		E60A452B10B0F36A1CABF23C /* PBXContainerItemProxy */ = {
+		2A3795AA307CBA1700D1AEF0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 94668CFB41270A364369F927 /* Project object */;
+			containerPortal = 2A379594307CBA1500D1AEF0 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4410D6B6739A58F9D84F13E1;
+			remoteGlobalIDString = 2A37959B307CBA1500D1AEF0;
+			remoteInfo = Agnoria;
+		};
+		2A3795B4307CBA1700D1AEF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A379594307CBA1500D1AEF0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A37959B307CBA1500D1AEF0;
 			remoteInfo = Agnoria;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03FA82733E1BE3118FCB745C /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
-		2449D7CDBF670DC6F3714004 /* ChoiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceButton.swift; sourceTree = "<group>"; };
-		256258D9680B802CB67D4A1E /* grammar.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = grammar.json; sourceTree = "<group>"; };
-		2B05DC823B907CA181E9AF61 /* Snapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshots.swift; sourceTree = "<group>"; };
-		338DC19107E389559D1526FD /* AgnoriaTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = AgnoriaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37EDBE51C4D7C6E32D753298 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		400822149860BFA2C56F9BAE /* SetBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBuilder.swift; sourceTree = "<group>"; };
-		463E6400915CF1284B55DC1D /* Agnoria.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Agnoria.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C3DAF3EA0DCE1477EEEF74D /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		54F77CEB845EAABDF2EFC7E8 /* AgnoriaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgnoriaApp.swift; sourceTree = "<group>"; };
-		55CFB5996E791AD1CF2952FF /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
-		5759AF27B37A5530B477FB0C /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
-		6C217608E9DB5166A949B8BC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		70047B688EE1B426C7B7B596 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
-		71659BA63C00080CD809132E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		71F4FCC8E525D60458ABAD77 /* PriorityAndSetBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityAndSetBuilderTests.swift; sourceTree = "<group>"; };
-		7E2837E2EFE6484FBBFD373B /* QuizRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRun.swift; sourceTree = "<group>"; };
-		9317D9731E5F9F2021E6523F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A0D170D38E63AD09D3E20E65 /* Agnoria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Agnoria.entitlements; sourceTree = "<group>"; };
-		AA2E24AA3F7C77FBC2C7B9A3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		ADEE9F464AE2A951D2131524 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		B011B320171FECB22C95AE00 /* words.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = words.json; sourceTree = "<group>"; };
-		B3CD919BD0BA1C0C978E9749 /* DrillTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillTypes.swift; sourceTree = "<group>"; };
-		C162D2E9660E6D22DC03CD32 /* AppModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelTests.swift; sourceTree = "<group>"; };
-		C2EA9035D075877E4A3EB548 /* BundleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleData.swift; sourceTree = "<group>"; };
-		CCC71004CCC9FA185E62B2E3 /* DataImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataImporter.swift; sourceTree = "<group>"; };
-		CF2E15B0A39921310E1DEC2E /* WordQuestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordQuestionTests.swift; sourceTree = "<group>"; };
-		D41B096809B8F2364454A88F /* AIAssist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAssist.swift; sourceTree = "<group>"; };
-		D8D9F8633E3D42AFFDB07A12 /* Streak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streak.swift; sourceTree = "<group>"; };
-		DFB0ECC366F4B4A77A2A3F99 /* Cloze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloze.swift; sourceTree = "<group>"; };
-		E715BA7E9D75B672A9BAEFE9 /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
-		EE4CC555557F339A00B4B580 /* HomeStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStats.swift; sourceTree = "<group>"; };
-		EE63570A25E5A91DD8D436FC /* ExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationView.swift; sourceTree = "<group>"; };
-		F803D9D75A94EA72FE8FCB33 /* QuizQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestion.swift; sourceTree = "<group>"; };
+		2A37959C307CBA1500D1AEF0 /* Agnoria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agnoria.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A3795A9307CBA1700D1AEF0 /* AgnoriaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgnoriaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A3795B3307CBA1700D1AEF0 /* AgnoriaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgnoriaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXGroup section */
-		08A7A11590359CB50B091618 /* AgnoriaTests */ = {
-			isa = PBXGroup;
-			children = (
-				C162D2E9660E6D22DC03CD32 /* AppModelTests.swift */,
-				E715BA7E9D75B672A9BAEFE9 /* DataTests.swift */,
-				71F4FCC8E525D60458ABAD77 /* PriorityAndSetBuilderTests.swift */,
-				CF2E15B0A39921310E1DEC2E /* WordQuestionTests.swift */,
-			);
-			path = AgnoriaTests;
-			sourceTree = "<group>";
-		};
-		1ABDC06B6106938E3EC06F4C /* Agnoria */ = {
-			isa = PBXGroup;
-			children = (
-				A0D170D38E63AD09D3E20E65 /* Agnoria.entitlements */,
-				71659BA63C00080CD809132E /* Info.plist */,
-				52B960FE3A5D17F2BE771CBF /* App */,
-				40B26657BD6E8CFB4034C992 /* Data */,
-				93E7EE6C037A4AEB927CAF8D /* Logic */,
-				D1D4DF15CB72BB2B3CEDB9A7 /* Models */,
-				5EFE80AE97A8334330765749 /* Resources */,
-				57A91B491217BD7A5315B682 /* Services */,
-				B853CD945F59A14BCD9FA9D1 /* Views */,
-			);
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2A37959E307CBA1500D1AEF0 /* Agnoria */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Agnoria;
 			sourceTree = "<group>";
 		};
-		40B26657BD6E8CFB4034C992 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				C2EA9035D075877E4A3EB548 /* BundleData.swift */,
-				CCC71004CCC9FA185E62B2E3 /* DataImporter.swift */,
-			);
-			path = Data;
+		2A3795AC307CBA1700D1AEF0 /* AgnoriaTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AgnoriaTests;
 			sourceTree = "<group>";
 		};
-		415F9E2AD97CF97919A1C8C8 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				ADEE9F464AE2A951D2131524 /* HomeView.swift */,
-			);
-			path = Home;
+		2A3795B6307CBA1700D1AEF0 /* AgnoriaUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AgnoriaUITests;
 			sourceTree = "<group>";
 		};
-		52B960FE3A5D17F2BE771CBF /* App */ = {
-			isa = PBXGroup;
-			children = (
-				54F77CEB845EAABDF2EFC7E8 /* AgnoriaApp.swift */,
-				37EDBE51C4D7C6E32D753298 /* AppModel.swift */,
-				7E2837E2EFE6484FBBFD373B /* QuizRun.swift */,
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A379599307CBA1500D1AEF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
 			);
-			path = App;
-			sourceTree = "<group>";
 		};
-		5775F7317D127ABFF1480B54 /* Result */ = {
-			isa = PBXGroup;
-			children = (
-				03FA82733E1BE3118FCB745C /* ResultView.swift */,
+		2A3795A6307CBA1700D1AEF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
 			);
-			path = Result;
-			sourceTree = "<group>";
 		};
-		57A91B491217BD7A5315B682 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				D41B096809B8F2364454A88F /* AIAssist.swift */,
-				4C3DAF3EA0DCE1477EEEF74D /* AppSettings.swift */,
-				55CFB5996E791AD1CF2952FF /* Speaker.swift */,
+		2A3795B0307CBA1700D1AEF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
 			);
-			path = Services;
-			sourceTree = "<group>";
 		};
-		5EFE80AE97A8334330765749 /* Resources */ = {
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A379593307CBA1500D1AEF0 = {
 			isa = PBXGroup;
 			children = (
-				9317D9731E5F9F2021E6523F /* Assets.xcassets */,
-				994227834D501771690763E8 /* Data */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		857704E4D78C15B5195F4B4F = {
-			isa = PBXGroup;
-			children = (
-				1ABDC06B6106938E3EC06F4C /* Agnoria */,
-				08A7A11590359CB50B091618 /* AgnoriaTests */,
-				CC2752D8A1F6CBF6816DD9E6 /* Products */,
+				2A37959E307CBA1500D1AEF0 /* Agnoria */,
+				2A3795AC307CBA1700D1AEF0 /* AgnoriaTests */,
+				2A3795B6307CBA1700D1AEF0 /* AgnoriaUITests */,
+				2A37959D307CBA1500D1AEF0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		93E7EE6C037A4AEB927CAF8D /* Logic */ = {
+		2A37959D307CBA1500D1AEF0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DFB0ECC366F4B4A77A2A3F99 /* Cloze.swift */,
-				EE4CC555557F339A00B4B580 /* HomeStats.swift */,
-				70047B688EE1B426C7B7B596 /* Priority.swift */,
-				F803D9D75A94EA72FE8FCB33 /* QuizQuestion.swift */,
-				400822149860BFA2C56F9BAE /* SetBuilder.swift */,
-				D8D9F8633E3D42AFFDB07A12 /* Streak.swift */,
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
-		994227834D501771690763E8 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				256258D9680B802CB67D4A1E /* grammar.json */,
-				B011B320171FECB22C95AE00 /* words.json */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		9E2CE8DC99D33E71A45D6FE2 /* Quiz */ = {
-			isa = PBXGroup;
-			children = (
-				5759AF27B37A5530B477FB0C /* QuizView.swift */,
-			);
-			path = Quiz;
-			sourceTree = "<group>";
-		};
-		B853CD945F59A14BCD9FA9D1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				415F9E2AD97CF97919A1C8C8 /* Home */,
-				9E2CE8DC99D33E71A45D6FE2 /* Quiz */,
-				5775F7317D127ABFF1480B54 /* Result */,
-				E4233AB917FEB92B313411E2 /* Settings */,
-				DF39BD778F6505B2CC62370F /* Shared */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		CC2752D8A1F6CBF6816DD9E6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				463E6400915CF1284B55DC1D /* Agnoria.app */,
-				338DC19107E389559D1526FD /* AgnoriaTests.xctest */,
+				2A37959C307CBA1500D1AEF0 /* Agnoria.app */,
+				2A3795A9307CBA1700D1AEF0 /* AgnoriaTests.xctest */,
+				2A3795B3307CBA1700D1AEF0 /* AgnoriaUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D1D4DF15CB72BB2B3CEDB9A7 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B3CD919BD0BA1C0C978E9749 /* DrillTypes.swift */,
-				6C217608E9DB5166A949B8BC /* Models.swift */,
-				2B05DC823B907CA181E9AF61 /* Snapshots.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		DF39BD778F6505B2CC62370F /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				2449D7CDBF670DC6F3714004 /* ChoiceButton.swift */,
-				EE63570A25E5A91DD8D436FC /* ExplanationView.swift */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		E4233AB917FEB92B313411E2 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				AA2E24AA3F7C77FBC2C7B9A3 /* SettingsView.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3A56F8B914023CC78302C7D7 /* AgnoriaTests */ = {
+		2A37959B307CBA1500D1AEF0 /* Agnoria */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0BB0A1B8771237C25F5676AA /* Build configuration list for PBXNativeTarget "AgnoriaTests" */;
+			buildConfigurationList = 2A3795BB307CBA1700D1AEF0 /* Build configuration list for PBXNativeTarget "Agnoria" */;
 			buildPhases = (
-				FB4A1EB2A26FD2FB1EE188BC /* Sources */,
+				2A379598307CBA1500D1AEF0 /* Sources */,
+				2A379599307CBA1500D1AEF0 /* Frameworks */,
+				2A37959A307CBA1500D1AEF0 /* Resources */,
 			);
 			buildRules = (
 			);
-			dependencies = (
-				A9187F70BBFCA475393F14CB /* PBXTargetDependency */,
-			);
-			name = AgnoriaTests;
-			packageProductDependencies = (
-			);
-			productName = AgnoriaTests;
-			productReference = 338DC19107E389559D1526FD /* AgnoriaTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		4410D6B6739A58F9D84F13E1 /* Agnoria */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C257C512B322516F3DDA2C1 /* Build configuration list for PBXNativeTarget "Agnoria" */;
-			buildPhases = (
-				3163E239B98A7064F203DF7C /* Sources */,
-				AFC5E122479DB2A72A1C3EB4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
+			fileSystemSynchronizedGroups = (
+				2A37959E307CBA1500D1AEF0 /* Agnoria */,
 			);
 			name = Agnoria;
-			packageProductDependencies = (
-			);
 			productName = Agnoria;
-			productReference = 463E6400915CF1284B55DC1D /* Agnoria.app */;
+			productReference = 2A37959C307CBA1500D1AEF0 /* Agnoria.app */;
 			productType = "com.apple.product-type.application";
+		};
+		2A3795A8307CBA1700D1AEF0 /* AgnoriaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A3795BE307CBA1700D1AEF0 /* Build configuration list for PBXNativeTarget "AgnoriaTests" */;
+			buildPhases = (
+				2A3795A5307CBA1700D1AEF0 /* Sources */,
+				2A3795A6307CBA1700D1AEF0 /* Frameworks */,
+				2A3795A7307CBA1700D1AEF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A3795AB307CBA1700D1AEF0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2A3795AC307CBA1700D1AEF0 /* AgnoriaTests */,
+			);
+			name = AgnoriaTests;
+			productName = AgnoriaTests;
+			productReference = 2A3795A9307CBA1700D1AEF0 /* AgnoriaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2A3795B2307CBA1700D1AEF0 /* AgnoriaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A3795C1307CBA1700D1AEF0 /* Build configuration list for PBXNativeTarget "AgnoriaUITests" */;
+			buildPhases = (
+				2A3795AF307CBA1700D1AEF0 /* Sources */,
+				2A3795B0307CBA1700D1AEF0 /* Frameworks */,
+				2A3795B1307CBA1700D1AEF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A3795B5307CBA1700D1AEF0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2A3795B6307CBA1700D1AEF0 /* AgnoriaUITests */,
+			);
+			name = AgnoriaUITests;
+			productName = AgnoriaUITests;
+			productReference = 2A3795B3307CBA1700D1AEF0 /* AgnoriaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		94668CFB41270A364369F927 /* Project object */ = {
+		2A379594307CBA1500D1AEF0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
-					3A56F8B914023CC78302C7D7 = {
-						DevelopmentTeam = U9296HT99T;
-						ProvisioningStyle = Automatic;
+					2A37959B307CBA1500D1AEF0 = {
+						CreatedOnToolsVersion = 27.0;
 					};
-					4410D6B6739A58F9D84F13E1 = {
-						DevelopmentTeam = U9296HT99T;
-						ProvisioningStyle = Automatic;
+					2A3795A8307CBA1700D1AEF0 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 2A37959B307CBA1500D1AEF0;
+					};
+					2A3795B2307CBA1700D1AEF0 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 2A37959B307CBA1500D1AEF0;
 					};
 				};
 			};
-			buildConfigurationList = 026BB9058AFEA0AECB3A5410 /* Build configuration list for PBXProject "Agnoria" */;
-			compatibilityVersion = "Xcode 14.0";
+			buildConfigurationList = 2A379597307CBA1500D1AEF0 /* Build configuration list for PBXProject "Agnoria" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
+				Base,
 			);
-			mainGroup = 857704E4D78C15B5195F4B4F;
+			mainGroup = 2A379593307CBA1500D1AEF0;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
+			productRefGroup = 2A37959D307CBA1500D1AEF0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4410D6B6739A58F9D84F13E1 /* Agnoria */,
-				3A56F8B914023CC78302C7D7 /* AgnoriaTests */,
+				2A37959B307CBA1500D1AEF0 /* Agnoria */,
+				2A3795A8307CBA1700D1AEF0 /* AgnoriaTests */,
+				2A3795B2307CBA1700D1AEF0 /* AgnoriaUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AFC5E122479DB2A72A1C3EB4 /* Resources */ = {
+		2A37959A307CBA1500D1AEF0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
-				A6638F680158A02896559F8A /* Assets.xcassets in Resources */,
-				AFB1A84520A20CE3032FC19A /* grammar.json in Resources */,
-				3977BCDF94831B3F8C6B4BF0 /* words.json in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A3795A7307CBA1700D1AEF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		2A3795B1307CBA1700D1AEF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3163E239B98A7064F203DF7C /* Sources */ = {
+		2A379598307CBA1500D1AEF0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
-				59E06832C12C4A15969FEC9A /* AIAssist.swift in Sources */,
-				A22D61202169B53F7A873C83 /* AgnoriaApp.swift in Sources */,
-				7712902255A5D8C5AF5069A0 /* AppModel.swift in Sources */,
-				7175F4E51360192CFC5CAA34 /* AppSettings.swift in Sources */,
-				2F4C63B07D6A5E0FE1413D8D /* BundleData.swift in Sources */,
-				D9BC318D3A30415A81247A35 /* ChoiceButton.swift in Sources */,
-				8FC332AFF91C8D707A5D1247 /* Cloze.swift in Sources */,
-				FB62F942AFEEF5C9E18566BC /* DataImporter.swift in Sources */,
-				D6145FB0500E838B090DCBFD /* DrillTypes.swift in Sources */,
-				D1C7ACB9703A7FDD3F3FCCB7 /* ExplanationView.swift in Sources */,
-				7B1C35164B6C0C32E55140DF /* HomeStats.swift in Sources */,
-				26F6012E79E4EAED547AEC3E /* HomeView.swift in Sources */,
-				10E3AFC4B5E357E53CB6AE14 /* Models.swift in Sources */,
-				4BCF098607635068AD056D90 /* Priority.swift in Sources */,
-				8624ABAE5A996509F51099B1 /* QuizQuestion.swift in Sources */,
-				2DC497A8282E60A6258C0ABC /* QuizRun.swift in Sources */,
-				0052493345C8C86426FFFE6A /* QuizView.swift in Sources */,
-				C05783E82CEAFF224C8367EE /* ResultView.swift in Sources */,
-				55A1E56F05256C87A4DE396B /* SetBuilder.swift in Sources */,
-				F1FA1576851AE73CD8F27F9F /* SettingsView.swift in Sources */,
-				50825B42F7716EBEF6500984 /* Snapshots.swift in Sources */,
-				FCDF70DEF27691F1B3290A64 /* Speaker.swift in Sources */,
-				226EF6519933F9B0177F76BD /* Streak.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FB4A1EB2A26FD2FB1EE188BC /* Sources */ = {
+		2A3795A5307CBA1700D1AEF0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
-				80313CAF438828613499129A /* AppModelTests.swift in Sources */,
-				F21D1383BBCBBB71E3BF802E /* DataTests.swift in Sources */,
-				4B414A136C74EB297C9A9DE5 /* PriorityAndSetBuilderTests.swift in Sources */,
-				8043D712C7468C2C4427DA27 /* WordQuestionTests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A3795AF307CBA1700D1AEF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A9187F70BBFCA475393F14CB /* PBXTargetDependency */ = {
+		2A3795AB307CBA1700D1AEF0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4410D6B6739A58F9D84F13E1 /* Agnoria */;
-			targetProxy = E60A452B10B0F36A1CABF23C /* PBXContainerItemProxy */;
+			target = 2A37959B307CBA1500D1AEF0 /* Agnoria */;
+			targetProxy = 2A3795AA307CBA1700D1AEF0 /* PBXContainerItemProxy */;
+		};
+		2A3795B5307CBA1700D1AEF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A37959B307CBA1500D1AEF0 /* Agnoria */;
+			targetProxy = 2A3795B4307CBA1700D1AEF0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2442F06833E8E688547F8138 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.AgnoriaTests;
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Agnoria.app/Agnoria";
-				"TEST_HOST[sdk=macosx*]" = "$(BUILT_PRODUCTS_DIR)/Agnoria.app/Contents/MacOS/Agnoria";
-			};
-			name = Debug;
-		};
-		5B6AA8443EBE6F320697195C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Agnoria/Agnoria.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				INFOPLIST_FILE = Agnoria/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.Agnoria;
-				PRODUCT_NAME = Agnoria;
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		A5AA709B27E102FBAE55F250 /* Release */ = {
+		2A3795B9307CBA1700D1AEF0 /* Debug configuration for PBXProject "Agnoria" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -478,126 +276,19 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = U9296HT99T;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
-				MACOSX_DEPLOYMENT_TARGET = 27.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_VERSION = 6.0;
-			};
-			name = Release;
-		};
-		A600CBEDF81F47CAB7FF2915 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Agnoria/Agnoria.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				INFOPLIST_FILE = Agnoria/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.Agnoria;
-				PRODUCT_NAME = Agnoria;
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		CEDB93D0CB398E80ED85CC96 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.AgnoriaTests;
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Agnoria.app/Agnoria";
-				"TEST_HOST[sdk=macosx*]" = "$(BUILT_PRODUCTS_DIR)/Agnoria.app/Contents/MacOS/Agnoria";
-			};
-			name = Release;
-		};
-		FDB318A91C159B1D19931510 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = U9296HT99T;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
 					"DEBUG=1",
+					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -605,52 +296,298 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
-				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
+		};
+		2A3795BA307CBA1700D1AEF0 /* Release configuration for PBXProject "Agnoria" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = U9296HT99T;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		2A3795BC307CBA1700D1AEF0 /* Debug configuration for PBXNativeTarget "Agnoria" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9296HT99T;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.Agnoria;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		2A3795BD307CBA1700D1AEF0 /* Release configuration for PBXNativeTarget "Agnoria" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9296HT99T;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.Agnoria;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
+		2A3795BF307CBA1700D1AEF0 /* Debug configuration for PBXNativeTarget "AgnoriaTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9296HT99T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.AgnoriaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Agnoria.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Agnoria";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		2A3795C0307CBA1700D1AEF0 /* Release configuration for PBXNativeTarget "AgnoriaTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9296HT99T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.AgnoriaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Agnoria.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Agnoria";
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
+		};
+		2A3795C2307CBA1700D1AEF0 /* Debug configuration for PBXNativeTarget "AgnoriaUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9296HT99T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.AgnoriaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Agnoria;
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Debug;
+		};
+		2A3795C3307CBA1700D1AEF0 /* Release configuration for PBXNativeTarget "AgnoriaUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U9296HT99T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.AgnoriaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Agnoria;
+				XROS_DEPLOYMENT_TARGET = 27.0;
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		026BB9058AFEA0AECB3A5410 /* Build configuration list for PBXProject "Agnoria" */ = {
+		2A379597307CBA1500D1AEF0 /* Build configuration list for PBXProject "Agnoria" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FDB318A91C159B1D19931510 /* Debug */,
-				A5AA709B27E102FBAE55F250 /* Release */,
+				2A3795B9307CBA1700D1AEF0 /* Debug configuration for PBXProject "Agnoria" */,
+				2A3795BA307CBA1700D1AEF0 /* Release configuration for PBXProject "Agnoria" */,
 			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
-		0BB0A1B8771237C25F5676AA /* Build configuration list for PBXNativeTarget "AgnoriaTests" */ = {
+		2A3795BB307CBA1700D1AEF0 /* Build configuration list for PBXNativeTarget "Agnoria" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2442F06833E8E688547F8138 /* Debug */,
-				CEDB93D0CB398E80ED85CC96 /* Release */,
+				2A3795BC307CBA1700D1AEF0 /* Debug configuration for PBXNativeTarget "Agnoria" */,
+				2A3795BD307CBA1700D1AEF0 /* Release configuration for PBXNativeTarget "Agnoria" */,
 			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
-		3C257C512B322516F3DDA2C1 /* Build configuration list for PBXNativeTarget "Agnoria" */ = {
+		2A3795BE307CBA1700D1AEF0 /* Build configuration list for PBXNativeTarget "AgnoriaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A600CBEDF81F47CAB7FF2915 /* Debug */,
-				5B6AA8443EBE6F320697195C /* Release */,
+				2A3795BF307CBA1700D1AEF0 /* Debug configuration for PBXNativeTarget "AgnoriaTests" */,
+				2A3795C0307CBA1700D1AEF0 /* Release configuration for PBXNativeTarget "AgnoriaTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
+		};
+		2A3795C1307CBA1700D1AEF0 /* Build configuration list for PBXNativeTarget "AgnoriaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A3795C2307CBA1700D1AEF0 /* Debug configuration for PBXNativeTarget "AgnoriaUITests" */,
+				2A3795C3307CBA1700D1AEF0 /* Release configuration for PBXNativeTarget "AgnoriaUITests" */,
+			);
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 94668CFB41270A364369F927 /* Project object */;
+	rootObject = 2A379594307CBA1500D1AEF0 /* Project object */;
+	validationLevel = 1;
 }

@@ -1,7 +1,7 @@
 import Foundation
 
 /// 例文中の単語を空欄に置き換える（§3.1）
-enum Cloze {
+nonisolated enum Cloze {
     static let blank = "______"
 
     /// 置換できなければ nil（その語は cloze 対象外）

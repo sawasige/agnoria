@@ -1,7 +1,7 @@
 import Foundation
 
 /// 連続学習日数（1日1セット以上で継続）
-enum Streak {
+nonisolated enum Streak {
     struct Result: Equatable, Sendable {
         var days: Int
         var doneToday: Bool
@@ -23,7 +23,7 @@ enum Streak {
 }
 
 /// レベル称号（§4.5）。演出のみ
-enum Rank {
+nonisolated enum Rank {
     static func title(totalCorrect: Int) -> String {
         switch totalCorrect {
         case ..<100: "Kore"

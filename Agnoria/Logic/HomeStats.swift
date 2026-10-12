@@ -1,7 +1,7 @@
 import Foundation
 
 /// ホームのタイルに出す集計
-struct CategoryStats: Hashable, Sendable {
+nonisolated struct CategoryStats: Hashable, Sendable {
     var total: Int = 0
     var graduated: Int = 0
     var answered: Int = 0
@@ -12,7 +12,7 @@ struct CategoryStats: Hashable, Sendable {
     }
 }
 
-enum HomeStats {
+nonisolated enum HomeStats {
     static func byCategory(items: [(id: String, category: String)],
                            progress: [String: ProgressSnapshot]) -> [String: CategoryStats] {
         var out: [String: CategoryStats] = [:]

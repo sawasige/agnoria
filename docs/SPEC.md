@@ -22,13 +22,13 @@
 
 ## 1. 技術スタック
 
-- Swift 6 / SwiftUI / SwiftData
+- Swift / SwiftUI / SwiftData。**[v1.1]** 言語設定は Xcode 27 の新規プロジェクト既定のまま（Swift 5 言語モード + Approachable Concurrency + MainActor 既定分離）。純粋ロジックの値型は `nonisolated` を付けて actor やテストから使えるようにする
 - Deployment Target: iOS 27.0 / macOS 27.0 **[v1.1]**
 - アーキテクチャ: MV（View + @Observable のストア）。MVVM にはしない。画面数が少ないため
 - 依存ライブラリ: なし（SPM 追加禁止。標準フレームワークのみ）
 - Foundation Models（Apple Intelligence）: 任意機能として利用。非対応端末では該当UIを非表示
 - AVSpeechSynthesizer: 例文読み上げ（en-US）
-- プロジェクト生成: XcodeGen（`project.yml` → `xcodegen generate`）。**[v1.1]** 以下がすべて通ることを完了条件とする
+- プロジェクト: **[v1.1]** Xcode 27 の Multiplatform App テンプレートで生成したものを正とする（XcodeGen は使わない）。Info.plist は `GENERATE_INFOPLIST_FILE` + `INFOPLIST_KEY_*`、sandbox は `ENABLE_APP_SANDBOX` のビルド設定で、テンプレートからの変更は「Apple Vision を外す」「iPhone 縦固定」「App Store カテゴリ」「Bundle ID / Team」のみ。以下がすべて通ることを完了条件とする
   - `xcodebuild -scheme Agnoria -destination 'platform=iOS Simulator,name=iPhone 17' build`
   - `xcodebuild -scheme Agnoria -destination 'platform=macOS' build`
   - 上記2つの destination で `xcodebuild ... test`
@@ -40,7 +40,7 @@
 
 ### 2.1 バンドルJSON
 
-`Agnoria/Resources/Data/` 配下に `grammar.json` / `words.json` を置く。起動時に SwiftData へ取り込む。
+`Agnoria/Resources/Data/` 配下に `grammar.json` / `words.json` を置く（synchronized folder なので Xcode に手で追加する必要はない）。起動時に SwiftData へ取り込む。
 
 #### `grammar.json`（Part5 文法）
 ```json

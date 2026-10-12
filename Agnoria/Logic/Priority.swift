@@ -1,7 +1,7 @@
 import Foundation
 
 /// 出題優先度（§3.2）。純粋関数のみ
-enum Priority {
+nonisolated enum Priority {
     static let recentWindow = 3
 
     /// 未回答: 3 / 直近に不正解あり: 2 + 不正解数 / 直近3回すべて正解: 0.3（卒業）/ それ以外: 1
@@ -23,7 +23,7 @@ enum Priority {
 }
 
 /// 重み付きランダム抽出（重複なし）
-enum WeightedSampler {
+nonisolated enum WeightedSampler {
     static func sample<T>(_ items: [(item: T, weight: Double)], count: Int,
                           using rng: inout some RandomNumberGenerator) -> [T] {
         var pool = items.filter { $0.weight > 0 }
@@ -43,7 +43,7 @@ enum WeightedSampler {
 }
 
 /// 選択肢のシャッフル。正解インデックスを追跡する
-enum ChoiceShuffler {
+nonisolated enum ChoiceShuffler {
     static func shuffle(_ choices: [String], correctIndex: Int,
                         using rng: inout some RandomNumberGenerator) -> (choices: [String], correctIndex: Int) {
         let order = Array(choices.indices).shuffled(using: &rng)
@@ -54,7 +54,7 @@ enum ChoiceShuffler {
 }
 
 /// テスト用の決定的 RNG（SplitMix64）
-struct SeededRandomNumberGenerator: RandomNumberGenerator {
+nonisolated struct SeededRandomNumberGenerator: RandomNumberGenerator {
     private var state: UInt64
     init(seed: UInt64) { state = seed }
     mutating func next() -> UInt64 {

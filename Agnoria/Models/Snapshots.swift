@@ -1,7 +1,7 @@
 import Foundation
 
 /// バンドル JSON の 1 要素 / SwiftData から切り出した値型。actor 間を安全に渡せる
-struct WordSnapshot: Codable, Hashable, Sendable, Identifiable {
+nonisolated struct WordSnapshot: Codable, Hashable, Sendable, Identifiable {
     var id: String
     var word: String
     var pos: String
@@ -18,7 +18,7 @@ struct WordSnapshot: Codable, Hashable, Sendable, Identifiable {
     }
 }
 
-struct GrammarSnapshot: Codable, Hashable, Sendable, Identifiable {
+nonisolated struct GrammarSnapshot: Codable, Hashable, Sendable, Identifiable {
     var id: String
     var category: String
     var question: String
@@ -28,7 +28,7 @@ struct GrammarSnapshot: Codable, Hashable, Sendable, Identifiable {
     var level: Int
 }
 
-struct ProgressSnapshot: Hashable, Sendable {
+nonisolated struct ProgressSnapshot: Hashable, Sendable {
     var itemID: String
     var recentResults: [Bool] = []
     var totalCorrect: Int = 0

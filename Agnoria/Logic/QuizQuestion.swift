@@ -1,7 +1,7 @@
 import Foundation
 
 /// 画面に出す1問。値型。SwiftData には依存しない
-struct QuizQuestion: Identifiable, Hashable, Sendable {
+nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
     let id: UUID
     let itemID: String
     let mode: DrillMode
@@ -38,7 +38,7 @@ struct QuizQuestion: Identifiable, Hashable, Sendable {
     static let choiceLabels = ["A", "B", "C", "D"]
 }
 
-enum GrammarQuestionFactory {
+nonisolated enum GrammarQuestionFactory {
     static func make(_ g: GrammarSnapshot, using rng: inout some RandomNumberGenerator) -> QuizQuestion {
         let (choices, correct) = ChoiceShuffler.shuffle(g.choices, correctIndex: g.answer, using: &rng)
         return QuizQuestion(itemID: g.id, mode: .grammar, wordFormat: nil, categoryName: g.category,
@@ -48,7 +48,7 @@ enum GrammarQuestionFactory {
     }
 }
 
-enum WordQuestionFactory {
+nonisolated enum WordQuestionFactory {
     /// 誤答用の他単語3語。同 pos・同 level → 同 pos → 全体 の順で条件を緩める
     static func distractorWords(for w: WordSnapshot, pool: [WordSnapshot],
                                 using rng: inout some RandomNumberGenerator) -> [WordSnapshot] {

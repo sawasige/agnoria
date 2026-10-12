@@ -40,7 +40,7 @@
 2. **アプリアイコン**: `AppIcon.appiconset` は空。1024×1024 の画像を入れる。
 3. **文法30問の内容確認**: 原則どおり自作だが、正解の一意性は人の目でも一度見てほしい（`docs/` ではなく `Agnoria/Resources/Data/grammar.json`）。
 4. **Foundation Models の動作確認**: シミュレータ／Mac で Apple Intelligence が有効なときだけ UI が出る。非対応環境ではボタン自体が表示されないのが正常。
-5. **Xcode プロジェクトの管理**: `Agnoria.xcodeproj` は `xcodegen generate` で再生成できる。Git 管理するなら `.xcodeproj` は ignore でも可。
+5. ~~Xcode プロジェクトの管理~~ → XcodeGen は廃止（2026-10-12）。Xcode 27 のテンプレートで作り直し、`.xcodeproj` を直接管理する。XcodeGen 時代との主な違い: synchronized folders、生成 Info.plist、`ENABLE_APP_SANDBOX` ビルド設定、Swift 5 言語モード + MainActor 既定分離、UI テストターゲット付き。
 
 ## E. 完了条件の確認結果
 

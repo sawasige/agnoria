@@ -2,7 +2,7 @@ import Foundation
 import CryptoKit
 
 /// バンドル JSON の読み込みと検証
-enum BundleData {
+nonisolated enum BundleData {
     struct Payload: Sendable {
         var words: [WordSnapshot]
         var grammar: [GrammarSnapshot]

@@ -1,7 +1,7 @@
 import Foundation
 
 /// 10問セットの生成（§3.2）。入力はすべて値型なのでユニットテスト可能
-enum SetBuilder {
+nonisolated enum SetBuilder {
     static let setSize = 10
 
     struct Candidate: Hashable, Sendable {

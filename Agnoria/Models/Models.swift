@@ -142,14 +142,14 @@ final class StudySession {
     }
 }
 
-struct SessionResult: Codable, Hashable, Sendable {
+nonisolated struct SessionResult: Codable, Hashable, Sendable {
     var itemID: String
     var isCorrect: Bool
     var chosenIndex: Int
     var elapsedMs: Int
 }
 
-enum AgnoriaSchema {
+nonisolated enum AgnoriaSchema {
     static let models: [any PersistentModel.Type] = [
         GrammarQuestion.self, Word.self, ItemProgress.self, StudySession.self,
     ]
