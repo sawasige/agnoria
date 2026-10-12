@@ -1,0 +1,105 @@
+import SwiftUI
+
+struct SettingsView: View {
+    @Environment(AppModel.self) private var model
+    @Environment(AppSettings.self) private var settings
+    @Environment(\.dismiss) private var dismiss
+    @State private var confirmReset1 = false
+    @State private var confirmReset2 = false
+    @State private var resetDone = false
+
+    var body: some View {
+        @Bindable var settings = settings
+        NavigationStack {
+            Form {
+                Section {
+                    ForEach(Level.allCases, id: \.rawValue) { level in
+                        Toggle("\(level.rawValue) 点帯", isOn: binding(for: level.rawValue))
+                            .disabled(settings.enabledLevels == [level.rawValue])
+                    }
+                } header: {
+                    Text("出題レベル")
+                } footer: {
+                    Text("目安のスコア帯で絞り込みます。少なくとも1つは必要です。")
+                }
+
+                Section("読み上げ") {
+                    VStack(alignment: .leading) {
+                        Slider(value: $settings.speechRate, in: AppSettings.speechRateRange, step: 0.05) {
+                            Text("速度")
+                        } minimumValueLabel: {
+                            Image(systemName: "tortoise")
+                        } maximumValueLabel: {
+                            Image(systemName: "hare")
+                        }
+                        .accessibilityValue(String(format: "%.2f", settings.speechRate))
+                    }
+                    Button {
+                        Speaker.shared.speak("Please pay the invoice within 30 days.", rate: settings.speechRate)
+                    } label: {
+                        Label("試し聞き", systemImage: "speaker.wave.2")
+                    }
+                }
+
+                Section {
+                    Button("学習履歴をリセット", role: .destructive) { confirmReset1 = true }
+                } footer: {
+                    Text("正誤の記録・ブックマーク・連続日数が消えます。問題データは残ります。")
+                }
+
+                Section("このアプリについて") {
+                    LabeledContent("バージョン", value: versionString)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Agnoria（アグノリア）").font(.headline)
+                        Text("ギリシャ語 Agnoia（無知）と、ローマの女神 Agenoria（子どもに学ぶ力を授ける）から。「無知から学び始める」の意。")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+            .formStyle(.grouped)
+            .navigationTitle("設定")
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("完了") { dismiss() }
+                }
+            }
+            .confirmationDialog("学習履歴をリセットしますか？", isPresented: $confirmReset1, titleVisibility: .visible) {
+                Button("次へ", role: .destructive) { confirmReset2 = true }
+                Button("キャンセル", role: .cancel) {}
+            } message: {
+                Text("この操作は取り消せません。")
+            }
+            .alert("本当にリセットしますか？", isPresented: $confirmReset2) {
+                Button("リセットする", role: .destructive) {
+                    resetDone = (try? model.resetHistory()) != nil
+                }
+                Button("キャンセル", role: .cancel) {}
+            } message: {
+                Text("すべての正誤記録とブックマークが削除されます。")
+            }
+            .alert("リセットしました", isPresented: $resetDone) {
+                Button("OK") {}
+            }
+        }
+        #if os(macOS)
+        .frame(minWidth: 440, minHeight: 520)
+        #endif
+    }
+
+    private func binding(for level: Int) -> Binding<Bool> {
+        Binding {
+            settings.enabledLevels.contains(level)
+        } set: { on in
+            if on { settings.enabledLevels.insert(level) }
+            else if settings.enabledLevels.count > 1 { settings.enabledLevels.remove(level) }
+        }
+    }
+
+    private var versionString: String {
+        let v = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
+        let b = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "?"
+        return "\(v) (\(b))"
+    }
+}

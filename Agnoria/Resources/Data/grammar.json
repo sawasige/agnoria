@@ -1,0 +1,422 @@
+[
+  {
+    "id": "pos-001",
+    "category": "品詞",
+    "question": "All employees must read the safety ______ before entering the warehouse.",
+    "choices": [
+      "instruct",
+      "instructive",
+      "instructions",
+      "instructively"
+    ],
+    "answer": 2,
+    "explanation": "the safety の後ろで read の目的語になる名詞 instructions が正解。動詞 instruct や形容詞 instructive は目的語になれない。",
+    "level": 450
+  },
+  {
+    "id": "pos-002",
+    "category": "品詞",
+    "question": "The new printer works ______ even when several people use it at once.",
+    "choices": [
+      "efficiently",
+      "efficient",
+      "efficiency",
+      "efficiencies"
+    ],
+    "answer": 0,
+    "explanation": "自動詞 works を修飾するのは副詞 efficiently。形容詞 efficient は動詞を修飾できない。",
+    "level": 450
+  },
+  {
+    "id": "pos-003",
+    "category": "品詞",
+    "question": "Ms. Tanaka gave a ______ summary of the sales figures at the meeting.",
+    "choices": [
+      "briefly",
+      "brief",
+      "briefness",
+      "briefed"
+    ],
+    "answer": 1,
+    "explanation": "冠詞 a と名詞 summary の間に入るのは形容詞 brief。副詞 briefly は名詞を修飾できない。",
+    "level": 500
+  },
+  {
+    "id": "pos-004",
+    "category": "品詞",
+    "question": "Customers have responded ______ to the hotel's new breakfast menu.",
+    "choices": [
+      "favor",
+      "favorable",
+      "favorably",
+      "favoring"
+    ],
+    "answer": 2,
+    "explanation": "動詞 responded を修飾するので副詞 favorably。respond は自動詞なので名詞 favor は目的語として続けられない。",
+    "level": 500
+  },
+  {
+    "id": "pos-005",
+    "category": "品詞",
+    "question": "Our ______ to customer privacy is stated clearly on the company website.",
+    "choices": [
+      "commit",
+      "committed",
+      "commitment",
+      "committing"
+    ],
+    "answer": 2,
+    "explanation": "所有格 Our の後ろで文の主語になるのは名詞 commitment。commitment to 〜「〜への取り組み」の形も覚えておきたい。",
+    "level": 550
+  },
+  {
+    "id": "pos-006",
+    "category": "品詞",
+    "question": "The report was ______ longer than the one submitted last quarter.",
+    "choices": [
+      "considerably",
+      "considerable",
+      "consider",
+      "consideration"
+    ],
+    "answer": 0,
+    "explanation": "比較級 longer を強調するのは副詞 considerably「かなり」。形容詞 considerable は比較級を修飾できない。",
+    "level": 600
+  },
+  {
+    "id": "prep-001",
+    "category": "前置詞・接続詞",
+    "question": "The store will be closed ______ the national holiday next Monday.",
+    "choices": [
+      "during",
+      "while",
+      "because",
+      "although"
+    ],
+    "answer": 0,
+    "explanation": "後ろが名詞句 the national holiday なので前置詞 during。while は接続詞で、後ろに主語と動詞が必要。",
+    "level": 450
+  },
+  {
+    "id": "prep-002",
+    "category": "前置詞・接続詞",
+    "question": "______ the heavy rain, the outdoor event started on time.",
+    "choices": [
+      "Although",
+      "Despite",
+      "Because",
+      "While"
+    ],
+    "answer": 1,
+    "explanation": "the heavy rain は名詞句なので前置詞 Despite「〜にもかかわらず」。Although は接続詞なので節が続かなければならない。",
+    "level": 450
+  },
+  {
+    "id": "prep-003",
+    "category": "前置詞・接続詞",
+    "question": "The invoice must be paid ______ thirty days of the delivery date.",
+    "choices": [
+      "until",
+      "by",
+      "within",
+      "since"
+    ],
+    "answer": 2,
+    "explanation": "within thirty days of 〜で「〜から30日以内に」。until や by は期限となる時点を示すため、期間の thirty days とは結びつかない。",
+    "level": 500
+  },
+  {
+    "id": "prep-004",
+    "category": "前置詞・接続詞",
+    "question": "Mr. Lopez could not attend the meeting ______ he was visiting a client in Osaka.",
+    "choices": [
+      "because of",
+      "because",
+      "despite",
+      "during"
+    ],
+    "answer": 1,
+    "explanation": "後ろに he was visiting という主語と動詞が続くので接続詞 because。because of は前置詞なので名詞句しか取れない。",
+    "level": 500
+  },
+  {
+    "id": "prep-005",
+    "category": "前置詞・接続詞",
+    "question": "Sales have increased steadily ______ the company launched its online store.",
+    "choices": [
+      "during",
+      "for",
+      "by",
+      "since"
+    ],
+    "answer": 3,
+    "explanation": "現在完了 have increased と「〜してから」の起点を表す接続詞 since の組み合わせ。during・for・by は前置詞なので、後ろに節（主語＋動詞）を導けない。",
+    "level": 550
+  },
+  {
+    "id": "prep-006",
+    "category": "前置詞・接続詞",
+    "question": "______ the new software is expensive, it will save the department time in the long run.",
+    "choices": [
+      "Despite",
+      "In spite of",
+      "Although",
+      "Because of"
+    ],
+    "answer": 2,
+    "explanation": "the new software is expensive という節を導くので接続詞 Although。Despite と In spite of は前置詞で、節を取れない。",
+    "level": 600
+  },
+  {
+    "id": "vocab-001",
+    "category": "語彙",
+    "question": "Please ______ the attached form and return it to the front desk by Friday.",
+    "choices": [
+      "arrive",
+      "spend",
+      "complete",
+      "agree"
+    ],
+    "answer": 2,
+    "explanation": "complete the form で「用紙に記入する」。arrive や agree は自動詞なので目的語 the form を直接続けられない。",
+    "level": 450
+  },
+  {
+    "id": "vocab-002",
+    "category": "語彙",
+    "question": "The meeting was ______ until next Tuesday because the director was ill.",
+    "choices": [
+      "increased",
+      "postponed",
+      "repaired",
+      "attended"
+    ],
+    "answer": 1,
+    "explanation": "be postponed until 〜で「〜まで延期される」。until next Tuesday という期限の表現と自然につながるのは postponed だけ。",
+    "level": 450
+  },
+  {
+    "id": "vocab-003",
+    "category": "語彙",
+    "question": "All visitors must wear a name ______ while they are inside the factory.",
+    "choices": [
+      "receipt",
+      "invoice",
+      "fee",
+      "badge"
+    ],
+    "answer": 3,
+    "explanation": "wear a name badge で「名札を着用する」。receipt「領収書」や invoice「請求書」は身に着けるものではない。",
+    "level": 500
+  },
+  {
+    "id": "vocab-004",
+    "category": "語彙",
+    "question": "We ______ for the delay and will ship your order tomorrow morning.",
+    "choices": [
+      "appreciate",
+      "approve",
+      "announce",
+      "apologize"
+    ],
+    "answer": 3,
+    "explanation": "apologize for 〜で「〜について謝罪する」。appreciate や approve は他動詞なので直後に for を置けない。",
+    "level": 500
+  },
+  {
+    "id": "vocab-005",
+    "category": "語彙",
+    "question": "Ms. Ortiz has ______ experience in managing international shipping projects.",
+    "choices": [
+      "expensive",
+      "extensive",
+      "entire",
+      "equal"
+    ],
+    "answer": 1,
+    "explanation": "extensive experience で「豊富な経験」。形の似た expensive「高価な」は経験を説明する語として不自然。",
+    "level": 550
+  },
+  {
+    "id": "vocab-006",
+    "category": "語彙",
+    "question": "Employees who travel abroad are ______ to a daily allowance for meals.",
+    "choices": [
+      "required",
+      "included",
+      "entitled",
+      "achieved"
+    ],
+    "answer": 2,
+    "explanation": "be entitled to 〜で「〜を受ける権利がある」。required は be required to の後に動詞の原形が続くため、名詞句には合わない。",
+    "level": 600
+  },
+  {
+    "id": "tense-001",
+    "category": "時制・態",
+    "question": "Our office ______ to a larger building two years ago.",
+    "choices": [
+      "moved",
+      "moves",
+      "will move",
+      "has moved"
+    ],
+    "answer": 0,
+    "explanation": "two years ago は過去の一時点を示すので過去形 moved。現在完了 has moved は ago と一緒に使えない。",
+    "level": 450
+  },
+  {
+    "id": "tense-002",
+    "category": "時制・態",
+    "question": "The package ______ to the wrong address yesterday.",
+    "choices": [
+      "delivers",
+      "is delivering",
+      "delivered",
+      "was delivered"
+    ],
+    "answer": 3,
+    "explanation": "荷物は「配達される」側なので受動態。yesterday があるため過去形の was delivered が正解。",
+    "level": 450
+  },
+  {
+    "id": "tense-003",
+    "category": "時制・態",
+    "question": "Ms. Chen ______ for the shipping company since 2015.",
+    "choices": [
+      "has worked",
+      "works",
+      "worked",
+      "is working"
+    ],
+    "answer": 0,
+    "explanation": "since 2015「2015年から」は継続を表すので現在完了 has worked。単純過去 worked は since と相性が悪い。",
+    "level": 500
+  },
+  {
+    "id": "tense-004",
+    "category": "時制・態",
+    "question": "The new cafeteria ______ next month, according to the facilities manager.",
+    "choices": [
+      "opened",
+      "has opened",
+      "was opened",
+      "will open"
+    ],
+    "answer": 3,
+    "explanation": "next month は未来を示すので will open。opened や was opened は過去の出来事を表すため時間表現と矛盾する。",
+    "level": 500
+  },
+  {
+    "id": "tense-005",
+    "category": "時制・態",
+    "question": "By the time the client arrived, the staff ______ the meeting room.",
+    "choices": [
+      "had prepared",
+      "prepare",
+      "will prepare",
+      "are preparing"
+    ],
+    "answer": 0,
+    "explanation": "By the time 〜 arrived「〜が到着した時までに」と、それより前に完了した動作なので過去完了 had prepared。",
+    "level": 550
+  },
+  {
+    "id": "tense-006",
+    "category": "時制・態",
+    "question": "All applications ______ by the end of this week, so please submit yours soon.",
+    "choices": [
+      "review",
+      "are reviewing",
+      "were reviewed",
+      "will be reviewed"
+    ],
+    "answer": 3,
+    "explanation": "応募書類は「審査される」側なので受動態。by the end of this week と「早く提出して」という文脈から未来の will be reviewed。",
+    "level": 600
+  },
+  {
+    "id": "pron-001",
+    "category": "代名詞・関係詞",
+    "question": "Mr. Park printed the documents ______ because the assistant was out of the office.",
+    "choices": [
+      "he",
+      "him",
+      "his",
+      "himself"
+    ],
+    "answer": 3,
+    "explanation": "「アシスタントが不在だったので自分で印刷した」という強調の再帰代名詞 himself。文はすでに完成しているので he や him は入らない。",
+    "level": 450
+  },
+  {
+    "id": "pron-002",
+    "category": "代名詞・関係詞",
+    "question": "The customer left ______ umbrella at the front desk this morning.",
+    "choices": [
+      "she",
+      "her",
+      "hers",
+      "herself"
+    ],
+    "answer": 1,
+    "explanation": "名詞 umbrella の前なので所有格 her。独立所有格 hers は後ろに名詞を置けない。",
+    "level": 450
+  },
+  {
+    "id": "pron-003",
+    "category": "代名詞・関係詞",
+    "question": "The technician ______ repaired our copier last week was very polite.",
+    "choices": [
+      "who",
+      "which",
+      "whose",
+      "where"
+    ],
+    "answer": 0,
+    "explanation": "先行詞 the technician は人で、関係詞節の主語が欠けているので who。which は人には使わない。",
+    "level": 500
+  },
+  {
+    "id": "pron-004",
+    "category": "代名詞・関係詞",
+    "question": "We visited the factory ______ our new products are made.",
+    "choices": [
+      "where",
+      "who",
+      "which",
+      "whose"
+    ],
+    "answer": 0,
+    "explanation": "関係詞節 our new products are made は主語も目的語も揃っているので、場所を表す関係副詞 where。which なら in which が必要。",
+    "level": 500
+  },
+  {
+    "id": "pron-005",
+    "category": "代名詞・関係詞",
+    "question": "Ms. Rivera is the consultant ______ advice helped us reduce shipping costs.",
+    "choices": [
+      "who",
+      "whose",
+      "which",
+      "whom"
+    ],
+    "answer": 1,
+    "explanation": "直後の名詞 advice と結びついて「その人の助言」を表す所有格の関係代名詞 whose。who は後ろに動詞が必要。",
+    "level": 550
+  },
+  {
+    "id": "pron-006",
+    "category": "代名詞・関係詞",
+    "question": "The new policy applies to all employees, including ______ who work part-time.",
+    "choices": [
+      "they",
+      "them",
+      "those",
+      "theirs"
+    ],
+    "answer": 2,
+    "explanation": "those who 〜で「〜する人々」。them は関係詞節で後ろから修飾される形では使えない。",
+    "level": 600
+  }
+]
