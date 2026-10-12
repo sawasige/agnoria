@@ -6,7 +6,7 @@
 
 | # | 箇所 | 問題 | 決定 |
 |---|---|---|---|
-| A1 | §0 対応OS / §1 | 仕様は「iOS 27 / iPhone 縦のみ」だが、対象は **iOS と Mac**。 | 1ターゲットのマルチプラットフォーム（iOS 27 + macOS 27、ネイティブ SwiftUI）。Mac Catalyst は不採用。iPhone は縦固定のまま、iPad は引き続き対象外（`TARGETED_DEVICE_FAMILY = 1`）。 |
+| A1 | §0 対応OS / §1 | 仕様は「iOS 27 / iPhone 縦のみ」だが、対象は **iPhone・iPad・Mac**。 | 1ターゲットのマルチプラットフォーム（iOS/iPadOS 27 + macOS 27、ネイティブ SwiftUI）。Mac Catalyst は不採用。iPhone は縦固定、iPad は全方向（`TARGETED_DEVICE_FAMILY = 1,2`）。iPadOS 26 以降 `UIRequiresFullScreen` は非推奨で、iPad はウィンドウのリサイズに応じる前提のため、幅に応じた列数と最大幅 720pt で対応。 |
 | A2 | §8 初期データ | `questions_sample.json`（文法30問）がどこにも存在しない。`words_sample.json` は `~/Downloads` にあった。 | 文法30問（5分野×6問、level 450〜600）を新規作成して `grammar.json` に。単語50語は `words.json` としてそのまま採用。ファイル名は §2.1 の `grammar.json` / `words.json` に統一。 |
 | A3 | §5 プロンプト vs §10 | Foundation Models への指示文「TOEIC 450点の学習者向けに…」をそのまま実装すると、バイナリ内に `TOEIC` 文字列が入り §10 の grep 条件に違反する。 | 指示文を「ビジネス英語を学び始めた初中級（スコア帯450点前後）の日本語話者」に変更。`grep -rn TOEIC Agnoria/` が空であることを確認済み。 |
 | A4 | §6 音声 | `.playback` カテゴリは `AVAudioSession` のもので **macOS には存在しない**。 | `#if os(iOS)` で囲む。Mac ではシステム音量に従う。 |

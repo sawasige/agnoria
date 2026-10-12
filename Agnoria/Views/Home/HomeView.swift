@@ -80,7 +80,7 @@ struct HomeView: View {
                     ContentUnavailableView("問題データを読み込めません", systemImage: "exclamationmark.triangle",
                                            description: Text(message))
                 } else {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 12)], spacing: 12) {
                         ForEach(mode.categories, id: \.self) { category in
                             CategoryTile(title: category, stats: stats[category] ?? CategoryStats()) {
                                 start(QuizConfig(mode: mode, category: category, format: formatChoice.format))
@@ -113,6 +113,8 @@ struct HomeView: View {
                 .controlSize(.large)
             }
             .padding()
+            .frame(maxWidth: 720)
+            .frame(maxWidth: .infinity)
         }
         .navigationTitle("Agnoria")
         .toolbar {

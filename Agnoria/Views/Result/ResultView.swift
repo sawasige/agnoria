@@ -72,6 +72,8 @@ struct ResultView: View {
                 .controlSize(.large)
             }
             .padding()
+            .frame(maxWidth: 720)
+            .frame(maxWidth: .infinity)
         }
         .navigationTitle("結果")
         .navigationBarBackButtonHidden(true)

@@ -72,6 +72,8 @@ struct QuizView: View {
                 }
             }
             .padding()
+            .frame(maxWidth: 720)
+            .frame(maxWidth: .infinity)
             .animation(.default, value: answer != nil)
         }
         .navigationTitle(run.config.categoryTitle)
