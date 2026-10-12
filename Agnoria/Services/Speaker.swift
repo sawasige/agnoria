@@ -11,25 +11,29 @@ final class Speaker {
     private init() {}
 
     func speak(_ text: String, rate: Double) {
-        configureSessionIfNeeded()
-        if synthesizer.isSpeaking { synthesizer.stopSpeaking(at: .immediate) }
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = Float(rate)
-        synthesizer.speak(utterance)
+        Task {
+            await activateSessionIfNeeded()
+            if synthesizer.isSpeaking { synthesizer.stopSpeaking(at: .immediate) }
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            utterance.rate = Float(rate)
+            synthesizer.speak(utterance)
+        }
     }
 
     func stop() {
         synthesizer.stopSpeaking(at: .immediate)
     }
 
-    /// サイレントモードでも鳴らす。AVAudioSession は iOS のみ
-    private func configureSessionIfNeeded() {
+    /// サイレントモードでも鳴らす。AVAudioSession は iOS のみ。
+    /// 同期の setActive はメインスレッドを止めうるので、iOS 27 の非同期 API を使う
+    private func activateSessionIfNeeded() async {
         #if os(iOS)
         guard !sessionConfigured else { return }
         sessionConfigured = true
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
-        try? AVAudioSession.sharedInstance().setActive(true)
+        let session = AVAudioSession.sharedInstance()
+        try? session.setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
+        _ = try? await session.activate(options: [])
         #endif
     }
 }
