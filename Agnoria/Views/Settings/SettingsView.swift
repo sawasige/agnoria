@@ -23,7 +23,8 @@ struct SettingsView: View {
                     Text("目安のスコア帯で絞り込みます。少なくとも1つは必要です。")
                 }
 
-                Section("読み上げ") {
+                Section("音") {
+                    Toggle("正解・不正解の効果音", isOn: $settings.soundEffects)
                     Toggle("回答後に例文を自動で読み上げる", isOn: $settings.autoSpeak)
                     VStack(alignment: .leading) {
                         Slider(value: $settings.speechRate, in: AppSettings.speechRateRange, step: 0.05) {

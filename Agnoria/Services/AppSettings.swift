@@ -9,6 +9,7 @@ final class AppSettings {
         static let levels = "enabledLevels"
         static let speechRate = "speechRate"
         static let autoSpeak = "autoSpeak"
+        static let soundEffects = "soundEffects"
         static let importedFingerprint = "importedDataFingerprint"
     }
 
@@ -28,6 +29,11 @@ final class AppSettings {
         didSet { defaults.set(autoSpeak, forKey: Key.autoSpeak) }
     }
 
+    /// 正解・不正解の効果音。デフォルト ON
+    var soundEffects: Bool {
+        didSet { defaults.set(soundEffects, forKey: Key.soundEffects) }
+    }
+
     var importedFingerprint: String? {
         get { defaults.string(forKey: Key.importedFingerprint) }
         set { defaults.set(newValue, forKey: Key.importedFingerprint) }
@@ -43,7 +49,11 @@ final class AppSettings {
         let rate = defaults.double(forKey: Key.speechRate)
         speechRate = rate == 0 ? 0.45 : rate
         autoSpeak = defaults.object(forKey: Key.autoSpeak) as? Bool ?? true
+        soundEffects = defaults.object(forKey: Key.soundEffects) as? Bool ?? true
     }
 
     static let speechRateRange: ClosedRange<Double> = 0.3...0.6
+
+    /// 効果音が鳴り終わってから読み上げを始めるまでの間
+    var autoSpeakDelay: Duration { .milliseconds(soundEffects ? 450 : 150) }
 }

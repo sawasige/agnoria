@@ -161,8 +161,15 @@ struct PracticeQuestionView: View {
                             ChoiceButton(label: QuizQuestion.choiceLabels[i], text: c, state: state(i)) {
                                 guard chosen == nil else { return }
                                 chosen = i
+                                let correct = i == question.correctIndex
+                                if settings.soundEffects {
+                                    SoundEffects.shared.play(correct ? .correct : .wrong)
+                                }
                                 if settings.autoSpeak, let text = question.speechText {
-                                    Speaker.shared.speak(text, rate: settings.speechRate)
+                                    Task {
+                                        try? await Task.sleep(for: settings.autoSpeakDelay)
+                                        Speaker.shared.speak(text, rate: settings.speechRate)
+                                    }
                                 }
                             }
                             .disabled(chosen != nil)
@@ -170,6 +177,7 @@ struct PracticeQuestionView: View {
                     }
                     if chosen != nil {
                         ExplanationView(question: question)
+                            .sensoryFeedback(chosen == question.correctIndex ? .success : .error, trigger: chosen)
                         if let text = question.speechText {
                             Button {
                                 Speaker.shared.speak(text, rate: settings.speechRate)

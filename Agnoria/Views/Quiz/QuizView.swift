@@ -5,6 +5,8 @@ struct QuizView: View {
     @Environment(AppSettings.self) private var settings
     @State private var confirmLeave = false
     @State private var bookmarked = false
+    @State private var feedbackCount = 0
+    @State private var lastCorrect = true
 
     var body: some View {
         if let run = model.run {
@@ -97,6 +99,7 @@ struct QuizView: View {
         .onChange(of: q.id, initial: true) { _, _ in
             bookmarked = model.isBookmarked(q.itemID)
         }
+        .sensoryFeedback(trigger: feedbackCount) { _, _ in lastCorrect ? .success : .error }
     }
 
     /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる
@@ -147,12 +150,22 @@ struct QuizView: View {
     private func select(_ index: Int) {
         guard let run = model.run, !run.isAnswered else { return }
         model.answerCurrent(index)
+        guard let a = run.currentAnswer else { return }
+        lastCorrect = a.isCorrect
+        feedbackCount += 1
+        if settings.soundEffects {
+            SoundEffects.shared.play(a.isCorrect ? .correct : .wrong)
+        }
         if settings.autoSpeak, let text = run.current.speechText {
-            Speaker.shared.speak(text, rate: settings.speechRate)
+            // 効果音にかぶらないよう少し待つ。待っている間に次へ進んだら読まない
+            let questionID = run.current.id
+            Task {
+                try? await Task.sleep(for: settings.autoSpeakDelay)
+                guard model.run === run, run.current.id == questionID else { return }
+                Speaker.shared.speak(text, rate: settings.speechRate)
+            }
         }
-        if let a = run.currentAnswer {
-            AccessibilityNotification.Announcement(a.isCorrect ? "正解" : "不正解。正解は \(QuizQuestion.choiceLabels[run.current.correctIndex])").post()
-        }
+        AccessibilityNotification.Announcement(a.isCorrect ? "正解" : "不正解。正解は \(QuizQuestion.choiceLabels[run.current.correctIndex])").post()
     }
 
     private func state(for i: Int, answer: QuizRun.Answer?, question: QuizQuestion) -> ChoiceButton.State {

@@ -6,13 +6,12 @@ final class Speaker {
     static let shared = Speaker()
 
     private let synthesizer = AVSpeechSynthesizer()
-    private var sessionConfigured = false
 
     private init() {}
 
     func speak(_ text: String, rate: Double) {
         Task {
-            await activateSessionIfNeeded()
+            await AudioSession.activateIfNeeded()
             if synthesizer.isSpeaking { synthesizer.stopSpeaking(at: .immediate) }
             let utterance = AVSpeechUtterance(string: text)
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
@@ -23,17 +22,5 @@ final class Speaker {
 
     func stop() {
         synthesizer.stopSpeaking(at: .immediate)
-    }
-
-    /// マナーモード（サイレントスイッチ）に従う: .ambient なら消音中は鳴らない。AVAudioSession は iOS のみ。
-    /// 同期の setActive はメインスレッドを止めうるので、iOS 27 の非同期 API を使う
-    private func activateSessionIfNeeded() async {
-        #if os(iOS)
-        guard !sessionConfigured else { return }
-        sessionConfigured = true
-        let session = AVAudioSession.sharedInstance()
-        try? session.setCategory(.ambient, mode: .spokenAudio, options: [.duckOthers])
-        _ = try? await session.activate(options: [])
-        #endif
     }
 }

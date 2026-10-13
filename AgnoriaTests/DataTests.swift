@@ -157,3 +157,13 @@ struct QuizRunTests {
         #expect(run.wrongAnswers.map(\.question.itemID) == ["q1"])
     }
 }
+
+@Suite("効果音の音源")
+struct SoundAssetTests {
+    @Test("correct / wrong の CAF がバンドルされている") func bundled() {
+        let bundle = Bundle(for: ItemProgress.self)
+        for effect in SoundEffects.Effect.allCases {
+            #expect(bundle.url(forResource: effect.rawValue, withExtension: "caf") != nil, "\(effect.rawValue).caf")
+        }
+    }
+}
