@@ -38,6 +38,8 @@ struct HomeView: View {
 
         ScrollView {
             VStack(spacing: 16) {
+                header
+
                 if model.importState == .running, allItems.isEmpty {
                     ProgressView("問題データを準備中…")
                         .padding(.vertical, 40)
@@ -84,6 +86,10 @@ struct HomeView: View {
             actionBar(stage: stage, stageSummary, disabled: allItems.isEmpty)
         }
         .navigationTitle("Agnoria")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(removing: .title)
+        #endif
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button { showSettings = true } label: { Label("設定", systemImage: "gearshape") }
@@ -97,6 +103,24 @@ struct HomeView: View {
         } message: {
             Text("設定の到達帯を広げるか、分野を選んでください。")
         }
+    }
+
+    // MARK: - ヘッダー
+
+    /// アイコンと同じ女神の立ち絵をタイトルに添える。装飾なので画像は VoiceOver から隠す
+    private var header: some View {
+        HStack(alignment: .center, spacing: 12) {
+            Image("AgenoriaPortrait")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 64)
+                .accessibilityHidden(true)
+            Text("Agnoria")
+                .font(.system(size: 34, weight: .bold))
+                .accessibilityAddTraits(.isHeader)
+            Spacer()
+        }
+        .padding(.bottom, 2)
     }
 
     // MARK: - 下部の固定バー

@@ -20,7 +20,10 @@ struct ResultView: View {
         ScrollView {
             VStack(spacing: 24) {
                 VStack(spacing: 14) {
-                    ScoreRing(correct: run.correctCount, total: run.questions.count)
+                    HStack(alignment: .bottom, spacing: 4) {
+                        AgenoriaFace(expression: .forScore(correct: run.correctCount, total: run.questions.count))
+                        ScoreRing(correct: run.correctCount, total: run.questions.count)
+                    }
                     Text(message(correct: run.correctCount, total: run.questions.count))
                         .font(.headline)
                         .fontDesign(.rounded)
@@ -191,21 +194,21 @@ struct ScoreRing: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.gray.opacity(0.15), lineWidth: 14)
+                .stroke(Color.gray.opacity(0.15), lineWidth: 12)
             Circle()
                 .trim(from: 0, to: shown ? ratio : 0)
-                .stroke(color, style: StrokeStyle(lineWidth: 14, lineCap: .round))
+                .stroke(color, style: StrokeStyle(lineWidth: 12, lineCap: .round))
                 .rotationEffect(.degrees(-90))
             VStack(spacing: 0) {
                 Text("\(correct)")
-                    .font(.system(size: 56, weight: .bold, design: .rounded).monospacedDigit())
+                    .font(.system(size: 50, weight: .bold, design: .rounded).monospacedDigit())
                 Text("/ \(total)")
                     .font(.title3.monospacedDigit())
                     .fontDesign(.rounded)
                     .foregroundStyle(.secondary)
             }
         }
-        .frame(width: 180, height: 180)
+        .frame(width: 160, height: 160)
         .onAppear {
             withAnimation(.spring(duration: 0.8, bounce: 0.15).delay(0.1)) { shown = true }
         }
