@@ -1,0 +1,97 @@
+# Agnoria
+
+**Agnoria（アグノリア）** は、スコア帯 450→600 点を目指す学習者向けの英語 4 択ドリルアプリです。単語と Part5 形式の文法を 10 問 1 セットで繰り返し、苦手な問題を自動で優先して出題します。
+
+> 名前はギリシャ語 *Agnoia*（無知）と、ローマの女神 *Agenoria*（子どもに学ぶ力を授ける）から。「無知から学び始める」の意。
+
+- 対応 OS: iOS / iPadOS 27 以上、macOS 27 以上（ネイティブ SwiftUI の 1 ターゲット）
+- 通信なし・広告なし・課金なし・アカウントなし。全データをバンドル同梱
+- 依存ライブラリなし（標準フレームワークのみ）
+
+## 特徴
+
+- **必ず 4 択で正誤が出る**: 「わかる／わからない」の自己申告ではなく、誤答を含む選択肢で判定する
+- **おまかせ出題**: 単語・文法をまたいで、未回答 → 直近で間違えた問題 → 放置した問題の順に重み付きで 10 問を選ぶ。卒業した問題も時間が経てば復習に回る
+- **ステージ**: スコア帯を 450 → 500 → 550 → 600 の順に進む。帯の習得率が 80% で次の帯が開く。設定で手動変更も可
+- **単語は 1 語から 3 形式**: 意味を選ぶ / 例文の穴埋め / 日→英。穴埋めは語尾変化（-s, -ed, -ing, -ly など）も検出する
+- **進捗の可視化**: 習得・学習中・苦手・未学習の 4 段階を積み上げバーで表示。直近 14 日の推移と分野別の内訳は進捗画面（Swift Charts）で確認できる
+- **音**: 正解・不正解の効果音（クイズ番組風）と、例文の読み上げ（en-US）。どちらもマナーモードに従う
+- **Liquid Glass UI**: メッシュグラデーション背景とガラス効果のカード・ボタン。ダークモード、Dynamic Type、VoiceOver に対応
+- **Apple Intelligence（任意）**: 対応端末では文法解説の言い換えと、単語穴埋めの類題生成ができる。非対応端末では該当 UI を表示しない
+- **Mac**: 選択肢は `1`〜`4` キー、次へは Return、やめるは Esc
+
+## 開発環境
+
+- Xcode 27 / Swift 6（Swift 6 言語モード、Approachable Concurrency、MainActor 既定分離）
+- SwiftUI + SwiftData、MV アーキテクチャ（View + `@Observable` のストア）
+- テストは Swift Testing（`import Testing`）
+- Bundle ID: `com.himatsubu.Agnoria`
+
+プロジェクトファイルは Xcode 27 の Multiplatform App テンプレートから生成したものを正とし、XcodeGen などの外部ツールは使いません。テンプレートからのビルド設定の変更は Bundle ID / Team、対応デバイス、Swift 6 言語モードのみです。ソースとリソースは synchronized folder なので、ファイルを置くだけで Xcode に反映されます。
+
+### ビルドとテスト
+
+```sh
+# iOS Simulator
+xcodebuild -project Agnoria.xcodeproj -scheme Agnoria \
+  -destination 'platform=iOS Simulator,name=iPhone 17' build
+xcodebuild -project Agnoria.xcodeproj -scheme Agnoria \
+  -destination 'platform=iOS Simulator,name=iPhone 17' test
+
+# macOS
+xcodebuild -project Agnoria.xcodeproj -scheme Agnoria -destination 'platform=macOS' build
+xcodebuild -project Agnoria.xcodeproj -scheme Agnoria -destination 'platform=macOS' test
+```
+
+### 実機へのインストール
+
+```sh
+UDID=$(xcrun devicectl list devices | grep -i iPhone | grep connected | awk '{print $(NF-2)}')
+xcodebuild -project Agnoria.xcodeproj -scheme Agnoria \
+  -destination "platform=iOS,id=$UDID" -allowProvisioningUpdates build
+APP=$(xcodebuild -project Agnoria.xcodeproj -scheme Agnoria \
+  -destination "platform=iOS,id=$UDID" -showBuildSettings | awk '/BUILT_PRODUCTS_DIR/{print $3; exit}')/Agnoria.app
+xcrun devicectl device install app --device "$UDID" "$APP"
+xcrun devicectl device process launch --terminate-existing --device "$UDID" com.himatsubu.Agnoria
+```
+
+## ディレクトリ構成
+
+```
+Agnoria/
+  App/        エントリポイント、AppModel（画面遷移・セット実行・履歴）、QuizRun
+  Models/     SwiftData モデル、出題条件（DrillMode / QuizConfig）、スナップショット
+  Logic/      純粋ロジック: 穴埋め、優先度、セット生成、習得段階、ステージ、連続日数
+  Data/       バンドル JSON の読み込みと SwiftData への取り込み（内容が変わったときのみ）
+  Services/   設定、音声セッション、効果音、読み上げ、Foundation Models
+  Views/      Home / Quiz / Result / Settings / Stats と共通部品（Shared）
+  Resources/  Data/words.json, Data/grammar.json, Sounds/correct.caf, Sounds/wrong.caf
+AgnoriaTests/     ユニットテスト（Swift Testing）
+AgnoriaUITests/   UI テスト
+docs/             仕様書と設計判断の記録
+```
+
+## 問題データ
+
+`Agnoria/Resources/Data/` に単語 400 語・文法 200 問を同梱しています（各スコア帯 100 語 / 50 問）。形式は [docs/SPEC.md](docs/SPEC.md) §2.1 を参照してください。
+
+データを追加・修正するときの約束:
+
+- すべてオリジナル問題。市販教材の転載や言い回しを変えただけの改変は不可
+- 単語の `distractors` は意味が近い日本語の誤答 3 つを人手で作る
+- 単語の綴りは全体で一意にする。`example` に `word`（または規則変化形）が含まれないと穴埋め形式が作れない
+- `level` は 450 / 500 / 550 / 600 のいずれか
+- アプリ内（`Agnoria/` 配下）に「TOEIC」の文字列を含めない。テストと `grep -rn TOEIC Agnoria/` で確認する
+
+JSON を変えると次回起動時に SHA-256 で差分を検出し、バックグラウンドで取り込みます。学習履歴は問題 ID で紐づくため、問題を更新しても消えません。
+
+## ドキュメント
+
+- [docs/SPEC.md](docs/SPEC.md): 仕様書（v1.3）。データ形式、出題ロジック、画面、完了条件
+- [docs/SPEC-REVIEW.md](docs/SPEC-REVIEW.md): 仕様の精査メモと各バージョンでの設計判断
+
+## 未完了・既知の事項
+
+- アプリアイコンは未設定
+- 生成した問題データ（既存 80 問を除く 520 問）は内容未レビュー。おかしい問題はブックマークして後で直す運用
+- Dynamic Type の最大サイズでのレイアウトは未確認
