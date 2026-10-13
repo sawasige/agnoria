@@ -55,5 +55,5 @@ final class AppSettings {
     static let speechRateRange: ClosedRange<Double> = 0.3...0.6
 
     /// 効果音が鳴り終わってから読み上げを始めるまでの間
-    var autoSpeakDelay: Duration { .milliseconds(soundEffects ? 450 : 150) }
+    var autoSpeakDelay: Duration { .milliseconds(soundEffects ? 700 : 150) }
 }
