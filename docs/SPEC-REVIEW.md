@@ -38,10 +38,10 @@
 ## D. 未解決・要判断（ユーザー向け）
 
 1. ~~Bundle ID / Team~~ → 設定済み: `com.himatsubu.Agnoria`（テストは `com.himatsubu.AgnoriaTests`）、`DEVELOPMENT_TEAM` は RunRun と同じ。
-2. **アプリアイコン**: `AppIcon.appiconset` は空。1024×1024 の画像を入れる。
+2. ~~アプリアイコン~~ → 設定済み（2026-10-13）: `Agnoria/Agnoria.icon`（Icon Composer）。H8 参照。空だった `AppIcon.appiconset` は削除。
 3. **文法30問の内容確認**: 原則どおり自作だが、正解の一意性は人の目でも一度見てほしい（`docs/` ではなく `Agnoria/Resources/Data/grammar.json`）。
 4. **Foundation Models の動作確認**: シミュレータ／Mac で Apple Intelligence が有効なときだけ UI が出る。非対応環境ではボタン自体が表示されないのが正常。
-5. ~~Xcode プロジェクトの管理~~ → XcodeGen は廃止（2026-10-12）。Xcode 27 のテンプレートで作り直し、`.xcodeproj` を直接管理する。XcodeGen 時代との主な違い: synchronized folders、生成 Info.plist、`ENABLE_APP_SANDBOX` ビルド設定、Swift 5 言語モード + MainActor 既定分離、UI テストターゲット付き。
+5. ~~Xcode プロジェクトの管理~~ → XcodeGen は廃止（2026-10-12）。Xcode 27 のテンプレートで作り直し、`.xcodeproj` を直接管理する。XcodeGen 時代との主な違い: synchronized folders、生成 Info.plist、`ENABLE_APP_SANDBOX` ビルド設定、MainActor 既定分離、UI テストターゲット付き（言語モードは 2026-10-13 に Swift 6 へ。H7 参照）。
 
 ## E. 完了条件の確認結果
 
@@ -91,5 +91,6 @@
 | H5 | 問題データはスコア帯ごとに別の Claude サブエージェントが作成し、スクリプトで検証・結合 | 600 問を1本で書くより速く、帯ごとの難易度を指示しやすい。帯をまたぐ綴りの重複（54 語）が出たので、上の帯のものを差し替えて全体一意にした |
 | H6 | 既存の 80 問は id・内容ともそのまま | 学習履歴は id に紐づくため（§2.1） |
 | H7 | 言語モードを Swift 5 → Swift 6 に上げた | ユーザー指示。並行処理の問題が警告ではなくエラーで止まる方が安全。切り替えで出たエラーは `AIAssist` の static 定数 2 つが MainActor 既定分離のため `@Sendable` クロージャから触れなかったものだけで、`nonisolated` を付けて解消。他はすべてそのまま通った |
+| H8 | アイコンは女神 Agenoria の胸像イラスト（ChatGPT 生成）を Icon Composer の 1 レイヤーで使う | 当初は「A + 若葉」の単一モチーフを提案したが、ユーザーが女神案を採用。ホーム画面サイズでも月桂冠と若葉が判別でき、名前の由来と直結する。背景除去の色フリンジはアイコンサイズでは見えない。未使用の旧レイヤーと空の `AppIcon.appiconset` は削除 |
 
 未レビュー: 追加した 520 問の正解の一意性・自然さは人の目で見ていない。気になった問題はクイズ画面のブックマークで印を付けておけば、後でまとめて直せる。

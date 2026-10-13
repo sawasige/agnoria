@@ -1,0 +1,50 @@
+{
+  "fill": {
+    "linear-gradient": [
+      "display-p3:1.00000,1.00000,1.00000,1.00000",
+      "display-p3:0.94664,1.00000,0.97358,1.00000"
+    ],
+    "orientation": {
+      "start": {
+        "x": 0.5,
+        "y": 1
+      },
+      "stop": {
+        "x": 0.5,
+        "y": 0
+      }
+    }
+  },
+  "groups": [
+    {
+      "blur-material": null,
+      "layers": [
+        {
+          "image-name": "ChatGPT 画像 2026年10月13日 14_48_39.png",
+          "name": "ChatGPT 画像 2026年10月13日 14_48_39",
+          "position": {
+            "scale": 1,
+            "translation-in-points": [
+              -87,
+              92
+            ]
+          }
+        }
+      ],
+      "shadow": {
+        "kind": "neutral",
+        "opacity": 0.5
+      },
+      "translucency": {
+        "enabled": true,
+        "value": 0.3
+      }
+    }
+  ],
+  "supported-platforms": {
+    "circles": [
+      "watchOS"
+    ],
+    "squares": "shared"
+  }
+}
