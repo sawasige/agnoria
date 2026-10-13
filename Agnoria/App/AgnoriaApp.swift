@@ -69,6 +69,7 @@ struct RootView: View {
                     switch route {
                     case .quiz: QuizView()
                     case .result: ResultView()
+                    case .stats: StatsView()
                     }
                 }
         }

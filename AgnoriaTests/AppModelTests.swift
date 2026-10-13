@@ -16,6 +16,25 @@ struct AppModelTests {
         return model
     }
 
+    @Test("おまかせは単語と文法が混ざった10問になり、セッションは mode=auto で保存される") func autoRun() async throws {
+        let model = try await makeModel()
+        var rng = SeededRandomNumberGenerator(seed: 11)
+        let qs = model.buildQuestions(.auto, using: &rng)
+        #expect(qs.count == 10)
+        #expect(qs.contains { $0.mode == .word })
+        #expect(qs.contains { $0.mode == .grammar })
+
+        let run = try #require(model.startQuiz(.auto))
+        while !run.isFinished {
+            model.answerCurrent(run.current.correctIndex)
+            if !run.isLast { model.advance() }
+        }
+        model.finishRun()
+        let sessions = try model.container.mainContext.fetch(FetchDescriptor<StudySession>())
+        #expect(sessions.first?.mode == StudySession.autoMode)
+        #expect(sessions.first?.category == nil)
+    }
+
     @Test("単語・文法それぞれで10問セットが最後まで回り、セッションが保存される") func fullRun() async throws {
         let model = try await makeModel()
         for mode in DrillMode.allCases {

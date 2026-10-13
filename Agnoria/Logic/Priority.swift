@@ -3,14 +3,35 @@ import Foundation
 /// 出題優先度（§3.2）。純粋関数のみ
 nonisolated enum Priority {
     static let recentWindow = 3
+    /// 忘却を見込む期間。これだけ放置すると復習の重みが上限に達する
+    static let forgettingDays: Double = 14
 
     /// 未回答: 3 / 直近に不正解あり: 2 + 不正解数 / 直近3回すべて正解: 0.3（卒業）/ それ以外: 1
     static func score(recentResults: [Bool]) -> Double {
+        score(recentResults: recentResults, lastAnsweredAt: nil, now: .now)
+    }
+
+    /// 最後に答えてからの経過日数で重みを戻す（[v1.2]）。
+    /// 卒業: 0.3 → 1.5（14日で上限）。その他の回答済み: 1 → 1.5。未回答と間違いは時間に依存しない
+    static func score(recentResults: [Bool], lastAnsweredAt: Date?, now: Date = .now) -> Double {
         if recentResults.isEmpty { return 3 }
         let wrong = recentResults.filter { !$0 }.count
         if wrong > 0 { return 2 + Double(wrong) }
-        if recentResults.count >= recentWindow { return 0.3 }
-        return 1
+        let decay = forgetting(lastAnsweredAt: lastAnsweredAt, now: now)
+        if recentResults.count >= recentWindow { return 0.3 + 1.2 * decay }
+        return 1 + 0.5 * decay
+    }
+
+    /// 0（今答えた）〜 1（forgettingDays 以上放置）
+    static func forgetting(lastAnsweredAt: Date?, now: Date = .now) -> Double {
+        guard let lastAnsweredAt else { return 0 }
+        let days = now.timeIntervalSince(lastAnsweredAt) / 86_400
+        return min(max(days / forgettingDays, 0), 1)
+    }
+
+    /// 卒業してから復習の目安（7日）を過ぎたか
+    static func isDueForReview(_ p: ProgressSnapshot, now: Date = .now) -> Bool {
+        isGraduated(p.recentResults) && forgetting(lastAnsweredAt: p.lastAnsweredAt, now: now) >= 0.5
     }
 
     static func isGraduated(_ recentResults: [Bool]) -> Bool {

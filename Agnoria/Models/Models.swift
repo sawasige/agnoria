@@ -115,7 +115,8 @@ final class ItemProgress {
 
     var snapshot: ProgressSnapshot {
         ProgressSnapshot(itemID: itemID, recentResults: recentResults, totalCorrect: totalCorrect,
-                         totalAnswered: totalAnswered, isBookmarked: isBookmarked)
+                         totalAnswered: totalAnswered, isBookmarked: isBookmarked,
+                         lastAnsweredAt: lastAnsweredAt)
     }
 }
 
@@ -125,17 +126,19 @@ final class StudySession {
     var id: UUID
     var startedAt: Date
     var finishedAt: Date
-    var mode: String            // DrillMode.rawValue
+    var mode: String            // DrillMode.rawValue。おまかせは "auto"
     var category: String?       // nil = ミックス
     var questionFormat: String? // 単語のとき WordFormat.rawValue。ランダムなら nil
     var results: [SessionResult]
 
-    init(startedAt: Date, finishedAt: Date, mode: DrillMode, category: String?,
+    static let autoMode = "auto"
+
+    init(startedAt: Date, finishedAt: Date, mode: DrillMode?, category: String?,
          questionFormat: WordFormat?, results: [SessionResult]) {
         id = UUID()
         self.startedAt = startedAt
         self.finishedAt = finishedAt
-        self.mode = mode.rawValue
+        self.mode = mode?.rawValue ?? Self.autoMode
         self.category = category
         self.questionFormat = questionFormat?.rawValue
         self.results = results

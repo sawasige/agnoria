@@ -5,6 +5,7 @@ import SwiftData
 enum Route: Hashable {
     case quiz
     case result
+    case stats
 }
 
 enum ImportState: Equatable, Sendable {
@@ -67,30 +68,43 @@ final class AppModel {
         return run
     }
 
+    /// 単語・文法の候補をまとめて優先度抽出し、選ばれたものだけ問題化する。
+    /// config.mode が指定されていれば eligible で片方に絞られる。nil（おまかせ）なら両方が混ざる
     func buildQuestions(_ config: QuizConfig, using rng: inout some RandomNumberGenerator) -> [QuizQuestion] {
         let progress = progressMap()
-        switch config.mode {
-        case .grammar:
-            let items = (try? context.fetch(FetchDescriptor<GrammarQuestion>(
-                predicate: #Predicate { !$0.isArchived }))) ?? []
-            let snaps = Dictionary(uniqueKeysWithValues: items.map { ($0.id, $0.snapshot) })
-            let candidates = items.map {
-                SetBuilder.Candidate(id: $0.id, category: $0.category, level: $0.level, progress: progress[$0.id])
+        let grammar = (try? context.fetch(FetchDescriptor<GrammarQuestion>(
+            predicate: #Predicate { !$0.isArchived }))) ?? []
+        let words = (try? context.fetch(FetchDescriptor<Word>(
+            predicate: #Predicate { !$0.isArchived }))) ?? []
+        let grammarSnaps = Dictionary(uniqueKeysWithValues: grammar.map { ($0.id, $0.snapshot) })
+        let pool = words.map(\.snapshot)
+        let wordSnaps = Dictionary(uniqueKeysWithValues: pool.map { ($0.id, $0) })
+
+        var candidates: [SetBuilder.Candidate] = []
+        if config.mode != .word {
+            candidates += grammar.map {
+                SetBuilder.Candidate(id: $0.id, mode: .grammar, category: $0.category, level: $0.level,
+                                     progress: progress[$0.id])
             }
-            let eligible = SetBuilder.eligible(candidates, config: config, enabledLevels: settings.enabledLevels)
-            let picked = SetBuilder.pick(from: eligible, using: &rng).compactMap { snaps[$0.id] }
-            return SetBuilder.grammarQuestions(picked, using: &rng)
-        case .word:
-            let items = (try? context.fetch(FetchDescriptor<Word>(
-                predicate: #Predicate { !$0.isArchived }))) ?? []
-            let pool = items.map(\.snapshot)
-            let snaps = Dictionary(uniqueKeysWithValues: pool.map { ($0.id, $0) })
-            let candidates = items.map {
-                SetBuilder.Candidate(id: $0.id, category: $0.category, level: $0.level, progress: progress[$0.id])
+        }
+        if config.mode != .grammar {
+            candidates += words.map {
+                SetBuilder.Candidate(id: $0.id, mode: .word, category: $0.category, level: $0.level,
+                                     progress: progress[$0.id])
             }
-            let eligible = SetBuilder.eligible(candidates, config: config, enabledLevels: settings.enabledLevels)
-            let picked = SetBuilder.pick(from: eligible, using: &rng).compactMap { snaps[$0.id] }
-            return SetBuilder.wordQuestions(picked, format: config.format, pool: pool, using: &rng)
+        }
+        let eligible = SetBuilder.eligible(candidates, config: config, enabledLevels: settings.enabledLevels)
+        let picked = SetBuilder.pick(from: eligible, using: &rng)
+        return picked.compactMap { c in
+            switch c.mode {
+            case .grammar:
+                guard let g = grammarSnaps[c.id] else { return nil }
+                return GrammarQuestionFactory.make(g, using: &rng)
+            case .word:
+                guard let w = wordSnaps[c.id] else { return nil }
+                let f = config.format ?? (WordFormat.allCases.randomElement(using: &rng) ?? .meaning)
+                return WordQuestionFactory.make(w, format: f, pool: pool, using: &rng)
+            }
         }
     }
 

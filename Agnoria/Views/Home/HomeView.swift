@@ -39,26 +39,46 @@ struct HomeView: View {
         Dictionary(progress.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, _ in a })
     }
 
+    private var wordItems: [(id: String, category: String)] {
+        words.filter { settings.enabledLevels.contains($0.level) }.map { ($0.id, $0.category) }
+    }
+    private var grammarItems: [(id: String, category: String)] {
+        grammar.filter { settings.enabledLevels.contains($0.level) }.map { ($0.id, $0.category) }
+    }
     private var items: [(id: String, category: String)] {
-        switch mode {
-        case .word: words.filter { settings.enabledLevels.contains($0.level) }.map { ($0.id, $0.category) }
-        case .grammar: grammar.filter { settings.enabledLevels.contains($0.level) }.map { ($0.id, $0.category) }
-        }
+        mode == .word ? wordItems : grammarItems
     }
 
     var body: some View {
         let pmap = progressMap
         let items = items
-        let stats = HomeStats.byCategory(items: items, progress: pmap)
-        let ids = items.map(\.id)
-        let wrong = HomeStats.wrongCount(itemIDs: ids, progress: pmap)
-        let bookmarked = HomeStats.bookmarkCount(itemIDs: ids, progress: pmap)
+        let allItems = wordItems + grammarItems
+        let stats = MasteryStats.byCategory(items: items, progress: pmap)
+        let overall = MasteryStats.summarize(items: allItems, progress: pmap)
+        let allIDs = allItems.map(\.id)
+        let wrong = MasteryStats.wrongCount(itemIDs: allIDs, progress: pmap)
+        let bookmarked = MasteryStats.bookmarkCount(itemIDs: allIDs, progress: pmap)
         let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
 
         ScrollView {
             VStack(spacing: 20) {
                 StreakHeader(streak: Streak.compute(sessionDates: sessions.map(\.finishedAt)),
                              totalCorrect: totalCorrect)
+
+                Button {
+                    start(.auto)
+                } label: {
+                    VStack(spacing: 4) {
+                        Label("おまかせで10問", systemImage: "sparkles")
+                            .font(.headline)
+                        Text("苦手 \(overall[.struggling])・未学習 \(overall[.unseen])・復習 \(overall.dueForReview)")
+                            .font(.caption)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .disabled(allItems.isEmpty)
 
                 Picker("モード", selection: $mode) {
                     ForEach(DrillMode.allCases, id: \.self) { Text($0.title).tag($0) }
@@ -82,11 +102,11 @@ struct HomeView: View {
                 } else {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 12)], spacing: 12) {
                         ForEach(mode.categories, id: \.self) { category in
-                            CategoryTile(title: category, stats: stats[category] ?? CategoryStats()) {
+                            CategoryTile(title: category, stats: stats[category] ?? MasterySummary()) {
                                 start(QuizConfig(mode: mode, category: category, format: formatChoice.format))
                             }
                         }
-                        CategoryTile(title: "ミックス", stats: HomeStats.overall(stats), isMix: true) {
+                        CategoryTile(title: "ミックス", stats: stats.values.reduce(MasterySummary(), +), isMix: true) {
                             start(QuizConfig(mode: mode, category: nil, format: formatChoice.format))
                         }
                     }
@@ -94,7 +114,7 @@ struct HomeView: View {
 
                 HStack(spacing: 12) {
                     Button {
-                        start(QuizConfig(mode: mode, category: nil, format: formatChoice.format, filter: .wrongOnly))
+                        start(QuizConfig(mode: nil, category: nil, format: nil, filter: .wrongOnly))
                     } label: {
                         Label("間違えた問題 (\(wrong))", systemImage: "arrow.counterclockwise")
                             .frame(maxWidth: .infinity)
@@ -102,7 +122,7 @@ struct HomeView: View {
                     .disabled(wrong == 0)
 
                     Button {
-                        start(QuizConfig(mode: mode, category: nil, format: formatChoice.format, filter: .bookmarked))
+                        start(QuizConfig(mode: nil, category: nil, format: nil, filter: .bookmarked))
                     } label: {
                         Label("ブックマーク (\(bookmarked))", systemImage: "bookmark")
                             .frame(maxWidth: .infinity)
@@ -172,7 +192,7 @@ struct StreakHeader: View {
 
 struct CategoryTile: View {
     let title: String
-    let stats: CategoryStats
+    let stats: MasterySummary
     var isMix = false
     let action: () -> Void
 
@@ -189,7 +209,7 @@ struct CategoryTile: View {
                     Text(stats.accuracyPercent.map { "\($0)%" } ?? "--")
                         .font(.title3.monospacedDigit().weight(.semibold))
                     Spacer()
-                    Text("卒業 \(stats.graduated) / \(stats.total)")
+                    Text("習得 \(stats[.mastered]) / \(stats.total)")
                         .font(.caption2.monospacedDigit())
                         .foregroundStyle(.secondary)
                 }
@@ -203,6 +223,6 @@ struct CategoryTile: View {
         .buttonStyle(.plain)
         .disabled(stats.total == 0)
         .opacity(stats.total == 0 ? 0.4 : 1)
-        .accessibilityLabel("\(title)。正答率 \(stats.accuracyPercent.map { "\($0)パーセント" } ?? "未学習")。卒業 \(stats.graduated) 件、全 \(stats.total) 件")
+        .accessibilityLabel("\(title)。正答率 \(stats.accuracyPercent.map { "\($0)パーセント" } ?? "未学習")。習得 \(stats[.mastered]) 件、全 \(stats.total) 件")
     }
 }

@@ -34,4 +34,5 @@ nonisolated struct ProgressSnapshot: Hashable, Sendable {
     var totalCorrect: Int = 0
     var totalAnswered: Int = 0
     var isBookmarked: Bool = false
+    var lastAnsweredAt: Date? = nil
 }

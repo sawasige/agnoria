@@ -22,7 +22,7 @@ struct ResultView: View {
                 VStack(spacing: 4) {
                     Text("\(run.correctCount) / \(run.questions.count)")
                         .font(.system(size: 56, weight: .bold, design: .rounded).monospacedDigit())
-                    Text(run.config.mode.title + " ・ " + run.config.categoryTitle)
+                    Text(run.config.mode.map { $0.title + " ・ " } ?? "" + run.config.categoryTitle)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

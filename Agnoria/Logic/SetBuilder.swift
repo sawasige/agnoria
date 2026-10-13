@@ -6,6 +6,7 @@ nonisolated enum SetBuilder {
 
     struct Candidate: Hashable, Sendable {
         var id: String
+        var mode: DrillMode
         var category: String
         var level: Int
         var progress: ProgressSnapshot?
@@ -14,6 +15,7 @@ nonisolated enum SetBuilder {
     /// 条件に合う候補に絞る
     static func eligible(_ all: [Candidate], config: QuizConfig, enabledLevels: Set<Int>) -> [Candidate] {
         all.filter { c in
+            if let m = config.mode, c.mode != m { return false }
             if let cat = config.category, c.category != cat { return false }
             if !enabledLevels.contains(c.level) { return false }
             if let only = config.restrictTo, !only.contains(c.id) { return false }
@@ -26,10 +28,11 @@ nonisolated enum SetBuilder {
     }
 
     /// 優先度を重みにして最大 setSize 件を抽出
-    static func pick(from candidates: [Candidate], count: Int = setSize,
+    static func pick(from candidates: [Candidate], count: Int = setSize, now: Date = .now,
                      using rng: inout some RandomNumberGenerator) -> [Candidate] {
         let weighted = candidates.map { c in
-            (item: c, weight: Priority.score(recentResults: c.progress?.recentResults ?? []))
+            (item: c, weight: Priority.score(recentResults: c.progress?.recentResults ?? [],
+                                             lastAnsweredAt: c.progress?.lastAnsweredAt, now: now))
         }
         return WeightedSampler.sample(weighted, count: count, using: &rng)
     }

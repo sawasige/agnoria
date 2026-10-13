@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 @testable import Agnoria
 
@@ -14,13 +15,43 @@ struct PriorityTests {
         #expect(Priority.hasRecentMistake([true, false, true]))
         #expect(!Priority.hasRecentMistake([]))
     }
+
+    @Test("卒業した問題は時間が経つと重みが戻る（14日で上限 1.5）") func forgettingRaisesGraduated() {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let day: TimeInterval = 86_400
+        let g = [true, true, true]
+        #expect(Priority.score(recentResults: g, lastAnsweredAt: now, now: now) == 0.3)
+        let week = Priority.score(recentResults: g, lastAnsweredAt: now.addingTimeInterval(-7 * day), now: now)
+        #expect(abs(week - 0.9) < 0.0001)
+        let twoWeeks = Priority.score(recentResults: g, lastAnsweredAt: now.addingTimeInterval(-14 * day), now: now)
+        #expect(abs(twoWeeks - 1.5) < 0.0001)
+        let month = Priority.score(recentResults: g, lastAnsweredAt: now.addingTimeInterval(-30 * day), now: now)
+        #expect(abs(month - 1.5) < 0.0001)
+        // 学習中も少し戻る。未回答・間違いは時間に依存しない
+        let learning = Priority.score(recentResults: [true], lastAnsweredAt: now.addingTimeInterval(-30 * day), now: now)
+        #expect(abs(learning - 1.5) < 0.0001)
+        #expect(Priority.score(recentResults: [false], lastAnsweredAt: now.addingTimeInterval(-30 * day), now: now) == 3)
+        #expect(Priority.score(recentResults: [], lastAnsweredAt: nil, now: now) == 3)
+    }
+
+    @Test("復習のころあい: 卒業後7日以上") func dueForReview() {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let fresh = ProgressSnapshot(itemID: "a", recentResults: [true, true, true], lastAnsweredAt: now)
+        let old = ProgressSnapshot(itemID: "b", recentResults: [true, true, true],
+                                   lastAnsweredAt: now.addingTimeInterval(-8 * 86_400))
+        let oldWrong = ProgressSnapshot(itemID: "c", recentResults: [true, false, true],
+                                        lastAnsweredAt: now.addingTimeInterval(-8 * 86_400))
+        #expect(!Priority.isDueForReview(fresh, now: now))
+        #expect(Priority.isDueForReview(old, now: now))
+        #expect(!Priority.isDueForReview(oldWrong, now: now))
+    }
 }
 
 @Suite("セット生成")
 struct SetBuilderTests {
     private func candidate(_ id: String, _ results: [Bool]?, category: String = "品詞", level: Int = 500,
-                           bookmarked: Bool = false) -> SetBuilder.Candidate {
-        SetBuilder.Candidate(id: id, category: category, level: level,
+                           bookmarked: Bool = false, mode: DrillMode = .grammar) -> SetBuilder.Candidate {
+        SetBuilder.Candidate(id: id, mode: mode, category: category, level: level,
                              progress: results.map {
                                  ProgressSnapshot(itemID: id, recentResults: $0, isBookmarked: bookmarked)
                              })
@@ -68,6 +99,24 @@ struct SetBuilderTests {
         // 重み比 0.3:3 = 1:10
         #expect(fHits > gHits * 4)
         #expect(gHits > 0, "卒業しても除外はしない")
+    }
+
+    @Test("おまかせ（mode nil）は単語と文法の両方から選ぶ。mode 指定なら片方だけ") func autoMixesModes() {
+        var rng = SeededRandomNumberGenerator(seed: 7)
+        let all = (0..<20).map { candidate("g\($0)", nil, mode: .grammar) }
+            + (0..<20).map { candidate("w\($0)", nil, category: "ビジネス一般", mode: .word) }
+        let auto = SetBuilder.eligible(all, config: .auto, enabledLevels: Level.allValues)
+        #expect(auto.count == 40)
+        let picked = SetBuilder.pick(from: auto, using: &rng)
+        #expect(picked.count == 10)
+        #expect(picked.contains { $0.mode == .grammar })
+        #expect(picked.contains { $0.mode == .word })
+
+        let wordsOnly = SetBuilder.eligible(all, config: QuizConfig(mode: .word, category: nil, format: nil),
+                                            enabledLevels: Level.allValues)
+        #expect(wordsOnly.count == 20)
+        #expect(wordsOnly.allSatisfy { $0.mode == .word })
+        #expect(QuizConfig.auto.categoryTitle == "おまかせ")
     }
 
     @Test("フィルタ: 分野・レベル・間違いのみ・ブックマーク") func filters() {
