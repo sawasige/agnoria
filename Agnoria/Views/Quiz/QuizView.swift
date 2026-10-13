@@ -32,11 +32,13 @@ struct QuizView: View {
                 }
                 .accessibilityElement(children: .combine)
 
-                ProgressView(value: Double(run.index + (answer == nil ? 0 : 1)), total: Double(run.questions.count))
+                ProgressDots(run: run)
                     .accessibilityHidden(true)
 
                 Text(q.prompt)
-                    .font(q.wordFormat == .meaning ? .largeTitle.bold() : .title3)
+                    .font(q.wordFormat == .meaning
+                          ? .system(.largeTitle, design: .serif, weight: .semibold)
+                          : .title3)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, 8)
@@ -55,13 +57,20 @@ struct QuizView: View {
 
                 if let answer {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text(answer.isCorrect ? "正解" : "不正解")
-                            .font(.headline)
-                            .foregroundStyle(answer.isCorrect ? .green : .red)
+                        HStack(spacing: 8) {
+                            Image(systemName: answer.isCorrect ? "checkmark.seal.fill" : "xmark.seal.fill")
+                                .font(.title2)
+                                .symbolEffect(.bounce, options: .nonRepeating, value: answer)
+                            Text(answer.isCorrect ? "正解" : "不正解")
+                                .font(.title3.weight(.bold))
+                                .fontDesign(.rounded)
+                        }
+                        .foregroundStyle(answer.isCorrect ? Color.green : Color.red)
                         ExplanationView(question: q)
                             .id(q.id)
                     }
-                    .transition(.opacity)
+                    .glassCard()
+                    .transition(.scale(scale: 0.96).combined(with: .opacity))
                 }
             }
             .padding()
@@ -69,6 +78,7 @@ struct QuizView: View {
             .frame(maxWidth: .infinity)
             .animation(.default, value: answer != nil)
         }
+        .background { AppBackground() }
         .safeAreaInset(edge: .bottom) {
             if answer != nil {
                 actionBar(run: run, question: q)
@@ -105,46 +115,57 @@ struct QuizView: View {
     /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる
     @ViewBuilder
     private func actionBar(run: QuizRun, question q: QuizQuestion) -> some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 10) {
-                if let text = q.speechText {
-                    Button {
-                        Speaker.shared.speak(text, rate: settings.speechRate)
-                    } label: {
-                        Label("読み上げ", systemImage: "speaker.wave.2")
-                            .frame(maxWidth: .infinity)
+        GlassEffectContainer(spacing: 10) {
+            VStack(spacing: 10) {
+                HStack(spacing: 10) {
+                    if let text = q.speechText {
+                        Button {
+                            Speaker.shared.speak(text, rate: settings.speechRate)
+                        } label: {
+                            Label("読み上げ", systemImage: "speaker.wave.2")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.glass)
+                    }
+                    if bookmarked {
+                        Button { toggleBookmark(q) } label: {
+                            Label("ブックマーク済み", systemImage: "bookmark.fill")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.glassProminent)
+                        .tint(.orange)
+                    } else {
+                        Button { toggleBookmark(q) } label: {
+                            Label("ブックマーク", systemImage: "bookmark")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.glass)
                     }
                 }
+
                 Button {
-                    model.toggleBookmark(q.itemID)
-                    bookmarked = model.isBookmarked(q.itemID)
+                    Speaker.shared.stop()
+                    if run.isLast { model.finishRun() } else { model.advance() }
                 } label: {
-                    Label(bookmarked ? "ブックマーク済み" : "ブックマーク",
-                          systemImage: bookmarked ? "bookmark.fill" : "bookmark")
+                    Text(run.isLast ? "結果を見る" : "次へ")
+                        .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
                 }
-                .tint(bookmarked ? .orange : nil)
+                .buttonStyle(.glassProminent)
+                .keyboardShortcut(.defaultAction)
             }
-            .buttonStyle(.bordered)
             .controlSize(.large)
-
-            Button {
-                Speaker.shared.stop()
-                if run.isLast { model.finishRun() } else { model.advance() }
-            } label: {
-                Text(run.isLast ? "結果を見る" : "次へ")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            .keyboardShortcut(.defaultAction)
         }
         .padding(.horizontal)
         .padding(.top, 10)
         .padding(.bottom, 6)
         .frame(maxWidth: 720)
         .frame(maxWidth: .infinity)
-        .background(.bar)
+    }
+
+    private func toggleBookmark(_ q: QuizQuestion) {
+        model.toggleBookmark(q.itemID)
+        bookmarked = model.isBookmarked(q.itemID)
     }
 
     private func select(_ index: Int) {
@@ -182,5 +203,33 @@ struct QuizView: View {
         case .jaToEn: "英語で言うと"
         case nil: q.categoryName
         }
+    }
+}
+
+/// 10問ぶんの進捗ドット。回答済みは正誤の色、現在の問題はアクセント
+struct ProgressDots: View {
+    let run: QuizRun
+
+    var body: some View {
+        HStack(spacing: 5) {
+            ForEach(run.questions.indices, id: \.self) { i in
+                Capsule()
+                    .fill(color(at: i))
+                    .frame(height: 6)
+                    .overlay {
+                        if i == run.index {
+                            Capsule().strokeBorder(Color.accentColor, lineWidth: 1.5)
+                        }
+                    }
+            }
+        }
+        .animation(.spring(duration: 0.4), value: run.answers.count)
+    }
+
+    private func color(at i: Int) -> Color {
+        if run.answers.indices.contains(i) {
+            return run.answers[i].isCorrect ? .green : .red
+        }
+        return i == run.index ? Color.accentColor.opacity(0.3) : Color.gray.opacity(0.2)
     }
 }

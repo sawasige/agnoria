@@ -1,6 +1,7 @@
 import SwiftUI
 
-/// 回答後の解説。文法: explanation / 単語: 意味 + 例文 + 和訳。Foundation Models の言い換え付き
+/// 回答後の解説。文法: explanation / 単語: 意味 + 例文 + 和訳。Foundation Models の言い換え付き。
+/// 背景は持たない（呼び出し側のガラスカードに載せる）
 struct ExplanationView: View {
     let question: QuizQuestion
     @State private var rephrased: String?
@@ -45,8 +46,6 @@ struct ExplanationView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     private func rephrase() async {

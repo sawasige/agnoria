@@ -12,6 +12,7 @@ struct HomeView: View {
 
     @State private var mode: DrillMode = .word
     @State private var formatChoice: FormatChoice = .random
+    @State private var showManual = true
     @State private var showSettings = false
     @State private var showEmptyAlert = false
 
@@ -61,81 +62,34 @@ struct HomeView: View {
         let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
 
         ScrollView {
-            VStack(spacing: 20) {
-                StreakHeader(streak: Streak.compute(sessionDates: sessions.map(\.finishedAt)),
-                             totalCorrect: totalCorrect)
-
+            VStack(spacing: 16) {
                 Button {
-                    start(.auto)
+                    model.path = [.stats]
                 } label: {
-                    VStack(spacing: 4) {
-                        Label("おまかせで10問", systemImage: "sparkles")
-                            .font(.headline)
-                        Text("苦手 \(overall[.struggling])・未学習 \(overall[.unseen])・復習 \(overall.dueForReview)")
-                            .font(.caption)
-                    }
-                    .frame(maxWidth: .infinity)
+                    MasteryCard(summary: overall,
+                                streak: Streak.compute(sessionDates: sessions.map(\.finishedAt)),
+                                totalCorrect: totalCorrect)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .disabled(allItems.isEmpty)
+                .buttonStyle(.plain)
+                .accessibilityHint("進捗の詳細を開く")
 
-                Picker("モード", selection: $mode) {
-                    ForEach(DrillMode.allCases, id: \.self) { Text($0.title).tag($0) }
-                }
-                .pickerStyle(.segmented)
-
-                if mode == .word {
-                    Picker("出題形式", selection: $formatChoice) {
-                        ForEach(FormatChoice.allCases, id: \.self) { Text($0.title).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
-                    .accessibilityLabel("出題形式")
-                }
-
-                if model.importState == .running, items.isEmpty {
+                if model.importState == .running, allItems.isEmpty {
                     ProgressView("問題データを準備中…")
                         .padding(.vertical, 40)
-                } else if case .failed(let message) = model.importState, items.isEmpty {
+                } else if case .failed(let message) = model.importState, allItems.isEmpty {
                     ContentUnavailableView("問題データを読み込めません", systemImage: "exclamationmark.triangle",
                                            description: Text(message))
                 } else {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 12)], spacing: 12) {
-                        ForEach(mode.categories, id: \.self) { category in
-                            CategoryTile(title: category, stats: stats[category] ?? MasterySummary()) {
-                                start(QuizConfig(mode: mode, category: category, format: formatChoice.format))
-                            }
-                        }
-                        CategoryTile(title: "ミックス", stats: stats.values.reduce(MasterySummary(), +), isMix: true) {
-                            start(QuizConfig(mode: mode, category: nil, format: formatChoice.format))
-                        }
-                    }
+                    autoButton(overall, disabled: allItems.isEmpty)
+                    manualSection(stats: stats)
+                    reviewButtons(wrong: wrong, bookmarked: bookmarked)
                 }
-
-                HStack(spacing: 12) {
-                    Button {
-                        start(QuizConfig(mode: nil, category: nil, format: nil, filter: .wrongOnly))
-                    } label: {
-                        Label("間違えた問題 (\(wrong))", systemImage: "arrow.counterclockwise")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .disabled(wrong == 0)
-
-                    Button {
-                        start(QuizConfig(mode: nil, category: nil, format: nil, filter: .bookmarked))
-                    } label: {
-                        Label("ブックマーク (\(bookmarked))", systemImage: "bookmark")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .disabled(bookmarked == 0)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.large)
             }
             .padding()
             .frame(maxWidth: 720)
             .frame(maxWidth: .infinity)
         }
+        .background { AppBackground() }
         .navigationTitle("Agnoria")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -152,44 +106,173 @@ struct HomeView: View {
         }
     }
 
+    // MARK: - おまかせ
+
+    private func autoButton(_ overall: MasterySummary, disabled: Bool) -> some View {
+        Button {
+            start(.auto)
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: "sparkles")
+                    .font(.title2)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("おまかせで10問")
+                        .font(.title3.weight(.semibold))
+                        .fontDesign(.rounded)
+                    Text(autoHint(overall))
+                        .font(.caption)
+                        .opacity(0.85)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.body.weight(.semibold))
+                    .opacity(0.7)
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 4)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.glassProminent)
+        .controlSize(.large)
+        .disabled(disabled)
+        .accessibilityLabel("おまかせで10問。\(autoHint(overall))")
+    }
+
+    /// 今のセットが何を中心に組まれるかの目安
+    private func autoHint(_ s: MasterySummary) -> String {
+        if s.total == 0 { return "問題がありません" }
+        if s[.struggling] == 0, s[.unseen] == 0, s.dueForReview == 0 {
+            return "全部習得済み。復習で定着させよう"
+        }
+        return "苦手 \(s[.struggling])・未学習 \(s[.unseen])・復習 \(s.dueForReview)"
+    }
+
+    // MARK: - 分野を選んで学ぶ
+
+    private func manualSection(stats: [String: MasterySummary]) -> some View {
+        DisclosureGroup(isExpanded: $showManual) {
+            VStack(spacing: 12) {
+                Picker("モード", selection: $mode) {
+                    ForEach(DrillMode.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                .pickerStyle(.segmented)
+
+                if mode == .word {
+                    Picker("出題形式", selection: $formatChoice) {
+                        ForEach(FormatChoice.allCases, id: \.self) { Text($0.title).tag($0) }
+                    }
+                    .pickerStyle(.segmented)
+                    .accessibilityLabel("出題形式")
+                }
+
+                GlassEffectContainer(spacing: 12) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 12)], spacing: 12) {
+                        ForEach(mode.categories, id: \.self) { category in
+                            CategoryTile(title: category, stats: stats[category] ?? MasterySummary()) {
+                                start(QuizConfig(mode: mode, category: category, format: formatChoice.format))
+                            }
+                        }
+                        CategoryTile(title: "ミックス", stats: stats.values.reduce(MasterySummary(), +), isMix: true) {
+                            start(QuizConfig(mode: mode, category: nil, format: formatChoice.format))
+                        }
+                    }
+                }
+            }
+            .padding(.top, 10)
+        } label: {
+            Label("分野を選んで学ぶ", systemImage: "square.grid.2x2")
+                .font(.headline)
+        }
+        .tint(.primary)
+        .padding(.top, 4)
+    }
+
+    private func reviewButtons(wrong: Int, bookmarked: Int) -> some View {
+        HStack(spacing: 12) {
+            Button {
+                start(QuizConfig(mode: nil, category: nil, format: nil, filter: .wrongOnly))
+            } label: {
+                Label("間違えた問題 (\(wrong))", systemImage: "arrow.counterclockwise")
+                    .frame(maxWidth: .infinity)
+            }
+            .disabled(wrong == 0)
+
+            Button {
+                start(QuizConfig(mode: nil, category: nil, format: nil, filter: .bookmarked))
+            } label: {
+                Label("ブックマーク (\(bookmarked))", systemImage: "bookmark")
+                    .frame(maxWidth: .infinity)
+            }
+            .disabled(bookmarked == 0)
+        }
+        .buttonStyle(.glass)
+        .controlSize(.large)
+    }
+
     private func start(_ config: QuizConfig) {
         if model.startQuiz(config) == nil { showEmptyAlert = true }
     }
 }
 
-struct StreakHeader: View {
+/// 学習状況のカード: 習得率・積み上げバー・連続日数・称号
+struct MasteryCard: View {
+    let summary: MasterySummary
     let streak: Streak.Result
     let totalCorrect: Int
 
     var body: some View {
-        HStack(alignment: .center) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(Rank.title(totalCorrect: totalCorrect))
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("習得")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    HStack(alignment: .firstTextBaseline, spacing: 2) {
+                        Text("\(summary.masteredPercent)")
+                            .font(.system(size: 42, weight: .bold, design: .rounded).monospacedDigit())
+                            .contentTransition(.numericText())
+                        Text("%")
+                            .font(.title3.weight(.semibold))
+                            .fontDesign(.rounded)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 3) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "flame.fill")
+                        Text("\(streak.days)日")
+                            .monospacedDigit()
+                    }
                     .font(.headline)
-                Text(Rank.subtitle(totalCorrect: totalCorrect))
+                    .fontDesign(.rounded)
+                    .foregroundStyle(streak.doneToday ? Color.orange : Color.secondary)
+                    Text(streak.doneToday ? "今日も学習済み" : "今日はまだ")
+                        .font(.caption)
+                        .fontWeight(streak.doneToday ? .regular : .semibold)
+                        .foregroundStyle(streak.doneToday ? Color.secondary : Color.orange)
+                }
+            }
+            MasteryBar(summary: summary, height: 12)
+            MasteryLegend(summary: summary)
+            HStack(spacing: 4) {
+                Text(Rank.title(totalCorrect: totalCorrect))
+                    .font(.caption.weight(.semibold))
+                Text("・ " + Rank.subtitle(totalCorrect: totalCorrect))
                     .font(.caption)
                     .foregroundStyle(.secondary)
-            }
-            Spacer()
-            VStack(alignment: .trailing, spacing: 2) {
-                HStack(spacing: 4) {
-                    Image(systemName: "flame.fill")
-                    Text("\(streak.days)日")
-                }
-                .font(.headline)
-                .foregroundStyle(streak.doneToday ? Color.orange : Color.secondary)
-                Text(streak.doneToday ? "今日も学習済み" : "今日はまだ")
-                    .font(.caption)
-                    .fontWeight(streak.doneToday ? .regular : .semibold)
-                    .foregroundStyle(streak.doneToday ? Color.secondary : Color.orange)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.tertiary)
             }
         }
-        .padding()
-        .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .glassCard()
         .accessibilityElement(children: .combine)
     }
 }
 
+/// 分野タイル: アイコン・習得率・積み上げバー
 struct CategoryTile: View {
     let title: String
     let stats: MasterySummary
@@ -198,31 +281,38 @@ struct CategoryTile: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .center) {
+                    Image(systemName: isMix ? "square.grid.2x2.fill" : DrillMode.symbol(for: title))
+                        .font(.title3)
+                        .foregroundStyle(isMix ? Color.accentColor : Color.secondary)
+                        .frame(width: 28, alignment: .leading)
+                    Spacer()
+                    Text(stats.total == 0 ? "--" : "\(stats.masteredPercent)%")
+                        .font(.subheadline.weight(.semibold).monospacedDigit())
+                        .fontDesign(.rounded)
+                        .foregroundStyle(.secondary)
+                }
                 Text(title)
                     .font(.headline)
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 0)
-                HStack(alignment: .firstTextBaseline) {
-                    Text(stats.accuracyPercent.map { "\($0)%" } ?? "--")
-                        .font(.title3.monospacedDigit().weight(.semibold))
-                    Spacer()
-                    Text("習得 \(stats[.mastered]) / \(stats.total)")
-                        .font(.caption2.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                }
+                MasteryBar(summary: stats, height: 6)
+                Text("習得 \(stats[.mastered]) / \(stats.total)")
+                    .font(.caption2.monospacedDigit())
+                    .foregroundStyle(.secondary)
             }
-            .padding()
-            .frame(maxWidth: .infinity, minHeight: 96, alignment: .leading)
-            .background(isMix ? Color.accentColor.opacity(0.15) : Color.secondary.opacity(0.08),
-                        in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-            .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .padding(14)
+            .frame(maxWidth: .infinity, minHeight: 124, alignment: .leading)
+            .glassEffect(isMix ? .regular.tint(Color.accentColor.opacity(0.3)).interactive() : .regular.interactive(),
+                         in: .rect(cornerRadius: 20))
+            .contentShape(.rect(cornerRadius: 20))
         }
         .buttonStyle(.plain)
         .disabled(stats.total == 0)
         .opacity(stats.total == 0 ? 0.4 : 1)
-        .accessibilityLabel("\(title)。正答率 \(stats.accuracyPercent.map { "\($0)パーセント" } ?? "未学習")。習得 \(stats[.mastered]) 件、全 \(stats.total) 件")
+        .accessibilityLabel("\(title)。習得 \(stats[.mastered]) 件、全 \(stats.total) 件")
     }
 }

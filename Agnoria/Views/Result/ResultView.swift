@@ -19,16 +19,23 @@ struct ResultView: View {
         let wrong = run.wrongAnswers
         ScrollView {
             VStack(spacing: 24) {
-                VStack(spacing: 4) {
-                    Text("\(run.correctCount) / \(run.questions.count)")
-                        .font(.system(size: 56, weight: .bold, design: .rounded).monospacedDigit())
-                    Text(run.config.mode.map { $0.title + " ・ " } ?? "" + run.config.categoryTitle)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                VStack(spacing: 14) {
+                    ScoreRing(correct: run.correctCount, total: run.questions.count)
+                    Text(message(correct: run.correctCount, total: run.questions.count))
+                        .font(.headline)
+                        .fontDesign(.rounded)
+                    HStack(spacing: 6) {
+                        Text((run.config.mode.map { $0.title + " ・ " } ?? "") + run.config.categoryTitle)
+                        Text("・")
+                        Text("正解 \(run.correctCount)").foregroundStyle(.green)
+                        Text("不正解 \(run.questions.count - run.correctCount)").foregroundStyle(.red)
+                    }
+                    .font(.subheadline.monospacedDigit())
+                    .foregroundStyle(.secondary)
                 }
-                .padding(.top, 24)
+                .padding(.top, 16)
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("\(run.questions.count)問中\(run.correctCount)問正解")
+                .accessibilityLabel("\(run.questions.count)問中\(run.correctCount)問正解。\(message(correct: run.correctCount, total: run.questions.count))")
 
                 if !wrong.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
@@ -48,7 +55,7 @@ struct ResultView: View {
                     } label: {
                         Text("同じ条件でもう1セット").frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.glassProminent)
 
                     if !wrong.isEmpty {
                         Button {
@@ -59,7 +66,7 @@ struct ResultView: View {
                         } label: {
                             Text("間違えた問題だけやり直す").frame(maxWidth: .infinity)
                         }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(.glass)
                     }
 
                     Button {
@@ -67,7 +74,7 @@ struct ResultView: View {
                     } label: {
                         Text("ホームへ").frame(maxWidth: .infinity)
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.glass)
                 }
                 .controlSize(.large)
             }
@@ -75,10 +82,22 @@ struct ResultView: View {
             .frame(maxWidth: 720)
             .frame(maxWidth: .infinity)
         }
+        .background { AppBackground() }
         .navigationTitle("結果")
         .navigationBarBackButtonHidden(true)
         .sheet(item: $practice) { q in
             PracticeQuestionView(question: q)
+        }
+    }
+
+    private func message(correct: Int, total: Int) -> String {
+        guard total > 0 else { return "" }
+        let ratio = Double(correct) / Double(total)
+        switch ratio {
+        case 1: return "全問正解！"
+        case 0.8...: return "いい調子"
+        case 0.5...: return "もう一歩"
+        default: return "苦手が見つかった。もう1セットいこう"
         }
     }
 
@@ -134,8 +153,48 @@ struct WrongAnswerRow: View {
                 .multilineTextAlignment(.leading)
                 .lineLimit(expanded ? nil : 2)
         }
-        .padding()
-        .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .tint(.primary)
+        .glassCard(padding: 14, cornerRadius: 16)
+    }
+}
+
+/// 正答数の円形ゲージ。表示時に 0 から伸びる
+struct ScoreRing: View {
+    let correct: Int
+    let total: Int
+    @State private var shown = false
+
+    private var ratio: Double { total == 0 ? 0 : Double(correct) / Double(total) }
+    private var color: Color {
+        switch ratio {
+        case 0.8...: .green
+        case 0.5...: Color.accentColor
+        default: .orange
+        }
+    }
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(Color.gray.opacity(0.15), lineWidth: 14)
+            Circle()
+                .trim(from: 0, to: shown ? ratio : 0)
+                .stroke(color, style: StrokeStyle(lineWidth: 14, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+            VStack(spacing: 0) {
+                Text("\(correct)")
+                    .font(.system(size: 56, weight: .bold, design: .rounded).monospacedDigit())
+                Text("/ \(total)")
+                    .font(.title3.monospacedDigit())
+                    .fontDesign(.rounded)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .frame(width: 180, height: 180)
+        .onAppear {
+            withAnimation(.spring(duration: 0.8, bounce: 0.15).delay(0.1)) { shown = true }
+        }
+        .accessibilityHidden(true)
     }
 }
 
@@ -177,6 +236,7 @@ struct PracticeQuestionView: View {
                     }
                     if chosen != nil {
                         ExplanationView(question: question)
+                            .glassCard()
                             .sensoryFeedback(chosen == question.correctIndex ? .success : .error, trigger: chosen)
                         if let text = question.speechText {
                             Button {
@@ -184,12 +244,13 @@ struct PracticeQuestionView: View {
                             } label: {
                                 Label("読み上げ", systemImage: "speaker.wave.2")
                             }
-                            .buttonStyle(.bordered)
+                            .buttonStyle(.glass)
                         }
                     }
                 }
                 .padding()
             }
+            .background { AppBackground() }
             .navigationTitle("類題")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
