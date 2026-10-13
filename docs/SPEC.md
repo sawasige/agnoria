@@ -260,6 +260,7 @@ SessionResult
 - 例文のみ読み上げ。単語単体の読み上げは v2
 - **[v1.1]** マナーモード（サイレントスイッチ）に従う。`.ambient` カテゴリなので消音中は鳴らない。自動読み上げをデフォルト ON にしたため、意図せず音が出る経路を無くす。`AVAudioSession` は iOS のみなので `#if os(iOS)` で囲む
 - **[v1.2]** 効果音は `Resources/Sounds/correct.caf` / `wrong.caf`（合成音。44.1kHz mono 16bit、ピーク -6 dBFS）を `AVAudioPlayer` でプリロードして鳴らす。セッション設定は読み上げと共有（`AudioSession`）なので、効果音もマナーモードに従う
+- **[v1.4]** `AVAudioSession` の `setCategory` / `setActive` と `AVAudioPlayer` の `prepareToPlay` / `play` は内部で同期的にセッションを有効化し、メインスレッドで呼ぶと Xcode が「AVAudioSession Hang Risk」を報告する。`AudioSession` と `SoundEffects` は actor にして、これらをメインスレッド以外で実行する（View からは `SoundEffects.shared.play(_:)` を呼ぶだけで待たない）。シミュレータのログで、旧実装では 1 セット中に 5 件出ていた診断が 0 件になることを確認済み
 
 ---
 
