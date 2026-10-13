@@ -6,10 +6,10 @@ import FoundationModels
 /// Foundation Models（§5）。非対応端末では isAvailable == false になり UI を出さない。
 /// 失敗・タイムアウト時は nil を返し、呼び出し側はボタンを静かに消す。
 enum AIAssist {
-    static let timeout: Duration = .seconds(5)
+    nonisolated static let timeout: Duration = .seconds(5)
 
     /// 学習者像の表現。商標名はアプリ内文字列に含めない（§0 / §10）
-    private static let learnerProfile = "ビジネス英語を学び始めた初中級（スコア帯450点前後）の日本語話者"
+    private nonisolated static let learnerProfile = "ビジネス英語を学び始めた初中級（スコア帯450点前後）の日本語話者"
 
     static var isAvailable: Bool {
         #if canImport(FoundationModels)
