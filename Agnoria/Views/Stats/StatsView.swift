@@ -21,12 +21,14 @@ struct StatsView: View {
         let current = Stage.current(unlocked: settings.unlockedLevel, byLevel: byLevel)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
+        let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
 
         ScrollView {
             VStack(spacing: 16) {
-                overview(overall, streak: streak)
+                overview(overall, streak: streak, totalCorrect: totalCorrect)
                 stageRows(byLevel: byLevel, current: current, unlocked: settings.unlockedLevel)
-                dailyChart(daily)
+                DailyChart(days: daily)
+                    .glassCard()
                 categoryChart(title: "単語", mode: .word, items: wordItems, progress: pmap)
                 categoryChart(title: "文法", mode: .grammar, items: grammarItems, progress: pmap)
             }
@@ -43,7 +45,7 @@ struct StatsView: View {
 
     // MARK: - 達成度
 
-    private func overview(_ s: MasterySummary, streak: Streak.Result) -> some View {
+    private func overview(_ s: MasterySummary, streak: Streak.Result, totalCorrect: Int) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .firstTextBaseline) {
                 Text("習得")
@@ -67,6 +69,15 @@ struct StatsView: View {
                 stat("累計正解", "\(s.correct)")
                 stat("連続日数", "\(streak.days)日")
                 stat("復習待ち", "\(s.dueForReview)")
+            }
+            HStack(spacing: 4) {
+                Image(systemName: "laurel.leading")
+                    .foregroundStyle(.secondary)
+                Text(Rank.title(totalCorrect: totalCorrect))
+                    .font(.caption.weight(.semibold))
+                Text("・ " + Rank.subtitle(totalCorrect: totalCorrect))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
         }
         .glassCard()
@@ -109,40 +120,6 @@ struct StatsView: View {
             Text("習得率 80% で次の帯が開きます")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
-        }
-        .glassCard()
-    }
-
-    // MARK: - 推移
-
-    private func dailyChart(_ days: [DayStat]) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .firstTextBaseline) {
-                Text("この2週間").font(.headline)
-                Spacer()
-                let answered = days.reduce(0) { $0 + $1.answered }
-                let correct = days.reduce(0) { $0 + $1.correct }
-                Text("回答 \(answered) ・ 正解 \(correct)")
-                    .font(.caption.monospacedDigit())
-                    .foregroundStyle(.secondary)
-            }
-            Chart(days) { day in
-                BarMark(x: .value("日", day.date, unit: .day), y: .value("回答", day.answered))
-                    .foregroundStyle(Color.accentColor.opacity(0.25))
-                    .cornerRadius(3)
-                BarMark(x: .value("日", day.date, unit: .day), y: .value("正解", day.correct))
-                    .foregroundStyle(Color.accentColor)
-                    .cornerRadius(3)
-            }
-            .chartXAxis {
-                AxisMarks(values: .stride(by: .day, count: 2)) { _ in
-                    AxisGridLine()
-                    AxisValueLabel(format: .dateTime.day(), centered: true)
-                }
-            }
-            .chartYAxis { AxisMarks(position: .trailing) }
-            .frame(height: 150)
-            .accessibilityLabel("日別の回答数と正解数")
         }
         .glassCard()
     }

@@ -59,4 +59,20 @@ struct MasteryTests {
         #expect(oct5?.answered == 2 && oct5?.correct == 0)
         #expect(days.filter { $0.answered == 0 }.count == 12)
     }
+
+    @Test("days: 1 の末尾は今日で、今日のセッションだけを数える（ホームの「今日」カード）") func todayOnly() {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        let today = cal.date(from: DateComponents(year: 2026, month: 10, day: 13, hour: 9))!
+        let r = { (ok: Bool) in SessionResult(itemID: "x", isCorrect: ok, chosenIndex: 0, elapsedMs: 100) }
+        let sessions: [(finishedAt: Date, results: [SessionResult])] = [
+            (cal.date(from: DateComponents(year: 2026, month: 10, day: 12, hour: 23, minute: 59))!, [r(true), r(true)]),
+            (cal.date(from: DateComponents(year: 2026, month: 10, day: 13, hour: 0, minute: 1))!, [r(true), r(false), r(false)]),
+        ]
+        let days = MasteryStats.daily(sessions: sessions, days: 1, today: today, calendar: cal)
+        #expect(days.count == 1)
+        #expect(days.last?.date == cal.startOfDay(for: today))
+        #expect(days.last?.answered == 3 && days.last?.correct == 1)
+        #expect(MasteryStats.daily(sessions: [], days: 1, today: today, calendar: cal).last?.answered == 0)
+    }
 }

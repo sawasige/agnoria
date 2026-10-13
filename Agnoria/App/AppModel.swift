@@ -6,6 +6,7 @@ enum Route: Hashable {
     case quiz
     case result
     case stats
+    case pick
 }
 
 enum ImportState: Equatable, Sendable {

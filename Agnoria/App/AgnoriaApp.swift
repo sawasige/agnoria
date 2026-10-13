@@ -70,6 +70,7 @@ struct RootView: View {
                     case .quiz: QuizView()
                     case .result: ResultView()
                     case .stats: StatsView()
+                    case .pick: PickView()
                     }
                 }
         }
