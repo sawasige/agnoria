@@ -6,7 +6,7 @@ import Observation
 @Observable
 final class AppSettings {
     private enum Key {
-        static let levels = "enabledLevels"
+        static let unlockedLevel = "unlockedLevel"
         static let speechRate = "speechRate"
         static let autoSpeak = "autoSpeak"
         static let soundEffects = "soundEffects"
@@ -15,9 +15,13 @@ final class AppSettings {
 
     private let defaults: UserDefaults
 
-    var enabledLevels: Set<Int> {
-        didSet { defaults.set(enabledLevels.sorted(), forKey: Key.levels) }
+    /// 到達しているスコア帯（§3.4）。450 から始まり、習得率 80% で次へ進む。手動でも変えられる
+    var unlockedLevel: Int {
+        didSet { defaults.set(unlockedLevel, forKey: Key.unlockedLevel) }
     }
+
+    /// 出題対象のレベル = 到達帯まで
+    var enabledLevels: Set<Int> { Stage.unlockedLevels(upTo: unlockedLevel) }
 
     /// AVSpeechUtterance.rate（0.0〜1.0）。デフォルトはやや遅め
     var speechRate: Double {
@@ -41,11 +45,8 @@ final class AppSettings {
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
-        if let saved = defaults.array(forKey: Key.levels) as? [Int], !saved.isEmpty {
-            enabledLevels = Set(saved)
-        } else {
-            enabledLevels = Level.allValues
-        }
+        let saved = defaults.integer(forKey: Key.unlockedLevel)
+        unlockedLevel = Stage.levels.contains(saved) ? saved : Stage.first
         let rate = defaults.double(forKey: Key.speechRate)
         speechRate = rate == 0 ? 0.45 : rate
         autoSpeak = defaults.object(forKey: Key.autoSpeak) as? Bool ?? true

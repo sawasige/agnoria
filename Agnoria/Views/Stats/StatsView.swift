@@ -16,12 +16,16 @@ struct StatsView: View {
         let wordItems = words.filter { settings.enabledLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
         let grammarItems = grammar.filter { settings.enabledLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
         let overall = MasteryStats.summarize(items: wordItems + grammarItems, progress: pmap)
+        let byLevel = MasteryStats.byLevel(items: words.map { (id: $0.id, level: $0.level) }
+                                           + grammar.map { (id: $0.id, level: $0.level) }, progress: pmap)
+        let current = Stage.current(unlocked: settings.unlockedLevel, byLevel: byLevel)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
 
         ScrollView {
             VStack(spacing: 16) {
                 overview(overall, streak: streak)
+                stageRows(byLevel: byLevel, current: current, unlocked: settings.unlockedLevel)
                 dailyChart(daily)
                 categoryChart(title: "単語", mode: .word, items: wordItems, progress: pmap)
                 categoryChart(title: "文法", mode: .grammar, items: grammarItems, progress: pmap)
@@ -75,6 +79,38 @@ struct StatsView: View {
             Text(title).font(.caption2).foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    // MARK: - ステージ
+
+    private func stageRows(byLevel: [Int: MasterySummary], current: Int, unlocked: Int) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("ステージ").font(.headline)
+            ForEach(Stage.levels, id: \.self) { level in
+                let s = byLevel[level] ?? MasterySummary()
+                let locked = level > unlocked
+                HStack(spacing: 10) {
+                    Image(systemName: locked ? "lock.fill" : (Stage.isCleared(s) ? "checkmark.circle.fill" : "circle"))
+                        .foregroundStyle(locked ? Color.secondary : (Stage.isCleared(s) ? Color.green : Color.accentColor))
+                        .frame(width: 20)
+                    Text("\(level) 点帯")
+                        .font(.subheadline.weight(level == current && !locked ? .semibold : .regular))
+                        .frame(width: 72, alignment: .leading)
+                    MasteryBar(summary: s, height: 8)
+                        .opacity(locked ? 0.4 : 1)
+                    Text(locked ? "未到達" : "\(s[.mastered]) / \(s.total)")
+                        .font(.caption.monospacedDigit())
+                        .foregroundStyle(.secondary)
+                        .frame(width: 64, alignment: .trailing)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("\(level)点帯。\(locked ? "未到達" : "習得 \(s[.mastered]) / \(s.total)")\(level == current ? "。今ここ" : "")")
+            }
+            Text("習得率 80% で次の帯が開きます")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+        }
+        .glassCard()
     }
 
     // MARK: - 推移

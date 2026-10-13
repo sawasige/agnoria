@@ -60,13 +60,17 @@ struct HomeView: View {
         let wrong = MasteryStats.wrongCount(itemIDs: allIDs, progress: pmap)
         let bookmarked = MasteryStats.bookmarkCount(itemIDs: allIDs, progress: pmap)
         let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
+        let byLevel = MasteryStats.byLevel(items: words.map { (id: $0.id, level: $0.level) }
+                                           + grammar.map { (id: $0.id, level: $0.level) }, progress: pmap)
+        let stage = Stage.current(unlocked: settings.unlockedLevel, byLevel: byLevel)
+        let stageSummary = byLevel[stage] ?? MasterySummary()
 
         ScrollView {
             VStack(spacing: 16) {
                 Button {
                     model.path = [.stats]
                 } label: {
-                    MasteryCard(summary: overall,
+                    MasteryCard(stage: stage, stageSummary: stageSummary, overall: overall,
                                 streak: Streak.compute(sessionDates: sessions.map(\.finishedAt)),
                                 totalCorrect: totalCorrect)
                 }
@@ -80,7 +84,7 @@ struct HomeView: View {
                     ContentUnavailableView("問題データを読み込めません", systemImage: "exclamationmark.triangle",
                                            description: Text(message))
                 } else {
-                    autoButton(overall, disabled: allItems.isEmpty)
+                    autoButton(stage: stage, stageSummary, disabled: allItems.isEmpty)
                     manualSection(stats: stats)
                     reviewButtons(wrong: wrong, bookmarked: bookmarked)
                 }
@@ -108,7 +112,7 @@ struct HomeView: View {
 
     // MARK: - おまかせ
 
-    private func autoButton(_ overall: MasterySummary, disabled: Bool) -> some View {
+    private func autoButton(stage: Int, _ summary: MasterySummary, disabled: Bool) -> some View {
         Button {
             start(.auto)
         } label: {
@@ -119,7 +123,7 @@ struct HomeView: View {
                     Text("おまかせで10問")
                         .font(.title3.weight(.semibold))
                         .fontDesign(.rounded)
-                    Text(autoHint(overall))
+                    Text(autoHint(stage: stage, summary))
                         .font(.caption)
                         .opacity(0.85)
                 }
@@ -135,16 +139,16 @@ struct HomeView: View {
         .buttonStyle(.glassProminent)
         .controlSize(.large)
         .disabled(disabled)
-        .accessibilityLabel("おまかせで10問。\(autoHint(overall))")
+        .accessibilityLabel("おまかせで10問。\(autoHint(stage: stage, summary))")
     }
 
-    /// 今のセットが何を中心に組まれるかの目安
-    private func autoHint(_ s: MasterySummary) -> String {
+    /// 今のセットが何を中心に組まれるかの目安（今のステージの内訳）
+    private func autoHint(stage: Int, _ s: MasterySummary) -> String {
         if s.total == 0 { return "問題がありません" }
         if s[.struggling] == 0, s[.unseen] == 0, s.dueForReview == 0 {
-            return "全部習得済み。復習で定着させよう"
+            return "\(stage) 点帯は全部習得済み。復習で定着させよう"
         }
-        return "苦手 \(s[.struggling])・未学習 \(s[.unseen])・復習 \(s.dueForReview)"
+        return "\(stage) 点帯: 苦手 \(s[.struggling])・未学習 \(s[.unseen])・復習 \(s.dueForReview)"
     }
 
     // MARK: - 分野を選んで学ぶ
@@ -214,9 +218,11 @@ struct HomeView: View {
     }
 }
 
-/// 学習状況のカード: 習得率・積み上げバー・連続日数・称号
+/// 学習状況のカード: 今のステージの習得率・積み上げバー・次の帯まで・連続日数・称号
 struct MasteryCard: View {
-    let summary: MasterySummary
+    let stage: Int
+    let stageSummary: MasterySummary
+    let overall: MasterySummary
     let streak: Streak.Result
     let totalCorrect: Int
 
@@ -224,11 +230,11 @@ struct MasteryCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("習得")
+                    Text("\(stage) 点帯の習得")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                     HStack(alignment: .firstTextBaseline, spacing: 2) {
-                        Text("\(summary.masteredPercent)")
+                        Text("\(stageSummary.masteredPercent)")
                             .font(.system(size: 42, weight: .bold, design: .rounded).monospacedDigit())
                             .contentTransition(.numericText())
                         Text("%")
@@ -253,8 +259,11 @@ struct MasteryCard: View {
                         .foregroundStyle(streak.doneToday ? Color.secondary : Color.orange)
                 }
             }
-            MasteryBar(summary: summary, height: 12)
-            MasteryLegend(summary: summary)
+            MasteryBar(summary: stageSummary, height: 12)
+            MasteryLegend(summary: stageSummary)
+            Text(nextText)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(Color.accentColor)
             HStack(spacing: 4) {
                 Text(Rank.title(totalCorrect: totalCorrect))
                     .font(.caption.weight(.semibold))
@@ -262,6 +271,9 @@ struct MasteryCard: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
+                Text("全体 \(overall.masteredPercent)%")
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(.secondary)
                 Image(systemName: "chevron.right")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.tertiary)
@@ -269,6 +281,16 @@ struct MasteryCard: View {
         }
         .glassCard()
         .accessibilityElement(children: .combine)
+    }
+
+    private var nextText: String {
+        if let next = Stage.next(after: stage) {
+            let remaining = Stage.remainingToClear(stageSummary)
+            return remaining == 0
+                ? "\(next) 点帯へ進めます"
+                : "あと \(remaining) 問の習得で \(next) 点帯へ"
+        }
+        return Stage.isCleared(stageSummary) ? "最上位の帯をクリア。復習で定着させよう" : "最上位の帯。ここを仕上げよう"
     }
 }
 

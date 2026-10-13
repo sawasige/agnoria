@@ -58,6 +58,7 @@ struct AppModelTests {
 
     @Test("分野指定・形式指定が反映される") func categoryAndFormat() async throws {
         let model = try await makeModel()
+        model.settings.unlockedLevel = Stage.last
         var rng = SeededRandomNumberGenerator(seed: 1)
         let qs = model.buildQuestions(QuizConfig(mode: .word, category: "人事・採用", format: .cloze), using: &rng)
         #expect(qs.count == 10)
@@ -88,17 +89,44 @@ struct AppModelTests {
         #expect(model.buildQuestions(QuizConfig(mode: .grammar, category: nil, format: nil, filter: .bookmarked), using: &rng).isEmpty)
     }
 
-    @Test("レベル絞り込みで0件なら開始しない") func levelFilterEmpty() async throws {
+    @Test("到達帯より上のレベルは出題されない") func stageLimitsLevels() async throws {
         let model = try await makeModel()
         let payload = try BundleData.load(bundle: Bundle(for: ItemProgress.self))
-        // 600 点帯の単語が無い分野を探す
-        let emptyCategory = try #require(WordCategory.allCases.map(\.rawValue).first { cat in
-            !payload.words.contains { $0.category == cat && $0.level == 600 }
-        })
-        model.settings.enabledLevels = [600]
-        #expect(model.startQuiz(QuizConfig(mode: .word, category: emptyCategory, format: nil)) == nil)
+        let top = Set(payload.words.filter { $0.level == Stage.last }.map(\.id))
+        try #require(!top.isEmpty)
+        model.settings.unlockedLevel = Stage.first
+        #expect(model.startQuiz(QuizConfig(mode: .word, category: nil, format: nil, restrictTo: top)) == nil)
         #expect(model.path.isEmpty)
-        model.settings.enabledLevels = Level.allValues
-        #expect(model.startQuiz(QuizConfig(mode: .word, category: emptyCategory, format: nil)) != nil)
+        var rng = SeededRandomNumberGenerator(seed: 5)
+        let levels = Dictionary(uniqueKeysWithValues: (payload.words.map { ($0.id, $0.level) } + payload.grammar.map { ($0.id, $0.level) }))
+        let auto = model.buildQuestions(.auto, using: &rng)
+        #expect(!auto.isEmpty)
+        #expect(auto.allSatisfy { levels[$0.itemID] == Stage.first })
+        model.settings.unlockedLevel = Stage.last
+        #expect(model.startQuiz(QuizConfig(mode: .word, category: nil, format: nil, restrictTo: top)) != nil)
+    }
+
+    @Test("到達帯の習得率が80%を超えたセットの完走で次の帯が開く") func unlockNextStage() async throws {
+        let model = try await makeModel()
+        let payload = try BundleData.load(bundle: Bundle(for: ItemProgress.self))
+        let firstLevelIDs = payload.words.filter { $0.level == Stage.first }.map(\.id)
+            + payload.grammar.filter { $0.level == Stage.first }.map(\.id)
+        for id in firstLevelIDs {
+            let p = model.progress(for: id)
+            for _ in 0..<3 { p.record(isCorrect: true) }
+        }
+        #expect(model.settings.unlockedLevel == Stage.first)
+        let run = try #require(model.startQuiz(.auto))
+        while !run.isFinished {
+            model.answerCurrent(run.current.correctIndex)
+            if !run.isLast { model.advance() }
+        }
+        model.finishRun()
+        #expect(model.settings.unlockedLevel == Stage.next(after: Stage.first))
+        #expect(model.lastUnlockedLevel == Stage.next(after: Stage.first))
+        #expect(model.stageState().current == Stage.next(after: Stage.first))
+        try model.resetHistory()
+        #expect(model.settings.unlockedLevel == Stage.first)
+        #expect(model.lastUnlockedLevel == nil)
     }
 }

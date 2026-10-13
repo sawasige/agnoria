@@ -13,14 +13,13 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section {
-                    ForEach(Level.allCases, id: \.rawValue) { level in
-                        Toggle("\(level.rawValue) 点帯", isOn: binding(for: level.rawValue))
-                            .disabled(settings.enabledLevels == [level.rawValue])
+                    Picker("到達帯", selection: $settings.unlockedLevel) {
+                        ForEach(Stage.levels, id: \.self) { Text("\($0) 点帯").tag($0) }
                     }
                 } header: {
-                    Text("出題レベル")
+                    Text("ステージ")
                 } footer: {
-                    Text("目安のスコア帯で絞り込みます。少なくとも1つは必要です。")
+                    Text("おまかせと分野タイルは、到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたい・戻りたいときはここで変えられます。")
                 }
 
                 Section("音") {
@@ -88,15 +87,6 @@ struct SettingsView: View {
         #if os(macOS)
         .frame(minWidth: 440, minHeight: 520)
         #endif
-    }
-
-    private func binding(for level: Int) -> Binding<Bool> {
-        Binding {
-            settings.enabledLevels.contains(level)
-        } set: { on in
-            if on { settings.enabledLevels.insert(level) }
-            else if settings.enabledLevels.count > 1 { settings.enabledLevels.remove(level) }
-        }
     }
 
     private var versionString: String {

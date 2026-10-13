@@ -27,12 +27,13 @@ nonisolated enum SetBuilder {
         }
     }
 
-    /// 優先度を重みにして最大 setSize 件を抽出
+    /// 優先度を重みにして最大 setSize 件を抽出。factor でステージなどの係数を掛けられる（0 なら対象外）
     static func pick(from candidates: [Candidate], count: Int = setSize, now: Date = .now,
+                     factor: (Candidate) -> Double = { _ in 1 },
                      using rng: inout some RandomNumberGenerator) -> [Candidate] {
         let weighted = candidates.map { c in
             (item: c, weight: Priority.score(recentResults: c.progress?.recentResults ?? [],
-                                             lastAnsweredAt: c.progress?.lastAnsweredAt, now: now))
+                                             lastAnsweredAt: c.progress?.lastAnsweredAt, now: now) * factor(c))
         }
         return WeightedSampler.sample(weighted, count: count, using: &rng)
     }

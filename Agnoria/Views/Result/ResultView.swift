@@ -37,6 +37,21 @@ struct ResultView: View {
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("\(run.questions.count)問中\(run.correctCount)問正解。\(message(correct: run.correctCount, total: run.questions.count))")
 
+                if let level = model.lastUnlockedLevel {
+                    HStack(spacing: 10) {
+                        Image(systemName: "lock.open.fill")
+                            .font(.title2)
+                            .foregroundStyle(Color.accentColor)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("\(level) 点帯が開きました").font(.headline).fontDesign(.rounded)
+                            Text("次のおまかせからこの帯の問題が中心になります").font(.caption).foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                    }
+                    .glassCard(padding: 14, cornerRadius: 16)
+                    .transition(.scale.combined(with: .opacity))
+                }
+
                 if !wrong.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("間違えた問題").font(.headline)

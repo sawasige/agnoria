@@ -84,6 +84,17 @@ nonisolated enum MasteryStats {
         return out
     }
 
+    static func byLevel(items: [(id: String, level: Int)],
+                        progress: [String: ProgressSnapshot], now: Date = .now) -> [Int: MasterySummary] {
+        var out: [Int: MasterySummary] = [:]
+        for item in items {
+            var s = out[item.level] ?? MasterySummary()
+            s.add(progress[item.id], now: now)
+            out[item.level] = s
+        }
+        return out
+    }
+
     /// 直近 days 日分（今日を含む、古い順）。セットの無い日は 0 で埋める
     static func daily(sessions: [(finishedAt: Date, results: [SessionResult])], days: Int = 14,
                       today: Date = .now, calendar: Calendar = .current) -> [DayStat] {

@@ -25,6 +25,8 @@ final class AppModel {
     var run: QuizRun?
     var importState: ImportState = .idle
     var lastSavedSession: StudySession?
+    /// 直近のセット完走で開いたスコア帯（結果画面の演出用）。次のセット開始で消す
+    var lastUnlockedLevel: Int?
 
     private var context: ModelContext { container.mainContext }
 
@@ -62,6 +64,7 @@ final class AppModel {
         var rng = SystemRandomNumberGenerator()
         let questions = buildQuestions(config, using: &rng)
         guard !questions.isEmpty else { return nil }
+        lastUnlockedLevel = nil
         let run = QuizRun(config: config, questions: questions)
         self.run = run
         path = [.quiz]
@@ -94,7 +97,16 @@ final class AppModel {
             }
         }
         let eligible = SetBuilder.eligible(candidates, config: config, enabledLevels: settings.enabledLevels)
-        let picked = SetBuilder.pick(from: eligible, using: &rng)
+        // おまかせは今のステージを中心に、到達済みの帯を少し混ぜる（§3.4）
+        let picked: [SetBuilder.Candidate]
+        if config.isAuto, config.filter == .all, config.restrictTo == nil {
+            let stage = stageState()
+            picked = SetBuilder.pick(from: eligible, factor: {
+                Stage.weightFactor(level: $0.level, current: stage.current, unlocked: stage.unlocked)
+            }, using: &rng)
+        } else {
+            picked = SetBuilder.pick(from: eligible, using: &rng)
+        }
         return picked.compactMap { c in
             switch c.mode {
             case .grammar:
@@ -134,7 +146,34 @@ final class AppModel {
         context.insert(session)
         try? context.save()
         lastSavedSession = session
+        let stage = stageState()
+        if let next = Stage.unlock(unlocked: stage.unlocked, byLevel: stage.byLevel) {
+            settings.unlockedLevel = next
+            lastUnlockedLevel = next
+        }
         path = [.result]
+    }
+
+    // MARK: - ステージ
+
+    struct StageState {
+        var current: Int
+        var unlocked: Int
+        var byLevel: [Int: MasterySummary]
+    }
+
+    /// 全レベルの習得状況と、今取り組む帯
+    func stageState() -> StageState {
+        let progress = progressMap()
+        let grammar = (try? context.fetch(FetchDescriptor<GrammarQuestion>(
+            predicate: #Predicate { !$0.isArchived }))) ?? []
+        let words = (try? context.fetch(FetchDescriptor<Word>(
+            predicate: #Predicate { !$0.isArchived }))) ?? []
+        let items = grammar.map { (id: $0.id, level: $0.level) } + words.map { (id: $0.id, level: $0.level) }
+        let byLevel = MasteryStats.byLevel(items: items, progress: progress)
+        let unlocked = settings.unlockedLevel
+        return StageState(current: Stage.current(unlocked: unlocked, byLevel: byLevel),
+                          unlocked: unlocked, byLevel: byLevel)
     }
 
     /// 途中離脱。セットは保存しない（回答済みの Progress はそのまま残す）
@@ -179,5 +218,7 @@ final class AppModel {
         try context.delete(model: ItemProgress.self)
         try context.delete(model: StudySession.self)
         try context.save()
+        settings.unlockedLevel = Stage.first
+        lastUnlockedLevel = nil
     }
 }
