@@ -69,9 +69,11 @@ struct QuizView: View {
                     .animation(.default, value: answer != nil)
                 }
                 .scrollDisabled(dragAxis == .horizontal)
+                // 持ち上げて傾けている間、カード内の Liquid Glass を平らな塗りに置き換える。
+                // ガラスは回転すると回転前の外接矩形に膨らんで描かれ、行が縦に伸びて重なるため
+                .environment(\.cardLifting, dragX < 0)
                 // 持ち上げている間は 1 枚のカードに見せる: 背景を不透明にして下のカードが透けないようにし、角丸と影を付ける。
-                // 影は背景に付ける（ScrollView に付けると中の要素ごとに影が出る）。
-                // 回転は使わない: Liquid Glass の要素は回転した外接矩形で描かれ、行が縦に伸びて重なって見える
+                // 影は背景に付ける（ScrollView に付けると中の要素ごとに影が出る）
                 .clipShape(RoundedRectangle(cornerRadius: dragX < 0 ? 32 : 0, style: .continuous))
                 .background {
                     AppBackground()
@@ -80,6 +82,7 @@ struct QuizView: View {
                         .opacity(min(1, progress * 4))
                 }
                 .offset(x: dragX)
+                .rotationEffect(.degrees(Double(dragX / width) * 6), anchor: .bottom)
                 .id(q.id)
                 .transition(.opacity)
             }

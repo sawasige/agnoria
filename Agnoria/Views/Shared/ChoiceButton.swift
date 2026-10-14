@@ -8,6 +8,7 @@ struct ChoiceButton: View {
     let text: String
     let state: State
     let action: () -> Void
+    @Environment(\.cardLifting) private var lifting
 
     var body: some View {
         Button(action: action) {
@@ -37,7 +38,9 @@ struct ChoiceButton: View {
             .padding(.vertical, 13)
             .padding(.horizontal, 14)
             .frame(maxWidth: .infinity)
-            .glassEffect(glass, in: .rect(cornerRadius: 16))
+            // 持ち上げて傾けている間はガラスを切り、平らな塗りにする（回転でガラスが膨らむのを避ける）
+            .background(flatFill.opacity(lifting ? 1 : 0), in: .rect(cornerRadius: 16))
+            .glassEffect(lifting ? .identity : glass, in: .rect(cornerRadius: 16))
             .contentShape(.rect(cornerRadius: 16))
         }
         .buttonStyle(.plain)
@@ -54,6 +57,14 @@ struct ChoiceButton: View {
         case .correct: .regular.tint(.green.opacity(0.45))
         case .wrong: .regular.tint(.red.opacity(0.45))
         case .dimmed: .regular
+        }
+    }
+
+    private var flatFill: Color {
+        switch state {
+        case .correct: .green.opacity(0.35)
+        case .wrong: .red.opacity(0.35)
+        default: Color.primary.opacity(0.07)
         }
     }
 
