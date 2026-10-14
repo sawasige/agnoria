@@ -35,4 +35,8 @@ nonisolated struct ProgressSnapshot: Hashable, Sendable {
     var totalAnswered: Int = 0
     var isBookmarked: Bool = false
     var lastAnsweredAt: Date? = nil
+    var masteredAt: Date? = nil
+
+    /// 過去に一度でも習得したか [v1.4]
+    var wasMastered: Bool { masteredAt != nil }
 }

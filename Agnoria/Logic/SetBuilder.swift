@@ -32,8 +32,7 @@ nonisolated enum SetBuilder {
                      factor: (Candidate) -> Double = { _ in 1 },
                      using rng: inout some RandomNumberGenerator) -> [Candidate] {
         let weighted = candidates.map { c in
-            (item: c, weight: Priority.score(recentResults: c.progress?.recentResults ?? [],
-                                             lastAnsweredAt: c.progress?.lastAnsweredAt, now: now) * factor(c))
+            (item: c, weight: Priority.score(c.progress, now: now) * factor(c))
         }
         return WeightedSampler.sample(weighted, count: count, using: &rng)
     }

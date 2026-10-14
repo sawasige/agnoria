@@ -93,6 +93,8 @@ final class ItemProgress {
     var totalAnswered: Int
     var isBookmarked: Bool
     var lastAnsweredAt: Date?
+    /// はじめて習得（直近3回すべて正解）した日時 [v1.4]。一度習得した問題は復習で間違えても次の正解で習得に戻る
+    var masteredAt: Date?
 
     init(itemID: String) {
         self.itemID = itemID
@@ -101,6 +103,7 @@ final class ItemProgress {
         totalAnswered = 0
         isBookmarked = false
         lastAnsweredAt = nil
+        masteredAt = nil
     }
 
     func record(isCorrect: Bool, at date: Date = .now) {
@@ -111,12 +114,13 @@ final class ItemProgress {
         totalAnswered += 1
         if isCorrect { totalCorrect += 1 }
         lastAnsweredAt = date
+        if masteredAt == nil, Priority.isGraduated(recentResults) { masteredAt = date }
     }
 
     var snapshot: ProgressSnapshot {
         ProgressSnapshot(itemID: itemID, recentResults: recentResults, totalCorrect: totalCorrect,
                          totalAnswered: totalAnswered, isBookmarked: isBookmarked,
-                         lastAnsweredAt: lastAnsweredAt)
+                         lastAnsweredAt: lastAnsweredAt, masteredAt: masteredAt)
     }
 }
 

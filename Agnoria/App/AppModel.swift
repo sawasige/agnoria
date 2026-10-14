@@ -42,6 +42,7 @@ final class AppModel {
     func importBundledDataIfNeeded() async {
         guard importState != .running else { return }
         importState = .running
+        backfillMasteredAt()
         do {
             let payload = try BundleData.load()
             if settings.importedFingerprint == payload.fingerprint {
@@ -55,6 +56,17 @@ final class AppModel {
         } catch {
             importState = .failed(String(describing: error))
         }
+    }
+
+    /// [v1.4] masteredAt 追加前に習得していた問題へ、最後の回答日時を習得日として補う（起動時に 1 回。該当がなければ何もしない）
+    func backfillMasteredAt() {
+        let rows = (try? context.fetch(FetchDescriptor<ItemProgress>(predicate: #Predicate { $0.masteredAt == nil }))) ?? []
+        var changed = false
+        for p in rows where Priority.isGraduated(p.recentResults) {
+            p.masteredAt = p.lastAnsweredAt ?? .now
+            changed = true
+        }
+        if changed { try? context.save() }
     }
 
     // MARK: - セット

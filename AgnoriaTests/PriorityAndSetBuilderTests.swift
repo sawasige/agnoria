@@ -168,4 +168,52 @@ struct ProgressRecordTests {
         #expect(p.totalAnswered == 4)
         #expect(p.totalCorrect == 3)
     }
+
+    @Test("はじめて3連続正解した日時を masteredAt に残し、その後は変えない") func masteredAt() {
+        let p = ItemProgress(itemID: "x")
+        let t0 = Date(timeIntervalSince1970: 1_800_000_000)
+        p.record(isCorrect: true, at: t0)
+        p.record(isCorrect: true, at: t0.addingTimeInterval(60))
+        #expect(p.masteredAt == nil)
+        p.record(isCorrect: true, at: t0.addingTimeInterval(120))
+        #expect(p.masteredAt == t0.addingTimeInterval(120))
+        p.record(isCorrect: false, at: t0.addingTimeInterval(180))
+        p.record(isCorrect: true, at: t0.addingTimeInterval(240))
+        p.record(isCorrect: true, at: t0.addingTimeInterval(300))
+        p.record(isCorrect: true, at: t0.addingTimeInterval(360))
+        #expect(p.masteredAt == t0.addingTimeInterval(120))
+        #expect(p.snapshot.wasMastered)
+    }
+}
+
+@Suite("習得済みの復習 [v1.4]")
+struct RelearnTests {
+    private let now = Date(timeIntervalSince1970: 1_800_000_000)
+    private func snap(_ results: [Bool], mastered: Bool) -> ProgressSnapshot {
+        ProgressSnapshot(itemID: "x", recentResults: results, totalCorrect: 0, totalAnswered: results.count,
+                         lastAnsweredAt: now, masteredAt: mastered ? now.addingTimeInterval(-86_400) : nil)
+    }
+
+    @Test("一度習得した問題は、間違えても次の正解で習得に戻る") func backToMastered() {
+        #expect(!Priority.isGraduated(snap([true, true, false], mastered: true)))
+        #expect(Priority.isGraduated(snap([true, false, true], mastered: true)))
+        #expect(!Priority.isGraduated(snap([true, false, true], mastered: false)))
+        #expect(Mastery.of(snap([true, false, true], mastered: true)) == .mastered)
+        #expect(Mastery.of(snap([true, true, false], mastered: true)) == .learning)
+        #expect(Mastery.of(snap([true, true, false], mastered: false)) == .struggling)
+    }
+
+    @Test("重み: 習得済みで直近が不正解なら間違いと同じ、直近が正解なら卒業扱い") func weights() {
+        #expect(Priority.score(snap([true, true, false], mastered: true), now: now) == 3)
+        #expect(Priority.score(snap([true, false, true], mastered: true), now: now) == 0.3)
+        #expect(Priority.score(snap([true, false, true], mastered: false), now: now) == 3)
+        #expect(Priority.score(snap([true, true, true], mastered: false), now: now) == 0.3)
+        #expect(Priority.score(nil, now: now) == 3)
+        #expect(Priority.score(snap([], mastered: false), now: now) == 3)
+    }
+
+    @Test("間違えた問題フィルタには、習得済みでも直近で間違えたものが含まれる") func wrongFilter() {
+        let p = snap([true, true, false], mastered: true)
+        #expect(MasteryStats.wrongCount(itemIDs: ["x"], progress: ["x": p]) == 1)
+    }
 }

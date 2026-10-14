@@ -3,9 +3,9 @@ import Foundation
 /// 1問の習得段階（§4.6 [v1.2]）。Priority の判定をそのまま4段階に写す
 nonisolated enum Mastery: CaseIterable, Hashable, Sendable {
     case unseen       // 未学習
-    case struggling   // 苦手: 直近3回に不正解あり
-    case learning     // 学習中: 回答済みで不正解なし、まだ3回連続正解に届かない
-    case mastered     // 習得: 直近3回すべて正解
+    case struggling   // 苦手: 直近3回に不正解あり（一度も習得していない問題）
+    case learning     // 学習中: 回答済みで不正解なし、まだ3回連続正解に届かない。または習得済みだったが直近で間違えた [v1.4]
+    case mastered     // 習得: 直近3回すべて正解、または 過去に習得済みで直近が正解 [v1.4]
 
     var title: String {
         switch self {
@@ -18,8 +18,8 @@ nonisolated enum Mastery: CaseIterable, Hashable, Sendable {
 
     static func of(_ p: ProgressSnapshot?) -> Mastery {
         guard let p, !p.recentResults.isEmpty else { return .unseen }
-        if Priority.hasRecentMistake(p.recentResults) { return .struggling }
-        if Priority.isGraduated(p.recentResults) { return .mastered }
+        if Priority.isGraduated(p) { return .mastered }
+        if Priority.hasRecentMistake(p.recentResults) { return p.wasMastered ? .learning : .struggling }
         return .learning
     }
 }

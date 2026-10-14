@@ -29,13 +29,28 @@ nonisolated enum Priority {
         return min(max(days / forgettingDays, 0), 1)
     }
 
+    /// スナップショットから重みを出す [v1.4]。
+    /// 一度習得した問題は、直近が不正解なら間違いと同じ 2 + 不正解数、直近が正解なら卒業扱い（3連続を待たない）
+    static func score(_ p: ProgressSnapshot?, now: Date = .now) -> Double {
+        guard let p, !p.recentResults.isEmpty else { return 3 }
+        if p.wasMastered, p.recentResults.last == true {
+            return 0.3 + 1.2 * forgetting(lastAnsweredAt: p.lastAnsweredAt, now: now)
+        }
+        return score(recentResults: p.recentResults, lastAnsweredAt: p.lastAnsweredAt, now: now)
+    }
+
     /// 卒業してから復習の目安（7日）を過ぎたか
     static func isDueForReview(_ p: ProgressSnapshot, now: Date = .now) -> Bool {
-        isGraduated(p.recentResults) && forgetting(lastAnsweredAt: p.lastAnsweredAt, now: now) >= 0.5
+        isGraduated(p) && forgetting(lastAnsweredAt: p.lastAnsweredAt, now: now) >= 0.5
     }
 
     static func isGraduated(_ recentResults: [Bool]) -> Bool {
         recentResults.count >= recentWindow && recentResults.allSatisfy { $0 }
+    }
+
+    /// 習得の判定 [v1.4]: 直近3回すべて正解、または 過去に習得済みで直近が正解
+    static func isGraduated(_ p: ProgressSnapshot) -> Bool {
+        isGraduated(p.recentResults) || (p.wasMastered && p.recentResults.last == true)
     }
 
     static func hasRecentMistake(_ recentResults: [Bool]) -> Bool {

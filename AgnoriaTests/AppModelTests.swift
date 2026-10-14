@@ -56,6 +56,18 @@ struct AppModelTests {
         #expect(progress.count == 20)
     }
 
+    @Test("masteredAt 追加前に習得していた問題は起動時に補われる") func backfill() async throws {
+        let model = try await makeModel()
+        let ctx = model.container.mainContext
+        let a = ItemProgress(itemID: "w-0001"); a.recentResults = [true, true, true]; a.lastAnsweredAt = Date(timeIntervalSince1970: 1_800_000_000)
+        let b = ItemProgress(itemID: "w-0002"); b.recentResults = [true, true]; b.lastAnsweredAt = .now
+        ctx.insert(a); ctx.insert(b); try ctx.save()
+        model.backfillMasteredAt()
+        #expect(a.masteredAt == Date(timeIntervalSince1970: 1_800_000_000))
+        #expect(b.masteredAt == nil)
+        #expect(Mastery.of(a.snapshot) == .mastered)
+    }
+
     @Test("分野指定・形式指定が反映される") func categoryAndFormat() async throws {
         let model = try await makeModel()
         model.settings.unlockedLevel = Stage.last
