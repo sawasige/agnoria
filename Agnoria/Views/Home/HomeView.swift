@@ -34,6 +34,9 @@ struct HomeView: View {
         let stageSummary = byLevel[stage] ?? MasterySummary()
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
+        let estimate = Pace.estimate(remaining: Stage.remainingToClear(stageSummary),
+                                     masteredDates: progress.compactMap(\.masteredAt),
+                                     sessionDates: sessions.map(\.finishedAt))
         let showReview = overall.dueForReview > 0 || overall[.struggling] > 0 || wrong > 0 || bookmarked > 0
 
         ScrollView {
@@ -50,7 +53,7 @@ struct HomeView: View {
                     Button {
                         model.path = [.stats]
                     } label: {
-                        StageCard(stage: stage, unlocked: settings.unlockedLevel, byLevel: byLevel)
+                        StageCard(stage: stage, unlocked: settings.unlockedLevel, byLevel: byLevel, estimate: estimate)
                     }
                     .buttonStyle(.plain)
                     .accessibilityHint("進捗の詳細を開く")
@@ -194,6 +197,8 @@ struct StageCard: View {
     let stage: Int
     let unlocked: Int
     let byLevel: [Int: MasterySummary]
+    /// クリアまでの目安（§4.1）。クリア済みなら nil
+    var estimate: Pace.Estimate? = nil
 
     private var summary: MasterySummary { byLevel[stage] ?? MasterySummary() }
 
@@ -218,10 +223,17 @@ struct StageCard: View {
                 stageRow
             }
             MasteryBar(summary: summary, height: 12)
-            HStack {
-                Text(nextText)
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(Color.accentColor)
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(nextText)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
+                    if let estimateText {
+                        Text(estimateText)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                }
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.caption.weight(.semibold))
@@ -269,6 +281,15 @@ struct StageCard: View {
                 : "あと \(remaining) 問の習得で \(next) 点帯へ"
         }
         return Stage.isCleared(summary) ? "最上位の帯をクリア。復習で定着させよう" : "最上位の帯。ここを仕上げよう"
+    }
+
+    /// 「目安 約 40 セット・今のペースなら約 8 日」。まだ学習していなければセット数と 1 セットの所要時間だけ
+    private var estimateText: String? {
+        guard let estimate else { return nil }
+        if let days = estimate.days {
+            return "目安 約 \(estimate.sets) セット・今のペースなら\(Pace.daysText(days))"
+        }
+        return "目安 約 \(estimate.sets) セット（1 セット 3〜4 分）"
     }
 }
 
