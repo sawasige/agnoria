@@ -13,6 +13,8 @@ struct QuizView: View {
     @State private var dragAxis: Axis?
     /// カードが画面外へ抜けるアニメーション中
     @State private var leaving = false
+    /// ScrollView のスクロール位置（持ち上げ中の差し替え表示で再現する）
+    @State private var scrollOffset: CGFloat = 0
     /// 最後に指が動いた時刻。全幅の選択肢ボタンは横に動かしても指を離すと押下になるので、直前にドラッグしていたら回答にしない
     @State private var lastDragAt = Date.distantPast
 
@@ -40,51 +42,7 @@ struct QuizView: View {
                         .allowsHitTesting(false)
                         .transition(.opacity)
                 }
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        questionHeader(run: run, index: run.index, question: q)
-                        questionBody(q, answer: answer, interactive: true)
-
-                        if let answer {
-                            VStack(alignment: .leading, spacing: 12) {
-                                HStack(spacing: 8) {
-                                    Image(systemName: answer.isCorrect ? "checkmark.seal.fill" : "xmark.seal.fill")
-                                        .font(.title2)
-                                        .symbolEffect(.bounce, options: .nonRepeating, value: answer)
-                                    Text(answer.isCorrect ? "正解" : "不正解")
-                                        .font(.title3.weight(.bold))
-                                        .fontDesign(.rounded)
-                                }
-                                .foregroundStyle(answer.isCorrect ? Color.green : Color.red)
-                                ExplanationView(question: q)
-                                    .id(q.id)
-                            }
-                            .glassCard()
-                            .transition(.scale(scale: 0.96).combined(with: .opacity))
-                        }
-                    }
-                    .padding()
-                    .frame(maxWidth: 720)
-                    .frame(maxWidth: .infinity)
-                    .animation(.default, value: answer != nil)
-                }
-                .scrollDisabled(dragAxis == .horizontal)
-                // 持ち上げて傾けている間、カード内の Liquid Glass を平らな塗りに置き換える。
-                // ガラスは回転すると回転前の外接矩形に膨らんで描かれ、行が縦に伸びて重なるため
-                .environment(\.cardLifting, dragX < 0)
-                // 持ち上げている間は 1 枚のカードに見せる: 背景を不透明にして下のカードが透けないようにし、角丸と影を付ける。
-                // 影は背景に付ける（ScrollView に付けると中の要素ごとに影が出る）
-                .clipShape(RoundedRectangle(cornerRadius: dragX < 0 ? 32 : 0, style: .continuous))
-                // 背景は持ち上げた瞬間から不透明にする（フェードインさせると、先に現れる下のカードが透けて見える）
-                .background {
-                    if dragX < 0 {
-                        AppBackground()
-                            .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
-                            .shadow(color: .black.opacity(0.25 * progress), radius: 24, y: 12)
-                    }
-                }
-                .offset(x: dragX)
-                .rotationEffect(.degrees(Double(dragX / width) * 6), anchor: .bottom)
+                currentCard(run: run, question: q, answer: answer, width: width, progress: progress)
                 .id(q.id)
                 .transition(.opacity)
             }
@@ -125,6 +83,79 @@ struct QuizView: View {
         .sensoryFeedback(trigger: feedbackCount) { _, _ in lastCorrect ? .success : .error }
     }
 
+    /// 今の問題のカード。通常は ScrollView。持ち上げて傾けている間は、同じ内容をスクロール位置ごと再現した
+    /// 普通のビューに差し替えて回転させる（UIKit の ScrollView を回転させるとセーフエリアが回転後の枠から
+    /// 計算し直され、内容の上下の余白が動いてしまうため）
+    private func currentCard(run: QuizRun, question q: QuizQuestion, answer: QuizRun.Answer?,
+                             width: CGFloat, progress: CGFloat) -> some View {
+        Group {
+            if dragX < 0 {
+                // ScrollView の中と同じ高さ（内容の自然な高さ）で描く。固定しないと VStack が枠に収めようとして問題文が省略される
+                cardContent(run: run, question: q, answer: answer)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .offset(y: -scrollOffset)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            } else {
+                ScrollView {
+                    cardContent(run: run, question: q, answer: answer)
+                }
+                .scrollDisabled(dragAxis == .horizontal)
+                .onScrollGeometryChange(for: CGFloat.self) { g in
+                    g.contentOffset.y + g.contentInsets.top
+                } action: { _, new in
+                    scrollOffset = new
+                }
+            }
+        }
+        // 持ち上げて傾けている間、カード内の Liquid Glass を平らな塗りに置き換える。
+        // ガラスは回転すると回転前の外接矩形に膨らんで描かれ、行が縦に伸びて重なるため
+        .environment(\.cardLifting, dragX < 0)
+        // 持ち上げている間は 1 枚のカードに見せる: 背景を不透明にして下のカードが透けないようにし、角丸と影を付ける。
+        // 影は背景に付ける（ScrollView に付けると中の要素ごとに影が出る）
+        .clipShape(RoundedRectangle(cornerRadius: dragX < 0 ? 32 : 0, style: .continuous))
+        // 背景は持ち上げた瞬間から不透明にする（フェードインさせると、先に現れる下のカードが透けて見える）
+        .background {
+            if dragX < 0 {
+                AppBackground()
+                    .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+                    .shadow(color: .black.opacity(0.25 * progress), radius: 24, y: 12)
+            }
+        }
+        .offset(x: dragX)
+        .rotationEffect(.degrees(Double(dragX / width) * 6), anchor: .bottom)
+    }
+
+    /// カードの中身: 番号・問題文・4 択・回答後の解説
+    private func cardContent(run: QuizRun, question q: QuizQuestion, answer: QuizRun.Answer?) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            questionHeader(run: run, index: run.index, question: q)
+            questionBody(q, answer: answer, interactive: true)
+
+            if let answer {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(spacing: 8) {
+                        Image(systemName: answer.isCorrect ? "checkmark.seal.fill" : "xmark.seal.fill")
+                            .font(.title2)
+                            .symbolEffect(.bounce, options: .nonRepeating, value: answer)
+                        Text(answer.isCorrect ? "正解" : "不正解")
+                            .font(.title3.weight(.bold))
+                            .fontDesign(.rounded)
+                    }
+                    .foregroundStyle(answer.isCorrect ? Color.green : Color.red)
+                    ExplanationView(question: q)
+                        .id(q.id)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+                .glassCard()
+                .transition(.scale(scale: 0.96).combined(with: .opacity))
+            }
+        }
+        .padding()
+        .frame(maxWidth: 720)
+        .frame(maxWidth: .infinity)
+        .animation(.default, value: answer != nil)
+    }
+
     /// 番号・形式名・進捗ドット
     private func questionHeader(run: QuizRun, index: Int, question q: QuizQuestion) -> some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -151,6 +182,8 @@ struct QuizView: View {
                       ? .system(.largeTitle, design: .serif, weight: .semibold)
                       : .title3)
                 .multilineTextAlignment(.leading)
+                // 持ち上げ中の差し替え表示（ScrollView の外）で高さを詰められて行が欠けないよう、自然な高さに固定
+                .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 8)
                 .accessibilityAddTraits(.isHeader)
@@ -389,3 +422,4 @@ struct ProgressDots: View {
         return i == current ? Color.accentColor.opacity(0.3) : Color.gray.opacity(0.2)
     }
 }
+
