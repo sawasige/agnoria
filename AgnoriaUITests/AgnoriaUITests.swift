@@ -1,43 +1,47 @@
-//
-//  AgnoriaUITests.swift
-//  AgnoriaUITests
-//
-//  Created by SAWADA Shigeru on 2026/10/12.
-//
-
 import XCTest
 
-final class AgnoriaUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+extension XCUIApplication {
+    /// 効果音と自動読み上げを切って起動する。UserDefaults の引数ドメインに入るだけなので、設定としては保存されない。
+    /// UI テスト（画面確認用の一時テストも含む）はこれで起動して、テスト中に Mac から音を出さない
+    @discardableResult
+    static func launchQuiet() -> XCUIApplication {
         let app = XCUIApplication()
+        app.launchArguments += ["-soundEffects", "NO", "-autoSpeak", "NO"]
         app.launch()
+        return app
+    }
+}
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // XCUIAutomation Documentation
-        // https://developer.apple.com/documentation/xcuiautomation
+final class AgnoriaUITests: XCTestCase {
+    override func setUpWithError() throws {
+        continueAfterFailure = false
+    }
+
+    /// 起動してホームが出る。設定を開くと、起動引数で効果音と読み上げが切れている
+    @MainActor
+    func testLaunchQuiet() throws {
+        let app = XCUIApplication.launchQuiet()
+        let auto = app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'おまかせで10問'")).firstMatch
+        XCTAssertTrue(auto.waitForExistence(timeout: 30))
+
+        let gear = app.buttons["設定"].firstMatch
+        #if os(macOS)
+        gear.click()
+        #else
+        gear.tap()
+        #endif
+        // macOS の Switch はラベルを持たない（隣の StaticText）ので識別子で探す
+        let sound = app.switches["soundEffectsToggle"].firstMatch
+        XCTAssertTrue(sound.waitForExistence(timeout: 10))
+        // value は iOS では "0"、macOS では 0（NSNumber）
+        XCTAssertEqual("\(sound.value ?? "")", "0")
+        XCTAssertEqual("\(app.switches["autoSpeakToggle"].firstMatch.value ?? "")", "0")
     }
 
     @MainActor
     func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
         measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
+            XCUIApplication.launchQuiet()
         }
     }
 }

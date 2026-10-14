@@ -69,7 +69,7 @@ Agnoria/
   Views/      Home / Quiz / Result / Settings / Stats と共通部品（Shared）
   Resources/  Data/words.json, Data/grammar.json, Sounds/correct.caf, Sounds/wrong.caf
 AgnoriaTests/     ユニットテスト（Swift Testing）
-AgnoriaUITests/   UI テスト
+AgnoriaUITests/   UI テスト（`XCUIApplication.launchQuiet()` で効果音と読み上げを切って起動する。テスト中に Mac から音を出さないため）
 docs/             仕様書と設計判断の記録
 ```
 

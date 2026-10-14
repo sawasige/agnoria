@@ -24,7 +24,9 @@ struct SettingsView: View {
 
                 Section("音") {
                     Toggle("正解・不正解の効果音", isOn: $settings.soundEffects)
+                        .accessibilityIdentifier("soundEffectsToggle")
                     Toggle("回答後に例文を自動で読み上げる", isOn: $settings.autoSpeak)
+                        .accessibilityIdentifier("autoSpeakToggle")
                     VStack(alignment: .leading) {
                         Slider(value: $settings.speechRate, in: AppSettings.speechRateRange, step: 0.05) {
                             Text("速度")

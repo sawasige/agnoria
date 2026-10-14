@@ -49,8 +49,9 @@ final class AppSettings {
         unlockedLevel = Stage.levels.contains(saved) ? saved : Stage.first
         let rate = defaults.double(forKey: Key.speechRate)
         speechRate = rate == 0 ? 0.45 : rate
-        autoSpeak = defaults.object(forKey: Key.autoSpeak) as? Bool ?? true
-        soundEffects = defaults.object(forKey: Key.soundEffects) as? Bool ?? true
+        // bool(forKey:) は起動引数（-soundEffects NO など）の文字列も真偽に解釈する。UI テストは引数で音を切る
+        autoSpeak = defaults.object(forKey: Key.autoSpeak) == nil ? true : defaults.bool(forKey: Key.autoSpeak)
+        soundEffects = defaults.object(forKey: Key.soundEffects) == nil ? true : defaults.bool(forKey: Key.soundEffects)
     }
 
     static let speechRateRange: ClosedRange<Double> = 0.3...0.6
