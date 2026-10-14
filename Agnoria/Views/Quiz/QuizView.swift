@@ -90,8 +90,11 @@ struct QuizView: View {
                              width: CGFloat, progress: CGFloat) -> some View {
         Group {
             if dragX < 0 {
-                // ScrollView の中と同じ高さ（内容の自然な高さ）で描く。固定しないと VStack が枠に収めようとして問題文が省略される
+                // ScrollView の中と同じレイアウトにする: 幅を明示して高さは内容の自然な高さ。
+                // 幅が不定のまま高さだけ固定すると、文字サイズが大きいときに問題文が 1 行ぶんの高さで配置され、
+                // 描画は 2 行になって下の要素が上に寄る（実機で確認）
                 cardContent(run: run, question: q, answer: answer)
+                    .frame(width: width)
                     .fixedSize(horizontal: false, vertical: true)
                     .offset(y: -scrollOffset)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -422,4 +425,5 @@ struct ProgressDots: View {
         return i == current ? Color.accentColor.opacity(0.3) : Color.gray.opacity(0.2)
     }
 }
+
 
