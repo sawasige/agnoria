@@ -69,16 +69,17 @@ struct QuizView: View {
                     .animation(.default, value: answer != nil)
                 }
                 .scrollDisabled(dragAxis == .horizontal)
-                // 持ち上げている間は 1 枚のカードに見せる: 背景を不透明にして下のカードが透けないようにし、角丸と影を付ける
+                // 持ち上げている間は 1 枚のカードに見せる: 背景を不透明にして下のカードが透けないようにし、角丸と影を付ける。
+                // 影は背景に付ける（ScrollView に付けると中の要素ごとに影が出る）。
+                // 回転は使わない: Liquid Glass の要素は回転した外接矩形で描かれ、行が縦に伸びて重なって見える
+                .clipShape(RoundedRectangle(cornerRadius: dragX < 0 ? 32 : 0, style: .continuous))
                 .background {
                     AppBackground()
-                        .ignoresSafeArea()
+                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+                        .shadow(color: .black.opacity(0.25 * progress), radius: 24, y: 12)
                         .opacity(min(1, progress * 4))
                 }
-                .clipShape(RoundedRectangle(cornerRadius: dragX < 0 ? 32 : 0, style: .continuous))
-                .shadow(color: .black.opacity(0.22 * progress), radius: 24, y: 12)
                 .offset(x: dragX)
-                .rotationEffect(.degrees(Double(dragX / width) * 6), anchor: .bottom)
                 .id(q.id)
                 .transition(.opacity)
             }
