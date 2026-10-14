@@ -75,11 +75,13 @@ struct QuizView: View {
                 // 持ち上げている間は 1 枚のカードに見せる: 背景を不透明にして下のカードが透けないようにし、角丸と影を付ける。
                 // 影は背景に付ける（ScrollView に付けると中の要素ごとに影が出る）
                 .clipShape(RoundedRectangle(cornerRadius: dragX < 0 ? 32 : 0, style: .continuous))
+                // 背景は持ち上げた瞬間から不透明にする（フェードインさせると、先に現れる下のカードが透けて見える）
                 .background {
-                    AppBackground()
-                        .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
-                        .shadow(color: .black.opacity(0.25 * progress), radius: 24, y: 12)
-                        .opacity(min(1, progress * 4))
+                    if dragX < 0 {
+                        AppBackground()
+                            .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
+                            .shadow(color: .black.opacity(0.25 * progress), radius: 24, y: 12)
+                    }
                 }
                 .offset(x: dragX)
                 .rotationEffect(.degrees(Double(dragX / width) * 6), anchor: .bottom)
