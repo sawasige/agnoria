@@ -38,9 +38,8 @@ struct ChoiceButton: View {
             .padding(.vertical, 13)
             .padding(.horizontal, 14)
             .frame(maxWidth: .infinity)
-            // 持ち上げて傾けている間はガラスを切り、平らな塗りにする（回転でガラスが膨らむのを避ける）
-            .background(flatFill.opacity(lifting ? 1 : 0), in: .rect(cornerRadius: 16))
-            .glassEffect(lifting ? .identity : glass, in: .rect(cornerRadius: 16))
+            // 持ち上げて傾けている間はガラスを外し、平らな塗りにする（回転でガラスが膨らみ、位置もずれるのを避ける）
+            .liftableGlass(glass, flat: flatFill, lifting: lifting, in: .rect(cornerRadius: 16))
             .contentShape(.rect(cornerRadius: 16))
         }
         .buttonStyle(.plain)

@@ -16,8 +16,21 @@ struct GlassCardModifier: ViewModifier {
         content
             .padding(padding)
             .frame(maxWidth: .infinity)
-            .background(Color.primary.opacity(lifting ? 0.06 : 0), in: .rect(cornerRadius: cornerRadius))
-            .glassEffect(lifting ? .identity : .regular, in: .rect(cornerRadius: cornerRadius))
+            .liftableGlass(.regular, flat: Color.primary.opacity(0.06), lifting: lifting, in: .rect(cornerRadius: cornerRadius))
+    }
+}
+
+extension View {
+    /// Liquid Glass を付ける。ただしカードを持ち上げて傾けている間（lifting）はガラスの修飾子そのものを外して平らな塗りにする。
+    /// `.glassEffect(.identity)` に切り替えるだけでは足りない: ガラスの要素は回転した親の中で描画位置が文字と合わず、
+    /// 縦に 10pt ほどずれて見える（実機で確認、SPEC-REVIEW I13）
+    @ViewBuilder
+    func liftableGlass(_ glass: Glass, flat: Color, lifting: Bool, in shape: some Shape) -> some View {
+        if lifting {
+            background(flat, in: shape)
+        } else {
+            glassEffect(glass, in: shape)
+        }
     }
 }
 
