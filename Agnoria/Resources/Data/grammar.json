@@ -94,7 +94,7 @@
       "respond"
     ],
     "answer": 0,
-    "explanation": "be responsible for 〜 「〜を担当している」の形で形容詞 responsible が正解。名詞 responsibility は冠詞なしで is の後ろに置けず for ともつながらない。",
+    "explanation": "be responsible for 〜「〜を担当している」の形で形容詞 responsible が正解。名詞 responsibility を入れると「田中さんは責任である」となり意味が通らない。",
     "level": 450
   },
   {
@@ -506,15 +506,15 @@
   {
     "id": "tense-105",
     "category": "時制・態",
-    "question": "Every employee ______ an ID card to enter the building.",
+    "question": "Starting next month, every employee ______ an ID card to enter the building.",
     "choices": [
-      "needs",
-      "need",
-      "needing",
-      "are needing"
+      "will need",
+      "needed",
+      "has needed",
+      "needing"
     ],
     "answer": 0,
-    "explanation": "Every employee は単数扱いなので三人称単数の needs が正解。need は複数主語に使う形で、needing は単独では述語動詞になれない。",
+    "explanation": "Starting next month「来月から」という未来を示す語句があるので will need。needed や has needed は過去・現在完了で合わず、needing は単独では述語動詞になれない。",
     "level": 450
   },
   {
@@ -744,15 +744,15 @@
   {
     "id": "pos-202",
     "category": "品詞",
-    "question": "The new printer on the third floor is much more ______ than the old one.",
+    "question": "The new accounting software calculates tax much more ______ than the old spreadsheet did.",
     "choices": [
-      "reliable",
-      "reliably",
-      "reliability",
-      "rely"
+      "accurate",
+      "accurately",
+      "accuracy",
+      "accuracies"
     ],
-    "answer": 0,
-    "explanation": "be 動詞 is の後で more ... than の比較に入るのは形容詞 reliable。副詞 reliably は補語になれない。",
+    "answer": 1,
+    "explanation": "動詞 calculates を修飾し、more ... than の比較に入るのは副詞 accurately。形容詞 accurate は動詞を修飾できない。",
     "level": 500
   },
   {
@@ -788,13 +788,13 @@
     "category": "品詞",
     "question": "The ______ of the new cafeteria has been delayed until next month.",
     "choices": [
-      "open",
-      "opening",
-      "openly",
-      "opened"
+      "construct",
+      "construction",
+      "constructive",
+      "constructed"
     ],
     "answer": 1,
-    "explanation": "冠詞 The と前置詞 of の間で文の主語になるのは名詞 opening。形容詞 open や副詞 openly は主語になれない。",
+    "explanation": "冠詞 The と前置詞 of の間で文の主語になるのは名詞 construction。動詞 construct や形容詞 constructive は主語になれない。",
     "level": 500
   },
   {
@@ -802,13 +802,13 @@
     "category": "品詞",
     "question": "Our customer service team responds to every inquiry ______ and politely.",
     "choices": [
-      "quick",
-      "quickness",
-      "quickly",
-      "quicken"
+      "prompt",
+      "promptness",
+      "promptly",
+      "prompted"
     ],
     "answer": 2,
-    "explanation": "and politely と並列で動詞 responds を修飾するので副詞 quickly。形容詞 quick は副詞 politely と並べられない。",
+    "explanation": "and politely と並列で動詞 responds を修飾するので副詞 promptly。形容詞 prompt は副詞 politely と並べられない。",
     "level": 500
   },
   {
@@ -1052,7 +1052,7 @@
   {
     "id": "pron-204",
     "category": "代名詞・関係詞",
-    "question": "The manager prepared the entire presentation ______ because the assistant was absent.",
+    "question": "The CEO ______ will present the quarterly results to the shareholders.",
     "choices": [
       "him",
       "himself",
@@ -1060,7 +1060,7 @@
       "he"
     ],
     "answer": 1,
-    "explanation": "主語 The manager が「自分で」準備したことを強調する再帰代名詞 himself。目的格 him では意味が通らない。",
+    "explanation": "主語 The CEO を「CEO 自らが」と強調する再帰代名詞 himself。he や him を入れると主語が二重になり文が成り立たない。",
     "level": 500
   },
   {
@@ -1080,7 +1080,7 @@
   {
     "id": "pron-206",
     "category": "代名詞・関係詞",
-    "question": "The printer ______ was installed last week is already out of toner.",
+    "question": "The software ______ we purchased last year needs to be updated.",
     "choices": [
       "that",
       "who",
@@ -1088,7 +1088,7 @@
       "whom"
     ],
     "answer": 0,
-    "explanation": "先行詞が物 printer で関係詞節の主語になるので that。who や whom は人にしか使えない。",
+    "explanation": "先行詞が物 software で、関係詞節の中で purchased の目的語になるので that。who や whom は人にしか使えない。",
     "level": 500
   },
   {
@@ -1122,7 +1122,7 @@
   {
     "id": "tense-003",
     "category": "時制・態",
-    "question": "Ms. Chen ______ for the shipping company since 2015.",
+    "question": "Mr. Rivera ______ at the shipping company for the past five years.",
     "choices": [
       "has worked",
       "works",
@@ -1130,7 +1130,7 @@
       "is working"
     ],
     "answer": 0,
-    "explanation": "since 2015「2015年から」は継続を表すので現在完了 has worked。単純過去 worked は since と相性が悪い。",
+    "explanation": "for the past five years「この5年間」は現在までの継続を表すので現在完了 has worked。過去形 worked は現在まで続いていることを表せない。",
     "level": 500
   },
   {
@@ -1164,15 +1164,15 @@
   {
     "id": "tense-202",
     "category": "時制・態",
-    "question": "Ms. Ortiz ______ for this company since she graduated in 2015.",
+    "question": "Ms. Ortiz ______ the regional office since the merger was completed.",
     "choices": [
-      "works",
-      "worked",
-      "is working",
-      "has worked"
+      "manages",
+      "managed",
+      "is managing",
+      "has managed"
     ],
     "answer": 3,
-    "explanation": "since で過去から現在までの継続を表すので現在完了 has worked。過去形 worked は現在との結びつきを示せない。",
+    "explanation": "since the merger was completed「合併完了以来」という継続なので現在完了 has managed。過去形 managed は現在まで続いていることを表せない。",
     "level": 500
   },
   {
@@ -1248,15 +1248,15 @@
   {
     "id": "tense-208",
     "category": "時制・態",
-    "question": "Last year, the company ______ three new branches in the northern region.",
+    "question": "Last quarter, the sales team ______ its target by nearly fifteen percent.",
     "choices": [
-      "opened",
-      "has opened",
-      "opens",
-      "will open"
+      "exceeded",
+      "has exceeded",
+      "exceeds",
+      "will exceed"
     ],
     "answer": 0,
-    "explanation": "Last year という明確な過去の時点があるので過去形 opened。現在完了 has opened は過去の特定時点を表す語句と一緒に使えない。",
+    "explanation": "Last quarter という明確な過去の時点があるので過去形 exceeded。現在完了 has exceeded は過去の特定時点を表す語句と一緒に使えない。",
     "level": 500
   },
   {
@@ -1318,15 +1318,15 @@
   {
     "id": "vocab-203",
     "category": "語彙",
-    "question": "Please ______ the attached form and return it to the personnel office.",
+    "question": "Please ______ the meeting room for Tuesday's client visit.",
     "choices": [
       "arrive",
       "agree",
-      "complete",
+      "reserve",
       "depart"
     ],
     "answer": 2,
-    "explanation": "form（用紙）を「記入する」は complete。arrive や depart は目的語をとれず意味も合わない。",
+    "explanation": "会議室を「予約する」は reserve。arrive や depart は自動詞で目的語をとれず、agree は意味が合わない。",
     "level": 500
   },
   {
@@ -1388,15 +1388,15 @@
   {
     "id": "vocab-208",
     "category": "語彙",
-    "question": "Our office supplies are ______ from a local vendor every two weeks.",
+    "question": "The company ______ a new vendor to supply office furniture for the new branch.",
     "choices": [
-      "hired",
-      "purchased",
       "promoted",
-      "attended"
+      "selected",
+      "attended",
+      "retired"
     ],
     "answer": 1,
-    "explanation": "office supplies を vendor（業者）から「購入する」ので purchased。hired は人を雇う意味で物には使わない。",
+    "explanation": "新しい業者を「選ぶ」は select。promoted（昇進させる）や attended（出席する）は vendor を目的語にとると意味が合わない。",
     "level": 500
   },
   {
@@ -1850,15 +1850,15 @@
   {
     "id": "tense-302",
     "category": "時制・態",
-    "question": "By the time the auditors arrived, the finance team ______ all the necessary documents.",
+    "question": "The auditors found that several invoices ______ twice by mistake.",
     "choices": [
-      "had prepared",
-      "prepares",
-      "has prepared",
-      "will prepare"
+      "had been paid",
+      "are paid",
+      "have been paid",
+      "will be paid"
     ],
     "answer": 0,
-    "explanation": "By the time + 過去形 が cue で、それより前に完了した動作は過去完了 had prepared。has prepared は現在完了で過去の基準点には使えない。",
+    "explanation": "found（過去）より前に起きたことなので過去完了の受動態 had been paid。have been paid は現在完了で、過去の基準点 found には合わない。",
     "level": 550
   },
   {
@@ -1948,15 +1948,15 @@
   {
     "id": "tense-309",
     "category": "時制・態",
-    "question": "The company ______ its headquarters to the suburbs three years ago to reduce operating costs.",
+    "question": "The company ______ its first online store in 2010 to reach customers overseas.",
     "choices": [
-      "moves",
-      "has moved",
-      "moved",
-      "had moved"
+      "launches",
+      "has launched",
+      "launched",
+      "had launched"
     ],
     "answer": 2,
-    "explanation": "three years ago という過去の一時点を示す語句があるので単純過去 moved。現在完了 has moved は ago のような特定の過去時点とは併用できない。",
+    "explanation": "in 2010 という過去の一時点を示す語句があるので単純過去 launched。現在完了 has launched は特定の過去時点とは併用できず、had launched は基準となる別の過去の出来事がないので不適。",
     "level": 550
   },
   {
@@ -1990,7 +1990,7 @@
   {
     "id": "vocab-302",
     "category": "語彙",
-    "question": "Because of the heavy snow, the morning flight to the regional office was ______ until the afternoon.",
+    "question": "The shipment of replacement parts was ______ at customs for three days.",
     "choices": [
       "declined",
       "deleted",
@@ -1998,7 +1998,7 @@
       "delayed"
     ],
     "answer": 3,
-    "explanation": "大雪で便が「午後まで遅れた」ので delayed。until the afternoon と結びつくのは遅延を表す語で、declined（断る）や denied（拒否する）は便には使わない。",
+    "explanation": "交換部品の出荷が税関で「3日間足止めされた」ので delayed。declined（断る）や denied（拒否する）は for three days と結びつかない。",
     "level": 550
   },
   {
@@ -2216,13 +2216,13 @@
     "category": "品詞",
     "question": "Please review the ______ terms carefully before signing the lease for the additional warehouse space.",
     "choices": [
-      "attached",
-      "attach",
-      "attachment",
-      "attaching"
+      "revised",
+      "revise",
+      "revision",
+      "revising"
     ],
     "answer": 0,
-    "explanation": "「添付された条件」と受動の意味で名詞 terms を修飾する過去分詞 attached。現在分詞 attaching では「添付している条件」となり不自然。",
+    "explanation": "「修正された条件」と受動の意味で名詞 terms を修飾する過去分詞 revised。revising では「修正している条件」となり不自然で、名詞 revision は terms を修飾できない。",
     "level": 600
   },
   {
@@ -2242,29 +2242,29 @@
   {
     "id": "prep-006",
     "category": "前置詞・接続詞",
-    "question": "______ the new software is expensive, it will save the department time in the long run.",
+    "question": "The department will approve the purchase ______ the vendor agrees to a two-year support contract.",
     "choices": [
-      "Despite",
-      "In spite of",
-      "Although",
-      "Because of"
+      "provided that",
+      "in case of",
+      "despite",
+      "owing to"
     ],
-    "answer": 2,
-    "explanation": "the new software is expensive という節を導くので接続詞 Although。Despite と In spite of は前置詞で、節を取れない。",
+    "answer": 0,
+    "explanation": "後ろに節が続き「〜という条件なら」の意味なので接続詞 provided that。in case of と owing to は前置詞で名詞句しか取れず、despite も前置詞で意味も合わない。",
     "level": 600
   },
   {
     "id": "prep-401",
     "category": "前置詞・接続詞",
-    "question": "______ the heavy snowfall, nearly every employee arrived at the regional office in time for the quarterly meeting.",
+    "question": "______ having received the revised specifications only yesterday, the engineering team submitted a complete proposal this morning.",
     "choices": [
-      "Although",
       "Despite",
+      "Although",
       "Even though",
       "Whereas"
     ],
-    "answer": 1,
-    "explanation": "後ろが名詞句 the heavy snowfall なので前置詞 Despite。Although や Even though は接続詞で節（主語＋動詞）が必要。",
+    "answer": 0,
+    "explanation": "後ろが動名詞句 having received ... なので前置詞 Despite。Although や Even though は接続詞で、主語と動詞を持つ節が必要。",
     "level": 600
   },
   {
@@ -2298,15 +2298,15 @@
   {
     "id": "prep-404",
     "category": "前置詞・接続詞",
-    "question": "The elevators in the east wing will be out of service ______ the maintenance crew replaces the control panels.",
+    "question": "The elevators in the east wing will remain out of service ______ the control panels have been replaced and inspected.",
     "choices": [
+      "until",
       "during",
-      "while",
-      "meanwhile",
-      "throughout"
+      "by",
+      "as far as"
     ],
-    "answer": 1,
-    "explanation": "後ろに the maintenance crew replaces という節が続くので接続詞 while。during は前置詞で名詞句しか取れない。",
+    "answer": 0,
+    "explanation": "後ろに節が続き「〜するまで」なので接続詞 until。during と by は前置詞で節を取れず、as far as は「〜の限りでは」と範囲を表すので意味が合わない。",
     "level": 600
   },
   {
@@ -2326,15 +2326,15 @@
   {
     "id": "prep-406",
     "category": "前置詞・接続詞",
-    "question": "The shipment was delayed ______ a labor dispute at the port, so the product launch has been pushed back a week.",
+    "question": "The product launch has been pushed back a week ______ a labor dispute at the port that delayed the shipment.",
     "choices": [
+      "owing to",
       "because",
       "since",
-      "because of",
-      "although"
+      "now that"
     ],
-    "answer": 2,
-    "explanation": "後ろが名詞句 a labor dispute なので前置詞 because of。接続詞 because や since は節を必要とする。",
+    "answer": 0,
+    "explanation": "後ろが名詞句 a labor dispute なので前置詞 owing to。because や now that は接続詞で節が必要。since は前置詞としても使えるが「〜以来」と起点を表すので理由にはならない。",
     "level": 600
   },
   {
@@ -2510,27 +2510,27 @@
     "category": "代名詞・関係詞",
     "question": "The two finalists for the design award congratulated ______ warmly before the winner was announced.",
     "choices": [
-      "one another",
+      "each other",
       "themselves",
       "each one",
       "another"
     ],
     "answer": 0,
-    "explanation": "二人が互いに祝い合ったので「お互い」を表す one another。themselves では「自分自身を祝った」となり意味が合わない。",
+    "explanation": "二人が互いに祝い合ったので「お互い」を表す each other。themselves では「自分自身を祝った」となり意味が合わない。each other と one another は今では同じように使える。",
     "level": 600
   },
   {
     "id": "tense-006",
     "category": "時制・態",
-    "question": "All applications ______ by the end of this week, so please submit yours soon.",
+    "question": "All applications ______ by the time the committee meets next Friday, so please submit yours soon.",
     "choices": [
-      "review",
-      "are reviewing",
-      "were reviewed",
-      "will be reviewed"
+      "will have been reviewed",
+      "will be reviewing",
+      "have reviewed",
+      "were reviewed"
     ],
-    "answer": 3,
-    "explanation": "応募書類は「審査される」側なので受動態。by the end of this week と「早く提出して」という文脈から未来の will be reviewed。",
+    "answer": 0,
+    "explanation": "応募書類は「審査される」側なので受動態。by the time the committee meets「委員会が開かれる時までに」完了していることなので未来完了の受動態 will have been reviewed。",
     "level": 600
   },
   {
@@ -2592,29 +2592,29 @@
   {
     "id": "tense-405",
     "category": "時制・態",
-    "question": "The accounting team ______ on the year-end report for three weeks when the auditors requested additional documentation.",
+    "question": "By the time the merger was announced, the two companies ______ for over a year.",
     "choices": [
-      "has worked",
-      "had been working",
-      "is working",
-      "will work"
+      "have negotiated",
+      "had been negotiating",
+      "are negotiating",
+      "will negotiate"
     ],
     "answer": 1,
-    "explanation": "過去の時点 requested まで for three weeks 続いていた動作なので過去完了進行形 had been working。has worked は現在までの完了で時制が合わない。",
+    "explanation": "過去の時点 was announced まで for over a year 続いていた動作なので過去完了進行形 had been negotiating。have negotiated は現在までの完了で時制が合わない。",
     "level": 600
   },
   {
     "id": "tense-406",
     "category": "時制・態",
-    "question": "The city council requires that every new commercial building ______ with the updated fire safety code.",
+    "question": "Every new commercial building ______ by the fire department before it can open to the public.",
     "choices": [
-      "comply",
-      "complies",
-      "complied",
-      "is complying"
+      "must be inspected",
+      "must inspect",
+      "is inspecting",
+      "has inspected"
     ],
     "answer": 0,
-    "explanation": "require that の後は仮定法現在で動詞の原形 comply。主語が三人称単数でも complies とはならない。",
+    "explanation": "building は「検査される」側なので受動態 must be inspected。must inspect や has inspected は能動で、建物が検査する側になってしまう。",
     "level": 600
   },
   {

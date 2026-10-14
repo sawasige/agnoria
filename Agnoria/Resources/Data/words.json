@@ -288,7 +288,7 @@
     "id": "w-0020",
     "word": "supervisor",
     "pos": "名詞",
-    "meaning": "上司・監督者",
+    "meaning": "監督者・直属の上司",
     "example": "Please ask your supervisor before leaving early.",
     "example_ja": "早退する前に上司に確認してください。",
     "distractors": [
@@ -622,7 +622,7 @@
     "example": "We decided to extend the deadline by one week.",
     "example_ja": "締め切りを1週間延長することにしました。",
     "distractors": [
-      "拡大する",
+      "費やす",
       "短縮する",
       "延期する"
     ],
@@ -742,7 +742,7 @@
     "example": "I can assure you that the order will arrive on time.",
     "example_ja": "注文は予定通り届くことを保証します。",
     "distractors": [
-      "確実にする（ensure）",
+      "依頼する",
       "保険をかける",
       "評価する"
     ],
@@ -829,8 +829,8 @@
     "word": "document",
     "pos": "名詞",
     "meaning": "書類",
-    "example": "Please print the document and bring it to my desk.",
-    "example_ja": "その書類を印刷して私のデスクまで持ってきてください。",
+    "example": "This document explains how to use the new copier.",
+    "example_ja": "この書類は新しいコピー機の使い方を説明しています。",
     "distractors": [
       "封筒",
       "写真",
@@ -963,13 +963,13 @@
     "id": "w-0065",
     "word": "during",
     "pos": "前置詞",
-    "meaning": "～の間に",
+    "meaning": "〜の間に",
     "example": "Please turn off your phone during the presentation.",
     "example_ja": "発表の間は携帯電話の電源を切ってください。",
     "distractors": [
-      "～の後に",
-      "～の前に",
-      "～まで"
+      "〜の後に",
+      "〜の前に",
+      "〜まで"
     ],
     "category": "ビジネス一般",
     "level": 450
@@ -978,9 +978,9 @@
     "id": "w-0066",
     "word": "project",
     "pos": "名詞",
-    "meaning": "企画",
+    "meaning": "計画・プロジェクト",
     "example": "Our team started a new project last week.",
-    "example_ja": "私たちのチームは先週、新しい企画を始めました。",
+    "example_ja": "私たちのチームは先週、新しいプロジェクトを始めました。",
     "distractors": [
       "予算",
       "部署",
@@ -1053,9 +1053,9 @@
     "id": "w-0071",
     "word": "staff",
     "pos": "名詞",
-    "meaning": "職員",
-    "example": "Our staff will help you with any questions.",
-    "example_ja": "当社の職員がどんなご質問にも対応いたします。",
+    "meaning": "スタッフ・職員全体",
+    "example": "The hotel has a staff of forty during the summer.",
+    "example_ja": "そのホテルは夏の間、40人のスタッフを抱えています。",
     "distractors": [
       "社長",
       "顧客",
@@ -1069,8 +1069,8 @@
     "word": "train",
     "pos": "動詞",
     "meaning": "研修する",
-    "example": "We train new workers for two weeks in April.",
-    "example_ja": "4月に新しい従業員を2週間研修します。",
+    "example": "We train new workers on the system for two weeks in April.",
+    "example_ja": "4月に新しい従業員にシステムの研修を2週間行います。",
     "distractors": [
       "雇う",
       "評価する",
@@ -1188,9 +1188,9 @@
     "id": "w-0080",
     "word": "hardworking",
     "pos": "形容詞",
-    "meaning": "勤勉な",
+    "meaning": "働き者の",
     "example": "She is a hardworking member of the accounting team.",
-    "example_ja": "彼女は経理チームの勤勉な一員です。",
+    "example_ja": "彼女は経理チームの働き者の一員です。",
     "distractors": [
       "怠け者の",
       "経験豊かな",
@@ -1414,8 +1414,8 @@
     "word": "clear",
     "pos": "形容詞",
     "meaning": "明確な",
-    "example": "Thank you for the clear instructions about the new system.",
-    "example_ja": "新しいシステムについての明確な指示をありがとうございます。",
+    "example": "The instructions were clear, so nobody had any questions.",
+    "example_ja": "指示が明確だったので、誰も質問がありませんでした。",
     "distractors": [
       "曖昧な",
       "長い",
@@ -1428,9 +1428,9 @@
     "id": "w-0096",
     "word": "brief",
     "pos": "形容詞",
-    "meaning": "簡潔な",
+    "meaning": "手短な・短時間の",
     "example": "Please give us a brief summary of the results.",
-    "example_ja": "結果の簡潔な要約をお願いします。",
+    "example_ja": "結果の手短な要約をお願いします。",
     "distractors": [
       "詳しい",
       "長い",
@@ -1458,13 +1458,13 @@
     "id": "w-0098",
     "word": "until",
     "pos": "前置詞",
-    "meaning": "～まで",
+    "meaning": "〜まで",
     "example": "The office will stay open until eight tonight.",
     "example_ja": "オフィスは今夜8時まで開いています。",
     "distractors": [
-      "～の間に",
-      "～から",
-      "～までに"
+      "〜の間に",
+      "〜から",
+      "〜までに"
     ],
     "category": "会議・連絡",
     "level": 450
@@ -1473,13 +1473,13 @@
     "id": "w-0099",
     "word": "although",
     "pos": "接続詞",
-    "meaning": "～だけれども",
+    "meaning": "〜だけれども",
     "example": "Although it was raining, many customers came to the shop.",
     "example_ja": "雨が降っていたけれども、多くの顧客が店に来ました。",
     "distractors": [
-      "～なので",
-      "～する間に",
-      "もし～なら"
+      "〜なので",
+      "〜する間に",
+      "もし〜なら"
     ],
     "category": "会議・連絡",
     "level": 450
@@ -1537,7 +1537,7 @@
     "example": "The store will open a new branch downtown next spring.",
     "example_ja": "その店は来春、中心街に新しい支店を開きます。",
     "distractors": [
-      "倉庫",
+      "市場",
       "事務所",
       "工場"
     ],
@@ -1893,7 +1893,7 @@
     "id": "w-0127",
     "word": "hardly",
     "pos": "副詞",
-    "meaning": "ほとんど～ない",
+    "meaning": "ほとんど〜ない",
     "example": "I hardly had time for lunch today.",
     "example_ja": "今日は昼食の時間がほとんどありませんでした。",
     "distractors": [
@@ -1909,8 +1909,8 @@
     "word": "bring",
     "pos": "動詞",
     "meaning": "持ってくる",
-    "example": "Please bring your ID card to the meeting tomorrow.",
-    "example_ja": "明日の会議にIDカードを持ってきてください。",
+    "example": "Please bring your ID card with you when you come to the office tomorrow.",
+    "example_ja": "明日オフィスに来るときは、IDカードを持ってきてください。",
     "distractors": [
       "持っていく",
       "送る",
@@ -1924,8 +1924,8 @@
     "word": "take",
     "pos": "動詞",
     "meaning": "持っていく",
-    "example": "Please take these samples to the client's office.",
-    "example_ja": "これらの見本を取引先のオフィスへ持っていってください。",
+    "example": "When you go to the client's office, please take these samples with you.",
+    "example_ja": "取引先のオフィスへ行くときは、これらの見本を持っていってください。",
     "distractors": [
       "持ってくる",
       "見せる",
@@ -2013,13 +2013,13 @@
     "id": "w-0135",
     "word": "reach",
     "pos": "動詞",
-    "meaning": "～に着く",
+    "meaning": "〜に着く",
     "example": "We will reach the station before noon.",
     "example_ja": "正午前に駅に着きます。",
     "distractors": [
-      "～を出る",
-      "～を通る",
-      "～に戻る"
+      "〜を出る",
+      "〜を通る",
+      "〜に戻る"
     ],
     "category": "混同しやすい語",
     "level": 450
@@ -2028,9 +2028,9 @@
     "id": "w-0136",
     "word": "vendor",
     "pos": "名詞",
-    "meaning": "業者",
+    "meaning": "販売業者",
     "example": "We selected a new vendor for our office supplies last month.",
-    "example_ja": "先月、事務用品の新しい業者を選びました。",
+    "example_ja": "先月、事務用品の新しい販売業者を選びました。",
     "distractors": [
       "顧客",
       "株主",
@@ -2149,8 +2149,8 @@
     "word": "profit",
     "pos": "名詞",
     "meaning": "利益",
-    "example": "Our profit increased by ten percent compared to last year.",
-    "example_ja": "当社の利益は昨年と比べて10パーセント増えました。",
+    "example": "After paying all costs, the company made a small profit this year.",
+    "example_ja": "すべての費用を支払った後、会社は今年わずかな利益を出しました。",
     "distractors": [
       "損失",
       "売上",
@@ -2268,9 +2268,9 @@
     "id": "w-0152",
     "word": "division",
     "pos": "名詞",
-    "meaning": "部門",
+    "meaning": "事業部・部門",
     "example": "She leads the overseas sales division of the company.",
-    "example_ja": "彼女は会社の海外営業部門を率いています。",
+    "example_ja": "彼女は会社の海外営業事業部を率いています。",
     "distractors": [
       "支店",
       "役職",
@@ -2343,7 +2343,7 @@
     "id": "w-0157",
     "word": "employ",
     "pos": "動詞",
-    "meaning": "雇用する",
+    "meaning": "（継続的に）雇用する",
     "example": "The hotel employs more than two hundred people during the summer.",
     "example_ja": "そのホテルは夏の間、200人以上を雇用しています。",
     "distractors": [
@@ -2553,9 +2553,9 @@
     "id": "w-0171",
     "word": "conference",
     "pos": "名詞",
-    "meaning": "会議",
+    "meaning": "大規模な会議・協議会",
     "example": "Over two hundred people registered for the annual conference.",
-    "example_ja": "200人以上が年次会議に登録しました。",
+    "example_ja": "200人以上が年次の大会議に登録しました。",
     "distractors": [
       "講演",
       "面談",
@@ -2598,9 +2598,9 @@
     "id": "w-0174",
     "word": "briefly",
     "pos": "副詞",
-    "meaning": "簡潔に",
+    "meaning": "手短に",
     "example": "Let me briefly explain the background of this project.",
-    "example_ja": "このプロジェクトの背景を簡潔に説明させてください。",
+    "example_ja": "このプロジェクトの背景を手短に説明させてください。",
     "distractors": [
       "詳しく",
       "正式に",
@@ -2658,13 +2658,13 @@
     "id": "w-0178",
     "word": "unless",
     "pos": "接続詞",
-    "meaning": "～でなければ",
+    "meaning": "〜でなければ",
     "example": "We will proceed with the plan unless anyone objects by Friday.",
     "example_ja": "金曜日までに誰も反対しなければ、計画を進めます。",
     "distractors": [
-      "～だけれども",
-      "～する限り",
-      "～するまで"
+      "〜だけれども",
+      "〜する限り",
+      "〜するまで"
     ],
     "category": "会議・連絡",
     "level": 500
@@ -3024,7 +3024,7 @@
     "distractors": [
       "失う",
       "固い",
-      "緩める"
+      "失われた"
     ],
     "category": "混同しやすい語",
     "level": 500
@@ -3063,13 +3063,13 @@
     "id": "w-0205",
     "word": "except",
     "pos": "前置詞",
-    "meaning": "～を除いて",
-    "example": "Everyone except the sales team will work from home on Friday.",
-    "example_ja": "営業チームを除いて、全員が金曜日は在宅勤務です。",
+    "meaning": "〜を除いて",
+    "example": "The shop is open every day except Monday.",
+    "example_ja": "その店は月曜日を除いて毎日営業しています。",
     "distractors": [
       "受け入れる",
-      "～に加えて",
-      "～を含めて"
+      "〜に加えて",
+      "〜を含めて"
     ],
     "category": "混同しやすい語",
     "level": 500
@@ -3082,7 +3082,7 @@
     "example": "We happily accept credit cards and mobile payments.",
     "example_ja": "クレジットカードとモバイル決済を喜んで受け入れています。",
     "distractors": [
-      "～を除いて",
+      "〜を除いて",
       "拒否する",
       "期待する"
     ],
@@ -3123,13 +3123,13 @@
     "id": "w-0209",
     "word": "beside",
     "pos": "前置詞",
-    "meaning": "～のそばに",
+    "meaning": "〜のそばに",
     "example": "Please leave the package beside the reception desk.",
     "example_ja": "荷物は受付のそばに置いてください。",
     "distractors": [
-      "～に加えて",
-      "～の後ろに",
-      "～の中に"
+      "〜に加えて",
+      "〜の後ろに",
+      "〜の中に"
     ],
     "category": "混同しやすい語",
     "level": 500
@@ -3138,13 +3138,13 @@
     "id": "w-0210",
     "word": "besides",
     "pos": "前置詞",
-    "meaning": "～に加えて",
+    "meaning": "〜に加えて",
     "example": "Besides the main office, we have two branches in Nagoya.",
     "example_ja": "本社に加えて、名古屋に2つの支店があります。",
     "distractors": [
-      "～のそばに",
-      "～を除いて",
-      "～の代わりに"
+      "〜のそばに",
+      "〜を除いて",
+      "〜の代わりに"
     ],
     "category": "混同しやすい語",
     "level": 500
@@ -3423,9 +3423,9 @@
     "id": "w-0229",
     "word": "eligible",
     "pos": "形容詞",
-    "meaning": "資格のある",
+    "meaning": "（条件を満たして）対象となる",
     "example": "Employees who have worked here for one year are eligible for paid leave.",
-    "example_ja": "ここで1年間勤務した従業員は有給休暇を取得する資格があります。",
+    "example_ja": "ここで1年間勤務した従業員は有給休暇の対象となります。",
     "distractors": [
       "責任のある",
       "熱心な",
@@ -3558,9 +3558,9 @@
     "id": "w-0238",
     "word": "orientation",
     "pos": "名詞",
-    "meaning": "新人研修",
+    "meaning": "新人向け説明会・オリエンテーション",
     "example": "All new employees take part in orientation on their first day at the office.",
-    "example_ja": "新入社員は全員、出勤初日に新人研修に参加します。",
+    "example_ja": "新入社員は全員、出勤初日にオリエンテーションに参加します。",
     "distractors": [
       "歓迎会",
       "面接",
@@ -3588,7 +3588,7 @@
     "id": "w-0240",
     "word": "diligent",
     "pos": "形容詞",
-    "meaning": "勤勉な",
+    "meaning": "勤勉な・入念な",
     "example": "Her diligent work on the audit was praised by the entire management team.",
     "example_ja": "監査における彼女の勤勉な働きは経営陣全員から称賛されました。",
     "distractors": [
@@ -3633,7 +3633,7 @@
     "id": "w-0243",
     "word": "accommodate",
     "pos": "動詞",
-    "meaning": "応じる",
+    "meaning": "（要望に）応じる・便宜を図る",
     "example": "We try to accommodate requests for flexible hours whenever the workload allows.",
     "example_ja": "業務量が許す限り、柔軟な勤務時間の要望に応じるようにしています。",
     "distractors": [
@@ -3888,9 +3888,9 @@
     "id": "w-0260",
     "word": "recap",
     "pos": "名詞",
-    "meaning": "要約",
+    "meaning": "おさらい・振り返り",
     "example": "Here is a quick recap of the decisions we made this morning.",
-    "example_ja": "今朝決定した事項の簡単な要約です。",
+    "example_ja": "今朝決定した事項の簡単なおさらいです。",
     "distractors": [
       "議題",
       "予定",
@@ -4113,7 +4113,7 @@
     "id": "w-0275",
     "word": "checkout",
     "pos": "名詞",
-    "meaning": "レジ",
+    "meaning": "レジ（会計場所）",
     "example": "Please bring your membership card to the checkout to receive your points.",
     "example_ja": "ポイントを受け取るには、会員カードをレジにお持ちください。",
     "distractors": [
@@ -4297,7 +4297,7 @@
     "example": "We insure all equipment shipped overseas against loss or damage.",
     "example_ja": "海外へ出荷するすべての機器には、紛失や損傷に対する保険をかけています。",
     "distractors": [
-      "確実にする",
+      "主張する",
       "保証する",
       "点検する"
     ],
@@ -4503,7 +4503,7 @@
     "id": "w-0301",
     "word": "counsel",
     "pos": "動詞",
-    "meaning": "助言する",
+    "meaning": "（専門的に）助言する・相談に応じる",
     "example": "The legal team counsels managers on how to handle workplace disputes fairly.",
     "example_ja": "法務チームは、職場の紛争を公正に処理する方法について管理職に助言します。",
     "distractors": [
@@ -4565,7 +4565,7 @@
     "pos": "形容詞",
     "meaning": "実現可能な",
     "example": "Launching the service by March is feasible only if hiring finishes on schedule.",
-    "example_ja": "採用が予定通りに終わればこそ、3月までのサービス開始は実現可能です。",
+    "example_ja": "採用が予定通りに終わった場合に限り、3月までのサービス開始は実現可能です。",
     "distractors": [
       "望ましい",
       "不可能な",
@@ -4743,13 +4743,13 @@
     "id": "w-0317",
     "word": "notwithstanding",
     "pos": "前置詞",
-    "meaning": "～にもかかわらず",
+    "meaning": "〜にもかかわらず",
     "example": "Notwithstanding the delay, the project was finished within the approved cost.",
     "example_ja": "遅延にもかかわらず、プロジェクトは承認された費用内で完了しました。",
     "distractors": [
-      "～によって",
-      "～に加えて",
-      "～に関して"
+      "〜によって",
+      "〜に加えて",
+      "〜に関して"
     ],
     "category": "ビジネス一般",
     "level": 600
@@ -4758,12 +4758,12 @@
     "id": "w-0318",
     "word": "drastically",
     "pos": "副詞",
-    "meaning": "大幅に",
+    "meaning": "劇的に・急激に",
     "example": "Shipping fees have risen drastically since the fuel price increase last month.",
-    "example_ja": "先月の燃料価格上昇以来、送料は大幅に上がっています。",
+    "example_ja": "先月の燃料価格上昇以来、送料は急激に上がっています。",
     "distractors": [
       "わずかに",
-      "徐々に",
+      "着実に",
       "一時的に"
     ],
     "category": "ビジネス一般",
@@ -4878,9 +4878,9 @@
     "id": "w-0326",
     "word": "prospective",
     "pos": "形容詞",
-    "meaning": "見込みのある",
+    "meaning": "将来の・見込みの",
     "example": "We invite prospective employees to tour the office before accepting an offer.",
-    "example_ja": "当社では、入社の見込みのある人材に内定承諾前のオフィス見学を案内しています。",
+    "example_ja": "当社では、入社を検討中の候補者に内定承諾前のオフィス見学を案内しています。",
     "distractors": [
       "元の",
       "現在の",
@@ -4938,9 +4938,9 @@
     "id": "w-0330",
     "word": "stipend",
     "pos": "名詞",
-    "meaning": "手当",
+    "meaning": "（研修生などへの）給付金",
     "example": "Interns receive a monthly stipend to cover transportation and meals.",
-    "example_ja": "インターンは交通費と食費をまかなうための月々の手当を受け取ります。",
+    "example_ja": "インターンは交通費と食費をまかなうための月々の給付金を受け取ります。",
     "distractors": [
       "給与",
       "賞与",
@@ -5028,7 +5028,7 @@
     "id": "w-0336",
     "word": "dismiss",
     "pos": "動詞",
-    "meaning": "解雇する",
+    "meaning": "（人を）解雇する",
     "example": "The company cannot dismiss an employee without documenting the reasons first.",
     "example_ja": "会社は理由を文書化せずに従業員を解雇することはできません。",
     "distractors": [
@@ -5118,9 +5118,9 @@
     "id": "w-0342",
     "word": "accrue",
     "pos": "動詞",
-    "meaning": "積み立てられる",
+    "meaning": "（休暇などが）たまる・蓄積する",
     "example": "Full-time employees accrue two vacation days for every month worked.",
-    "example_ja": "正社員は勤務1か月ごとに2日の休暇が積み立てられます。",
+    "example_ja": "正社員は勤務1か月ごとに2日の休暇がたまります。",
     "distractors": [
       "消滅する",
       "返上する",
@@ -5253,9 +5253,9 @@
     "id": "w-0351",
     "word": "transcript",
     "pos": "名詞",
-    "meaning": "記録文書",
+    "meaning": "（発言の）書き起こし",
     "example": "A full transcript of the conference call will be shared by Wednesday.",
-    "example_ja": "電話会議の完全な記録文書は水曜日までに共有されます。",
+    "example_ja": "電話会議の完全な書き起こしは水曜日までに共有されます。",
     "distractors": [
       "要約",
       "翻訳",
@@ -5388,13 +5388,13 @@
     "id": "w-0360",
     "word": "provided",
     "pos": "接続詞",
-    "meaning": "～という条件で",
+    "meaning": "〜という条件で",
     "example": "We can ship on Monday provided the payment clears by Friday afternoon.",
     "example_ja": "金曜の午後までに入金が確認できるという条件で、月曜日に出荷できます。",
     "distractors": [
-      "～にもかかわらず",
-      "～するまで",
-      "～しない限り"
+      "〜にもかかわらず",
+      "〜するまで",
+      "〜しない限り"
     ],
     "category": "会議・連絡",
     "level": 600
@@ -5403,13 +5403,13 @@
     "id": "w-0361",
     "word": "whereas",
     "pos": "接続詞",
-    "meaning": "～であるのに対して",
+    "meaning": "〜であるのに対して",
     "example": "Sales rose in Asia, whereas the European market remained flat all year.",
     "example_ja": "アジアでは売上が伸びたのに対して、欧州市場は年間を通じて横ばいでした。",
     "distractors": [
-      "～なので",
-      "～する限り",
-      "～するために"
+      "〜なので",
+      "〜する限り",
+      "〜するために"
     ],
     "category": "会議・連絡",
     "level": 600
@@ -5508,9 +5508,9 @@
     "id": "w-0368",
     "word": "adhere",
     "pos": "動詞",
-    "meaning": "遵守する",
+    "meaning": "（規則などを）固く守る",
     "example": "All vendors must adhere to our returns policy without exception.",
-    "example_ja": "すべての出店業者は例外なく当店の返品方針を遵守しなければなりません。",
+    "example_ja": "すべての出店業者は例外なく当店の返品方針を固く守らなければなりません。",
     "distractors": [
       "無視する",
       "修正する",
@@ -5555,7 +5555,7 @@
     "pos": "名詞",
     "meaning": "備品",
     "example": "New lighting fixtures will be installed throughout the store next week.",
-    "example_ja": "来週、店内全体に新しい照明備品が設置されます。",
+    "example_ja": "来週、店内全体に新しい照明器具が設置されます。",
     "distractors": [
       "商品",
       "看板",
@@ -5765,7 +5765,7 @@
     "pos": "形容詞",
     "meaning": "思いやりのある",
     "example": "It was considerate of you to move the meeting around my hospital appointment.",
-    "example_ja": "私の病院の予約に合わせて会議を動かしてくださり、思いやりのあるご配慮に感謝します。",
+    "example_ja": "私の病院の予約に合わせて会議を動かしてくださったのは、思いやりのあるご配慮でした。",
     "distractors": [
       "相当な",
       "慎重な",
@@ -5778,7 +5778,7 @@
     "id": "w-0386",
     "word": "industrious",
     "pos": "形容詞",
-    "meaning": "勤勉な",
+    "meaning": "勤勉な・精力的な",
     "example": "The new intern is remarkably industrious and finishes every task ahead of time.",
     "example_ja": "新しいインターンは非常に勤勉で、すべての仕事を前倒しで終えます。",
     "distractors": [
@@ -5793,9 +5793,9 @@
     "id": "w-0387",
     "word": "successive",
     "pos": "形容詞",
-    "meaning": "連続した",
-    "example": "Profits have grown for five successive quarters despite the weak economy.",
-    "example_ja": "景気が弱いにもかかわらず、利益は5四半期連続で伸びています。",
+    "meaning": "相次ぐ・連続の",
+    "example": "The company has had three successive CEOs in five years.",
+    "example_ja": "その会社では5年間で3人のCEOが相次いで交代しました。",
     "distractors": [
       "成功した",
       "継承した",
@@ -5884,8 +5884,8 @@
     "word": "excess",
     "pos": "名詞",
     "meaning": "超過",
-    "example": "Any excess baggage fees for the business trip will be covered by the company.",
-    "example_ja": "出張時の超過手荷物料金はすべて会社が負担します。",
+    "example": "Any baggage in excess of 20 kilograms will be charged extra on the business trip.",
+    "example_ja": "出張時に20キロを超過する手荷物には追加料金がかかります。",
     "distractors": [
       "入手",
       "評価",
