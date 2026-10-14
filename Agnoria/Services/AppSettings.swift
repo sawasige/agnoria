@@ -10,6 +10,7 @@ final class AppSettings {
         static let speechRate = "speechRate"
         static let autoSpeak = "autoSpeak"
         static let soundEffects = "soundEffects"
+        static let swipeHintDone = "swipeHintDone"
         static let importedFingerprint = "importedDataFingerprint"
     }
 
@@ -38,6 +39,11 @@ final class AppSettings {
         didSet { defaults.set(soundEffects, forKey: Key.soundEffects) }
     }
 
+    /// 回答後の「左にスワイプでも次へ」のヒントを消したか（一度スワイプで進んだら true）[v1.4]
+    var swipeHintDone: Bool {
+        didSet { defaults.set(swipeHintDone, forKey: Key.swipeHintDone) }
+    }
+
     var importedFingerprint: String? {
         get { defaults.string(forKey: Key.importedFingerprint) }
         set { defaults.set(newValue, forKey: Key.importedFingerprint) }
@@ -52,6 +58,7 @@ final class AppSettings {
         // bool(forKey:) は起動引数（-soundEffects NO など）の文字列も真偽に解釈する。UI テストは引数で音を切る
         autoSpeak = defaults.object(forKey: Key.autoSpeak) == nil ? true : defaults.bool(forKey: Key.autoSpeak)
         soundEffects = defaults.object(forKey: Key.soundEffects) == nil ? true : defaults.bool(forKey: Key.soundEffects)
+        swipeHintDone = defaults.bool(forKey: Key.swipeHintDone)
     }
 
     static let speechRateRange: ClosedRange<Double> = 0.3...0.6

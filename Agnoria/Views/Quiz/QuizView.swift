@@ -7,6 +7,10 @@ struct QuizView: View {
     @State private var bookmarked = false
     @State private var feedbackCount = 0
     @State private var lastCorrect = true
+    /// 左スワイプ中の横ずれ（右へは動かさない）
+    @GestureState private var dragX: CGFloat = 0
+    /// 最後に指が動いた時刻。全幅の選択肢ボタンは横に動かしても指を離すと押下になるので、直前にドラッグしていたら回答にしない
+    @State private var lastDragAt = Date.distantPast
 
     var body: some View {
         if let run = model.run {
@@ -20,8 +24,10 @@ struct QuizView: View {
     private func content(_ run: QuizRun) -> some View {
         let q = run.current
         let answer = run.currentAnswer
+        ScrollViewReader { proxy in
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
+                Color.clear.frame(height: 0).id("top")
                 HStack {
                     Text("\(run.index + 1) / \(run.questions.count)")
                         .font(.subheadline.monospacedDigit())
@@ -77,6 +83,14 @@ struct QuizView: View {
             .frame(maxWidth: 720)
             .frame(maxWidth: .infinity)
             .animation(.default, value: answer != nil)
+            // 問題の切り替え: 古い問題が左へ抜け、次が右から入る（左スワイプの動きと一致させる）
+            .id(q.id)
+            .offset(x: dragX)
+            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading))
+                .combined(with: .opacity))
+        }
+        .simultaneousGesture(swipeGesture(run: run))
+        .onChange(of: q.id) { _, _ in proxy.scrollTo("top", anchor: .top) }
         }
         .background { AppBackground() }
         .safeAreaInset(edge: .bottom) {
@@ -143,9 +157,19 @@ struct QuizView: View {
                     }
                 }
 
+                #if os(iOS)
+                if !settings.swipeHintDone {
+                    Text("← 左にスワイプでも次へ")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .glassEffect(.regular, in: .capsule)
+                        .transition(.opacity)
+                }
+                #endif
                 Button {
-                    Speaker.shared.stop()
-                    if run.isLast { model.finishRun() } else { model.advance() }
+                    goNext(run)
                 } label: {
                     Text(run.isLast ? "結果を見る" : "次へ")
                         .fontWeight(.semibold)
@@ -163,6 +187,32 @@ struct QuizView: View {
         .frame(maxWidth: .infinity)
     }
 
+    /// 次へ（最終問は結果へ）。ボタンと左スワイプの両方から呼ぶ
+    private func goNext(_ run: QuizRun) {
+        Speaker.shared.stop()
+        withAnimation(.snappy) {
+            if run.isLast { model.finishRun() } else { model.advance() }
+        }
+    }
+
+    /// 回答後だけ効く左スワイプ（§4.2 [v1.4]）。縦スクロールと同時に認識し、横の動きが大きいときだけ内容をずらす
+    private func swipeGesture(run: QuizRun) -> some Gesture {
+        DragGesture(minimumDistance: 20)
+            .onChanged { _ in lastDragAt = .now }
+            .updating($dragX) { value, state, _ in
+                guard run.isAnswered, abs(value.translation.width) > abs(value.translation.height) else { return }
+                state = min(0, value.translation.width)
+            }
+            .onEnded { value in
+                guard run.isAnswered,
+                      SwipeNext.triggers(translation: value.translation, predicted: value.predictedEndTranslation) else { return }
+                if !settings.swipeHintDone {
+                    withAnimation { settings.swipeHintDone = true }
+                }
+                goNext(run)
+            }
+    }
+
     private func toggleBookmark(_ q: QuizQuestion) {
         model.toggleBookmark(q.itemID)
         bookmarked = model.isBookmarked(q.itemID)
@@ -170,6 +220,8 @@ struct QuizView: View {
 
     private func select(_ index: Int) {
         guard let run = model.run, !run.isAnswered else { return }
+        // 横スワイプの指離しをタップと区別する（§4.2 [v1.4]）
+        guard Date.now.timeIntervalSince(lastDragAt) > 0.3 else { return }
         model.answerCurrent(index)
         guard let a = run.currentAnswer else { return }
         lastCorrect = a.isCorrect
