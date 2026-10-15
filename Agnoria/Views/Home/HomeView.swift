@@ -119,9 +119,15 @@ struct HomeView: View {
                 .scaledToFit()
                 .frame(height: 64)
                 .accessibilityHidden(true)
-            Text("Agnoria")
-                .font(.system(size: 34, weight: .bold))
-                .accessibilityAddTraits(.isHeader)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Agnoria")
+                    .font(.system(size: 34, weight: .bold))
+                Text("英単語と文法 450〜600点")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityAddTraits(.isHeader)
             Spacer()
         }
         .padding(.bottom, 2)
