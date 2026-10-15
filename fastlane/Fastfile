@@ -4,12 +4,14 @@ platform :ios do
   # アプリの記録（App 名 / Bundle ID / SKU / 主言語）の新規作成は App Store Connect API では許可されていない
   # （apps は GET と UPDATE のみ）。初回は App Store Connect の Web で作る。以降のメタデータ・ビルドは API キーで上げられる
 
-  desc "メタデータ（fastlane/metadata）とスクリーンショットをアップロード。binary は上げない"
+  desc "メタデータ（fastlane/metadata）とフレーム付きスクリーンショットをアップロード。binary は上げない"
   lane :upload_metadata do |options|
     setup_api_key
+    skip_screenshots = options[:skip_screenshots] || false
     deliver(
+      screenshots_path: (skip_screenshots ? nil : staged_framed_screenshots_path),
       skip_binary_upload: true,
-      skip_screenshots: options[:skip_screenshots] || false,
+      skip_screenshots: skip_screenshots,
       overwrite_screenshots: true,
       force: true,
       run_precheck_before_submit: false,
@@ -20,6 +22,17 @@ platform :ios do
   # App のプライバシー（データを収集しない）、審査用の連絡先（電話番号・メール）、年齢制限の質問票は
   # fastlane から送れない（Apple ID ログインが必要、または質問票の形式が新しくなり項目が足りないと拒否される）。
   # いずれも App Store Connect の Web で設定する
+
+  desc "スクリーンショットにデバイスの枠とキャプション（ja/keyword.strings, title.strings）を付ける"
+  lane :add_frames do
+    frameit(white: true, path: "./fastlane/screenshots")
+    # アルファチャンネルを除去して圧縮（App Store Connect は透過 PNG を受け付けない）
+    dir = File.expand_path("../screenshots", __FILE__)
+    Dir.glob("#{dir}/**/*_framed.png").each do |file|
+      sh("magick '#{file}' -background white -alpha remove -alpha off '#{file}'")
+      sh("pngquant --force --quality=80-95 --output '#{file}' '#{file}'") if system("which pngquant > /dev/null")
+    end
+  end
 
   # ビルドをバージョンに紐づけるのは deliver では審査提出時にしか行われない。
   # 提出前に紐づけるなら Spaceship で app_store_version.select_build(build_id:) を呼ぶ（SPEC-REVIEW J 参照）か Web で選ぶ
@@ -63,4 +76,16 @@ def setup_api_key
     key_content: json["key"],
     in_house: false
   )
+end
+
+# フレーム版（*_framed.png）だけを集めた一時ディレクトリ。元画像と混ざると 1 機種 10 枚の上限を超える
+def staged_framed_screenshots_path
+  src = File.expand_path("../screenshots", __FILE__)
+  dst = File.join(Dir.tmpdir, "agnoria-framed-screenshots")
+  FileUtils.rm_rf(dst)
+  FileUtils.mkdir_p(File.join(dst, "ja"))
+  framed = Dir.glob(File.join(src, "ja", "*_framed.png"))
+  UI.user_error!("ja にフレーム版スクリーンショットがありません。先に `fastlane ios add_frames`") if framed.empty?
+  framed.each { |f| FileUtils.cp(f, File.join(dst, "ja", File.basename(f))) }
+  dst
 end
