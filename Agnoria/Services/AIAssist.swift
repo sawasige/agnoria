@@ -46,6 +46,7 @@ enum AIAssist {
                 あなたは英語教材の作成者です。\(learnerProfile)向けに、ビジネス場面の英語の例文を1文作ります。
                 例文には対象の単語をちょうど1回含め、対象の単語の部分だけを ______ （アンダースコア6つ）にしてください。
                 誤答の選択肢は、品詞が同じで意味が異なる一般的な英単語を3語、対象の単語と重複しないように挙げてください。
+                誤答は、その例文の空欄に入れると意味が通らない語だけにしてください（類義語や同じ文脈で自然に使える語は避ける）。
                 """)
             let prompt = "対象の単語: \(word.word) / 品詞: \(word.pos) / 意味: \(word.meaning)"
             return try await session.respond(to: prompt, generating: PracticeCloze.self).content

@@ -5,6 +5,7 @@ import SwiftData
 struct HomeView: View {
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     @Query(filter: #Predicate<Word> { !$0.isArchived }) private var words: [Word]
     @Query(filter: #Predicate<GrammarQuestion> { !$0.isArchived }) private var grammar: [GrammarQuestion]
@@ -131,8 +132,10 @@ struct HomeView: View {
     /// 画面下に固定する学習の入口。おまかせ（主）と分野を選ぶ（副）
     @ViewBuilder
     private func actionBar(stage: Int, _ summary: MasterySummary, disabled: Bool) -> some View {
+        // 文字サイズがアクセシビリティ段階のときは横に並べず縦に積む（横だと文字が 1 字ずつ縦に折れる）
+        let stacked = typeSize.isAccessibilitySize
         GlassEffectContainer(spacing: 10) {
-            HStack(spacing: 10) {
+            AnyLayout(stacked ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))) {
                 Button {
                     start(.auto)
                 } label: {
@@ -155,13 +158,19 @@ struct HomeView: View {
                 Button {
                     model.path = [.pick]
                 } label: {
-                    VStack(spacing: 2) {
-                        Image(systemName: "square.grid.2x2")
+                    if stacked {
+                        Label("分野を選ぶ", systemImage: "square.grid.2x2")
                             .font(.headline)
-                        Text("分野")
-                            .font(.caption)
+                            .frame(maxWidth: .infinity)
+                    } else {
+                        VStack(spacing: 2) {
+                            Image(systemName: "square.grid.2x2")
+                                .font(.headline)
+                            Text("分野")
+                                .font(.caption)
+                        }
+                        .frame(minWidth: 52)
                     }
-                    .frame(minWidth: 52)
                 }
                 .buttonStyle(.glass)
                 .disabled(disabled)
@@ -201,10 +210,13 @@ struct StageCard: View {
     var estimate: Pace.Estimate? = nil
 
     private var summary: MasterySummary { byLevel[stage] ?? MasterySummary() }
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
+        // アクセシビリティ文字サイズでは見出しと帯の並びを縦に積む
+        let stacked = typeSize.isAccessibilitySize
         VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .top) {
+            AnyLayout(stacked ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .top))) {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("\(stage) 点帯の習得")
                         .font(.subheadline)
@@ -219,7 +231,7 @@ struct StageCard: View {
                             .foregroundStyle(.secondary)
                     }
                 }
-                Spacer()
+                if !stacked { Spacer() }
                 stageRow
             }
             MasteryBar(summary: summary, height: 12)
@@ -262,6 +274,7 @@ struct StageCard: View {
                         .font(.caption2.monospacedDigit())
                         .fontWeight(level == stage ? .bold : .regular)
                         .foregroundStyle(level == stage ? Color.primary : Color.secondary)
+                        .fixedSize()
                 }
             }
         }

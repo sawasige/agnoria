@@ -3,6 +3,7 @@ import SwiftUI
 struct QuizView: View {
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
+    @Environment(\.dynamicTypeSize) private var typeSize
     @State private var confirmLeave = false
     @State private var bookmarked = false
     @State private var feedbackCount = 0
@@ -240,9 +241,11 @@ struct QuizView: View {
     /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる
     @ViewBuilder
     private func actionBar(run: QuizRun, question q: QuizQuestion) -> some View {
+        // アクセシビリティ文字サイズでは 読み上げ / ブックマーク を縦に積む
+        let stacked = typeSize.isAccessibilitySize
         GlassEffectContainer(spacing: 10) {
             VStack(spacing: 10) {
-                HStack(spacing: 10) {
+                AnyLayout(stacked ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))) {
                     if let text = q.speechText {
                         Button {
                             Speaker.shared.speak(text, rate: settings.speechRate)
