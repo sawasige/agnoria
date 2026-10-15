@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-ja="サポート - Agnoria" data-en="Support - Agnoria">サポート - Agnoria</title>
+    <style>
+        :root { --bg: #fff; --text: #333; --text-muted: #666; --link: #3F51B5; --border: #888; --accent: #5C6BC0; --box-bg: #f5f5f7; }
+        @media (prefers-color-scheme: dark) {
+            :root { --bg: #0d0d0f; --text: #e8e8eb; --text-muted: #a1a1a8; --link: #8C9EFF; --border: #555; --accent: #9FA8DA; --box-bg: #1a1a1d; }
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; line-height: 1.8; background: var(--bg); color: var(--text); }
+        h1 { color: var(--link); font-size: 1.5em; }
+        h2 { font-size: 1.2em; margin-top: 2em; }
+        a { color: var(--link); }
+        p { margin: 1em 0; }
+        .updated { color: var(--text-muted); font-size: 0.9em; }
+        .box { background: var(--box-bg); border-radius: 8px; padding: 12px 16px; }
+        .lang-toggle { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 4px 12px; color: inherit; cursor: pointer; font-family: inherit; font-size: 0.85em; float: right; }
+        .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        nav { font-size: 0.9em; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">EN / 日本語</button>
+    <nav><a href="index.html">Agnoria</a></nav>
+    <h1 data-ja="サポート" data-en="Support">サポート</h1>
+    <p data-ja="Agnoria は、ビジネス英語の単語と文法を 4 択で繰り返し学ぶ iPhone / iPad 向けのドリルアプリです。" data-en="Agnoria is a drill app for iPhone and iPad that helps you learn business English vocabulary and grammar through repeated four-choice questions.">Agnoria は、ビジネス英語の単語と文法を 4 択で繰り返し学ぶ iPhone / iPad 向けのドリルアプリです。</p>
+    <h2 data-ja="よくある質問" data-en="FAQ">よくある質問</h2>
+    <p data-html data-ja="<strong>学習の記録はどこに保存されますか？</strong><br>お使いの端末内にのみ保存されます。アプリを削除すると記録も削除されます。" data-en="<strong>Where are my learning records stored?</strong><br>Only on your device. Deleting the App also deletes the records."><strong>学習の記録はどこに保存されますか？</strong><br>お使いの端末内にのみ保存されます。アプリを削除すると記録も削除されます。</p>
+    <p data-html data-ja="<strong>「別の言い方で」や「類題を出す」のボタンが出ません。</strong><br>これらは Apple Intelligence が使える端末でのみ表示されます。対応していない端末では表示されませんが、学習機能はすべて使えます。" data-en="<strong>I do not see the &quot;rephrase&quot; or &quot;practice question&quot; buttons.</strong><br>These appear only on devices where Apple Intelligence is available. All learning features work without them."><strong>「別の言い方で」や「類題を出す」のボタンが出ません。</strong><br>これらは Apple Intelligence が使える端末でのみ表示されます。対応していない端末では表示されませんが、学習機能はすべて使えます。</p>
+    <p data-html data-ja="<strong>問題の内容に誤りを見つけました。</strong><br>クイズ画面のブックマークで印を付けたうえで、下記よりお知らせください。" data-en="<strong>I found an error in a question.</strong><br>Please bookmark it in the quiz screen and let us know using the contact below."><strong>問題の内容に誤りを見つけました。</strong><br>クイズ画面のブックマークで印を付けたうえで、下記よりお知らせください。</p>
+    <h2 data-ja="お問い合わせ" data-en="Contact">お問い合わせ</h2>
+    <div class="box">
+    <p data-ja="ご質問・ご要望・不具合報告は、GitHub Issues からお寄せください:" data-en="For questions, feedback, or bug reports, please open an issue on GitHub:">ご質問・ご要望・不具合報告は、GitHub Issues からお寄せください:</p>
+        <p><a href="https://github.com/sawasige/agnoria/issues">https://github.com/sawasige/agnoria/issues</a></p>
+    </div>
+    <p data-html data-ja="<a href=&quot;privacy.html&quot;>プライバシーポリシー</a>" data-en="<a href=&quot;privacy.html&quot;>Privacy Policy</a>"><a href=&quot;privacy.html&quot;>プライバシーポリシー</a></p>
+
+    <script>
+        var currentLang = 'ja';
+        function applyLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+                var val = el.getAttribute('data-' + lang);
+                if (val === null) return;
+                if (el.hasAttribute('data-html')) { el.innerHTML = val; } else { el.textContent = val; }
+            });
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('lang', lang); } catch (e) {}
+        }
+        window.toggleLang = function () { applyLang(currentLang === 'ja' ? 'en' : 'ja'); };
+        var saved = null;
+        try { saved = localStorage.getItem('lang'); } catch (e) {}
+        applyLang(saved || ((navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en'));
+    </script>
+</body>
+</html>

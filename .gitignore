@@ -5,3 +5,12 @@ DerivedData/
 build/
 # xcodegen で再生成できる
 # Agnoria.xcodeproj/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/test_output
+fastlane/README.md
+fastlane/api_key.json
+fastlane/build/
+fastlane/metadata/review_information/

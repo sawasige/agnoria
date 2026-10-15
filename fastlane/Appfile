@@ -1,0 +1,4 @@
+app_identifier "com.himatsubu.Agnoria"
+team_id "U9296HT99T"
+
+# 認証は App Store Connect API キー経由（setup_api_key を参照）

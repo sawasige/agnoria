@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-ja="Agnoria - Agnoria" data-en="Agnoria - Agnoria">Agnoria - Agnoria</title>
+    <style>
+        :root { --bg: #fff; --text: #333; --text-muted: #666; --link: #3F51B5; --border: #888; --accent: #5C6BC0; --box-bg: #f5f5f7; }
+        @media (prefers-color-scheme: dark) {
+            :root { --bg: #0d0d0f; --text: #e8e8eb; --text-muted: #a1a1a8; --link: #8C9EFF; --border: #555; --accent: #9FA8DA; --box-bg: #1a1a1d; }
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; line-height: 1.8; background: var(--bg); color: var(--text); }
+        h1 { color: var(--link); font-size: 1.5em; }
+        h2 { font-size: 1.2em; margin-top: 2em; }
+        a { color: var(--link); }
+        p { margin: 1em 0; }
+        .updated { color: var(--text-muted); font-size: 0.9em; }
+        .box { background: var(--box-bg); border-radius: 8px; padding: 12px 16px; }
+        .lang-toggle { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 4px 12px; color: inherit; cursor: pointer; font-family: inherit; font-size: 0.85em; float: right; }
+        .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        nav { font-size: 0.9em; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">EN / 日本語</button>
+        <h1 data-ja="Agnoria" data-en="Agnoria">Agnoria</h1>
+    <p data-ja="ビジネス英語の単語と文法を、4 択ドリルで繰り返し身につける iPhone / iPad アプリ。スコア帯 450 から 600 へ、ステージを順に進みます。" data-en="An iPhone and iPad app for mastering business English vocabulary and grammar through four-choice drills, progressing stage by stage from the 450 to the 600 score band.">ビジネス英語の単語と文法を、4 択ドリルで繰り返し身につける iPhone / iPad アプリ。スコア帯 450 から 600 へ、ステージを順に進みます。</p>
+    <ul>
+        <li><a href="support.html" data-ja="サポート" data-en="Support">サポート</a></li>
+        <li><a href="privacy.html" data-ja="プライバシーポリシー" data-en="Privacy Policy">プライバシーポリシー</a></li>
+        <li><a href="https://github.com/sawasige/agnoria">GitHub</a></li>
+    </ul>
+
+    <script>
+        var currentLang = 'ja';
+        function applyLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+                var val = el.getAttribute('data-' + lang);
+                if (val === null) return;
+                if (el.hasAttribute('data-html')) { el.innerHTML = val; } else { el.textContent = val; }
+            });
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('lang', lang); } catch (e) {}
+        }
+        window.toggleLang = function () { applyLang(currentLang === 'ja' ? 'en' : 'ja'); };
+        var saved = null;
+        try { saved = localStorage.getItem('lang'); } catch (e) {}
+        applyLang(saved || ((navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en'));
+    </script>
+</body>
+</html>

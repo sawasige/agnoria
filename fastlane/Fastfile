@@ -1,0 +1,61 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "App Store Connect にアプリの記録を作る（初回のみ）"
+  lane :create_app do
+    setup_api_key
+    produce(
+      app_name: "Agnoria",
+      language: "ja",
+      app_version: "1.0",
+      sku: "com.himatsubu.Agnoria",
+      platforms: ["ios"],
+      skip_itc: false,
+      skip_devcenter: false
+    )
+  end
+
+  desc "メタデータ（fastlane/metadata）とスクリーンショットをアップロード。binary は上げない"
+  lane :upload_metadata do |options|
+    setup_api_key
+    deliver(
+      skip_binary_upload: true,
+      skip_screenshots: options[:skip_screenshots] || false,
+      overwrite_screenshots: true,
+      force: true,
+      run_precheck_before_submit: false,
+      app_rating_config_path: "./fastlane/rating.json",
+      submit_for_review: false
+    )
+  end
+
+  desc "App Store 用にアーカイブして TestFlight に上げる"
+  lane :beta do
+    setup_api_key
+    build_app(
+      scheme: "Agnoria",
+      destination: "generic/platform=iOS",
+      export_method: "app-store",
+      xcargs: "-allowProvisioningUpdates",
+      output_directory: "./fastlane/build",
+      clean: true
+    )
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      changelog: File.read("./fastlane/metadata/ja/release_notes.txt")
+    )
+  end
+end
+
+# API キーは runrun-ios と同じもの（同じチーム）。リポジトリには置かない
+def setup_api_key
+  path = ENV["AGNORIA_ASC_API_KEY_JSON"] || File.expand_path("~/git/runrun-ios/fastlane/api_key.json")
+  UI.user_error!("App Store Connect API キーが見つかりません: #{path}") unless File.exist?(path)
+  json = JSON.parse(File.read(path))
+  app_store_connect_api_key(
+    key_id: json["key_id"],
+    issuer_id: json["issuer_id"],
+    key_content: json["key"],
+    in_house: false
+  )
+end
