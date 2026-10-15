@@ -34,6 +34,26 @@ platform :ios do
     end
   end
 
+  desc "編集中のバージョンを指定ビルドで審査に提出する（例: fastlane ios submit_review build:7）"
+  lane :submit_review do |options|
+    setup_api_key
+    deliver(
+      build_number: options[:build].to_s,
+      skip_binary_upload: true,
+      skip_metadata: true,
+      skip_screenshots: true,
+      skip_app_version_update: true,
+      force: true,
+      run_precheck_before_submit: false,
+      submit_for_review: true,
+      submission_information: {
+        export_compliance_uses_encryption: false,          # 通信も暗号化もない（ITSAppUsesNonExemptEncryption = NO と同じ）
+        add_id_info_uses_idfa: false,                       # 広告識別子は使わない
+        content_rights_contains_third_party_content: false  # 問題データ・イラスト・効果音は自作・生成物。未設定だと提出が 409 で止まる
+      }
+    )
+  end
+
   # ビルドをバージョンに紐づけるのは deliver では審査提出時にしか行われない。
   # 提出前に紐づけるなら Spaceship で app_store_version.select_build(build_id:) を呼ぶ（SPEC-REVIEW J 参照）か Web で選ぶ
 
