@@ -3,50 +3,848 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-ja="Agnoria - Agnoria" data-en="Agnoria - Agnoria">Agnoria - Agnoria</title>
+    <title data-ja="Agnoria 英単語と文法 450〜600点" data-en="Agnoria - Business English Vocabulary and Grammar">Agnoria 英単語と文法 450〜600点</title>
+    <meta name="description" content="ビジネス英語の単語400語と文法200問を4択で。1日10問、3分で終わる。TOEIC L&R 450〜600点を目指す人のためのドリルアプリ。">
+    <meta property="og:title" content="Agnoria 英単語と文法 450〜600点">
+    <meta property="og:description" content="わかったつもりを、卒業。1日10問、3分で終わるビジネス英語ドリル。">
+    <meta property="og:image" content="https://sawasige.github.io/agnoria/assets/og-image.jpg">
+    <meta property="og:image:width" content="1671">
+    <meta property="og:image:height" content="941">
+    <meta property="og:image:alt" content="Agnoria — 空を見上げる学びの女神アゲノリア">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://sawasige.github.io/agnoria/assets/og-image.jpg">
+    <link rel="icon" type="image/png" href="assets/logo.png">
     <style>
-        :root { --bg: #fff; --text: #333; --text-muted: #666; --link: #3F51B5; --border: #888; --accent: #5C6BC0; --box-bg: #f5f5f7; }
-        @media (prefers-color-scheme: dark) {
-            :root { --bg: #0d0d0f; --text: #e8e8eb; --text-muted: #a1a1a8; --link: #8C9EFF; --border: #555; --accent: #9FA8DA; --box-bg: #1a1a1d; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; line-height: 1.8; background: var(--bg); color: var(--text); }
-        h1 { color: var(--link); font-size: 1.5em; }
-        h2 { font-size: 1.2em; margin-top: 2em; }
-        a { color: var(--link); }
-        p { margin: 1em 0; }
-        .updated { color: var(--text-muted); font-size: 0.9em; }
-        .box { background: var(--box-bg); border-radius: 8px; padding: 12px 16px; }
-        .lang-toggle { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 4px 12px; color: inherit; cursor: pointer; font-family: inherit; font-size: 0.85em; float: right; }
-        .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
-        nav { font-size: 0.9em; color: var(--text-muted); }
+
+        :root {
+            --accent: #3F51B5;
+            --accent-light: #EEF0FA;
+            --bg: #FAFAFA;
+            --bg-gradient-top: #ffffff;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --card-bg: #fff;
+            --pill-bg: var(--bg);
+            --heading: #1a1a1a;
+            --footer-bg: #1a1a1a;
+            --footer-bg-deep: #0d0d0d;
+            --shadow-strong: 0 12px 40px rgba(0,0,0,0.15);
+            --shadow-medium: 0 8px 32px rgba(0,0,0,0.08);
+            --shadow-light: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --accent: #8C9EFF;
+                --accent-light: #1a1c2e;
+                --bg: #0d0d0f;
+                --bg-gradient-top: #1a1a1d;
+                --text: #f2f2f5;
+                --text-muted: #a1a1a8;
+                --card-bg: #1a1a1d;
+                --pill-bg: #2a2a2e;
+                --heading: #f2f2f5;
+                --footer-bg: #050506;
+                --footer-bg-deep: #050506;
+                --shadow-strong: 0 12px 40px rgba(0,0,0,0.6);
+                --shadow-medium: 0 8px 32px rgba(0,0,0,0.5);
+                --shadow-light: 0 2px 12px rgba(0,0,0,0.3);
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 40px 20px 60px;
+            background: linear-gradient(180deg, var(--bg-gradient-top) 0%, var(--bg) 100%);
+        }
+
+        .hero-banner {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto 32px;
+            aspect-ratio: 1671 / 941;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .hero-banner > img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 56%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(8px, 1.5vw, 16px);
+            padding: 4%;
+            color: white;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(20,30,80,0.45);
+        }
+
+        .hero-overlay-tagline {
+            font-size: clamp(0.75rem, 1.4vw, 1.1rem);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .hero-overlay-lockup {
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 1.5vw, 18px);
+        }
+
+        .hero-overlay-icon {
+            width: clamp(40px, 7vw, 88px);
+            height: clamp(40px, 7vw, 88px);
+            border-radius: clamp(8px, 1.4vw, 20px);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        }
+
+        .hero-overlay-name {
+            font-size: clamp(2rem, 6.5vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: white;
+            line-height: 1;
+        }
+
+        .hero-overlay-subtitle {
+            font-size: clamp(0.7rem, 1.1vw, 0.95rem);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .app-store-badge {
+            height: 54px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .app-store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* Screenshots */
+        .screenshots-wrap {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .screenshots {
+            display: flex;
+            gap: 20px;
+            padding: 40px 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+
+        .screenshots img {
+            height: 480px;
+            border-radius: 12px;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-medium);
+            scroll-snap-align: center;
+            cursor: zoom-in;
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.35);
+            color: white;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: opacity 0.2s ease, background 0.2s ease;
+        }
+
+        .scroll-arrow:hover {
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .scroll-arrow.left {
+            left: 8px;
+        }
+
+        .scroll-arrow.right {
+            right: 8px;
+        }
+
+        .scroll-arrow.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* タッチデバイスではスワイプが自然なので矢印を隠す */
+        @media (hover: none) {
+            .scroll-arrow {
+                display: none;
+            }
+        }
+
+        /* Brand intro */
+        .brand-intro {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .brand-intro h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            color: var(--heading);
+        }
+
+        .brand-intro .lead {
+            font-size: 1.15rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .brand-intro .body {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        .brand-intro .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Feature detail */
+        .feature-detail {
+            padding: 60px 20px;
+        }
+
+        .feature-detail.alt {
+            background: var(--card-bg);
+        }
+
+        .feature-detail-inner {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feature-detail-inner.reversed {
+            flex-direction: row-reverse;
+        }
+
+        .feature-detail-text {
+            flex: 1;
+        }
+
+        .feature-detail-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            color: var(--heading);
+        }
+
+        .feature-detail-text p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .feature-detail-text .accent {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .feature-detail-image {
+            flex: 0 0 260px;
+        }
+
+        .feature-detail-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: var(--shadow-medium);
+            cursor: zoom-in;
+        }
+
+        @media (max-width: 600px) {
+            .feature-detail-inner,
+            .feature-detail-inner.reversed {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 24px;
+            }
+
+            .feature-detail-image {
+                flex: none;
+                width: 100%;
+                max-width: 240px;
+                margin: 0 auto;
+            }
+
+            .feature-detail {
+                padding: 48px 20px;
+            }
+        }
+
+        /* Highlights */
+        .highlights {
+            background: var(--card-bg);
+            padding: 60px 20px;
+        }
+
+        .highlights-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .highlights h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--heading);
+        }
+
+        .highlights p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .pill-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .pill-list span {
+            background: var(--pill-bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Features */
+        .features {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 48px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .feature {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .feature h3 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Target Users */
+        .target {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .target h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+        }
+
+        .target-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .target-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--card-bg);
+            padding: 20px 24px;
+            border-radius: 12px;
+        }
+
+        .target-item .icon {
+            font-size: 1.5rem;
+        }
+
+        .target-item p {
+            font-size: 1rem;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--accent-light) 100%);
+        }
+
+        .cta h2 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 48px 20px 40px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            background: var(--footer-bg-deep);
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 13px;
+            margin: 0 auto 16px;
+            display: block;
+            opacity: 0.95;
+        }
+
+        .footer-links {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .lang-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            transition: color 0.2s;
+            padding: 0;
+        }
+
+        .lang-toggle:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 24px 16px 40px;
+            }
+
+            .screenshots img {
+                height: 380px;
+            }
+
+            .features h2,
+            .feature-detail-text h2 {
+                font-size: 1.5rem;
+            }
+
+            .brand-intro h1 {
+                font-size: 1.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cta .trademark { font-size: 0.8rem; color: var(--text-muted); margin-top: 24px; margin-bottom: 0; }
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
-    <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">EN / 日本語</button>
-        <h1 data-ja="Agnoria" data-en="Agnoria">Agnoria</h1>
-    <p data-ja="ビジネス英語の単語と文法を、4 択ドリルで繰り返し身につける iPhone / iPad アプリ。スコア帯 450 から 600 へ、ステージを順に進みます。" data-en="An iPhone and iPad app for mastering business English vocabulary and grammar through four-choice drills, progressing stage by stage from the 450 to the 600 score band.">ビジネス英語の単語と文法を、4 択ドリルで繰り返し身につける iPhone / iPad アプリ。スコア帯 450 から 600 へ、ステージを順に進みます。</p>
-    <ul>
-        <li><a href="support.html" data-ja="サポート" data-en="Support">サポート</a></li>
-        <li><a href="privacy.html" data-ja="プライバシーポリシー" data-en="Privacy Policy">プライバシーポリシー</a></li>
-        <li><a href="https://github.com/sawasige/agnoria">GitHub</a></li>
-    </ul>
+    <section class="hero">
+        <div class="hero-banner">
+            <img src="assets/hero.jpg"
+                 alt="空を見上げる学びの女神アゲノリア"
+                 data-alt-ja="空を見上げる学びの女神アゲノリア"
+                 data-alt-en="Agenoria, goddess of learning, looking up at the sky">
+            <div class="hero-overlay">
+                <p class="hero-overlay-tagline"
+                   data-html
+                   data-ja="わかったつもりを、卒業。<br>1日10問、3分で終わる英語ドリル。"
+                   data-en="Stop guessing you know it.<br>Ten questions a day, done in three minutes.">わかったつもりを、卒業。<br>1日10問、3分で終わる英語ドリル。</p>
+                <div class="hero-overlay-lockup">
+                    <img src="assets/logo.png" alt="" class="hero-overlay-icon">
+                    <span class="hero-overlay-name">Agnoria</span>
+                </div>
+                <p class="hero-overlay-subtitle"
+                   data-ja="英単語と文法 450〜600点"
+                   data-en="Business English vocabulary and grammar, 450 to 600">英単語と文法 450〜600点</p>
+            </div>
+        </div>
+        <a href="https://apps.apple.com/app/id6823061416">
+            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83"
+                 alt="App Storeからダウンロード"
+                 class="app-store-badge"
+                 data-src-ja="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83"
+                 data-src-en="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+                 data-alt-ja="App Storeからダウンロード"
+                 data-alt-en="Download on the App Store">
+        </a>
+    </section>
+
+    <section class="brand-intro">
+        <h1 data-ja="Agnoria 英単語と文法 450〜600点" data-en="Agnoria — Vocabulary and Grammar, 450 to 600">Agnoria 英単語と文法 450〜600点</h1>
+        <p class="lead" data-ja="1日10問、3分で終わる。" data-en="Ten questions a day. Done in three minutes.">1日10問、3分で終わる。</p>
+        <p class="body" data-html
+           data-ja="ビジネス英語の単語400語と Part 5 形式の文法200問を、4択で繰り返す。今の実力に合わせておまかせで出題されるので、開いて答えるだけ。<span class=&quot;highlight&quot;>通信なし、広告なし、無料。</span>"
+           data-en="400 business English words and 200 Part 5-style grammar questions, drilled as four-choice questions. The app picks today&#39;s ten for your level, so just open it and answer. <span class=&quot;highlight&quot;>No network, no ads, free.</span>">ビジネス英語の単語400語と Part 5 形式の文法200問を、4択で繰り返す。今の実力に合わせておまかせで出題されるので、開いて答えるだけ。<span class="highlight">通信なし、広告なし、無料。</span></p>
+    </section>
+
+    <div class="screenshots-wrap">
+        <button class="scroll-arrow left hidden" aria-label="前へ" type="button" data-aria-label-ja="前へ" data-aria-label-en="Previous">‹</button>
+        <section class="screenshots">
+            <img src="assets/screenshot1.png" alt="ホーム" data-alt-ja="ホーム" data-alt-en="Home">
+            <img src="assets/screenshot2.png" alt="分野を選ぶ" data-alt-ja="分野を選ぶ" data-alt-en="Pick a category">
+            <img src="assets/screenshot3.png" alt="出題" data-alt-ja="出題" data-alt-en="Question">
+            <img src="assets/screenshot4.png" alt="回答後の解説" data-alt-ja="回答後の解説" data-alt-en="Explanation">
+            <img src="assets/screenshot5.png" alt="進捗" data-alt-ja="進捗" data-alt-en="Progress">
+        </section>
+        <button class="scroll-arrow right" aria-label="次へ" type="button" data-aria-label-ja="次へ" data-aria-label-en="Next">›</button>
+    </div>
+
+    <section class="feature-detail alt">
+        <div class="feature-detail-inner">
+            <div class="feature-detail-text">
+                <h2 data-ja="覚えたつもりを、なくす。" data-en="No more &quot;I think I know it.&quot;">覚えたつもりを、なくす。</h2>
+                <p data-html
+                   data-ja="「わかる／わからない」の自己申告ではなく、毎回4択に答える。<span class=&quot;accent&quot;>自信のない単語も、正直に判定</span>されます。"
+                   data-en="No self-reporting. Every question is a four-choice answer, so <span class=&quot;accent&quot;>words you only half know get caught</span>.">「わかる／わからない」の自己申告ではなく、毎回4択に答える。<span class="accent">自信のない単語も、正直に判定</span>されます。</p>
+                <p data-html
+                   data-ja="間違えた問題は復習に回り、<span class=&quot;accent&quot;>3回連続で正解すると「習得」</span>。身についたものだけが積み上がります。"
+                   data-en="Misses come back for review, and <span class=&quot;accent&quot;>three correct answers in a row mark a word as mastered</span>. Only what sticks counts.">間違えた問題は復習に回り、<span class="accent">3回連続で正解すると「習得」</span>。身についたものだけが積み上がります。</p>
+            </div>
+            <div class="feature-detail-image">
+                <img src="assets/screenshot3.png" alt="出題" data-alt-ja="出題" data-alt-en="Question">
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-detail">
+        <div class="feature-detail-inner reversed">
+            <div class="feature-detail-text">
+                <h2 data-ja="おまかせで、今日の10問。" data-en="Today&#39;s ten, picked for you.">おまかせで、今日の10問。</h2>
+                <p data-html
+                   data-ja="ホームのボタンを押すだけで、<span class=&quot;accent&quot;>今の実力に合った10問</span>が出題されます。新しい問題と復習が、ちょうどよく混ざります。"
+                   data-en="One tap on the home screen and <span class=&quot;accent&quot;>ten questions matched to your level</span> appear, with new items and reviews mixed just right.">ホームのボタンを押すだけで、<span class="accent">今の実力に合った10問</span>が出題されます。新しい問題と復習が、ちょうどよく混ざります。</p>
+                <p data-html
+                   data-ja="苦手な分野を集中的にやりたい日は、<span class=&quot;accent&quot;>単語5分野・文法5分野</span>から選んで何度でも。"
+                   data-en="Want to hammer a weak spot? Pick from <span class=&quot;accent&quot;>five vocabulary and five grammar categories</span> and repeat as often as you like.">苦手な分野を集中的にやりたい日は、<span class="accent">単語5分野・文法5分野</span>から選んで何度でも。</p>
+            </div>
+            <div class="feature-detail-image">
+                <img src="assets/screenshot1.png" alt="ホーム" data-alt-ja="ホーム" data-alt-en="Home">
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-detail alt">
+        <div class="feature-detail-inner">
+            <div class="feature-detail-text">
+                <h2 data-ja="450点から、600点へ。" data-en="From 450 to 600.">450点から、600点へ。</h2>
+                <p data-html
+                   data-ja="450・500・550・600点のステージを順に進みます。<span class=&quot;accent&quot;>習得率が80%になると、自動で次のステージへ</span>。"
+                   data-en="Progress through the 450, 500, 550 and 600 stages in order. <span class=&quot;accent&quot;>Reach 80% mastery and the next stage opens automatically</span>.">450・500・550・600点のステージを順に進みます。<span class="accent">習得率が80%になると、自動で次のステージへ</span>。</p>
+                <p data-html
+                   data-ja="クリアまでに必要なセット数と日数の目安、連続学習日数、2週間の学習量が<span class=&quot;accent&quot;>ホームでひと目でわかります</span>。"
+                   data-en="Sets and days left to clear the stage, your streak and two weeks of activity are <span class=&quot;accent&quot;>all on the home screen</span>.">クリアまでに必要なセット数と日数の目安、連続学習日数、2週間の学習量が<span class="accent">ホームでひと目でわかります</span>。</p>
+            </div>
+            <div class="feature-detail-image">
+                <img src="assets/screenshot5.png" alt="進捗" data-alt-ja="進捗" data-alt-en="Progress">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 data-ja="その他の機能" data-en="More features">その他の機能</h2>
+        <div class="feature-grid">
+            <div class="feature">
+                <div class="feature-icon">📝</div>
+                <h3 data-ja="解説と例文" data-en="Explanations and examples">解説と例文</h3>
+                <p data-ja="文法は全問に解説つき。単語は例文と和訳で、使われ方まで覚えられます。" data-en="Every grammar question comes with an explanation. Words come with an example sentence and its translation.">文法は全問に解説つき。単語は例文と和訳で、使われ方まで覚えられます。</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔊</div>
+                <h3 data-ja="読み上げ" data-en="Read aloud">読み上げ</h3>
+                <p data-ja="例文をその場で読み上げ。回答後に自動で読む設定もできます。" data-en="Hear the example sentence on the spot, or have it read automatically after you answer.">例文をその場で読み上げ。回答後に自動で読む設定もできます。</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔖</div>
+                <h3 data-ja="ブックマーク" data-en="Bookmarks">ブックマーク</h3>
+                <p data-ja="気になった問題に印を付けて、あとでまとめて復習。" data-en="Flag questions that bug you and review them together later.">気になった問題に印を付けて、あとでまとめて復習。</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✨</div>
+                <h3 data-ja="Apple Intelligence" data-en="Apple Intelligence">Apple Intelligence</h3>
+                <p data-ja="対応端末では、解説の言い換えと練習問題の生成も。すべて端末内で処理されます。" data-en="On supported devices, rephrase explanations and generate practice questions, all on-device.">対応端末では、解説の言い換えと練習問題の生成も。すべて端末内で処理されます。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="highlights">
+        <div class="highlights-inner">
+            <h2 data-ja="収録内容" data-en="What&#39;s inside">収録内容</h2>
+            <p data-ja="単語400語・文法200問。ビジネスの場面に絞って収録" data-en="400 words and 200 grammar questions, all set in business situations">単語400語・文法200問。ビジネスの場面に絞って収録</p>
+            <div class="pill-list">
+                <span data-ja="ビジネス一般" data-en="Business basics">ビジネス一般</span>
+                <span data-ja="人事・採用" data-en="HR and hiring">人事・採用</span>
+                <span data-ja="会議・連絡" data-en="Meetings and messages">会議・連絡</span>
+                <span data-ja="店舗・顧客" data-en="Stores and customers">店舗・顧客</span>
+                <span data-ja="混同しやすい語" data-en="Easily confused words">混同しやすい語</span>
+                <span data-ja="品詞" data-en="Parts of speech">品詞</span>
+                <span data-ja="前置詞・接続詞" data-en="Prepositions and conjunctions">前置詞・接続詞</span>
+                <span data-ja="代名詞・関係詞" data-en="Pronouns and relatives">代名詞・関係詞</span>
+                <span data-ja="時制・態" data-en="Tense and voice">時制・態</span>
+                <span data-ja="語彙" data-en="Vocabulary in context">語彙</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="target">
+        <h2 data-ja="こんな人におすすめ" data-en="Perfect for">こんな人におすすめ</h2>
+        <div class="target-list">
+            <div class="target-item">
+                <span class="icon">🎯</span>
+                <p data-ja="TOEIC L&amp;R で 600 点を目指している方" data-en="Anyone aiming for 600 on the TOEIC L&amp;R test">TOEIC L&amp;R で 600 点を目指している方</p>
+            </div>
+            <div class="target-item">
+                <span class="icon">🚃</span>
+                <p data-ja="通勤や待ち時間に、少しずつ進めたい方" data-en="People who want to make progress in short gaps, like the commute">通勤や待ち時間に、少しずつ進めたい方</p>
+            </div>
+            <div class="target-item">
+                <span class="icon">🙅</span>
+                <p data-ja="単語帳の「わかる／わからない」に限界を感じた方" data-en="People who are done with flashcards that take your word for it">単語帳の「わかる／わからない」に限界を感じた方</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2 data-ja="今日の10問から始めよう" data-en="Start with today&#39;s ten">今日の10問から始めよう</h2>
+        <p data-ja="iPhone と iPad で。通信なし、広告なし、無料。" data-en="For iPhone and iPad. No network, no ads, free.">iPhone と iPad で。通信なし、広告なし、無料。</p>
+        <a href="https://apps.apple.com/app/id6823061416">
+            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83"
+                 alt="App Storeからダウンロード"
+                 class="app-store-badge"
+                 data-src-ja="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp?size=250x83"
+                 data-src-en="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+                 data-alt-ja="App Storeからダウンロード"
+                 data-alt-en="Download on the App Store">
+        </a>
+        <p class="trademark" data-ja="TOEIC は ETS の登録商標です。本アプリは ETS および IIBC とは関係ありません。" data-en="TOEIC is a registered trademark of ETS. This app is not affiliated with ETS or IIBC.">TOEIC は ETS の登録商標です。本アプリは ETS および IIBC とは関係ありません。</p>
+    </section>
+
+    <footer>
+        <img src="assets/logo.png" alt="Agnoria" class="footer-logo">
+        <div class="footer-links">
+            <a href="privacy.html" data-ja="プライバシーポリシー" data-en="Privacy Policy">プライバシーポリシー</a>
+            <a href="support.html" data-ja="サポート" data-en="Support">サポート</a>
+            <a href="https://github.com/sawasige/agnoria">GitHub</a>
+            <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">EN / 日本語</button>
+        </div>
+        <p>&copy; 2026 Shigeru Sawada</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <img src="" alt="">
+    </div>
 
     <script>
+        // 言語切替
         var currentLang = 'ja';
+
         function applyLang(lang) {
             currentLang = lang;
             document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
                 var val = el.getAttribute('data-' + lang);
                 if (val === null) return;
-                if (el.hasAttribute('data-html')) { el.innerHTML = val; } else { el.textContent = val; }
+                if (el.hasAttribute('data-html')) {
+                    el.innerHTML = val;
+                } else {
+                    el.textContent = val;
+                }
+            });
+            document.querySelectorAll('[data-alt-' + lang + ']').forEach(function (el) {
+                el.alt = el.getAttribute('data-alt-' + lang);
+            });
+            document.querySelectorAll('[data-src-' + lang + ']').forEach(function (el) {
+                el.src = el.getAttribute('data-src-' + lang);
+            });
+            document.querySelectorAll('[data-aria-label-' + lang + ']').forEach(function (el) {
+                el.setAttribute('aria-label', el.getAttribute('data-aria-label-' + lang));
             });
             document.documentElement.lang = lang;
             try { localStorage.setItem('lang', lang); } catch (e) {}
         }
-        window.toggleLang = function () { applyLang(currentLang === 'ja' ? 'en' : 'ja'); };
-        var saved = null;
-        try { saved = localStorage.getItem('lang'); } catch (e) {}
-        applyLang(saved || ((navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en'));
+
+        window.toggleLang = function () {
+            applyLang(currentLang === 'ja' ? 'en' : 'ja');
+        };
+
+        var savedLang = null;
+        try { savedLang = localStorage.getItem('lang'); } catch (e) {}
+        var initialLang = savedLang || ((navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en');
+        applyLang(initialLang);
+
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = lightbox.querySelector('img');
+
+        document.querySelectorAll('.screenshots img, .feature-detail-image img').forEach(function(img) {
+            img.addEventListener('click', function() {
+                lightboxImg.src = this.src;
+                lightboxImg.alt = this.alt;
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightbox.addEventListener('click', function() {
+            lightbox.classList.remove('active');
+        });
+
+        // スクリーンショットカルーセルの矢印
+        var screenshots = document.querySelector('.screenshots');
+        var leftArrow = document.querySelector('.scroll-arrow.left');
+        var rightArrow = document.querySelector('.scroll-arrow.right');
+
+        if (screenshots && leftArrow && rightArrow) {
+            function updateArrows() {
+                var sl = screenshots.scrollLeft;
+                var max = screenshots.scrollWidth - screenshots.clientWidth;
+                leftArrow.classList.toggle('hidden', sl <= 1);
+                rightArrow.classList.toggle('hidden', sl >= max - 1);
+            }
+
+            function scrollByStep(direction) {
+                var step = Math.max(200, screenshots.clientWidth * 0.6);
+                screenshots.scrollBy({ left: step * direction, behavior: 'smooth' });
+            }
+
+            leftArrow.addEventListener('click', function() { scrollByStep(-1); });
+            rightArrow.addEventListener('click', function() { scrollByStep(1); });
+            screenshots.addEventListener('scroll', updateArrows, { passive: true });
+            window.addEventListener('resize', updateArrows);
+            window.addEventListener('load', updateArrows);
+            updateArrows();
+        }
     </script>
 </body>
 </html>
