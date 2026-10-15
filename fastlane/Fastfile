@@ -24,7 +24,7 @@ platform :ios do
   # ビルドをバージョンに紐づけるのは deliver では審査提出時にしか行われない。
   # 提出前に紐づけるなら Spaceship で app_store_version.select_build(build_id:) を呼ぶ（SPEC-REVIEW J 参照）か Web で選ぶ
 
-  desc "App Store 用にアーカイブして TestFlight に上げる"
+  desc "予備: この Mac でアーカイブして TestFlight に上げる（通常は Xcode Cloud の Default ワークフローで配信する。SPEC-REVIEW J6）"
   lane :beta do
     setup_api_key
     build_app(
