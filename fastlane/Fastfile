@@ -34,7 +34,17 @@ platform :ios do
     )
     upload_to_testflight(
       skip_waiting_for_build_processing: true,
-      changelog: File.read("./fastlane/metadata/ja/release_notes.txt")
+      changelog: File.read("./metadata/ja/release_notes.txt")  # fastlane の作業ディレクトリは fastlane/
+    )
+  end
+
+  desc "ビルド済みの ipa（fastlane/build/Agnoria.ipa）だけを TestFlight に上げる"
+  lane :upload_ipa do
+    setup_api_key
+    upload_to_testflight(
+      ipa: "./fastlane/build/Agnoria.ipa",  # アクションの引数のパスはリポジトリ基点、File.read は fastlane/ 基点
+      skip_waiting_for_build_processing: true,
+      changelog: File.read("./metadata/ja/release_notes.txt")
     )
   end
 end
