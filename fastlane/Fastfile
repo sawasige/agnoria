@@ -18,6 +18,9 @@ platform :ios do
     )
   end
 
+  # App のプライバシー（データを収集しない）と審査用の連絡先（電話番号・メール）は API キーでは送れない
+  # （fastlane の該当アクションは Apple ID ログインが必要）。App Store Connect の Web で設定する
+
   desc "App Store 用にアーカイブして TestFlight に上げる"
   lane :beta do
     setup_api_key
