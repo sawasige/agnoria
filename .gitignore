@@ -14,3 +14,9 @@ fastlane/README.md
 fastlane/api_key.json
 fastlane/build/
 fastlane/metadata/review_information/
+
+# Xcode Cloud が自動生成する
+Agnoria.xcodeproj/xcshareddata/xcodecloud/
+
+# 撮影用の一時テスト（コミットしない）
+AgnoriaUITests/TempShotTests.swift

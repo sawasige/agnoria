@@ -1,19 +1,8 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "App Store Connect にアプリの記録を作る（初回のみ）"
-  lane :create_app do
-    setup_api_key
-    produce(
-      app_name: "Agnoria",
-      language: "ja",
-      app_version: "1.0",
-      sku: "com.himatsubu.Agnoria",
-      platforms: ["ios"],
-      skip_itc: false,
-      skip_devcenter: false
-    )
-  end
+  # アプリの記録（App 名 / Bundle ID / SKU / 主言語）の新規作成は App Store Connect API では許可されていない
+  # （apps は GET と UPDATE のみ）。初回は App Store Connect の Web で作る。以降のメタデータ・ビルドは API キーで上げられる
 
   desc "メタデータ（fastlane/metadata）とスクリーンショットをアップロード。binary は上げない"
   lane :upload_metadata do |options|
