@@ -51,7 +51,7 @@ final class AppSettings {
         didSet { defaults.set(topStageCelebrated, forKey: Key.topStageCelebrated) }
     }
 
-    /// 使用状況（機能の利用回数）を開発者に送る。デフォルト ON（§7 [v1.6]）。起動引数 `-analytics NO` はこれより優先
+    /// 使用状況（機能の利用回数）とクラッシュ情報を開発者に送る。デフォルト ON（§7 [v1.6]）。起動引数 `-analytics NO` はこれより優先
     var usageReporting: Bool {
         didSet { defaults.set(usageReporting, forKey: Key.usageReporting) }
     }

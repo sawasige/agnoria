@@ -25,6 +25,7 @@
 
 /* Begin PBXBuildFile section */
 		2AF1AB0100000000000000A3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF1AB0100000000000000A2 /* FirebaseAnalytics */; };
+		2AF1AB0100000000000000A5 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF1AB0100000000000000A4 /* FirebaseCrashlytics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				2AF1AB0100000000000000A3 /* FirebaseAnalytics in Frameworks */,
+				2AF1AB0100000000000000A5 /* FirebaseCrashlytics in Frameworks */,
 			);
 		};
 		2A3795A6307CBA1700D1AEF0 /* Frameworks */ = {
@@ -110,6 +112,7 @@
 			name = Agnoria;
 			packageProductDependencies = (
 				2AF1AB0100000000000000A2 /* FirebaseAnalytics */,
+				2AF1AB0100000000000000A4 /* FirebaseCrashlytics */,
 			);
 			productName = Agnoria;
 			productReference = 2A37959C307CBA1500D1AEF0 /* Agnoria.app */;
@@ -400,6 +403,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.Agnoria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -446,6 +453,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 27.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.himatsubu.Agnoria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -618,6 +629,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2AF1AB0100000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		2AF1AB0100000000000000A4 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AF1AB0100000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

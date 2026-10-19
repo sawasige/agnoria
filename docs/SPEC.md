@@ -5,7 +5,7 @@
 > v1.3（2026-10-13）: スコア帯を順に進むステージ、問題データを単語400・文法200に拡充。
 > v1.4（2026-10-13〜14）: ホームをダッシュボードにし、分野の選択を別画面へ。習得後の再学習、クリアまでの目安。
 > v1.5（2026-10-16〜）: スコア帯クリアの演出（§4.3.1）。学習記録の iCloud 自動同期（§2.3、計画）。Mac 版はこの後。
-> v1.6（2026-10-19〜）: 利用状況の計測（§7.1、Firebase Analytics）。
+> v1.6（2026-10-19〜）: 利用状況の計測とクラッシュ報告（§7.1、Firebase Analytics / Crashlytics）。
 
 ## 0. 概要
 
@@ -16,7 +16,7 @@
 | 目的 | TOEIC 450→600点帯の学習者が、スキマ時間に **単語** と **Part5形式の文法** を4択ドリルで繰り返す |
 | 対象 | まず開発者自身。あわよくば App Store 公開 |
 | 対応OS | **[v1.1]** iOS / iPadOS 27 以上（iPhone は縦画面のみ、iPad は全方向）/ macOS 27 以上（ネイティブ SwiftUI の1ターゲット。Mac Catalyst は使わない） |
-| 通信 | 開発者のサーバーとは通信しない。全データをバンドル同梱。広告なし、課金なし、アカウントなし。**[v1.5]** 学習記録は iCloud で同期（計画）、**[v1.6]** 機能の利用回数だけを Firebase Analytics に送る（§7.1。設定で OFF にできる） |
+| 通信 | 開発者のサーバーとは通信しない。全データをバンドル同梱。広告なし、課金なし、アカウントなし。**[v1.5]** 学習記録は iCloud で同期（計画）、**[v1.6]** 機能の利用回数とクラッシュ情報だけを Firebase（Analytics / Crashlytics）に送る（§7.1。設定で OFF にできる） |
 | 商標回避 | アプリ名・Bundle ID・画面内の固定文言に「TOEIC」を使わない。App Store 説明文で「TOEIC対策に」と触れる程度は可 |
 
 ### 既存アプリへの不満（＝設計の軸）
@@ -264,7 +264,7 @@ SessionResult
 - 読み上げ速度、回答後の自動読み上げ ON/OFF **[v1.1]**、効果音 ON/OFF **[v1.2]**（セクション名は「音」）
 - 学習履歴のリセット（確認2段階。**[v1.5]** iCloud 側の記録も消える旨を確認文に書く）
 - **[v1.5]** iCloud 同期の状態表示（同期中 / 未サインイン）。トグルは持たない
-- **[v1.6]** 「使用状況を開発者に送信」トグル（§7.1）。デフォルト ON。送れないビルド（Firebase 未設定、`-analytics NO`、Debug）では disabled にして脚注に「このビルドでは送信しません」
+- **[v1.6]** 「使用状況とクラッシュ情報を送信」トグル（§7.1）。デフォルト ON。送れないビルド（Firebase 未設定、`-analytics NO`、Debug）では disabled にして脚注に「このビルドでは送信しません」
 - バージョン情報、由来（Agnoia / Agenoria の一言）
 
 ### 4.5 レベル称号（演出。ロジックには影響しない）
@@ -328,11 +328,13 @@ SessionResult
 - **[v1.4]** 女神 Agenoria の画像は `Assets.xcassets` の `AgenoriaPortrait`（アイコンと同じ絵、600px）と表情 4 枚 `AgenoriaJoy / Happy / Neutral / Sad`（ChatGPT 生成の 4 コマ画像を分割し、市松模様の背景を外周からの塗りつぶしで透明化。619px）。単一スケールの PNG
 - **[v1.3]** アプリアイコンは `Agnoria/Agnoria.icon`（Icon Composer）。女神 Agenoria の胸像イラスト 1 レイヤー（月桂冠と手の上の若葉）に白〜淡いミントの背景。光沢・影・ダーク外観は Icon Composer 任せ
 
-### 7.1 利用状況の計測 **[v1.6]**
+### 7.1 利用状況の計測とクラッシュ報告 **[v1.6]**
 
 目的: どの機能がどれだけ使われているか（セット数、モードや分野の偏り、帯クリアまでの道のり、Apple Intelligence・読み上げ・ブックマークの利用、途中離脱）を知る。App Store Connect の App Analytics（DL・セッション・継続率）だけでは分からないアプリ内の動きを補う。
 
-**送る先**: Firebase Analytics（SPM `firebase-ios-sdk` の `FirebaseAnalytics` のみ。Crashlytics は入れない）。アプリ側は `UsageAnalytics` に集約し、View は Firebase を直接呼ばない。
+**送る先**: Firebase Analytics と Crashlytics（SPM `firebase-ios-sdk` の `FirebaseAnalytics` / `FirebaseCrashlytics`。Analytics の要件で `OTHER_LDFLAGS` に `-ObjC`）。アプリ側は `UsageAnalytics` に集約し、View は Firebase を直接呼ばない。
+
+**クラッシュ報告**: Xcode の Organizer は「開発者と共有」を許可した人の分しか、日単位でしか届かないので Crashlytics で補う。クラッシュに加えて、握りつぶしていた失敗（SwiftData の保存失敗 `save.answer` / `save.session` / `save.bookmark` / `save.backfill`、取り込み失敗 `import`）を非致命エラーとして `record(error, where)` で送る。シンボル化のため Xcode Cloud のアーカイブ後に `ci_scripts/ci_post_xcodebuild.sh` が `upload-symbols` で dSYM を送る（アーカイブ以外のアクションと plist の無いビルドでは何もしない）。
 
 **送るもの**（問題の内容・回答・個人を特定できる情報は送らない）
 
@@ -352,11 +354,11 @@ SessionResult
 **送らない条件**（優先順）
 1. 同梱の `GoogleService-Info.plist` が無い（Firebase 未設定のビルド）
 2. 起動引数 `-analytics NO`（UI テストの `launchQuiet()` が付ける）。Debug ビルドは逆に `-analytics YES` を付けたときだけ送る（開発中の操作を本番の計測に混ぜない。DebugView で確認するときは `-FIRDebugEnabled` も付ける）
-3. 設定の「使用状況を開発者に送信」が OFF（`Analytics.setAnalyticsCollectionEnabled(false)`）
+3. 設定の「使用状況とクラッシュ情報を送信」が OFF（`Analytics.setAnalyticsCollectionEnabled(false)` と `setCrashlyticsCollectionEnabled(false)`。1 つのトグルで両方）
 
 **設定ファイル**: `GoogleService-Info.plist` は `Agnoria/` に置いてリポジトリにコミットする（synchronized folder なので置くだけでバンドルされる）。中身（API キー、プロジェクト ID、App ID）は Google が公開情報として扱うもので、アプリに同梱される以上は隠せない。使うのが Analytics だけなので、第三者にできるのは偽のイベントを送ることまで。Google Cloud コンソールでこの API キーに iOS アプリ（Bundle ID）の制限を付けておく。GitHub の secret scanning の警告は閉じる。
 
-**申告と文言**: App Store Connect の「App のプライバシー」は「データを収集しない」から、「使用状況データ（製品の操作）」と「識別子（デバイス ID）」を「分析」目的で収集・ユーザーに紐付けない・トラッキングに使わない、に変える。`PrivacyInfo.xcprivacy` は Firebase SDK 側のマニフェストが収集種別を申告するので、アプリ側は触らない。プライバシーポリシー・サポートページ・ストア説明文・ランディングページの「通信なし」「解析ツールなし」を直す（§1）。
+**申告と文言**: App Store Connect の「App のプライバシー」は「データを収集しない」から、「使用状況データ（製品の操作）」「診断（クラッシュデータ）」「識別子（デバイス ID）」を「分析」目的で収集・ユーザーに紐付けない・トラッキングに使わない、に変える。`PrivacyInfo.xcprivacy` は Firebase SDK 側のマニフェストが収集種別を申告するので、アプリ側は触らない。プライバシーポリシー・サポートページ・ストア説明文・ランディングページの「通信なし」「解析ツールなし」を直す（§1）。
 
 ---
 

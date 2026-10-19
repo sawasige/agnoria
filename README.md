@@ -6,7 +6,7 @@
 
 - 対応 OS: iOS / iPadOS 27 以上、macOS 27 以上（ネイティブ SwiftUI の 1 ターゲット）
 - 広告なし・課金なし・アカウントなし。全データをバンドル同梱。開発者のサーバーとは通信しない
-- 依存ライブラリは Firebase Analytics だけ（機能の利用回数の計測。設定で OFF にできる。問題の内容や回答は送らない）
+- 依存ライブラリは Firebase（Analytics と Crashlytics）だけ。機能の利用回数とクラッシュ情報の送信で、設定で OFF にできる。問題の内容や回答は送らない
 
 ## 特徴
 
@@ -48,7 +48,7 @@ xcodebuild -project Agnoria.xcodeproj -scheme Agnoria -destination 'platform=mac
 
 ### Firebase の設定ファイル
 
-利用状況の計測（SPEC §7.1）は `Agnoria/GoogleService-Info.plist` があるときだけ動きます。このファイルはリポジトリにコミットしてあります（中身は Google が公開情報として扱うもの。API キーは Bundle ID で制限）。無いビルドでは計測が無効のまま普通に動きます。Debug ビルドは起動引数 `-analytics YES` を付けたときだけ送信します。
+利用状況の計測とクラッシュ報告（SPEC §7.1）は `Agnoria/GoogleService-Info.plist` があるときだけ動きます。このファイルはリポジトリにコミットしてあります（中身は Google が公開情報として扱うもの。API キーは Bundle ID で制限）。無いビルドでは計測が無効のまま普通に動きます。Debug ビルドは起動引数 `-analytics YES` を付けたときだけ送信します。
 
 ### 実機へのインストール
 
@@ -70,12 +70,13 @@ Agnoria/
   Models/     SwiftData モデル、出題条件（DrillMode / QuizConfig）、スナップショット
   Logic/      純粋ロジック: 穴埋め、優先度、セット生成、習得段階、ステージ、連続日数、クリアまでの目安
   Data/       バンドル JSON の読み込みと SwiftData への取り込み（内容が変わったときのみ）
-  Services/   設定、音声セッション、効果音、読み上げ、Foundation Models、利用状況の計測（UsageAnalytics）
+  Services/   設定、音声セッション、効果音、読み上げ、Foundation Models、利用状況の計測とクラッシュ報告（UsageAnalytics）
   Views/      Home / Quiz / Result / Settings / Stats と共通部品（Shared）
   Resources/  Data/words.json, Data/grammar.json, Sounds/correct.caf, Sounds/wrong.caf
 AgnoriaTests/     ユニットテスト（Swift Testing）
 AgnoriaUITests/   UI テスト（`XCUIApplication.launchQuiet()` で効果音と読み上げを切って起動する。テスト中に Mac から音を出さないため）
 docs/             仕様書と設計判断の記録
+ci_scripts/       Xcode Cloud のスクリプト（アーカイブ後に dSYM を Crashlytics へ送る）
 ```
 
 ## 問題データ

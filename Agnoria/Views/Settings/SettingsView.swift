@@ -51,7 +51,7 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    Toggle("使用状況を開発者に送信", isOn: $settings.usageReporting)
+                    Toggle("使用状況とクラッシュ情報を送信", isOn: $settings.usageReporting)
                         .accessibilityIdentifier("usageReportingToggle")
                         .disabled(!usageReportingAvailable)
                 } header: {
@@ -118,7 +118,7 @@ struct SettingsView: View {
     }
 
     private var usageReportingFooter: String {
-        let base = "どの機能がどれだけ使われているかを集計のために送ります。問題の内容や回答、お名前などの個人情報は送りません。"
+        let base = "どの機能がどれだけ使われているかと、クラッシュが起きたときの情報を開発者に送ります。問題の内容や回答、お名前などの個人情報は送りません。"
         return usageReportingAvailable ? base : base + "（このビルドでは送信しません）"
     }
 

@@ -1,9 +1,10 @@
 import Foundation
 import FirebaseCore
 import FirebaseAnalytics
+import FirebaseCrashlytics
 
-/// 利用状況の計測（§7 [v1.6]）。送るのは機能の利用回数だけで、問題の内容・回答・個人を特定できる情報は送らない。
-/// 送る先は Firebase Analytics。View は Firebase を直接呼ばず、必ずここを通す
+/// 利用状況の計測とクラッシュ報告（§7.1 [v1.6]）。送るのは機能の利用回数とクラッシュ・保存失敗の情報だけで、
+/// 問題の内容・回答・個人を特定できる情報は送らない。送る先は Firebase Analytics / Crashlytics。View は Firebase を直接呼ばず、必ずここを通す
 @MainActor
 final class UsageAnalytics {
     /// 送る出来事。name と params は Firebase の制約（名前 40 字以内、文字列値 100 字以内）に収める
@@ -106,6 +107,7 @@ final class UsageAnalytics {
         guard configured, allowedByLaunch else { return }
         if FirebaseApp.app() == nil { FirebaseApp.configure() }
         Analytics.setAnalyticsCollectionEnabled(settings.usageReporting)
+        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(settings.usageReporting)
         syncUserProperties()
     }
 
@@ -114,6 +116,15 @@ final class UsageAnalytics {
         guard state == .active || state == .disabledBySetting else { return }
         state = settings.usageReporting ? .active : .disabledBySetting
         Analytics.setAnalyticsCollectionEnabled(settings.usageReporting)
+        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(settings.usageReporting)
+    }
+
+    /// クラッシュしていないが見過ごしたくない失敗（SwiftData の保存失敗、取り込み失敗）を非致命エラーとして送る。
+    /// what は "save.answer" のような短い場所の名前。送れない状態でも呼び出し側は気にしなくてよい
+    func record(_ error: Error, _ what: String) {
+        guard state == .active else { return }
+        Crashlytics.crashlytics().setCustomValue(what, forKey: "where")
+        Crashlytics.crashlytics().record(error: error)
     }
 
     func log(_ event: Event) {

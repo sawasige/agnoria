@@ -61,7 +61,13 @@ final class AppModel {
             importState = .done
         } catch {
             importState = .failed(String(describing: error))
+            analytics.record(error, "import")
         }
+    }
+
+    /// 保存。失敗はクラッシュさせず非致命エラーとして記録する（§7.1）
+    private func save(_ what: String) {
+        do { try context.save() } catch { analytics.record(error, "save.\(what)") }
     }
 
     /// [v1.4] masteredAt 追加前に習得していた問題へ、最後の回答日時を習得日として補う（起動時に 1 回。該当がなければ何もしない）
@@ -72,7 +78,7 @@ final class AppModel {
             p.masteredAt = p.lastAnsweredAt ?? .now
             changed = true
         }
-        if changed { try? context.save() }
+        if changed { save("backfill") }
     }
 
     // MARK: - セット
@@ -147,7 +153,7 @@ final class AppModel {
         guard !a.question.isPractice else { return }
         let p = progress(for: a.question.itemID)
         p.record(isCorrect: a.isCorrect)
-        try? context.save()
+        save("answer")
     }
 
     func advance() {
@@ -165,7 +171,7 @@ final class AppModel {
                               chosenIndex: $0.chosenIndex, elapsedMs: $0.elapsedMs)
             })
         context.insert(session)
-        try? context.save()
+        save("session")
         lastSavedSession = session
         analytics.log(.setFinish(run.config, count: run.answers.count,
                                  correct: run.answers.filter(\.isCorrect).count,
@@ -267,7 +273,7 @@ final class AppModel {
     func toggleBookmark(_ itemID: String) {
         let p = progress(for: itemID)
         p.isBookmarked.toggle()
-        try? context.save()
+        save("bookmark")
         analytics.log(.bookmarkToggled(on: p.isBookmarked))
     }
 
