@@ -6,7 +6,7 @@
 
 - 対応 OS: iOS / iPadOS 27 以上、macOS 27 以上（ネイティブ SwiftUI の 1 ターゲット）
 - 広告なし・課金なし・アカウントなし。全データをバンドル同梱。開発者のサーバーとは通信しない
-- 依存ライブラリは Firebase（Analytics と Crashlytics）だけ。機能の利用回数とクラッシュ情報の送信で、設定で OFF にできる。問題の内容や回答は送らない
+- 依存ライブラリは Firebase（Analytics と Crashlytics）だけ。機能の利用回数とクラッシュ情報の送信で、問題の内容や回答は送らない
 
 ## 特徴
 
@@ -48,7 +48,7 @@ xcodebuild -project Agnoria.xcodeproj -scheme Agnoria -destination 'platform=mac
 
 ### Firebase の設定ファイル
 
-利用状況の計測とクラッシュ報告（SPEC §7.1）は `Agnoria/GoogleService-Info.plist` があるときだけ動きます。このファイルはリポジトリにコミットしてあります（中身は Google が公開情報として扱うもの。API キーは Bundle ID で制限）。無いビルドでは計測が無効のまま普通に動きます。Debug ビルドは起動引数 `-analytics YES` を付けたときだけ送信します。
+利用状況の計測とクラッシュ報告（SPEC §7.1）は `Agnoria/GoogleService-Info.plist` があるときだけ動きます。このファイルはリポジトリにコミットしてあります（中身は Google が公開情報として扱うもの。API キーは Bundle ID で制限）。無いビルドでは計測が無効のまま普通に動きます。Debug ビルドは起動引数 `-analytics YES` を付けたときだけ送信します。`-debugCrash YES` を付けると Crashlytics の確認用にわざと落ちます（Debug のみ）。
 
 ### 実機へのインストール
 

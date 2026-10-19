@@ -78,8 +78,6 @@ final class UsageAnalytics {
         case unconfigured
         /// 起動引数 `-analytics NO` か Debug ビルド
         case disabledByLaunch
-        /// 設定の「使用状況の送信」が OFF
-        case disabledBySetting
     }
 
     private(set) var state: State
@@ -103,21 +101,11 @@ final class UsageAnalytics {
         } else if !allowedByLaunch {
             state = .disabledByLaunch
         } else {
-            state = settings.usageReporting ? .active : .disabledBySetting
+            state = .active
         }
-        guard configured, allowedByLaunch else { return }
+        guard state == .active else { return }
         if FirebaseApp.app() == nil { FirebaseApp.configure() }
-        Analytics.setAnalyticsCollectionEnabled(settings.usageReporting)
-        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(settings.usageReporting)
         syncUserProperties()
-    }
-
-    /// 設定の「使用状況の送信」を反映
-    func applySetting() {
-        guard state == .active || state == .disabledBySetting else { return }
-        state = settings.usageReporting ? .active : .disabledBySetting
-        Analytics.setAnalyticsCollectionEnabled(settings.usageReporting)
-        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(settings.usageReporting)
     }
 
     /// クラッシュしていないが見過ごしたくない失敗（SwiftData の保存失敗、取り込み失敗）を非致命エラーとして送る。

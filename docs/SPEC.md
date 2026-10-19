@@ -16,7 +16,7 @@
 | 目的 | TOEIC 450→600点帯の学習者が、スキマ時間に **単語** と **Part5形式の文法** を4択ドリルで繰り返す |
 | 対象 | まず開発者自身。あわよくば App Store 公開 |
 | 対応OS | **[v1.1]** iOS / iPadOS 27 以上（iPhone は縦画面のみ、iPad は全方向）/ macOS 27 以上（ネイティブ SwiftUI の1ターゲット。Mac Catalyst は使わない） |
-| 通信 | 開発者のサーバーとは通信しない。全データをバンドル同梱。広告なし、課金なし、アカウントなし。**[v1.5]** 学習記録は iCloud で同期（計画）、**[v1.6]** 機能の利用回数とクラッシュ情報だけを Firebase（Analytics / Crashlytics）に送る（§7.1。設定で OFF にできる） |
+| 通信 | 開発者のサーバーとは通信しない。全データをバンドル同梱。広告なし、課金なし、アカウントなし。**[v1.5]** 学習記録は iCloud で同期（計画）、**[v1.6]** 機能の利用回数とクラッシュ情報だけを Firebase（Analytics / Crashlytics）に送る（§7.1） |
 | 商標回避 | アプリ名・Bundle ID・画面内の固定文言に「TOEIC」を使わない。App Store 説明文で「TOEIC対策に」と触れる程度は可 |
 
 ### 既存アプリへの不満（＝設計の軸）
@@ -264,7 +264,6 @@ SessionResult
 - 読み上げ速度、回答後の自動読み上げ ON/OFF **[v1.1]**、効果音 ON/OFF **[v1.2]**（セクション名は「音」）
 - 学習履歴のリセット（確認2段階。**[v1.5]** iCloud 側の記録も消える旨を確認文に書く）
 - **[v1.5]** iCloud 同期の状態表示（同期中 / 未サインイン）。トグルは持たない
-- **[v1.6]** 「使用状況とクラッシュ情報を送信」トグル（§7.1）。デフォルト ON。送れないビルド（Firebase 未設定、`-analytics NO`、Debug）では disabled にして脚注に「このビルドでは送信しません」
 - バージョン情報、由来（Agnoia / Agenoria の一言）
 
 ### 4.5 レベル称号（演出。ロジックには影響しない）
@@ -354,7 +353,10 @@ SessionResult
 **送らない条件**（優先順）
 1. 同梱の `GoogleService-Info.plist` が無い（Firebase 未設定のビルド）
 2. 起動引数 `-analytics NO`（UI テストの `launchQuiet()` が付ける）。Debug ビルドは逆に `-analytics YES` を付けたときだけ送る（開発中の操作を本番の計測に混ぜない。DebugView で確認するときは `-FIRDebugEnabled` も付ける）
-3. 設定の「使用状況とクラッシュ情報を送信」が OFF（`Analytics.setAnalyticsCollectionEnabled(false)` と `setCrashlyticsCollectionEnabled(false)`。1 つのトグルで両方）
+
+利用者向けのオプトアウト（設定のトグル）は持たない。Apple の要件ではなく、「App のプライバシー」の申告とプライバシーポリシーで足りる（配信は日本のみ）。
+
+**確認用のクラッシュ**: Debug ビルドだけ、起動引数 `-debugCrash YES` でホーム表示直後に `fatalError` で落ちる。報告は次回起動時に送られるので、落とした後に `-analytics YES` でもう一度起動する。Crashlytics コンソールのオンボーディングは最初の報告が届くまで終わらないので、導入時に 1 回これで送った
 
 **設定ファイル**: `GoogleService-Info.plist` は `Agnoria/` に置いてリポジトリにコミットする（synchronized folder なので置くだけでバンドルされる）。中身（API キー、プロジェクト ID、App ID）は Google が公開情報として扱うもので、アプリに同梱される以上は隠せない。使うのが Analytics だけなので、第三者にできるのは偽のイベントを送ることまで。Google Cloud コンソールでこの API キーに iOS アプリ（Bundle ID）の制限を付けておく。GitHub の secret scanning の警告は閉じる。
 
