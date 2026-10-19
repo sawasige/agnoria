@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import SwiftData
+import CoreData
 #if os(iOS)
 import WidgetKit
 #endif
@@ -28,6 +29,8 @@ final class AppModel {
     let container: ModelContainer
     let settings: AppSettings
     let analytics: UsageAnalytics
+    /// 記録ストアが iCloud 同期の構成か（§2.3 [v1.7]）
+    let cloudSync: Bool
     var path: [Route] = []
     var run: QuizRun?
     var importState: ImportState = .idle
@@ -39,10 +42,68 @@ final class AppModel {
 
     private var context: ModelContext { container.mainContext }
 
-    init(container: ModelContainer, settings: AppSettings, analytics: UsageAnalytics? = nil) {
+    init(container: ModelContainer, settings: AppSettings, analytics: UsageAnalytics? = nil, cloudSync: Bool = false) {
         self.container = container
         self.settings = settings
         self.analytics = analytics ?? UsageAnalytics(settings: settings)
+        self.cloudSync = cloudSync
+        if cloudSync { observeRemoteChanges() }
+    }
+
+    // MARK: - iCloud 同期（§2.3）
+
+    enum CloudSyncStatus { case off, notSignedIn, syncing }
+
+    /// 設定画面の状態表示用。トグルは持たない
+    var cloudSyncStatus: CloudSyncStatus {
+        guard cloudSync else { return .off }
+        return FileManager.default.ubiquityIdentityToken == nil ? .notSignedIn : .syncing
+    }
+
+    private var remoteChangeTask: Task<Void, Never>?
+
+    /// 他の端末からの変更が届いたら、重複をまとめ、到達帯を求め直し、ウィジェットの写しを書き直す。
+    /// 通知は短時間に連続するので 1 秒まとめてから処理する
+    private func observeRemoteChanges() {
+        NotificationCenter.default.addObserver(forName: .NSPersistentStoreRemoteChange, object: nil, queue: nil) { [weak self] _ in
+            Task { @MainActor in
+                guard let self else { return }
+                self.remoteChangeTask?.cancel()
+                self.remoteChangeTask = Task { @MainActor in
+                    try? await Task.sleep(for: .seconds(1))
+                    guard !Task.isCancelled else { return }
+                    self.reconcileAfterSync()
+                }
+            }
+        }
+    }
+
+    /// 同期後の整合: 重複の合成 → 到達帯の再計算（高い方に揃える）→ ウィジェットの写し
+    func reconcileAfterSync() {
+        mergeDuplicateRecords()
+        let computed = Stage.unlockedFromRecords(byLevel: stageState().byLevel)
+        if computed > settings.unlockedLevel { settings.unlockedLevel = computed }
+        refreshWidgetSnapshot()
+    }
+
+    /// 同じ itemID の ItemProgress、同じ id の StudySession を 1 件にまとめる（§2.3 の衝突規則）
+    func mergeDuplicateRecords() {
+        let progress = (try? context.fetch(FetchDescriptor<ItemProgress>())) ?? []
+        var changed = false
+        for (_, group) in Dictionary(grouping: progress, by: \.itemID) where group.count > 1 {
+            let keep = group[0]
+            for extra in group.dropFirst() {
+                keep.absorb(extra.snapshot)
+                context.delete(extra)
+            }
+            changed = true
+        }
+        let sessions = (try? context.fetch(FetchDescriptor<StudySession>())) ?? []
+        for (_, group) in Dictionary(grouping: sessions, by: \.id) where group.count > 1 {
+            for extra in group.dropFirst() { context.delete(extra) }
+            changed = true
+        }
+        if changed { save("merge") }
     }
 
     // MARK: - 取り込み
@@ -51,7 +112,13 @@ final class AppModel {
     func importBundledDataIfNeeded() async {
         guard importState != .running else { return }
         importState = .running
+        // 1.7 で問題データを別ストアに分けた。初回は fingerprint を消して新しいストアへ取り込み直す（§2.3）
+        if !settings.storesSplit {
+            settings.importedFingerprint = nil
+            settings.storesSplit = true
+        }
         backfillMasteredAt()
+        mergeDuplicateRecords()
         // 取り込みの要否にかかわらず、起動のたびにウィジェットの写しを書き直す（早期 return の経路でも）
         defer { refreshWidgetSnapshot() }
         do {
@@ -280,7 +347,15 @@ final class AppModel {
 
     func progress(for itemID: String) -> ItemProgress {
         let descriptor = FetchDescriptor<ItemProgress>(predicate: #Predicate { $0.itemID == itemID })
-        if let existing = try? context.fetch(descriptor).first { return existing }
+        let found = (try? context.fetch(descriptor)) ?? []
+        if let existing = found.first {
+            // 同期で重複していたらここでまとめる
+            for extra in found.dropFirst() {
+                existing.absorb(extra.snapshot)
+                context.delete(extra)
+            }
+            return existing
+        }
         let p = ItemProgress(itemID: itemID)
         context.insert(p)
         return p
@@ -288,12 +363,12 @@ final class AppModel {
 
     func progressMap() -> [String: ProgressSnapshot] {
         let all = (try? context.fetch(FetchDescriptor<ItemProgress>())) ?? []
-        return Dictionary(all.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, _ in a })
+        return Dictionary(all.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, b in RecordMerge.merge(a, b) })
     }
 
     func isBookmarked(_ itemID: String) -> Bool {
         let descriptor = FetchDescriptor<ItemProgress>(predicate: #Predicate { $0.itemID == itemID })
-        return (try? context.fetch(descriptor).first?.isBookmarked) ?? false
+        return ((try? context.fetch(descriptor)) ?? []).contains { $0.isBookmarked }
     }
 
     func toggleBookmark(_ itemID: String) {

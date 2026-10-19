@@ -16,13 +16,13 @@ struct AgnoriaApp: App {
     @State private var model: AppModel
 
     init() {
-        let container: ModelContainer
+        let stores: AgnoriaSchema.Result
         do {
-            container = try AgnoriaSchema.makeContainer()
+            stores = try AgnoriaSchema.make(cloudSync: AgnoriaSchema.cloudSyncRequested())
         } catch {
             fatalError("SwiftData の初期化に失敗: \(error)")
         }
-        _model = State(initialValue: AppModel(container: container, settings: AppSettings()))
+        _model = State(initialValue: AppModel(container: stores.container, settings: AppSettings(), cloudSync: stores.cloudSync))
     }
 
     var body: some Scene {

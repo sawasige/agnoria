@@ -45,6 +45,14 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    LabeledContent("iCloud 同期", value: cloudSyncLabel)
+                } header: {
+                    Text("iCloud")
+                } footer: {
+                    Text(cloudSyncFooter)
+                }
+
+                Section {
                     Button("学習履歴をリセット", role: .destructive) { confirmReset1 = true }
                 } footer: {
                     Text("正誤の記録・ブックマーク・連続日数が消えます。問題データは残ります。")
@@ -88,7 +96,7 @@ struct SettingsView: View {
                 }
                 Button("キャンセル", role: .cancel) {}
             } message: {
-                Text("すべての正誤記録とブックマークが削除されます。")
+                Text(model.cloudSync ? "すべての正誤記録とブックマークが削除されます。iCloud に同期した記録も消えます。" : "すべての正誤記録とブックマークが削除されます。")
             }
             .alert("リセットしました", isPresented: $resetDone) {
                 Button("OK") {}
@@ -97,6 +105,22 @@ struct SettingsView: View {
         #if os(macOS)
         .frame(minWidth: 440, minHeight: 520)
         #endif
+    }
+
+    private var cloudSyncLabel: String {
+        switch model.cloudSyncStatus {
+        case .syncing: "同期中"
+        case .notSignedIn: "未サインイン"
+        case .off: "オフ"
+        }
+    }
+
+    private var cloudSyncFooter: String {
+        switch model.cloudSyncStatus {
+        case .syncing: "学習の記録は、お使いの iCloud を通じて iPhone・iPad・Mac の間で自動的に同期されます。開発者が見ることはできません。"
+        case .notSignedIn: "iCloud にサインインすると、学習の記録が他の端末と自動的に同期されます。"
+        case .off: "このビルドでは同期しません。"
+        }
     }
 
     private var versionString: String {

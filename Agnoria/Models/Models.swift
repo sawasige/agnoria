@@ -85,25 +85,32 @@ final class Word {
 
 /// 学習履歴。問題の id（itemID）に紐づく独立したレコード。
 /// 問題本文を更新・アーカイブしても履歴は残る。
+/// **[v1.7]** iCloud 同期の制約（§2.3）: `@Attribute(.unique)` は使えず、全プロパティに既定値が要る。
+/// 同じ itemID が 2 件になったら取得時にまとめる（AppModel.mergeDuplicateRecords）
 @Model
 final class ItemProgress {
-    @Attribute(.unique) var itemID: String
-    var recentResults: [Bool]     // 直近3回。古い順
-    var totalCorrect: Int
-    var totalAnswered: Int
-    var isBookmarked: Bool
+    var itemID: String = ""
+    var recentResults: [Bool] = []     // 直近3回。古い順
+    var totalCorrect: Int = 0
+    var totalAnswered: Int = 0
+    var isBookmarked: Bool = false
     var lastAnsweredAt: Date?
     /// はじめて習得（直近3回すべて正解）した日時 [v1.4]。一度習得した問題は復習で間違えても次の正解で習得に戻る
     var masteredAt: Date?
 
     init(itemID: String) {
         self.itemID = itemID
-        recentResults = []
-        totalCorrect = 0
-        totalAnswered = 0
-        isBookmarked = false
-        lastAnsweredAt = nil
-        masteredAt = nil
+    }
+
+    /// 同期で重複した 2 件を 1 件にまとめる（§2.3）。self を残す側として other を取り込む
+    func absorb(_ other: ProgressSnapshot) {
+        let merged = RecordMerge.merge(snapshot, other)
+        recentResults = merged.recentResults
+        totalCorrect = merged.totalCorrect
+        totalAnswered = merged.totalAnswered
+        isBookmarked = merged.isBookmarked
+        lastAnsweredAt = merged.lastAnsweredAt
+        masteredAt = merged.masteredAt
     }
 
     func record(isCorrect: Bool, at date: Date = .now) {
@@ -127,13 +134,13 @@ final class ItemProgress {
 /// 1セット（10問）の記録。完走したセットのみ保存する（途中離脱は保存しない）
 @Model
 final class StudySession {
-    var id: UUID
-    var startedAt: Date
-    var finishedAt: Date
-    var mode: String            // DrillMode.rawValue。おまかせは "auto"
+    var id: UUID = UUID()
+    var startedAt: Date = Date.now
+    var finishedAt: Date = Date.now
+    var mode: String = "auto"   // DrillMode.rawValue。おまかせは "auto"
     var category: String?       // nil = ミックス
     var questionFormat: String? // 単語のとき WordFormat.rawValue。ランダムなら nil
-    var results: [SessionResult]
+    var results: [SessionResult] = []
 
     static let autoMode = "auto"
 
@@ -156,13 +163,56 @@ nonisolated struct SessionResult: Codable, Hashable, Sendable {
     var elapsedMs: Int
 }
 
+/// ストアの構成（§2.3 [v1.7]）。
+/// - 記録ストア `default.store`（1.0 からのファイルそのまま）: ItemProgress / StudySession。iCloud のプライベートデータベースに同期
+/// - 問題ストア `questions.store`: GrammarQuestion / Word。ローカルのみ（同梱 JSON から端末ごとに取り込む）
+/// 1.0 では 4 つのモデルが default.store に同居していた。問題の 2 モデルは軽量マイグレーションで default.store から外れ、
+/// 新しい questions.store に取り込み直す（AppModel.importBundledDataIfNeeded が fingerprint を消して再取り込みする）
 nonisolated enum AgnoriaSchema {
-    static let models: [any PersistentModel.Type] = [
-        GrammarQuestion.self, Word.self, ItemProgress.self, StudySession.self,
-    ]
+    static let questionModels: [any PersistentModel.Type] = [GrammarQuestion.self, Word.self]
+    static let recordModels: [any PersistentModel.Type] = [ItemProgress.self, StudySession.self]
+    static let models: [any PersistentModel.Type] = questionModels + recordModels
+    static let cloudKitContainer = "iCloud.com.himatsubu.Agnoria"
+
+    struct Result {
+        let container: ModelContainer
+        /// 記録ストアが iCloud 同期の構成で開けたか（entitlement が無いビルドや `-cloudSync NO` では false）
+        let cloudSync: Bool
+    }
 
     static func makeContainer(inMemory: Bool = false) throws -> ModelContainer {
-        let config = ModelConfiguration(isStoredInMemoryOnly: inMemory)
-        return try ModelContainer(for: Schema(models), configurations: [config])
+        try make(inMemory: inMemory, cloudSync: false).container
+    }
+
+    static func make(inMemory: Bool = false, cloudSync: Bool) throws -> Result {
+        let schema = Schema(models)
+        if inMemory {
+            let questions = ModelConfiguration("questions", schema: Schema(questionModels), isStoredInMemoryOnly: true)
+            let records = ModelConfiguration("records", schema: Schema(recordModels), isStoredInMemoryOnly: true)
+            return Result(container: try ModelContainer(for: schema, configurations: [questions, records]), cloudSync: false)
+        }
+        let dir = URL.applicationSupportDirectory
+        let questions = ModelConfiguration("questions", schema: Schema(questionModels),
+                                           url: dir.appending(path: "questions.store"), cloudKitDatabase: .none)
+        let recordsURL = dir.appending(path: "default.store")
+        if cloudSync {
+            // iCloud の entitlement（CloudKit コンテナ）が無いビルドでは、ここは throw ではなく後で別スレッドで落ちる。
+            // 同期を切るのは起動引数 -cloudSync NO かテスト実行時（cloudSyncRequested）で、entitlement は必須
+            let records = ModelConfiguration("records", schema: Schema(recordModels), url: recordsURL,
+                                             cloudKitDatabase: .private(cloudKitContainer))
+            if let container = try? ModelContainer(for: schema, configurations: [questions, records]) {
+                return Result(container: container, cloudSync: true)
+            }
+        }
+        let records = ModelConfiguration("records", schema: Schema(recordModels), url: recordsURL, cloudKitDatabase: .none)
+        return Result(container: try ModelContainer(for: schema, configurations: [questions, records]), cloudSync: false)
+    }
+
+    /// 起動引数 `-cloudSync NO` で同期を切る（UI テストとシミュレータ作業用。利用者向けの設定ではない）。
+    /// ユニットテストのホストとして起動したときも切る（テストが iCloud に触れないため）
+    static func cloudSyncRequested(defaults: UserDefaults = .standard,
+                                   environment: [String: String] = ProcessInfo.processInfo.environment) -> Bool {
+        if environment["XCTestConfigurationFilePath"] != nil || environment["XCTestSessionIdentifier"] != nil { return false }
+        return defaults.object(forKey: "cloudSync") == nil ? true : defaults.bool(forKey: "cloudSync")
     }
 }
