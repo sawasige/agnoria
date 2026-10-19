@@ -68,11 +68,21 @@
 			);
 			target = 2A3E9A953085EDCD00485736 /* AgnoriaWidgetExtension */;
 		};
+		2A3E9BEB3086017700485736 /* Exceptions for "Agnoria" folder in "Agnoria" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2A37959B307CBA1500D1AEF0 /* Agnoria */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2A37959E307CBA1500D1AEF0 /* Agnoria */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2A3E9BEB3086017700485736 /* Exceptions for "Agnoria" folder in "Agnoria" target */,
+			);
 			path = Agnoria;
 			sourceTree = "<group>";
 		};
@@ -502,6 +512,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Agnoria/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -553,6 +564,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Agnoria/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
