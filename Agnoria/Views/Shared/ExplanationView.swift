@@ -4,6 +4,7 @@ import SwiftUI
 /// 背景は持たない（呼び出し側のガラスカードに載せる）
 struct ExplanationView: View {
     let question: QuizQuestion
+    @Environment(AppModel.self) private var model
     @State private var rephrased: String?
     @State private var aiHidden = !AIAssist.isAvailable
     @State private var aiLoading = false
@@ -51,6 +52,7 @@ struct ExplanationView: View {
     private func rephrase() async {
         aiLoading = true
         defer { aiLoading = false }
+        model.analytics.log(.rephraseUsed)
         if let text = await AIAssist.rephrase(explanation: question.explanation), !text.isEmpty {
             rephrased = text
         } else {

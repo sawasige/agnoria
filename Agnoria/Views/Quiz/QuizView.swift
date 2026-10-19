@@ -249,6 +249,7 @@ struct QuizView: View {
                     if let text = q.speechText {
                         Button {
                             Speaker.shared.speak(text, rate: settings.speechRate)
+                            model.analytics.log(.speakTapped)
                         } label: {
                             Label("読み上げ", systemImage: "speaker.wave.2")
                                 .frame(maxWidth: .infinity)

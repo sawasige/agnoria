@@ -23,6 +23,10 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXBuildFile section */
+		2AF1AB0100000000000000A3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF1AB0100000000000000A2 /* FirebaseAnalytics */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2A37959C307CBA1500D1AEF0 /* Agnoria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agnoria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A3795A9307CBA1700D1AEF0 /* AgnoriaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgnoriaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +55,7 @@
 		2A379599307CBA1500D1AEF0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				2AF1AB0100000000000000A3 /* FirebaseAnalytics in Frameworks */,
 			);
 		};
 		2A3795A6307CBA1700D1AEF0 /* Frameworks */ = {
@@ -103,6 +108,9 @@
 				2A37959E307CBA1500D1AEF0 /* Agnoria */,
 			);
 			name = Agnoria;
+			packageProductDependencies = (
+				2AF1AB0100000000000000A2 /* FirebaseAnalytics */,
+			);
 			productName = Agnoria;
 			productReference = 2A37959C307CBA1500D1AEF0 /* Agnoria.app */;
 			productType = "com.apple.product-type.application";
@@ -182,6 +190,9 @@
 			);
 			mainGroup = 2A379593307CBA1500D1AEF0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2AF1AB0100000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2A37959D307CBA1500D1AEF0 /* Products */;
 			projectDirPath = "";
@@ -590,6 +601,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2AF1AB0100000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2AF1AB0100000000000000A2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2AF1AB0100000000000000A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2A379594307CBA1500D1AEF0 /* Project object */;
 	validationLevel = 1;

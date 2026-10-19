@@ -123,6 +123,7 @@ struct ResultView: View {
         guard let w = question.word else { return }
         generatingFor = question.itemID
         defer { generatingFor = nil }
+        model.analytics.log(.practiceUsed)
         if let q = await AIAssist.practiceCloze(for: w) {
             practice = q
         } else {
@@ -220,6 +221,7 @@ struct ScoreRing: View {
 struct PracticeQuestionView: View {
     let question: QuizQuestion
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
     @State private var chosen: Int?
 
@@ -259,6 +261,7 @@ struct PracticeQuestionView: View {
                         if let text = question.speechText {
                             Button {
                                 Speaker.shared.speak(text, rate: settings.speechRate)
+                                model.analytics.log(.speakTapped)
                             } label: {
                                 Label("読み上げ", systemImage: "speaker.wave.2")
                             }

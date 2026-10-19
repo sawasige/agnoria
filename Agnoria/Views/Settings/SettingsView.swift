@@ -50,6 +50,16 @@ struct SettingsView: View {
                     Text("正誤の記録・ブックマーク・連続日数が消えます。問題データは残ります。")
                 }
 
+                Section {
+                    Toggle("使用状況を開発者に送信", isOn: $settings.usageReporting)
+                        .accessibilityIdentifier("usageReportingToggle")
+                        .disabled(!usageReportingAvailable)
+                } header: {
+                    Text("使用状況")
+                } footer: {
+                    Text(usageReportingFooter)
+                }
+
                 Section("このアプリについて") {
                     LabeledContent("バージョン", value: versionString)
                     VStack(alignment: .leading, spacing: 4) {
@@ -63,6 +73,14 @@ struct SettingsView: View {
             }
             .formStyle(.grouped)
             .navigationTitle("設定")
+            .onChange(of: settings.usageReporting) { model.analytics.applySetting() }
+            .onChange(of: settings.soundEffects) { model.analytics.log(.settingsChanged(key: "soundEffects")) }
+            .onChange(of: settings.autoSpeak) { model.analytics.log(.settingsChanged(key: "autoSpeak")) }
+            .onChange(of: settings.speechRate) { model.analytics.log(.settingsChanged(key: "speechRate")) }
+            .onChange(of: settings.unlockedLevel) {
+                model.analytics.log(.settingsChanged(key: "unlockedLevel"))
+                model.analytics.syncUserProperties()
+            }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("完了") { dismiss() }
@@ -89,6 +107,19 @@ struct SettingsView: View {
         #if os(macOS)
         .frame(minWidth: 440, minHeight: 520)
         #endif
+    }
+
+    /// Firebase 未設定のビルドと `-analytics NO` では送れないので、トグルを触れなくする
+    private var usageReportingAvailable: Bool {
+        switch model.analytics.state {
+        case .active, .disabledBySetting: true
+        case .unconfigured, .disabledByLaunch: false
+        }
+    }
+
+    private var usageReportingFooter: String {
+        let base = "どの機能がどれだけ使われているかを集計のために送ります。問題の内容や回答、お名前などの個人情報は送りません。"
+        return usageReportingAvailable ? base : base + "（このビルドでは送信しません）"
     }
 
     private var versionString: String {

@@ -6,7 +6,7 @@ extension XCUIApplication {
     @discardableResult
     static func launchQuiet() -> XCUIApplication {
         let app = XCUIApplication()
-        app.launchArguments += ["-soundEffects", "NO", "-autoSpeak", "NO"]
+        app.launchArguments += ["-soundEffects", "NO", "-autoSpeak", "NO", "-analytics", "NO"]
         app.launch()
         return app
     }

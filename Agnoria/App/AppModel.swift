@@ -24,6 +24,7 @@ enum ImportState: Equatable, Sendable {
 final class AppModel {
     let container: ModelContainer
     let settings: AppSettings
+    let analytics: UsageAnalytics
     var path: [Route] = []
     var run: QuizRun?
     var importState: ImportState = .idle
@@ -35,9 +36,10 @@ final class AppModel {
 
     private var context: ModelContext { container.mainContext }
 
-    init(container: ModelContainer, settings: AppSettings) {
+    init(container: ModelContainer, settings: AppSettings, analytics: UsageAnalytics? = nil) {
         self.container = container
         self.settings = settings
+        self.analytics = analytics ?? UsageAnalytics(settings: settings)
     }
 
     // MARK: - 取り込み
@@ -86,6 +88,7 @@ final class AppModel {
         let run = QuizRun(config: config, questions: questions)
         self.run = run
         path = [.quiz]
+        analytics.log(.setStart(config))
         return run
     }
 
@@ -164,6 +167,9 @@ final class AppModel {
         context.insert(session)
         try? context.save()
         lastSavedSession = session
+        analytics.log(.setFinish(run.config, count: run.answers.count,
+                                 correct: run.answers.filter(\.isCorrect).count,
+                                 durationSec: Int(session.finishedAt.timeIntervalSince(session.startedAt))))
         let stage = stageState()
         if let clear = Stage.clearEvent(unlocked: stage.unlocked, byLevel: stage.byLevel,
                                         topCelebrated: settings.topStageCelebrated) {
@@ -174,6 +180,8 @@ final class AppModel {
                 settings.topStageCelebrated = true
             }
             pendingStageClear = clear
+            analytics.log(.stageClear(clear))
+            analytics.syncUserProperties()
             path = [.stageClear]
         } else {
             path = [.result]
@@ -225,6 +233,7 @@ final class AppModel {
 
     /// 途中離脱。セットは保存しない（回答済みの Progress はそのまま残す）
     func abandonRun() {
+        if let run { analytics.log(.setAbort(run.config, answered: run.answers.count)) }
         run = nil
         path = []
     }
@@ -259,6 +268,7 @@ final class AppModel {
         let p = progress(for: itemID)
         p.isBookmarked.toggle()
         try? context.save()
+        analytics.log(.bookmarkToggled(on: p.isBookmarked))
     }
 
     /// 学習履歴のリセット（Progress と StudySession を全削除。問題データは残す）
@@ -270,5 +280,7 @@ final class AppModel {
         settings.topStageCelebrated = false
         lastUnlockedLevel = nil
         pendingStageClear = nil
+        analytics.log(.historyReset)
+        analytics.syncUserProperties()
     }
 }
