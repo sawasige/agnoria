@@ -22,6 +22,7 @@
 - **Liquid Glass UI**: メッシュグラデーション背景とガラス効果のカード・ボタン。ダークモード、Dynamic Type、VoiceOver に対応
 - **Apple Intelligence（任意）**: 対応端末では文法解説の言い換えと、単語穴埋めの類題生成ができる。非対応端末では該当 UI を表示しない
 - **Mac**: 選択肢は `1`〜`4` キー、次へは Return、やめるは Esc
+- **ウィジェット**（iOS）: 連続日数と今日の状態（small）、今の帯の習得率と 4 帯の並び（medium）。アプリが App Group に書いた写しを表示する
 
 ## 開発環境
 
@@ -73,6 +74,8 @@ Agnoria/
   Services/   設定、音声セッション、効果音、読み上げ、Foundation Models、利用状況の計測とクラッシュ報告（UsageAnalytics）
   Views/      Home / Quiz / Result / Settings / Stats と共通部品（Shared）
   Resources/  Data/words.json, Data/grammar.json, Sounds/correct.caf, Sounds/wrong.caf
+AgnoriaWidget/    ウィジェット拡張（WidgetKit。Shared/ の WidgetSnapshot を読むだけ）
+Shared/           アプリと拡張の両方に入れる型（WidgetSnapshot）
 AgnoriaTests/     ユニットテスト（Swift Testing）
 AgnoriaUITests/   UI テスト（`XCUIApplication.launchQuiet()` で効果音と読み上げを切って起動する。テスト中に Mac から音を出さないため）
 docs/             仕様書と設計判断の記録
