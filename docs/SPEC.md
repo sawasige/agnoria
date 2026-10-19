@@ -1,11 +1,12 @@
-# Agnoria — 仕様書 v1.6
+# Agnoria — 仕様書 v1.7
 
-> v1 からの変更点は `docs/SPEC-REVIEW.md` 参照。本文中の **[v1.1]** / **[v1.2]** / **[v1.3]** / **[v1.4]** / **[v1.5]** / **[v1.6]** が変更箇所。
+> v1 からの変更点は `docs/SPEC-REVIEW.md` 参照。本文中の **[v1.1]** / **[v1.2]** / **[v1.3]** / **[v1.4]** / **[v1.5]** / **[v1.6]** / **[v1.7]** が変更箇所。
 > v1.2（2026-10-13）: おまかせ出題・達成度の可視化・効果音・Liquid Glass UI。
 > v1.3（2026-10-13）: スコア帯を順に進むステージ、問題データを単語400・文法200に拡充。
 > v1.4（2026-10-13〜14）: ホームをダッシュボードにし、分野の選択を別画面へ。習得後の再学習、クリアまでの目安。
 > v1.5（2026-10-16〜）: スコア帯クリアの演出（§4.3.1）。学習記録の iCloud 自動同期（§2.3、計画）。Mac 版はこの後。
 > v1.6（2026-10-19〜）: 利用状況の計測とクラッシュ報告（§7.1、Firebase Analytics / Crashlytics）。ホーム画面のウィジェット（§4.6）。
+> v1.7（2026-10-19〜）: 学習記録の iCloud 自動同期を実装（§2.3）。v1.6 とあわせて App Store の 1.1 として出す。Mac 版はこの後。
 
 ## 0. 概要
 
@@ -139,6 +140,10 @@ SessionResult
 
 **同期する範囲**: ItemProgress と StudySession のみ。問題データは同梱 JSON から端末ごとに取り込む（iCloud に上げると端末ごとに二重になる）。設定（UserDefaults）は同期しない。到達帯（§3.4）は記録から再計算できるので、同期後に再計算して高い方に揃える
 
+**ストアの構成 [v1.7]**: 記録ストアは 1.0 からの `default.store` をそのまま使い、これに CloudKit を付ける（既存の記録は初回同期でそのまま上がる）。問題データは新しい `questions.store`（ローカルのみ）に移し、初回起動で fingerprint を消して同梱 JSON から取り込み直す（`AppSettings.storesSplit`）。`default.store` から GrammarQuestion / Word の 2 モデルが外れるのは軽量マイグレーションで通る。記録を別ストアへコピーする案は採らない（コピーの失敗経路が増えるだけで、問題データの取り込み直しは 1 秒未満）
+
+**モデルの制約 [v1.7]**: CloudKit では `@Attribute(.unique)` を使えず、全プロパティに既定値か Optional が要る。`ItemProgress.itemID` の unique を外し、各プロパティに既定値を付けた。同じ itemID の重複は取得時にまとめる（`RecordMerge`、`AppModel.mergeDuplicateRecords`）。StudySession の `id` も同様に取得時に 1 件へ寄せる
+
 **衝突の規則**（2 台でオフラインに回答したときに起きる）
 - 同じ `itemID` の ItemProgress が複数あれば、取得時にまとめる: `totalAnswered` が多い方を正、`isBookmarked` は OR、`recentResults` は `lastAnsweredAt` が新しい方、`totalCorrect` は正とした方の値。余った方は削除し、以後は 1 件に書く
 - StudySession は追記のみで衝突しない。`id`（UUID）が同じものが 2 件あれば 1 件に寄せる
@@ -147,6 +152,10 @@ SessionResult
 **更新経路**: 1.0 のローカルストアに同期を足す。初回起動で既存レコードがそのまま上がることを、1.0 を入れた端末からの更新で確認する。CloudKit Dashboard でスキーマを **Production に配備してから** リリースする（配備を忘れると本番で同期されない）
 
 **iCloud が使えないとき**（未サインイン、iCloud Drive オフ、機内モード）: 今までどおりローカルで動く。同期は復帰後に再開する。エラーは出さない
+
+**同期後の整合 [v1.7]**: 他端末からの変更は `NSPersistentStoreRemoteChange` で受け、1 秒まとめてから、重複の合成 → 到達帯の再計算（`Stage.unlockedFromRecords`、高い方に揃える）→ ウィジェットの写しの書き直し、の順に行う（`AppModel.reconcileAfterSync`）。起動時の取り込みの後にも同じ合成を行う
+
+**entitlement と起動 [v1.7]**: CloudKit コンテナの entitlement が無いビルドで同期の構成を開くと、throw ではなく後で別スレッドで落ちる（CKContainer の例外）。そのため同期を切る手段は起動引数 `-cloudSync NO` と、ユニットテストのホストとして起動したとき（`XCTestConfigurationFilePath` がある）の 2 つで、entitlement は必須
 
 **文言の変更**: プライバシーポリシーとサポートページの「端末内にのみ保存」を「端末と、お使いの iCloud に保存されます。開発者が見ることはできません」に直す。App Store の「App のプライバシー」は「データを収集しない」のまま（プライベートデータベースは利用者自身の領域）。ストアの説明文の「通信なし」は「開発者のサーバーとの通信なし」の意味で残すが、「学習の記録は iCloud で同期」を 1 行足す
 

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A3E9A993085EDCD00485736 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A3E9A983085EDCD00485736 /* WidgetKit.framework */; };
 		2A3E9A9B3085EDCD00485736 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A3E9A9A3085EDCD00485736 /* SwiftUI.framework */; };
-		2A3E9AA83085EDCF00485736 /* AgnoriaWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A3E9A963085EDCD00485736 /* AgnoriaWidgetExtension.appex */; platformFilters = (ios, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2A3E9AA83085EDCF00485736 /* AgnoriaWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2A3E9A963085EDCD00485736 /* AgnoriaWidgetExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2AF1AB0100000000000000A3 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF1AB0100000000000000A2 /* FirebaseAnalyticsCore */; };
 		2AF1AB0100000000000000A5 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2AF1AB0100000000000000A4 /* FirebaseCrashlytics */; };
 /* End PBXBuildFile section */
@@ -68,11 +68,21 @@
 			);
 			target = 2A3E9A953085EDCD00485736 /* AgnoriaWidgetExtension */;
 		};
+		2A3E9BEB3086017700485736 /* Exceptions for "Agnoria" folder in "Agnoria" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2A37959B307CBA1500D1AEF0 /* Agnoria */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2A37959E307CBA1500D1AEF0 /* Agnoria */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2A3E9BEB3086017700485736 /* Exceptions for "Agnoria" folder in "Agnoria" target */,
+			);
 			path = Agnoria;
 			sourceTree = "<group>";
 		};
@@ -365,9 +375,7 @@
 		};
 		2A3E9AA73085EDCF00485736 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilters = (
-				ios,
-			);
+			platformFilter = ios;
 			target = 2A3E9A953085EDCD00485736 /* AgnoriaWidgetExtension */;
 			targetProxy = 2A3E9AA63085EDCF00485736 /* PBXContainerItemProxy */;
 		};
@@ -504,6 +512,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Agnoria/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -555,6 +564,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Agnoria/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;

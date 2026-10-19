@@ -13,6 +13,7 @@ final class AppSettings {
         static let swipeHintDone = "swipeHintDone"
         static let topStageCelebrated = "topStageCelebrated"
         static let importedFingerprint = "importedDataFingerprint"
+        static let storesSplit = "storesSplit"
     }
 
     private let defaults: UserDefaults
@@ -48,6 +49,12 @@ final class AppSettings {
     /// 最上位の帯（600）のクリアを祝ったか。開く先が無いので 1 回だけ祝う（§4.3.1 [v1.5]）。履歴リセットで戻す
     var topStageCelebrated: Bool {
         didSet { defaults.set(topStageCelebrated, forKey: Key.topStageCelebrated) }
+    }
+
+    /// 1.7 でストアを記録用と問題用に分けたか。false なら起動時に問題データを新しいストアへ取り込み直す（§2.3）
+    var storesSplit: Bool {
+        get { defaults.bool(forKey: Key.storesSplit) }
+        set { defaults.set(newValue, forKey: Key.storesSplit) }
     }
 
     var importedFingerprint: String? {

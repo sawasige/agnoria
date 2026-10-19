@@ -59,6 +59,15 @@ nonisolated enum Stage {
         return nil
     }
 
+    /// 記録から到達帯を求め直す（同期後の再計算 §2.3 [v1.7]）。最初の帯から順に、クリアしていれば次へ進む
+    static func unlockedFromRecords(byLevel: [Int: MasterySummary]) -> Int {
+        var unlocked = first
+        while let next = next(after: unlocked), isCleared(byLevel[unlocked] ?? MasterySummary()) {
+            unlocked = next
+        }
+        return unlocked
+    }
+
     /// おまかせの重み係数: 今の帯 1、それ以外の到達済み帯 0.35（復習）、未到達 0
     static func weightFactor(level: Int, current: Int, unlocked: Int) -> Double {
         if level > unlocked { return 0 }
