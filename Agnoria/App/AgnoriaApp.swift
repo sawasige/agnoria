@@ -54,7 +54,12 @@ struct AgnoriaApp: App {
         RootView()
             .environment(model)
             .environment(model.settings)
-            .task { await model.importBundledDataIfNeeded() }
+            .task {
+                await model.importBundledDataIfNeeded()
+                #if DEBUG
+                model.showDebugStageClearIfRequested()
+                #endif
+            }
     }
 }
 
@@ -68,6 +73,7 @@ struct RootView: View {
                 .navigationDestination(for: Route.self) { route in
                     switch route {
                     case .quiz: QuizView()
+                    case .stageClear: StageClearView()
                     case .result: ResultView()
                     case .stats: StatsView()
                     case .pick: PickView()

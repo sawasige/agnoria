@@ -40,6 +40,25 @@ nonisolated enum Stage {
         return next(after: unlocked)
     }
 
+    /// セット完走でスコア帯をクリアしたときの出来事（§4.3.1 [v1.5]）。
+    /// cleared はクリアした帯、next は新しく開いた帯（最上位をクリアしたときは nil）
+    struct Clear: Equatable, Hashable, Sendable {
+        let cleared: Int
+        let next: Int?
+    }
+
+    /// セット完走時に呼ぶ。到達帯をクリアしていれば Clear を返す。
+    /// 最上位の帯は開く先が無いので、まだ祝っていないとき（topCelebrated == false）だけ 1 回返す
+    static func clearEvent(unlocked: Int, byLevel: [Int: MasterySummary], topCelebrated: Bool) -> Clear? {
+        if let next = unlock(unlocked: unlocked, byLevel: byLevel) {
+            return Clear(cleared: unlocked, next: next)
+        }
+        if unlocked == last, !topCelebrated, isCleared(byLevel[last] ?? MasterySummary()) {
+            return Clear(cleared: last, next: nil)
+        }
+        return nil
+    }
+
     /// おまかせの重み係数: 今の帯 1、それ以外の到達済み帯 0.35（復習）、未到達 0
     static func weightFactor(level: Int, current: Int, unlocked: Int) -> Double {
         if level > unlocked { return 0 }

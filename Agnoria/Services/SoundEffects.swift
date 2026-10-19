@@ -1,12 +1,14 @@
 import AVFoundation
 
-/// 正解・不正解の効果音（§4.2 [v1.2]）。音源は Resources/Sounds の短い CAF。
+/// 正解・不正解の効果音（§4.2 [v1.2]）とスコア帯クリアのファンファーレ [v1.5]。音源は Resources/Sounds の短い CAF。
 /// AVAudioPlayer の prepareToPlay / play は内部で同期の setActive を呼びメインスレッドを止めうるので、
 /// プレイヤーの生成と再生は actor の中（メインスレッド以外）で行う
 actor SoundEffects {
     enum Effect: String, CaseIterable, Sendable {
         case correct
         case wrong
+        /// スコア帯クリアのファンファーレ（§4.3.1 [v1.5]）
+        case fanfare
     }
 
     static let shared = SoundEffects()

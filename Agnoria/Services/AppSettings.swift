@@ -11,6 +11,7 @@ final class AppSettings {
         static let autoSpeak = "autoSpeak"
         static let soundEffects = "soundEffects"
         static let swipeHintDone = "swipeHintDone"
+        static let topStageCelebrated = "topStageCelebrated"
         static let importedFingerprint = "importedDataFingerprint"
     }
 
@@ -44,6 +45,11 @@ final class AppSettings {
         didSet { defaults.set(swipeHintDone, forKey: Key.swipeHintDone) }
     }
 
+    /// 最上位の帯（600）のクリアを祝ったか。開く先が無いので 1 回だけ祝う（§4.3.1 [v1.5]）。履歴リセットで戻す
+    var topStageCelebrated: Bool {
+        didSet { defaults.set(topStageCelebrated, forKey: Key.topStageCelebrated) }
+    }
+
     var importedFingerprint: String? {
         get { defaults.string(forKey: Key.importedFingerprint) }
         set { defaults.set(newValue, forKey: Key.importedFingerprint) }
@@ -59,6 +65,7 @@ final class AppSettings {
         autoSpeak = defaults.object(forKey: Key.autoSpeak) == nil ? true : defaults.bool(forKey: Key.autoSpeak)
         soundEffects = defaults.object(forKey: Key.soundEffects) == nil ? true : defaults.bool(forKey: Key.soundEffects)
         swipeHintDone = defaults.bool(forKey: Key.swipeHintDone)
+        topStageCelebrated = defaults.bool(forKey: Key.topStageCelebrated)
     }
 
     static let speechRateRange: ClosedRange<Double> = 0.3...0.6

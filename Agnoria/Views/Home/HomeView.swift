@@ -262,34 +262,14 @@ struct StageCard: View {
         .accessibilityElement(children: .combine)
     }
 
-    /// 4 帯の状態を横に並べる: クリア済み ✓ / 今の帯 ● / 開いている ○ / 未到達 🔒
+    /// 4 帯の状態を横に並べる（StageChips）
     private var stageRow: some View {
-        HStack(spacing: 10) {
-            ForEach(Stage.levels, id: \.self) { level in
-                let s = byLevel[level] ?? MasterySummary()
-                let locked = level > unlocked
-                let cleared = !locked && Stage.isCleared(s)
-                VStack(spacing: 3) {
-                    Image(systemName: locked ? "lock.fill"
-                          : cleared ? "checkmark.circle.fill"
-                          : level == stage ? "record.circle" : "circle")
-                        .font(.footnote)
-                        .foregroundStyle(locked ? Color.secondary.opacity(0.5)
-                                         : cleared ? Color.green : Color.accentColor)
-                    Text("\(level)")
-                        .font(.caption2.monospacedDigit())
-                        .fontWeight(level == stage ? .bold : .regular)
-                        .foregroundStyle(level == stage ? Color.primary : Color.secondary)
-                        .fixedSize()
-                }
-            }
-        }
+        StageChips(state: { level in
+            if level > unlocked { return .locked }
+            if Stage.isCleared(byLevel[level] ?? MasterySummary()) { return .cleared }
+            return level == stage ? .current : .open
+        })
         .padding(.top, 4)
-        .accessibilityLabel(Stage.levels.map { level in
-            let locked = level > unlocked
-            let cleared = !locked && Stage.isCleared(byLevel[level] ?? MasterySummary())
-            return "\(level) 点帯 " + (locked ? "未到達" : cleared ? "クリア" : level == stage ? "今ここ" : "学習中")
-        }.joined(separator: "、"))
     }
 
     private var nextText: String {

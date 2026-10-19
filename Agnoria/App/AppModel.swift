@@ -4,6 +4,8 @@ import SwiftData
 
 enum Route: Hashable {
     case quiz
+    /// スコア帯クリアの演出（結果の前に挟む）[v1.5]
+    case stageClear
     case result
     case stats
     case pick
@@ -28,6 +30,8 @@ final class AppModel {
     var lastSavedSession: StudySession?
     /// 直近のセット完走で開いたスコア帯（結果画面の演出用）。次のセット開始で消す
     var lastUnlockedLevel: Int?
+    /// 直近のセット完走でクリアしたスコア帯（専用画面の演出用 §4.3.1 [v1.5]）。次のセット開始とホームで消す
+    var pendingStageClear: Stage.Clear?
 
     private var context: ModelContext { container.mainContext }
 
@@ -78,6 +82,7 @@ final class AppModel {
         let questions = buildQuestions(config, using: &rng)
         guard !questions.isEmpty else { return nil }
         lastUnlockedLevel = nil
+        pendingStageClear = nil
         let run = QuizRun(config: config, questions: questions)
         self.run = run
         path = [.quiz]
@@ -160,12 +165,41 @@ final class AppModel {
         try? context.save()
         lastSavedSession = session
         let stage = stageState()
-        if let next = Stage.unlock(unlocked: stage.unlocked, byLevel: stage.byLevel) {
-            settings.unlockedLevel = next
-            lastUnlockedLevel = next
+        if let clear = Stage.clearEvent(unlocked: stage.unlocked, byLevel: stage.byLevel,
+                                        topCelebrated: settings.topStageCelebrated) {
+            if let next = clear.next {
+                settings.unlockedLevel = next
+                lastUnlockedLevel = next
+            } else {
+                settings.topStageCelebrated = true
+            }
+            pendingStageClear = clear
+            path = [.stageClear]
+        } else {
+            path = [.result]
         }
+    }
+
+    /// 演出を見終えて結果へ
+    func showResultAfterStageClear() {
         path = [.result]
     }
+
+    #if DEBUG
+    /// 確認・撮影用。起動引数 `-debugStageClear 500` でホーム表示直後に「450 点帯クリア → 500 点帯へ」の演出を出す。
+    /// `-debugStageClear top` なら最上位クリアの演出。記録や設定は変えない
+    func showDebugStageClearIfRequested() {
+        guard let arg = UserDefaults.standard.string(forKey: "debugStageClear"), path.isEmpty else { return }
+        if arg == "top" {
+            pendingStageClear = Stage.Clear(cleared: Stage.last, next: nil)
+        } else if let next = Int(arg), let i = Stage.levels.firstIndex(of: next), i > 0 {
+            pendingStageClear = Stage.Clear(cleared: Stage.levels[i - 1], next: next)
+        } else {
+            return
+        }
+        path = [.stageClear]
+    }
+    #endif
 
     // MARK: - ステージ
 
@@ -197,6 +231,7 @@ final class AppModel {
 
     func goHome() {
         run = nil
+        pendingStageClear = nil
         path = []
     }
 
@@ -232,6 +267,8 @@ final class AppModel {
         try context.delete(model: StudySession.self)
         try context.save()
         settings.unlockedLevel = Stage.first
+        settings.topStageCelebrated = false
         lastUnlockedLevel = nil
+        pendingStageClear = nil
     }
 }
