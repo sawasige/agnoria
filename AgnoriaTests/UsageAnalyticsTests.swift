@@ -47,12 +47,10 @@ struct UsageAnalyticsTests {
     @Test("設定ファイルの無いビルドでは unconfigured で、ログしても何も起きない") @MainActor func unconfigured() {
         let defaults = UserDefaults(suiteName: "UsageAnalyticsTests-\(UUID().uuidString)")!
         let settings = AppSettings(defaults: defaults)
-        #expect(settings.usageReporting == true)
         let a = UsageAnalytics(settings: settings, defaults: defaults, configured: false)
         #expect(a.state == .unconfigured)
         a.log(.historyReset)
-        settings.usageReporting = false
-        a.applySetting()
+        a.syncUserProperties()
         #expect(a.state == .unconfigured)
     }
 
@@ -63,7 +61,6 @@ struct UsageAnalyticsTests {
         let a = UsageAnalytics(settings: settings, defaults: defaults, configured: true)
         #expect(a.state == .disabledByLaunch)
         a.log(.setStart(.auto))
-        a.applySetting()
         #expect(a.state == .disabledByLaunch)
     }
 }

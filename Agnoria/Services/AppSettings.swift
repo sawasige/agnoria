@@ -12,7 +12,6 @@ final class AppSettings {
         static let soundEffects = "soundEffects"
         static let swipeHintDone = "swipeHintDone"
         static let topStageCelebrated = "topStageCelebrated"
-        static let usageReporting = "usageReporting"
         static let importedFingerprint = "importedDataFingerprint"
     }
 
@@ -51,11 +50,6 @@ final class AppSettings {
         didSet { defaults.set(topStageCelebrated, forKey: Key.topStageCelebrated) }
     }
 
-    /// 使用状況（機能の利用回数）とクラッシュ情報を開発者に送る。デフォルト ON（§7 [v1.6]）。起動引数 `-analytics NO` はこれより優先
-    var usageReporting: Bool {
-        didSet { defaults.set(usageReporting, forKey: Key.usageReporting) }
-    }
-
     var importedFingerprint: String? {
         get { defaults.string(forKey: Key.importedFingerprint) }
         set { defaults.set(newValue, forKey: Key.importedFingerprint) }
@@ -72,7 +66,6 @@ final class AppSettings {
         soundEffects = defaults.object(forKey: Key.soundEffects) == nil ? true : defaults.bool(forKey: Key.soundEffects)
         swipeHintDone = defaults.bool(forKey: Key.swipeHintDone)
         topStageCelebrated = defaults.bool(forKey: Key.topStageCelebrated)
-        usageReporting = defaults.object(forKey: Key.usageReporting) == nil ? true : defaults.bool(forKey: Key.usageReporting)
     }
 
     static let speechRateRange: ClosedRange<Double> = 0.3...0.6

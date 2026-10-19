@@ -58,6 +58,7 @@ struct AgnoriaApp: App {
                 await model.importBundledDataIfNeeded()
                 #if DEBUG
                 model.showDebugStageClearIfRequested()
+                model.crashIfRequested()
                 #endif
             }
     }

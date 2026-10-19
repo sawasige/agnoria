@@ -200,6 +200,13 @@ final class AppModel {
     }
 
     #if DEBUG
+    /// Crashlytics の確認用。起動引数 `-debugCrash YES` を付けるとホーム表示直後にわざと落ちる（§7.1）。
+    /// 報告は次回起動時に送られるので、落とした後にもう一度 `-analytics YES` で起動する
+    func crashIfRequested() {
+        guard UserDefaults.standard.bool(forKey: "debugCrash") else { return }
+        fatalError("Crashlytics の確認用のクラッシュ（起動引数 -debugCrash YES）")
+    }
+
     /// 確認・撮影用。起動引数 `-debugStageClear 500` でホーム表示直後に「450 点帯クリア → 500 点帯へ」の演出を出す。
     /// `-debugStageClear top` なら最上位クリアの演出。記録や設定は変えない
     func showDebugStageClearIfRequested() {
