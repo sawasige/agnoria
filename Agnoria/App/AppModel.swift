@@ -52,6 +52,8 @@ final class AppModel {
         guard importState != .running else { return }
         importState = .running
         backfillMasteredAt()
+        // 取り込みの要否にかかわらず、起動のたびにウィジェットの写しを書き直す（早期 return の経路でも）
+        defer { refreshWidgetSnapshot() }
         do {
             let payload = try BundleData.load()
             if settings.importedFingerprint == payload.fingerprint {
@@ -66,7 +68,6 @@ final class AppModel {
             importState = .failed(String(describing: error))
             analytics.record(error, "import")
         }
-        refreshWidgetSnapshot()
     }
 
     // MARK: - ウィジェット
