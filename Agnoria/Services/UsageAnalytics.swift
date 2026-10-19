@@ -88,9 +88,10 @@ final class UsageAnalytics {
     /// アプリ起動時に 1 回。Firebase の設定ファイルが同梱されていれば configure する。
     /// Debug ビルドは `-analytics YES` を付けたときだけ送る（開発中の操作を本番の計測に混ぜない）。
     /// `-analytics NO` は常に優先（UI テストの launchQuiet が付ける）
-    init(settings: AppSettings, defaults: UserDefaults = .standard) {
+    /// configured はテスト用（nil なら同梱の plist の有無で決める）
+    init(settings: AppSettings, defaults: UserDefaults = .standard, configured: Bool? = nil) {
         self.settings = settings
-        let configured = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist") != nil
+        let configured = configured ?? (Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist") != nil)
         let arg = defaults.object(forKey: "analytics") == nil ? nil : defaults.bool(forKey: "analytics")
         #if DEBUG
         let allowedByLaunch = arg == true

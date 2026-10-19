@@ -48,11 +48,22 @@ struct UsageAnalyticsTests {
         let defaults = UserDefaults(suiteName: "UsageAnalyticsTests-\(UUID().uuidString)")!
         let settings = AppSettings(defaults: defaults)
         #expect(settings.usageReporting == true)
-        let a = UsageAnalytics(settings: settings, defaults: defaults)
+        let a = UsageAnalytics(settings: settings, defaults: defaults, configured: false)
         #expect(a.state == .unconfigured)
         a.log(.historyReset)
         settings.usageReporting = false
         a.applySetting()
         #expect(a.state == .unconfigured)
+    }
+
+    @Test("起動引数 -analytics NO は設定より優先で、Firebase を初期化しない") @MainActor func disabledByLaunch() {
+        let defaults = UserDefaults(suiteName: "UsageAnalyticsTests-\(UUID().uuidString)")!
+        defaults.set(false, forKey: "analytics")
+        let settings = AppSettings(defaults: defaults)
+        let a = UsageAnalytics(settings: settings, defaults: defaults, configured: true)
+        #expect(a.state == .disabledByLaunch)
+        a.log(.setStart(.auto))
+        a.applySetting()
+        #expect(a.state == .disabledByLaunch)
     }
 }

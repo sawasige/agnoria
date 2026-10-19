@@ -332,7 +332,7 @@ SessionResult
 
 目的: どの機能がどれだけ使われているか（セット数、モードや分野の偏り、帯クリアまでの道のり、Apple Intelligence・読み上げ・ブックマークの利用、途中離脱）を知る。App Store Connect の App Analytics（DL・セッション・継続率）だけでは分からないアプリ内の動きを補う。
 
-**送る先**: Firebase Analytics と Crashlytics（SPM `firebase-ios-sdk` の `FirebaseAnalytics` / `FirebaseCrashlytics`。Analytics の要件で `OTHER_LDFLAGS` に `-ObjC`）。アプリ側は `UsageAnalytics` に集約し、View は Firebase を直接呼ばない。
+**送る先**: Firebase Analytics と Crashlytics（SPM `firebase-ios-sdk` の `FirebaseAnalyticsCore` / `FirebaseCrashlytics`。Core は IDFA 対応（IdentitySupport）と広告の端末内コンバージョン計測を含まない版で、import は同じ `FirebaseAnalytics`。Analytics の要件で `OTHER_LDFLAGS` に `-ObjC`）。アプリ側は `UsageAnalytics` に集約し、View は Firebase を直接呼ばない。
 
 **クラッシュ報告**: Xcode の Organizer は「開発者と共有」を許可した人の分しか、日単位でしか届かないので Crashlytics で補う。クラッシュに加えて、握りつぶしていた失敗（SwiftData の保存失敗 `save.answer` / `save.session` / `save.bookmark` / `save.backfill`、取り込み失敗 `import`）を非致命エラーとして `record(error, where)` で送る。シンボル化のため Xcode Cloud のアーカイブ後に `ci_scripts/ci_post_xcodebuild.sh` が `upload-symbols` で dSYM を送る（アーカイブ以外のアクションと plist の無いビルドでは何もしない）。
 
@@ -349,7 +349,7 @@ SessionResult
 | `history_reset` | なし |
 | `settings_changed` | key（soundEffects / autoSpeak / speechRate / unlockedLevel） |
 
-ユーザープロパティ: `unlocked_level`。Firebase が自動で集める `first_open` / `session_start` / `screen_view` はそのまま。1 問ごとの回答イベントは量が多いので送らない。IDFA は使わない（AdSupport をリンクしない。ATT のダイアログは出さない）。
+ユーザープロパティ: `unlocked_level`。Firebase が自動で集める `first_open` / `session_start` / `screen_view` はそのまま。1 問ごとの回答イベントは量が多いので送らない。IDFA は使わない（`FirebaseAnalyticsCore` を使い AdSupport も IdentitySupport もリンクしない。ATT のダイアログは出さない）。
 
 **送らない条件**（優先順）
 1. 同梱の `GoogleService-Info.plist` が無い（Firebase 未設定のビルド）
