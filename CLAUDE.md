@@ -6,6 +6,7 @@ Agnoria（iOS / iPadOS / macOS の英語 4 択ドリル）で作業するとき�
 
 - `main` に直接 push しない。作業ブランチを切って push し、PR を作る。PR の本文に動作確認の手順を書く。
 - マージは動作確認が済んでから。確認はユーザーが行う（実機・TestFlight）。OK が出るまで待つ。
+- マージはマージコミット（`gh pr merge --merge`）で行う。スカッシュマージとリベースマージは使わない（ブランチのコミット履歴をそのまま残す）。
 - コミットと push は sawasige アカウントで行う（`SAWADA Shigeru <6521997+sawasige@users.noreply.github.com>`）。`gh` は仕事用アカウントから切り替えてから使い、終わったら戻す。
 - コミットメッセージ・PR・Issue に AI の帰属（`Co-Authored-By: Claude`、「Generated with Claude Code」など）を書かない。
 - Issue にローカルのパスを書かない（他の人には意味がない）。
