@@ -69,6 +69,7 @@ struct SettingsView: View {
             .onChange(of: settings.unlockedLevel) {
                 model.analytics.log(.settingsChanged(key: "unlockedLevel"))
                 model.analytics.syncUserProperties()
+                model.refreshWidgetSnapshot()
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

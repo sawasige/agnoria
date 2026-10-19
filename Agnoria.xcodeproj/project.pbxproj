@@ -50,6 +50,11 @@
 			path = AgnoriaUITests;
 			sourceTree = "<group>";
 		};
+		2AF1AB0100000000000000B1 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				2A37959E307CBA1500D1AEF0 /* Agnoria */,
+				2AF1AB0100000000000000B1 /* Shared */,
 				2A3795AC307CBA1700D1AEF0 /* AgnoriaTests */,
 				2A3795B6307CBA1700D1AEF0 /* AgnoriaUITests */,
 				2A37959D307CBA1500D1AEF0 /* Products */,
@@ -108,6 +114,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				2A37959E307CBA1500D1AEF0 /* Agnoria */,
+				2AF1AB0100000000000000B1 /* Shared */,
 			);
 			name = Agnoria;
 			packageProductDependencies = (

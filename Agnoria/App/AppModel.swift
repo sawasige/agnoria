@@ -1,6 +1,9 @@
 import Foundation
 import Observation
 import SwiftData
+#if os(iOS)
+import WidgetKit
+#endif
 
 enum Route: Hashable {
     case quiz
@@ -63,6 +66,20 @@ final class AppModel {
             importState = .failed(String(describing: error))
             analytics.record(error, "import")
         }
+        refreshWidgetSnapshot()
+    }
+
+    // MARK: - ウィジェット
+
+    /// ウィジェット用の写しを書き直す（§4.6 [v1.6]）。起動時・セット完走・履歴リセット・到達帯の変更で呼ぶ。
+    /// iOS 以外は App Group を持たないので何もしない
+    func refreshWidgetSnapshot() {
+        #if os(iOS)
+        let stage = stageState()
+        let dates = ((try? context.fetch(FetchDescriptor<StudySession>())) ?? []).map(\.finishedAt)
+        WidgetSnapshot.make(stage: stage, sessionDates: dates).save()
+        WidgetCenter.shared.reloadAllTimelines()
+        #endif
     }
 
     /// 保存。失敗はクラッシュさせず非致命エラーとして記録する（§7.1）
@@ -192,6 +209,7 @@ final class AppModel {
         } else {
             path = [.result]
         }
+        refreshWidgetSnapshot()
     }
 
     /// 演出を見終えて結果へ
@@ -295,5 +313,6 @@ final class AppModel {
         pendingStageClear = nil
         analytics.log(.historyReset)
         analytics.syncUserProperties()
+        refreshWidgetSnapshot()
     }
 }
