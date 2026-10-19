@@ -58,6 +58,8 @@ nonisolated enum BundleData {
             if Set(g.choices).count != g.choices.count { issues.append("\(g.id): choices が重複") }
             if !(0..<g.choices.count).contains(g.answer) { issues.append("\(g.id): answer が範囲外") }
             if !g.question.contains(Cloze.blank) { issues.append("\(g.id): 問題文に空欄 ______ がない") }
+            if g.questionJa.trimmingCharacters(in: .whitespaces).isEmpty { issues.append("\(g.id): question_ja が空") }
+            if g.questionJa.contains(Cloze.blank) { issues.append("\(g.id): question_ja に空欄が残っている") }
             if GrammarCategory(rawValue: g.category) == nil { issues.append("\(g.id): 未知の category \(g.category)") }
             if Level(rawValue: g.level) == nil { issues.append("\(g.id): level が 450/500/550/600 以外") }
         }

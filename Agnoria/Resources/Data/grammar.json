@@ -3,6 +3,7 @@
     "id": "pos-001",
     "category": "品詞",
     "question": "All employees must read the safety ______ before entering the warehouse.",
+    "question_ja": "全従業員は、倉庫に入る前に安全指示書を読まなければなりません。",
     "choices": [
       "instruct",
       "instructive",
@@ -17,6 +18,7 @@
     "id": "pos-002",
     "category": "品詞",
     "question": "The new printer works ______ even when several people use it at once.",
+    "question_ja": "新しいプリンターは、何人かが同時に使っても効率よく動きます。",
     "choices": [
       "efficiently",
       "efficient",
@@ -31,6 +33,7 @@
     "id": "pos-101",
     "category": "品詞",
     "question": "The new printer is very ______ and rarely needs repairs.",
+    "question_ja": "新しいプリンターはとても信頼性が高く、修理が必要になることはめったにありません。",
     "choices": [
       "reliable",
       "reliably",
@@ -45,6 +48,7 @@
     "id": "pos-102",
     "category": "品詞",
     "question": "Please ______ the attached form and return it by Friday.",
+    "question_ja": "添付の用紙に記入のうえ、金曜日までにご返送ください。",
     "choices": [
       "completion",
       "complete",
@@ -59,6 +63,7 @@
     "id": "pos-103",
     "category": "品詞",
     "question": "The manager spoke ______ about the sales results at the meeting.",
+    "question_ja": "部長は会議で、売上の結果について誇らしげに語りました。",
     "choices": [
       "proud",
       "pride",
@@ -73,6 +78,7 @@
     "id": "pos-104",
     "category": "品詞",
     "question": "Our team made a ______ to open a second store next year.",
+    "question_ja": "私たちのチームは、来年 2 号店を開く決断をしました。",
     "choices": [
       "decide",
       "decisive",
@@ -87,6 +93,7 @@
     "id": "pos-105",
     "category": "品詞",
     "question": "Ms. Tanaka is ______ for hiring new staff at our branch.",
+    "question_ja": "田中さんは、当支店で新しいスタッフの採用を担当しています。",
     "choices": [
       "responsible",
       "responsibly",
@@ -101,6 +108,7 @@
     "id": "pos-106",
     "category": "品詞",
     "question": "The ______ of the new office will take place in March.",
+    "question_ja": "新しいオフィスの開設は 3 月に行われます。",
     "choices": [
       "open",
       "opening",
@@ -115,6 +123,7 @@
     "id": "pos-107",
     "category": "品詞",
     "question": "Sales increased ______ after we launched the online shop.",
+    "question_ja": "オンラインショップを始めてから、売上はすぐに伸びました。",
     "choices": [
       "quick",
       "quickness",
@@ -129,6 +138,7 @@
     "id": "pos-108",
     "category": "品詞",
     "question": "We need to ______ the meeting room before the clients arrive.",
+    "question_ja": "お客様が到着する前に、会議室を準備する必要があります。",
     "choices": [
       "preparation",
       "prepared",
@@ -143,6 +153,7 @@
     "id": "prep-001",
     "category": "前置詞・接続詞",
     "question": "The store will be closed ______ the national holiday next Monday.",
+    "question_ja": "来週月曜日の祝日の間、店舗は休業します。",
     "choices": [
       "during",
       "while",
@@ -157,6 +168,7 @@
     "id": "prep-002",
     "category": "前置詞・接続詞",
     "question": "______ the heavy rain, the outdoor event started on time.",
+    "question_ja": "大雨にもかかわらず、屋外イベントは定刻に始まりました。",
     "choices": [
       "Although",
       "Despite",
@@ -171,6 +183,7 @@
     "id": "prep-101",
     "category": "前置詞・接続詞",
     "question": "The weekly staff meeting is held ______ Monday mornings.",
+    "question_ja": "週次のスタッフ会議は、月曜日の午前中に開かれます。",
     "choices": [
       "on",
       "in",
@@ -185,6 +198,7 @@
     "id": "prep-102",
     "category": "前置詞・接続詞",
     "question": "Please submit your travel report ______ the end of this week.",
+    "question_ja": "出張報告書は今週末までに提出してください。",
     "choices": [
       "until",
       "by",
@@ -199,6 +213,7 @@
     "id": "prep-103",
     "category": "前置詞・接続詞",
     "question": "The office will be closed ______ the renovation work next month.",
+    "question_ja": "来月の改装工事の間、オフィスは閉鎖されます。",
     "choices": [
       "at",
       "since",
@@ -213,6 +228,7 @@
     "id": "prep-104",
     "category": "前置詞・接続詞",
     "question": "The report was long, ______ it was easy to understand.",
+    "question_ja": "報告書は長かったものの、分かりやすいものでした。",
     "choices": [
       "so",
       "because",
@@ -227,6 +243,7 @@
     "id": "prep-105",
     "category": "前置詞・接続詞",
     "question": "Mr. Lee has worked at this company ______ ten years.",
+    "question_ja": "リーさんはこの会社で 10 年間働いています。",
     "choices": [
       "for",
       "since",
@@ -241,6 +258,7 @@
     "id": "prep-106",
     "category": "前置詞・接続詞",
     "question": "We could not start the meeting ______ the projector was broken.",
+    "question_ja": "プロジェクターが故障していたため、会議を始められませんでした。",
     "choices": [
       "so",
       "because",
@@ -255,6 +273,7 @@
     "id": "prep-107",
     "category": "前置詞・接続詞",
     "question": "______ the weather was bad, the delivery arrived on time.",
+    "question_ja": "天気は悪かったものの、配達は時間どおりに届きました。",
     "choices": [
       "Because",
       "So",
@@ -269,6 +288,7 @@
     "id": "prep-108",
     "category": "前置詞・接続詞",
     "question": "The new employee will meet the team ______ 10 a.m. tomorrow.",
+    "question_ja": "新入社員は、明日の午前 10 時にチームと顔合わせをします。",
     "choices": [
       "in",
       "on",
@@ -283,6 +303,7 @@
     "id": "pron-001",
     "category": "代名詞・関係詞",
     "question": "Mr. Park printed the documents ______ because the assistant was out of the office.",
+    "question_ja": "アシスタントが不在だったので、パクさんは自分で書類を印刷しました。",
     "choices": [
       "he",
       "him",
@@ -297,6 +318,7 @@
     "id": "pron-002",
     "category": "代名詞・関係詞",
     "question": "The customer left ______ umbrella at the front desk this morning.",
+    "question_ja": "そのお客様は今朝、受付に傘を置き忘れました。",
     "choices": [
       "she",
       "her",
@@ -311,6 +333,7 @@
     "id": "pron-101",
     "category": "代名詞・関係詞",
     "question": "Ms. Kim finished the report by ______ without any help from the team.",
+    "question_ja": "キムさんはチームの助けを借りずに、一人で報告書を仕上げました。",
     "choices": [
       "herself",
       "her",
@@ -325,6 +348,7 @@
     "id": "pron-102",
     "category": "代名詞・関係詞",
     "question": "The manager asked ______ to send the file before noon.",
+    "question_ja": "部長は私たちに、正午までにファイルを送るよう頼みました。",
     "choices": [
       "we",
       "us",
@@ -339,6 +363,7 @@
     "id": "pron-103",
     "category": "代名詞・関係詞",
     "question": "We hired a designer ______ has ten years of experience.",
+    "question_ja": "私たちは 10 年の経験があるデザイナーを採用しました。",
     "choices": [
       "which",
       "whose",
@@ -353,6 +378,7 @@
     "id": "pron-104",
     "category": "代名詞・関係詞",
     "question": "The printer ______ was installed last week is already out of paper.",
+    "question_ja": "先週設置されたプリンターは、もう用紙切れです。",
     "choices": [
       "who",
       "whom",
@@ -367,6 +393,7 @@
     "id": "pron-105",
     "category": "代名詞・関係詞",
     "question": "Please return the keys to ______ owner after the event.",
+    "question_ja": "イベントの後、鍵は持ち主に返してください。",
     "choices": [
       "their",
       "them",
@@ -381,6 +408,7 @@
     "id": "pron-106",
     "category": "代名詞・関係詞",
     "question": "This laptop is mine, and the one on the desk is ______.",
+    "question_ja": "このノートパソコンは私のもので、机の上のものは彼女のものです。",
     "choices": [
       "her",
       "hers",
@@ -395,6 +423,7 @@
     "id": "pron-107",
     "category": "代名詞・関係詞",
     "question": "Mr. Park thanked ______ for their hard work on the project.",
+    "question_ja": "パクさんは、プロジェクトでの尽力に対して彼らに感謝しました。",
     "choices": [
       "they",
       "their",
@@ -409,6 +438,7 @@
     "id": "pron-108",
     "category": "代名詞・関係詞",
     "question": "The woman ______ office is next to mine joined the company in April.",
+    "question_ja": "私の隣にオフィスがある女性は、4 月に入社しました。",
     "choices": [
       "who",
       "which",
@@ -423,6 +453,7 @@
     "id": "tense-001",
     "category": "時制・態",
     "question": "Our office ______ to a larger building two years ago.",
+    "question_ja": "当社のオフィスは 2 年前、より大きなビルに移転しました。",
     "choices": [
       "moved",
       "moves",
@@ -437,6 +468,7 @@
     "id": "tense-002",
     "category": "時制・態",
     "question": "The package ______ to the wrong address yesterday.",
+    "question_ja": "その荷物は昨日、間違った住所に配達されました。",
     "choices": [
       "delivers",
       "is delivering",
@@ -451,6 +483,7 @@
     "id": "tense-101",
     "category": "時制・態",
     "question": "The company ______ a new branch in Osaka last year.",
+    "question_ja": "その会社は昨年、大阪に新しい支店を開きました。",
     "choices": [
       "opened",
       "opens",
@@ -465,6 +498,7 @@
     "id": "tense-102",
     "category": "時制・態",
     "question": "The invoices ______ to customers every Monday by the accounting team.",
+    "question_ja": "請求書は毎週月曜日に、経理チームからお客様へ送られます。",
     "choices": [
       "send",
       "are sent",
@@ -479,6 +513,7 @@
     "id": "tense-103",
     "category": "時制・態",
     "question": "Mr. Brown ______ the clients tomorrow afternoon at the head office.",
+    "question_ja": "ブラウンさんは明日の午後、本社で顧客と会います。",
     "choices": [
       "met",
       "has met",
@@ -493,6 +528,7 @@
     "id": "tense-104",
     "category": "時制・態",
     "question": "The new schedule ______ to all staff yesterday afternoon.",
+    "question_ja": "新しいスケジュールは昨日の午後、全スタッフに送られました。",
     "choices": [
       "sends",
       "is sending",
@@ -507,6 +543,7 @@
     "id": "tense-105",
     "category": "時制・態",
     "question": "Starting next month, every employee ______ an ID card to enter the building.",
+    "question_ja": "来月から、建物に入るには全従業員に ID カードが必要になります。",
     "choices": [
       "will need",
       "needed",
@@ -521,6 +558,7 @@
     "id": "tense-106",
     "category": "時制・態",
     "question": "Right now, the technician ______ the broken copier on the third floor.",
+    "question_ja": "ちょうど今、技術者が 3 階の壊れたコピー機を修理しています。",
     "choices": [
       "repaired",
       "is repairing",
@@ -535,6 +573,7 @@
     "id": "tense-107",
     "category": "時制・態",
     "question": "Ms. Garcia ______ for this company since 2015.",
+    "question_ja": "ガルシアさんは 2015 年からこの会社で働いています。",
     "choices": [
       "works",
       "worked",
@@ -549,6 +588,7 @@
     "id": "tense-108",
     "category": "時制・態",
     "question": "The report ______ by Mr. Ito before the meeting started yesterday.",
+    "question_ja": "その報告書は昨日、会議が始まる前に伊藤さんによって仕上げられました。",
     "choices": [
       "finishes",
       "is finished",
@@ -563,6 +603,7 @@
     "id": "vocab-001",
     "category": "語彙",
     "question": "Please ______ the attached form and return it to the front desk by Friday.",
+    "question_ja": "添付の用紙に記入し、金曜日までに受付へご返却ください。",
     "choices": [
       "arrive",
       "spend",
@@ -577,6 +618,7 @@
     "id": "vocab-002",
     "category": "語彙",
     "question": "The meeting was ______ until next Tuesday because the director was ill.",
+    "question_ja": "ディレクターが病気だったため、会議は来週火曜日まで延期されました。",
     "choices": [
       "increased",
       "postponed",
@@ -591,6 +633,7 @@
     "id": "vocab-101",
     "category": "語彙",
     "question": "Please ______ the attached document before you sign it.",
+    "question_ja": "署名する前に、添付の書類を確認してください。",
     "choices": [
       "review",
       "arrive",
@@ -605,6 +648,7 @@
     "id": "vocab-102",
     "category": "語彙",
     "question": "The hotel is ______ to the train station, so it is easy to reach.",
+    "question_ja": "そのホテルは駅に近いので、行きやすいです。",
     "choices": [
       "far",
       "close",
@@ -619,6 +663,7 @@
     "id": "vocab-103",
     "category": "語彙",
     "question": "Employees can ______ a free parking space by filling out this form.",
+    "question_ja": "従業員はこの用紙に記入すれば、無料の駐車スペースを申請できます。",
     "choices": [
       "pay",
       "buy",
@@ -633,6 +678,7 @@
     "id": "vocab-104",
     "category": "語彙",
     "question": "The ______ for the sales position is Friday, May 10.",
+    "question_ja": "営業職の応募締め切りは 5 月 10 日金曜日です。",
     "choices": [
       "price",
       "salary",
@@ -647,6 +693,7 @@
     "id": "vocab-105",
     "category": "語彙",
     "question": "The ______ to the museum is free for children under twelve.",
+    "question_ja": "12 歳未満の子どもは、博物館の入場料が無料です。",
     "choices": [
       "admission",
       "payment",
@@ -661,6 +708,7 @@
     "id": "vocab-106",
     "category": "語彙",
     "question": "Our office supplies are ______ from a local company every month.",
+    "question_ja": "当社の事務用品は、毎月地元の会社に発注しています。",
     "choices": [
       "told",
       "ordered",
@@ -675,6 +723,7 @@
     "id": "vocab-107",
     "category": "語彙",
     "question": "The train was ______ by thirty minutes because of heavy snow.",
+    "question_ja": "大雪のため、列車は 30 分遅れました。",
     "choices": [
       "broken",
       "closed",
@@ -689,6 +738,7 @@
     "id": "vocab-108",
     "category": "語彙",
     "question": "Customers who have questions should ______ our support team.",
+    "question_ja": "ご質問のあるお客様は、サポートチームにお問い合わせください。",
     "choices": [
       "answer",
       "arrive",
@@ -703,6 +753,7 @@
     "id": "pos-003",
     "category": "品詞",
     "question": "Ms. Tanaka gave a ______ summary of the sales figures at the meeting.",
+    "question_ja": "田中さんは会議で、売上の数字について簡潔な要約を示しました。",
     "choices": [
       "briefly",
       "brief",
@@ -717,6 +768,7 @@
     "id": "pos-004",
     "category": "品詞",
     "question": "Customers have responded ______ to the hotel's new breakfast menu.",
+    "question_ja": "お客様は、ホテルの新しい朝食メニューに好意的な反応を示しています。",
     "choices": [
       "favor",
       "favorable",
@@ -731,6 +783,7 @@
     "id": "pos-201",
     "category": "品詞",
     "question": "Please read the attached document ______ before signing the contract.",
+    "question_ja": "契約書に署名する前に、添付の書類を注意深くお読みください。",
     "choices": [
       "careful",
       "carefully",
@@ -745,6 +798,7 @@
     "id": "pos-202",
     "category": "品詞",
     "question": "The new accounting software calculates tax much more ______ than the old spreadsheet did.",
+    "question_ja": "新しい会計ソフトは、以前の表計算シートよりもはるかに正確に税額を計算します。",
     "choices": [
       "accurate",
       "accurately",
@@ -759,6 +813,7 @@
     "id": "pos-203",
     "category": "品詞",
     "question": "All visitors must show a valid form of ______ at the front desk.",
+    "question_ja": "来訪者は全員、受付で有効な身分証明書を提示しなければなりません。",
     "choices": [
       "identify",
       "identified",
@@ -773,6 +828,7 @@
     "id": "pos-204",
     "category": "品詞",
     "question": "Ms. Tanaka gave a very ______ presentation on the company's sales results.",
+    "question_ja": "田中さんは、会社の売上結果についてとても印象的なプレゼンを行いました。",
     "choices": [
       "impression",
       "impressively",
@@ -787,6 +843,7 @@
     "id": "pos-205",
     "category": "品詞",
     "question": "The ______ of the new cafeteria has been delayed until next month.",
+    "question_ja": "新しい社員食堂の建設は、来月まで延期されました。",
     "choices": [
       "construct",
       "construction",
@@ -801,6 +858,7 @@
     "id": "pos-206",
     "category": "品詞",
     "question": "Our customer service team responds to every inquiry ______ and politely.",
+    "question_ja": "当社のカスタマーサービスチームは、すべての問い合わせに迅速かつ丁寧に対応します。",
     "choices": [
       "prompt",
       "promptness",
@@ -815,6 +873,7 @@
     "id": "pos-207",
     "category": "品詞",
     "question": "Employees are encouraged to make ______ use of the online training materials.",
+    "question_ja": "従業員は、オンライン研修教材を十分に活用するよう奨励されています。",
     "choices": [
       "full",
       "fully",
@@ -829,6 +888,7 @@
     "id": "pos-208",
     "category": "品詞",
     "question": "Thank you for your ______ to the staff survey last week.",
+    "question_ja": "先週の従業員アンケートにご回答いただき、ありがとうございます。",
     "choices": [
       "respond",
       "responsive",
@@ -843,6 +903,7 @@
     "id": "prep-003",
     "category": "前置詞・接続詞",
     "question": "The invoice must be paid ______ thirty days of the delivery date.",
+    "question_ja": "請求書は、納品日から 30 日以内にお支払いいただく必要があります。",
     "choices": [
       "until",
       "by",
@@ -857,6 +918,7 @@
     "id": "prep-004",
     "category": "前置詞・接続詞",
     "question": "Mr. Lopez could not attend the meeting ______ he was visiting a client in Osaka.",
+    "question_ja": "ロペスさんは大阪で顧客を訪問していたため、会議に出席できませんでした。",
     "choices": [
       "because of",
       "because",
@@ -871,6 +933,7 @@
     "id": "prep-201",
     "category": "前置詞・接続詞",
     "question": "The meeting was postponed ______ a scheduling conflict with the client.",
+    "question_ja": "顧客との日程の重複により、会議は延期されました。",
     "choices": [
       "because",
       "due to",
@@ -885,6 +948,7 @@
     "id": "prep-202",
     "category": "前置詞・接続詞",
     "question": "Mr. Lee will be ______ charge of the marketing department from April.",
+    "question_ja": "リーさんは 4 月からマーケティング部門の責任者になります。",
     "choices": [
       "at",
       "on",
@@ -899,6 +963,7 @@
     "id": "prep-203",
     "category": "前置詞・接続詞",
     "question": "______ to the notice, the parking lot will be closed for repairs this weekend.",
+    "question_ja": "お知らせによると、駐車場は今週末、補修のため閉鎖されます。",
     "choices": [
       "According",
       "Regarding",
@@ -913,6 +978,7 @@
     "id": "prep-204",
     "category": "前置詞・接続詞",
     "question": "Please do not use your mobile phone ______ the safety training session.",
+    "question_ja": "安全研修の間は、携帯電話を使用しないでください。",
     "choices": [
       "during",
       "while",
@@ -927,6 +993,7 @@
     "id": "prep-205",
     "category": "前置詞・接続詞",
     "question": "The sales team is responsible ______ preparing the monthly performance report.",
+    "question_ja": "営業チームは、月次の業績報告書の作成を担当しています。",
     "choices": [
       "to",
       "of",
@@ -941,6 +1008,7 @@
     "id": "prep-206",
     "category": "前置詞・接続詞",
     "question": "Sales increased sharply last quarter ______ the new advertising campaign was launched.",
+    "question_ja": "新しい広告キャンペーンが始まった後、前四半期の売上は急増しました。",
     "choices": [
       "because of",
       "despite",
@@ -955,6 +1023,7 @@
     "id": "prep-207",
     "category": "前置詞・接続詞",
     "question": "______ the office will be closed on Monday, all deadlines have been moved to Tuesday.",
+    "question_ja": "月曜日はオフィスが閉まるため、すべての締め切りが火曜日に変更されました。",
     "choices": [
       "Because of",
       "Since",
@@ -969,6 +1038,7 @@
     "id": "prep-208",
     "category": "前置詞・接続詞",
     "question": "You can contact the help desk ______ by phone or by e-mail during business hours.",
+    "question_ja": "営業時間内であれば、電話またはメールのどちらでもヘルプデスクに連絡できます。",
     "choices": [
       "both",
       "neither",
@@ -983,6 +1053,7 @@
     "id": "pron-003",
     "category": "代名詞・関係詞",
     "question": "The technician ______ repaired our copier last week was very polite.",
+    "question_ja": "先週コピー機を修理してくれた技術者は、とても礼儀正しい人でした。",
     "choices": [
       "who",
       "which",
@@ -997,6 +1068,7 @@
     "id": "pron-004",
     "category": "代名詞・関係詞",
     "question": "We visited the factory ______ our new products are made.",
+    "question_ja": "私たちは、新製品が作られている工場を訪問しました。",
     "choices": [
       "where",
       "who",
@@ -1011,6 +1083,7 @@
     "id": "pron-201",
     "category": "代名詞・関係詞",
     "question": "The applicant ______ résumé impressed the committee will be interviewed on Thursday.",
+    "question_ja": "履歴書で委員会に強い印象を与えた応募者は、木曜日に面接を受けます。",
     "choices": [
       "who",
       "which",
@@ -1025,6 +1098,7 @@
     "id": "pron-202",
     "category": "代名詞・関係詞",
     "question": "Each employee is expected to clean ______ own desk before leaving the office.",
+    "question_ja": "各従業員は、退社前に自分の机を片付けることになっています。",
     "choices": [
       "their",
       "they",
@@ -1039,6 +1113,7 @@
     "id": "pron-203",
     "category": "代名詞・関係詞",
     "question": "The director ______ opened the new branch last year has been promoted.",
+    "question_ja": "昨年新しい支店を開いた部長は昇進しました。",
     "choices": [
       "which",
       "whose",
@@ -1053,6 +1128,7 @@
     "id": "pron-204",
     "category": "代名詞・関係詞",
     "question": "The CEO ______ will present the quarterly results to the shareholders.",
+    "question_ja": "CEO 自らが、株主に四半期の業績を発表します。",
     "choices": [
       "him",
       "himself",
@@ -1067,6 +1143,7 @@
     "id": "pron-205",
     "category": "代名詞・関係詞",
     "question": "______ of the two candidates has the experience required for the position.",
+    "question_ja": "2 人の候補者のどちらも、その職に必要な経験を持っていません。",
     "choices": [
       "Both",
       "Every",
@@ -1081,6 +1158,7 @@
     "id": "pron-206",
     "category": "代名詞・関係詞",
     "question": "The software ______ we purchased last year needs to be updated.",
+    "question_ja": "昨年購入したソフトウェアは、更新が必要です。",
     "choices": [
       "that",
       "who",
@@ -1095,6 +1173,7 @@
     "id": "pron-207",
     "category": "代名詞・関係詞",
     "question": "______ staff member must wear an ID badge while inside the building.",
+    "question_ja": "スタッフは全員、建物内では ID バッジを着用しなければなりません。",
     "choices": [
       "All",
       "Every",
@@ -1109,6 +1188,7 @@
     "id": "pron-208",
     "category": "代名詞・関係詞",
     "question": "The clients have not replied yet, so please send ______ a reminder this afternoon.",
+    "question_ja": "顧客からまだ返事がないので、今日の午後、彼らにリマインダーを送ってください。",
     "choices": [
       "they",
       "their",
@@ -1123,6 +1203,7 @@
     "id": "tense-003",
     "category": "時制・態",
     "question": "Mr. Rivera ______ at the shipping company for the past five years.",
+    "question_ja": "リベラさんはこの 5 年間、その運送会社で働いています。",
     "choices": [
       "has worked",
       "works",
@@ -1137,6 +1218,7 @@
     "id": "tense-004",
     "category": "時制・態",
     "question": "The new cafeteria ______ next month, according to the facilities manager.",
+    "question_ja": "施設管理者によると、新しい社員食堂は来月オープンします。",
     "choices": [
       "opened",
       "has opened",
@@ -1151,6 +1233,7 @@
     "id": "tense-201",
     "category": "時制・態",
     "question": "The quarterly report ______ by the finance team yesterday afternoon.",
+    "question_ja": "四半期報告書は昨日の午後、財務チームによって完成されました。",
     "choices": [
       "completes",
       "is completing",
@@ -1165,6 +1248,7 @@
     "id": "tense-202",
     "category": "時制・態",
     "question": "Ms. Ortiz ______ the regional office since the merger was completed.",
+    "question_ja": "オルティスさんは、合併が完了して以来、地域オフィスを管理しています。",
     "choices": [
       "manages",
       "managed",
@@ -1179,6 +1263,7 @@
     "id": "tense-203",
     "category": "時制・態",
     "question": "Next week, the IT department ______ new security software on all computers.",
+    "question_ja": "来週、IT 部門がすべてのコンピューターに新しいセキュリティソフトをインストールします。",
     "choices": [
       "installed",
       "will install",
@@ -1193,6 +1278,7 @@
     "id": "tense-204",
     "category": "時制・態",
     "question": "The annual budget meeting ______ in Room 302 every March.",
+    "question_ja": "年次予算会議は、毎年 3 月に 302 号室で開かれます。",
     "choices": [
       "holds",
       "held",
@@ -1207,6 +1293,7 @@
     "id": "tense-205",
     "category": "時制・態",
     "question": "According to the forecast, it ______ heavily during the outdoor event tomorrow.",
+    "question_ja": "予報によると、明日の屋外イベントの間は激しい雨が降りそうです。",
     "choices": [
       "rained",
       "has rained",
@@ -1221,6 +1308,7 @@
     "id": "tense-206",
     "category": "時制・態",
     "question": "The new employee handbook ______ to all staff members last Monday.",
+    "question_ja": "新しい従業員ハンドブックは、先週の月曜日に全スタッフに配布されました。",
     "choices": [
       "distributes",
       "distributed",
@@ -1235,6 +1323,7 @@
     "id": "tense-207",
     "category": "時制・態",
     "question": "I ______ the invoice to the client as soon as the manager approves it.",
+    "question_ja": "部長が承認し次第、顧客に請求書を送ります。",
     "choices": [
       "will send",
       "sent",
@@ -1249,6 +1338,7 @@
     "id": "tense-208",
     "category": "時制・態",
     "question": "Last quarter, the sales team ______ its target by nearly fifteen percent.",
+    "question_ja": "前四半期、営業チームは目標を 15 パーセント近く上回りました。",
     "choices": [
       "exceeded",
       "has exceeded",
@@ -1263,6 +1353,7 @@
     "id": "vocab-003",
     "category": "語彙",
     "question": "All visitors must wear a name ______ while they are inside the factory.",
+    "question_ja": "来訪者は全員、工場内にいる間は名札を着用しなければなりません。",
     "choices": [
       "receipt",
       "invoice",
@@ -1277,6 +1368,7 @@
     "id": "vocab-004",
     "category": "語彙",
     "question": "We ______ for the delay and will ship your order tomorrow morning.",
+    "question_ja": "遅れをお詫びいたします。ご注文の品は明日の朝に発送します。",
     "choices": [
       "appreciate",
       "approve",
@@ -1291,6 +1383,7 @@
     "id": "vocab-201",
     "category": "語彙",
     "question": "All employees must ______ their time sheets by Friday afternoon.",
+    "question_ja": "全従業員は、金曜日の午後までに勤務表を提出しなければなりません。",
     "choices": [
       "submit",
       "invite",
@@ -1305,6 +1398,7 @@
     "id": "vocab-202",
     "category": "語彙",
     "question": "The company offers a 10 percent ______ to customers who order online.",
+    "question_ja": "その会社は、オンラインで注文する顧客に 10 パーセントの割引を提供しています。",
     "choices": [
       "salary",
       "discount",
@@ -1319,6 +1413,7 @@
     "id": "vocab-203",
     "category": "語彙",
     "question": "Please ______ the meeting room for Tuesday's client visit.",
+    "question_ja": "火曜日の顧客訪問のために会議室を予約してください。",
     "choices": [
       "arrive",
       "agree",
@@ -1333,6 +1428,7 @@
     "id": "vocab-204",
     "category": "語彙",
     "question": "Due to heavy snow, the morning flight to the regional office was ______.",
+    "question_ja": "大雪のため、地域オフィスへの朝の便は欠航になりました。",
     "choices": [
       "promoted",
       "canceled",
@@ -1347,6 +1443,7 @@
     "id": "vocab-205",
     "category": "語彙",
     "question": "The new ______ in the sales department will start work on Monday.",
+    "question_ja": "営業部の新しい従業員は、月曜日から勤務を始めます。",
     "choices": [
       "employee",
       "equipment",
@@ -1361,6 +1458,7 @@
     "id": "vocab-206",
     "category": "語彙",
     "question": "Please keep your ______ in case you need to return the product.",
+    "question_ja": "商品を返品する必要がある場合に備えて、レシートを保管しておいてください。",
     "choices": [
       "deadline",
       "salary",
@@ -1375,6 +1473,7 @@
     "id": "vocab-207",
     "category": "語彙",
     "question": "The conference room can ______ up to fifty people for the annual meeting.",
+    "question_ja": "その会議室は、年次会議で最大 50 人を収容できます。",
     "choices": [
       "participate",
       "announce",
@@ -1389,6 +1488,7 @@
     "id": "vocab-208",
     "category": "語彙",
     "question": "The company ______ a new vendor to supply office furniture for the new branch.",
+    "question_ja": "会社は、新しい支店の事務家具を供給する新しい納入業者を選びました。",
     "choices": [
       "promoted",
       "selected",
@@ -1403,6 +1503,7 @@
     "id": "pos-005",
     "category": "品詞",
     "question": "Our ______ to customer privacy is stated clearly on the company website.",
+    "question_ja": "お客様のプライバシーに対する当社の取り組みは、会社のウェブサイトに明記されています。",
     "choices": [
       "commit",
       "committed",
@@ -1417,6 +1518,7 @@
     "id": "pos-301",
     "category": "品詞",
     "question": "Please review the ______ file before the meeting and send me your comments by noon.",
+    "question_ja": "会議の前に添付ファイルを確認し、正午までにコメントをお送りください。",
     "choices": [
       "attach",
       "attaching",
@@ -1431,6 +1533,7 @@
     "id": "pos-302",
     "category": "品詞",
     "question": "There is a ______ demand for remote work options among employees in the sales division.",
+    "question_ja": "営業部門の従業員の間で、在宅勤務の選択肢への需要が高まっています。",
     "choices": [
       "growing",
       "grow",
@@ -1445,6 +1548,7 @@
     "id": "pos-303",
     "category": "品詞",
     "question": "______, the quarterly budget was approved without any major changes from the board.",
+    "question_ja": "幸い、四半期予算は取締役会から大きな変更を受けることなく承認されました。",
     "choices": [
       "Fortunate",
       "Fortune",
@@ -1459,6 +1563,7 @@
     "id": "pos-304",
     "category": "品詞",
     "question": "______ the new software took the IT team longer than expected because of several compatibility issues.",
+    "question_ja": "いくつかの互換性の問題のため、新しいソフトウェアのインストールは IT チームの予想より長くかかりました。",
     "choices": [
       "Install",
       "Installing",
@@ -1473,6 +1578,7 @@
     "id": "pos-305",
     "category": "品詞",
     "question": "The ______ of the annual conference has been moved to a larger venue downtown.",
+    "question_ja": "年次会議の会場は、市内中心部のより広い施設に変更されました。",
     "choices": [
       "locate",
       "located",
@@ -1487,6 +1593,7 @@
     "id": "pos-306",
     "category": "品詞",
     "question": "Several employees found the training session ______ because the instructor spoke too quickly.",
+    "question_ja": "講師の話し方が速すぎたため、研修を分かりにくいと感じた従業員が何人かいました。",
     "choices": [
       "confusing",
       "confused",
@@ -1501,6 +1608,7 @@
     "id": "pos-307",
     "category": "品詞",
     "question": "The newly hired accountant completed the audit ______ despite the tight deadline.",
+    "question_ja": "新しく採用された会計士は、厳しい締め切りにもかかわらず監査を無事に終えました。",
     "choices": [
       "success",
       "successful",
@@ -1515,6 +1623,7 @@
     "id": "pos-308",
     "category": "品詞",
     "question": "The committee was ______ impressed by the quality of the proposals submitted this year.",
+    "question_ja": "委員会は、今年提出された提案の質に深く感銘を受けました。",
     "choices": [
       "deep",
       "deeply",
@@ -1529,6 +1638,7 @@
     "id": "pos-309",
     "category": "品詞",
     "question": "Employees who are ______ in the mentoring program should contact the human resources office.",
+    "question_ja": "メンター制度に関心のある従業員は、人事部に連絡してください。",
     "choices": [
       "interest",
       "interesting",
@@ -1543,6 +1653,7 @@
     "id": "prep-005",
     "category": "前置詞・接続詞",
     "question": "Sales have increased steadily ______ the company launched its online store.",
+    "question_ja": "会社がオンラインストアを開設して以来、売上は着実に伸びています。",
     "choices": [
       "during",
       "for",
@@ -1557,6 +1668,7 @@
     "id": "prep-301",
     "category": "前置詞・接続詞",
     "question": "All suppliers must comply ______ the updated safety regulations by the end of the fiscal year.",
+    "question_ja": "すべての取引先は、会計年度末までに改定された安全規則に従わなければなりません。",
     "choices": [
       "to",
       "with",
@@ -1571,6 +1683,7 @@
     "id": "prep-302",
     "category": "前置詞・接続詞",
     "question": "Only full-time employees are eligible ______ the company's tuition reimbursement program.",
+    "question_ja": "会社の学費補助制度を利用できるのは、正社員だけです。",
     "choices": [
       "for",
       "to",
@@ -1585,6 +1698,7 @@
     "id": "prep-303",
     "category": "前置詞・接続詞",
     "question": "The orientation package consists ______ a handbook, a security badge, and a parking permit.",
+    "question_ja": "オリエンテーション資料一式は、ハンドブック、セキュリティバッジ、駐車許可証で構成されています。",
     "choices": [
       "in",
       "with",
@@ -1599,6 +1713,7 @@
     "id": "prep-304",
     "category": "前置詞・接続詞",
     "question": "______ the shipment arrives by Friday, we will have to postpone the product launch.",
+    "question_ja": "金曜日までに荷物が届かなければ、製品の発売を延期せざるを得ません。",
     "choices": [
       "Whereas",
       "Although",
@@ -1613,6 +1728,7 @@
     "id": "prep-305",
     "category": "前置詞・接続詞",
     "question": "The marketing team prefers face-to-face meetings, ______ the engineers usually communicate through online chat.",
+    "question_ja": "マーケティングチームは対面の会議を好む一方、エンジニアはたいていオンラインチャットでやり取りします。",
     "choices": [
       "whereas",
       "because",
@@ -1627,6 +1743,7 @@
     "id": "prep-306",
     "category": "前置詞・接続詞",
     "question": "______ the contract has been signed by both parties, construction on the new warehouse can begin.",
+    "question_ja": "両者が契約書に署名し次第、新しい倉庫の建設を始められます。",
     "choices": [
       "In case",
       "Despite",
@@ -1641,6 +1758,7 @@
     "id": "prep-307",
     "category": "前置詞・接続詞",
     "question": "Please keep a copy of the receipt ______ the accounting department needs to verify your expenses.",
+    "question_ja": "経理部が経費を確認する必要がある場合に備えて、領収書の控えを保管しておいてください。",
     "choices": [
       "even though",
       "so that",
@@ -1655,6 +1773,7 @@
     "id": "prep-308",
     "category": "前置詞・接続詞",
     "question": "The new printer is faster than the old one; ______, it uses considerably less toner.",
+    "question_ja": "新しいプリンターは以前のものより速く、しかもトナーの使用量がかなり少なくて済みます。",
     "choices": [
       "although",
       "moreover",
@@ -1669,6 +1788,7 @@
     "id": "prep-309",
     "category": "前置詞・接続詞",
     "question": "______ the budget was reduced, the project team managed to deliver the system on schedule.",
+    "question_ja": "予算は削減されたものの、プロジェクトチームは予定どおりシステムを納品することができました。",
     "choices": [
       "However",
       "Although",
@@ -1683,6 +1803,7 @@
     "id": "pron-005",
     "category": "代名詞・関係詞",
     "question": "Ms. Rivera is the consultant ______ advice helped us reduce shipping costs.",
+    "question_ja": "リベラさんは、その助言のおかげで私たちが配送費を削減できたコンサルタントです。",
     "choices": [
       "who",
       "whose",
@@ -1697,6 +1818,7 @@
     "id": "pron-301",
     "category": "代名詞・関係詞",
     "question": "______ who wish to attend the workshop must register online by the end of the week.",
+    "question_ja": "ワークショップへの参加を希望する人は、今週末までにオンラインで登録しなければなりません。",
     "choices": [
       "Those",
       "These",
@@ -1711,6 +1833,7 @@
     "id": "pron-302",
     "category": "代名詞・関係詞",
     "question": "The conference room ______ the interviews will be held is on the fourth floor.",
+    "question_ja": "面接が行われる会議室は 4 階にあります。",
     "choices": [
       "which",
       "where",
@@ -1725,6 +1848,7 @@
     "id": "pron-303",
     "category": "代名詞・関係詞",
     "question": "Please remember the date ______ the new expense policy takes effect so that your claims are processed correctly.",
+    "question_ja": "経費精算が正しく処理されるよう、新しい経費規定が発効する日付を覚えておいてください。",
     "choices": [
       "where",
       "which",
@@ -1739,6 +1863,7 @@
     "id": "pron-304",
     "category": "代名詞・関係詞",
     "question": "______ is chosen as team leader will be responsible for preparing the weekly progress report.",
+    "question_ja": "チームリーダーに選ばれた人は誰であれ、週次の進捗報告書の作成を担当します。",
     "choices": [
       "Whatever",
       "Whichever",
@@ -1753,6 +1878,7 @@
     "id": "pron-305",
     "category": "代名詞・関係詞",
     "question": "You may choose ______ of the two training dates is more convenient for your schedule.",
+    "question_ja": "2 つの研修日のうち、ご都合のよい方をどちらでも選べます。",
     "choices": [
       "whoever",
       "whichever",
@@ -1767,6 +1893,7 @@
     "id": "pron-306",
     "category": "代名詞・関係詞",
     "question": "One of the two printers is out of order, and ______ is being used for a large print job.",
+    "question_ja": "2 台のプリンターのうち 1 台は故障しており、もう 1 台は大量の印刷に使われています。",
     "choices": [
       "another",
       "other",
@@ -1781,6 +1908,7 @@
     "id": "pron-307",
     "category": "代名詞・関係詞",
     "question": "This conference room is already booked, so we will need to find ______ one for the client meeting.",
+    "question_ja": "この会議室はすでに予約されているので、顧客との打ち合わせには別の部屋を探す必要があります。",
     "choices": [
       "another",
       "other",
@@ -1795,6 +1923,7 @@
     "id": "pron-308",
     "category": "代名詞・関係詞",
     "question": "Some employees prefer to work from home, while ______ would rather come to the office every day.",
+    "question_ja": "在宅勤務を好む従業員もいれば、毎日出社したいという従業員もいます。",
     "choices": [
       "another",
       "other",
@@ -1809,6 +1938,7 @@
     "id": "pron-309",
     "category": "代名詞・関係詞",
     "question": "The consultant ______ recommendations we adopted last year will visit our office again in March.",
+    "question_ja": "昨年私たちがその提言を採用したコンサルタントが、3 月に再び来社します。",
     "choices": [
       "who",
       "whom",
@@ -1823,6 +1953,7 @@
     "id": "tense-005",
     "category": "時制・態",
     "question": "By the time the client arrived, the staff ______ the meeting room.",
+    "question_ja": "顧客が到着するまでに、スタッフは会議室の準備を終えていました。",
     "choices": [
       "had prepared",
       "prepare",
@@ -1837,6 +1968,7 @@
     "id": "tense-301",
     "category": "時制・態",
     "question": "The accountant ______ at the firm for ten years when she was promoted to regional director.",
+    "question_ja": "その会計士は、地域ディレクターに昇進したとき、その事務所で 10 年間働いていました。",
     "choices": [
       "works",
       "has worked",
@@ -1851,6 +1983,7 @@
     "id": "tense-302",
     "category": "時制・態",
     "question": "The auditors found that several invoices ______ twice by mistake.",
+    "question_ja": "監査人は、いくつかの請求書が誤って二重に支払われていたことを発見しました。",
     "choices": [
       "had been paid",
       "are paid",
@@ -1865,6 +1998,7 @@
     "id": "tense-303",
     "category": "時制・態",
     "question": "The technician ______ on the server problem since early this morning and has not found the cause yet.",
+    "question_ja": "技術者は今朝早くからサーバーの問題に取り組んでいますが、まだ原因を見つけられていません。",
     "choices": [
       "works",
       "has been working",
@@ -1879,6 +2013,7 @@
     "id": "tense-304",
     "category": "時制・態",
     "question": "We will send you the revised contract as soon as the legal department ______ its review.",
+    "question_ja": "法務部が確認を終え次第、改定した契約書をお送りします。",
     "choices": [
       "will complete",
       "completed",
@@ -1893,6 +2028,7 @@
     "id": "tense-305",
     "category": "時制・態",
     "question": "All visitors are required ______ by a staff member while in the laboratory area.",
+    "question_ja": "来訪者は全員、実験室エリアにいる間はスタッフの付き添いが必要です。",
     "choices": [
       "to be accompanied",
       "to accompany",
@@ -1907,6 +2043,7 @@
     "id": "tense-306",
     "category": "時制・態",
     "question": "The quarterly report ______ to all department heads before the meeting on Thursday.",
+    "question_ja": "四半期報告書は、木曜日の会議の前に全部門長に配布されます。",
     "choices": [
       "distributed",
       "has distributed",
@@ -1921,6 +2058,7 @@
     "id": "tense-307",
     "category": "時制・態",
     "question": "Please note that the parking lot ______ by a contractor tomorrow and will be unavailable all day.",
+    "question_ja": "明日は業者が駐車場の舗装をやり直すため、終日使用できませんのでご注意ください。",
     "choices": [
       "repaves",
       "will be repaved",
@@ -1935,6 +2073,7 @@
     "id": "tense-308",
     "category": "時制・態",
     "question": "When the new director ______ next month, the office layout will be reorganized.",
+    "question_ja": "来月新しいディレクターが着任したら、オフィスのレイアウトが再編されます。",
     "choices": [
       "arrives",
       "arrived",
@@ -1949,6 +2088,7 @@
     "id": "tense-309",
     "category": "時制・態",
     "question": "The company ______ its first online store in 2010 to reach customers overseas.",
+    "question_ja": "その会社は海外の顧客を獲得するため、2010 年に初めてのオンラインストアを開設しました。",
     "choices": [
       "launches",
       "has launched",
@@ -1963,6 +2103,7 @@
     "id": "vocab-005",
     "category": "語彙",
     "question": "Ms. Ortiz has ______ experience in managing international shipping projects.",
+    "question_ja": "オルティスさんは、国際輸送プロジェクトの管理において豊富な経験があります。",
     "choices": [
       "expensive",
       "extensive",
@@ -1977,6 +2118,7 @@
     "id": "vocab-301",
     "category": "語彙",
     "question": "Staff were asked to ______ the inventory count so that the figures are ready when the auditors arrive.",
+    "question_ja": "監査人が到着したときに数字がそろっているよう、スタッフは在庫数の集計を確定するよう求められました。",
     "choices": [
       "postpone",
       "dismiss",
@@ -1991,6 +2133,7 @@
     "id": "vocab-302",
     "category": "語彙",
     "question": "The shipment of replacement parts was ______ at customs for three days.",
+    "question_ja": "交換部品の出荷は、税関で 3 日間足止めされました。",
     "choices": [
       "declined",
       "deleted",
@@ -2005,6 +2148,7 @@
     "id": "vocab-303",
     "category": "語彙",
     "question": "The seminar on time management was so ______ that many attendees asked for a follow-up session.",
+    "question_ja": "時間管理のセミナーはとても有益だったので、多くの参加者が続編の開催を求めました。",
     "choices": [
       "informative",
       "expensive",
@@ -2019,6 +2163,7 @@
     "id": "vocab-304",
     "category": "語彙",
     "question": "Employees are reminded to ______ their passwords every ninety days to protect company data.",
+    "question_ja": "会社のデータを守るため、従業員は 90 日ごとにパスワードを更新するよう注意喚起されています。",
     "choices": [
       "assemble",
       "update",
@@ -2033,6 +2178,7 @@
     "id": "vocab-305",
     "category": "語彙",
     "question": "The sales figures for the third quarter ______ our expectations by nearly fifteen percent.",
+    "question_ja": "第 3 四半期の売上は、私たちの予想を 15 パーセント近く上回りました。",
     "choices": [
       "examined",
       "exchanged",
@@ -2047,6 +2193,7 @@
     "id": "vocab-306",
     "category": "語彙",
     "question": "Please read the ______ carefully before signing, as it describes the conditions of the warranty.",
+    "question_ja": "この契約書には保証の条件が書かれていますので、署名の前によくお読みください。",
     "choices": [
       "invitation",
       "schedule",
@@ -2061,6 +2208,7 @@
     "id": "vocab-307",
     "category": "語彙",
     "question": "The hotel offers a ______ shuttle service between the airport and the convention center.",
+    "question_ja": "そのホテルは、空港とコンベンションセンターの間を結ぶ無料のシャトルサービスを提供しています。",
     "choices": [
       "complimentary",
       "compulsory",
@@ -2075,6 +2223,7 @@
     "id": "vocab-308",
     "category": "語彙",
     "question": "Due to a sudden ______ in orders, the factory will operate an extra shift this month.",
+    "question_ja": "注文が急に増えたため、工場は今月、追加のシフトで操業します。",
     "choices": [
       "inquiry",
       "increase",
@@ -2089,6 +2238,7 @@
     "id": "vocab-309",
     "category": "語彙",
     "question": "The CEO's speech ______ the importance of teamwork in achieving the company's long-term goals.",
+    "question_ja": "CEO のスピーチは、会社の長期目標を達成するうえでのチームワークの大切さを強調しました。",
     "choices": [
       "estimated",
       "employed",
@@ -2103,6 +2253,7 @@
     "id": "pos-006",
     "category": "品詞",
     "question": "The report was ______ longer than the one submitted last quarter.",
+    "question_ja": "その報告書は、前四半期に提出されたものよりかなり長いものでした。",
     "choices": [
       "considerably",
       "considerable",
@@ -2117,6 +2268,7 @@
     "id": "pos-401",
     "category": "品詞",
     "question": "All visitors must wear ______ identification badges while on the premises of the research facility.",
+    "question_ja": "来訪者は全員、研究施設の敷地内では目に見える形で身分証バッジを着用しなければなりません。",
     "choices": [
       "visibly",
       "visible",
@@ -2131,6 +2283,7 @@
     "id": "pos-402",
     "category": "品詞",
     "question": "The ______ of the new billing system has been postponed until the accounting team completes its training.",
+    "question_ja": "新しい請求システムの導入は、経理チームが研修を終えるまで延期されました。",
     "choices": [
       "implement",
       "implemented",
@@ -2145,6 +2298,7 @@
     "id": "pos-403",
     "category": "品詞",
     "question": "Despite the ______ delays, the construction crew managed to finish the lobby renovation ahead of schedule.",
+    "question_ja": "費用のかさむ遅れがあったにもかかわらず、工事班はロビーの改装を予定より早く終えることができました。",
     "choices": [
       "cost",
       "costs",
@@ -2159,6 +2313,7 @@
     "id": "pos-404",
     "category": "品詞",
     "question": "Employees who relocate for work are entitled to ______ for moving expenses up to a fixed amount.",
+    "question_ja": "転勤する従業員は、一定額を上限に引っ越し費用の払い戻しを受ける権利があります。",
     "choices": [
       "reimbursement",
       "reimburse",
@@ -2173,6 +2328,7 @@
     "id": "pos-405",
     "category": "品詞",
     "question": "The committee found the consultant's proposal ______ and recommended that the board adopt it without major changes.",
+    "question_ja": "委員会はコンサルタントの提案に説得力があると判断し、大きな変更なしに採用するよう取締役会に勧めました。",
     "choices": [
       "persuade",
       "persuasion",
@@ -2187,6 +2343,7 @@
     "id": "pos-406",
     "category": "品詞",
     "question": "A ______ response to customer complaints is essential if the company hopes to retain its loyal client base.",
+    "question_ja": "会社が常連客を維持したいのであれば、顧客の苦情への迅速な対応が欠かせません。",
     "choices": [
       "time",
       "timed",
@@ -2201,6 +2358,7 @@
     "id": "pos-407",
     "category": "品詞",
     "question": "The newly appointed director spoke ______ about the challenges the sales division will face next quarter.",
+    "question_ja": "新任の取締役は、営業部門が来四半期に直面する課題について率直に語りました。",
     "choices": [
       "candid",
       "candidly",
@@ -2215,6 +2373,7 @@
     "id": "pos-408",
     "category": "品詞",
     "question": "Please review the ______ terms carefully before signing the lease for the additional warehouse space.",
+    "question_ja": "追加の倉庫スペースの賃貸契約に署名する前に、改定された条件を注意深くご確認ください。",
     "choices": [
       "revised",
       "revise",
@@ -2229,6 +2388,7 @@
     "id": "pos-409",
     "category": "品詞",
     "question": "Because of its ______ to the airport, the hotel is a popular choice for executives attending the annual trade fair.",
+    "question_ja": "空港に近いため、そのホテルは年次見本市に参加する経営幹部に人気の選択肢です。",
     "choices": [
       "proximate",
       "approximate",
@@ -2243,6 +2403,7 @@
     "id": "prep-006",
     "category": "前置詞・接続詞",
     "question": "The department will approve the purchase ______ the vendor agrees to a two-year support contract.",
+    "question_ja": "納入業者が 2 年間のサポート契約に同意するなら、部門はその購入を承認します。",
     "choices": [
       "provided that",
       "in case of",
@@ -2257,6 +2418,7 @@
     "id": "prep-401",
     "category": "前置詞・接続詞",
     "question": "______ having received the revised specifications only yesterday, the engineering team submitted a complete proposal this morning.",
+    "question_ja": "改定された仕様書を昨日受け取ったばかりにもかかわらず、技術チームは今朝、完全な提案書を提出しました。",
     "choices": [
       "Despite",
       "Although",
@@ -2271,6 +2433,7 @@
     "id": "prep-402",
     "category": "前置詞・接続詞",
     "question": "All vendors must handle confidential client data ______ accordance with the guidelines issued by the legal department.",
+    "question_ja": "すべての納入業者は、法務部が出したガイドラインに従って顧客の機密データを取り扱わなければなりません。",
     "choices": [
       "in",
       "on",
@@ -2285,6 +2448,7 @@
     "id": "prep-403",
     "category": "前置詞・接続詞",
     "question": "Ms. Tanaka will accept the industry award ______ behalf of the entire engineering team at the ceremony on Friday.",
+    "question_ja": "田中さんは金曜日の式典で、技術チーム全体を代表して業界賞を受け取ります。",
     "choices": [
       "by",
       "for",
@@ -2299,6 +2463,7 @@
     "id": "prep-404",
     "category": "前置詞・接続詞",
     "question": "The elevators in the east wing will remain out of service ______ the control panels have been replaced and inspected.",
+    "question_ja": "東棟のエレベーターは、制御盤の交換と点検が終わるまで使用できません。",
     "choices": [
       "until",
       "during",
@@ -2313,6 +2478,7 @@
     "id": "prep-405",
     "category": "前置詞・接続詞",
     "question": "Staff members must obtain written approval from a supervisor ______ purchasing any software for company devices.",
+    "question_ja": "スタッフは、会社の端末にソフトウェアを購入する前に、上司の書面による承認を得なければなりません。",
     "choices": [
       "prior to",
       "previous",
@@ -2327,6 +2493,7 @@
     "id": "prep-406",
     "category": "前置詞・接続詞",
     "question": "The product launch has been pushed back a week ______ a labor dispute at the port that delayed the shipment.",
+    "question_ja": "港での労働争議で出荷が遅れたため、製品の発売は 1 週間先送りされました。",
     "choices": [
       "owing to",
       "because",
@@ -2341,6 +2508,7 @@
     "id": "prep-407",
     "category": "前置詞・接続詞",
     "question": "Employees may take compensatory time off ______ overtime pay if their manager approves the request in advance.",
+    "question_ja": "上司が事前に申請を承認すれば、従業員は残業代の代わりに代休を取ることができます。",
     "choices": [
       "instead",
       "in lieu of",
@@ -2355,6 +2523,7 @@
     "id": "prep-408",
     "category": "前置詞・接続詞",
     "question": "______ of next Tuesday, all requests for office supplies must be submitted through the online procurement portal.",
+    "question_ja": "来週火曜日以降、事務用品の申請はすべてオンラインの購買ポータルから行わなければなりません。",
     "choices": [
       "As",
       "Since",
@@ -2369,6 +2538,7 @@
     "id": "prep-409",
     "category": "前置詞・接続詞",
     "question": "______ completed, the inventory report should be forwarded to both the warehouse supervisor and the finance department.",
+    "question_ja": "在庫報告書は、完成したら倉庫責任者と財務部の両方に送ってください。",
     "choices": [
       "While",
       "Since",
@@ -2383,6 +2553,7 @@
     "id": "pron-006",
     "category": "代名詞・関係詞",
     "question": "The new policy applies to all employees, including ______ who work part-time.",
+    "question_ja": "新しい方針は、パートタイムで働く人も含めて全従業員に適用されます。",
     "choices": [
       "they",
       "them",
@@ -2397,6 +2568,7 @@
     "id": "pron-401",
     "category": "代名詞・関係詞",
     "question": "The consultant interviewed twelve department heads, most of ______ expressed concern about the proposed reorganization.",
+    "question_ja": "コンサルタントは 12 人の部門長に聞き取りを行い、そのほとんどが提案された組織再編への懸念を示しました。",
     "choices": [
       "them",
       "whom",
@@ -2411,6 +2583,7 @@
     "id": "pron-402",
     "category": "代名詞・関係詞",
     "question": "The firm has introduced a new system ______ employees can exchange unused vacation days for additional training credits.",
+    "question_ja": "その会社は、未使用の有給休暇を追加の研修ポイントと交換できる新しい制度を導入しました。",
     "choices": [
       "which",
       "whom",
@@ -2425,6 +2598,7 @@
     "id": "pron-403",
     "category": "代名詞・関係詞",
     "question": "Please complete ______ sections of the form apply to your department and leave the remaining ones blank.",
+    "question_ja": "用紙のうち、あなたの部門に当てはまる欄だけを記入し、残りは空欄のままにしてください。",
     "choices": [
       "however",
       "whoever",
@@ -2439,6 +2613,7 @@
     "id": "pron-404",
     "category": "代名詞・関係詞",
     "question": "The annual bonus will be paid only to ______ who met their sales targets in all four quarters.",
+    "question_ja": "年次賞与は、4 つの四半期すべてで売上目標を達成した人にのみ支給されます。",
     "choices": [
       "those",
       "them",
@@ -2453,6 +2628,7 @@
     "id": "pron-405",
     "category": "代名詞・関係詞",
     "question": "The attorney ______ the board entrusted the merger negotiations has over twenty years of experience in corporate law.",
+    "question_ja": "取締役会が合併交渉を任せた弁護士は、企業法務で 20 年以上の経験があります。",
     "choices": [
       "whom",
       "to whom",
@@ -2467,6 +2643,7 @@
     "id": "pron-406",
     "category": "代名詞・関係詞",
     "question": "______ of the applicants has been notified of the interview schedule by email.",
+    "question_ja": "応募者には一人ひとり、面接の日程がメールで通知されています。",
     "choices": [
       "All",
       "Most",
@@ -2481,6 +2658,7 @@
     "id": "pron-407",
     "category": "代名詞・関係詞",
     "question": "The training manual, ______ was revised last month, now includes a chapter on remote collaboration tools.",
+    "question_ja": "先月改訂された研修マニュアルには、リモートでの共同作業ツールに関する章が加わりました。",
     "choices": [
       "that",
       "which",
@@ -2495,6 +2673,7 @@
     "id": "pron-408",
     "category": "代名詞・関係詞",
     "question": "Any employee ______ badge is lost or stolen must report the incident to the security office within twenty-four hours.",
+    "question_ja": "バッジを紛失または盗難された従業員は、24 時間以内に警備室に届け出なければなりません。",
     "choices": [
       "who",
       "whom",
@@ -2509,6 +2688,7 @@
     "id": "pron-409",
     "category": "代名詞・関係詞",
     "question": "The two finalists for the design award congratulated ______ warmly before the winner was announced.",
+    "question_ja": "デザイン賞の最終候補の 2 人は、受賞者の発表前に互いを温かく祝福し合いました。",
     "choices": [
       "each other",
       "themselves",
@@ -2523,6 +2703,7 @@
     "id": "tense-006",
     "category": "時制・態",
     "question": "All applications ______ by the time the committee meets next Friday, so please submit yours soon.",
+    "question_ja": "来週金曜日に委員会が開かれるまでに、すべての応募書類の審査は終わっている予定ですので、早めに提出してください。",
     "choices": [
       "will have been reviewed",
       "will be reviewing",
@@ -2537,6 +2718,7 @@
     "id": "tense-401",
     "category": "時制・態",
     "question": "By the time the new distribution center opens next spring, the company ______ more than two hundred additional warehouse staff.",
+    "question_ja": "来春に新しい物流センターが開設されるまでに、その会社は倉庫スタッフを 200 人以上追加で雇用している予定です。",
     "choices": [
       "hires",
       "has hired",
@@ -2551,6 +2733,7 @@
     "id": "tense-402",
     "category": "時制・態",
     "question": "The supervisor reported that the shipment ______ the port before the storm warning was issued.",
+    "question_ja": "監督者は、嵐の警報が出る前に荷物は港を出ていたと報告しました。",
     "choices": [
       "had left",
       "has left",
@@ -2565,6 +2748,7 @@
     "id": "tense-403",
     "category": "時制・態",
     "question": "All safety inspections ______ by certified personnel before the equipment is returned to the production line.",
+    "question_ja": "設備を生産ラインに戻す前に、すべての安全点検は有資格者が行わなければなりません。",
     "choices": [
       "must perform",
       "must have performed",
@@ -2579,6 +2763,7 @@
     "id": "tense-404",
     "category": "時制・態",
     "question": "The committee recommended that the proposal ______ to the shareholders at the next general meeting.",
+    "question_ja": "委員会は、その提案を次回の総会で株主に提示するよう勧告しました。",
     "choices": [
       "be presented",
       "is presented",
@@ -2593,6 +2778,7 @@
     "id": "tense-405",
     "category": "時制・態",
     "question": "By the time the merger was announced, the two companies ______ for over a year.",
+    "question_ja": "合併が発表された時点で、2 社は 1 年以上にわたって交渉を続けていました。",
     "choices": [
       "have negotiated",
       "had been negotiating",
@@ -2607,6 +2793,7 @@
     "id": "tense-406",
     "category": "時制・態",
     "question": "Every new commercial building ______ by the fire department before it can open to the public.",
+    "question_ja": "新しい商業ビルはすべて、一般公開の前に消防署の検査を受けなければなりません。",
     "choices": [
       "must be inspected",
       "must inspect",
@@ -2621,6 +2808,7 @@
     "id": "tense-407",
     "category": "時制・態",
     "question": "Once the contract ______ by both parties, the vendor will begin delivering materials to the construction site.",
+    "question_ja": "両者が契約書に署名したら、納入業者は建設現場への資材の搬入を始めます。",
     "choices": [
       "will be signed",
       "had been signed",
@@ -2635,6 +2823,7 @@
     "id": "tense-408",
     "category": "時制・態",
     "question": "The receptionist ______ the visitor to the conference room when the fire alarm unexpectedly went off.",
+    "question_ja": "受付係が来訪者を会議室へ案内していたとき、突然火災報知器が鳴りました。",
     "choices": [
       "escorts",
       "has escorted",
@@ -2649,6 +2838,7 @@
     "id": "tense-409",
     "category": "時制・態",
     "question": "The quarterly figures ______ to the regional managers as soon as the finance department finalizes them.",
+    "question_ja": "四半期の数字は、財務部が確定し次第、地域マネージャーに配布されます。",
     "choices": [
       "will be distributed",
       "distribute",
@@ -2663,6 +2853,7 @@
     "id": "vocab-006",
     "category": "語彙",
     "question": "Employees who travel abroad are ______ to a daily allowance for meals.",
+    "question_ja": "海外出張をする従業員には、食事の日当を受け取る権利があります。",
     "choices": [
       "required",
       "included",
@@ -2677,6 +2868,7 @@
     "id": "vocab-401",
     "category": "語彙",
     "question": "The marketing department will ______ a survey next month to measure customer satisfaction with the redesigned website.",
+    "question_ja": "マーケティング部門は来月、刷新したウェブサイトに対する顧客満足度を測るためのアンケートを実施します。",
     "choices": [
       "commit",
       "compose",
@@ -2691,6 +2883,7 @@
     "id": "vocab-402",
     "category": "語彙",
     "question": "Attendance at the ethics workshop is ______ for all new hires and must be completed within the first thirty days.",
+    "question_ja": "倫理ワークショップへの出席は新入社員全員の義務で、入社後 30 日以内に受講しなければなりません。",
     "choices": [
       "optional",
       "tentative",
@@ -2705,6 +2898,7 @@
     "id": "vocab-403",
     "category": "語彙",
     "question": "Due to unforeseen circumstances, the keynote speaker's session has been ______ until the afternoon of the second day.",
+    "question_ja": "予期せぬ事情により、基調講演者のセッションは 2 日目の午後に延期されました。",
     "choices": [
       "dismissed",
       "postponed",
@@ -2719,6 +2913,7 @@
     "id": "vocab-404",
     "category": "語彙",
     "question": "The audit revealed several ______ between the inventory records and the actual stock on the warehouse shelves.",
+    "question_ja": "監査により、在庫記録と倉庫の棚にある実際の在庫との間にいくつかの食い違いが見つかりました。",
     "choices": [
       "consequences",
       "assumptions",
@@ -2733,6 +2928,7 @@
     "id": "vocab-405",
     "category": "語彙",
     "question": "Applicants for the regional sales position must be willing to travel ______, sometimes on very short notice.",
+    "question_ja": "地域営業職の応募者は、ときには急な連絡でも、頻繁に出張できることが求められます。",
     "choices": [
       "roughly",
       "formerly",
@@ -2747,6 +2943,7 @@
     "id": "vocab-406",
     "category": "語彙",
     "question": "The two firms reached a ______ agreement under which each will share production facilities in the Asian market.",
+    "question_ja": "2 社は、アジア市場でそれぞれの生産設備を共有するという相互の合意に達しました。",
     "choices": [
       "frequent",
       "spacious",
@@ -2761,6 +2958,7 @@
     "id": "vocab-407",
     "category": "語彙",
     "question": "Please ______ from using the main entrance on Thursday morning while the floor tiles are being replaced.",
+    "question_ja": "木曜日の午前中は床タイルの張り替えを行いますので、正面玄関の使用はお控えください。",
     "choices": [
       "avoid",
       "refrain",
@@ -2775,6 +2973,7 @@
     "id": "vocab-408",
     "category": "語彙",
     "question": "The quarterly newsletter ______ several articles on energy conservation measures adopted at our manufacturing plants.",
+    "question_ja": "四半期の社内報では、当社の製造工場で採用された省エネ対策に関する記事をいくつか特集しています。",
     "choices": [
       "observes",
       "attends",
@@ -2789,6 +2988,7 @@
     "id": "vocab-409",
     "category": "語彙",
     "question": "The new accounting software is fully ______ with the database systems currently used by our overseas branches.",
+    "question_ja": "新しい会計ソフトは、海外支店が現在使っているデータベースシステムと完全に互換性があります。",
     "choices": [
       "comparable",
       "competitive",

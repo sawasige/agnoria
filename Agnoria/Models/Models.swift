@@ -6,6 +6,8 @@ final class GrammarQuestion {
     @Attribute(.unique) var id: String
     var category: String
     var question: String
+    /// 空欄を正解で埋めた文の和訳 [v1.7]。既定値は軽量マイグレーション用
+    var questionJa: String = ""
     var choices: [String]
     var answer: Int
     var explanation: String
@@ -16,6 +18,7 @@ final class GrammarQuestion {
         id = s.id
         category = s.category
         question = s.question
+        questionJa = s.questionJa
         choices = s.choices
         answer = s.answer
         explanation = s.explanation
@@ -26,6 +29,7 @@ final class GrammarQuestion {
     func apply(_ s: GrammarSnapshot) {
         category = s.category
         question = s.question
+        questionJa = s.questionJa
         choices = s.choices
         answer = s.answer
         explanation = s.explanation
@@ -34,7 +38,7 @@ final class GrammarQuestion {
     }
 
     var snapshot: GrammarSnapshot {
-        GrammarSnapshot(id: id, category: category, question: question, choices: choices,
+        GrammarSnapshot(id: id, category: category, question: question, questionJa: questionJa, choices: choices,
                         answer: answer, explanation: explanation, level: level)
     }
 }

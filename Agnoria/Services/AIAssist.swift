@@ -47,11 +47,13 @@ enum AIAssist {
                 例文には対象の単語をちょうど1回含め、対象の単語の部分だけを ______ （アンダースコア6つ）にしてください。
                 誤答の選択肢は、品詞が同じで意味が異なる一般的な英単語を3語、対象の単語と重複しないように挙げてください。
                 誤答は、その例文の空欄に入れると意味が通らない語だけにしてください（類義語や同じ文脈で自然に使える語は避ける）。
+                例文の和訳（空欄を対象の単語で埋めた文全体の自然な日本語訳）も付けてください。
                 """)
             let prompt = "対象の単語: \(word.word) / 品詞: \(word.pos) / 意味: \(word.meaning)"
             return try await session.respond(to: prompt, generating: PracticeCloze.self).content
         }
         guard let g = generated, g.sentence.contains(Cloze.blank) else { return nil }
+        let sentenceJa = g.sentenceJa.trimmingCharacters(in: .whitespacesAndNewlines)
         let distractors = Array(Set(g.distractors.map { $0.trimmingCharacters(in: .whitespaces) })
             .filter { !$0.isEmpty && $0.lowercased() != word.word.lowercased() }
             .prefix(3))
@@ -59,7 +61,8 @@ enum AIAssist {
         var rng = SystemRandomNumberGenerator()
         let (choices, correct) = ChoiceShuffler.shuffle([word.word] + distractors, correctIndex: 0, using: &rng)
         return QuizQuestion(itemID: word.id, mode: .word, wordFormat: .cloze, categoryName: "練習用",
-                            prompt: g.sentence, choices: choices, correctIndex: correct,
+                            prompt: g.sentence, promptJa: sentenceJa.isEmpty ? nil : sentenceJa,
+                            choices: choices, correctIndex: correct,
                             explanation: word.meaning, word: word,
                             speechText: g.sentence.replacingOccurrences(of: Cloze.blank, with: word.word),
                             isPractice: true)
@@ -88,6 +91,8 @@ enum AIAssist {
 struct PracticeCloze {
     @Guide(description: "対象の単語を ______ に置き換えた英語の例文1文。8〜16語")
     var sentence: String
+    @Guide(description: "空欄を対象の単語で埋めた例文全体の自然な日本語訳。1文")
+    var sentenceJa: String
     @Guide(description: "誤答となる英単語3語。対象の単語と同じ品詞で意味が異なるもの", .count(3))
     var distractors: [String]
 }

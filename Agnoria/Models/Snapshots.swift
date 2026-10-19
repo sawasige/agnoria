@@ -22,10 +22,17 @@ nonisolated struct GrammarSnapshot: Codable, Hashable, Sendable, Identifiable {
     var id: String
     var category: String
     var question: String
+    /// 空欄を正解で埋めた文の和訳 [v1.7]
+    var questionJa: String
     var choices: [String]
     var answer: Int
     var explanation: String
     var level: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id, category, question, choices, answer, explanation, level
+        case questionJa = "question_ja"
+    }
 }
 
 nonisolated struct ProgressSnapshot: Hashable, Sendable {

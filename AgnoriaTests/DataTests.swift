@@ -58,7 +58,7 @@ struct ImporterTests {
                      distractors: ["a", "b", "c"], category: "ビジネス一般", level: 450)
     }
     private func makeGrammar(_ id: String) -> GrammarSnapshot {
-        GrammarSnapshot(id: id, category: "品詞", question: "x ______ y", choices: ["a", "b", "c", "d"],
+        GrammarSnapshot(id: id, category: "品詞", question: "x ______ y", questionJa: "x a y の訳", choices: ["a", "b", "c", "d"],
                         answer: 0, explanation: "e", level: 450)
     }
 
@@ -165,5 +165,26 @@ struct SoundAssetTests {
         for effect in SoundEffects.Effect.allCases {
             #expect(bundle.url(forResource: effect.rawValue, withExtension: "caf") != nil, "\(effect.rawValue).caf")
         }
+    }
+}
+
+@Suite("文法問題の和訳")
+struct GrammarTranslationTests {
+    @Test("文法問題は和訳を運び、空欄を正解で埋めた英文を作れる") func promptJa() {
+        let g = GrammarSnapshot(id: "pos-900", category: "品詞", question: "Please ______ the form.", questionJa: "用紙に記入してください。",
+                                choices: ["complete", "completion", "completely", "completed"], answer: 0, explanation: "e", level: 450)
+        var rng = SystemRandomNumberGenerator()
+        let q = GrammarQuestionFactory.make(g, using: &rng)
+        #expect(q.promptJa == "用紙に記入してください。")
+        #expect(q.completedPrompt == "Please complete the form.")
+        #expect(q.choices[q.correctIndex] == "complete")
+    }
+
+    @Test("単語問題は和訳を word 側に持つので promptJa は nil") func wordHasNoPromptJa() {
+        let w = WordSnapshot(id: "w-900", word: "invoice", pos: "名", meaning: "請求書", example: "Please pay the invoice.",
+                             exampleJa: "請求書をお支払いください。", distractors: ["a", "b", "c"], category: "ビジネス一般", level: 450)
+        var rng = SystemRandomNumberGenerator()
+        let q = WordQuestionFactory.make(w, format: .meaning, pool: [w], using: &rng)
+        #expect(q?.promptJa == nil)
     }
 }
