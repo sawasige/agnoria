@@ -187,8 +187,10 @@ nonisolated enum AgnoriaSchema {
     static func make(inMemory: Bool = false, cloudSync: Bool) throws -> Result {
         let schema = Schema(models)
         if inMemory {
-            let questions = ModelConfiguration("questions", schema: Schema(questionModels), isStoredInMemoryOnly: true)
-            let records = ModelConfiguration("records", schema: Schema(recordModels), isStoredInMemoryOnly: true)
+            // cloudKitDatabase の既定は .automatic で、iCloud の entitlement があるビルド（テストのホストも）では CloudKit の
+            // 検証（unique 不可・既定値必須）が走って問題モデルで失敗する。インメモリは必ず .none
+            let questions = ModelConfiguration("questions", schema: Schema(questionModels), isStoredInMemoryOnly: true, cloudKitDatabase: .none)
+            let records = ModelConfiguration("records", schema: Schema(recordModels), isStoredInMemoryOnly: true, cloudKitDatabase: .none)
             return Result(container: try ModelContainer(for: schema, configurations: [questions, records]), cloudSync: false)
         }
         let dir = URL.applicationSupportDirectory
