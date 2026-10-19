@@ -8,6 +8,8 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
     let wordFormat: WordFormat?
     let categoryName: String
     let prompt: String
+    /// 空欄を正解で埋めた prompt の和訳 [v1.7]。文法問題と練習問題で持つ。単語問題は word.exampleJa を使うので nil
+    let promptJa: String?
     let choices: [String]
     let correctIndex: Int
     /// 文法: explanation / 単語: 意味（例文は word から）
@@ -19,7 +21,7 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
     var isPractice: Bool = false
 
     init(itemID: String, mode: DrillMode, wordFormat: WordFormat?, categoryName: String,
-         prompt: String, choices: [String], correctIndex: Int, explanation: String,
+         prompt: String, promptJa: String? = nil, choices: [String], correctIndex: Int, explanation: String,
          word: WordSnapshot?, speechText: String?, isPractice: Bool = false) {
         id = UUID()
         self.itemID = itemID
@@ -27,6 +29,7 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
         self.wordFormat = wordFormat
         self.categoryName = categoryName
         self.prompt = prompt
+        self.promptJa = promptJa
         self.choices = choices
         self.correctIndex = correctIndex
         self.explanation = explanation
@@ -36,13 +39,16 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
     }
 
     static let choiceLabels = ["A", "B", "C", "D"]
+
+    /// 空欄（______）を正解で埋めた英文。空欄が無ければ prompt のまま
+    var completedPrompt: String { prompt.replacingOccurrences(of: Cloze.blank, with: choices[correctIndex]) }
 }
 
 nonisolated enum GrammarQuestionFactory {
     static func make(_ g: GrammarSnapshot, using rng: inout some RandomNumberGenerator) -> QuizQuestion {
         let (choices, correct) = ChoiceShuffler.shuffle(g.choices, correctIndex: g.answer, using: &rng)
         return QuizQuestion(itemID: g.id, mode: .grammar, wordFormat: nil, categoryName: g.category,
-                            prompt: g.question, choices: choices, correctIndex: correct,
+                            prompt: g.question, promptJa: g.questionJa, choices: choices, correctIndex: correct,
                             explanation: g.explanation, word: nil,
                             speechText: g.question.replacingOccurrences(of: Cloze.blank, with: g.choices[g.answer]))
     }
