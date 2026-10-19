@@ -165,6 +165,6 @@ id はすべて据え置き（学習履歴の紐づけは変えない）。
 
 | # | 判断 | 理由・経緯 |
 |---|---|---|
-| M1 | iCloud 同期（Issue #2、SPEC §2.3）を 1.1 の後、1.2 として実装。方式は SwiftData + CloudKit のまま（Firebase ではなく） | ユーザーの「iCloud と Firebase どっちがいい？」に対し、サインイン不要・開発者が記録を見られない・実装が薄い・無料・Mac 版にそのまま効く、の 5 点で iCloud を推奨し採用。Android を出す場合は同期層（Firestore + アカウント）を作り直すことになるが、ローカルの SwiftData が正なので行き止まりではない |
+| M1 | iCloud 同期（Issue #2、SPEC §2.3）を実装し、1.1 に含める（当初は 1.2 を提案したが、ユーザーが「iCloud 対応も 1.1 では？」と 1.1 に含める判断）。方式は SwiftData + CloudKit のまま（Firebase ではなく） | ユーザーの「iCloud と Firebase どっちがいい？」に対し、サインイン不要・開発者が記録を見られない・実装が薄い・無料・Mac 版にそのまま効く、の 5 点で iCloud を推奨し採用。Android を出す場合は同期層（Firestore + アカウント）を作り直すことになるが、ローカルの SwiftData が正なので行き止まりではない |
 | M2 | 既存データの移行は「記録を別ストアへコピー」ではなく「問題データを新しい `questions.store` へ移し、`default.store` を記録ストアとして CloudKit 化」 | 記録のコピーは失敗経路が増える。問題データは同梱 JSON から 1 秒未満で取り込み直せるので、fingerprint を消して再取り込みするだけで済む。シミュレータに残っていた 1.1 相当のストア（ItemProgress 3 件、Word 400、Grammar 200）で更新を試し、記録がそのまま残り、questions.store に 400 / 200 が入ることを確認。`default.store` には旧テーブル（ZWORD 等）が残るが、モデルに無いので同期対象外で害はない |
 | M3 | entitlement が無いビルドで CloudKit 構成を開くと別スレッドで落ちる（try で捕まえられない）ため、ユニットテストのホスト起動時は同期を切る | テスト実行が 10 分固まった原因。クラッシュログは `PFCloudKitContainerProvider containerWithIdentifier:` の EXC_BREAKPOINT。`XCTestConfigurationFilePath` の有無で判定し、UI テストは `launchQuiet()` の `-cloudSync NO` で切る。iCloud の capability（CloudKit コンテナ、Background Modes の Remote notifications）は Xcode の GUI でユーザーが追加（コンテナの登録を伴うため） |
