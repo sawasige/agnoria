@@ -1,12 +1,13 @@
-# Agnoria — 仕様書 v1.7
+# Agnoria — 仕様書 v1.8
 
-> v1 からの変更点は `docs/SPEC-REVIEW.md` 参照。本文中の **[v1.1]** / **[v1.2]** / **[v1.3]** / **[v1.4]** / **[v1.5]** / **[v1.6]** / **[v1.7]** が変更箇所。
+> v1 からの変更点は `docs/SPEC-REVIEW.md` 参照。本文中の **[v1.1]** / **[v1.2]** / **[v1.3]** / **[v1.4]** / **[v1.5]** / **[v1.6]** / **[v1.7]** / **[v1.8]** が変更箇所。
 > v1.2（2026-10-13）: おまかせ出題・達成度の可視化・効果音・Liquid Glass UI。
 > v1.3（2026-10-13）: スコア帯を順に進むステージ、問題データを単語400・文法200に拡充。
 > v1.4（2026-10-13〜14）: ホームをダッシュボードにし、分野の選択を別画面へ。習得後の再学習、クリアまでの目安。
 > v1.5（2026-10-16〜）: スコア帯クリアの演出（§4.3.1）。学習記録の iCloud 自動同期（§2.3、計画）。Mac 版はこの後。
 > v1.6（2026-10-19〜）: 利用状況の計測とクラッシュ報告（§7.1、Firebase Analytics / Crashlytics）。ホーム画面のウィジェット（§4.6）。
 > v1.7（2026-10-19〜）: 学習記録の iCloud 自動同期を実装（§2.3）。v1.6 とあわせて App Store の 1.1 として出す。Mac 版はこの後。
+> v1.8（2026-10-20〜）: App Store の評価ダイアログ（§4.8）。
 
 ## 0. 概要
 
@@ -321,6 +322,17 @@ iOS のホーム画面に置く WidgetKit のウィジェット（ターゲッ�
 
 **見た目**: `containerBackground(.fill.tertiary)`、主な数字と文は `widgetAccentable()`（色合い調整でも読める）。Dynamic Type は標準に任せる。「1 問だけ」の対話型ウィジェットは別 Issue（§9）。
 
+### 4.8 App Store の評価 **[v1.8]**
+
+StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で OS の評価ダイアログを頼む。実際に出すか、何回まで出すか（1 年に 3 回まで）は OS が決める。独自のダイアログやレビューのお願いの文言は出さない。
+
+- **頼むきっかけ**（セット完走時に `ReviewPrompt.trigger` で判定）: そのセットでスコア帯をクリアした（`stage_clear`）、または累計の完走セットが 5 以上で正答率 80% 以上（`high_score`）
+- **頼む場所**: 結果画面を開いて 1.5 秒後。帯クリアのときは演出を見終えた後の結果画面。その前に画面を離れたら頼まない（セット中・起動直後・成績の悪い結果画面では頼まない）
+- **頻度**: 同じバージョン（`CFBundleShortVersionString`）では 1 回だけ（`AppSettings.reviewRequestedVersion`）
+- **設定**: 「このアプリについて」に `App Store でレビューを書く`（`https://apps.apple.com/app/id6823061416?action=write-review` を開く）
+- **計測**: 頼んだとき `review_requested`（trigger）、設定のリンク `review_link_opened`。ダイアログが実際に出たか・評価したかは OS から取れない
+- 起動引数 `-reviewPrompt NO` で頼まない（UI テストはこれで起動）。Debug ビルドではダイアログが出るが送信されない。TestFlight では出ない（OS の仕様）ので、確認は Debug で起動引数 `-debugReviewPrompt YES`（条件に関係なく毎セット頼む）を使う
+
 ---
 
 ## 5. Foundation Models（任意機能・v1に含める）
@@ -377,6 +389,8 @@ iOS のホーム画面に置く WidgetKit のウィジェット（ターゲッ�
 | `bookmark_toggled` | on |
 | `history_reset` | なし |
 | `settings_changed` | key（soundEffects / autoSpeak / speechRate / unlockedLevel） |
+| `review_requested` | trigger（stage_clear / high_score）**[v1.8]** |
+| `review_link_opened` | なし **[v1.8]** |
 
 ユーザープロパティ: `unlocked_level`。Firebase が自動で集める `first_open` / `session_start` / `screen_view` はそのまま。1 問ごとの回答イベントは量が多いので送らない。IDFA は使わない（`FirebaseAnalyticsCore` を使い AdSupport も IdentitySupport もリンクしない。ATT のダイアログは出さない）。
 

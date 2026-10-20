@@ -14,6 +14,7 @@ final class AppSettings {
         static let topStageCelebrated = "topStageCelebrated"
         static let importedFingerprint = "importedDataFingerprint"
         static let storesSplit = "storesSplit"
+        static let reviewRequestedVersion = "reviewRequestedVersion"
     }
 
     private let defaults: UserDefaults
@@ -55,6 +56,12 @@ final class AppSettings {
     var storesSplit: Bool {
         get { defaults.bool(forKey: Key.storesSplit) }
         set { defaults.set(newValue, forKey: Key.storesSplit) }
+    }
+
+    /// 最後に評価ダイアログを頼んだバージョン（§4.8 [v1.8]）。同じバージョンでは 2 回頼まない
+    var reviewRequestedVersion: String? {
+        get { defaults.string(forKey: Key.reviewRequestedVersion) }
+        set { defaults.set(newValue, forKey: Key.reviewRequestedVersion) }
     }
 
     var importedFingerprint: String? {

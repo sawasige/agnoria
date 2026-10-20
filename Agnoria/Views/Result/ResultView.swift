@@ -1,7 +1,9 @@
 import SwiftUI
+import StoreKit
 
 struct ResultView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.requestReview) private var requestReview
     @State private var practice: QuizQuestion?
     @State private var aiHidden = !AIAssist.isAvailable
     @State private var generatingFor: String?
@@ -105,6 +107,12 @@ struct ResultView: View {
         .navigationBarBackButtonHidden(true)
         .sheet(item: $practice) { q in
             PracticeQuestionView(question: q)
+        }
+        .task {
+            // 結果を見てから頼む（§4.8 [v1.8]）。その前に画面を離れたら頼まない
+            try? await Task.sleep(for: .seconds(1.5))
+            guard !Task.isCancelled, model.consumeReviewRequest() else { return }
+            requestReview()
         }
     }
 
