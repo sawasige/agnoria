@@ -27,6 +27,7 @@ Agnoria（iOS / iPadOS / macOS の英語 4 択ドリル）で作業するとき�
 - メタデータとスクリーンショットは `bundle exec fastlane ios upload_metadata`、審査提出は `fastlane ios submit_review build:N`。
 - App Store Connect の API キーはリポジトリに置かない。runrun-ios のキーをパスで参照する（Fastfile の `setup_api_key`）。中身を表示しない。
 - ストアの文章（説明文、プロモーション、キャプション、リリースノート）は商品説明の調子で書く。開発者の一人称（「〜作りました」）、仕様書の言葉（「必ず 4 択で正誤が出る」）、アプリ内の用語（帯、習得率）は使わない。書いたら必ずプレビューを見せ、ユーザーの OK を得てから App Store Connect に上げる。
+- ストアの文章の PR は、文面の OK が出た時点で確認済みとして扱う。App Store Connect に上げる（審査に出す）のと同時にマージし、別に OK を待たない（リポジトリと App Store Connect の内容をずらさない）。
 - App Store Connect の Web でしかできない項目（App のプライバシー、審査用連絡先、年齢制限、価格）はユーザーに依頼する。
 
 ## 計測（Firebase）
