@@ -13,12 +13,14 @@ struct StatsView: View {
 
     var body: some View {
         let pmap = Dictionary(progress.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, _ in a })
-        let wordItems = words.filter { settings.enabledLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
-        let grammarItems = grammar.filter { settings.enabledLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
+        let wordLevels = settings.enabledLevels(.word)
+        let grammarLevels = settings.enabledLevels(.grammar)
+        let wordItems = words.filter { wordLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
+        let grammarItems = grammar.filter { grammarLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
         let overall = MasteryStats.summarize(items: wordItems + grammarItems, progress: pmap)
-        let byLevel = MasteryStats.byLevel(items: words.map { (id: $0.id, level: $0.level) }
-                                           + grammar.map { (id: $0.id, level: $0.level) }, progress: pmap)
-        let current = Stage.current(unlocked: settings.unlockedLevel, byLevel: byLevel)
+        let tracks = Stage.tracks(items: [.word: words.map { (id: $0.id, level: $0.level) },
+                                          .grammar: grammar.map { (id: $0.id, level: $0.level) }],
+                                  progress: pmap, unlocked: settings.unlockedLevels)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
         let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
@@ -26,7 +28,7 @@ struct StatsView: View {
         ScrollView {
             VStack(spacing: 16) {
                 overview(overall, streak: streak, totalCorrect: totalCorrect)
-                stageRows(byLevel: byLevel, current: current, unlocked: settings.unlockedLevel)
+                stageRows(tracks)
                 DailyChart(days: daily)
                     .glassCard()
                 categoryChart(title: "単語", mode: .word, items: wordItems, progress: pmap)
@@ -94,9 +96,25 @@ struct StatsView: View {
 
     // MARK: - ステージ
 
-    private func stageRows(byLevel: [Int: MasterySummary], current: Int, unlocked: Int) -> some View {
+    /// 軸ごとに 4 帯の行を並べる [v1.8]
+    private func stageRows(_ tracks: [Stage.Track]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("ステージ").font(.headline)
+            ForEach(tracks) { track in
+                Text(track.mode.title)
+                    .font(.subheadline.weight(.semibold))
+                    .padding(.top, track.mode == tracks.first?.mode ? 0 : 6)
+                levelRows(byLevel: track.byLevel, current: track.current, unlocked: track.unlocked, title: track.mode.title)
+            }
+            Text("単語と文法それぞれ、習得率 80% で次の帯が開きます")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+        }
+        .glassCard()
+    }
+
+    @ViewBuilder
+    private func levelRows(byLevel: [Int: MasterySummary], current: Int, unlocked: Int, title: String) -> some View {
             ForEach(Stage.levels, id: \.self) { level in
                 let s = byLevel[level] ?? MasterySummary()
                 let locked = level > unlocked
@@ -115,13 +133,8 @@ struct StatsView: View {
                         .frame(width: 64, alignment: .trailing)
                 }
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("\(level)点帯。\(locked ? "未到達" : "習得 \(s[.mastered]) / \(s.total)")\(level == current ? "。今ここ" : "")")
+                .accessibilityLabel("\(title) \(level)点帯。\(locked ? "未到達" : "習得 \(s[.mastered]) / \(s.total)")\(level == current ? "。今ここ" : "")")
             }
-            Text("習得率 80% で次の帯が開きます")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-        }
-        .glassCard()
     }
 
     // MARK: - 分野別

@@ -1,7 +1,7 @@
 import WidgetKit
 import SwiftUI
 
-/// ホーム画面のウィジェット（§4.6 [v1.6]）。small: 今日の状態と連続日数、medium: それに加えてスコア帯の進み。
+/// ホーム画面のウィジェット（§4.6 [v1.6]）。small: 今日の状態と連続日数、medium: それに加えて軸ごとのスコア帯の進み。
 /// 読むのはアプリが App Group に書いた WidgetSnapshot だけ。タップでアプリが開く
 struct AgnoriaWidget: Widget {
     static let kind = "AgnoriaWidget"
@@ -124,50 +124,59 @@ private struct MediumView: View {
     }
 }
 
-/// 今の帯の習得率と、4 帯の並び（ホームの StageChips と同じ記号）
+/// 軸（単語 / 文法）ごとに、今の帯の習得率と 4 帯の並び（ホームの StageChips と同じ記号）[v1.8]
 private struct StageBlock: View {
     let snapshot: WidgetSnapshot
 
     var body: some View {
-        let current = snapshot.current
-        let ratio = current?.masteredRatio ?? 0
-        VStack(alignment: .leading, spacing: 6) {
-            Text("\(snapshot.currentLevel) 点帯")
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.secondary)
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text("\(Int((ratio * 100).rounded()))")
-                    .font(.system(.title, design: .rounded).weight(.bold).monospacedDigit())
-                    .widgetAccentable()
-                Text("% 習得")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: 10) {
+            ForEach(snapshot.tracks, id: \.title) { track in
+                TrackRow(track: track)
             }
-            ProgressView(value: ratio)
-                .tint(.accentColor)
             Spacer(minLength: 0)
-            HStack(spacing: 10) {
-                ForEach(snapshot.levels, id: \.level) { level in
-                    VStack(spacing: 2) {
-                        Image(systemName: symbol(level))
-                            .font(.caption2)
-                            .foregroundStyle(color(level))
-                        Text("\(level.level)")
-                            .font(.caption2.monospacedDigit())
-                            .fontWeight(level.level == snapshot.currentLevel ? .bold : .regular)
-                            .foregroundStyle(level.level == snapshot.currentLevel ? Color.primary : Color.secondary)
-                    }
-                }
-            }
-            .accessibilityLabel(snapshot.levels.map { "\($0.level) 点帯 \(label($0))" }.joined(separator: "、"))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
+}
+
+private struct TrackRow: View {
+    let track: WidgetSnapshot.Track
+
+    var body: some View {
+        let ratio = track.current?.masteredRatio ?? 0
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(track.title)
+                    .font(.caption.weight(.semibold))
+                Text("\(track.currentLevel) 点帯")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                Spacer(minLength: 4)
+                Text("\(Int((ratio * 100).rounded()))%")
+                    .font(.system(.headline, design: .rounded).weight(.bold).monospacedDigit())
+                    .widgetAccentable()
+            }
+            HStack(spacing: 8) {
+                ProgressView(value: ratio)
+                    .tint(.accentColor)
+                HStack(spacing: 3) {
+                    ForEach(track.levels, id: \.level) { level in
+                        Image(systemName: symbol(level))
+                            .font(.system(size: 9))
+                            .foregroundStyle(color(level))
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(track.title) \(track.currentLevel) 点帯 \(Int((ratio * 100).rounded()))% 習得。"
+            + track.levels.map { "\($0.level) 点帯 \(label($0))" }.joined(separator: "、"))
+    }
 
     private func state(_ l: WidgetSnapshot.LevelProgress) -> String {
-        if l.level > snapshot.unlockedLevel { return "locked" }
+        if l.level > track.unlockedLevel { return "locked" }
         if l.cleared { return "cleared" }
-        return l.level == snapshot.currentLevel ? "current" : "open"
+        return l.level == track.currentLevel ? "current" : "open"
     }
 
     private func symbol(_ l: WidgetSnapshot.LevelProgress) -> String {
@@ -217,12 +226,20 @@ private struct EmptyStateView: View {
 extension WidgetSnapshot {
     /// プレースホルダとウィジェットギャラリー用
     static let sample = WidgetSnapshot(
-        lastStudyDay: Calendar.current.startOfDay(for: .now), streakDays: 12, unlockedLevel: 500, currentLevel: 500,
-        levels: [
-            .init(level: 450, masteredRatio: 0.85, cleared: true),
-            .init(level: 500, masteredRatio: 0.42, cleared: false),
-            .init(level: 550, masteredRatio: 0, cleared: false),
-            .init(level: 600, masteredRatio: 0, cleared: false),
+        lastStudyDay: Calendar.current.startOfDay(for: .now), streakDays: 12,
+        tracks: [
+            .init(title: "単語", unlockedLevel: 500, currentLevel: 500, levels: [
+                .init(level: 450, masteredRatio: 0.85, cleared: true),
+                .init(level: 500, masteredRatio: 0.42, cleared: false),
+                .init(level: 550, masteredRatio: 0, cleared: false),
+                .init(level: 600, masteredRatio: 0, cleared: false),
+            ]),
+            .init(title: "文法", unlockedLevel: 550, currentLevel: 550, levels: [
+                .init(level: 450, masteredRatio: 0.92, cleared: true),
+                .init(level: 500, masteredRatio: 0.84, cleared: true),
+                .init(level: 550, masteredRatio: 0.3, cleared: false),
+                .init(level: 600, masteredRatio: 0, cleared: false),
+            ]),
         ],
         updatedAt: .now)
 }

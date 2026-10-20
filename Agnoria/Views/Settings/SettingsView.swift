@@ -14,13 +14,22 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section {
-                    Picker("到達帯", selection: $settings.unlockedLevel) {
-                        ForEach(Stage.levels, id: \.self) { Text("\($0) 点帯").tag($0) }
+                    ForEach(DrillMode.allCases, id: \.self) { mode in
+                        Picker("\(mode.title)の到達帯", selection: Binding(
+                            get: { settings.unlockedLevel(mode) },
+                            set: { level in
+                                settings.setUnlockedLevel(level, for: mode)
+                                model.analytics.log(.settingsChanged(key: "unlockedLevel.\(mode.rawValue)"))
+                                model.analytics.syncUserProperties()
+                                model.refreshWidgetSnapshot()
+                            })) {
+                            ForEach(Stage.levels, id: \.self) { Text("\($0) 点帯").tag($0) }
+                        }
                     }
                 } header: {
                     Text("ステージ")
                 } footer: {
-                    Text("おまかせと分野タイルは、到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたい・戻りたいときはここで変えられます。")
+                    Text("単語と文法は別々に帯を進みます。おまかせと分野タイルは、それぞれの到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたい・戻りたいときはここで変えられます。")
                 }
 
                 Section("音") {
@@ -79,11 +88,6 @@ struct SettingsView: View {
             .onChange(of: settings.soundEffects) { model.analytics.log(.settingsChanged(key: "soundEffects")) }
             .onChange(of: settings.autoSpeak) { model.analytics.log(.settingsChanged(key: "autoSpeak")) }
             .onChange(of: settings.speechRate) { model.analytics.log(.settingsChanged(key: "speechRate")) }
-            .onChange(of: settings.unlockedLevel) {
-                model.analytics.log(.settingsChanged(key: "unlockedLevel"))
-                model.analytics.syncUserProperties()
-                model.refreshWidgetSnapshot()
-            }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("完了") { dismiss() }

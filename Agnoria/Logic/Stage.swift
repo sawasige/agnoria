@@ -1,6 +1,7 @@
 import Foundation
 
-/// スコア帯のステージ（§3.4 [v1.3]）。450 → 500 → 550 → 600 の順に進む。純粋関数のみ
+/// スコア帯のステージ（§3.4 [v1.3]）。450 → 500 → 550 → 600 の順に進む。純粋関数のみ。
+/// [v1.8] 進み具合は出題の種類（DrillMode）ごとの軸で別々に持つ。ここの関数は 1 つの軸の分だけを扱う
 nonisolated enum Stage {
     /// この習得率でステージクリア
     static let clearRatio = 0.8
@@ -41,20 +42,21 @@ nonisolated enum Stage {
     }
 
     /// セット完走でスコア帯をクリアしたときの出来事（§4.3.1 [v1.5]）。
-    /// cleared はクリアした帯、next は新しく開いた帯（最上位をクリアしたときは nil）
+    /// mode はクリアした軸 [v1.8]、cleared はクリアした帯、next は新しく開いた帯（最上位をクリアしたときは nil）
     struct Clear: Equatable, Hashable, Sendable {
+        let mode: DrillMode
         let cleared: Int
         let next: Int?
     }
 
-    /// セット完走時に呼ぶ。到達帯をクリアしていれば Clear を返す。
+    /// セット完走時に軸ごとに呼ぶ。到達帯をクリアしていれば Clear を返す。
     /// 最上位の帯は開く先が無いので、まだ祝っていないとき（topCelebrated == false）だけ 1 回返す
-    static func clearEvent(unlocked: Int, byLevel: [Int: MasterySummary], topCelebrated: Bool) -> Clear? {
+    static func clearEvent(mode: DrillMode, unlocked: Int, byLevel: [Int: MasterySummary], topCelebrated: Bool) -> Clear? {
         if let next = unlock(unlocked: unlocked, byLevel: byLevel) {
-            return Clear(cleared: unlocked, next: next)
+            return Clear(mode: mode, cleared: unlocked, next: next)
         }
         if unlocked == last, !topCelebrated, isCleared(byLevel[last] ?? MasterySummary()) {
-            return Clear(cleared: last, next: nil)
+            return Clear(mode: mode, cleared: last, next: nil)
         }
         return nil
     }
@@ -72,5 +74,27 @@ nonisolated enum Stage {
     static func weightFactor(level: Int, current: Int, unlocked: Int) -> Double {
         if level > unlocked { return 0 }
         return level == current ? 1 : 0.35
+    }
+
+    /// 1 つの軸の帯の状態（ホーム・進捗の表示用 [v1.8]）
+    struct Track: Identifiable, Sendable {
+        let mode: DrillMode
+        let unlocked: Int
+        let current: Int
+        let byLevel: [Int: MasterySummary]
+
+        var id: DrillMode { mode }
+        /// 今の帯の習得状況
+        var summary: MasterySummary { byLevel[current] ?? MasterySummary() }
+    }
+
+    /// 軸ごとの問題（id とレベル）と記録から、軸ごとの帯の状態を作る
+    static func tracks(items: [DrillMode: [(id: String, level: Int)]], progress: [String: ProgressSnapshot],
+                       unlocked: [DrillMode: Int], now: Date = .now) -> [Track] {
+        DrillMode.allCases.map { mode in
+            let byLevel = MasteryStats.byLevel(items: items[mode] ?? [], progress: progress, now: now)
+            let u = unlocked[mode] ?? first
+            return Track(mode: mode, unlocked: u, current: current(unlocked: u, byLevel: byLevel), byLevel: byLevel)
+        }
     }
 }

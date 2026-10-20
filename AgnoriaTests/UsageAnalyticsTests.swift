@@ -24,9 +24,10 @@ struct UsageAnalyticsTests {
         #expect(finish.params["duration_sec"] as? Int == 95)
         #expect(finish.params["itemID"] == nil)
 
-        let top = UsageAnalytics.Event.stageClear(Stage.Clear(cleared: 600, next: nil))
+        let top = UsageAnalytics.Event.stageClear(Stage.Clear(mode: .grammar, cleared: 600, next: nil))
         #expect(top.params["level"] as? Int == 600)
         #expect(top.params["next"] as? Int == 0)
+        #expect(top.params["mode"] as? String == "grammar")
         #expect(UsageAnalytics.Event.bookmarkToggled(on: true).params["on"] as? Int == 1)
         #expect(UsageAnalytics.Event.settingsChanged(key: "soundEffects").params["key"] as? String == "soundEffects")
         #expect(UsageAnalytics.Event.rephraseUsed.params.isEmpty)
@@ -36,7 +37,7 @@ struct UsageAnalyticsTests {
     @Test("Firebase の制約: イベント名は 40 字以内、パラメータ名は 40 字以内") func firebaseLimits() {
         let events: [UsageAnalytics.Event] = [
             .setStart(.auto), .setFinish(.auto, count: 1, correct: 1, durationSec: 1), .setAbort(.auto, answered: 0),
-            .stageClear(Stage.Clear(cleared: 450, next: 500)), .rephraseUsed, .practiceUsed, .speakTapped,
+            .stageClear(Stage.Clear(mode: .grammar, cleared: 450, next: 500)), .rephraseUsed, .practiceUsed, .speakTapped,
             .bookmarkToggled(on: false), .historyReset, .settingsChanged(key: "autoSpeak"),
             .reviewRequested(.stageClear), .reviewRequested(.highScore), .reviewLinkOpened,
         ]

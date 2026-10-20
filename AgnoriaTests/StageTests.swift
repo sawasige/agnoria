@@ -20,13 +20,13 @@ struct StageTests {
     @Test("セット完走時のクリア判定: 次の帯が開く / 最上位は 1 回だけ") func clearEvent() {
         let cleared = summary(mastered: 90, total: 100)
         let notYet = summary(mastered: 50, total: 100)
-        #expect(Stage.clearEvent(unlocked: 450, byLevel: [450: cleared], topCelebrated: false)
-                == Stage.Clear(cleared: 450, next: 500))
-        #expect(Stage.clearEvent(unlocked: 450, byLevel: [450: notYet], topCelebrated: false) == nil)
-        #expect(Stage.clearEvent(unlocked: 600, byLevel: [600: cleared], topCelebrated: false)
-                == Stage.Clear(cleared: 600, next: nil))
-        #expect(Stage.clearEvent(unlocked: 600, byLevel: [600: cleared], topCelebrated: true) == nil)
-        #expect(Stage.clearEvent(unlocked: 600, byLevel: [600: notYet], topCelebrated: false) == nil)
+        #expect(Stage.clearEvent(mode: .word, unlocked: 450, byLevel: [450: cleared], topCelebrated: false)
+                == Stage.Clear(mode: .word, cleared: 450, next: 500))
+        #expect(Stage.clearEvent(mode: .word, unlocked: 450, byLevel: [450: notYet], topCelebrated: false) == nil)
+        #expect(Stage.clearEvent(mode: .word, unlocked: 600, byLevel: [600: cleared], topCelebrated: false)
+                == Stage.Clear(mode: .word, cleared: 600, next: nil))
+        #expect(Stage.clearEvent(mode: .word, unlocked: 600, byLevel: [600: cleared], topCelebrated: true) == nil)
+        #expect(Stage.clearEvent(mode: .word, unlocked: 600, byLevel: [600: notYet], topCelebrated: false) == nil)
     }
 
     @Test("クリア判定とあと何問") func clear() {

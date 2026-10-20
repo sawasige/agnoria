@@ -105,7 +105,7 @@ struct SetBuilderTests {
         var rng = SeededRandomNumberGenerator(seed: 7)
         let all = (0..<20).map { candidate("g\($0)", nil, mode: .grammar) }
             + (0..<20).map { candidate("w\($0)", nil, category: "ビジネス一般", mode: .word) }
-        let auto = SetBuilder.eligible(all, config: .auto, enabledLevels: Level.allValues)
+        let auto = SetBuilder.eligible(all, config: .auto, enabledLevels: SetBuilder.allLevels)
         #expect(auto.count == 40)
         let picked = SetBuilder.pick(from: auto, using: &rng)
         #expect(picked.count == 10)
@@ -113,7 +113,7 @@ struct SetBuilderTests {
         #expect(picked.contains { $0.mode == .word })
 
         let wordsOnly = SetBuilder.eligible(all, config: QuizConfig(mode: .word, category: nil, format: nil),
-                                            enabledLevels: Level.allValues)
+                                            enabledLevels: SetBuilder.allLevels)
         #expect(wordsOnly.count == 20)
         #expect(wordsOnly.allSatisfy { $0.mode == .word })
         #expect(QuizConfig.auto.categoryTitle == "おまかせ")
@@ -126,23 +126,23 @@ struct SetBuilderTests {
             candidate("c", [true, true, true], category: "品詞", level: 500, bookmarked: true),
         ]
         let cat = SetBuilder.eligible(all, config: QuizConfig(mode: .grammar, category: "品詞", format: nil),
-                                      enabledLevels: Level.allValues)
+                                      enabledLevels: SetBuilder.allLevels)
         #expect(cat.map(\.id) == ["a", "c"])
 
         let lvl = SetBuilder.eligible(all, config: QuizConfig(mode: .grammar, category: nil, format: nil),
-                                      enabledLevels: [600])
+                                      enabledLevels: [.grammar: [600], .word: Level.allValues])
         #expect(lvl.map(\.id) == ["b"])
 
         let wrong = SetBuilder.eligible(all, config: QuizConfig(mode: .grammar, category: nil, format: nil, filter: .wrongOnly),
-                                        enabledLevels: Level.allValues)
+                                        enabledLevels: SetBuilder.allLevels)
         #expect(wrong.map(\.id) == ["b"])
 
         let bm = SetBuilder.eligible(all, config: QuizConfig(mode: .grammar, category: nil, format: nil, filter: .bookmarked),
-                                     enabledLevels: Level.allValues)
+                                     enabledLevels: SetBuilder.allLevels)
         #expect(bm.map(\.id) == ["c"])
 
         let restricted = SetBuilder.eligible(all, config: QuizConfig(mode: .grammar, category: nil, format: nil, restrictTo: ["a", "b"]),
-                                             enabledLevels: Level.allValues)
+                                             enabledLevels: SetBuilder.allLevels)
         #expect(restricted.map(\.id) == ["a", "b"])
     }
 

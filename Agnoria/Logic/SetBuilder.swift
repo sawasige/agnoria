@@ -12,12 +12,16 @@ nonisolated enum SetBuilder {
         var progress: ProgressSnapshot?
     }
 
-    /// 条件に合う候補に絞る
-    static func eligible(_ all: [Candidate], config: QuizConfig, enabledLevels: Set<Int>) -> [Candidate] {
+    /// 全軸の全レベル（テストや絞り込みなしの集計用）
+    static let allLevels: [DrillMode: Set<Int>] =
+        Dictionary(uniqueKeysWithValues: DrillMode.allCases.map { ($0, Level.allValues) })
+
+    /// 条件に合う候補に絞る。enabledLevels は軸ごとの出題対象のレベル（§3.4 [v1.8]）
+    static func eligible(_ all: [Candidate], config: QuizConfig, enabledLevels: [DrillMode: Set<Int>]) -> [Candidate] {
         all.filter { c in
             if let m = config.mode, c.mode != m { return false }
             if let cat = config.category, c.category != cat { return false }
-            if !enabledLevels.contains(c.level) { return false }
+            if !(enabledLevels[c.mode] ?? []).contains(c.level) { return false }
             if let only = config.restrictTo, !only.contains(c.id) { return false }
             switch config.filter {
             case .all: return true

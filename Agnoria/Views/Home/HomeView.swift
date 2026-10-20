@@ -16,10 +16,12 @@ struct HomeView: View {
     @State private var showEmptyAlert = false
 
     private var wordItems: [(id: String, category: String)] {
-        words.filter { settings.enabledLevels.contains($0.level) }.map { ($0.id, $0.category) }
+        let enabled = settings.enabledLevels(.word)
+        return words.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
     }
     private var grammarItems: [(id: String, category: String)] {
-        grammar.filter { settings.enabledLevels.contains($0.level) }.map { ($0.id, $0.category) }
+        let enabled = settings.enabledLevels(.grammar)
+        return grammar.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
     }
 
     var body: some View {
@@ -29,15 +31,12 @@ struct HomeView: View {
         let allIDs = allItems.map(\.id)
         let wrong = MasteryStats.wrongCount(itemIDs: allIDs, progress: pmap)
         let bookmarked = MasteryStats.bookmarkCount(itemIDs: allIDs, progress: pmap)
-        let byLevel = MasteryStats.byLevel(items: words.map { (id: $0.id, level: $0.level) }
-                                           + grammar.map { (id: $0.id, level: $0.level) }, progress: pmap)
-        let stage = Stage.current(unlocked: settings.unlockedLevel, byLevel: byLevel)
-        let stageSummary = byLevel[stage] ?? MasterySummary()
+        let tracks = Stage.tracks(items: [.word: words.map { (id: $0.id, level: $0.level) },
+                                          .grammar: grammar.map { (id: $0.id, level: $0.level) }],
+                                  progress: pmap, unlocked: settings.unlockedLevels)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
-        let estimate = Pace.estimate(remaining: Stage.remainingToClear(stageSummary),
-                                     masteredDates: progress.compactMap(\.masteredAt),
-                                     sessionDates: sessions.map(\.finishedAt))
+        let estimates = estimates(tracks)
         let showReview = overall.dueForReview > 0 || overall[.struggling] > 0 || wrong > 0 || bookmarked > 0
 
         ScrollView {
@@ -51,13 +50,15 @@ struct HomeView: View {
                     ContentUnavailableView("問題データを読み込めません", systemImage: "exclamationmark.triangle",
                                            description: Text(message))
                 } else {
-                    Button {
-                        model.path = [.stats]
-                    } label: {
-                        StageCard(stage: stage, unlocked: settings.unlockedLevel, byLevel: byLevel, estimate: estimate)
+                    ForEach(tracks) { track in
+                        Button {
+                            model.path = [.stats]
+                        } label: {
+                            StageCard(track: track, estimate: estimates[track.mode])
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityHint("進捗の詳細を開く")
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityHint("進捗の詳細を開く")
 
                     HStack(spacing: 12) {
                         StreakCard(streak: streak)
@@ -87,7 +88,7 @@ struct HomeView: View {
         }
         .background { AppBackground() }
         .safeAreaInset(edge: .bottom) {
-            actionBar(stage: stage, stageSummary, disabled: allItems.isEmpty)
+            actionBar(tracks: tracks, disabled: allItems.isEmpty)
         }
         .navigationTitle("Agnoria")
         #if os(iOS)
@@ -137,7 +138,7 @@ struct HomeView: View {
 
     /// 画面下に固定する学習の入口。おまかせ（主）と分野を選ぶ（副）
     @ViewBuilder
-    private func actionBar(stage: Int, _ summary: MasterySummary, disabled: Bool) -> some View {
+    private func actionBar(tracks: [Stage.Track], disabled: Bool) -> some View {
         // 文字サイズがアクセシビリティ段階のときは横に並べず縦に積む（横だと文字が 1 字ずつ縦に折れる）
         let stacked = typeSize.isAccessibilitySize
         GlassEffectContainer(spacing: 10) {
@@ -149,7 +150,7 @@ struct HomeView: View {
                         Label("おまかせで10問", systemImage: "sparkles")
                             .font(.headline)
                             .fontDesign(.rounded)
-                        Text(autoHint(stage: stage, summary))
+                        Text(autoHint(tracks))
                             .font(.caption)
                             .opacity(0.85)
                             .lineLimit(1)
@@ -159,7 +160,7 @@ struct HomeView: View {
                 .buttonStyle(.glassProminent)
                 .keyboardShortcut(.defaultAction)
                 .disabled(disabled)
-                .accessibilityLabel("おまかせで10問。\(autoHint(stage: stage, summary))")
+                .accessibilityLabel("おまかせで10問。\(autoHint(tracks))")
 
                 Button {
                     model.path = [.pick]
@@ -191,13 +192,26 @@ struct HomeView: View {
         .frame(maxWidth: .infinity)
     }
 
-    /// 今のセットが何を中心に組まれるかの目安（今のステージの内訳）
-    private func autoHint(stage: Int, _ s: MasterySummary) -> String {
-        if s.total == 0 { return "問題がありません" }
-        if s[.struggling] == 0, s[.unseen] == 0, s.dueForReview == 0 {
-            return "\(stage) 点帯は全部習得済み。復習で定着させよう"
+    /// 今のセットが何を中心に組まれるかの目安（軸ごとの今の帯 [v1.8]）
+    private func autoHint(_ tracks: [Stage.Track]) -> String {
+        if tracks.allSatisfy({ $0.summary.total == 0 }) { return "問題がありません" }
+        return tracks.map { "\($0.mode.title) \($0.current)" }.joined(separator: "・") + " 点帯が中心"
+    }
+
+    /// 軸ごとのクリアまでの目安。1 セットに占める割合は、到達帯までの問題数の比で見込む
+    private func estimates(_ tracks: [Stage.Track]) -> [DrillMode: Pace.Estimate] {
+        let idsByMode: [DrillMode: Set<String>] = [.word: Set(wordItems.map(\.id)), .grammar: Set(grammarItems.map(\.id))]
+        let total = Double(idsByMode.values.reduce(0) { $0 + $1.count })
+        let sessionDates = sessions.map(\.finishedAt)
+        var out: [DrillMode: Pace.Estimate] = [:]
+        for track in tracks {
+            let ids = idsByMode[track.mode] ?? []
+            guard total > 0, !ids.isEmpty else { continue }
+            out[track.mode] = Pace.estimate(remaining: Stage.remainingToClear(track.summary),
+                                            masteredDates: progress.filter { ids.contains($0.itemID) }.compactMap(\.masteredAt),
+                                            sessionDates: sessionDates, share: Double(ids.count) / total)
         }
-        return "\(stage) 点帯: 苦手 \(s[.struggling])・未学習 \(s[.unseen])・復習 \(s.dueForReview)"
+        return out
     }
 
     private func start(_ config: QuizConfig) {
@@ -207,15 +221,14 @@ struct HomeView: View {
 
 // MARK: - ウィジェット
 
-/// 今の帯の習得率・積み上げバー・次の帯まで・4 帯のミニ表示
+/// 1 つの軸の今の帯の習得率・積み上げバー・次の帯まで・4 帯のミニ表示（軸ごとに 1 枚 [v1.8]）
 struct StageCard: View {
-    let stage: Int
-    let unlocked: Int
-    let byLevel: [Int: MasterySummary]
+    let track: Stage.Track
     /// クリアまでの目安（§4.1）。クリア済みなら nil
     var estimate: Pace.Estimate? = nil
 
-    private var summary: MasterySummary { byLevel[stage] ?? MasterySummary() }
+    private var stage: Int { track.current }
+    private var summary: MasterySummary { track.summary }
     @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
@@ -224,12 +237,16 @@ struct StageCard: View {
         VStack(alignment: .leading, spacing: 12) {
             AnyLayout(stacked ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .top))) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("\(stage) 点帯の習得")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                        Text(track.mode.title)
+                            .font(.subheadline.weight(.semibold))
+                        Text("\(stage) 点帯の習得")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
                     HStack(alignment: .firstTextBaseline, spacing: 2) {
                         Text("\(summary.masteredPercent)")
-                            .font(.system(size: 42, weight: .bold, design: .rounded).monospacedDigit())
+                            .font(.system(size: 36, weight: .bold, design: .rounded).monospacedDigit())
                             .contentTransition(.numericText())
                         Text("%")
                             .font(.title3.weight(.semibold))
@@ -265,8 +282,8 @@ struct StageCard: View {
     /// 4 帯の状態を横に並べる（StageChips）
     private var stageRow: some View {
         StageChips(state: { level in
-            if level > unlocked { return .locked }
-            if Stage.isCleared(byLevel[level] ?? MasterySummary()) { return .cleared }
+            if level > track.unlocked { return .locked }
+            if Stage.isCleared(track.byLevel[level] ?? MasterySummary()) { return .cleared }
             return level == stage ? .current : .open
         })
         .padding(.top, 4)
