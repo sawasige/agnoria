@@ -103,3 +103,37 @@ struct WordQuestionFactoryTests {
         #expect(Set(qs.compactMap(\.wordFormat)).count > 1)
     }
 }
+
+@Suite("例文 3 つの使い分け")
+struct MultiExampleTests {
+    private func word() -> WordSnapshot {
+        WordSnapshot(id: "w-m", word: "invoice", pos: "名詞", meaning: "請求書",
+                     examples: [.init(en: "Please pay the invoice within 30 days.", ja: "30 日以内に請求書をお支払いください。"),
+                                .init(en: "The invoice was sent yesterday.", ja: "請求書は昨日送られました。"),
+                                .init(en: "No target word here.", ja: "対象語なし")],
+                     distractors: ["領収書", "見積書", "契約書"], category: "ビジネス一般", level: 450)
+    }
+
+    @Test("穴埋めは空欄にできる文だけから選び、解説用の例文と和訳を運ぶ") func clozePicksFillable() {
+        let w = word()
+        var rng = SystemRandomNumberGenerator()
+        var seen = Set<String>()
+        for _ in 0..<40 {
+            let q = WordQuestionFactory.make(w, format: .cloze, pool: [w], using: &rng)
+            // 誤答が足りないので meaning にフォールバックするが、例文の選び方は pickExample で確認する
+            #expect(q != nil)
+            if let ex = WordQuestionFactory.pickExample(w, forCloze: true, using: &rng) { seen.insert(ex.en) }
+        }
+        #expect(seen == ["Please pay the invoice within 30 days.", "The invoice was sent yesterday."])
+    }
+
+    @Test("meaning / jaToEn は 3 つのどれかを例文として運び、読み上げも同じ文") func meaningCarriesExample() {
+        let w = word()
+        var rng = SystemRandomNumberGenerator()
+        let q = WordQuestionFactory.make(w, format: .meaning, pool: [w], using: &rng)!
+        let ex = q.example!
+        #expect(w.examples.contains(ex))
+        #expect(q.speechText == ex.en)
+        #expect(q.promptJa == nil)
+    }
+}

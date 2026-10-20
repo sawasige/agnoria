@@ -51,6 +51,8 @@ final class Word {
     var meaning: String
     var example: String
     var exampleJa: String
+    /// 例文 3 つ [v1.7]。既定値は軽量マイグレーション用。空なら example / exampleJa の 1 つだけ
+    var examples: [ExampleSentence] = []
     var distractors: [String]
     var category: String
     var level: Int
@@ -63,6 +65,7 @@ final class Word {
         meaning = s.meaning
         example = s.example
         exampleJa = s.exampleJa
+        examples = s.examples
         distractors = s.distractors
         category = s.category
         level = s.level
@@ -75,6 +78,7 @@ final class Word {
         meaning = s.meaning
         example = s.example
         exampleJa = s.exampleJa
+        examples = s.examples
         distractors = s.distractors
         category = s.category
         level = s.level
@@ -82,8 +86,9 @@ final class Word {
     }
 
     var snapshot: WordSnapshot {
-        WordSnapshot(id: id, word: word, pos: pos, meaning: meaning, example: example,
-                     exampleJa: exampleJa, distractors: distractors, category: category, level: level)
+        WordSnapshot(id: id, word: word, pos: pos, meaning: meaning,
+                     examples: examples.isEmpty ? [ExampleSentence(en: example, ja: exampleJa)] : examples,
+                     distractors: distractors, category: category, level: level)
     }
 }
 
