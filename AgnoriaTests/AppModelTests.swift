@@ -137,8 +137,27 @@ struct AppModelTests {
         #expect(model.settings.unlockedLevel == Stage.next(after: Stage.first))
         #expect(model.lastUnlockedLevel == Stage.next(after: Stage.first))
         #expect(model.stageState().current == Stage.next(after: Stage.first))
+        #expect(model.pendingReviewRequest == .stageClear)
         try model.resetHistory()
         #expect(model.settings.unlockedLevel == Stage.first)
         #expect(model.lastUnlockedLevel == nil)
+    }
+
+    @Test("全問正解を 5 セット完走すると評価ダイアログを頼み、同じバージョンでは以後頼まない") func reviewRequest() async throws {
+        let model = try await makeModel()
+        for n in 1...6 {
+            let run = try #require(model.startQuiz(QuizConfig(mode: .word, category: nil, format: nil)))
+            while !run.isFinished {
+                model.answerCurrent(run.current.correctIndex)
+                if !run.isLast { model.advance() }
+            }
+            model.finishRun()
+            #expect(model.pendingReviewRequest == (n == ReviewPrompt.minFinishedSets ? .highScore : nil))
+            if n == ReviewPrompt.minFinishedSets {
+                #expect(model.consumeReviewRequest())
+                #expect(!model.consumeReviewRequest())
+                #expect(model.settings.reviewRequestedVersion == AppModel.appVersion)
+            }
+        }
     }
 }

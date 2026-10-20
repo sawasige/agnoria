@@ -4,6 +4,7 @@ struct SettingsView: View {
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
     @State private var confirmReset1 = false
     @State private var confirmReset2 = false
     @State private var resetDone = false
@@ -60,6 +61,10 @@ struct SettingsView: View {
 
                 Section("このアプリについて") {
                     LabeledContent("バージョン", value: versionString)
+                    Button("App Store でレビューを書く") {
+                        model.analytics.log(.reviewLinkOpened)
+                        openURL(Self.writeReviewURL)
+                    }
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Agnoria（アグノリア）").font(.headline)
                         Text("ギリシャ語 Agnoia（無知）と、ローマの女神 Agenoria（子どもに学ぶ力を授ける）から。「無知から学び始める」の意。")
@@ -122,6 +127,8 @@ struct SettingsView: View {
         case .off: "このビルドでは同期しません。"
         }
     }
+
+    static let writeReviewURL = URL(string: "https://apps.apple.com/app/id6823061416?action=write-review")!
 
     private var versionString: String {
         let v = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"

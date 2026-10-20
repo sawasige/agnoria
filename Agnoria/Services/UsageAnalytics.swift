@@ -19,6 +19,8 @@ final class UsageAnalytics {
         case bookmarkToggled(on: Bool)
         case historyReset
         case settingsChanged(key: String)
+        case reviewRequested(ReviewPrompt.Trigger)
+        case reviewLinkOpened
 
         var name: String {
             switch self {
@@ -32,6 +34,8 @@ final class UsageAnalytics {
             case .bookmarkToggled: "bookmark_toggled"
             case .historyReset: "history_reset"
             case .settingsChanged: "settings_changed"
+            case .reviewRequested: "review_requested"
+            case .reviewLinkOpened: "review_link_opened"
             }
         }
 
@@ -49,7 +53,9 @@ final class UsageAnalytics {
                 return ["on": on ? 1 : 0]
             case .settingsChanged(let key):
                 return ["key": key]
-            case .rephraseUsed, .practiceUsed, .speakTapped, .historyReset:
+            case .reviewRequested(let trigger):
+                return ["trigger": trigger.rawValue]
+            case .rephraseUsed, .practiceUsed, .speakTapped, .historyReset, .reviewLinkOpened:
                 return [:]
             }
         }

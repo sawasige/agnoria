@@ -22,6 +22,7 @@
 - **Liquid Glass UI**: メッシュグラデーション背景とガラス効果のカード・ボタン。ダークモード、Dynamic Type、VoiceOver に対応
 - **解説**: 単語は意味・例文・和訳、文法は空欄を正解で埋めた英文（正解太字）・和訳・解説
 - **Apple Intelligence（任意）**: 対応端末では文法解説の言い換えと、単語穴埋めの類題生成（例文・誤答・和訳）ができる。非対応端末では該当 UI を表示しない
+- **App Store の評価**: 帯をクリアしたときと、5 セット以上こなして 8 割以上正解したときの結果画面で、OS の評価ダイアログを頼む（同じバージョンでは 1 回）。設定から「App Store でレビューを書く」も開ける
 - **Mac**: 選択肢は `1`〜`4` キー、次へは Return、やめるは Esc
 - **ウィジェット**（iOS）: 連続日数と今日の状態（small）、今の帯の習得率と 4 帯の並び（medium）。アプリが App Group に書いた写しを表示する
 - **iCloud 同期**: 学習の記録（正誤・ブックマーク・セット）を iCloud のプライベートデータベースで端末間に同期する。問題データは同期しない。起動引数 `-cloudSync NO` で切れる（UI テストはこれで起動）
@@ -79,7 +80,7 @@ Agnoria/
 AgnoriaWidget/    ウィジェット拡張（WidgetKit。Shared/ の WidgetSnapshot を読むだけ）
 Shared/           アプリと拡張の両方に入れる型（WidgetSnapshot）
 AgnoriaTests/     ユニットテスト（Swift Testing）
-AgnoriaUITests/   UI テスト（`XCUIApplication.launchQuiet()` で効果音と読み上げを切って起動する。テスト中に Mac から音を出さないため）
+AgnoriaUITests/   UI テスト（`XCUIApplication.launchQuiet()` で効果音・読み上げ・計測・iCloud 同期・評価ダイアログを切って起動する）
 docs/             仕様書と設計判断の記録
 ci_scripts/       Xcode Cloud のスクリプト（アーカイブ後に dSYM を Crashlytics へ送る）
 ```

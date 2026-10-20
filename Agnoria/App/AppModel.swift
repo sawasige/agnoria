@@ -39,6 +39,8 @@ final class AppModel {
     var lastUnlockedLevel: Int?
     /// 直近のセット完走でクリアしたスコア帯（専用画面の演出用 §4.3.1 [v1.5]）。次のセット開始とホームで消す
     var pendingStageClear: Stage.Clear?
+    /// 結果画面で評価ダイアログを頼むきっかけ（§4.8 [v1.8]）。結果画面が頼んだら消す
+    var pendingReviewRequest: ReviewPrompt.Trigger?
 
     private var context: ModelContext { container.mainContext }
 
@@ -176,6 +178,7 @@ final class AppModel {
         guard !questions.isEmpty else { return nil }
         lastUnlockedLevel = nil
         pendingStageClear = nil
+        pendingReviewRequest = nil
         let run = QuizRun(config: config, questions: questions)
         self.run = run
         path = [.quiz]
@@ -262,8 +265,20 @@ final class AppModel {
                                  correct: run.answers.filter(\.isCorrect).count,
                                  durationSec: Int(session.finishedAt.timeIntervalSince(session.startedAt))))
         let stage = stageState()
-        if let clear = Stage.clearEvent(unlocked: stage.unlocked, byLevel: stage.byLevel,
-                                        topCelebrated: settings.topStageCelebrated) {
+        let clear = Stage.clearEvent(unlocked: stage.unlocked, byLevel: stage.byLevel,
+                                     topCelebrated: settings.topStageCelebrated)
+        if Self.reviewPromptEnabled {
+            pendingReviewRequest = ReviewPrompt.trigger(
+                correct: run.correctCount, total: run.questions.count,
+                finishedSets: (try? context.fetchCount(FetchDescriptor<StudySession>())) ?? 0,
+                stageCleared: clear != nil,
+                lastAskedVersion: settings.reviewRequestedVersion, currentVersion: Self.appVersion)
+            #if DEBUG
+            // 確認用。起動引数 `-debugReviewPrompt YES` で、条件に関係なく毎セット頼む
+            if UserDefaults.standard.bool(forKey: "debugReviewPrompt") { pendingReviewRequest = .highScore }
+            #endif
+        }
+        if let clear {
             if let next = clear.next {
                 settings.unlockedLevel = next
                 lastUnlockedLevel = next
@@ -283,6 +298,24 @@ final class AppModel {
     /// 演出を見終えて結果へ
     func showResultAfterStageClear() {
         path = [.result]
+    }
+
+    /// 結果画面が評価ダイアログを頼む直前に呼ぶ。頼むきっかけを消費し、このバージョンでは以後頼まない
+    func consumeReviewRequest() -> Bool {
+        guard let trigger = pendingReviewRequest else { return false }
+        pendingReviewRequest = nil
+        settings.reviewRequestedVersion = Self.appVersion
+        analytics.log(.reviewRequested(trigger))
+        return true
+    }
+
+    static var appVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+    }
+
+    /// 起動引数 `-reviewPrompt NO` で評価ダイアログを頼まない（UI テストはこれで起動）
+    static var reviewPromptEnabled: Bool {
+        UserDefaults.standard.object(forKey: "reviewPrompt") == nil || UserDefaults.standard.bool(forKey: "reviewPrompt")
     }
 
     #if DEBUG
@@ -340,6 +373,7 @@ final class AppModel {
     func goHome() {
         run = nil
         pendingStageClear = nil
+        pendingReviewRequest = nil
         path = []
     }
 
@@ -387,6 +421,7 @@ final class AppModel {
         settings.topStageCelebrated = false
         lastUnlockedLevel = nil
         pendingStageClear = nil
+        pendingReviewRequest = nil
         analytics.log(.historyReset)
         analytics.syncUserProperties()
         refreshWidgetSnapshot()
