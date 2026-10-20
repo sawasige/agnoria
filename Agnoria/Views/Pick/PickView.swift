@@ -36,8 +36,8 @@ struct PickView: View {
 
     private var items: [(id: String, category: String)] {
         switch mode {
-        case .word: words.filter { settings.enabledLevels.contains($0.level) }.map { ($0.id, $0.category) }
-        case .grammar: grammar.filter { settings.enabledLevels.contains($0.level) }.map { ($0.id, $0.category) }
+        case .word: words.filter { settings.enabledLevels(.word).contains($0.level) }.map { ($0.id, $0.category) }
+        case .grammar: grammar.filter { settings.enabledLevels(.grammar).contains($0.level) }.map { ($0.id, $0.category) }
         }
     }
 
@@ -74,7 +74,7 @@ struct PickView: View {
                 }
                 .padding(.top, 4)
 
-                Text("\(settings.unlockedLevel) 点帯までの問題から 10 問。到達帯は設定で変えられます")
+                Text("\(mode.title)は \(settings.unlockedLevel(mode)) 点帯までの問題から 10 問。到達帯は設定で変えられます")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)

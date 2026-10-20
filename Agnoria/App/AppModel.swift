@@ -35,10 +35,10 @@ final class AppModel {
     var run: QuizRun?
     var importState: ImportState = .idle
     var lastSavedSession: StudySession?
-    /// 直近のセット完走で開いたスコア帯（結果画面の演出用）。次のセット開始で消す
-    var lastUnlockedLevel: Int?
-    /// 直近のセット完走でクリアしたスコア帯（専用画面の演出用 §4.3.1 [v1.5]）。次のセット開始とホームで消す
-    var pendingStageClear: Stage.Clear?
+    /// 直近のセット完走で次の帯が開いた軸（結果画面の表示用。next が開いた帯）。次のセット開始で消す
+    var lastUnlocked: [Stage.Clear] = []
+    /// 直近のセット完走でクリアしたスコア帯（専用画面の演出用 §4.3.1 [v1.5]）。軸ごとに 1 件 [v1.8]。次のセット開始とホームで消す
+    var pendingStageClears: [Stage.Clear] = []
     /// 結果画面で評価ダイアログを頼むきっかけ（§4.8 [v1.8]）。結果画面が頼んだら消す
     var pendingReviewRequest: ReviewPrompt.Trigger?
 
@@ -80,12 +80,19 @@ final class AppModel {
         }
     }
 
-    /// 同期後の整合: 重複の合成 → 到達帯の再計算（高い方に揃える）→ ウィジェットの写し
+    /// 同期後の整合: 重複の合成 → 軸ごとの到達帯の再計算（高い方に揃える）→ ウィジェットの写し
     func reconcileAfterSync() {
         mergeDuplicateRecords()
-        let computed = Stage.unlockedFromRecords(byLevel: stageState().byLevel)
-        if computed > settings.unlockedLevel { settings.unlockedLevel = computed }
+        raiseUnlockedLevelsFromRecords()
         refreshWidgetSnapshot()
+    }
+
+    /// 記録から軸ごとに到達帯を求め、今より高ければ上げる（下げない。手動で戻した帯は同期では戻さない）
+    private func raiseUnlockedLevelsFromRecords() {
+        for (mode, state) in stageStates() {
+            let computed = Stage.unlockedFromRecords(byLevel: state.byLevel)
+            if computed > settings.unlockedLevel(mode) { settings.setUnlockedLevel(computed, for: mode) }
+        }
     }
 
     /// 同じ itemID の ItemProgress、同じ id の StudySession を 1 件にまとめる（§2.3 の衝突規則）
@@ -121,6 +128,11 @@ final class AppModel {
         }
         backfillMasteredAt()
         mergeDuplicateRecords()
+        // 1.8 で到達帯を軸ごとに分けた。初回は記録から軸ごとに求め直す（§3.4 [v1.8]）
+        if !settings.stageTracksMigrated {
+            raiseUnlockedLevelsFromRecords()
+            settings.stageTracksMigrated = true
+        }
         // 取り込みの要否にかかわらず、起動のたびにウィジェットの写しを書き直す（早期 return の経路でも）
         defer { refreshWidgetSnapshot() }
         do {
@@ -145,9 +157,8 @@ final class AppModel {
     /// iOS 以外は App Group を持たないので何もしない
     func refreshWidgetSnapshot() {
         #if os(iOS)
-        let stage = stageState()
         let dates = ((try? context.fetch(FetchDescriptor<StudySession>())) ?? []).map(\.finishedAt)
-        WidgetSnapshot.make(stage: stage, sessionDates: dates).save()
+        WidgetSnapshot.make(stages: stageStates(), sessionDates: dates).save()
         WidgetCenter.shared.reloadAllTimelines()
         #endif
     }
@@ -176,8 +187,8 @@ final class AppModel {
         var rng = SystemRandomNumberGenerator()
         let questions = buildQuestions(config, using: &rng)
         guard !questions.isEmpty else { return nil }
-        lastUnlockedLevel = nil
-        pendingStageClear = nil
+        lastUnlocked = []
+        pendingStageClears = []
         pendingReviewRequest = nil
         let run = QuizRun(config: config, questions: questions)
         self.run = run
@@ -211,13 +222,14 @@ final class AppModel {
                                      progress: progress[$0.id])
             }
         }
-        let eligible = SetBuilder.eligible(candidates, config: config, enabledLevels: settings.enabledLevels)
-        // おまかせは今のステージを中心に、到達済みの帯を少し混ぜる（§3.4）
+        let eligible = SetBuilder.eligible(candidates, config: config, enabledLevels: settings.enabledLevelsByMode)
+        // おまかせは軸ごとに今のステージを中心に、到達済みの帯を少し混ぜる（§3.4）
         let picked: [SetBuilder.Candidate]
         if config.isAuto, config.filter == .all, config.restrictTo == nil {
-            let stage = stageState()
-            picked = SetBuilder.pick(from: eligible, factor: {
-                Stage.weightFactor(level: $0.level, current: stage.current, unlocked: stage.unlocked)
+            let stages = stageStates()
+            picked = SetBuilder.pick(from: eligible, factor: { c in
+                guard let s = stages[c.mode] else { return 0 }
+                return Stage.weightFactor(level: c.level, current: s.current, unlocked: s.unlocked)
             }, using: &rng)
         } else {
             picked = SetBuilder.pick(from: eligible, using: &rng)
@@ -264,29 +276,36 @@ final class AppModel {
         analytics.log(.setFinish(run.config, count: run.answers.count,
                                  correct: run.answers.filter(\.isCorrect).count,
                                  durationSec: Int(session.finishedAt.timeIntervalSince(session.startedAt))))
-        let stage = stageState()
-        let clear = Stage.clearEvent(unlocked: stage.unlocked, byLevel: stage.byLevel,
-                                     topCelebrated: settings.topStageCelebrated)
+        // このセットで出した軸だけ判定する（手動で下げた別の軸が、関係ないセットでクリア扱いになるのを避ける）
+        let modes = Set(run.questions.filter { !$0.isPractice }.map(\.mode))
+        let stages = stageStates()
+        let clears = DrillMode.allCases.filter(modes.contains).compactMap { mode -> Stage.Clear? in
+            guard let s = stages[mode] else { return nil }
+            return Stage.clearEvent(mode: mode, unlocked: s.unlocked, byLevel: s.byLevel,
+                                    topCelebrated: settings.topStageCelebrated.contains(mode))
+        }
         if Self.reviewPromptEnabled {
             pendingReviewRequest = ReviewPrompt.trigger(
                 correct: run.correctCount, total: run.questions.count,
                 finishedSets: (try? context.fetchCount(FetchDescriptor<StudySession>())) ?? 0,
-                stageCleared: clear != nil,
+                stageCleared: !clears.isEmpty,
                 lastAskedVersion: settings.reviewRequestedVersion, currentVersion: Self.appVersion)
             #if DEBUG
             // 確認用。起動引数 `-debugReviewPrompt YES` で、条件に関係なく毎セット頼む
             if UserDefaults.standard.bool(forKey: "debugReviewPrompt") { pendingReviewRequest = .highScore }
             #endif
         }
-        if let clear {
-            if let next = clear.next {
-                settings.unlockedLevel = next
-                lastUnlockedLevel = next
-            } else {
-                settings.topStageCelebrated = true
+        if !clears.isEmpty {
+            for clear in clears {
+                if let next = clear.next {
+                    settings.setUnlockedLevel(next, for: clear.mode)
+                } else {
+                    settings.setTopStageCelebrated(true, for: clear.mode)
+                }
+                analytics.log(.stageClear(clear))
             }
-            pendingStageClear = clear
-            analytics.log(.stageClear(clear))
+            lastUnlocked = clears.filter { $0.next != nil }
+            pendingStageClears = clears
             analytics.syncUserProperties()
             path = [.stageClear]
         } else {
@@ -326,17 +345,21 @@ final class AppModel {
         fatalError("Crashlytics の確認用のクラッシュ（起動引数 -debugCrash YES）")
     }
 
-    /// 確認・撮影用。起動引数 `-debugStageClear 500` でホーム表示直後に「450 点帯クリア → 500 点帯へ」の演出を出す。
-    /// `-debugStageClear top` なら最上位クリアの演出。記録や設定は変えない
+    /// 確認・撮影用。起動引数 `-debugStageClear 500` でホーム表示直後に「単語 450 点帯クリア → 500 点帯へ」の演出を出す。
+    /// `top` なら最上位クリア、`grammar:500` のように軸を付けられ、`both:500` なら 2 軸同時。記録や設定は変えない
     func showDebugStageClearIfRequested() {
         guard let arg = UserDefaults.standard.string(forKey: "debugStageClear"), path.isEmpty else { return }
-        if arg == "top" {
-            pendingStageClear = Stage.Clear(cleared: Stage.last, next: nil)
-        } else if let next = Int(arg), let i = Stage.levels.firstIndex(of: next), i > 0 {
-            pendingStageClear = Stage.Clear(cleared: Stage.levels[i - 1], next: next)
-        } else {
-            return
+        let parts = arg.split(separator: ":").map(String.init)
+        let level = parts.last ?? ""
+        let modes: [DrillMode] = parts.count < 2 ? [.word]
+            : parts[0] == "both" ? DrillMode.allCases : [DrillMode(rawValue: parts[0]) ?? .word]
+        let clears: [Stage.Clear] = modes.compactMap { mode in
+            if level == "top" { return Stage.Clear(mode: mode, cleared: Stage.last, next: nil) }
+            guard let next = Int(level), let i = Stage.levels.firstIndex(of: next), i > 0 else { return nil }
+            return Stage.Clear(mode: mode, cleared: Stage.levels[i - 1], next: next)
         }
+        guard !clears.isEmpty else { return }
+        pendingStageClears = clears
         path = [.stageClear]
     }
     #endif
@@ -349,18 +372,27 @@ final class AppModel {
         var byLevel: [Int: MasterySummary]
     }
 
-    /// 全レベルの習得状況と、今取り組む帯
-    func stageState() -> StageState {
+    /// 軸ごとの全レベルの習得状況と、今取り組む帯（§3.4 [v1.8]）
+    func stageStates() -> [DrillMode: StageState] {
         let progress = progressMap()
         let grammar = (try? context.fetch(FetchDescriptor<GrammarQuestion>(
             predicate: #Predicate { !$0.isArchived }))) ?? []
         let words = (try? context.fetch(FetchDescriptor<Word>(
             predicate: #Predicate { !$0.isArchived }))) ?? []
-        let items = grammar.map { (id: $0.id, level: $0.level) } + words.map { (id: $0.id, level: $0.level) }
-        let byLevel = MasteryStats.byLevel(items: items, progress: progress)
-        let unlocked = settings.unlockedLevel
-        return StageState(current: Stage.current(unlocked: unlocked, byLevel: byLevel),
-                          unlocked: unlocked, byLevel: byLevel)
+        let items: [DrillMode: [(id: String, level: Int)]] = [
+            .word: words.map { (id: $0.id, level: $0.level) },
+            .grammar: grammar.map { (id: $0.id, level: $0.level) },
+        ]
+        return Dictionary(uniqueKeysWithValues: DrillMode.allCases.map { mode in
+            let byLevel = MasteryStats.byLevel(items: items[mode] ?? [], progress: progress)
+            let unlocked = settings.unlockedLevel(mode)
+            return (mode, StageState(current: Stage.current(unlocked: unlocked, byLevel: byLevel),
+                                     unlocked: unlocked, byLevel: byLevel))
+        })
+    }
+
+    func stageState(_ mode: DrillMode) -> StageState {
+        stageStates()[mode] ?? StageState(current: Stage.first, unlocked: Stage.first, byLevel: [:])
     }
 
     /// 途中離脱。セットは保存しない（回答済みの Progress はそのまま残す）
@@ -372,7 +404,7 @@ final class AppModel {
 
     func goHome() {
         run = nil
-        pendingStageClear = nil
+        pendingStageClears = []
         pendingReviewRequest = nil
         path = []
     }
@@ -417,10 +449,12 @@ final class AppModel {
         try context.delete(model: ItemProgress.self)
         try context.delete(model: StudySession.self)
         try context.save()
-        settings.unlockedLevel = Stage.first
-        settings.topStageCelebrated = false
-        lastUnlockedLevel = nil
-        pendingStageClear = nil
+        for mode in DrillMode.allCases {
+            settings.setUnlockedLevel(Stage.first, for: mode)
+            settings.setTopStageCelebrated(false, for: mode)
+        }
+        lastUnlocked = []
+        pendingStageClears = []
         pendingReviewRequest = nil
         analytics.log(.historyReset)
         analytics.syncUserProperties()

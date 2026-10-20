@@ -70,7 +70,7 @@ struct AppModelTests {
 
     @Test("分野指定・形式指定が反映される") func categoryAndFormat() async throws {
         let model = try await makeModel()
-        model.settings.unlockedLevel = Stage.last
+        for m in DrillMode.allCases { model.settings.setUnlockedLevel(Stage.last, for: m) }
         var rng = SeededRandomNumberGenerator(seed: 1)
         let qs = model.buildQuestions(QuizConfig(mode: .word, category: "人事・採用", format: .cloze), using: &rng)
         #expect(qs.count == 10)
@@ -106,7 +106,7 @@ struct AppModelTests {
         let payload = try BundleData.load(bundle: Bundle(for: ItemProgress.self))
         let top = Set(payload.words.filter { $0.level == Stage.last }.map(\.id))
         try #require(!top.isEmpty)
-        model.settings.unlockedLevel = Stage.first
+        for m in DrillMode.allCases { model.settings.setUnlockedLevel(Stage.first, for: m) }
         #expect(model.startQuiz(QuizConfig(mode: .word, category: nil, format: nil, restrictTo: top)) == nil)
         #expect(model.path.isEmpty)
         var rng = SeededRandomNumberGenerator(seed: 5)
@@ -114,33 +114,70 @@ struct AppModelTests {
         let auto = model.buildQuestions(.auto, using: &rng)
         #expect(!auto.isEmpty)
         #expect(auto.allSatisfy { levels[$0.itemID] == Stage.first })
-        model.settings.unlockedLevel = Stage.last
+        for m in DrillMode.allCases { model.settings.setUnlockedLevel(Stage.last, for: m) }
         #expect(model.startQuiz(QuizConfig(mode: .word, category: nil, format: nil, restrictTo: top)) != nil)
     }
 
-    @Test("到達帯の習得率が80%を超えたセットの完走で次の帯が開く") func unlockNextStage() async throws {
+    @Test("軸の到達帯の習得率が 80% を超えたセットの完走で、その軸だけ次の帯が開く") func unlockNextStage() async throws {
         let model = try await makeModel()
         let payload = try BundleData.load(bundle: Bundle(for: ItemProgress.self))
-        let firstLevelIDs = payload.words.filter { $0.level == Stage.first }.map(\.id)
-            + payload.grammar.filter { $0.level == Stage.first }.map(\.id)
-        for id in firstLevelIDs {
+        let firstLevelWords = payload.words.filter { $0.level == Stage.first }.map(\.id)
+        for id in firstLevelWords {
             let p = model.progress(for: id)
             for _ in 0..<3 { p.record(isCorrect: true) }
         }
-        #expect(model.settings.unlockedLevel == Stage.first)
-        let run = try #require(model.startQuiz(.auto))
+        #expect(model.settings.unlockedLevel(.word) == Stage.first)
+        // 文法だけのセットでは、単語の軸は判定しない
+        let grammarRun = try #require(model.startQuiz(QuizConfig(mode: .grammar, category: nil, format: nil)))
+        while !grammarRun.isFinished {
+            model.answerCurrent(grammarRun.current.correctIndex)
+            if !grammarRun.isLast { model.advance() }
+        }
+        model.finishRun()
+        #expect(model.settings.unlockedLevel(.word) == Stage.first)
+        #expect(model.pendingStageClears.isEmpty)
+
+        let run = try #require(model.startQuiz(QuizConfig(mode: .word, category: nil, format: nil)))
         while !run.isFinished {
             model.answerCurrent(run.current.correctIndex)
             if !run.isLast { model.advance() }
         }
         model.finishRun()
-        #expect(model.settings.unlockedLevel == Stage.next(after: Stage.first))
-        #expect(model.lastUnlockedLevel == Stage.next(after: Stage.first))
-        #expect(model.stageState().current == Stage.next(after: Stage.first))
+        let next = Stage.next(after: Stage.first)
+        #expect(model.settings.unlockedLevel(.word) == next)
+        #expect(model.settings.unlockedLevel(.grammar) == Stage.first)
+        #expect(model.pendingStageClears == [Stage.Clear(mode: .word, cleared: Stage.first, next: next)])
+        #expect(model.lastUnlocked.map(\.mode) == [.word])
+        #expect(model.path == [.stageClear])
+        #expect(model.stageState(.word).current == next)
+        #expect(model.stageState(.grammar).current == Stage.first)
         #expect(model.pendingReviewRequest == .stageClear)
         try model.resetHistory()
-        #expect(model.settings.unlockedLevel == Stage.first)
-        #expect(model.lastUnlockedLevel == nil)
+        #expect(model.settings.unlockedLevel(.word) == Stage.first)
+        #expect(model.lastUnlocked.isEmpty)
+    }
+
+    @Test("1.8 への初回起動で、記録から軸ごとの到達帯を求め直し、古い合算のキーを消す") func migrateStageTracks() async throws {
+        let container = try AgnoriaSchema.makeContainer(inMemory: true)
+        let defaults = UserDefaults(suiteName: "AppModelTests-\(UUID().uuidString)")!
+        defaults.set(550, forKey: "unlockedLevel")   // 1.2 までの合算の到達帯
+        let model = AppModel(container: container, settings: AppSettings(defaults: defaults))
+        let payload = try BundleData.load(bundle: Bundle(for: ItemProgress.self))
+        _ = try await DataImporter(modelContainer: container).importData(payload)
+        for id in payload.grammar.filter({ $0.level <= 500 }).map(\.id) {
+            let p = model.progress(for: id)
+            for _ in 0..<3 { p.record(isCorrect: true) }
+        }
+        #expect(!model.settings.stageTracksMigrated)
+        await model.importBundledDataIfNeeded()
+        #expect(model.settings.stageTracksMigrated)
+        #expect(model.settings.unlockedLevel(.grammar) == 550)
+        #expect(model.settings.unlockedLevel(.word) == Stage.first)
+        #expect(defaults.object(forKey: "unlockedLevel") == nil)
+        // 2 回目以降は求め直さない（手動で下げた帯を戻さない）
+        model.settings.setUnlockedLevel(Stage.first, for: .grammar)
+        await model.importBundledDataIfNeeded()
+        #expect(model.settings.unlockedLevel(.grammar) == Stage.first)
     }
 
     @Test("全問正解を 5 セット完走すると評価ダイアログを頼み、同じバージョンでは以後頼まない") func reviewRequest() async throws {

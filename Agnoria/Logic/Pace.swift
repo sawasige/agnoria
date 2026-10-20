@@ -21,7 +21,9 @@ nonisolated enum Pace {
     ///   - remaining: クリアまであと何問の習得か（`Stage.remainingToClear`）。0 なら nil
     ///   - masteredDates: 習得した日時（全帯。`ItemProgress.masteredAt`）
     ///   - sessionDates: セット完走の日時（`StudySession.finishedAt`）
-    static func estimate(remaining: Int, masteredDates: [Date], sessionDates: [Date],
+    ///   - share: この軸が 1 セットに占める割合の見込み（§3.4 [v1.8]）。既定値（1 セットの習得数）に掛ける。
+    ///     masteredDates もその軸の問題の分だけを渡す
+    static func estimate(remaining: Int, masteredDates: [Date], sessionDates: [Date], share: Double = 1,
                          now: Date = .now, calendar: Calendar = .current) -> Estimate? {
         guard remaining > 0 else { return nil }
         let todayStart = calendar.startOfDay(for: now)
@@ -29,9 +31,9 @@ nonisolated enum Pace {
         let recentSessions = sessionDates.filter { $0 >= windowStart }
         let recentMastered = masteredDates.filter { $0 >= windowStart }.count
 
-        let perSet = (Double(recentMastered) + defaultMasteredPerSet * priorWeight)
+        let perSet = (Double(recentMastered) + defaultMasteredPerSet * share * priorWeight)
             / (Double(recentSessions.count) + priorWeight)
-        let sets = max(1, Int((Double(remaining) / perSet).rounded(.up)))
+        let sets = max(1, Int((Double(remaining) / max(perSet, 0.01)).rounded(.up)))
 
         guard let first = recentSessions.min() else { return Estimate(sets: sets, days: nil) }
         let firstDay = calendar.startOfDay(for: first)

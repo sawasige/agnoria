@@ -48,7 +48,7 @@ final class UsageAnalytics {
             case .setAbort(let c, let answered):
                 return Self.configParams(c).merging(["answered": answered]) { a, _ in a }
             case .stageClear(let clear):
-                return ["level": clear.cleared, "next": clear.next ?? 0]
+                return ["mode": clear.mode.rawValue, "level": clear.cleared, "next": clear.next ?? 0]
             case .bookmarkToggled(let on):
                 return ["on": on ? 1 : 0]
             case .settingsChanged(let key):
@@ -127,9 +127,11 @@ final class UsageAnalytics {
         Analytics.logEvent(event.name, parameters: event.params)
     }
 
-    /// 到達帯をユーザープロパティに。帯が変わるたびに呼ぶ
+    /// 軸ごとの到達帯をユーザープロパティに（unlocked_level_word / unlocked_level_grammar）。帯が変わるたびに呼ぶ
     func syncUserProperties() {
         guard state == .active else { return }
-        Analytics.setUserProperty(String(settings.unlockedLevel), forName: "unlocked_level")
+        for mode in DrillMode.allCases {
+            Analytics.setUserProperty(String(settings.unlockedLevel(mode)), forName: "unlocked_level_\(mode.rawValue)")
+        }
     }
 }
