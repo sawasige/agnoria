@@ -4074,7 +4074,7 @@
       "経営陣"
     ],
     "category": "人事・採用",
-    "level": 500
+    "level": 550
   },
   {
     "id": "w-0152",
@@ -4830,7 +4830,7 @@
       "課題"
     ],
     "category": "会議・連絡",
-    "level": 500
+    "level": 550
   },
   {
     "id": "w-0180",
@@ -4911,7 +4911,7 @@
       "原材料"
     ],
     "category": "店舗・顧客",
-    "level": 500
+    "level": 550
   },
   {
     "id": "w-0183",
@@ -5181,7 +5181,7 @@
       "勤勉な"
     ],
     "category": "店舗・顧客",
-    "level": 500
+    "level": 550
   },
   {
     "id": "w-0193",
@@ -6315,7 +6315,7 @@
       "定年"
     ],
     "category": "人事・採用",
-    "level": 550
+    "level": 600
   },
   {
     "id": "w-0235",
@@ -6693,7 +6693,7 @@
       "記録する"
     ],
     "category": "会議・連絡",
-    "level": 550
+    "level": 600
   },
   {
     "id": "w-0249",
@@ -7368,7 +7368,7 @@
       "取引先"
     ],
     "category": "店舗・顧客",
-    "level": 550
+    "level": 600
   },
   {
     "id": "w-0274",
@@ -7422,7 +7422,7 @@
       "返品窓口"
     ],
     "category": "店舗・顧客",
-    "level": 550
+    "level": 500
   },
   {
     "id": "w-0276",
@@ -7668,33 +7668,6 @@
     "level": 550
   },
   {
-    "id": "w-0285",
-    "word": "averse",
-    "pos": "形容詞",
-    "meaning": "嫌って",
-    "examples": [
-      {
-        "en": "Our clients are generally averse to sudden changes in service fees.",
-        "ja": "当社の顧客は概して、サービス料金の突然の変更を嫌っています。"
-      },
-      {
-        "en": "Investors are averse to risk when the market is unstable.",
-        "ja": "市場が不安定なとき、投資家はリスクを嫌います。"
-      },
-      {
-        "en": "He is not averse to working late when a deadline is near.",
-        "ja": "彼は締め切りが近いときに遅くまで働くことを嫌がりません。"
-      }
-    ],
-    "distractors": [
-      "不利な",
-      "慣れて",
-      "賛成して"
-    ],
-    "category": "混同しやすい語",
-    "level": 550
-  },
-  {
     "id": "w-0286",
     "word": "ensure",
     "pos": "動詞",
@@ -7881,7 +7854,7 @@
       "不確かな"
     ],
     "category": "混同しやすい語",
-    "level": 550
+    "level": 600
   },
   {
     "id": "w-0293",
@@ -8070,7 +8043,7 @@
       "〜する間"
     ],
     "category": "混同しやすい語",
-    "level": 550
+    "level": 500
   },
   {
     "id": "w-0300",
@@ -8124,7 +8097,7 @@
       "処罰する"
     ],
     "category": "混同しやすい語",
-    "level": 550
+    "level": 600
   },
   {
     "id": "w-0302",
@@ -8532,33 +8505,6 @@
     "level": 600
   },
   {
-    "id": "w-0317",
-    "word": "notwithstanding",
-    "pos": "前置詞",
-    "meaning": "〜にもかかわらず",
-    "examples": [
-      {
-        "en": "Notwithstanding the delay, the project was finished within the approved cost.",
-        "ja": "遅延にもかかわらず、プロジェクトは承認された費用内で完了しました。"
-      },
-      {
-        "en": "Notwithstanding the higher price, the new model sold well.",
-        "ja": "価格が高いにもかかわらず、新モデルはよく売れました。"
-      },
-      {
-        "en": "Notwithstanding some complaints, most customers liked the new design.",
-        "ja": "いくつかの苦情はあったものの、ほとんどのお客様は新しいデザインを気に入りました。"
-      }
-    ],
-    "distractors": [
-      "〜によって",
-      "〜に加えて",
-      "〜に関して"
-    ],
-    "category": "ビジネス一般",
-    "level": 600
-  },
-  {
     "id": "w-0318",
     "word": "drastically",
     "pos": "副詞",
@@ -8883,33 +8829,6 @@
     "level": 600
   },
   {
-    "id": "w-0330",
-    "word": "stipend",
-    "pos": "名詞",
-    "meaning": "（研修生などへの）給付金",
-    "examples": [
-      {
-        "en": "Interns receive a monthly stipend to cover transportation and meals.",
-        "ja": "インターンは交通費と食費をまかなうための月々の給付金を受け取ります。"
-      },
-      {
-        "en": "Research assistants are paid a small stipend during the summer program.",
-        "ja": "研究助手は夏のプログラムの間、少額の給付金を受け取ります。"
-      },
-      {
-        "en": "The stipend is paid at the beginning of each month.",
-        "ja": "給付金は毎月の初めに支払われます。"
-      }
-    ],
-    "distractors": [
-      "給与",
-      "賞与",
-      "退職金"
-    ],
-    "category": "人事・採用",
-    "level": 600
-  },
-  {
     "id": "w-0331",
     "word": "referral",
     "pos": "名詞",
@@ -9096,7 +9015,7 @@
       "在宅勤務する"
     ],
     "category": "人事・採用",
-    "level": 600
+    "level": 500
   },
   {
     "id": "w-0338",
@@ -9283,33 +9202,6 @@
       "多数決で",
       "匿名で",
       "一時的に"
-    ],
-    "category": "会議・連絡",
-    "level": 600
-  },
-  {
-    "id": "w-0345",
-    "word": "henceforth",
-    "pos": "副詞",
-    "meaning": "今後は",
-    "examples": [
-      {
-        "en": "Henceforth, all travel requests must be submitted at least ten days in advance.",
-        "ja": "今後は、すべての出張申請を少なくとも10 日前に提出しなければなりません。"
-      },
-      {
-        "en": "Henceforth, the parking lot will close at 10 p.m.",
-        "ja": "今後、駐車場は午後 10 時に閉まります。"
-      },
-      {
-        "en": "Henceforth, the store will be known as Green Market.",
-        "ja": "今後、その店はグリーンマーケットという名前になります。"
-      }
-    ],
-    "distractors": [
-      "以前は",
-      "時々",
-      "直ちに"
     ],
     "category": "会議・連絡",
     "level": 600
@@ -9690,7 +9582,7 @@
       "詳細な"
     ],
     "category": "会議・連絡",
-    "level": 600
+    "level": 550
   },
   {
     "id": "w-0360",
@@ -9931,33 +9823,6 @@
       "無視する",
       "修正する",
       "却下する"
-    ],
-    "category": "店舗・顧客",
-    "level": 600
-  },
-  {
-    "id": "w-0369",
-    "word": "consignment",
-    "pos": "名詞",
-    "meaning": "委託販売",
-    "examples": [
-      {
-        "en": "The gallery sells local artwork on consignment and keeps a small commission.",
-        "ja": "そのギャラリーは地元の作品を委託販売し、少額の手数料を受け取ります。"
-      },
-      {
-        "en": "The shop accepts used furniture on consignment.",
-        "ja": "その店は中古家具の委託販売を受け付けています。"
-      },
-      {
-        "en": "Under a consignment agreement, the artist is paid only when the work sells.",
-        "ja": "委託販売の契約では、作品が売れたときにだけ作家に支払われます。"
-      }
-    ],
-    "distractors": [
-      "卸売",
-      "競売",
-      "直販"
     ],
     "category": "店舗・顧客",
     "level": 600
@@ -10314,33 +10179,6 @@
     "level": 600
   },
   {
-    "id": "w-0383",
-    "word": "comprehensible",
-    "pos": "形容詞",
-    "meaning": "理解できる",
-    "examples": [
-      {
-        "en": "The manual must be comprehensible to staff with no technical background.",
-        "ja": "マニュアルは技術的な背景のないスタッフにも理解できるものでなければなりません。"
-      },
-      {
-        "en": "The speaker's accent was strong, but his talk was still comprehensible.",
-        "ja": "講演者のなまりは強かったですが、話は十分理解できました。"
-      },
-      {
-        "en": "Without the charts, the sales data would hardly be comprehensible.",
-        "ja": "図表がなければ、売上データはほとんど理解できないでしょう。"
-      }
-    ],
-    "distractors": [
-      "包括的な",
-      "妥協できる",
-      "比較できる"
-    ],
-    "category": "混同しやすい語",
-    "level": 600
-  },
-  {
     "id": "w-0384",
     "word": "considerable",
     "pos": "形容詞",
@@ -10581,7 +10419,7 @@
       "追加"
     ],
     "category": "混同しやすい語",
-    "level": 600
+    "level": 550
   },
   {
     "id": "w-0393",
@@ -10617,8 +10455,8 @@
     "meaning": "装置",
     "examples": [
       {
-        "en": "Every device connected to the office network must have updated security software.",
-        "ja": "オフィスネットワークに接続するすべての装置には最新のセキュリティソフトが必要です。"
+        "en": "The new device can scan 50 pages in one minute.",
+        "ja": "新しい装置は 1 分間に 50 ページをスキャンできます。"
       },
       {
         "en": "The device measures the temperature of the warehouse every hour.",
@@ -10635,7 +10473,7 @@
       "配線"
     ],
     "category": "混同しやすい語",
-    "level": 600
+    "level": 500
   },
   {
     "id": "w-0395",
@@ -10660,33 +10498,6 @@
       "選択する",
       "変更する",
       "分担する"
-    ],
-    "category": "混同しやすい語",
-    "level": 600
-  },
-  {
-    "id": "w-0396",
-    "word": "elicit",
-    "pos": "動詞",
-    "meaning": "引き出す",
-    "examples": [
-      {
-        "en": "The survey was designed to elicit honest feedback from customers.",
-        "ja": "その調査は顧客から率直な意見を引き出すために設計されました。"
-      },
-      {
-        "en": "The interviewer asked open questions to elicit detailed answers.",
-        "ja": "面接官は詳しい答えを引き出すために自由回答の質問をしました。"
-      },
-      {
-        "en": "The new ad failed to elicit much interest from customers.",
-        "ja": "新しい広告は顧客の関心をあまり引き出せませんでした。"
-      }
-    ],
-    "distractors": [
-      "隠す",
-      "強制する",
-      "無視する"
     ],
     "category": "混同しやすい語",
     "level": 600
@@ -10719,33 +10530,6 @@
     "level": 600
   },
   {
-    "id": "w-0398",
-    "word": "stationary",
-    "pos": "形容詞",
-    "meaning": "静止した",
-    "examples": [
-      {
-        "en": "Keep the forklift stationary while loading pallets onto the truck.",
-        "ja": "パレットをトラックに積み込む間はフォークリフトを静止させておいてください。"
-      },
-      {
-        "en": "The conveyor belt remained stationary during the inspection.",
-        "ja": "検査の間、ベルトコンベアは静止したままでした。"
-      },
-      {
-        "en": "Please remain stationary while the scanner reads your badge.",
-        "ja": "スキャナーがバッジを読み取る間は動かないでください。"
-      }
-    ],
-    "distractors": [
-      "文房具の",
-      "一時的な",
-      "定期的な"
-    ],
-    "category": "混同しやすい語",
-    "level": 600
-  },
-  {
     "id": "w-0399",
     "word": "confidential",
     "pos": "形容詞",
@@ -10770,7 +10554,7 @@
       "信頼できる"
     ],
     "category": "混同しやすい語",
-    "level": 600
+    "level": 550
   },
   {
     "id": "w-0400",
@@ -10795,6 +10579,222 @@
       "立派に",
       "敬意をもって",
       "比較的"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0401",
+    "word": "subsequently",
+    "pos": "副詞",
+    "meaning": "その後・続いて",
+    "examples": [
+      {
+        "en": "The product was launched in Japan and subsequently introduced in other Asian markets.",
+        "ja": "その製品は日本で発売され、その後ほかのアジア市場に投入されました。"
+      },
+      {
+        "en": "The contract was signed in March, and construction subsequently began in May.",
+        "ja": "契約は 3 月に結ばれ、その後 5 月に工事が始まりました。"
+      },
+      {
+        "en": "She joined the company as an intern and was subsequently hired as a full-time analyst.",
+        "ja": "彼女はインターンとして入社し、その後正社員のアナリストとして採用されました。"
+      }
+    ],
+    "distractors": [
+      "以前に",
+      "同時に",
+      "頻繁に"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0402",
+    "word": "effective",
+    "pos": "形容詞",
+    "meaning": "（規則などが）発効して・有効な",
+    "examples": [
+      {
+        "en": "The new travel expense policy will be effective from April 1.",
+        "ja": "新しい出張経費の規定は 4 月 1 日から有効になります。"
+      },
+      {
+        "en": "Effective immediately, all visitors must sign in at the front desk.",
+        "ja": "本日から直ちに、すべての来訪者は受付で記帳する必要があります。"
+      },
+      {
+        "en": "Mr. Lee's appointment as sales director will be effective as of next Monday.",
+        "ja": "リー氏の営業部長への就任は来週月曜日付けで発効します。"
+      }
+    ],
+    "distractors": [
+      "廃止された",
+      "任意の",
+      "非公開の"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0403",
+    "word": "access",
+    "pos": "名詞",
+    "meaning": "利用する権利・アクセス",
+    "examples": [
+      {
+        "en": "Only managers have access to the employee salary database.",
+        "ja": "従業員の給与データベースへのアクセス権があるのは管理職だけです。"
+      },
+      {
+        "en": "Hotel guests have free access to the fitness center on the third floor.",
+        "ja": "ホテルの宿泊客は 3 階のフィットネスセンターを無料で利用できます。"
+      },
+      {
+        "en": "You will need a password to gain access to the shared files.",
+        "ja": "共有ファイルにアクセスするにはパスワードが必要です。"
+      }
+    ],
+    "distractors": [
+      "超過",
+      "保管",
+      "削除"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0404",
+    "word": "allowance",
+    "pos": "名詞",
+    "meaning": "手当",
+    "examples": [
+      {
+        "en": "Employees who travel abroad receive a daily meal allowance of 50 dollars.",
+        "ja": "海外出張する従業員は 1 日 50 ドルの食事手当を受け取ります。"
+      },
+      {
+        "en": "The company provides a monthly housing allowance for staff who relocate.",
+        "ja": "会社は転居するスタッフに毎月の住宅手当を支給しています。"
+      },
+      {
+        "en": "Your transportation allowance will be paid together with your monthly salary.",
+        "ja": "交通手当は毎月の給料と一緒に支払われます。"
+      }
+    ],
+    "distractors": [
+      "控除",
+      "罰金",
+      "年金"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0405",
+    "word": "courier",
+    "pos": "名詞",
+    "meaning": "宅配業者・宅配便",
+    "examples": [
+      {
+        "en": "We will send the replacement parts by courier so that they arrive tomorrow.",
+        "ja": "明日届くよう、交換部品は宅配便でお送りします。"
+      },
+      {
+        "en": "A courier will pick up the package from your office this afternoon.",
+        "ja": "今日の午後、宅配業者が御社のオフィスに荷物を受け取りに伺います。"
+      },
+      {
+        "en": "The signed contracts were delivered by courier to the client's headquarters.",
+        "ja": "署名済みの契約書は宅配便で取引先の本社に届けられました。"
+      }
+    ],
+    "distractors": [
+      "倉庫",
+      "仲介業者",
+      "警備員"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0406",
+    "word": "perspective",
+    "pos": "名詞",
+    "meaning": "視点・見方",
+    "examples": [
+      {
+        "en": "From the customer's perspective, the new checkout process is much faster.",
+        "ja": "顧客の視点から見ると、新しい会計手続きはずっと速くなっています。"
+      },
+      {
+        "en": "Hiring staff from other industries can bring a fresh perspective to the team.",
+        "ja": "他業界から人材を採用すると、チームに新しい視点がもたらされることがあります。"
+      },
+      {
+        "en": "Working abroad for five years gave him a broader perspective on global markets.",
+        "ja": "5 年間の海外勤務で、彼は世界市場についてより幅広い視点を得ました。"
+      }
+    ],
+    "distractors": [
+      "見込み",
+      "目的",
+      "手順"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0407",
+    "word": "industrial",
+    "pos": "形容詞",
+    "meaning": "産業の・工業の",
+    "examples": [
+      {
+        "en": "The new factory will be built in an industrial area outside the city.",
+        "ja": "新しい工場は市外の工業地域に建設されます。"
+      },
+      {
+        "en": "We sell industrial cleaning equipment to factories and warehouses.",
+        "ja": "当社は工場や倉庫向けに産業用の清掃機器を販売しています。"
+      },
+      {
+        "en": "Industrial production in the region rose by 3 percent last quarter.",
+        "ja": "その地域の工業生産は前四半期に 3 パーセント増加しました。"
+      }
+    ],
+    "distractors": [
+      "勤勉な",
+      "農業の",
+      "個人的な"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0408",
+    "word": "regardless",
+    "pos": "副詞",
+    "meaning": "（〜に）かかわらず",
+    "examples": [
+      {
+        "en": "All employees must attend the safety training, regardless of their position.",
+        "ja": "役職にかかわらず、全従業員が安全研修に出席しなければなりません。"
+      },
+      {
+        "en": "The shipping fee is the same regardless of the size of the order.",
+        "ja": "注文の量にかかわらず、送料は同じです。"
+      },
+      {
+        "en": "Regardless of the weather, the outdoor event will go ahead as planned.",
+        "ja": "天候にかかわらず、屋外イベントは予定どおり行われます。"
+      }
+    ],
+    "distractors": [
+      "〜に関して",
+      "〜のおかげで",
+      "〜に加えて"
     ],
     "category": "混同しやすい語",
     "level": 600
