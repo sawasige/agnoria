@@ -1,4 +1,4 @@
-# 使い方: bundle exec ruby fastlane/scripts/upload_creative_asset.rb [png] [live|edit] [参照名]
+# 使い方: bundle exec ruby fastlane/scripts/upload_creative_asset.rb [png] [live|edit] [参照名] [--only header|search]
 # App Store の製品ページヘッダーと検索結果用の共通クリエイティブアセット（16:9 5244x2950 PNG）を
 # Asset Library に上げ、iOS バージョン（live = 配信中 / edit = 編集中。既定は edit）の ja ローカライズの
 # ヘッダーと検索結果に割り当てる。同じ枠に既存の割り当てがあれば先に消す（API は CREATE / DELETE / GET_INSTANCE のみ）。
@@ -20,6 +20,11 @@ def call(method, path, body = nil)
   data
 end
 # 使い方 2: --assign <imageId> [live|edit] で、Asset Library にある画像を割り当て直すだけ
+# --only header|search で片方の枠だけに割り当てる（既定は両方）
+only = nil
+if (i = ARGV.index("--only"))
+  only = ARGV[i + 1]; ARGV.slice!(i, 2)
+end
 assign_only = ARGV[0] == "--assign" ? ARGV[1] : nil
 file = (assign_only ? nil : ARGV[0]) || File.expand_path("../creative/universal-16x9-5244x2950.png", __dir__)
 target = (assign_only ? ARGV[2] : ARGV[1]) || "edit"
@@ -73,7 +78,9 @@ assign = lambda do |image_id|
       existing[d.dig('attributes', 'placementType')] = pl['id']
     end
   end
-  %w[PRODUCT_PAGE_HEADER_ASSET APP_STORE_SEARCH_RESULTS_ASSET].each do |pt|
+  types = { "header" => %w[PRODUCT_PAGE_HEADER_ASSET], "search" => %w[APP_STORE_SEARCH_RESULTS_ASSET] }[only] ||
+          %w[PRODUCT_PAGE_HEADER_ASSET APP_STORE_SEARCH_RESULTS_ASSET]
+  types.each do |pt|
     if (old = existing[pt])
       call('DELETE', "appAssetLibraryPlacements/#{old}")
       puts "deleted old placement #{pt}: #{old}"
