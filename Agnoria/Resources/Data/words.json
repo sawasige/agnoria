@@ -176,8 +176,8 @@
         "ja": "カスタマーサポートのチームを 20 人に拡大します。"
       },
       {
-        "en": "The store decided to expand its opening hours on weekends.",
-        "ja": "その店は週末の営業時間を延ばすことにしました。"
+        "en": "The store decided to expand its online shop to include furniture.",
+        "ja": "その店はオンラインショップを拡大して家具も扱うことにしました。"
       }
     ],
     "distractors": [
@@ -230,8 +230,8 @@
         "ja": "財務チームは取締役会向けに四半期ごとの報告書を作成します。"
       },
       {
-        "en": "Quarterly sales were slightly higher than last year.",
-        "ja": "四半期の売上は昨年よりわずかに増えました。"
+        "en": "Quarterly sales were slightly higher than in the same period last year.",
+        "ja": "四半期の売上は前年同期よりわずかに増えました。"
       }
     ],
     "distractors": [
@@ -415,8 +415,8 @@
         "ja": "彼は今年末に退職します。"
       },
       {
-        "en": "Many employees choose to retire at sixty-five.",
-        "ja": "多くの従業員は 65 歳で退職することを選びます。"
+        "en": "Many employees at our company choose to retire at sixty-five.",
+        "ja": "当社の多くの従業員は 65 歳で退職することを選びます。"
       },
       {
         "en": "After she retires, Ms. Kato plans to travel across Europe.",
@@ -523,7 +523,7 @@
         "ja": "早退する前に上司に確認してください。"
       },
       {
-        "en": "Report any accident to your supervisor immediately.",
+        "en": "Report any accident at work to your supervisor immediately.",
         "ja": "事故が起きたらすぐに直属の上司に報告してください。"
       },
       {
@@ -905,8 +905,8 @@
         "ja": "マニュアルを 2 部購入したいのですが。"
       },
       {
-        "en": "Members can purchase tickets before they go on general sale.",
-        "ja": "会員は一般発売の前にチケットを購入できます。"
+        "en": "The firm plans to purchase new laptops for all sales staff next month.",
+        "ja": "会社は来月、営業担当全員のために新しいノートパソコンを購入する予定です。"
       }
     ],
     "distractors": [
@@ -1063,12 +1063,12 @@
         "ja": "新モデルは3色で入手できます。"
       },
       {
-        "en": "Free parking is available for customers behind the store.",
-        "ja": "お客様は店舗の裏にある無料駐車場を利用できます。"
+        "en": "Free customer parking is available behind the store.",
+        "ja": "店舗の裏に、お客様用の無料駐車場をご利用いただけます。"
       },
       {
-        "en": "Is the manager available to talk this afternoon?",
-        "ja": "店長は今日の午後、お話しできますか。"
+        "en": "Gift wrapping is available at the service counter for a small fee.",
+        "ja": "ギフト包装はサービスカウンターで少額の料金で利用できます。"
       }
     ],
     "distractors": [
@@ -1094,8 +1094,8 @@
         "ja": "2 人の技能は補い合っています。彼女がデザインを担当し、彼が財務を担当します。"
       },
       {
-        "en": "The two companies offer complementary services and often work together.",
-        "ja": "2 社は補完的なサービスを提供しており、よく一緒に仕事をしています。"
+        "en": "The two companies have complementary strengths, so the merger makes sense.",
+        "ja": "2 社は互いの強みを補い合うので、合併は理にかなっています。"
       }
     ],
     "distractors": [
@@ -1144,8 +1144,8 @@
         "ja": "その会社はリモートワークに関する新しい方針を採用しました。"
       },
       {
-        "en": "Many schools have adopted tablets for classroom use.",
-        "ja": "多くの学校が授業でタブレットを採用しています。"
+        "en": "Many offices have adopted a four-day workweek this year.",
+        "ja": "今年、多くの会社が週 4 日勤務を取り入れました。"
       },
       {
         "en": "The board decided to adopt the consultant's recommendations.",
@@ -1225,8 +1225,8 @@
         "ja": "新しい方針は売上に良い効果をもたらしました。"
       },
       {
-        "en": "The discount had little effect on sales.",
-        "ja": "その割引は売上にほとんど効果がありませんでした。"
+        "en": "The effect of the price cut was smaller than we expected.",
+        "ja": "値下げの効果は予想より小さかったです。"
       },
       {
         "en": "The new rules will take effect on April 1.",
@@ -1364,8 +1364,8 @@
         "ja": "新入社員向けの研修予定表は社内ネットに掲載されています。"
       },
       {
-        "en": "We are behind schedule because the parts arrived late.",
-        "ja": "部品の到着が遅れたため、予定より遅れています。"
+        "en": "Please check the shift schedule posted in the break room every Friday.",
+        "ja": "毎週金曜日に休憩室に貼り出されるシフトの予定表を確認してください。"
       }
     ],
     "distractors": [
@@ -1549,8 +1549,8 @@
         "ja": "部長は今朝、電話対応で忙しいです。"
       },
       {
-        "en": "The restaurant is always busy on Friday evenings.",
-        "ja": "そのレストランは金曜日の夜はいつも混んでいます。"
+        "en": "The sales team is always busy at the end of each quarter.",
+        "ja": "営業チームは毎四半期末にいつも忙しくしています。"
       },
       {
         "en": "I am busy until three, but I can meet you after that.",
@@ -1742,8 +1742,8 @@
         "ja": "休暇の週の間、オフィスは閉まります。"
       },
       {
-        "en": "Several questions were raised during the meeting.",
-        "ja": "会議の間にいくつかの質問が出ました。"
+        "en": "Several questions about the budget were raised during the meeting.",
+        "ja": "会議の間に予算についていくつかの質問が出ました。"
       }
     ],
     "distractors": [
@@ -1874,7 +1874,7 @@
       },
       {
         "en": "Each employee receives twenty days of paid leave per year.",
-        "ja": "各従業員は年に 20 日の有給休暇を受け取ります。"
+        "ja": "従業員には各自、年に 20 日の有給休暇が与えられます。"
       },
       {
         "en": "An employee from the IT department fixed my computer.",
@@ -2683,8 +2683,8 @@
         "ja": "会議を木曜日に移すことを提案します。"
       },
       {
-        "en": "Several customers suggested longer opening hours.",
-        "ja": "何人かのお客様が営業時間の延長を提案しました。"
+        "en": "Several customers suggested that we stay open later on weekends.",
+        "ja": "何人かのお客様が週末の営業時間を延ばすことを提案しました。"
       },
       {
         "en": "May I suggest a different venue for the party?",
@@ -2791,8 +2791,8 @@
         "ja": "当店では新品と中古のオフィス家具を両方販売しています。"
       },
       {
-        "en": "The bakery sells out of croissants by ten every morning.",
-        "ja": "そのベーカリーでは毎朝 10 時までにクロワッサンが売り切れます。"
+        "en": "The bakery sells fresh bread and cakes from seven every morning.",
+        "ja": "そのベーカリーは毎朝 7 時からパンとケーキを売っています。"
       },
       {
         "en": "We do not sell this model in Japan anymore.",
@@ -2953,12 +2953,12 @@
         "ja": "14日以内なら商品を返品できます。"
       },
       {
-        "en": "Customers may return unused items with the original receipt.",
-        "ja": "お客様は元の領収書があれば未使用の商品を返品できます。"
+        "en": "Customers may return unused items for a full refund with the original receipt.",
+        "ja": "元の領収書があれば、未使用の商品を返品して全額返金を受けられます。"
       },
       {
-        "en": "I had to return the printer because it did not work.",
-        "ja": "プリンターが動かなかったので返品しなければなりませんでした。"
+        "en": "I returned the printer and got a full refund because it did not work.",
+        "ja": "プリンターが動かなかったので返品し、全額返金してもらいました。"
       }
     ],
     "distractors": [
@@ -2985,7 +2985,7 @@
       },
       {
         "en": "Good service brings customers back again and again.",
-        "ja": "良い接客はお客様を何度も呼び戻します。"
+        "ja": "良い接客をすれば、お客様は何度も来てくださいます。"
       }
     ],
     "distractors": [
@@ -3092,8 +3092,8 @@
         "ja": "今週末の特売では靴がすべて半額です。"
       },
       {
-        "en": "The sale was so busy that we ran out of shopping bags.",
-        "ja": "特売はとても混んで、買い物袋が足りなくなりました。"
+        "en": "During the sale, the store was so busy that we ran out of shopping bags.",
+        "ja": "特売中は店がとても混雑し、買い物袋が足りなくなりました。"
       }
     ],
     "distractors": [
@@ -3227,8 +3227,8 @@
         "ja": "図書館は学期の間、学生にタブレットを貸し出します。"
       },
       {
-        "en": "Could you lend me a hand with these boxes?",
-        "ja": "この箱を運ぶのを手伝ってもらえますか。"
+        "en": "The bank agreed to lend us the money for the new equipment.",
+        "ja": "銀行は新しい設備の資金を貸すことに同意しました。"
       }
     ],
     "distractors": [
@@ -3254,8 +3254,8 @@
         "ja": "避難訓練についての放送が聞こえましたか。"
       },
       {
-        "en": "We were glad to hear that the shipment had arrived safely.",
-        "ja": "荷物が無事に届いたと聞いて安心しました。"
+        "en": "Can everyone in the back row hear the speaker clearly?",
+        "ja": "後ろの列の皆さん、話し手の声がはっきり聞こえますか。"
       }
     ],
     "distractors": [
@@ -3308,8 +3308,8 @@
         "ja": "そのクレジットカードの年会費は 5,000 円です。"
       },
       {
-        "en": "There is no fee for canceling within 24 hours.",
-        "ja": "24 時間以内のキャンセルには料金がかかりません。"
+        "en": "The bank charges a fee of 300 yen for each transfer.",
+        "ja": "その銀行は振込 1 回につき 300 円の料金を取ります。"
       }
     ],
     "distractors": [
@@ -3335,8 +3335,8 @@
         "ja": "電車の運賃は 4 月に 3 パーセント上がります。"
       },
       {
-        "en": "The taxi fare from the airport was higher than I expected.",
-        "ja": "空港からのタクシー運賃は予想より高かったです。"
+        "en": "Please have the exact fare ready when you board the bus.",
+        "ja": "バスに乗る際は、ちょうどの運賃をご用意ください。"
       }
     ],
     "distractors": [
@@ -3439,8 +3439,8 @@
         "ja": "明日オフィスに来るときは、IDカードを持ってきてください。"
       },
       {
-        "en": "Please bring a copy of your receipt to the service desk.",
-        "ja": "レシートの控えをサービスデスクにお持ちください。"
+        "en": "Could you bring a copy of your receipt when you come back here tomorrow?",
+        "ja": "明日こちらに戻る際に、レシートの控えを持ってきていただけますか。"
       },
       {
         "en": "Could you bring me the file from the cabinet?",
@@ -3466,8 +3466,8 @@
         "ja": "取引先のオフィスへ行くときは、これらの見本を持っていってください。"
       },
       {
-        "en": "Please take an umbrella; it may rain this afternoon.",
-        "ja": "午後は雨が降るかもしれないので、傘を持っていってください。"
+        "en": "Take an umbrella when you leave the office; it may rain this afternoon.",
+        "ja": "午後は雨が降るかもしれないので、会社を出るときは傘を持っていってください。"
       },
       {
         "en": "I will take the documents to the post office on my way home.",
@@ -3628,8 +3628,8 @@
         "ja": "正午前に駅に着きます。"
       },
       {
-        "en": "You can reach me on my mobile phone during the trip.",
-        "ja": "出張中は携帯電話で私に連絡が取れます。"
+        "en": "We should reach the client's office by ten if traffic is light.",
+        "ja": "道が空いていれば、10 時までに取引先のオフィスに着くはずです。"
       },
       {
         "en": "The truck will reach the warehouse by early afternoon.",
@@ -3687,7 +3687,7 @@
       },
       {
         "en": "The company rents heavy equipment to construction firms.",
-        "ja": "その会社は建設会社に大型設備を貸し出しています。"
+        "ja": "その会社は建設会社に重機などの大型設備を貸し出しています。"
       }
     ],
     "distractors": [
@@ -3763,8 +3763,8 @@
         "ja": "サーバーは日曜日の朝、保守のため停止します。"
       },
       {
-        "en": "Regular maintenance keeps the machines running safely.",
-        "ja": "定期的な保守により、機械は安全に稼働し続けます。"
+        "en": "Regular maintenance keeps the machines in the factory running safely.",
+        "ja": "定期的な保守により、工場の機械は安全に稼働し続けます。"
       },
       {
         "en": "The elevator is out of service for maintenance until noon.",
@@ -3794,8 +3794,8 @@
         "ja": "その会社は 3 か国で新しいアプリを発売します。"
       },
       {
-        "en": "We decided to launch the campaign a week earlier than planned.",
-        "ja": "キャンペーンを予定より 1 週間早く始めることにしました。"
+        "en": "We decided to launch the new model a week earlier than planned.",
+        "ja": "新モデルを予定より 1 週間早く発売することにしました。"
       }
     ],
     "distractors": [
@@ -3817,8 +3817,8 @@
         "ja": "退社する前にファイルを共有フォルダに移してください。"
       },
       {
-        "en": "Ms. Chen will transfer to the Singapore office in April.",
-        "ja": "チェンさんは 4 月にシンガポール支社へ異動します。"
+        "en": "We will transfer all customer data to the new server next weekend.",
+        "ja": "来週末、すべての顧客データを新しいサーバーに移します。"
       },
       {
         "en": "You can transfer money to the account using the online form.",
@@ -4172,8 +4172,8 @@
         "ja": "カスタマーサービスの担当者が 1 時間以内に折り返しお電話します。"
       },
       {
-        "en": "Each region sends one representative to the annual meeting.",
-        "ja": "各地域は年次会議に代表者を 1 人送ります。"
+        "en": "Please ask our sales representative for a detailed price list.",
+        "ja": "詳しい価格表は当社の営業担当者にお尋ねください。"
       }
     ],
     "distractors": [
@@ -4307,8 +4307,8 @@
         "ja": "費用と納期に基づいて提案を評価します。"
       },
       {
-        "en": "The committee evaluates each applicant's portfolio carefully.",
-        "ja": "委員会は各応募者の作品集を丁寧に評価します。"
+        "en": "The committee evaluates each applicant's portfolio carefully before the interview.",
+        "ja": "委員会は面接の前に各応募者の作品集を丁寧に評価します。"
       }
     ],
     "distractors": [
@@ -4469,8 +4469,8 @@
         "ja": "アンケートは金曜日に締め切られますので、念のためお知らせします。"
       },
       {
-        "en": "Set a reminder so that you do not forget the dentist appointment.",
-        "ja": "歯医者の予約を忘れないよう、リマインダーを設定してください。"
+        "en": "We will send a reminder to anyone who has not paid by the 15th.",
+        "ja": "15 日までにお支払いのない方には再通知をお送りします。"
       }
     ],
     "distractors": [
@@ -4573,8 +4573,8 @@
         "ja": "予定を変更する前にチームリーダーに相談してください。"
       },
       {
-        "en": "Please consult the manual before calling technical support.",
-        "ja": "技術サポートに電話する前にマニュアルを参照してください。"
+        "en": "Please consult the legal team before signing a contract with a new client.",
+        "ja": "新しい顧客と契約を結ぶ前に法務チームに相談してください。"
       },
       {
         "en": "We consulted a lawyer about the terms of the lease.",
@@ -4685,8 +4685,8 @@
         "ja": "部長は新しい休暇制度について手短に話しました。"
       },
       {
-        "en": "We stopped briefly at the café before the meeting.",
-        "ja": "会議の前にカフェに少しだけ立ち寄りました。"
+        "en": "Could you briefly describe your role in the project?",
+        "ja": "そのプロジェクトでのあなたの役割を手短に説明してもらえますか。"
       }
     ],
     "distractors": [
@@ -4870,8 +4870,8 @@
         "ja": "彼女は10年以上小売の仕事をしています。"
       },
       {
-        "en": "The company sells online and through retail partners.",
-        "ja": "その会社はオンラインと小売のパートナーを通じて販売しています。"
+        "en": "Many graduates start their careers in retail, working in shops and department stores.",
+        "ja": "多くの新卒者は店舗や百貨店で働き、小売でキャリアを始めます。"
       },
       {
         "en": "Retail prices are usually higher than wholesale prices.",
@@ -4925,7 +4925,7 @@
       },
       {
         "en": "The cashier gave me the wrong change by mistake.",
-        "ja": "レジ係が間違ってお釣りを多く渡してしまいました。"
+        "ja": "レジ係が間違ったお釣りを渡しました。"
       },
       {
         "en": "We need one more cashier during the lunch rush.",
@@ -5005,12 +5005,12 @@
         "ja": "その会社は300以上の店舗を通じて製品を流通させています。"
       },
       {
-        "en": "We distribute free samples at the entrance every Saturday.",
-        "ja": "毎週土曜日に入口で無料サンプルを配っています。"
+        "en": "The firm distributes its frozen foods to supermarkets across Kyushu.",
+        "ja": "その会社は冷凍食品を九州全域のスーパーに流通させています。"
       },
       {
-        "en": "The brochures will be distributed to all hotels in the area.",
-        "ja": "パンフレットは地域のすべてのホテルに配布されます。"
+        "en": "A local company will distribute our drinks in the Kansai region.",
+        "ja": "地元の会社が関西地方で当社の飲料を流通させます。"
       }
     ],
     "distractors": [
@@ -5032,12 +5032,12 @@
         "ja": "そのセーターはどの店舗でも別のサイズに交換できます。"
       },
       {
-        "en": "Can I exchange this shirt for a larger size?",
-        "ja": "このシャツを大きいサイズに交換できますか。"
+        "en": "If the shoes do not fit, we will exchange them for another pair.",
+        "ja": "靴が合わなければ、別の靴と交換いたします。"
       },
       {
-        "en": "The store will exchange faulty goods within thirty days.",
-        "ja": "店は 30 日以内であれば不良品を交換します。"
+        "en": "The store will exchange faulty goods for new ones within thirty days.",
+        "ja": "店は 30 日以内であれば不良品を新品と交換します。"
       }
     ],
     "distractors": [
@@ -5144,8 +5144,8 @@
         "ja": "ジムの会員資格は 1 年分をまとめて支払うと安くなります。"
       },
       {
-        "en": "Your membership expires at the end of June.",
-        "ja": "あなたの会員資格は 6 月末で期限が切れます。"
+        "en": "Membership is free for the first three months.",
+        "ja": "最初の 3 か月は会員資格が無料です。"
       }
     ],
     "distractors": [
@@ -5225,8 +5225,8 @@
         "ja": "ご予約に関する混乱をお詫びします。"
       },
       {
-        "en": "The airline apologized to passengers for the long wait.",
-        "ja": "航空会社は長い待ち時間について乗客に謝罪しました。"
+        "en": "Please apologize to the customer before explaining the error.",
+        "ja": "誤りを説明する前に、お客様に謝ってください。"
       }
     ],
     "distractors": [
@@ -5276,7 +5276,7 @@
       },
       {
         "en": "The report describes the economic impact of the new airport.",
-        "ja": "その報告書は新空港の経済的な影響について述べています。"
+        "ja": "その報告書は新空港が経済に与える影響について述べています。"
       },
       {
         "en": "Economic growth slowed in the second half of the year.",
@@ -5333,8 +5333,8 @@
         "ja": "質問があれば手を挙げてください。"
       },
       {
-        "en": "The charity hopes to raise one million yen for the shelter.",
-        "ja": "その慈善団体は避難所のために 100 万円を集めることを目指しています。"
+        "en": "The new manager wants to raise the quality of customer service.",
+        "ja": "新しい店長は接客の質を上げたいと考えています。"
       }
     ],
     "distractors": [
@@ -5387,8 +5387,8 @@
         "ja": "この写真を見ると、新宿にあった最初のオフィスを思い出します。"
       },
       {
-        "en": "Could you remind the team about Friday's deadline?",
-        "ja": "チームに金曜日の締め切りを思い出させてもらえますか。"
+        "en": "Could you remind the team to submit their reports by Friday?",
+        "ja": "金曜日までに報告書を提出するよう、チームに念を押してもらえますか。"
       }
     ],
     "distractors": [
@@ -5414,8 +5414,8 @@
         "ja": "バッジを失くしたら、すぐに警備室に届け出てください。"
       },
       {
-        "en": "The team did not want to lose its best designer.",
-        "ja": "チームは最高のデザイナーを失いたくありませんでした。"
+        "en": "Many small shops lose money in their first year of business.",
+        "ja": "多くの小さな店は開業 1 年目にお金を失います。"
       }
     ],
     "distractors": [
@@ -5437,12 +5437,12 @@
         "ja": "この椅子のねじは緩くて締め直す必要があります。"
       },
       {
-        "en": "The handle on the door is loose and should be repaired.",
-        "ja": "ドアの取っ手が緩んでいるので修理が必要です。"
+        "en": "A loose wire caused the printer to stop working.",
+        "ja": "緩んだ配線が原因でプリンターが止まりました。"
       },
       {
-        "en": "Wear loose clothing for the factory tour.",
-        "ja": "工場見学にはゆったりした服装で来てください。"
+        "en": "Do not wear loose clothing near the machines during the factory tour.",
+        "ja": "工場見学中は、機械の近くでゆったりした服を着ないでください。"
       }
     ],
     "distractors": [
@@ -5550,7 +5550,7 @@
       },
       {
         "en": "She decided to accept the job offer from the Tokyo office.",
-        "ja": "彼女は東京支社からの採用通知を受け入れることにしました。"
+        "ja": "彼女は東京支社からの内定を受けることにしました。"
       }
     ],
     "distractors": [
@@ -6031,8 +6031,8 @@
         "ja": "経験豊かな営業スタッフは、当社が持つ最も価値のある資産です。"
       },
       {
-        "en": "The building is the company's largest asset.",
-        "ja": "そのビルは会社の最大の資産です。"
+        "en": "The office building is the company's largest single asset.",
+        "ja": "そのオフィスビルは会社の最大の資産です。"
       },
       {
         "en": "A good reputation is an asset that takes years to build.",
@@ -6278,8 +6278,8 @@
         "ja": "彼女の前の上司は、彼女のために強い推薦状を書きました。"
       },
       {
-        "en": "We contact at least one reference before making a job offer.",
-        "ja": "採用の通知を出す前に、少なくとも 1 人の推薦者に連絡します。"
+        "en": "Please ask your former supervisor to send a reference directly to our HR team.",
+        "ja": "前の上司に、推薦状を当社の人事部へ直接送ってもらうよう依頼してください。"
       }
     ],
     "distractors": [
@@ -6301,8 +6301,8 @@
         "ja": "彼女の部長在職期間中に、部門の年間生産量は2倍になりました。"
       },
       {
-        "en": "His tenure as mayor lasted eight years.",
-        "ja": "彼の市長としての在職期間は 8 年に及びました。"
+        "en": "His tenure as company president lasted eight years.",
+        "ja": "彼の社長としての在職期間は 8 年に及びました。"
       },
       {
         "en": "Staff with a long tenure receive extra vacation days.",
@@ -6436,8 +6436,8 @@
         "ja": "このプロジェクトにこれほど献身的なチームが取り組んでくれていることに感謝しています。"
       },
       {
-        "en": "A dedicated support line is available for business customers.",
-        "ja": "法人のお客様向けに専用のサポート窓口があります。"
+        "en": "We thank our dedicated volunteers for their many hours of hard work.",
+        "ja": "長い時間を割いて尽力してくださった献身的なボランティアの皆さんに感謝します。"
       },
       {
         "en": "The nurses are dedicated to the care of their patients.",
@@ -6468,7 +6468,7 @@
       },
       {
         "en": "He is diligent about answering every customer email the same day.",
-        "ja": "彼はすべての顧客メールにその日のうちに返信するよう勤勉に取り組んでいます。"
+        "ja": "彼はすべての顧客メールにその日のうちに返信するよう、勤勉に努めています。"
       }
     ],
     "distractors": [
@@ -6521,8 +6521,8 @@
         "ja": "入口近くの駐車スペースは年功順に割り当てられます。"
       },
       {
-        "en": "Promotions here depend on performance, not seniority.",
-        "ja": "ここでの昇進は年功ではなく業績で決まります。"
+        "en": "Promotions at this company depend on performance, not seniority.",
+        "ja": "この会社での昇進は年功ではなく業績で決まります。"
       }
     ],
     "distractors": [
@@ -6544,8 +6544,8 @@
         "ja": "業務量が許す限り、柔軟な勤務時間の要望に応じるようにしています。"
       },
       {
-        "en": "The hotel can accommodate up to 300 guests for the conference.",
-        "ja": "そのホテルは会議のために最大 300 人の宿泊客を受け入れられます。"
+        "en": "The hotel staff did their best to accommodate our request for a late checkout.",
+        "ja": "ホテルのスタッフは、チェックアウトを遅らせたいという私たちの要望にできる限り応じてくれました。"
       },
       {
         "en": "We will do our best to accommodate your dietary requests.",
@@ -6599,7 +6599,7 @@
       },
       {
         "en": "The store offers a discount card to retain regular customers.",
-        "ja": "その店は常連客を保持するために割引カードを提供しています。"
+        "ja": "その店は常連客をつなぎ留めるために割引カードを提供しています。"
       },
       {
         "en": "Please retain your receipt as proof of purchase.",
@@ -6679,8 +6679,8 @@
         "ja": "議長はデータ漏えいについて協議するため緊急会議を招集します。"
       },
       {
-        "en": "The committee will convene again in two weeks.",
-        "ja": "委員会は 2 週間後に再び招集されます。"
+        "en": "The chairperson will convene the committee again in two weeks.",
+        "ja": "議長は 2 週間後に再び委員会を招集します。"
       },
       {
         "en": "The mayor decided to convene a meeting of local business owners.",
@@ -6706,8 +6706,8 @@
         "ja": "会議は正午に休会となり、昼食後に再開されます。"
       },
       {
-        "en": "The judge decided to adjourn the hearing until Monday.",
-        "ja": "裁判官は審理を月曜日まで休会することにしました。"
+        "en": "The chairperson decided to adjourn the meeting until Monday morning.",
+        "ja": "議長は会議を月曜日の朝まで休会とすることにしました。"
       },
       {
         "en": "Let's adjourn for ten minutes and continue after the break.",
@@ -6872,8 +6872,8 @@
         "ja": "事前に予約のあるお客様は列に並ばずに入れます。"
       },
       {
-        "en": "No prior experience is needed for this position.",
-        "ja": "この職には事前の経験は必要ありません。"
+        "en": "Prior registration is required for all workshop participants.",
+        "ja": "ワークショップの参加者は全員、事前の登録が必要です。"
       }
     ],
     "distractors": [
@@ -6895,12 +6895,12 @@
         "ja": "顧客とのすべての文書連絡は共有プロジェクトフォルダに保存してください。"
       },
       {
-        "en": "All correspondence with suppliers must be in writing.",
-        "ja": "仕入先との文書連絡はすべて書面で行わなければなりません。"
+        "en": "All correspondence with suppliers must be copied to the purchasing manager.",
+        "ja": "仕入先との文書連絡はすべて、購買部長にも写しを送らなければなりません。"
       },
       {
-        "en": "Please address correspondence to the accounting department.",
-        "ja": "文書は経理部宛てに送ってください。"
+        "en": "Please address all correspondence about your order to the accounting department.",
+        "ja": "ご注文に関する文書はすべて経理部宛てにお送りください。"
       }
     ],
     "distractors": [
@@ -6953,8 +6953,8 @@
         "ja": "その報告書は費用の計算方法について詳しく述べていません。"
       },
       {
-        "en": "Could you elaborate on your plan for the second phase?",
-        "ja": "第 2 段階の計画について詳しく話してもらえますか。"
+        "en": "The speaker declined to elaborate on the reasons for the delay.",
+        "ja": "講演者は遅れの理由について詳しく述べることを控えました。"
       }
     ],
     "distractors": [
@@ -7030,7 +7030,7 @@
         "ja": "異議がなければ、次の項目に進みます。"
       },
       {
-        "en": "The plan passed without a single objection.",
+        "en": "The plan passed at the meeting without a single objection.",
         "ja": "その計画は異議が 1 つも出ずに可決されました。"
       },
       {
@@ -7169,8 +7169,8 @@
         "ja": "その小売業者は昨年、地方の 10 店舗を閉鎖しました。"
       },
       {
-        "en": "A large retailer has agreed to stock our new drinks.",
-        "ja": "大手の小売業者が当社の新しい飲料を取り扱うことに同意しました。"
+        "en": "The retailer sells directly to consumers through its own website.",
+        "ja": "その小売業者は自社のウェブサイトを通じて消費者に直接販売しています。"
       }
     ],
     "distractors": [
@@ -7439,8 +7439,8 @@
         "ja": "朝の混雑前にペットボトルの水を補充してください。"
       },
       {
-        "en": "The supplier could not restock the item until next month.",
-        "ja": "仕入先は来月までその商品を補充できませんでした。"
+        "en": "We cannot restock the item until the next delivery arrives.",
+        "ja": "次の入荷まではその商品を補充できません。"
       }
     ],
     "distractors": [
@@ -7547,8 +7547,8 @@
         "ja": "そのラウンジはファーストクラスの乗客専用です。"
       },
       {
-        "en": "This tea is sold exclusively at our Ginza store.",
-        "ja": "この紅茶は当社の銀座店でのみ販売しています。"
+        "en": "The firm works exclusively with local farmers.",
+        "ja": "その会社は地元の農家とだけ取引しています。"
       }
     ],
     "distractors": [
@@ -7732,8 +7732,8 @@
         "ja": "海外へ出荷するすべての機器には、紛失や損傷に対する保険をかけています。"
       },
       {
-        "en": "We insure the building against fire and flood.",
-        "ja": "そのビルには火災と洪水に備えて保険をかけています。"
+        "en": "Is it worth insuring a phone that cost only 20,000 yen?",
+        "ja": "2 万円しかしなかった電話に保険をかける価値はありますか。"
       },
       {
         "en": "It costs about 10,000 yen a year to insure the laptop.",
@@ -7759,8 +7759,8 @@
         "ja": "金曜日の夜、授賞式に先立って短い歓迎会が行われます。"
       },
       {
-        "en": "A brief introduction will precede the main presentation.",
-        "ja": "本編のプレゼンの前に短い紹介があります。"
+        "en": "In the report, a summary of key findings precedes the detailed data.",
+        "ja": "報告書では、詳細なデータの前に主な調査結果の要約が置かれています。"
       },
       {
         "en": "The safety video must precede every factory tour.",
@@ -7790,8 +7790,8 @@
         "ja": "搭乗のため 12 番ゲートへお進みください。"
       },
       {
-        "en": "We will proceed with the order once the deposit is paid.",
-        "ja": "手付金が支払われ次第、注文を進めます。"
+        "en": "Construction will proceed as planned despite the rain.",
+        "ja": "雨にもかかわらず、工事は予定どおり進みます。"
       }
     ],
     "distractors": [
@@ -7840,8 +7840,8 @@
         "ja": "説明会の後、マネージャーたちはそれぞれの部署に戻りました。"
       },
       {
-        "en": "Please return the tools to their respective drawers.",
-        "ja": "工具はそれぞれの引き出しに戻してください。"
+        "en": "Each speaker will talk about trends in their respective industries.",
+        "ja": "各講演者がそれぞれの業界の動向について話します。"
       },
       {
         "en": "The two directors manage their respective regions independently.",
@@ -7871,8 +7871,8 @@
         "ja": "スタッフは検査官がまもなく到着すると警告されました。"
       },
       {
-        "en": "With the storm imminent, the ferry service was suspended.",
-        "ja": "嵐が差し迫っていたため、フェリーの運航は停止されました。"
+        "en": "Staff were told that a decision on the merger was imminent.",
+        "ja": "従業員は、合併についての決定が差し迫っていると伝えられました。"
       }
     ],
     "distractors": [
@@ -7899,7 +7899,7 @@
       },
       {
         "en": "He refused the gift as a matter of principle.",
-        "ja": "彼は原則として、その贈り物を断りました。"
+        "ja": "彼は主義として、その贈り物を断りました。"
       }
     ],
     "distractors": [
@@ -7921,8 +7921,8 @@
         "ja": "文房具の注文書は、まずチームリーダーの承認を得る必要があります。"
       },
       {
-        "en": "The stationery cupboard is next to the copier.",
-        "ja": "文房具の戸棚はコピー機の隣にあります。"
+        "en": "Please ask the general affairs team if you need more stationery.",
+        "ja": "文房具がもっと必要な場合は総務チームに聞いてください。"
       },
       {
         "en": "We order stationery for the whole office once a month.",
@@ -8164,7 +8164,7 @@
         "ja": "工場は余剰在庫を地域の販売業者に低価格で売却しました。"
       },
       {
-        "en": "The warehouse has a surplus of winter jackets after the mild season.",
+        "en": "The warehouse has a surplus of winter jackets after the mild winter.",
         "ja": "暖冬の後、倉庫には冬物ジャケットの余剰があります。"
       },
       {
@@ -8489,7 +8489,7 @@
       },
       {
         "en": "Only a small proportion of applicants were invited to an interview.",
-        "ja": "応募者のうち面接に呼ばれたのはごく一部の割合でした。"
+        "ja": "面接に呼ばれた応募者の割合はごくわずかでした。"
       },
       {
         "en": "The proportion of part-time staff has grown over the past five years.",
@@ -8704,8 +8704,8 @@
         "ja": "第二言語の熟達は顧客サービス職では有利になります。"
       },
       {
-        "en": "Applicants must show proficiency in spreadsheet software.",
-        "ja": "応募者は表計算ソフトの熟達を示す必要があります。"
+        "en": "Applicants must demonstrate proficiency in standard spreadsheet software.",
+        "ja": "応募者は一般的な表計算ソフトに熟達していることを示す必要があります。"
       },
       {
         "en": "Her proficiency in Spanish was useful during the trip to Mexico.",
@@ -8736,7 +8736,7 @@
       },
       {
         "en": "Meticulous planning made the product launch a success.",
-        "ja": "細心の計画が製品発売を成功に導きました。"
+        "ja": "細心の注意を払った計画が、製品発売を成功に導きました。"
       }
     ],
     "distractors": [
@@ -8758,8 +8758,8 @@
         "ja": "パートタイムのスタッフは必須の週末シフト輪番から免除されています。"
       },
       {
-        "en": "Charities are exempt from paying this tax.",
-        "ja": "慈善団体はこの税金の支払いを免除されています。"
+        "en": "Registered charities are exempt from paying this local tax.",
+        "ja": "登録済みの慈善団体はこの地方税の支払いを免除されています。"
       },
       {
         "en": "Managers are not exempt from the new dress code.",
@@ -8816,8 +8816,8 @@
         "ja": "彼女は京都の小さなベーカリーで見習いとして働き始めました。"
       },
       {
-        "en": "The company accepts ten apprentices every spring.",
-        "ja": "その会社は毎年春に見習いを 10 人受け入れます。"
+        "en": "The company accepts ten apprentices at its factory every spring.",
+        "ja": "その会社は毎年春、工場に見習いを 10 人受け入れます。"
       }
     ],
     "distractors": [
@@ -9109,8 +9109,8 @@
         "ja": "会計も日程管理も同様にこなせる多才なアシスタントが必要です。"
       },
       {
-        "en": "This versatile printer can scan, copy, and fax.",
-        "ja": "この多機能なプリンターはスキャン、コピー、ファックスができます。"
+        "en": "We need a versatile designer who can handle both print and web projects.",
+        "ja": "印刷物とウェブの両方の案件をこなせる多才なデザイナーが必要です。"
       },
       {
         "en": "He is a versatile employee who has worked in three departments.",
@@ -9406,8 +9406,8 @@
         "ja": "部長が海外にいる間、副議長が会議の議長を務めます。"
       },
       {
-        "en": "Ms. Ono will preside over the award ceremony this year.",
-        "ja": "今年は小野さんが授賞式の議長を務めます。"
+        "en": "Ms. Ono will preside over the annual shareholders' meeting this year.",
+        "ja": "今年は小野さんが年次株主総会の議長を務めます。"
       },
       {
         "en": "The oldest member usually presides over the first meeting.",
@@ -9626,8 +9626,8 @@
         "ja": "市は新しい公園について住民から意見を募ります。"
       },
       {
-        "en": "We solicited bids from four construction companies.",
-        "ja": "4 社の建設会社から入札を募りました。"
+        "en": "We solicited bids from four construction companies for the warehouse.",
+        "ja": "倉庫の工事について 4 社の建設会社から入札を募りました。"
       }
     ],
     "distractors": [
@@ -9730,8 +9730,8 @@
         "ja": "アジアでは売上が伸びたのに対して、欧州市場は年間を通じて横ばいでした。"
       },
       {
-        "en": "The old model used paper forms, whereas the new one is fully digital.",
-        "ja": "旧モデルは紙の用紙を使っていたのに対し、新モデルは完全にデジタルです。"
+        "en": "The old system used paper forms, whereas the new one is fully digital.",
+        "ja": "旧システムは紙の用紙を使っていたのに対し、新システムは完全にデジタルです。"
       },
       {
         "en": "Some staff prefer email, whereas others like to talk in person.",
@@ -9761,8 +9761,8 @@
         "ja": "部長は安全装備を着用することの大切さを繰り返し述べました。"
       },
       {
-        "en": "Let me reiterate the three main points of the proposal.",
-        "ja": "提案の主な 3 点をもう一度繰り返させてください。"
+        "en": "At the end of the meeting, she reiterated the three main points of the proposal.",
+        "ja": "会議の最後に、彼女は提案の主な 3 点を繰り返し述べました。"
       }
     ],
     "distractors": [
@@ -9811,8 +9811,8 @@
         "ja": "腐りやすい商品は配達から1時間以内に冷蔵しなければなりません。"
       },
       {
-        "en": "Perishable items are delivered in refrigerated trucks.",
-        "ja": "腐りやすい商品は冷蔵トラックで配送されます。"
+        "en": "Fresh fruit is perishable, so we order small amounts each day.",
+        "ja": "生の果物は腐りやすいので、毎日少量ずつ注文します。"
       },
       {
         "en": "Do not leave perishable food in the staff room overnight.",
@@ -9838,8 +9838,8 @@
         "ja": "そのホテルは申し分のないサービスと清潔な客室で知られています。"
       },
       {
-        "en": "Her English pronunciation is impeccable.",
-        "ja": "彼女の英語の発音は申し分ありません。"
+        "en": "Her English is impeccable, so she handles all our overseas calls.",
+        "ja": "彼女の英語は申し分ないので、海外からの電話はすべて彼女が対応しています。"
       },
       {
         "en": "The restaurant has an impeccable record for food safety.",
@@ -9870,7 +9870,7 @@
       },
       {
         "en": "Patrons are asked to return their trays after eating.",
-        "ja": "お客様は食事の後にトレイを返却するようお願いしています。"
+        "ja": "お客様には、お食事の後にトレイを返却していただくようお願いしています。"
       }
     ],
     "distractors": [
@@ -10004,8 +10004,8 @@
         "ja": "棚を含む店の備品は家主の所有物です。"
       },
       {
-        "en": "We replaced the old fixtures with energy-saving lights.",
-        "ja": "古い備品を省エネの照明に交換しました。"
+        "en": "We need new display fixtures for the shoe section.",
+        "ja": "靴売り場には新しい陳列用の備品が必要です。"
       }
     ],
     "distractors": [
@@ -10027,8 +10027,8 @@
         "ja": "その製品は有名シェフの推奨を受けて人気を得ました。"
       },
       {
-        "en": "The running shoes carry the endorsement of a famous athlete.",
-        "ja": "そのランニングシューズは有名な選手の推奨を受けています。"
+        "en": "Celebrity endorsements can be too expensive for small brands.",
+        "ja": "有名人による推奨は、小さなブランドには費用がかかりすぎることがあります。"
       },
       {
         "en": "An endorsement from the trade association helped sales.",
@@ -10054,8 +10054,8 @@
         "ja": "彼女は店舗と法人顧客との間の連絡係を務めています。"
       },
       {
-        "en": "Mr. Tanaka acts as liaison between the factory and the sales office.",
-        "ja": "田中さんは工場と営業所の連絡係を務めています。"
+        "en": "The hotel appointed a liaison to assist the conference organizers.",
+        "ja": "ホテルは会議の主催者を支援する連絡係を任命しました。"
       },
       {
         "en": "We need a liaison who speaks both Japanese and Thai.",
@@ -10220,8 +10220,8 @@
         "ja": "銀行は初年度の年会費を免除します。"
       },
       {
-        "en": "We agreed to waive the cancellation charge because of the illness.",
-        "ja": "病気のため、キャンセル料を免除することにしました。"
+        "en": "We agreed to waive the cancellation charge because the guest was ill.",
+        "ja": "宿泊客が病気だったため、キャンセル料を免除することにしました。"
       }
     ],
     "distractors": [
@@ -10271,7 +10271,7 @@
       },
       {
         "en": "The contractor asked for thirty percent of the cost upfront.",
-        "ja": "業者は費用の 30 パーセントを前払いで求めました。"
+        "ja": "業者は費用の 30 パーセントを前払いするよう求めました。"
       },
       {
         "en": "Paying upfront saves you the monthly service charge.",
@@ -10324,12 +10324,12 @@
         "ja": "マニュアルは技術的な背景のないスタッフにも理解できるものでなければなりません。"
       },
       {
-        "en": "The instructions should be comprehensible to a first-time user.",
-        "ja": "説明書は初めて使う人にも理解できるものでなければなりません。"
+        "en": "The speaker's accent was strong, but his talk was still comprehensible.",
+        "ja": "講演者のなまりは強かったですが、話は十分理解できました。"
       },
       {
-        "en": "Her explanation of the tax rules was clear and comprehensible.",
-        "ja": "彼女の税制の説明は明快で理解しやすいものでした。"
+        "en": "Without the charts, the sales data would hardly be comprehensible.",
+        "ja": "図表がなければ、売上データはほとんど理解できないでしょう。"
       }
     ],
     "distractors": [
@@ -10378,8 +10378,8 @@
         "ja": "私の病院の予約に合わせて会議を動かしてくださったのは、思いやりのあるご配慮でした。"
       },
       {
-        "en": "It was considerate of the hotel to provide a quiet room.",
-        "ja": "静かな部屋を用意してくれたのは、ホテルの思いやりでした。"
+        "en": "Please be considerate of colleagues and keep phone calls short in the office.",
+        "ja": "同僚に配慮し、オフィスでの電話は短めにしてください。"
       },
       {
         "en": "A considerate manager listens before making decisions.",
@@ -10463,8 +10463,8 @@
         "ja": "会場を早めに予約するのが賢明でしょう。"
       },
       {
-        "en": "Wearing sensible shoes is a good idea for the factory tour.",
-        "ja": "工場見学には実用的な靴を履いていくのがよいでしょう。"
+        "en": "Asking the client first was the sensible thing to do.",
+        "ja": "先に取引先に聞くのが賢明なやり方でした。"
       }
     ],
     "distractors": [
@@ -10486,8 +10486,8 @@
         "ja": "営業チームは価格方針のどんな変更にも非常に敏感です。"
       },
       {
-        "en": "This document contains sensitive information about our clients.",
-        "ja": "この書類には顧客に関する取り扱いに注意を要する情報が含まれています。"
+        "en": "Some customers are sensitive to strong smells, so we use unscented cleaners.",
+        "ja": "強いにおいに敏感なお客様もいるので、無香料の洗剤を使っています。"
       },
       {
         "en": "The scale is sensitive enough to weigh a single sheet of paper.",
@@ -10594,8 +10594,8 @@
         "ja": "出張時に20キロを超過する手荷物には追加料金がかかります。"
       },
       {
-        "en": "Any expense in excess of the budget must be approved by the director.",
-        "ja": "予算を超過する経費は部長の承認が必要です。"
+        "en": "Sales in excess of our target earned the team a bonus.",
+        "ja": "目標を超過した売上で、チームはボーナスを得ました。"
       },
       {
         "en": "The shop ordered an excess of winter coats last year.",
@@ -10648,8 +10648,8 @@
         "ja": "誰もが毎週土曜に働かなくてよいように、2チームは週末シフトを交互に行います。"
       },
       {
-        "en": "The two receptionists alternate lunch breaks so the desk is never empty.",
-        "ja": "2 人の受付係は昼休みを交互に取るので、受付が空になることはありません。"
+        "en": "The screen alternates photos of new products with store announcements.",
+        "ja": "画面には新商品の写真と店舗からのお知らせが交互に表示されます。"
       },
       {
         "en": "We alternate between in-person and online meetings each week.",
@@ -10702,8 +10702,8 @@
         "ja": "チームは年間売上目標を2か月早く達成しました。"
       },
       {
-        "en": "She worked hard to attain a management position by age thirty.",
-        "ja": "彼女は 30 歳までに管理職に就くために懸命に働きました。"
+        "en": "She worked hard to attain her goal of becoming a manager by thirty.",
+        "ja": "彼女は 30 歳までに管理職になるという目標を達成するために懸命に働きました。"
       },
       {
         "en": "The company hopes to attain carbon neutrality by 2030.",
