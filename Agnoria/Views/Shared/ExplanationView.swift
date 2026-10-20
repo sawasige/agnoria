@@ -69,11 +69,13 @@ struct ExplanationView: View {
         let answer = question.choices[question.correctIndex]
         let parts = question.prompt.components(separatedBy: Cloze.blank)
         guard parts.count > 1 else { return Text(question.prompt) }
-        var text = Text(parts[0])
+        var text = AttributedString(parts[0])
         for part in parts.dropFirst() {
-            text = text + Text(answer).bold() + Text(part)
+            var bold = AttributedString(answer)
+            bold.inlinePresentationIntent = .stronglyEmphasized
+            text += bold + AttributedString(part)
         }
-        return text
+        return Text(text)
     }
 
     private func rephrase() async {
