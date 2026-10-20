@@ -15,21 +15,6 @@
     "level": 450
   },
   {
-    "id": "pos-002",
-    "category": "品詞",
-    "question": "The new printer works ______ even when several people use it at once.",
-    "question_ja": "新しいプリンターは、何人かが同時に使っても効率よく動きます。",
-    "choices": [
-      "efficiently",
-      "efficient",
-      "efficiency",
-      "efficiencies"
-    ],
-    "answer": 0,
-    "explanation": "自動詞 works を修飾するのは副詞 efficiently。形容詞 efficient は動詞を修飾できない。",
-    "level": 450
-  },
-  {
     "id": "pos-101",
     "category": "品詞",
     "question": "The new printer is very ______ and rarely needs repairs.",
@@ -150,33 +135,33 @@
     "level": 450
   },
   {
-    "id": "prep-001",
-    "category": "前置詞・接続詞",
-    "question": "The store will be closed ______ the national holiday next Monday.",
-    "question_ja": "来週月曜日の祝日の間、店舗は休業します。",
+    "id": "pos-305",
+    "category": "品詞",
+    "question": "The ______ of the new store is very convenient for shoppers.",
+    "question_ja": "新しい店舗の場所は、買い物客にとってとても便利です。",
     "choices": [
-      "during",
-      "while",
-      "because",
-      "although"
+      "locate",
+      "located",
+      "locating",
+      "location"
     ],
-    "answer": 0,
-    "explanation": "後ろが名詞句 the national holiday なので前置詞 during。while は接続詞で、後ろに主語と動詞が必要。",
+    "answer": 3,
+    "explanation": "The と of の間に入り主語になるのは名詞 location。動詞 locate や分詞 located は冠詞の直後で主語になれない。",
     "level": 450
   },
   {
-    "id": "prep-002",
+    "id": "prep-003",
     "category": "前置詞・接続詞",
-    "question": "______ the heavy rain, the outdoor event started on time.",
-    "question_ja": "大雨にもかかわらず、屋外イベントは定刻に始まりました。",
+    "question": "The invoice must be paid ______ thirty days of the delivery date.",
+    "question_ja": "請求書は、納品日から 30 日以内にお支払いいただく必要があります。",
     "choices": [
-      "Although",
-      "Despite",
-      "Because",
-      "While"
+      "until",
+      "by",
+      "within",
+      "since"
     ],
-    "answer": 1,
-    "explanation": "the heavy rain は名詞句なので前置詞 Despite「〜にもかかわらず」。Although は接続詞なので節が続かなければならない。",
+    "answer": 2,
+    "explanation": "within thirty days of 〜で「〜から30日以内に」。until や by は期限となる時点を示すため、期間の thirty days とは結びつかない。",
     "level": 450
   },
   {
@@ -300,18 +285,18 @@
     "level": 450
   },
   {
-    "id": "pron-001",
-    "category": "代名詞・関係詞",
-    "question": "Mr. Park printed the documents ______ because the assistant was out of the office.",
-    "question_ja": "アシスタントが不在だったので、パクさんは自分で書類を印刷しました。",
+    "id": "prep-208",
+    "category": "前置詞・接続詞",
+    "question": "You can contact the help desk ______ by phone or by e-mail during business hours.",
+    "question_ja": "営業時間内であれば、電話またはメールのどちらでもヘルプデスクに連絡できます。",
     "choices": [
-      "he",
-      "him",
-      "his",
-      "himself"
+      "both",
+      "neither",
+      "either",
+      "whether"
     ],
-    "answer": 3,
-    "explanation": "「アシスタントが不在だったので自分で印刷した」という強調の再帰代名詞 himself。文はすでに完成しているので he や him は入らない。",
+    "answer": 2,
+    "explanation": "後ろの or と組んで「AかBか」を表すのは either ... or。both は and、neither は nor と組むので不可。",
     "level": 450
   },
   {
@@ -330,21 +315,6 @@
     "level": 450
   },
   {
-    "id": "pron-101",
-    "category": "代名詞・関係詞",
-    "question": "Ms. Kim finished the report by ______ without any help from the team.",
-    "question_ja": "キムさんはチームの助けを借りずに、一人で報告書を仕上げました。",
-    "choices": [
-      "herself",
-      "her",
-      "she",
-      "hers"
-    ],
-    "answer": 0,
-    "explanation": "by oneself 「一人で」の形で、without any help とも意味がつながる herself が正解。by her では「彼女によって」となり文意に合わない。",
-    "level": 450
-  },
-  {
     "id": "pron-102",
     "category": "代名詞・関係詞",
     "question": "The manager asked ______ to send the file before noon.",
@@ -357,36 +327,6 @@
     ],
     "answer": 1,
     "explanation": "動詞 asked の目的語になる目的格 us が正解。主格 we や所有格 our は動詞の目的語の位置に置けない。",
-    "level": 450
-  },
-  {
-    "id": "pron-103",
-    "category": "代名詞・関係詞",
-    "question": "We hired a designer ______ has ten years of experience.",
-    "question_ja": "私たちは 10 年の経験があるデザイナーを採用しました。",
-    "choices": [
-      "which",
-      "whose",
-      "who",
-      "whom"
-    ],
-    "answer": 2,
-    "explanation": "先行詞 a designer は人で、後ろに動詞 has が続くので主格の関係代名詞 who が正解。which は物に使い、whom は目的格なので主語の位置に置けない。",
-    "level": 450
-  },
-  {
-    "id": "pron-104",
-    "category": "代名詞・関係詞",
-    "question": "The printer ______ was installed last week is already out of paper.",
-    "question_ja": "先週設置されたプリンターは、もう用紙切れです。",
-    "choices": [
-      "who",
-      "whom",
-      "whose",
-      "which"
-    ],
-    "answer": 3,
-    "explanation": "先行詞 The printer は物で、後ろに動詞 was installed が続くので主格の関係代名詞 which が正解。who は人にしか使えない。",
     "level": 450
   },
   {
@@ -435,18 +375,78 @@
     "level": 450
   },
   {
-    "id": "pron-108",
+    "id": "pron-202",
     "category": "代名詞・関係詞",
-    "question": "The woman ______ office is next to mine joined the company in April.",
-    "question_ja": "私の隣にオフィスがある女性は、4 月に入社しました。",
+    "question": "Each employee must clean ______ own desk before going home.",
+    "question_ja": "従業員はそれぞれ、帰宅する前に自分の机を片付けなければなりません。",
     "choices": [
-      "who",
-      "which",
-      "whom",
-      "whose"
+      "their",
+      "they",
+      "them",
+      "theirs"
+    ],
+    "answer": 0,
+    "explanation": "名詞 desk の前で own と共に所有を表すので所有格 their。主格 they や目的格 them は名詞の前に置けない。",
+    "level": 450
+  },
+  {
+    "id": "pron-208",
+    "category": "代名詞・関係詞",
+    "question": "The clients have not replied yet, so please send ______ a reminder this afternoon.",
+    "question_ja": "顧客からまだ返事がないので、今日の午後、彼らにリマインダーを送ってください。",
+    "choices": [
+      "they",
+      "their",
+      "them",
+      "themselves"
+    ],
+    "answer": 2,
+    "explanation": "動詞 send の目的語で the clients を指すので目的格 them。主格 they は目的語になれない。",
+    "level": 450
+  },
+  {
+    "id": "pron-410",
+    "category": "代名詞・関係詞",
+    "question": "Please call ______ office if you have any questions about your order.",
+    "question_ja": "ご注文についてご質問があれば、当社の事務所にお電話ください。",
+    "choices": [
+      "we",
+      "us",
+      "our",
+      "ours"
+    ],
+    "answer": 2,
+    "explanation": "名詞 office の前に置いて「私たちの」と所有を表すのは所有格 our。主格 we や目的格 us は名詞の前に置けず、ours は名詞の代わりに使う形。",
+    "level": 450
+  },
+  {
+    "id": "pron-411",
+    "category": "代名詞・関係詞",
+    "question": "Mr. Chen called this morning, and ______ will visit our office at 3 p.m.",
+    "question_ja": "チェンさんから今朝電話があり、彼は午後 3 時に当社を訪れます。",
+    "choices": [
+      "him",
+      "his",
+      "himself",
+      "he"
     ],
     "answer": 3,
-    "explanation": "後ろに名詞 office が続き「その女性のオフィス」という所有関係を表す whose が正解。who は後ろに動詞が続く主格なので名詞 office の前に置けない。",
+    "explanation": "接続詞 and の後の節で will visit の主語になるので主格 he。目的格 him や所有格 his は主語の位置に置けない。",
+    "level": 450
+  },
+  {
+    "id": "pron-412",
+    "category": "代名詞・関係詞",
+    "question": "The new copier is easy to use, so please try ______ today.",
+    "question_ja": "新しいコピー機は使いやすいので、今日ぜひ試してみてください。",
+    "choices": [
+      "its",
+      "they",
+      "them",
+      "it"
+    ],
+    "answer": 3,
+    "explanation": "動詞 try の目的語で、単数の The new copier を指すので目的格 it。its は所有格で目的語にならず、they と them は複数のものを指す。",
     "level": 450
   },
   {
@@ -465,18 +465,18 @@
     "level": 450
   },
   {
-    "id": "tense-002",
+    "id": "tense-004",
     "category": "時制・態",
-    "question": "The package ______ to the wrong address yesterday.",
-    "question_ja": "その荷物は昨日、間違った住所に配達されました。",
+    "question": "The new cafeteria on the first floor ______ next month.",
+    "question_ja": "1 階の新しい社員食堂は来月オープンします。",
     "choices": [
-      "delivers",
-      "is delivering",
-      "delivered",
-      "was delivered"
+      "opened",
+      "has opened",
+      "was opened",
+      "will open"
     ],
     "answer": 3,
-    "explanation": "荷物は「配達される」側なので受動態。yesterday があるため過去形の was delivered が正解。",
+    "explanation": "next month は未来を示すので will open。opened や was opened は過去の出来事を表すため時間表現と矛盾する。",
     "level": 450
   },
   {
@@ -485,28 +485,13 @@
     "question": "The company ______ a new branch in Osaka last year.",
     "question_ja": "その会社は昨年、大阪に新しい支店を開きました。",
     "choices": [
-      "opened",
-      "opens",
       "will open",
+      "opens",
+      "opened",
       "is opening"
     ],
-    "answer": 0,
+    "answer": 2,
     "explanation": "last year 「昨年」という過去を表す語があるので過去形 opened が正解。will open は未来、opens は現在の習慣を表すので合わない。",
-    "level": 450
-  },
-  {
-    "id": "tense-102",
-    "category": "時制・態",
-    "question": "The invoices ______ to customers every Monday by the accounting team.",
-    "question_ja": "請求書は毎週月曜日に、経理チームからお客様へ送られます。",
-    "choices": [
-      "send",
-      "are sent",
-      "sending",
-      "have sent"
-    ],
-    "answer": 1,
-    "explanation": "主語 invoices 「請求書」は送られる側なので受動態 are sent が正解。by the accounting team も受動態の手がかり。能動態 send や have sent では意味が通らない。",
     "level": 450
   },
   {
@@ -545,12 +530,12 @@
     "question": "Starting next month, every employee ______ an ID card to enter the building.",
     "question_ja": "来月から、建物に入るには全従業員に ID カードが必要になります。",
     "choices": [
-      "will need",
+      "needing",
       "needed",
       "has needed",
-      "needing"
+      "will need"
     ],
-    "answer": 0,
+    "answer": 3,
     "explanation": "Starting next month「来月から」という未来を示す語句があるので will need。needed や has needed は過去・現在完了で合わず、needing は単独では述語動詞になれない。",
     "level": 450
   },
@@ -570,48 +555,48 @@
     "level": 450
   },
   {
-    "id": "tense-107",
+    "id": "tense-203",
     "category": "時制・態",
-    "question": "Ms. Garcia ______ for this company since 2015.",
-    "question_ja": "ガルシアさんは 2015 年からこの会社で働いています。",
+    "question": "Next week, the IT department ______ new security software on all computers.",
+    "question_ja": "来週、IT 部門がすべてのコンピューターに新しいセキュリティソフトをインストールします。",
     "choices": [
-      "works",
-      "worked",
-      "has worked",
-      "is working"
+      "installed",
+      "will install",
+      "has installed",
+      "install"
     ],
-    "answer": 2,
-    "explanation": "since 2015 「2015年から今まで」という継続を表す語句があるので現在完了 has worked が正解。過去形 worked は現在まで続いていることを表せない。",
+    "answer": 1,
+    "explanation": "Next week が未来を示すので will install。installed は過去、has installed は完了で未来の予定には使えない。",
     "level": 450
   },
   {
-    "id": "tense-108",
+    "id": "tense-208",
     "category": "時制・態",
-    "question": "The report ______ by Mr. Ito before the meeting started yesterday.",
-    "question_ja": "その報告書は昨日、会議が始まる前に伊藤さんによって仕上げられました。",
+    "question": "Last month, the sales team ______ its sales target by ten percent.",
+    "question_ja": "先月、営業チームは売上目標を 10 パーセント上回りました。",
     "choices": [
-      "finishes",
-      "is finished",
-      "will finish",
-      "was finished"
+      "has exceeded",
+      "exceeded",
+      "exceeds",
+      "will exceed"
     ],
-    "answer": 3,
-    "explanation": "主語 report は仕上げられる側で、yesterday と started という過去の手がかりがあるので過去の受動態 was finished が正解。is finished は現在形なので時制が合わない。",
+    "answer": 1,
+    "explanation": "Last month という明確な過去の時点があるので過去形 exceeded。現在完了 has exceeded は過去の特定時点を表す語句と一緒に使えない。",
     "level": 450
   },
   {
-    "id": "vocab-001",
-    "category": "語彙",
-    "question": "Please ______ the attached form and return it to the front desk by Friday.",
-    "question_ja": "添付の用紙に記入し、金曜日までに受付へご返却ください。",
+    "id": "tense-410",
+    "category": "時制・態",
+    "question": "Ms. Ito usually ______ to work by train, but today she is driving.",
+    "question_ja": "伊藤さんはふだん電車で通勤していますが、今日は車で来ています。",
     "choices": [
-      "arrive",
-      "spend",
-      "complete",
-      "agree"
+      "went",
+      "go",
+      "goes",
+      "is going"
     ],
     "answer": 2,
-    "explanation": "complete the form で「用紙に記入する」。arrive や agree は自動詞なので目的語 the form を直接続けられない。",
+    "explanation": "usually「ふだん」は習慣を表すので現在形で、主語が三人称単数なので goes。go は主語と形が合わず、went は過去、is going は今行っている動作を表すため合わない。",
     "level": 450
   },
   {
@@ -750,6 +735,36 @@
     "level": 450
   },
   {
+    "id": "vocab-205",
+    "category": "語彙",
+    "question": "The new ______ in the sales department will start work on Monday.",
+    "question_ja": "営業部の新しい従業員は、月曜日から勤務を始めます。",
+    "choices": [
+      "employee",
+      "equipment",
+      "invoice",
+      "schedule"
+    ],
+    "answer": 0,
+    "explanation": "will start work（勤務を始める）の主語になれるのは人を表す employee。equipment は物なので働けない。",
+    "level": 450
+  },
+  {
+    "id": "pos-002",
+    "category": "品詞",
+    "question": "The new printer works ______ even when several people use it at once.",
+    "question_ja": "新しいプリンターは、何人かが同時に使っても効率よく動きます。",
+    "choices": [
+      "efficiently",
+      "efficient",
+      "efficiency",
+      "efficiencies"
+    ],
+    "answer": 0,
+    "explanation": "自動詞 works を修飾するのは副詞 efficiently。形容詞 efficient は動詞を修飾できない。",
+    "level": 500
+  },
+  {
     "id": "pos-003",
     "category": "品詞",
     "question": "Ms. Tanaka gave a ______ summary of the sales figures at the meeting.",
@@ -792,36 +807,6 @@
     ],
     "answer": 1,
     "explanation": "動詞 read を修飾するので副詞 carefully。形容詞 careful は名詞を修飾するためここでは不可。",
-    "level": 500
-  },
-  {
-    "id": "pos-202",
-    "category": "品詞",
-    "question": "The new accounting software calculates tax much more ______ than the old spreadsheet did.",
-    "question_ja": "新しい会計ソフトは、以前の表計算シートよりもはるかに正確に税額を計算します。",
-    "choices": [
-      "accurate",
-      "accurately",
-      "accuracy",
-      "accuracies"
-    ],
-    "answer": 1,
-    "explanation": "動詞 calculates を修飾し、more ... than の比較に入るのは副詞 accurately。形容詞 accurate は動詞を修飾できない。",
-    "level": 500
-  },
-  {
-    "id": "pos-203",
-    "category": "品詞",
-    "question": "All visitors must show a valid form of ______ at the front desk.",
-    "question_ja": "来訪者は全員、受付で有効な身分証明書を提示しなければなりません。",
-    "choices": [
-      "identify",
-      "identified",
-      "identification",
-      "identifiable"
-    ],
-    "answer": 2,
-    "explanation": "前置詞 of の後には名詞が必要なので identification。動詞 identify や形容詞 identifiable は置けない。",
     "level": 500
   },
   {
@@ -870,21 +855,6 @@
     "level": 500
   },
   {
-    "id": "pos-207",
-    "category": "品詞",
-    "question": "Employees are encouraged to make ______ use of the online training materials.",
-    "question_ja": "従業員は、オンライン研修教材を十分に活用するよう奨励されています。",
-    "choices": [
-      "full",
-      "fully",
-      "fullness",
-      "fill"
-    ],
-    "answer": 0,
-    "explanation": "名詞 use を修飾するのは形容詞 full。make full use of で「十分に活用する」。副詞 fully は名詞を修飾できない。",
-    "level": 500
-  },
-  {
     "id": "pos-208",
     "category": "品詞",
     "question": "Thank you for your ______ to the staff survey last week.",
@@ -900,18 +870,48 @@
     "level": 500
   },
   {
-    "id": "prep-003",
-    "category": "前置詞・接続詞",
-    "question": "The invoice must be paid ______ thirty days of the delivery date.",
-    "question_ja": "請求書は、納品日から 30 日以内にお支払いいただく必要があります。",
+    "id": "pos-307",
+    "category": "品詞",
+    "question": "The new accountant completed the report ______ despite the tight deadline.",
+    "question_ja": "新しく入った会計士は、厳しい締め切りにもかかわらず報告書を無事に仕上げました。",
     "choices": [
-      "until",
-      "by",
-      "within",
-      "since"
+      "success",
+      "successful",
+      "successfully",
+      "succeed"
     ],
     "answer": 2,
-    "explanation": "within thirty days of 〜で「〜から30日以内に」。until や by は期限となる時点を示すため、期間の thirty days とは結びつかない。",
+    "explanation": "動詞 completed を修飾するので副詞 successfully。形容詞 successful は目的語 the report の後に置いて動詞を修飾することはできない。",
+    "level": 500
+  },
+  {
+    "id": "pos-401",
+    "category": "品詞",
+    "question": "All visitors must wear ______ name badges while they are inside the factory.",
+    "question_ja": "工場内にいる間、すべての訪問者は名札を見えるように着用しなければなりません。",
+    "choices": [
+      "visibly",
+      "visible",
+      "visibility",
+      "vision"
+    ],
+    "answer": 1,
+    "explanation": "名詞句 name badges を修飾するので形容詞 visible。副詞 visibly は名詞を修飾できない。",
+    "level": 500
+  },
+  {
+    "id": "prep-001",
+    "category": "前置詞・接続詞",
+    "question": "The store will be closed ______ the national holiday next Monday.",
+    "question_ja": "来週月曜日の祝日の間、店舗は休業します。",
+    "choices": [
+      "although",
+      "while",
+      "because",
+      "during"
+    ],
+    "answer": 3,
+    "explanation": "後ろが名詞句 the national holiday なので前置詞 during。while は接続詞で、後ろに主語と動詞が必要。",
     "level": 500
   },
   {
@@ -1035,18 +1035,18 @@
     "level": 500
   },
   {
-    "id": "prep-208",
+    "id": "prep-404",
     "category": "前置詞・接続詞",
-    "question": "You can contact the help desk ______ by phone or by e-mail during business hours.",
-    "question_ja": "営業時間内であれば、電話またはメールのどちらでもヘルプデスクに連絡できます。",
+    "question": "The elevator will remain out of service ______ the repairs are finished.",
+    "question_ja": "修理が終わるまで、エレベーターは使用できません。",
     "choices": [
-      "both",
-      "neither",
-      "either",
-      "whether"
+      "as far as",
+      "during",
+      "by",
+      "until"
     ],
-    "answer": 2,
-    "explanation": "後ろの or と組んで「AかBか」を表すのは either ... or。both は and、neither は nor と組むので不可。",
+    "answer": 3,
+    "explanation": "後ろに節が続き「〜するまで」なので接続詞 until。during と by は前置詞で節を取れず、as far as は「〜の限りでは」と範囲を表すので意味が合わない。",
     "level": 500
   },
   {
@@ -1065,48 +1065,48 @@
     "level": 500
   },
   {
-    "id": "pron-004",
+    "id": "pron-101",
     "category": "代名詞・関係詞",
-    "question": "We visited the factory ______ our new products are made.",
-    "question_ja": "私たちは、新製品が作られている工場を訪問しました。",
+    "question": "Ms. Kim finished the report by ______ without any help from the team.",
+    "question_ja": "キムさんはチームの助けを借りずに、一人で報告書を仕上げました。",
     "choices": [
-      "where",
-      "who",
-      "which",
-      "whose"
+      "herself",
+      "her",
+      "she",
+      "hers"
     ],
     "answer": 0,
-    "explanation": "関係詞節 our new products are made は主語も目的語も揃っているので、場所を表す関係副詞 where。which なら in which が必要。",
+    "explanation": "by oneself 「一人で」の形で、without any help とも意味がつながる herself が正解。by her では「彼女によって」となり文意に合わない。",
     "level": 500
   },
   {
-    "id": "pron-201",
+    "id": "pron-103",
     "category": "代名詞・関係詞",
-    "question": "The applicant ______ résumé impressed the committee will be interviewed on Thursday.",
-    "question_ja": "履歴書で委員会に強い印象を与えた応募者は、木曜日に面接を受けます。",
+    "question": "We hired a designer ______ has ten years of experience.",
+    "question_ja": "私たちは 10 年の経験があるデザイナーを採用しました。",
+    "choices": [
+      "which",
+      "whose",
+      "who",
+      "whom"
+    ],
+    "answer": 2,
+    "explanation": "先行詞 a designer は人で、後ろに動詞 has が続くので主格の関係代名詞 who が正解。which は物に使い、whom は目的格なので主語の位置に置けない。",
+    "level": 500
+  },
+  {
+    "id": "pron-104",
+    "category": "代名詞・関係詞",
+    "question": "The printer ______ was installed last week is already out of paper.",
+    "question_ja": "先週設置されたプリンターは、もう用紙切れです。",
     "choices": [
       "who",
-      "which",
       "whom",
-      "whose"
+      "whose",
+      "which"
     ],
     "answer": 3,
-    "explanation": "空所の後に名詞 résumé が続き「応募者の履歴書」と所有を表すので whose。who の後には動詞が来る。",
-    "level": 500
-  },
-  {
-    "id": "pron-202",
-    "category": "代名詞・関係詞",
-    "question": "Each employee is expected to clean ______ own desk before leaving the office.",
-    "question_ja": "各従業員は、退社前に自分の机を片付けることになっています。",
-    "choices": [
-      "their",
-      "they",
-      "them",
-      "theirs"
-    ],
-    "answer": 0,
-    "explanation": "名詞 desk の前で own と共に所有を表すので所有格 their。主格 they や目的格 them は名詞の前に置けない。",
+    "explanation": "先行詞 The printer は物で、後ろに動詞 was installed が続くので主格の関係代名詞 which が正解。who は人にしか使えない。",
     "level": 500
   },
   {
@@ -1122,21 +1122,6 @@
     ],
     "answer": 2,
     "explanation": "先行詞が人 director で、関係詞節の主語になるので who。which は物に、whom は目的格に使う。",
-    "level": 500
-  },
-  {
-    "id": "pron-204",
-    "category": "代名詞・関係詞",
-    "question": "The CEO ______ will present the quarterly results to the shareholders.",
-    "question_ja": "CEO 自らが、株主に四半期の業績を発表します。",
-    "choices": [
-      "him",
-      "himself",
-      "his",
-      "he"
-    ],
-    "answer": 1,
-    "explanation": "主語 The CEO を「CEO 自らが」と強調する再帰代名詞 himself。he や him を入れると主語が二重になり文が成り立たない。",
     "level": 500
   },
   {
@@ -1185,18 +1170,48 @@
     "level": 500
   },
   {
-    "id": "pron-208",
+    "id": "pron-307",
     "category": "代名詞・関係詞",
-    "question": "The clients have not replied yet, so please send ______ a reminder this afternoon.",
-    "question_ja": "顧客からまだ返事がないので、今日の午後、彼らにリマインダーを送ってください。",
+    "question": "This conference room is already booked, so we will need to find ______ one for the client meeting.",
+    "question_ja": "この会議室はすでに予約されているので、顧客との打ち合わせには別の部屋を探す必要があります。",
     "choices": [
-      "they",
-      "their",
-      "them",
-      "themselves"
+      "another",
+      "other",
+      "the other",
+      "others"
     ],
-    "answer": 2,
-    "explanation": "動詞 send の目的語で the clients を指すので目的格 them。主格 they は目的語になれない。",
+    "answer": 0,
+    "explanation": "不特定の「別の一室」を探すので another one。the other は残りが一つに特定される場合に使い、other は単数名詞 one の前に単独では置けない。",
+    "level": 500
+  },
+  {
+    "id": "pron-406",
+    "category": "代名詞・関係詞",
+    "question": "______ of the applicants has been notified of the interview schedule by email.",
+    "question_ja": "応募者には一人ひとり、面接の日程がメールで通知されています。",
+    "choices": [
+      "All",
+      "Most",
+      "Many",
+      "Each"
+    ],
+    "answer": 3,
+    "explanation": "動詞が単数形 has been なので単数扱いの Each of。All や Most of the applicants は複数扱いで have となる。",
+    "level": 500
+  },
+  {
+    "id": "tense-002",
+    "category": "時制・態",
+    "question": "The package ______ to the wrong address yesterday.",
+    "question_ja": "その荷物は昨日、間違った住所に配達されました。",
+    "choices": [
+      "delivers",
+      "is delivering",
+      "delivered",
+      "was delivered"
+    ],
+    "answer": 3,
+    "explanation": "荷物は「配達される」側なので受動態。yesterday があるため過去形の was delivered が正解。",
     "level": 500
   },
   {
@@ -1215,33 +1230,33 @@
     "level": 500
   },
   {
-    "id": "tense-004",
+    "id": "tense-102",
     "category": "時制・態",
-    "question": "The new cafeteria ______ next month, according to the facilities manager.",
-    "question_ja": "施設管理者によると、新しい社員食堂は来月オープンします。",
+    "question": "The invoices ______ to customers every Monday by the accounting team.",
+    "question_ja": "請求書は毎週月曜日に、経理チームからお客様へ送られます。",
     "choices": [
-      "opened",
-      "has opened",
-      "was opened",
-      "will open"
+      "send",
+      "are sent",
+      "sending",
+      "have sent"
     ],
-    "answer": 3,
-    "explanation": "next month は未来を示すので will open。opened や was opened は過去の出来事を表すため時間表現と矛盾する。",
+    "answer": 1,
+    "explanation": "主語 invoices 「請求書」は送られる側なので受動態 are sent が正解。by the accounting team も受動態の手がかり。能動態 send や have sent では意味が通らない。",
     "level": 500
   },
   {
-    "id": "tense-201",
+    "id": "tense-108",
     "category": "時制・態",
-    "question": "The quarterly report ______ by the finance team yesterday afternoon.",
-    "question_ja": "四半期報告書は昨日の午後、財務チームによって完成されました。",
+    "question": "The report ______ by Mr. Ito before the meeting started yesterday.",
+    "question_ja": "その報告書は昨日、会議が始まる前に伊藤さんによって仕上げられました。",
     "choices": [
-      "completes",
-      "is completing",
-      "has completed",
-      "was completed"
+      "finishes",
+      "is finished",
+      "will finish",
+      "was finished"
     ],
     "answer": 3,
-    "explanation": "主語 report は「完成させられる」側で、by の行為者と yesterday があるので過去の受動態 was completed。has completed は能動かつ yesterday と合わない。",
+    "explanation": "主語 report は仕上げられる側で、yesterday と started という過去の手がかりがあるので過去の受動態 was finished が正解。is finished は現在形なので時制が合わない。",
     "level": 500
   },
   {
@@ -1257,21 +1272,6 @@
     ],
     "answer": 3,
     "explanation": "since the merger was completed「合併完了以来」という継続なので現在完了 has managed。過去形 managed は現在まで続いていることを表せない。",
-    "level": 500
-  },
-  {
-    "id": "tense-203",
-    "category": "時制・態",
-    "question": "Next week, the IT department ______ new security software on all computers.",
-    "question_ja": "来週、IT 部門がすべてのコンピューターに新しいセキュリティソフトをインストールします。",
-    "choices": [
-      "installed",
-      "will install",
-      "has installed",
-      "install"
-    ],
-    "answer": 1,
-    "explanation": "Next week が未来を示すので will install。installed は過去、has installed は完了で未来の予定には使えない。",
     "level": 500
   },
   {
@@ -1305,21 +1305,6 @@
     "level": 500
   },
   {
-    "id": "tense-206",
-    "category": "時制・態",
-    "question": "The new employee handbook ______ to all staff members last Monday.",
-    "question_ja": "新しい従業員ハンドブックは、先週の月曜日に全スタッフに配布されました。",
-    "choices": [
-      "distributes",
-      "distributed",
-      "has distributed",
-      "was distributed"
-    ],
-    "answer": 3,
-    "explanation": "handbook は「配布される」側なので受動態、last Monday なので過去形の was distributed。distributed は能動で主語と合わない。",
-    "level": 500
-  },
-  {
     "id": "tense-207",
     "category": "時制・態",
     "question": "I ______ the invoice to the client as soon as the manager approves it.",
@@ -1335,18 +1320,33 @@
     "level": 500
   },
   {
-    "id": "tense-208",
+    "id": "tense-309",
     "category": "時制・態",
-    "question": "Last quarter, the sales team ______ its target by nearly fifteen percent.",
-    "question_ja": "前四半期、営業チームは目標を 15 パーセント近く上回りました。",
+    "question": "The company ______ its first online store in 2010 to reach customers overseas.",
+    "question_ja": "その会社は海外の顧客を獲得するため、2010 年に初めてのオンラインストアを開設しました。",
     "choices": [
-      "exceeded",
-      "has exceeded",
-      "exceeds",
-      "will exceed"
+      "launches",
+      "has launched",
+      "launched",
+      "had launched"
     ],
-    "answer": 0,
-    "explanation": "Last quarter という明確な過去の時点があるので過去形 exceeded。現在完了 has exceeded は過去の特定時点を表す語句と一緒に使えない。",
+    "answer": 2,
+    "explanation": "in 2010 という過去の一時点を示す語句があるので単純過去 launched。現在完了 has launched は特定の過去時点とは併用できず、had launched は基準となる別の過去の出来事がないので不適。",
+    "level": 500
+  },
+  {
+    "id": "tense-408",
+    "category": "時制・態",
+    "question": "The receptionist ______ the visitor to the meeting room when the fire alarm went off.",
+    "question_ja": "火災報知器が鳴ったとき、受付係は来訪者を会議室へ案内しているところでした。",
+    "choices": [
+      "escorts",
+      "has escorted",
+      "was escorting",
+      "will have escorted"
+    ],
+    "answer": 2,
+    "explanation": "過去の出来事 went off が起きた時点で進行中だった動作なので過去進行形 was escorting。has escorted は過去の when 節と共に使えない。",
     "level": 500
   },
   {
@@ -1440,21 +1440,6 @@
     "level": 500
   },
   {
-    "id": "vocab-205",
-    "category": "語彙",
-    "question": "The new ______ in the sales department will start work on Monday.",
-    "question_ja": "営業部の新しい従業員は、月曜日から勤務を始めます。",
-    "choices": [
-      "employee",
-      "equipment",
-      "invoice",
-      "schedule"
-    ],
-    "answer": 0,
-    "explanation": "will start work（勤務を始める）の主語になれるのは人を表す employee。equipment は物なので働けない。",
-    "level": 500
-  },
-  {
     "id": "vocab-206",
     "category": "語彙",
     "question": "Please keep your ______ in case you need to return the product.",
@@ -1470,33 +1455,48 @@
     "level": 500
   },
   {
-    "id": "vocab-207",
+    "id": "vocab-304",
     "category": "語彙",
-    "question": "The conference room can ______ up to fifty people for the annual meeting.",
-    "question_ja": "その会議室は、年次会議で最大 50 人を収容できます。",
+    "question": "Employees should ______ their passwords every ninety days to protect company data.",
+    "question_ja": "会社のデータを守るため、従業員は 90 日ごとにパスワードを更新する必要があります。",
     "choices": [
-      "participate",
-      "announce",
-      "install",
-      "accommodate"
+      "assemble",
+      "update",
+      "negotiate",
+      "decorate"
     ],
-    "answer": 3,
-    "explanation": "部屋が人数を「収容できる」は accommodate。participate は「参加する」で部屋が主語になれない。",
+    "answer": 1,
+    "explanation": "パスワードを「定期的に更新する」ので update。every ninety days が cue で、negotiate（交渉する）や assemble（組み立てる）はパスワードには使えない。",
     "level": 500
   },
   {
-    "id": "vocab-208",
+    "id": "vocab-306",
     "category": "語彙",
-    "question": "The company ______ a new vendor to supply office furniture for the new branch.",
-    "question_ja": "会社は、新しい支店の事務家具を供給する新しい納入業者を選びました。",
+    "question": "Please read the ______ carefully before signing, because it explains the terms of the service.",
+    "question_ja": "この契約書にはサービスの条件が書かれていますので、署名の前によくお読みください。",
     "choices": [
-      "promoted",
-      "selected",
-      "attended",
-      "retired"
+      "invitation",
+      "schedule",
+      "receipt",
+      "agreement"
+    ],
+    "answer": 3,
+    "explanation": "「署名する前に読み、サービスの条件が書かれている」文書は契約書 agreement。receipt（領収書）は署名の対象でも条件を記す文書でもない。",
+    "level": 500
+  },
+  {
+    "id": "vocab-308",
+    "category": "語彙",
+    "question": "Because of a sudden ______ in orders, the factory will add an extra shift this month.",
+    "question_ja": "注文が急に増えたため、工場は今月、シフトを 1 つ追加します。",
+    "choices": [
+      "inquiry",
+      "increase",
+      "invoice",
+      "instance"
     ],
     "answer": 1,
-    "explanation": "新しい業者を「選ぶ」は select。promoted（昇進させる）や attended（出席する）は vendor を目的語にとると意味が合わない。",
+    "explanation": "「追加シフトを組む」原因は注文の「急増」increase。in orders と結びつき増減を表せるのは increase のみで、inquiry（問い合わせ）では理由にならない。",
     "level": 500
   },
   {
@@ -1512,6 +1512,51 @@
     ],
     "answer": 2,
     "explanation": "所有格 Our の後ろで文の主語になるのは名詞 commitment。commitment to 〜「〜への取り組み」の形も覚えておきたい。",
+    "level": 550
+  },
+  {
+    "id": "pos-202",
+    "category": "品詞",
+    "question": "The new accounting software calculates tax much more ______ than the old spreadsheet did.",
+    "question_ja": "新しい会計ソフトは、以前の表計算シートよりもはるかに正確に税額を計算します。",
+    "choices": [
+      "accurate",
+      "accurately",
+      "accuracy",
+      "accuracies"
+    ],
+    "answer": 1,
+    "explanation": "動詞 calculates を修飾し、more ... than の比較に入るのは副詞 accurately。形容詞 accurate は動詞を修飾できない。",
+    "level": 550
+  },
+  {
+    "id": "pos-203",
+    "category": "品詞",
+    "question": "All visitors must show a valid form of ______ at the front desk.",
+    "question_ja": "来訪者は全員、受付で有効な身分証明書を提示しなければなりません。",
+    "choices": [
+      "identify",
+      "identified",
+      "identification",
+      "identifiable"
+    ],
+    "answer": 2,
+    "explanation": "前置詞 of の後には名詞が必要なので identification。動詞 identify や形容詞 identifiable は置けない。",
+    "level": 550
+  },
+  {
+    "id": "pos-207",
+    "category": "品詞",
+    "question": "Employees are encouraged to make ______ use of the online training materials.",
+    "question_ja": "従業員は、オンライン研修教材を十分に活用するよう奨励されています。",
+    "choices": [
+      "full",
+      "fully",
+      "fullness",
+      "fill"
+    ],
+    "answer": 0,
+    "explanation": "名詞 use を修飾するのは形容詞 full。make full use of で「十分に活用する」。副詞 fully は名詞を修飾できない。",
     "level": 550
   },
   {
@@ -1560,36 +1605,6 @@
     "level": 550
   },
   {
-    "id": "pos-304",
-    "category": "品詞",
-    "question": "______ the new software took the IT team longer than expected because of several compatibility issues.",
-    "question_ja": "いくつかの互換性の問題のため、新しいソフトウェアのインストールは IT チームの予想より長くかかりました。",
-    "choices": [
-      "Install",
-      "Installing",
-      "Installed",
-      "Installation"
-    ],
-    "answer": 1,
-    "explanation": "空所の直後に目的語 the new software があり、主語になれるのは動名詞 Installing。名詞 Installation は of なしで目的語をとれない。",
-    "level": 550
-  },
-  {
-    "id": "pos-305",
-    "category": "品詞",
-    "question": "The ______ of the annual conference has been moved to a larger venue downtown.",
-    "question_ja": "年次会議の会場は、市内中心部のより広い施設に変更されました。",
-    "choices": [
-      "locate",
-      "located",
-      "locating",
-      "location"
-    ],
-    "answer": 3,
-    "explanation": "The と of の間に入り主語になるのは名詞 location。動詞 locate や分詞 located は冠詞の直後で主語になれない。",
-    "level": 550
-  },
-  {
     "id": "pos-306",
     "category": "品詞",
     "question": "Several employees found the training session ______ because the instructor spoke too quickly.",
@@ -1602,21 +1617,6 @@
     ],
     "answer": 0,
     "explanation": "session が人を「混乱させる」側なので現在分詞 confusing。confused は人が「混乱した」感情を表すため、物が主体の補語には不適。",
-    "level": 550
-  },
-  {
-    "id": "pos-307",
-    "category": "品詞",
-    "question": "The newly hired accountant completed the audit ______ despite the tight deadline.",
-    "question_ja": "新しく採用された会計士は、厳しい締め切りにもかかわらず監査を無事に終えました。",
-    "choices": [
-      "success",
-      "successful",
-      "successfully",
-      "succeed"
-    ],
-    "answer": 2,
-    "explanation": "動詞 completed を修飾するので副詞 successfully。形容詞 successful は目的語 the audit の後に置いて動詞を修飾することはできない。",
     "level": 550
   },
   {
@@ -1647,6 +1647,21 @@
     ],
     "answer": 3,
     "explanation": "人が「興味を持っている」状態は be interested in で表す。interesting は「興味を起こさせる」という物の性質を表し、主語が人なので不適。",
+    "level": 550
+  },
+  {
+    "id": "prep-002",
+    "category": "前置詞・接続詞",
+    "question": "______ the heavy rain, the outdoor event started on time.",
+    "question_ja": "大雨にもかかわらず、屋外イベントは定刻に始まりました。",
+    "choices": [
+      "Although",
+      "Despite",
+      "Because",
+      "While"
+    ],
+    "answer": 1,
+    "explanation": "the heavy rain は名詞句なので前置詞 Despite「〜にもかかわらず」。Although は接続詞なので節が続かなければならない。",
     "level": 550
   },
   {
@@ -1725,21 +1740,6 @@
     "level": 550
   },
   {
-    "id": "prep-305",
-    "category": "前置詞・接続詞",
-    "question": "The marketing team prefers face-to-face meetings, ______ the engineers usually communicate through online chat.",
-    "question_ja": "マーケティングチームは対面の会議を好む一方、エンジニアはたいていオンラインチャットでやり取りします。",
-    "choices": [
-      "whereas",
-      "because",
-      "once",
-      "unless"
-    ],
-    "answer": 0,
-    "explanation": "マーケティング部とエンジニアの対照を示す接続詞 whereas。because では二つの部署の好みに因果関係がないため意味が通らない。",
-    "level": 550
-  },
-  {
     "id": "prep-306",
     "category": "前置詞・接続詞",
     "question": "______ the contract has been signed by both parties, construction on the new warehouse can begin.",
@@ -1800,6 +1800,21 @@
     "level": 550
   },
   {
+    "id": "pron-001",
+    "category": "代名詞・関係詞",
+    "question": "Mr. Park printed the documents ______ because the assistant was out of the office.",
+    "question_ja": "アシスタントが不在だったので、パクさんは自分で書類を印刷しました。",
+    "choices": [
+      "he",
+      "him",
+      "his",
+      "himself"
+    ],
+    "answer": 3,
+    "explanation": "「アシスタントが不在だったので自分で印刷した」という強調の再帰代名詞 himself。文はすでに完成しているので he や him は入らない。",
+    "level": 550
+  },
+  {
     "id": "pron-005",
     "category": "代名詞・関係詞",
     "question": "Ms. Rivera is the consultant ______ advice helped us reduce shipping costs.",
@@ -1812,6 +1827,36 @@
     ],
     "answer": 1,
     "explanation": "直後の名詞 advice と結びついて「その人の助言」を表す所有格の関係代名詞 whose。who は後ろに動詞が必要。",
+    "level": 550
+  },
+  {
+    "id": "pron-108",
+    "category": "代名詞・関係詞",
+    "question": "The woman ______ office is next to mine joined the company in April.",
+    "question_ja": "私の隣にオフィスがある女性は、4 月に入社しました。",
+    "choices": [
+      "who",
+      "which",
+      "whom",
+      "whose"
+    ],
+    "answer": 3,
+    "explanation": "後ろに名詞 office が続き「その女性のオフィス」という所有関係を表す whose が正解。who は後ろに動詞が続く主格なので名詞 office の前に置けない。",
+    "level": 550
+  },
+  {
+    "id": "pron-204",
+    "category": "代名詞・関係詞",
+    "question": "The CEO ______ will present the quarterly results to the shareholders.",
+    "question_ja": "CEO 自らが、株主に四半期の業績を発表します。",
+    "choices": [
+      "him",
+      "himself",
+      "his",
+      "he"
+    ],
+    "answer": 1,
+    "explanation": "主語 The CEO を「CEO 自らが」と強調する再帰代名詞 himself。he や him を入れると主語が二重になり文が成り立たない。",
     "level": 550
   },
   {
@@ -1860,21 +1905,6 @@
     "level": 550
   },
   {
-    "id": "pron-304",
-    "category": "代名詞・関係詞",
-    "question": "______ is chosen as team leader will be responsible for preparing the weekly progress report.",
-    "question_ja": "チームリーダーに選ばれた人は誰であれ、週次の進捗報告書の作成を担当します。",
-    "choices": [
-      "Whatever",
-      "Whichever",
-      "Whoever",
-      "Whomever"
-    ],
-    "answer": 2,
-    "explanation": "team leader に選ばれるのは人で、is chosen の主語になるので主格の Whoever。Whomever は目的格で主語の位置には置けない。",
-    "level": 550
-  },
-  {
     "id": "pron-305",
     "category": "代名詞・関係詞",
     "question": "You may choose ______ of the two training dates is more convenient for your schedule.",
@@ -1905,21 +1935,6 @@
     "level": 550
   },
   {
-    "id": "pron-307",
-    "category": "代名詞・関係詞",
-    "question": "This conference room is already booked, so we will need to find ______ one for the client meeting.",
-    "question_ja": "この会議室はすでに予約されているので、顧客との打ち合わせには別の部屋を探す必要があります。",
-    "choices": [
-      "another",
-      "other",
-      "the other",
-      "others"
-    ],
-    "answer": 0,
-    "explanation": "不特定の「別の一室」を探すので another one。the other は残りが一つに特定される場合に使い、other は単数名詞 one の前に単独では置けない。",
-    "level": 550
-  },
-  {
     "id": "pron-308",
     "category": "代名詞・関係詞",
     "question": "Some employees prefer to work from home, while ______ would rather come to the office every day.",
@@ -1932,21 +1947,6 @@
     ],
     "answer": 2,
     "explanation": "Some 〜, others ... で「ある人々は〜、他の人々は…」と対比する。other は形容詞で単独の主語になれず、another は単数で複数の従業員を指せない。",
-    "level": 550
-  },
-  {
-    "id": "pron-309",
-    "category": "代名詞・関係詞",
-    "question": "The consultant ______ recommendations we adopted last year will visit our office again in March.",
-    "question_ja": "昨年私たちがその提言を採用したコンサルタントが、3 月に再び来社します。",
-    "choices": [
-      "who",
-      "whom",
-      "whose",
-      "which"
-    ],
-    "answer": 2,
-    "explanation": "「そのコンサルタントの提案」と所有関係を表し、直後の名詞 recommendations につながるので whose。who や whom は直後に名詞を続けられない。",
     "level": 550
   },
   {
@@ -1965,21 +1965,6 @@
     "level": 550
   },
   {
-    "id": "tense-301",
-    "category": "時制・態",
-    "question": "The accountant ______ at the firm for ten years when she was promoted to regional director.",
-    "question_ja": "その会計士は、地域ディレクターに昇進したとき、その事務所で 10 年間働いていました。",
-    "choices": [
-      "works",
-      "has worked",
-      "will work",
-      "had been working"
-    ],
-    "answer": 3,
-    "explanation": "過去の時点 when she was promoted までの継続なので過去完了進行形 had been working。has worked は現在までの継続を表し、過去の基準点とは合わない。",
-    "level": 550
-  },
-  {
     "id": "tense-302",
     "category": "時制・態",
     "question": "The auditors found that several invoices ______ twice by mistake.",
@@ -1992,21 +1977,6 @@
     ],
     "answer": 0,
     "explanation": "found（過去）より前に起きたことなので過去完了の受動態 had been paid。have been paid は現在完了で、過去の基準点 found には合わない。",
-    "level": 550
-  },
-  {
-    "id": "tense-303",
-    "category": "時制・態",
-    "question": "The technician ______ on the server problem since early this morning and has not found the cause yet.",
-    "question_ja": "技術者は今朝早くからサーバーの問題に取り組んでいますが、まだ原因を見つけられていません。",
-    "choices": [
-      "works",
-      "has been working",
-      "worked",
-      "will work"
-    ],
-    "answer": 1,
-    "explanation": "since early this morning と現在も続く動作なので現在完了進行形 has been working。単純過去 worked は since と組み合わせて継続を表せない。",
     "level": 550
   },
   {
@@ -2040,21 +2010,6 @@
     "level": 550
   },
   {
-    "id": "tense-306",
-    "category": "時制・態",
-    "question": "The quarterly report ______ to all department heads before the meeting on Thursday.",
-    "question_ja": "四半期報告書は、木曜日の会議の前に全部門長に配布されます。",
-    "choices": [
-      "distributed",
-      "has distributed",
-      "will be distributed",
-      "is distributing"
-    ],
-    "answer": 2,
-    "explanation": "report は「配布される」側で、before the meeting on Thursday が未来を示すので受動の未来形 will be distributed。能動の has distributed では報告書が配る側になる。",
-    "level": 550
-  },
-  {
     "id": "tense-307",
     "category": "時制・態",
     "question": "Please note that the parking lot ______ by a contractor tomorrow and will be unavailable all day.",
@@ -2085,18 +2040,63 @@
     "level": 550
   },
   {
-    "id": "tense-309",
+    "id": "tense-402",
     "category": "時制・態",
-    "question": "The company ______ its first online store in 2010 to reach customers overseas.",
-    "question_ja": "その会社は海外の顧客を獲得するため、2010 年に初めてのオンラインストアを開設しました。",
+    "question": "The supervisor reported that the shipment ______ the port before the storm warning was issued.",
+    "question_ja": "監督者は、嵐の警報が出る前に荷物は港を出ていたと報告しました。",
     "choices": [
-      "launches",
-      "has launched",
-      "launched",
-      "had launched"
+      "had left",
+      "has left",
+      "leaves",
+      "will leave"
+    ],
+    "answer": 0,
+    "explanation": "reported という過去の報告より前に起きた出来事なので過去完了 had left。has left は過去の文脈の中では使えない。",
+    "level": 550
+  },
+  {
+    "id": "tense-406",
+    "category": "時制・態",
+    "question": "Every new commercial building ______ by the fire department before it can open to the public.",
+    "question_ja": "新しい商業ビルはすべて、一般公開の前に消防署の検査を受けなければなりません。",
+    "choices": [
+      "is inspecting",
+      "must inspect",
+      "must be inspected",
+      "has inspected"
     ],
     "answer": 2,
-    "explanation": "in 2010 という過去の一時点を示す語句があるので単純過去 launched。現在完了 has launched は特定の過去時点とは併用できず、had launched は基準となる別の過去の出来事がないので不適。",
+    "explanation": "building は「検査される」側なので受動態 must be inspected。must inspect や has inspected は能動で、建物が検査する側になってしまう。",
+    "level": 550
+  },
+  {
+    "id": "tense-409",
+    "category": "時制・態",
+    "question": "The quarterly figures ______ to the regional managers as soon as the finance department finalizes them.",
+    "question_ja": "四半期の数字は、財務部が確定し次第、地域マネージャーに配布されます。",
+    "choices": [
+      "have distributed",
+      "distribute",
+      "will be distributed",
+      "were distributing"
+    ],
+    "answer": 2,
+    "explanation": "figures は「配布される」側なので受動態、かつ as soon as 節が現在形なので主節は未来形 will be distributed。distribute は能動で意味が通らない。",
+    "level": 550
+  },
+  {
+    "id": "tense-411",
+    "category": "時制・態",
+    "question": "The conference room cannot be used this morning because it ______ for the board meeting.",
+    "question_ja": "役員会の準備中のため、会議室は今朝使えません。",
+    "choices": [
+      "is preparing",
+      "is being prepared",
+      "prepares",
+      "has prepared"
+    ],
+    "answer": 1,
+    "explanation": "主語 it（会議室）は準備される側で、今まさに進行中なので現在進行形の受動態 is being prepared。is preparing や has prepared は能動態で、会議室が何かを準備する意味になってしまう。",
     "level": 550
   },
   {
@@ -2115,6 +2115,36 @@
     "level": 550
   },
   {
+    "id": "vocab-207",
+    "category": "語彙",
+    "question": "The conference room can ______ up to fifty people for the annual meeting.",
+    "question_ja": "その会議室は、年次会議で最大 50 人を収容できます。",
+    "choices": [
+      "participate",
+      "announce",
+      "install",
+      "accommodate"
+    ],
+    "answer": 3,
+    "explanation": "部屋が人数を「収容できる」は accommodate。participate は「参加する」で部屋が主語になれない。",
+    "level": 550
+  },
+  {
+    "id": "vocab-208",
+    "category": "語彙",
+    "question": "The company ______ a new vendor to supply office furniture for the new branch.",
+    "question_ja": "会社は、新しい支店の事務家具を供給する新しい納入業者を選びました。",
+    "choices": [
+      "promoted",
+      "selected",
+      "attended",
+      "retired"
+    ],
+    "answer": 1,
+    "explanation": "新しい業者を「選ぶ」は select。promoted（昇進させる）や attended（出席する）は vendor を目的語にとると意味が合わない。",
+    "level": 550
+  },
+  {
     "id": "vocab-301",
     "category": "語彙",
     "question": "Staff were asked to ______ the inventory count so that the figures are ready when the auditors arrive.",
@@ -2127,21 +2157,6 @@
     ],
     "answer": 2,
     "explanation": "「監査人が来るまでに数字を揃える」ので、棚卸しを「完了させる」finalize。postpone（延期する）では数字が準備できないため矛盾する。",
-    "level": 550
-  },
-  {
-    "id": "vocab-302",
-    "category": "語彙",
-    "question": "The shipment of replacement parts was ______ at customs for three days.",
-    "question_ja": "交換部品の出荷は、税関で 3 日間足止めされました。",
-    "choices": [
-      "declined",
-      "deleted",
-      "denied",
-      "delayed"
-    ],
-    "answer": 3,
-    "explanation": "交換部品の出荷が税関で「3日間足止めされた」ので delayed。declined（断る）や denied（拒否する）は for three days と結びつかない。",
     "level": 550
   },
   {
@@ -2160,21 +2175,6 @@
     "level": 550
   },
   {
-    "id": "vocab-304",
-    "category": "語彙",
-    "question": "Employees are reminded to ______ their passwords every ninety days to protect company data.",
-    "question_ja": "会社のデータを守るため、従業員は 90 日ごとにパスワードを更新するよう注意喚起されています。",
-    "choices": [
-      "assemble",
-      "update",
-      "negotiate",
-      "decorate"
-    ],
-    "answer": 1,
-    "explanation": "パスワードを「定期的に更新する」ので update。every ninety days が cue で、negotiate（交渉する）や assemble（組み立てる）はパスワードには使えない。",
-    "level": 550
-  },
-  {
     "id": "vocab-305",
     "category": "語彙",
     "question": "The sales figures for the third quarter ______ our expectations by nearly fifteen percent.",
@@ -2187,21 +2187,6 @@
     ],
     "answer": 2,
     "explanation": "「予想を15%上回った」なので exceeded。by nearly fifteen percent という差を表す語句が cue で、examined（調べた）では差の表現と結びつかない。",
-    "level": 550
-  },
-  {
-    "id": "vocab-306",
-    "category": "語彙",
-    "question": "Please read the ______ carefully before signing, as it describes the conditions of the warranty.",
-    "question_ja": "この契約書には保証の条件が書かれていますので、署名の前によくお読みください。",
-    "choices": [
-      "invitation",
-      "schedule",
-      "receipt",
-      "agreement"
-    ],
-    "answer": 3,
-    "explanation": "「署名する前に読み、保証条件が書かれている」文書は契約書 agreement。receipt（領収書）は署名の対象でも条件を記す文書でもない。",
     "level": 550
   },
   {
@@ -2220,21 +2205,6 @@
     "level": 550
   },
   {
-    "id": "vocab-308",
-    "category": "語彙",
-    "question": "Due to a sudden ______ in orders, the factory will operate an extra shift this month.",
-    "question_ja": "注文が急に増えたため、工場は今月、追加のシフトで操業します。",
-    "choices": [
-      "inquiry",
-      "increase",
-      "invoice",
-      "instance"
-    ],
-    "answer": 1,
-    "explanation": "「追加シフトを組む」原因は注文の「急増」increase。in orders と結びつき増減を表せるのは increase のみで、inquiry（問い合わせ）では理由にならない。",
-    "level": 550
-  },
-  {
     "id": "vocab-309",
     "category": "語彙",
     "question": "The CEO's speech ______ the importance of teamwork in achieving the company's long-term goals.",
@@ -2247,6 +2217,36 @@
     ],
     "answer": 2,
     "explanation": "スピーチが「重要性を強調した」ので emphasized。the importance を目的語にとれる動詞で、eliminated（取り除いた）では文意が逆になる。",
+    "level": 550
+  },
+  {
+    "id": "vocab-405",
+    "category": "語彙",
+    "question": "Applicants for the regional sales position must be willing to travel ______, sometimes on very short notice.",
+    "question_ja": "地域営業職の応募者は、ときには急な連絡でも、頻繁に出張できることが求められます。",
+    "choices": [
+      "roughly",
+      "formerly",
+      "frequently",
+      "lately"
+    ],
+    "answer": 2,
+    "explanation": "「頻繁に出張する意欲」という文脈に合う frequently。formerly（以前は）や lately（最近）は求人の条件として不自然。",
+    "level": 550
+  },
+  {
+    "id": "vocab-410",
+    "category": "語彙",
+    "question": "Before you submit your expense report, please ______ that all the receipts are attached.",
+    "question_ja": "経費報告書を提出する前に、すべての領収書が添付されていることを確認してください。",
+    "choices": [
+      "verify",
+      "violate",
+      "vary",
+      "vacate"
+    ],
+    "answer": 0,
+    "explanation": "that 節を続けて「〜であることを確認する」を表すのは verify。vary（変わる）や violate（違反する）、vacate（明け渡す）は意味が合わない。",
     "level": 550
   },
   {
@@ -2265,18 +2265,18 @@
     "level": 600
   },
   {
-    "id": "pos-401",
+    "id": "pos-304",
     "category": "品詞",
-    "question": "All visitors must wear ______ identification badges while on the premises of the research facility.",
-    "question_ja": "来訪者は全員、研究施設の敷地内では目に見える形で身分証バッジを着用しなければなりません。",
+    "question": "______ the new software took the IT team longer than expected because of several compatibility issues.",
+    "question_ja": "いくつかの互換性の問題のため、新しいソフトウェアのインストールは IT チームの予想より長くかかりました。",
     "choices": [
-      "visibly",
-      "visible",
-      "visibility",
-      "vision"
+      "Install",
+      "Installing",
+      "Installed",
+      "Installation"
     ],
     "answer": 1,
-    "explanation": "名詞句 identification badges を修飾するので形容詞 visible。副詞 visibly は名詞を修飾できない。",
+    "explanation": "空所の直後に目的語 the new software があり、主語になれるのは動名詞 Installing。名詞 Installation は of なしで目的語をとれない。",
     "level": 600
   },
   {
@@ -2415,6 +2415,21 @@
     "level": 600
   },
   {
+    "id": "prep-305",
+    "category": "前置詞・接続詞",
+    "question": "The marketing team prefers face-to-face meetings, ______ the engineers usually communicate through online chat.",
+    "question_ja": "マーケティングチームは対面の会議を好む一方、エンジニアはたいていオンラインチャットでやり取りします。",
+    "choices": [
+      "unless",
+      "because",
+      "once",
+      "whereas"
+    ],
+    "answer": 3,
+    "explanation": "マーケティング部とエンジニアの対照を示す接続詞 whereas。because では二つの部署の好みに因果関係がないため意味が通らない。",
+    "level": 600
+  },
+  {
     "id": "prep-401",
     "category": "前置詞・接続詞",
     "question": "______ having received the revised specifications only yesterday, the engineering team submitted a complete proposal this morning.",
@@ -2457,21 +2472,6 @@
     ],
     "answer": 2,
     "explanation": "on behalf of で「〜を代表して」。behalf と組む前置詞は on と決まっている。",
-    "level": 600
-  },
-  {
-    "id": "prep-404",
-    "category": "前置詞・接続詞",
-    "question": "The elevators in the east wing will remain out of service ______ the control panels have been replaced and inspected.",
-    "question_ja": "東棟のエレベーターは、制御盤の交換と点検が終わるまで使用できません。",
-    "choices": [
-      "until",
-      "during",
-      "by",
-      "as far as"
-    ],
-    "answer": 0,
-    "explanation": "後ろに節が続き「〜するまで」なので接続詞 until。during と by は前置詞で節を取れず、as far as は「〜の限りでは」と範囲を表すので意味が合わない。",
     "level": 600
   },
   {
@@ -2550,18 +2550,18 @@
     "level": 600
   },
   {
-    "id": "pron-006",
+    "id": "pron-304",
     "category": "代名詞・関係詞",
-    "question": "The new policy applies to all employees, including ______ who work part-time.",
-    "question_ja": "新しい方針は、パートタイムで働く人も含めて全従業員に適用されます。",
+    "question": "______ is chosen as team leader will be responsible for preparing the weekly progress report.",
+    "question_ja": "チームリーダーに選ばれた人は誰であれ、週次の進捗報告書の作成を担当します。",
     "choices": [
-      "they",
-      "them",
-      "those",
-      "theirs"
+      "Whatever",
+      "Whichever",
+      "Whoever",
+      "Whomever"
     ],
     "answer": 2,
-    "explanation": "those who 〜で「〜する人々」。them は関係詞節で後ろから修飾される形では使えない。",
+    "explanation": "team leader に選ばれるのは人で、is chosen の主語になるので主格の Whoever。Whomever は目的格で主語の位置には置けない。",
     "level": 600
   },
   {
@@ -2640,21 +2640,6 @@
     "level": 600
   },
   {
-    "id": "pron-406",
-    "category": "代名詞・関係詞",
-    "question": "______ of the applicants has been notified of the interview schedule by email.",
-    "question_ja": "応募者には一人ひとり、面接の日程がメールで通知されています。",
-    "choices": [
-      "All",
-      "Most",
-      "Many",
-      "Each"
-    ],
-    "answer": 3,
-    "explanation": "動詞が単数形 has been なので単数扱いの Each of。All や Most of the applicants は複数扱いで have となる。",
-    "level": 600
-  },
-  {
     "id": "pron-407",
     "category": "代名詞・関係詞",
     "question": "The training manual, ______ was revised last month, now includes a chapter on remote collaboration tools.",
@@ -2667,21 +2652,6 @@
     ],
     "answer": 1,
     "explanation": "カンマで区切られた非制限用法では that は使えず、物を指す which を用いる。what は先行詞を取らない。",
-    "level": 600
-  },
-  {
-    "id": "pron-408",
-    "category": "代名詞・関係詞",
-    "question": "Any employee ______ badge is lost or stolen must report the incident to the security office within twenty-four hours.",
-    "question_ja": "バッジを紛失または盗難された従業員は、24 時間以内に警備室に届け出なければなりません。",
-    "choices": [
-      "who",
-      "whom",
-      "whose",
-      "which"
-    ],
-    "answer": 2,
-    "explanation": "直後の名詞 badge を所有する関係を表す所有格の関係代名詞 whose。who では badge とつながらない。",
     "level": 600
   },
   {
@@ -2700,6 +2670,36 @@
     "level": 600
   },
   {
+    "id": "pron-413",
+    "category": "代名詞・関係詞",
+    "question": "The shipment arrived two days late, ______ caused delays in production.",
+    "question_ja": "出荷品が 2 日遅れて届き、そのことが生産の遅れにつながりました。",
+    "choices": [
+      "that",
+      "which",
+      "what",
+      "it"
+    ],
+    "answer": 1,
+    "explanation": "カンマの後で前の節全体の内容を受ける関係代名詞は which。that はカンマの後で使えず、what は先行詞を含むので不可、it では接続詞がなく文がつながらない。",
+    "level": 600
+  },
+  {
+    "id": "pron-414",
+    "category": "代名詞・関係詞",
+    "question": "The company has three warehouses, the largest of ______ is located near the port.",
+    "question_ja": "その会社は倉庫を 3 つ持っており、そのうち最大のものは港の近くにあります。",
+    "choices": [
+      "them",
+      "whom",
+      "that",
+      "which"
+    ],
+    "answer": 3,
+    "explanation": "カンマの後で節をつなぎ、物（warehouses）を指して前置詞 of の目的語になる関係代名詞は which。them では文がつながらず、whom は人を指し、that は前置詞の後に置けない。",
+    "level": 600
+  },
+  {
     "id": "tense-006",
     "category": "時制・態",
     "question": "All applications ______ by the time the committee meets next Friday, so please submit yours soon.",
@@ -2715,6 +2715,36 @@
     "level": 600
   },
   {
+    "id": "tense-301",
+    "category": "時制・態",
+    "question": "The accountant ______ at the firm for ten years when she was promoted to regional director.",
+    "question_ja": "その会計士は、地域ディレクターに昇進したとき、その事務所で 10 年間働いていました。",
+    "choices": [
+      "works",
+      "has worked",
+      "will work",
+      "had been working"
+    ],
+    "answer": 3,
+    "explanation": "過去の時点 when she was promoted までの継続なので過去完了進行形 had been working。has worked は現在までの継続を表し、過去の基準点とは合わない。",
+    "level": 600
+  },
+  {
+    "id": "tense-303",
+    "category": "時制・態",
+    "question": "The technician ______ on the server problem since early this morning and has not found the cause yet.",
+    "question_ja": "技術者は今朝早くからサーバーの問題に取り組んでいますが、まだ原因を見つけられていません。",
+    "choices": [
+      "works",
+      "has been working",
+      "worked",
+      "will work"
+    ],
+    "answer": 1,
+    "explanation": "since early this morning と現在も続く動作なので現在完了進行形 has been working。単純過去 worked は since と組み合わせて継続を表せない。",
+    "level": 600
+  },
+  {
     "id": "tense-401",
     "category": "時制・態",
     "question": "By the time the new distribution center opens next spring, the company ______ more than two hundred additional warehouse staff.",
@@ -2727,36 +2757,6 @@
     ],
     "answer": 3,
     "explanation": "By the time ＋ 未来の時点なので、その時点までの完了を表す未来完了 will have hired。had hired は過去完了で未来には使えない。",
-    "level": 600
-  },
-  {
-    "id": "tense-402",
-    "category": "時制・態",
-    "question": "The supervisor reported that the shipment ______ the port before the storm warning was issued.",
-    "question_ja": "監督者は、嵐の警報が出る前に荷物は港を出ていたと報告しました。",
-    "choices": [
-      "had left",
-      "has left",
-      "leaves",
-      "will leave"
-    ],
-    "answer": 0,
-    "explanation": "reported という過去の報告より前に起きた出来事なので過去完了 had left。has left は過去の文脈の中では使えない。",
-    "level": 600
-  },
-  {
-    "id": "tense-403",
-    "category": "時制・態",
-    "question": "All safety inspections ______ by certified personnel before the equipment is returned to the production line.",
-    "question_ja": "設備を生産ラインに戻す前に、すべての安全点検は有資格者が行わなければなりません。",
-    "choices": [
-      "must perform",
-      "must have performed",
-      "must be performing",
-      "must be performed"
-    ],
-    "answer": 3,
-    "explanation": "主語 inspections は「実施される」側なので助動詞＋受動態 must be performed。by certified personnel が受動の目印。",
     "level": 600
   },
   {
@@ -2790,21 +2790,6 @@
     "level": 600
   },
   {
-    "id": "tense-406",
-    "category": "時制・態",
-    "question": "Every new commercial building ______ by the fire department before it can open to the public.",
-    "question_ja": "新しい商業ビルはすべて、一般公開の前に消防署の検査を受けなければなりません。",
-    "choices": [
-      "must be inspected",
-      "must inspect",
-      "is inspecting",
-      "has inspected"
-    ],
-    "answer": 0,
-    "explanation": "building は「検査される」側なので受動態 must be inspected。must inspect や has inspected は能動で、建物が検査する側になってしまう。",
-    "level": 600
-  },
-  {
     "id": "tense-407",
     "category": "時制・態",
     "question": "Once the contract ______ by both parties, the vendor will begin delivering materials to the construction site.",
@@ -2820,33 +2805,48 @@
     "level": 600
   },
   {
-    "id": "tense-408",
+    "id": "tense-412",
     "category": "時制・態",
-    "question": "The receptionist ______ the visitor to the conference room when the fire alarm unexpectedly went off.",
-    "question_ja": "受付係が来訪者を会議室へ案内していたとき、突然火災報知器が鳴りました。",
+    "question": "Had the parts arrived on time, the factory ______ the order last week.",
+    "question_ja": "部品が予定どおりに届いていれば、工場は先週その注文を仕上げていたでしょう。",
     "choices": [
-      "escorts",
-      "has escorted",
-      "was escorting",
-      "will have escorted"
+      "will complete",
+      "has completed",
+      "would have completed",
+      "completes"
     ],
     "answer": 2,
-    "explanation": "過去の出来事 went off が起きた時点で進行中だった動作なので過去進行形 was escorting。has escorted は過去の when 節と共に使えない。",
+    "explanation": "Had the parts arrived は If the parts had arrived の倒置で、過去の事実に反する仮定（仮定法過去完了）。主節は would have completed になり、will complete や has completed では仮定の意味にならない。",
     "level": 600
   },
   {
-    "id": "tense-409",
+    "id": "tense-413",
     "category": "時制・態",
-    "question": "The quarterly figures ______ to the regional managers as soon as the finance department finalizes them.",
-    "question_ja": "四半期の数字は、財務部が確定し次第、地域マネージャーに配布されます。",
+    "question": "By the end of this year, Mr. Hayashi ______ for the company for twenty years.",
+    "question_ja": "今年の終わりで、林さんはこの会社に 20 年間勤めていることになります。",
     "choices": [
-      "will be distributed",
-      "distribute",
-      "have distributed",
-      "were distributing"
+      "has been working",
+      "will have been working",
+      "had been working",
+      "is working"
     ],
-    "answer": 0,
-    "explanation": "figures は「配布される」側なので受動態、かつ as soon as 節が現在形なので主節は未来形 will be distributed。distribute は能動で意味が通らない。",
+    "answer": 1,
+    "explanation": "By the end of this year という未来の時点まで続く動作なので未来完了進行形 will have been working。has been working は現在まで、had been working は過去のある時点までの継続を表す。",
+    "level": 600
+  },
+  {
+    "id": "tense-414",
+    "category": "時制・態",
+    "question": "It is essential that every team leader ______ the safety checklist before the inspection.",
+    "question_ja": "点検の前に、各チームリーダーが安全チェックリストを確認することが不可欠です。",
+    "choices": [
+      "reviewed",
+      "review",
+      "will review",
+      "reviewing"
+    ],
+    "answer": 1,
+    "explanation": "It is essential that の後の節は仮定法現在で、主語に関係なく動詞の原形を使うため review。reviewed や will review は不可で、reviewing は単独で述語になれない。",
     "level": 600
   },
   {
@@ -2895,21 +2895,6 @@
     "level": 600
   },
   {
-    "id": "vocab-403",
-    "category": "語彙",
-    "question": "Due to unforeseen circumstances, the keynote speaker's session has been ______ until the afternoon of the second day.",
-    "question_ja": "予期せぬ事情により、基調講演者のセッションは 2 日目の午後に延期されました。",
-    "choices": [
-      "dismissed",
-      "postponed",
-      "expired",
-      "terminated"
-    ],
-    "answer": 1,
-    "explanation": "until the afternoon と時点が続くので「延期された」postponed。terminated は「打ち切られた」で until と合わない。",
-    "level": 600
-  },
-  {
     "id": "vocab-404",
     "category": "語彙",
     "question": "The audit revealed several ______ between the inventory records and the actual stock on the warehouse shelves.",
@@ -2922,21 +2907,6 @@
     ],
     "answer": 3,
     "explanation": "between A and B と組んで「AとBの食い違い」を表す discrepancies。consequences（結果）は between と結びつかない。",
-    "level": 600
-  },
-  {
-    "id": "vocab-405",
-    "category": "語彙",
-    "question": "Applicants for the regional sales position must be willing to travel ______, sometimes on very short notice.",
-    "question_ja": "地域営業職の応募者は、ときには急な連絡でも、頻繁に出張できることが求められます。",
-    "choices": [
-      "roughly",
-      "formerly",
-      "frequently",
-      "lately"
-    ],
-    "answer": 2,
-    "explanation": "「頻繁に出張する意欲」という文脈に合う frequently。formerly（以前は）や lately（最近）は求人の条件として不自然。",
     "level": 600
   },
   {
@@ -2997,6 +2967,36 @@
     ],
     "answer": 2,
     "explanation": "compatible with で「〜と互換性がある」。綴りの似た comparable は「比較できる」で、ソフトとデータベースの関係に合わない。",
+    "level": 600
+  },
+  {
+    "id": "vocab-411",
+    "category": "語彙",
+    "question": "Due to ______ demand, the limited-edition model will be available for another month.",
+    "question_ja": "需要が非常に大きいため、限定モデルはさらに 1 か月販売されます。",
+    "choices": [
+      "overdue",
+      "overwhelming",
+      "overlapping",
+      "overlooking"
+    ],
+    "answer": 1,
+    "explanation": "demand を修飾して「圧倒的な需要」を表すのは overwhelming。overdue（期限を過ぎた）や overlapping（重なり合う）は需要の大きさを表さない。",
+    "level": 600
+  },
+  {
+    "id": "vocab-412",
+    "category": "語彙",
+    "question": "Ms. Kato was ______ for her outstanding contributions to the success of the product launch.",
+    "question_ja": "加藤さんは、新製品発売の成功への際立った貢献を評価されました。",
+    "choices": [
+      "recognized",
+      "recovered",
+      "reminded",
+      "realized"
+    ],
+    "answer": 0,
+    "explanation": "be recognized for 〜で「〜を評価される、表彰される」。realized（実現された・気づかれた）や reminded（思い出させられた）は人の功績をたたえる意味にならない。",
     "level": 600
   }
 ]

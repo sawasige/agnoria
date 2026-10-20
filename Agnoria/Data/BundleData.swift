@@ -47,6 +47,15 @@ nonisolated enum BundleData {
         for w in p.words {
             if !ids.insert(w.id).inserted { issues.append("重複 id: \(w.id)") }
             if w.distractors.count != 3 { issues.append("\(w.id): distractors は3つ必要") }
+            if w.examples.count != 3 { issues.append("\(w.id): examples は3つ必要（\(w.examples.count)）") }
+            for (i, ex) in w.examples.enumerated() {
+                if ex.en.trimmingCharacters(in: .whitespaces).isEmpty || ex.ja.trimmingCharacters(in: .whitespaces).isEmpty {
+                    issues.append("\(w.id): examples[\(i)] が空")
+                } else if Cloze.fill(ex.en, word: w.word) == nil {
+                    issues.append("\(w.id): examples[\(i)] に \(w.word) が見つからない（穴埋めにできない）")
+                }
+            }
+            if Set(w.examples.map(\.en)).count != w.examples.count { issues.append("\(w.id): examples が重複") }
             if w.distractors.contains(w.meaning) { issues.append("\(w.id): distractors に正解が含まれる") }
             if Set(w.distractors).count != w.distractors.count { issues.append("\(w.id): distractors が重複") }
             if WordCategory(rawValue: w.category) == nil { issues.append("\(w.id): 未知の category \(w.category)") }

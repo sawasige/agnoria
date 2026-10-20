@@ -26,8 +26,9 @@ struct ExplanationView: View {
                         Text(ja).font(.callout).foregroundStyle(.secondary)
                     }
                 } else {
-                    Text(w.example).font(.callout)
-                    Text(w.exampleJa).font(.callout).foregroundStyle(.secondary)
+                    // この問題で使った例文（3 つのうちの 1 つ）
+                    Text(question.example?.en ?? w.example).font(.callout)
+                    Text(question.example?.ja ?? w.exampleJa).font(.callout).foregroundStyle(.secondary)
                 }
             } else {
                 completedSentence.font(.callout)

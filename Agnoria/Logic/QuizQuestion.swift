@@ -8,8 +8,10 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
     let wordFormat: WordFormat?
     let categoryName: String
     let prompt: String
-    /// 空欄を正解で埋めた prompt の和訳 [v1.7]。文法問題と練習問題で持つ。単語問題は word.exampleJa を使うので nil
+    /// 空欄を正解で埋めた prompt の和訳 [v1.7]。文法問題・単語の穴埋め・練習問題で持つ
     let promptJa: String?
+    /// 単語問題でこの問題に使った例文（3 つのうちの 1 つ）[v1.7]。解説と読み上げに使う
+    let example: ExampleSentence?
     let choices: [String]
     let correctIndex: Int
     /// 文法: explanation / 単語: 意味（例文は word から）
@@ -22,7 +24,7 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
 
     init(itemID: String, mode: DrillMode, wordFormat: WordFormat?, categoryName: String,
          prompt: String, promptJa: String? = nil, choices: [String], correctIndex: Int, explanation: String,
-         word: WordSnapshot?, speechText: String?, isPractice: Bool = false) {
+         word: WordSnapshot?, example: ExampleSentence? = nil, speechText: String?, isPractice: Bool = false) {
         id = UUID()
         self.itemID = itemID
         self.mode = mode
@@ -34,6 +36,7 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
         self.correctIndex = correctIndex
         self.explanation = explanation
         self.word = word
+        self.example = example
         self.speechText = speechText
         self.isPractice = isPractice
     }
@@ -71,19 +74,27 @@ nonisolated enum WordQuestionFactory {
         return Array(others.shuffled(using: &rng).prefix(3))
     }
 
+    /// 例文 3 つから 1 つを選ぶ（§3.2 [v1.7]）。穴埋めは空欄にできる文だけが候補
+    static func pickExample(_ w: WordSnapshot, forCloze: Bool, using rng: inout some RandomNumberGenerator) -> ExampleSentence? {
+        let candidates = w.examples.filter { !$0.en.isEmpty && (!forCloze || Cloze.fill($0.en, word: w.word) != nil) }
+        return candidates.randomElement(using: &rng)
+    }
+
     /// 形式に応じて1問を作る。cloze が作れない語は meaning にフォールバック
     static func make(_ w: WordSnapshot, format: WordFormat, pool: [WordSnapshot],
                      using rng: inout some RandomNumberGenerator) -> QuizQuestion? {
         switch format {
         case .meaning:
             guard w.distractors.count >= 3 else { return nil }
+            let ex = pickExample(w, forCloze: false, using: &rng)
             let (choices, correct) = ChoiceShuffler.shuffle([w.meaning] + Array(w.distractors.prefix(3)),
                                                             correctIndex: 0, using: &rng)
             return QuizQuestion(itemID: w.id, mode: .word, wordFormat: .meaning, categoryName: w.category,
                                 prompt: w.word, choices: choices, correctIndex: correct,
-                                explanation: w.meaning, word: w, speechText: w.example)
+                                explanation: w.meaning, word: w, example: ex, speechText: ex?.en)
         case .cloze:
-            guard let blanked = Cloze.fill(w.example, word: w.word) else {
+            guard let ex = pickExample(w, forCloze: true, using: &rng),
+                  let blanked = Cloze.fill(ex.en, word: w.word) else {
                 return make(w, format: .meaning, pool: pool, using: &rng)
             }
             let others = distractorWords(for: w, pool: pool, using: &rng)
@@ -91,16 +102,17 @@ nonisolated enum WordQuestionFactory {
             let (choices, correct) = ChoiceShuffler.shuffle([w.word] + others.map(\.word),
                                                             correctIndex: 0, using: &rng)
             return QuizQuestion(itemID: w.id, mode: .word, wordFormat: .cloze, categoryName: w.category,
-                                prompt: blanked, choices: choices, correctIndex: correct,
-                                explanation: w.meaning, word: w, speechText: w.example)
+                                prompt: blanked, promptJa: ex.ja, choices: choices, correctIndex: correct,
+                                explanation: w.meaning, word: w, example: ex, speechText: ex.en)
         case .jaToEn:
             let others = distractorWords(for: w, pool: pool, using: &rng)
             guard others.count == 3 else { return make(w, format: .meaning, pool: pool, using: &rng) }
+            let ex = pickExample(w, forCloze: false, using: &rng)
             let (choices, correct) = ChoiceShuffler.shuffle([w.word] + others.map(\.word),
                                                             correctIndex: 0, using: &rng)
             return QuizQuestion(itemID: w.id, mode: .word, wordFormat: .jaToEn, categoryName: w.category,
                                 prompt: w.meaning, choices: choices, correctIndex: correct,
-                                explanation: w.meaning, word: w, speechText: w.example)
+                                explanation: w.meaning, word: w, example: ex, speechText: ex?.en)
         }
     }
 }
