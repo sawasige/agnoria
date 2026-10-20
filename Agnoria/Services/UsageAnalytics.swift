@@ -21,6 +21,8 @@ final class UsageAnalytics {
         case settingsChanged(key: String)
         case reviewRequested(ReviewPrompt.Trigger)
         case reviewLinkOpened
+        case reminderPermission(granted: Bool)
+        case reminderOpened
 
         var name: String {
             switch self {
@@ -36,6 +38,8 @@ final class UsageAnalytics {
             case .settingsChanged: "settings_changed"
             case .reviewRequested: "review_requested"
             case .reviewLinkOpened: "review_link_opened"
+            case .reminderPermission: "reminder_permission"
+            case .reminderOpened: "reminder_opened"
             }
         }
 
@@ -55,7 +59,9 @@ final class UsageAnalytics {
                 return ["key": key]
             case .reviewRequested(let trigger):
                 return ["trigger": trigger.rawValue]
-            case .rephraseUsed, .practiceUsed, .speakTapped, .historyReset, .reviewLinkOpened:
+            case .reminderPermission(let granted):
+                return ["granted": granted ? 1 : 0]
+            case .rephraseUsed, .practiceUsed, .speakTapped, .historyReset, .reviewLinkOpened, .reminderOpened:
                 return [:]
             }
         }

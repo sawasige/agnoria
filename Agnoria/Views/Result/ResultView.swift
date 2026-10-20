@@ -111,9 +111,12 @@ struct ResultView: View {
             PracticeQuestionView(question: q)
         }
         .task {
-            // 結果を見てから頼む（§4.8 [v1.8]）。その前に画面を離れたら頼まない
+            // 結果を見てから頼む（§4.8 / §4.9 [v1.8]）。その前に画面を離れたら頼まない。
+            // 最初の完走では通知の許可を尋ね、そのときは評価ダイアログを重ねない
             try? await Task.sleep(for: .seconds(1.5))
-            guard !Task.isCancelled, model.consumeReviewRequest() else { return }
+            guard !Task.isCancelled else { return }
+            if await model.askReminderIfNeeded() { return }
+            guard model.consumeReviewRequest() else { return }
             requestReview()
         }
     }

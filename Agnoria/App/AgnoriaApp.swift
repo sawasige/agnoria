@@ -22,6 +22,7 @@ struct AgnoriaApp: App {
         } catch {
             fatalError("SwiftData の初期化に失敗: \(error)")
         }
+        ReminderScheduler.shared.activate()
         _model = State(initialValue: AppModel(container: stores.container, settings: AppSettings(), cloudSync: stores.cloudSync))
     }
 

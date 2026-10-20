@@ -2,6 +2,7 @@ import Foundation
 import Observation
 import SwiftData
 import CoreData
+import UserNotifications
 #if os(iOS)
 import WidgetKit
 #endif
@@ -50,6 +51,7 @@ final class AppModel {
         self.analytics = analytics ?? UsageAnalytics(settings: settings)
         self.cloudSync = cloudSync
         if cloudSync { observeRemoteChanges() }
+        ReminderScheduler.shared.onOpen = { [weak self] in self?.analytics.log(.reminderOpened) }
     }
 
     // MARK: - iCloud 同期（§2.3）
@@ -85,6 +87,7 @@ final class AppModel {
         mergeDuplicateRecords()
         raiseUnlockedLevelsFromRecords()
         refreshWidgetSnapshot()
+        refreshReminders()
     }
 
     /// 記録から軸ごとに到達帯を求め、今より高ければ上げる（下げない。手動で戻した帯は同期では戻さない）
@@ -134,7 +137,10 @@ final class AppModel {
             settings.stageTracksMigrated = true
         }
         // 取り込みの要否にかかわらず、起動のたびにウィジェットの写しを書き直す（早期 return の経路でも）
-        defer { refreshWidgetSnapshot() }
+        defer {
+            refreshWidgetSnapshot()
+            refreshReminders()
+        }
         do {
             let payload = try BundleData.load()
             if settings.importedFingerprint == payload.fingerprint {
@@ -161,6 +167,41 @@ final class AppModel {
         WidgetSnapshot.make(stages: stageStates(), sessionDates: dates).save()
         WidgetCenter.shared.reloadAllTimelines()
         #endif
+    }
+
+    // MARK: - リマインダー
+
+    /// 通知の予約を今の設定と記録で置き換える（§4.9 [v1.8]）。起動時・セット完走・履歴リセット・同期後・設定の変更で呼ぶ
+    func refreshReminders() {
+        let enabled = settings.reminderEnabled
+        let minutes = settings.reminderMinutes
+        let dates = ((try? context.fetch(FetchDescriptor<StudySession>())) ?? []).map(\.finishedAt)
+        Task { await ReminderScheduler.shared.reschedule(enabled: enabled, minutes: minutes, sessionDates: dates) }
+    }
+
+    /// 通知の許可を求め、結果で設定を更新して予約し直す。設定のトグルと、最初の完走後の 1 回で使う
+    @discardableResult
+    func requestReminderPermission() async -> Bool {
+        let granted = await ReminderScheduler.shared.requestAuthorization()
+        analytics.log(.reminderPermission(granted: granted))
+        settings.reminderEnabled = granted
+        refreshReminders()
+        return granted
+    }
+
+    /// 最初のセット完走後に一度だけ、通知の許可を尋ねる（結果画面から呼ぶ）。尋ねたら true
+    func askReminderIfNeeded() async -> Bool {
+        guard Self.reminderPromptEnabled, !settings.reminderPrompted, lastSavedSession != nil else { return false }
+        settings.reminderPrompted = true
+        // 設定で先にオン・オフを決めていれば尋ねない
+        guard await ReminderScheduler.shared.authorizationStatus() == .notDetermined else { return false }
+        await requestReminderPermission()
+        return true
+    }
+
+    /// 起動引数 `-reminderPrompt NO` で通知の許可を尋ねない（UI テストはこれで起動）
+    static var reminderPromptEnabled: Bool {
+        UserDefaults.standard.object(forKey: "reminderPrompt") == nil || UserDefaults.standard.bool(forKey: "reminderPrompt")
     }
 
     /// 保存。失敗はクラッシュさせず非致命エラーとして記録する（§7.1）
@@ -312,6 +353,7 @@ final class AppModel {
             path = [.result]
         }
         refreshWidgetSnapshot()
+        refreshReminders()
     }
 
     /// 演出を見終えて結果へ
@@ -459,5 +501,6 @@ final class AppModel {
         analytics.log(.historyReset)
         analytics.syncUserProperties()
         refreshWidgetSnapshot()
+        refreshReminders()
     }
 }

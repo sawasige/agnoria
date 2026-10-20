@@ -7,7 +7,7 @@
 > v1.5（2026-10-16〜）: スコア帯クリアの演出（§4.3.1）。学習記録の iCloud 自動同期（§2.3、計画）。Mac 版はこの後。
 > v1.6（2026-10-19〜）: 利用状況の計測とクラッシュ報告（§7.1、Firebase Analytics / Crashlytics）。ホーム画面のウィジェット（§4.6）。
 > v1.7（2026-10-19〜）: 学習記録の iCloud 自動同期を実装（§2.3）。v1.6 とあわせて App Store の 1.1 として出す。Mac 版はこの後。
-> v1.8（2026-10-20〜）: App Store の評価ダイアログ（§4.8）。スコア帯の進み具合を出題の種類（単語 / 文法）ごとの軸に分ける（§3.4）。
+> v1.8（2026-10-20〜）: App Store の評価ダイアログ（§4.8）。スコア帯の進み具合を出題の種類（単語 / 文法）ごとの軸に分ける（§3.4）。学習のリマインダー通知（§4.9）。
 
 ## 0. 概要
 
@@ -288,6 +288,7 @@ SessionResult
 - 読み上げ速度、回答後の自動読み上げ ON/OFF **[v1.1]**、効果音 ON/OFF **[v1.2]**（セクション名は「音」）
 - 学習履歴のリセット（確認2段階。**[v1.5]** iCloud 側の記録も消える旨を確認文に書く）
 - **[v1.5]** iCloud 同期の状態表示（同期中 / 未サインイン）。トグルは持たない
+- **[v1.8]** 「リマインダー」: `学習のリマインダー` のトグルと時刻（§4.9）
 - バージョン情報、由来（Agnoia / Agenoria の一言）
 
 ### 4.5 レベル称号（演出。ロジックには影響しない）
@@ -341,6 +342,19 @@ StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で
 - **設定**: 「このアプリについて」に `App Store でレビューを書く`（`https://apps.apple.com/app/id6823061416?action=write-review` を開く）
 - **計測**: 頼んだとき `review_requested`（trigger）、設定のリンク `review_link_opened`。ダイアログが実際に出たか・評価したかは OS から取れない
 - 起動引数 `-reviewPrompt NO` で頼まない（UI テストはこれで起動）。Debug ビルドではダイアログが出るが送信されない。TestFlight では出ない（OS の仕様）ので、確認は Debug で起動引数 `-debugReviewPrompt YES`（条件に関係なく毎セット頼む）を使う
+
+### 4.9 学習のリマインダー通知 **[v1.8]**
+
+その日にまだ 1 セットも完走していなければ、決めた時刻にローカル通知で知らせる（`UNUserNotificationCenter`。サーバーは使わない）。iOS と Mac で同じ。
+
+- **予約のしかた**: 通知の時点で「今日やったか」を判定できないので、繰り返し通知は使わない。今日から 7 日分を 1 日 1 件ずつ予約し（`Reminder.plan`、識別子 `reminder-yyyy-MM-dd`）、起動・セット完走・履歴リセット・iCloud 同期後・設定の変更のたびに置き換える。今日もう完走していれば今日の分は予約しない。時刻を過ぎた分も予約しない
+- **文面**: 連続中なら「連続 N 日 / 今日の 10 問で N+1 日目。3 分で終わります」。今日の分は昨日までの連続、明日の分は今日完走していれば今日までの連続で数え、それより先や連続が 0 のときは「今日の 10 問 / 1 セット 3 分。今日の分を始めましょう」
+- **許可**: 起動直後には求めない。最初のセットを完走した結果画面で 1 回だけ（1.5 秒後。その回は評価ダイアログ §4.8 を重ねない）、または設定でオンにしたときに OS のダイアログを出す（`reminderPrompted`）。許可されたらオン、拒否ならオフ
+- **設定**: 「リマインダー」セクションに `学習のリマインダー`（既定オフ。許可でオンになる）と、オンのとき `時刻`（既定 20:00、`reminderMinutes`）。拒否されていれば「通知が許可されていません」と `通知の設定を開く`（OS の通知設定）
+- アプリを使っている最中は出さない（`willPresent` で表示しない）。通知をタップするとアプリが開く（画面は変えない）
+- iCloud 同期で他の端末で学習した分は、同期の取り込み後か次の起動で予約し直したときに反映する
+- **計測**: `reminder_permission`（granted）、`reminder_opened`、`settings_changed`（reminderEnabled / reminderTime）
+- 起動引数 `-reminderPrompt NO` で許可を尋ねない（UI テストはこれで起動）。`-reminderMinutes 1230` で時刻を上書きできる（確認用）。テスト中は通知センターに触れない
 
 ---
 
@@ -397,9 +411,11 @@ StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で
 | `rephrase_used` / `practice_used` / `speak_tapped`（手動の読み上げのみ） | なし |
 | `bookmark_toggled` | on |
 | `history_reset` | なし |
-| `settings_changed` | key（soundEffects / autoSpeak / speechRate / unlockedLevel） |
+| `settings_changed` | key（soundEffects / autoSpeak / speechRate / unlockedLevel.word / unlockedLevel.grammar / reminderEnabled / reminderTime） |
 | `review_requested` | trigger（stage_clear / high_score）**[v1.8]** |
 | `review_link_opened` | なし **[v1.8]** |
+| `reminder_permission` | granted（1 / 0）**[v1.8]** |
+| `reminder_opened` | なし **[v1.8]** |
 
 ユーザープロパティ: ~~`unlocked_level`~~ **[v1.8]** `unlocked_level_word` / `unlocked_level_grammar`。Firebase が自動で集める `first_open` / `session_start` / `screen_view` はそのまま。1 問ごとの回答イベントは量が多いので送らない。IDFA は使わない（`FirebaseAnalyticsCore` を使い AdSupport も IdentitySupport もリンクしない。ATT のダイアログは出さない）。
 
