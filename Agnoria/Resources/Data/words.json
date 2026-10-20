@@ -7,7 +7,7 @@
     "examples": [
       {
         "en": "Please pay the invoice within 30 days.",
-        "ja": "30日以内に請求書をお支払いください。"
+        "ja": "30 日以内に請求書をお支払いください。"
       },
       {
         "en": "The invoice for the October order was sent to your accounting department.",
@@ -122,8 +122,8 @@
         "ja": "見積もりによると、改装には約 200 万円かかります。"
       },
       {
-        "en": "Please get an estimate from at least two contractors before deciding.",
-        "ja": "決める前に、少なくとも 2 社の業者から見積もりを取ってください。"
+        "en": "Please get an estimate from at least two companies before you decide.",
+        "ja": "決める前に、少なくとも 2 社から見積もりを取ってください。"
       }
     ],
     "distractors": [
@@ -196,7 +196,7 @@
     "examples": [
       {
         "en": "The merger of the two banks was announced yesterday.",
-        "ja": "2つの銀行の合併が昨日発表されました。"
+        "ja": "2 つの銀行の合併が昨日発表されました。"
       },
       {
         "en": "After the merger, the two companies will share one headquarters.",
@@ -223,7 +223,7 @@
     "examples": [
       {
         "en": "The quarterly meeting will be held in March.",
-        "ja": "四半期会議は3月に開催されます。"
+        "ja": "四半期会議は3 月に開催されます。"
       },
       {
         "en": "The finance team prepares a quarterly report for the board.",
@@ -385,7 +385,7 @@
     "examples": [
       {
         "en": "Your interview is scheduled for 10 A.M. on Tuesday.",
-        "ja": "あなたの面接は火曜日の午前10時に予定されています。"
+        "ja": "あなたの面接は火曜日の午前10 時に予定されています。"
       },
       {
         "en": "The interview lasted about forty minutes and covered my past projects.",
@@ -493,7 +493,7 @@
     "examples": [
       {
         "en": "Three candidates were selected for the final interview.",
-        "ja": "最終面接に3人の候補者が選ばれました。"
+        "ja": "最終面接に3 人の候補者が選ばれました。"
       },
       {
         "en": "The ideal candidate has experience in both sales and marketing.",
@@ -628,7 +628,7 @@
     "examples": [
       {
         "en": "About fifty people attended the seminar.",
-        "ja": "約50人がセミナーに出席しました。"
+        "ja": "約50 人がセミナーに出席しました。"
       },
       {
         "en": "All managers are required to attend the safety briefing.",
@@ -743,8 +743,8 @@
         "ja": "ウェブサイト経由で 1 日に約 50 件の問い合わせがあります。"
       },
       {
-        "en": "Please direct any inquiry about billing to the accounting team.",
-        "ja": "請求に関するお問い合わせは経理チームにお願いします。"
+        "en": "Please send any inquiry about payments to the accounting team.",
+        "ja": "支払いに関するお問い合わせは経理チームにお送りください。"
       }
     ],
     "distractors": [
@@ -817,7 +817,7 @@
     "examples": [
       {
         "en": "You can request a refund within 14 days.",
-        "ja": "14日以内であれば返金を請求できます。"
+        "ja": "14 日以内であれば返金を請求できます。"
       },
       {
         "en": "The refund will appear on your card within five business days.",
@@ -871,7 +871,7 @@
     "examples": [
       {
         "en": "The laptop comes with a two-year warranty.",
-        "ja": "そのノートパソコンには2年間の保証が付いています。"
+        "ja": "そのノートパソコンには2 年間の保証が付いています。"
       },
       {
         "en": "The warranty does not cover damage caused by water.",
@@ -1060,7 +1060,7 @@
     "examples": [
       {
         "en": "The new model is available in three colors.",
-        "ja": "新モデルは3色で入手できます。"
+        "ja": "新モデルは3 色で入手できます。"
       },
       {
         "en": "Free customer parking is available behind the store.",
@@ -1087,7 +1087,7 @@
     "examples": [
       {
         "en": "The two products have complementary features.",
-        "ja": "その2つの製品は補い合う機能を持っています。"
+        "ja": "その2 つの製品は補い合う機能を持っています。"
       },
       {
         "en": "Their skills are complementary: she designs and he handles the finances.",
@@ -1114,7 +1114,7 @@
     "examples": [
       {
         "en": "We decided to extend the deadline by one week.",
-        "ja": "締め切りを1週間延長することにしました。"
+        "ja": "締め切りを1 週間延長することにしました。"
       },
       {
         "en": "The store will extend its opening hours during the holiday season.",
@@ -1198,8 +1198,8 @@
         "ja": "天候が配送スケジュールに影響を与える可能性があります。"
       },
       {
-        "en": "The strike did not affect our deliveries to Osaka.",
-        "ja": "ストライキは大阪への配送に影響しませんでした。"
+        "en": "The heavy snow did not affect our deliveries to Osaka.",
+        "ja": "大雪は大阪への配達に影響しませんでした。"
       },
       {
         "en": "Rising fuel prices will affect the cost of shipping.",
@@ -1303,7 +1303,7 @@
     "examples": [
       {
         "en": "Your membership will expire at the end of May.",
-        "ja": "あなたの会員資格は5月末に期限が切れます。"
+        "ja": "あなたの会員資格は5 月末に期限が切れます。"
       },
       {
         "en": "My passport will expire in March, so I need to renew it.",
@@ -1360,8 +1360,8 @@
         "ja": "部屋を予約する前に予定表を確認してください。"
       },
       {
-        "en": "The training schedule for new employees is posted on the intranet.",
-        "ja": "新入社員向けの研修予定表は社内ネットに掲載されています。"
+        "en": "The training schedule for new employees is on the notice board.",
+        "ja": "新入社員向けの研修の予定表は掲示板に貼ってあります。"
       },
       {
         "en": "Please check the shift schedule posted in the break room every Friday.",
@@ -1391,8 +1391,8 @@
         "ja": "木曜日までにサンプルを顧客に届けてもらえますか。"
       },
       {
-        "en": "The courier will deliver the package between 2 and 4 p.m.",
-        "ja": "宅配業者は午後 2 時から 4 時の間に荷物を配達します。"
+        "en": "The driver will deliver the package between 2 and 4 p.m.",
+        "ja": "運転手が午後 2 時から 4 時の間に荷物を配達します。"
       }
     ],
     "distractors": [
@@ -1418,8 +1418,8 @@
         "ja": "紙の価格は今年に入って 2 回上がりました。"
       },
       {
-        "en": "We offer a lower price for customers who order in bulk.",
-        "ja": "まとめて注文するお客様には、より低い価格を提示しています。"
+        "en": "We offer a lower price for customers who order a lot.",
+        "ja": "たくさん注文するお客様には、より低い価格をご提示しています。"
       }
     ],
     "distractors": [
@@ -1519,7 +1519,7 @@
     "examples": [
       {
         "en": "Our company has three offices in Asia.",
-        "ja": "当社はアジアに3つの事務所があります。"
+        "ja": "当社はアジアに3 つの事務所があります。"
       },
       {
         "en": "The company was founded in 1985 by two engineers.",
@@ -1600,11 +1600,11 @@
     "examples": [
       {
         "en": "Please sign both copies of the contract here.",
-        "ja": "契約書の2部両方にここで署名してください。"
+        "ja": "契約書の2 部両方にここで署名してください。"
       },
       {
-        "en": "Visitors must sign the register at the front desk.",
-        "ja": "来訪者は受付で記録簿に署名しなければなりません。"
+        "en": "Visitors must sign their name at the front desk.",
+        "ja": "来訪者は受付で名前を署名しなければなりません。"
       },
       {
         "en": "Do not sign the agreement until the lawyer has checked it.",
@@ -1711,8 +1711,8 @@
         "ja": "昼食前にこの報告書を終える必要があります。"
       },
       {
-        "en": "We expect to finish the renovation by the end of March.",
-        "ja": "改装は 3 月末までに終える予定です。"
+        "en": "We expect to finish the work on the new office by the end of March.",
+        "ja": "3 月末までに新しいオフィスの工事を終える予定です。"
       },
       {
         "en": "Please finish the survey and return it to the receptionist.",
@@ -1742,8 +1742,8 @@
         "ja": "休暇の週の間、オフィスは閉まります。"
       },
       {
-        "en": "Several questions about the budget were raised during the meeting.",
-        "ja": "会議の間に予算についていくつかの質問が出ました。"
+        "en": "Several people asked about the budget during the meeting.",
+        "ja": "会議の間に、何人かが予算について質問しました。"
       }
     ],
     "distractors": [
@@ -1843,7 +1843,7 @@
     "examples": [
       {
         "en": "We plan to hire two new sales assistants in May.",
-        "ja": "5月に新しい販売スタッフを2人雇う予定です。"
+        "ja": "5 月に新しい販売スタッフを2 人雇う予定です。"
       },
       {
         "en": "The restaurant will hire extra staff for the holiday season.",
@@ -1897,7 +1897,7 @@
     "examples": [
       {
         "en": "The hotel has a staff of forty during the summer.",
-        "ja": "そのホテルは夏の間、40人のスタッフを抱えています。"
+        "ja": "そのホテルは夏の間、40 人のスタッフを抱えています。"
       },
       {
         "en": "All staff are invited to the year-end party on December 20.",
@@ -1924,7 +1924,7 @@
     "examples": [
       {
         "en": "We train new workers on the system for two weeks in April.",
-        "ja": "4月に新しい従業員にシステムの研修を2週間行います。"
+        "ja": "4 月に新しい従業員にシステムの研修を2 週間行います。"
       },
       {
         "en": "We will train the new cashiers before the store opens.",
@@ -2012,8 +2012,8 @@
         "ja": "受付の職には 50 人以上が応募しました。"
       },
       {
-        "en": "You must apply before the end of the month to be considered.",
-        "ja": "選考の対象になるには、月末までに応募しなければなりません。"
+        "en": "You must apply before the end of the month.",
+        "ja": "月末までに応募する必要があります。"
       }
     ],
     "distractors": [
@@ -2032,7 +2032,7 @@
     "examples": [
       {
         "en": "The position requires at least two years of experience.",
-        "ja": "その職には少なくとも2年の経験が必要です。"
+        "ja": "その職には少なくとも2 年の経験が必要です。"
       },
       {
         "en": "We have an open position in the customer service department.",
@@ -2086,7 +2086,7 @@
     "examples": [
       {
         "en": "Three new members will join our team in July.",
-        "ja": "7月に新しいメンバーが3人、私たちのチームに加わります。"
+        "ja": "7 月に新しいメンバーが3 人、私たちのチームに加わります。"
       },
       {
         "en": "Would you like to join us for lunch after the meeting?",
@@ -2113,15 +2113,15 @@
     "examples": [
       {
         "en": "I am taking a vacation during the first week of August.",
-        "ja": "8月の第1週に休暇を取ります。"
+        "ja": "8 月の第1 週に休暇を取ります。"
       },
       {
         "en": "Please submit your vacation request at least two weeks in advance.",
         "ja": "休暇の申請は少なくとも 2 週間前に提出してください。"
       },
       {
-        "en": "He is on vacation until the 15th, so I will reply on his behalf.",
-        "ja": "彼は 15 日まで休暇中なので、私が代わりに返信します。"
+        "en": "He is on vacation until the 15th, so I will reply instead.",
+        "ja": "彼は 15 日まで休暇中なので、代わりに私が返信します。"
       }
     ],
     "distractors": [
@@ -2167,15 +2167,15 @@
     "examples": [
       {
         "en": "Two workers were absent because of the heavy snow.",
-        "ja": "大雪のため2人の従業員が欠勤しました。"
+        "ja": "大雪のため2 人の従業員が欠勤しました。"
       },
       {
         "en": "If you are absent for more than three days, please provide a doctor's note.",
         "ja": "3 日を超えて欠勤する場合は、医師の診断書を提出してください。"
       },
       {
-        "en": "The manager was absent, so the meeting was postponed.",
-        "ja": "部長が不在だったため、会議は延期されました。"
+        "en": "The manager was absent, so we moved the meeting to Friday.",
+        "ja": "部長が欠勤だったので、会議を金曜日に移しました。"
       }
     ],
     "distractors": [
@@ -2275,7 +2275,7 @@
     "examples": [
       {
         "en": "The weekly meeting starts at ten in room B.",
-        "ja": "週例会議はB会議室で10時に始まります。"
+        "ja": "週例会議はB会議室で10 時に始まります。"
       },
       {
         "en": "The meeting was moved to the larger room on the third floor.",
@@ -2309,8 +2309,8 @@
         "ja": "サンプルが届き次第お電話します。"
       },
       {
-        "en": "The call was cut off because of a poor signal.",
-        "ja": "電波が悪くて電話が途中で切れました。"
+        "en": "The call ended suddenly because the signal was weak.",
+        "ja": "電波が弱かったので、電話が突然切れました。"
       }
     ],
     "distractors": [
@@ -2336,8 +2336,8 @@
         "ja": "折り返し電話してほしいと伝言を残しました。"
       },
       {
-        "en": "Did you get my message about the change of venue?",
-        "ja": "会場変更についての私の伝言は受け取りましたか。"
+        "en": "Did you get my message about the new meeting room?",
+        "ja": "新しい会議室についての私の伝言は受け取りましたか。"
       }
     ],
     "distractors": [
@@ -2386,8 +2386,8 @@
         "ja": "今日、イベントの日付を決めなければなりません。"
       },
       {
-        "en": "The committee will decide which supplier to use by Friday.",
-        "ja": "委員会はどの仕入先を使うか金曜日までに決めます。"
+        "en": "The team will decide which shop to use by Friday.",
+        "ja": "チームは金曜日までにどの店を使うか決めます。"
       },
       {
         "en": "We could not decide between the two designs.",
@@ -2417,8 +2417,8 @@
         "ja": "ガイドはツアーの前に安全規則を説明します。"
       },
       {
-        "en": "Can you explain why the shipment was late?",
-        "ja": "出荷が遅れた理由を説明してもらえますか。"
+        "en": "Can you explain why the delivery was late?",
+        "ja": "配達が遅れた理由を説明していただけますか。"
       }
     ],
     "distractors": [
@@ -2471,8 +2471,8 @@
         "ja": "来月の講習会の話題はカスタマーサービスです。"
       },
       {
-        "en": "Let's move on to the next topic on the agenda.",
-        "ja": "議題の次の話題に進みましょう。"
+        "en": "Let's move on to the next topic.",
+        "ja": "次の話題に移りましょう。"
       }
     ],
     "distractors": [
@@ -2626,11 +2626,11 @@
     "examples": [
       {
         "en": "The office will stay open until eight tonight.",
-        "ja": "オフィスは今夜8時まで開いています。"
+        "ja": "オフィスは今夜8 時まで開いています。"
       },
       {
-        "en": "Please keep your receipt until the warranty period ends.",
-        "ja": "保証期間が終わるまでレシートを保管してください。"
+        "en": "Please keep your receipt until the end of the year.",
+        "ja": "年末まで領収書を保管してください。"
       },
       {
         "en": "The sale continues until the end of the month.",
@@ -2710,8 +2710,8 @@
         "ja": "開店パーティーにすべての取引先を招待します。"
       },
       {
-        "en": "The company invited the press to the product launch.",
-        "ja": "会社は製品発表会に報道関係者を招待しました。"
+        "en": "The company invited reporters to the new product event.",
+        "ja": "会社は新製品のイベントに記者を招待しました。"
       },
       {
         "en": "We would like to invite you to speak at our seminar in May.",
@@ -2768,8 +2768,8 @@
         "ja": "その店は食品と日用品の両方を売っています。"
       },
       {
-        "en": "Our store will be closed for inventory on Tuesday.",
-        "ja": "当店は火曜日に棚卸しのため休業します。"
+        "en": "Our store will be closed for cleaning on Tuesday.",
+        "ja": "当店は火曜日、清掃のため休業します。"
       }
     ],
     "distractors": [
@@ -2842,7 +2842,7 @@
     "examples": [
       {
         "en": "The shop is open from nine to seven on weekdays.",
-        "ja": "その店は平日の9時から7時まで営業しています。"
+        "ja": "その店は平日の9 時から7 時まで営業しています。"
       },
       {
         "en": "The museum is open until nine on Friday evenings.",
@@ -2950,7 +2950,7 @@
     "examples": [
       {
         "en": "You can return the item within fourteen days.",
-        "ja": "14日以内なら商品を返品できます。"
+        "ja": "14 日以内なら商品を返品できます。"
       },
       {
         "en": "Customers may return unused items for a full refund with the original receipt.",
@@ -3031,7 +3031,7 @@
     "examples": [
       {
         "en": "Please choose a color from these five samples.",
-        "ja": "この5つの見本から色を選んでください。"
+        "ja": "この5 つの見本から色を選んでください。"
       },
       {
         "en": "Customers can choose between home delivery and store pickup.",
@@ -3139,7 +3139,7 @@
     "examples": [
       {
         "en": "Please bring the form to the service counter on the second floor.",
-        "ja": "その用紙を2階のサービスカウンターまでお持ちください。"
+        "ja": "その用紙を2 階のサービスカウンターまでお持ちください。"
       },
       {
         "en": "Leave your bag at the counter and take a number.",
@@ -3250,8 +3250,8 @@
         "ja": "騒音のせいであなたの声がよく聞こえません。"
       },
       {
-        "en": "Did you hear the announcement about the fire drill?",
-        "ja": "避難訓練についての放送が聞こえましたか。"
+        "en": "Did you hear the announcement about the new parking rules?",
+        "ja": "新しい駐車場の規則についての案内は聞こえましたか。"
       },
       {
         "en": "Can everyone in the back row hear the speaker clearly?",
@@ -3277,8 +3277,8 @@
         "ja": "安全に関する案内を注意して聞いてください。"
       },
       {
-        "en": "I always listen to the news while I commute.",
-        "ja": "通勤中はいつもニュースを聞いています。"
+        "en": "I always listen to the news on the train to work.",
+        "ja": "通勤の電車ではいつもニュースを聞いています。"
       },
       {
         "en": "Good salespeople listen to their customers before making suggestions.",
@@ -3328,7 +3328,7 @@
     "examples": [
       {
         "en": "The bus fare to the airport is eight dollars.",
-        "ja": "空港までのバス運賃は8ドルです。"
+        "ja": "空港までのバス運賃は8 ドルです。"
       },
       {
         "en": "Train fares will go up by three percent in April.",
@@ -3490,7 +3490,7 @@
     "examples": [
       {
         "en": "Our sales staff travel to Osaka twice a month.",
-        "ja": "当社の営業職員は月に2回大阪へ出かけます。"
+        "ja": "当社の営業職員は月に2 回大阪へ出かけます。"
       },
       {
         "en": "She travels to Europe several times a year for work.",
@@ -3655,8 +3655,8 @@
         "ja": "先月、事務用品の新しい販売業者を選びました。"
       },
       {
-        "en": "The vendor will replace the faulty chairs at no extra charge.",
-        "ja": "販売業者は不良品の椅子を追加料金なしで交換します。"
+        "en": "The vendor will replace the broken chairs for free.",
+        "ja": "販売業者は壊れた椅子を無料で交換します。"
       },
       {
         "en": "We compared three vendors before choosing the cheapest one.",
@@ -3898,8 +3898,8 @@
         "ja": "数か月の交渉を経て、両社は契約に署名しました。"
       },
       {
-        "en": "The contract will be renewed automatically unless either side cancels it.",
-        "ja": "どちらかが解約しない限り、契約は自動的に更新されます。"
+        "en": "The contract will be renewed automatically every year.",
+        "ja": "契約は毎年自動的に更新されます。"
       },
       {
         "en": "Please read the contract carefully before you sign it.",
@@ -4057,7 +4057,7 @@
     "examples": [
       {
         "en": "The factory's workforce has grown to over five hundred people.",
-        "ja": "その工場の全従業員は500人以上に増えました。"
+        "ja": "その工場の全従業員は500 人以上に増えました。"
       },
       {
         "en": "About half of the workforce now works from home at least once a week.",
@@ -4111,7 +4111,7 @@
     "examples": [
       {
         "en": "The director approved my request for two weeks of vacation.",
-        "ja": "部長は私の2週間の休暇申請を承認しました。"
+        "ja": "部長は私の2 週間の休暇申請を承認しました。"
       },
       {
         "en": "The city council will approve the new building plan next week.",
@@ -4219,7 +4219,7 @@
     "examples": [
       {
         "en": "The hotel employs more than two hundred people during the summer.",
-        "ja": "そのホテルは夏の間、200人以上を雇用しています。"
+        "ja": "そのホテルは夏の間、200 人以上を雇用しています。"
       },
       {
         "en": "The company employs about thirty engineers at its Osaka plant.",
@@ -4246,7 +4246,7 @@
     "examples": [
       {
         "en": "This job requires a teaching qualification and two years of practice.",
-        "ja": "この仕事には教員資格と2年の実務が必要です。"
+        "ja": "この仕事には教員資格と2 年の実務が必要です。"
       },
       {
         "en": "A nursing qualification is required for this position.",
@@ -4300,15 +4300,15 @@
     "examples": [
       {
         "en": "Team leaders evaluate each member's performance twice a year.",
-        "ja": "チームリーダーは年に2回、各メンバーの業績を評価します。"
+        "ja": "チームリーダーは年に2 回、各メンバーの業績を評価します。"
       },
       {
         "en": "We will evaluate the proposals based on cost and delivery time.",
         "ja": "費用と納期に基づいて提案を評価します。"
       },
       {
-        "en": "The committee evaluates each applicant's portfolio carefully before the interview.",
-        "ja": "委員会は面接の前に各応募者の作品集を丁寧に評価します。"
+        "en": "The managers evaluate each applicant's work carefully before the interview.",
+        "ja": "面接の前に、管理職が各応募者の作品を丁寧に評価します。"
       }
     ],
     "distractors": [
@@ -4354,7 +4354,7 @@
     "examples": [
       {
         "en": "Bonuses are based on each employee's performance over the year.",
-        "ja": "賞与は各社員の1年間の業績に基づいて決まります。"
+        "ja": "賞与は各社員の1 年間の業績に基づいて決まります。"
       },
       {
         "en": "The factory's performance improved after the new manager arrived.",
@@ -4543,7 +4543,7 @@
     "examples": [
       {
         "en": "Twenty managers joined the seminar on effective time management.",
-        "ja": "20人の管理職が効果的な時間管理に関する講習会に参加しました。"
+        "ja": "20 人の管理職が効果的な時間管理に関する講習会に参加しました。"
       },
       {
         "en": "The seminar on tax changes will be held in the main hall.",
@@ -4577,8 +4577,8 @@
         "ja": "新しい顧客と契約を結ぶ前に法務チームに相談してください。"
       },
       {
-        "en": "We consulted a lawyer about the terms of the lease.",
-        "ja": "賃貸契約の条件について弁護士に相談しました。"
+        "en": "We consulted a lawyer about the new office rent.",
+        "ja": "新しい事務所の家賃について弁護士に相談しました。"
       }
     ],
     "distractors": [
@@ -4597,7 +4597,7 @@
     "examples": [
       {
         "en": "Over two hundred people registered for the annual conference.",
-        "ja": "200人以上が年次の大会議に登録しました。"
+        "ja": "200 人以上が年次の大会議に登録しました。"
       },
       {
         "en": "The conference will take place in Yokohama in October.",
@@ -4759,7 +4759,7 @@
     "examples": [
       {
         "en": "I have an appointment with a client at three o'clock.",
-        "ja": "3時に顧客と面会の約束があります。"
+        "ja": "3 時に顧客と面会の約束があります。"
       },
       {
         "en": "Please call to make an appointment before visiting the clinic.",
@@ -4785,8 +4785,8 @@
     "meaning": "〜でなければ",
     "examples": [
       {
-        "en": "We will proceed with the plan unless anyone objects by Friday.",
-        "ja": "金曜日までに誰も反対しなければ、計画を進めます。"
+        "en": "We will start the plan unless anyone says no by Friday.",
+        "ja": "金曜日までに誰も反対しなければ、計画を始めます。"
       },
       {
         "en": "Unless the weather improves, the outdoor event will be canceled.",
@@ -4867,15 +4867,15 @@
     "examples": [
       {
         "en": "She has worked in retail for more than ten years.",
-        "ja": "彼女は10年以上小売の仕事をしています。"
+        "ja": "彼女は10 年以上小売の仕事をしています。"
       },
       {
         "en": "Many graduates start their careers in retail, working in shops and department stores.",
         "ja": "多くの新卒者は店舗や百貨店で働き、小売でキャリアを始めます。"
       },
       {
-        "en": "Retail prices are usually higher than wholesale prices.",
-        "ja": "小売価格は通常、卸売価格より高くなります。"
+        "en": "Retail prices are usually higher than factory prices.",
+        "ja": "小売価格は通常、工場出荷価格より高くなります。"
       }
     ],
     "distractors": [
@@ -4894,7 +4894,7 @@
     "examples": [
       {
         "en": "All merchandise on this shelf is twenty percent off today.",
-        "ja": "この棚の商品はすべて本日20パーセント引きです。"
+        "ja": "この棚の商品はすべて本日20 パーセント引きです。"
       },
       {
         "en": "The new merchandise will arrive at the store on Thursday.",
@@ -4948,7 +4948,7 @@
     "examples": [
       {
         "en": "You can find cleaning products in aisle seven.",
-        "ja": "掃除用品は7番通路にあります。"
+        "ja": "掃除用品は7 番通路にあります。"
       },
       {
         "en": "Please keep the aisle clear so that carts can pass.",
@@ -5002,7 +5002,7 @@
     "examples": [
       {
         "en": "The company distributes its products through over three hundred stores.",
-        "ja": "その会社は300以上の店舗を通じて製品を流通させています。"
+        "ja": "その会社は300 以上の店舗を通じて製品を流通させています。"
       },
       {
         "en": "The firm distributes its frozen foods to supermarkets across Kyushu.",
@@ -5036,8 +5036,8 @@
         "ja": "靴が合わなければ、別の靴と交換いたします。"
       },
       {
-        "en": "The store will exchange faulty goods for new ones within thirty days.",
-        "ja": "店は 30 日以内であれば不良品を新品と交換します。"
+        "en": "The store will exchange broken goods for new ones within thirty days.",
+        "ja": "その店は 30 日以内であれば、壊れた商品を新品と交換します。"
       }
     ],
     "distractors": [
@@ -5272,7 +5272,7 @@
     "examples": [
       {
         "en": "The economic situation has improved over the past year.",
-        "ja": "経済の状況はこの1年で改善しました。"
+        "ja": "経済の状況はこの1 年で改善しました。"
       },
       {
         "en": "The report describes the economic impact of the new airport.",
@@ -5326,7 +5326,7 @@
     "examples": [
       {
         "en": "The company decided to raise prices by five percent next month.",
-        "ja": "会社は来月、価格を5パーセント上げることを決めました。"
+        "ja": "会社は来月、価格を5 パーセント上げることを決めました。"
       },
       {
         "en": "Please raise your hand if you have a question.",
@@ -5433,8 +5433,8 @@
     "meaning": "緩い",
     "examples": [
       {
-        "en": "The screws on this chair are loose and need tightening.",
-        "ja": "この椅子のねじは緩くて締め直す必要があります。"
+        "en": "The legs of this chair are loose, so please be careful.",
+        "ja": "この椅子の脚は緩いので、気をつけてください。"
       },
       {
         "en": "A loose wire caused the printer to stop working.",
@@ -5572,8 +5572,8 @@
         "ja": "前の部長は今、小さなコンサルティング会社を経営しています。"
       },
       {
-        "en": "The former warehouse has been converted into offices.",
-        "ja": "以前の倉庫はオフィスに改装されました。"
+        "en": "The former warehouse is now used as an office.",
+        "ja": "以前の倉庫は現在、事務所として使われています。"
       },
       {
         "en": "A former employee now works for our main competitor.",
@@ -5650,7 +5650,7 @@
     "examples": [
       {
         "en": "Besides the main office, we have two branches in Nagoya.",
-        "ja": "本社に加えて、名古屋に2つの支店があります。"
+        "ja": "本社に加えて、名古屋に2 つの支店があります。"
       },
       {
         "en": "Besides English, she speaks Korean and Thai.",
@@ -5704,7 +5704,7 @@
     "examples": [
       {
         "en": "We plan to implement the new expense system across all branches in April.",
-        "ja": "4月に全支店で新しい経費システムを実施する予定です。"
+        "ja": "4 月に全支店で新しい経費システムを実施する予定です。"
       },
       {
         "en": "The factory will implement a new inspection process in October.",
@@ -5731,7 +5731,7 @@
     "examples": [
       {
         "en": "All vendors must comply with our updated safety standards by the end of June.",
-        "ja": "すべての取引先は6月末までに当社の改定された安全基準を遵守しなければなりません。"
+        "ja": "すべての取引先は6 月末までに当社の改定された安全基準を遵守しなければなりません。"
       },
       {
         "en": "Drivers who fail to comply with the rules will lose their parking permits.",
@@ -5758,7 +5758,7 @@
     "examples": [
       {
         "en": "The company will reimburse employees for travel costs within two weeks of submission.",
-        "ja": "会社は提出から2週間以内に従業員へ出張費を払い戻します。"
+        "ja": "会社は提出から2 週間以内に従業員へ出張費を払い戻します。"
       },
       {
         "en": "We will reimburse the full cost of the damaged item.",
@@ -5812,7 +5812,7 @@
     "examples": [
       {
         "en": "Sales have increased for five consecutive quarters thanks to the new product line.",
-        "ja": "新製品ラインのおかげで、売上は5四半期連続で増加しています。"
+        "ja": "新製品ラインのおかげで、売上は5 四半期連続で増加しています。"
       },
       {
         "en": "The store has reported losses for three consecutive months.",
@@ -5839,7 +5839,7 @@
     "examples": [
       {
         "en": "We have set a tentative launch date of March 15 for the mobile app.",
-        "ja": "モバイルアプリの発売日を仮に3月15日と設定しました。"
+        "ja": "モバイルアプリの発売日を仮に3 月15 日と設定しました。"
       },
       {
         "en": "The agenda is tentative and may change before the meeting.",
@@ -5920,7 +5920,7 @@
     "examples": [
       {
         "en": "The procurement team is reviewing bids from three potential parts manufacturers.",
-        "ja": "調達チームは3社の部品メーカー候補からの入札を検討しています。"
+        "ja": "調達チームは3 社の部品メーカー候補からの入札を検討しています。"
       },
       {
         "en": "The procurement department handles all purchases over 100,000 yen.",
@@ -6109,7 +6109,7 @@
     "examples": [
       {
         "en": "Construction of the new warehouse will commence in early September.",
-        "ja": "新しい倉庫の建設は9月上旬に開始されます。"
+        "ja": "新しい倉庫の建設は9 月上旬に開始されます。"
       },
       {
         "en": "The training program will commence on the first Monday of July.",
@@ -6136,7 +6136,7 @@
     "examples": [
       {
         "en": "The report lists every liability the company must pay off within twelve months.",
-        "ja": "報告書には、会社が12か月以内に返済しなければならないすべての負債が記載されています。"
+        "ja": "報告書には、会社が12 か月以内に返済しなければならないすべての負債が記載されています。"
       },
       {
         "en": "The company sold two buildings to reduce its liability.",
@@ -6163,7 +6163,7 @@
     "examples": [
       {
         "en": "Employees who have worked here for one year are eligible for paid leave.",
-        "ja": "ここで1年間勤務した従業員は有給休暇の対象となります。"
+        "ja": "ここで1 年間勤務した従業員は有給休暇の対象となります。"
       },
       {
         "en": "Only full-time staff are eligible for the housing allowance.",
@@ -6217,7 +6217,7 @@
     "examples": [
       {
         "en": "Your annual performance appraisal is scheduled for the second week of December.",
-        "ja": "あなたの年次業績評価は12月の第2週に予定されています。"
+        "ja": "あなたの年次業績評価は12 月の第2 週に予定されています。"
       },
       {
         "en": "The appraisal showed that she had met all of her goals.",
@@ -6244,7 +6244,7 @@
     "examples": [
       {
         "en": "New hires complete a three-month probation before receiving full benefits.",
-        "ja": "新入社員は、すべての福利厚生を受ける前に3か月の試用期間を終えます。"
+        "ja": "新入社員は、すべての福利厚生を受ける前に3 か月の試用期間を終えます。"
       },
       {
         "en": "During probation, new staff meet their manager every two weeks.",
@@ -6298,7 +6298,7 @@
     "examples": [
       {
         "en": "During her tenure as director, the department doubled its annual output.",
-        "ja": "彼女の部長在職期間中に、部門の年間生産量は2倍になりました。"
+        "ja": "彼女の部長在職期間中に、部門の年間生産量は2 倍になりました。"
       },
       {
         "en": "His tenure as company president lasted eight years.",
@@ -6325,7 +6325,7 @@
     "examples": [
       {
         "en": "Staff who work on public holidays are compensated with an extra day off.",
-        "ja": "祝日に勤務したスタッフには、代休1日で補償されます。"
+        "ja": "祝日に勤務したスタッフには、代休1 日で補償されます。"
       },
       {
         "en": "The airline will compensate passengers for the long delay.",
@@ -6352,7 +6352,7 @@
     "examples": [
       {
         "en": "Senior engineers mentor new graduates during their first six months here.",
-        "ja": "ベテランエンジニアは入社後最初の6か月間、新卒者を指導します。"
+        "ja": "ベテランエンジニアは入社後最初の6 か月間、新卒者を指導します。"
       },
       {
         "en": "Experienced nurses mentor the trainees on every shift.",
@@ -6379,7 +6379,7 @@
     "examples": [
       {
         "en": "Either party may terminate this agreement with thirty days' written notice.",
-        "ja": "いずれの当事者も30日前の書面による通知でこの契約を終了させることができます。"
+        "ja": "いずれの当事者も30 日前の書面による通知でこの契約を終了させることができます。"
       },
       {
         "en": "The landlord may terminate the lease if rent is unpaid for two months.",
@@ -6487,7 +6487,7 @@
     "examples": [
       {
         "en": "The payroll department processes payments on the twenty-fifth of every month.",
-        "ja": "給与支払部門は毎月25日に支払いを処理します。"
+        "ja": "給与支払部門は毎月25 日に支払いを処理します。"
       },
       {
         "en": "Our payroll is handled by an outside accounting firm.",
@@ -6757,7 +6757,7 @@
     "examples": [
       {
         "en": "After two hours of discussion, the team finally reached a consensus on pricing.",
-        "ja": "2時間の議論の後、チームはついに価格設定について合意に達しました。"
+        "ja": "2 時間の議論の後、チームはついに価格設定について合意に達しました。"
       },
       {
         "en": "There is no consensus yet on where to hold the conference.",
@@ -7135,7 +7135,7 @@
     "examples": [
       {
         "en": "The apparel section on the second floor will be renovated next month.",
-        "ja": "2階の衣料品売り場は来月改装されます。"
+        "ja": "2 階の衣料品売り場は来月改装されます。"
       },
       {
         "en": "Children's apparel is on sale this week.",
@@ -7189,7 +7189,7 @@
     "examples": [
       {
         "en": "We sell our products at wholesale to shops in more than forty cities.",
-        "ja": "当社は40以上の都市の店舗に製品を卸売で販売しています。"
+        "ja": "当社は40 以上の都市の店舗に製品を卸売で販売しています。"
       },
       {
         "en": "The bakery buys flour at wholesale from a local mill.",
@@ -7243,7 +7243,7 @@
     "examples": [
       {
         "en": "Customers who return the survey will receive a voucher worth ten dollars.",
-        "ja": "アンケートを返送されたお客様には10ドル分の引換券をお渡しします。"
+        "ja": "アンケートを返送されたお客様には10 ドル分の引換券をお渡しします。"
       },
       {
         "en": "This voucher can be used at any branch until March 31.",
@@ -7270,7 +7270,7 @@
     "examples": [
       {
         "en": "Any defective item can be exchanged at the counter within fourteen days.",
-        "ja": "欠陥のある商品は14日以内であればカウンターで交換できます。"
+        "ja": "欠陥のある商品は14 日以内であればカウンターで交換できます。"
       },
       {
         "en": "The defective batteries were removed from the shelves immediately.",
@@ -8026,7 +8026,7 @@
     "examples": [
       {
         "en": "Staff morale improved noticeably after the bonus announcement in March.",
-        "ja": "3月のボーナス発表の後、社員の士気は目に見えて向上しました。"
+        "ja": "3 月のボーナス発表の後、社員の士気は目に見えて向上しました。"
       },
       {
         "en": "Long hours and low pay hurt morale in the warehouse.",
@@ -8080,7 +8080,7 @@
     "examples": [
       {
         "en": "The advisory council meets twice a year to review our environmental goals.",
-        "ja": "諮問評議会は年に2回集まり、当社の環境目標を見直します。"
+        "ja": "諮問評議会は年に2 回集まり、当社の環境目標を見直します。"
       },
       {
         "en": "The city council approved the plan for the new parking garage.",
@@ -8215,7 +8215,7 @@
     "examples": [
       {
         "en": "Launching the service by March is feasible only if hiring finishes on schedule.",
-        "ja": "採用が予定通りに終わった場合に限り、3月までのサービス開始は実現可能です。"
+        "ja": "採用が予定通りに終わった場合に限り、3 月までのサービス開始は実現可能です。"
       },
       {
         "en": "A four-day workweek is feasible for the design team but not for the call center.",
@@ -8377,7 +8377,7 @@
     "examples": [
       {
         "en": "We decided to consolidate our three warehouses into a single distribution center.",
-        "ja": "当社は3つの倉庫を1つの物流センターに統合することを決定しました。"
+        "ja": "当社は3 つの倉庫を1 つの物流センターに統合することを決定しました。"
       },
       {
         "en": "The bank will consolidate its two branches on Main Street next year.",
@@ -8404,7 +8404,7 @@
     "examples": [
       {
         "en": "The finance team reported a shortfall of two million yen in the third quarter.",
-        "ja": "財務チームは第3四半期に200万円の不足額を報告しました。"
+        "ja": "財務チームは第3 四半期に200 万円の不足額を報告しました。"
       },
       {
         "en": "A shortfall in donations forced the museum to cancel the exhibition.",
@@ -8512,7 +8512,7 @@
     "examples": [
       {
         "en": "We automated the billing process, thereby freeing up two staff members.",
-        "ja": "請求処理を自動化し、それによって2名のスタッフの手が空きました。"
+        "ja": "請求処理を自動化し、それによって2 名のスタッフの手が空きました。"
       },
       {
         "en": "The store extended its hours, thereby attracting more evening shoppers.",
@@ -8620,7 +8620,7 @@
     "examples": [
       {
         "en": "Both parties agreed to amend the delivery terms in the second clause.",
-        "ja": "双方は第2条の納品条件を修正することに同意しました。"
+        "ja": "双方は第2 条の納品条件を修正することに同意しました。"
       },
       {
         "en": "The committee voted to amend the rules on remote work.",
@@ -8809,7 +8809,7 @@
     "examples": [
       {
         "en": "Each apprentice works alongside a senior technician for the first year.",
-        "ja": "各見習いは最初の1年間、先輩技術者と一緒に働きます。"
+        "ja": "各見習いは最初の1 年間、先輩技術者と一緒に働きます。"
       },
       {
         "en": "She started as an apprentice in a small bakery in Kyoto.",
@@ -8863,7 +8863,7 @@
     "examples": [
       {
         "en": "Laid-off workers will receive severance equal to two months of pay.",
-        "ja": "解雇される従業員は2か月分の給与に相当する退職金を受け取ります。"
+        "ja": "解雇される従業員は2 か月分の給与に相当する退職金を受け取ります。"
       },
       {
         "en": "The severance package includes three months of health insurance.",
@@ -9160,7 +9160,7 @@
     "examples": [
       {
         "en": "Managers may nominate one team member for the annual excellence award.",
-        "ja": "管理職は年間優秀賞にチームメンバー1名を推薦できます。"
+        "ja": "管理職は年間優秀賞にチームメンバー1 名を推薦できます。"
       },
       {
         "en": "Three customers nominated the store for a service award.",
@@ -9187,7 +9187,7 @@
     "examples": [
       {
         "en": "Two engineers were reassigned to the mobile team after the project ended.",
-        "ja": "プロジェクト終了後、2名のエンジニアがモバイルチームに配置転換されました。"
+        "ja": "プロジェクト終了後、2 名のエンジニアがモバイルチームに配置転換されました。"
       },
       {
         "en": "The company will reassign staff from the closed branch to nearby stores.",
@@ -9214,7 +9214,7 @@
     "examples": [
       {
         "en": "Full-time employees accrue two vacation days for every month worked.",
-        "ja": "正社員は勤務1か月ごとに2日の休暇がたまります。"
+        "ja": "正社員は勤務1 か月ごとに2 日の休暇がたまります。"
       },
       {
         "en": "Interest will accrue on the loan from the first day of the month.",
@@ -9268,7 +9268,7 @@
     "examples": [
       {
         "en": "The board unanimously approved the proposal to open a second factory.",
-        "ja": "取締役会は第2工場開設の提案を満場一致で承認しました。"
+        "ja": "取締役会は第2 工場開設の提案を満場一致で承認しました。"
       },
       {
         "en": "The committee unanimously agreed to extend the deadline.",
@@ -9295,7 +9295,7 @@
     "examples": [
       {
         "en": "Henceforth, all travel requests must be submitted at least ten days in advance.",
-        "ja": "今後は、すべての出張申請を少なくとも10日前に提出しなければなりません。"
+        "ja": "今後は、すべての出張申請を少なくとも10 日前に提出しなければなりません。"
       },
       {
         "en": "Henceforth, the parking lot will close at 10 p.m.",
@@ -9376,7 +9376,7 @@
     "examples": [
       {
         "en": "After lengthy deliberation, the committee chose the second design.",
-        "ja": "長い審議の後、委員会は2番目のデザインを選びました。"
+        "ja": "長い審議の後、委員会は2 番目のデザインを選びました。"
       },
       {
         "en": "The jury's deliberation lasted more than six hours.",
@@ -9754,7 +9754,7 @@
     "examples": [
       {
         "en": "Let me reiterate that all expense claims are due by the fifth.",
-        "ja": "すべての経費請求は5日が締め切りであることを繰り返し申し上げます。"
+        "ja": "すべての経費請求は5 日が締め切りであることを繰り返し申し上げます。"
       },
       {
         "en": "The manager reiterated the importance of wearing safety gear.",
@@ -9808,7 +9808,7 @@
     "examples": [
       {
         "en": "Perishable goods must be refrigerated within one hour of delivery.",
-        "ja": "腐りやすい商品は配達から1時間以内に冷蔵しなければなりません。"
+        "ja": "腐りやすい商品は配達から1 時間以内に冷蔵しなければなりません。"
       },
       {
         "en": "Fresh fruit is perishable, so we order small amounts each day.",
@@ -9970,7 +9970,7 @@
     "examples": [
       {
         "en": "The standard markup on imported furniture is about forty percent.",
-        "ja": "輸入家具の標準的な利幅は約40パーセントです。"
+        "ja": "輸入家具の標準的な利幅は約40 パーセントです。"
       },
       {
         "en": "The markup on coffee drinks is much higher than on food.",
@@ -10267,7 +10267,7 @@
     "examples": [
       {
         "en": "Customers who pay upfront for a full year receive two months free.",
-        "ja": "1年分を前払いで支払うお客様は2か月分無料になります。"
+        "ja": "1 年分を前払いで支払うお客様は2 か月分無料になります。"
       },
       {
         "en": "The contractor asked for thirty percent of the cost upfront.",
@@ -10429,7 +10429,7 @@
     "examples": [
       {
         "en": "The company has had three successive CEOs in five years.",
-        "ja": "その会社では5年間で3人のCEOが相次いで交代しました。"
+        "ja": "その会社では5 年間で3 人のCEOが相次いで交代しました。"
       },
       {
         "en": "The team won the award for the third successive year.",
@@ -10591,7 +10591,7 @@
     "examples": [
       {
         "en": "Any baggage in excess of 20 kilograms will be charged extra on the business trip.",
-        "ja": "出張時に20キロを超過する手荷物には追加料金がかかります。"
+        "ja": "出張時に20 キロを超過する手荷物には追加料金がかかります。"
       },
       {
         "en": "Sales in excess of our target earned the team a bonus.",
@@ -10645,7 +10645,7 @@
     "examples": [
       {
         "en": "The two teams alternate weekend shifts so no one works every Saturday.",
-        "ja": "誰もが毎週土曜に働かなくてよいように、2チームは週末シフトを交互に行います。"
+        "ja": "誰もが毎週土曜に働かなくてよいように、2 チームは週末シフトを交互に行います。"
       },
       {
         "en": "The screen alternates photos of new products with store announcements.",
@@ -10699,7 +10699,7 @@
     "examples": [
       {
         "en": "The team attained its annual sales target two months early.",
-        "ja": "チームは年間売上目標を2か月早く達成しました。"
+        "ja": "チームは年間売上目標を2 か月早く達成しました。"
       },
       {
         "en": "She worked hard to attain her goal of becoming a manager by thirty.",
@@ -10780,7 +10780,7 @@
     "examples": [
       {
         "en": "The Tokyo and Osaka branches reported sales of 3 million and 2 million respectively.",
-        "ja": "東京支店と大阪支店はそれぞれ300万と200万の売上を報告しました。"
+        "ja": "東京支店と大阪支店はそれぞれ300 万と200 万の売上を報告しました。"
       },
       {
         "en": "The meeting rooms on the first and second floors seat ten and twenty people respectively.",

@@ -2267,8 +2267,8 @@
   {
     "id": "pos-401",
     "category": "品詞",
-    "question": "All visitors must wear ______ identification badges while on the premises of the research facility.",
-    "question_ja": "来訪者は全員、研究施設の敷地内では目に見える形で身分証バッジを着用しなければなりません。",
+    "question": "All visitors must wear ______ name badges while they are inside the factory.",
+    "question_ja": "工場内にいる間、すべての訪問者は名札を見えるように着用しなければなりません。",
     "choices": [
       "visibly",
       "visible",
@@ -2462,8 +2462,8 @@
   {
     "id": "prep-404",
     "category": "前置詞・接続詞",
-    "question": "The elevators in the east wing will remain out of service ______ the control panels have been replaced and inspected.",
-    "question_ja": "東棟のエレベーターは、制御盤の交換と点検が終わるまで使用できません。",
+    "question": "The elevator will remain out of service ______ the repairs are finished.",
+    "question_ja": "修理が終わるまで、エレベーターは使用できません。",
     "choices": [
       "until",
       "during",
@@ -2822,8 +2822,8 @@
   {
     "id": "tense-408",
     "category": "時制・態",
-    "question": "The receptionist ______ the visitor to the conference room when the fire alarm unexpectedly went off.",
-    "question_ja": "受付係が来訪者を会議室へ案内していたとき、突然火災報知器が鳴りました。",
+    "question": "The receptionist ______ the visitor to the meeting room when the fire alarm went off.",
+    "question_ja": "火災報知器が鳴ったとき、受付係は来訪者を会議室へ案内しているところでした。",
     "choices": [
       "escorts",
       "has escorted",
@@ -2897,8 +2897,8 @@
   {
     "id": "vocab-403",
     "category": "語彙",
-    "question": "Due to unforeseen circumstances, the keynote speaker's session has been ______ until the afternoon of the second day.",
-    "question_ja": "予期せぬ事情により、基調講演者のセッションは 2 日目の午後に延期されました。",
+    "question": "Due to bad weather, the speaker's session has been ______ until the second day.",
+    "question_ja": "悪天候のため、講演者のセッションは 2 日目に延期されました。",
     "choices": [
       "dismissed",
       "postponed",
