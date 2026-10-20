@@ -1,4 +1,8 @@
 import SwiftUI
+import UserNotifications
+#if os(iOS)
+import UIKit
+#endif
 
 struct SettingsView: View {
     @Environment(AppModel.self) private var model
@@ -8,6 +12,7 @@ struct SettingsView: View {
     @State private var confirmReset1 = false
     @State private var confirmReset2 = false
     @State private var resetDone = false
+    @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
 
     var body: some View {
         @Bindable var settings = settings
@@ -55,6 +60,26 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    Toggle("学習のリマインダー", isOn: Binding(
+                        get: { settings.reminderEnabled },
+                        set: { on in Task { await setReminder(on) } }))
+                    if settings.reminderEnabled {
+                        DatePicker("時刻", selection: reminderTime, displayedComponents: .hourAndMinute)
+                    }
+                    if notificationStatus == .denied {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("通知が許可されていません")
+                                .foregroundStyle(.secondary)
+                            Button("通知の設定を開く") { openURL(Self.notificationSettingsURL) }
+                        }
+                    }
+                } header: {
+                    Text("リマインダー")
+                } footer: {
+                    Text("その日まだ 1 セットも終えていなければ、この時刻に通知します。")
+                }
+
+                Section {
                     LabeledContent("iCloud 同期", value: cloudSyncLabel)
                 } header: {
                     Text("iCloud")
@@ -88,6 +113,11 @@ struct SettingsView: View {
             .onChange(of: settings.soundEffects) { model.analytics.log(.settingsChanged(key: "soundEffects")) }
             .onChange(of: settings.autoSpeak) { model.analytics.log(.settingsChanged(key: "autoSpeak")) }
             .onChange(of: settings.speechRate) { model.analytics.log(.settingsChanged(key: "speechRate")) }
+            .onChange(of: settings.reminderMinutes) {
+                model.analytics.log(.settingsChanged(key: "reminderTime"))
+                model.refreshReminders()
+            }
+            .task { notificationStatus = await ReminderScheduler.shared.authorizationStatus() }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("完了") { dismiss() }
@@ -130,6 +160,45 @@ struct SettingsView: View {
         case .notSignedIn: "iCloud にサインインすると、学習の記録が他の端末と自動的に同期されます。"
         case .off: "このビルドでは同期しません。"
         }
+    }
+
+    /// トグルでオンにしたとき、まだ決めていなければ OS の許可ダイアログを出す。拒否済みならオンにせず案内を出す
+    private func setReminder(_ on: Bool) async {
+        if on {
+            let status = await ReminderScheduler.shared.authorizationStatus()
+            if status == .notDetermined {
+                await model.requestReminderPermission()
+            } else {
+                settings.reminderEnabled = status == .authorized || status == .provisional
+            }
+        } else {
+            settings.reminderEnabled = false
+        }
+        settings.reminderPrompted = true
+        notificationStatus = await ReminderScheduler.shared.authorizationStatus()
+        model.analytics.log(.settingsChanged(key: "reminderEnabled"))
+        model.refreshReminders()
+    }
+
+    /// 時刻のピッカー用。保存は 0 時からの分
+    private var reminderTime: Binding<Date> {
+        Binding(
+            get: {
+                Calendar.current.date(byAdding: .minute, value: settings.reminderMinutes,
+                                      to: Calendar.current.startOfDay(for: .now)) ?? .now
+            },
+            set: { date in
+                let c = Calendar.current.dateComponents([.hour, .minute], from: date)
+                settings.reminderMinutes = (c.hour ?? 20) * 60 + (c.minute ?? 0)
+            })
+    }
+
+    static var notificationSettingsURL: URL {
+        #if os(iOS)
+        URL(string: UIApplication.openNotificationSettingsURLString)!
+        #else
+        URL(string: "x-apple.systempreferences:com.apple.Notifications-Settings.extension?id=com.himatsubu.Agnoria")!
+        #endif
     }
 
     static let writeReviewURL = URL(string: "https://apps.apple.com/app/id6823061416?action=write-review")!

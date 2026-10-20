@@ -19,6 +19,9 @@ final class AppSettings {
         static let importedFingerprint = "importedDataFingerprint"
         static let storesSplit = "storesSplit"
         static let reviewRequestedVersion = "reviewRequestedVersion"
+        static let reminderEnabled = "reminderEnabled"
+        static let reminderMinutes = "reminderMinutes"
+        static let reminderPrompted = "reminderPrompted"
     }
 
     private let defaults: UserDefaults
@@ -87,6 +90,22 @@ final class AppSettings {
         set { defaults.set(newValue, forKey: Key.storesSplit) }
     }
 
+    /// 学習のリマインダー通知（§4.9 [v1.8]）。既定はオフで、通知を許可したときにオンになる
+    var reminderEnabled: Bool {
+        didSet { defaults.set(reminderEnabled, forKey: Key.reminderEnabled) }
+    }
+
+    /// 通知する時刻（0 時からの分）。既定 20:00
+    var reminderMinutes: Int {
+        didSet { defaults.set(reminderMinutes, forKey: Key.reminderMinutes) }
+    }
+
+    /// 最初のセット完走後に、通知の許可を一度だけ尋ねたか
+    var reminderPrompted: Bool {
+        get { defaults.bool(forKey: Key.reminderPrompted) }
+        set { defaults.set(newValue, forKey: Key.reminderPrompted) }
+    }
+
     /// 最後に評価ダイアログを頼んだバージョン（§4.8 [v1.8]）。同じバージョンでは 2 回頼まない
     var reviewRequestedVersion: String? {
         get { defaults.string(forKey: Key.reviewRequestedVersion) }
@@ -110,6 +129,10 @@ final class AppSettings {
         autoSpeak = defaults.object(forKey: Key.autoSpeak) == nil ? true : defaults.bool(forKey: Key.autoSpeak)
         soundEffects = defaults.object(forKey: Key.soundEffects) == nil ? true : defaults.bool(forKey: Key.soundEffects)
         swipeHintDone = defaults.bool(forKey: Key.swipeHintDone)
+        reminderEnabled = defaults.bool(forKey: Key.reminderEnabled)
+        // integer(forKey:) は起動引数（-reminderMinutes 1230 など、文字列で入る）も数として読む
+        reminderMinutes = defaults.object(forKey: Key.reminderMinutes) == nil
+            ? Reminder.defaultMinutes : min(max(defaults.integer(forKey: Key.reminderMinutes), 0), 24 * 60 - 1)
         topStageCelebrated = Set(DrillMode.allCases.filter { defaults.bool(forKey: Key.topStageCelebrated($0)) })
     }
 
