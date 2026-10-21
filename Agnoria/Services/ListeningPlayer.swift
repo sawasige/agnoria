@@ -96,13 +96,16 @@ final class ListeningPlayer: NSObject, AVSpeechSynthesizerDelegate {
         }
     }
 
+    /// 読み終えても `playing` は消さず、次の読み上げが始まるまで今の部分を保つ（記号「A.」と応答の文の間の 0.25 秒で
+    /// 記号が消えて点き直すチラつきを避ける。SPEC-REVIEW N8）。最後の読み上げを終えたときだけ消す
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         let id = ObjectIdentifier(utterance)
         Task { @MainActor in
-            guard self.parts[id] != nil else { return }
-            if id == self.lastUtterance { self.finish() } else { self.playing = nil }
+            guard self.parts[id] != nil, id == self.lastUtterance else { return }
+            self.finish()
         }
     }
+
 
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
         let id = ObjectIdentifier(utterance)
