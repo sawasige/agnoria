@@ -1,6 +1,7 @@
 import SwiftUI
 
-/// 回答後の解説。文法: 完成した英文 + 和訳 + explanation [v1.7] / 単語: 意味 + 例文 + 和訳（練習問題は生成文とその和訳）。
+/// 回答後の解説。文法: 完成した英文 + 和訳 + explanation [v1.7] / 単語: 意味 + 例文 + 和訳（練習問題は生成文とその和訳）/
+/// リスニング: 問いかけ + 和訳 + 応答 3 つとその和訳 + explanation [v1.9]。
 /// Foundation Models の言い換え付き。
 /// 背景は持たない（呼び出し側のガラスカードに載せる）
 struct ExplanationView: View {
@@ -12,7 +13,34 @@ struct ExplanationView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            if let w = question.word {
+            if question.isListening {
+                Text(question.prompt).font(.callout.weight(.semibold))
+                if let ja = question.promptJa, !ja.isEmpty {
+                    Text(ja).font(.callout).foregroundStyle(.secondary)
+                }
+                Divider()
+                ForEach(Array(question.choices.enumerated()), id: \.offset) { i, choice in
+                    let correct = i == question.correctIndex
+                    HStack(alignment: .firstTextBaseline, spacing: 8) {
+                        Text(QuizQuestion.choiceLabels[i])
+                            .font(.caption.weight(.bold))
+                            .fontDesign(.rounded)
+                            .foregroundStyle(correct ? Color.green : Color.secondary)
+                            .frame(width: 16, alignment: .leading)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(choice).font(.callout.weight(correct ? .semibold : .regular))
+                            if let ja = question.choicesJa?[safe: i], !ja.isEmpty {
+                                Text(ja).font(.footnote).foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("\(QuizQuestion.choiceLabels[i])\(correct ? "、正解" : "")。\(choice)。\(question.choicesJa?[safe: i] ?? "")")
+                }
+                Divider()
+                Text(question.explanation).font(.body)
+            } else if let w = question.word {
+
                 HStack(alignment: .firstTextBaseline) {
                     Text(w.word).font(.title3.bold())
                     Text(w.pos).font(.caption).foregroundStyle(.secondary)
@@ -88,4 +116,9 @@ struct ExplanationView: View {
             aiHidden = true  // 失敗時は静かに消す（§5）
         }
     }
+}
+
+nonisolated extension Array {
+    /// 範囲外なら nil
+    subscript(safe i: Int) -> Element? { indices.contains(i) ? self[i] : nil }
 }

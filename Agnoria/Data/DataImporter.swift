@@ -48,7 +48,25 @@ actor DataImporter {
             summary.archived += 1
         }
 
+        // --- Listening [v1.9]
+        let existingListening = try modelContext.fetch(FetchDescriptor<ListeningQuestion>())
+        var listeningByID = Dictionary(existingListening.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
+        for s in payload.listening {
+            if let l = listeningByID.removeValue(forKey: s.id) {
+                l.apply(s)
+                summary.updated += 1
+            } else {
+                modelContext.insert(ListeningQuestion(s))
+                summary.inserted += 1
+            }
+        }
+        for orphan in listeningByID.values where !orphan.isArchived {
+            orphan.isArchived = true
+            summary.archived += 1
+        }
+
         try modelContext.save()
+
         return summary
     }
 }

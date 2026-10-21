@@ -1,13 +1,14 @@
 import SwiftUI
 import SwiftData
 
-/// 分野を選ぶ（§4.7 [v1.4]）。単語 / 文法 → 出題形式（単語のみ）→ 分野タイル。ホームから切り出した
+/// 分野を選ぶ（§4.7 [v1.4]）。単語 / 文法 / リスニング [v1.9] → 出題形式（単語のみ）→ 分野タイル。ホームから切り出した
 struct PickView: View {
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
 
     @Query(filter: #Predicate<Word> { !$0.isArchived }) private var words: [Word]
     @Query(filter: #Predicate<GrammarQuestion> { !$0.isArchived }) private var grammar: [GrammarQuestion]
+    @Query(filter: #Predicate<ListeningQuestion> { !$0.isArchived }) private var listening: [ListeningQuestion]
     @Query private var progress: [ItemProgress]
 
     @State private var mode: DrillMode = .word
@@ -38,6 +39,7 @@ struct PickView: View {
         switch mode {
         case .word: words.filter { settings.enabledLevels(.word).contains($0.level) }.map { ($0.id, $0.category) }
         case .grammar: grammar.filter { settings.enabledLevels(.grammar).contains($0.level) }.map { ($0.id, $0.category) }
+        case .listening: listening.filter { settings.enabledLevels(.listening).contains($0.level) }.map { ($0.id, $0.category) }
         }
     }
 
@@ -78,6 +80,13 @@ struct PickView: View {
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                if mode == .listening {
+                    Label("問いかけと応答を音声で出します。音の出せる場所で", systemImage: "speaker.wave.2")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
             }
             .padding()
             .frame(maxWidth: 720)

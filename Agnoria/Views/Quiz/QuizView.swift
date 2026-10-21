@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 struct QuizView: View {
     @Environment(AppModel.self) private var model
@@ -72,6 +73,7 @@ struct QuizView: View {
         .confirmationDialog("このセットをやめますか？", isPresented: $confirmLeave, titleVisibility: .visible) {
             Button("やめてホームへ", role: .destructive) {
                 Speaker.shared.stop()
+                ListeningPlayer.shared.stop()
                 model.abandonRun()
             }
             Button("続ける", role: .cancel) {}
@@ -178,36 +180,49 @@ struct QuizView: View {
         }
     }
 
-    /// 問題文と 4 択。interactive が false なら押せない飾り（次のカードの伏せ字用。キーボードショートカットも付けない）
+    /// 問題文と 4 択。interactive が false なら押せない飾り（次のカードの伏せ字用。キーボードショートカットも付けない）。
+    /// リスニングは問題文の代わりに再生の案内、選択肢は回答まで伏せる（§4.2 [v1.9]）
     private func questionBody(_ q: QuizQuestion, answer: QuizRun.Answer?, interactive: Bool) -> some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text(q.prompt)
-                .font(q.wordFormat == .meaning
-                      ? .system(.largeTitle, design: .serif, weight: .semibold)
-                      : .title3)
-                .multilineTextAlignment(.leading)
-                // 持ち上げ中の差し替え表示（ScrollView の外）で高さを詰められて行が欠けないよう、自然な高さに固定
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 8)
-                .accessibilityAddTraits(.isHeader)
+            if q.isListening {
+                ListeningPrompt(question: q, answered: answer != nil, interactive: interactive)
+            } else {
+                Text(q.prompt)
+                    .font(q.wordFormat == .meaning
+                          ? .system(.largeTitle, design: .serif, weight: .semibold)
+                          : .title3)
+                    .multilineTextAlignment(.leading)
+                    // 持ち上げ中の差し替え表示（ScrollView の外）で高さを詰められて行が欠けないよう、自然な高さに固定
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 8)
+                    .accessibilityAddTraits(.isHeader)
+            }
 
             VStack(spacing: 10) {
                 ForEach(Array(q.choices.enumerated()), id: \.offset) { i, choice in
                     if interactive {
                         ChoiceButton(label: QuizQuestion.choiceLabels[i], text: choice,
-                                     state: state(for: i, answer: answer, question: q)) {
+                                     state: state(for: i, answer: answer, question: q),
+                                     revealed: !q.isListening || answer != nil,
+                                     playing: q.isListening && answer == nil && isPlaying(q, part: .response(i))) {
                             select(i)
                         }
                         .disabled(answer != nil)
                         .keyboardShortcut(KeyEquivalent(Character("\(i + 1)")), modifiers: [])
                     } else {
-                        ChoiceButton(label: QuizQuestion.choiceLabels[i], text: choice, state: .idle) {}
+                        ChoiceButton(label: QuizQuestion.choiceLabels[i], text: choice, state: .idle,
+                                     revealed: !q.isListening) {}
                             .disabled(true)
                     }
                 }
             }
         }
+    }
+
+    private func isPlaying(_ q: QuizQuestion, part: ListeningPlayer.Part) -> Bool {
+        let player = ListeningPlayer.shared
+        return player.questionID == q.id && player.playing == part
     }
 
     /// めくった下に見える次のカード。レイアウトは本物と同じだが、問題文と選択肢は伏せ字にして先に読めないようにする。
@@ -246,7 +261,16 @@ struct QuizView: View {
         GlassEffectContainer(spacing: 10) {
             VStack(spacing: 10) {
                 AnyLayout(stacked ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))) {
-                    if let text = q.speechText {
+                    if q.isListening {
+                        Button {
+                            ListeningPlayer.shared.play(q, rate: settings.speechRate)
+                            model.analytics.log(.replayTapped)
+                        } label: {
+                            Label("もう一度聞く", systemImage: "speaker.wave.2")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.glass)
+                    } else if let text = q.speechText {
                         Button {
                             Speaker.shared.speak(text, rate: settings.speechRate)
                             model.analytics.log(.speakTapped)
@@ -306,6 +330,7 @@ struct QuizView: View {
     private func goNext(_ run: QuizRun) {
         guard !leaving else { return }
         Speaker.shared.stop()
+        ListeningPlayer.shared.stop()
         withAnimation(.easeOut(duration: 0.25)) {
             if run.isLast { model.finishRun() } else { model.advance() }
         }
@@ -315,6 +340,7 @@ struct QuizView: View {
     private func commitSwipe(run: QuizRun, width: CGFloat) {
         leaving = true
         Speaker.shared.stop()
+        ListeningPlayer.shared.stop()
         if !settings.swipeHintDone {
             withAnimation { settings.swipeHintDone = true }
         }
@@ -364,6 +390,8 @@ struct QuizView: View {
         guard Date.now.timeIntervalSince(lastDragAt) > 0.3 else { return }
         model.answerCurrent(index)
         guard let a = run.currentAnswer else { return }
+        // リスニングは回答で再生を止める（効果音と重ねない）。自動読み上げも無し
+        if run.current.isListening { ListeningPlayer.shared.stop() }
         lastCorrect = a.isCorrect
         feedbackCount += 1
         if settings.soundEffects {
@@ -389,14 +417,91 @@ struct QuizView: View {
     }
 
     private func formatLabel(_ q: QuizQuestion) -> String {
-        switch q.wordFormat {
+        if q.isListening { return "自然な応答を選ぶ" }
+        return switch q.wordFormat {
         case .meaning: "意味を選ぶ"
         case .cloze: "例文の空欄に入る語"
         case .jaToEn: "英語で言うと"
         case nil: q.categoryName
         }
+
     }
 }
+
+/// リスニングの問題文の場所（§4.2 [v1.9]）。回答前は案内と「聞く」ボタン、表示されたら自動で再生する。回答後は問いかけの英文
+struct ListeningPrompt: View {
+    let question: QuizQuestion
+    let answered: Bool
+    /// 次のカードの伏せ字では false（自動再生しない）
+    let interactive: Bool
+    @Environment(AppSettings.self) private var settings
+    @Environment(AppModel.self) private var model
+    @State private var volumeZero = false
+
+    private var player: ListeningPlayer { ListeningPlayer.shared }
+    private var playingThis: Bool { player.questionID == question.id && player.playing != nil }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            if answered {
+                Text(question.prompt)
+                    .font(.title3)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 8)
+                    .accessibilityAddTraits(.isHeader)
+            } else {
+                HStack(alignment: .center, spacing: 14) {
+                    Image(systemName: playingThis && player.playing == .question ? "person.wave.2.fill" : "person.wave.2")
+                        .font(.system(size: 34))
+                        .foregroundStyle(playingThis && player.playing == .question ? Color.accentColor : Color.secondary)
+                        .symbolEffect(.variableColor.iterative, isActive: playingThis && player.playing == .question)
+                        .frame(width: 44)
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("問いかけと 3 つの応答を聞いて、いちばん自然な応答を選ぶ")
+                            .font(.subheadline)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Text(volumeZero ? "音量が 0 になっています" : "文字は回答のあとに出ます")
+                            .font(.caption)
+                            .foregroundStyle(volumeZero ? Color.orange : Color.secondary)
+                    }
+                    Spacer(minLength: 0)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityAddTraits(.isHeader)
+                Button {
+                    play()
+                    model.analytics.log(.replayTapped)
+                } label: {
+                    Label(playingThis ? "再生中…" : "聞く", systemImage: playingThis ? "waveform" : "play.fill")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.glass)
+                .controlSize(.large)
+                .disabled(!interactive)
+                .keyboardShortcut(.space, modifiers: [])
+            }
+        }
+        .padding(.vertical, 4)
+        .task(id: question.id) {
+            // 表示されたら少し待って自動で再生。回答済み・伏せ字・すでに再生中なら何もしない
+            guard interactive, !answered, player.questionID != question.id else { return }
+            try? await Task.sleep(for: .milliseconds(400))
+            guard !Task.isCancelled else { return }
+            play()
+        }
+    }
+
+    private func play() {
+        #if os(iOS)
+        volumeZero = AVAudioSession.sharedInstance().outputVolume == 0
+        #endif
+        player.play(question, rate: settings.speechRate)
+    }
+}
+
 
 /// 10問ぶんの進捗ドット。回答済みは正誤の色、現在の問題はアクセント
 struct ProgressDots: View {

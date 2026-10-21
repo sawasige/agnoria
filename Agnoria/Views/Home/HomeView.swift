@@ -9,6 +9,7 @@ struct HomeView: View {
 
     @Query(filter: #Predicate<Word> { !$0.isArchived }) private var words: [Word]
     @Query(filter: #Predicate<GrammarQuestion> { !$0.isArchived }) private var grammar: [GrammarQuestion]
+    @Query(filter: #Predicate<ListeningQuestion> { !$0.isArchived }) private var listening: [ListeningQuestion]
     @Query private var progress: [ItemProgress]
     @Query private var sessions: [StudySession]
 
@@ -23,16 +24,22 @@ struct HomeView: View {
         let enabled = settings.enabledLevels(.grammar)
         return grammar.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
     }
+    private var listeningItems: [(id: String, category: String)] {
+        let enabled = settings.enabledLevels(.listening)
+        return listening.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
+    }
 
     var body: some View {
         let pmap = Dictionary(progress.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, _ in a })
+        // 復習カードの件数はおまかせ・復習の対象（単語・文法）だけ。リスニングは分野画面から [v1.9]
         let allItems = wordItems + grammarItems
         let overall = MasteryStats.summarize(items: allItems, progress: pmap)
         let allIDs = allItems.map(\.id)
         let wrong = MasteryStats.wrongCount(itemIDs: allIDs, progress: pmap)
         let bookmarked = MasteryStats.bookmarkCount(itemIDs: allIDs, progress: pmap)
         let tracks = Stage.tracks(items: [.word: words.map { (id: $0.id, level: $0.level) },
-                                          .grammar: grammar.map { (id: $0.id, level: $0.level) }],
+                                          .grammar: grammar.map { (id: $0.id, level: $0.level) },
+                                          .listening: listening.map { (id: $0.id, level: $0.level) }],
                                   progress: pmap, unlocked: settings.unlockedLevels)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
@@ -123,7 +130,7 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text("Agnoria")
                     .font(.system(size: 34, weight: .bold))
-                Text("英単語と文法 450〜600点")
+                Text("英単語・文法・リスニング 450〜600点")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -192,15 +199,18 @@ struct HomeView: View {
         .frame(maxWidth: .infinity)
     }
 
-    /// 今のセットが何を中心に組まれるかの目安（軸ごとの今の帯 [v1.8]）
+    /// 今のセットが何を中心に組まれるかの目安（おまかせに入る軸ごとの今の帯 [v1.8]）
     private func autoHint(_ tracks: [Stage.Track]) -> String {
-        if tracks.allSatisfy({ $0.summary.total == 0 }) { return "問題がありません" }
-        return tracks.map { "\($0.mode.title) \($0.current)" }.joined(separator: "・") + " 点帯が中心"
+        let auto = tracks.filter { DrillMode.autoModes.contains($0.mode) }
+        if auto.allSatisfy({ $0.summary.total == 0 }) { return "問題がありません" }
+        return auto.map { "\($0.mode.title) \($0.current)" }.joined(separator: "・") + " 点帯が中心"
     }
 
     /// 軸ごとのクリアまでの目安。1 セットに占める割合は、到達帯までの問題数の比で見込む
     private func estimates(_ tracks: [Stage.Track]) -> [DrillMode: Pace.Estimate] {
-        let idsByMode: [DrillMode: Set<String>] = [.word: Set(wordItems.map(\.id)), .grammar: Set(grammarItems.map(\.id))]
+        let idsByMode: [DrillMode: Set<String>] = [.word: Set(wordItems.map(\.id)), .grammar: Set(grammarItems.map(\.id)),
+                                                   .listening: Set(listeningItems.map(\.id))]
+
         let total = Double(idsByMode.values.reduce(0) { $0 + $1.count })
         let sessionDates = sessions.map(\.finishedAt)
         var out: [DrillMode: Pace.Estimate] = [:]

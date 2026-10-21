@@ -1,14 +1,17 @@
 import Foundation
 
-/// 出題モード（単語 / 文法）
+/// 出題モード（単語 / 文法 / リスニング [v1.9]）。スコア帯の軸でもある（§3.4）
 nonisolated enum DrillMode: String, CaseIterable, Codable, Hashable, Sendable {
     case word
     case grammar
+    /// Part 2 形式の応答問題（§3.5 [v1.9]）。音声だけで出すので、おまかせ（mode = nil）には混ぜない
+    case listening
 
     var title: String {
         switch self {
         case .word: "単語"
         case .grammar: "文法"
+        case .listening: "リスニング"
         }
     }
 
@@ -16,13 +19,18 @@ nonisolated enum DrillMode: String, CaseIterable, Codable, Hashable, Sendable {
         switch self {
         case .word: WordCategory.allCases.map(\.rawValue)
         case .grammar: GrammarCategory.allCases.map(\.rawValue)
+        case .listening: ListeningCategory.allCases.map(\.rawValue)
         }
     }
+
+    /// おまかせ（mode = nil）と復習の絞り込みで混ぜる軸。リスニングは音が出せない場面があるので、分野画面から始めたときだけ
+    static let autoModes: [DrillMode] = [.word, .grammar]
 
     /// 分野タイル用の SF Symbols 名。ミックスなど不明な分野は square.grid.2x2
     static func symbol(for category: String) -> String {
         if let g = GrammarCategory(rawValue: category) { return g.symbolName }
         if let w = WordCategory(rawValue: category) { return w.symbolName }
+        if let l = ListeningCategory(rawValue: category) { return l.symbolName }
         return "square.grid.2x2"
     }
 }
@@ -78,6 +86,25 @@ nonisolated enum WordCategory: String, CaseIterable, Sendable {
     }
 }
 
+/// リスニング（応答問題）の問いかけの型 [v1.9]
+nonisolated enum ListeningCategory: String, CaseIterable, Sendable {
+    case wh = "WH 疑問文"
+    case yesNo = "Yes・No 疑問文"
+    case request = "依頼・提案"
+    case statement = "平叙文"
+    case alternativeTag = "選択・付加疑問文"
+
+    var symbolName: String {
+        switch self {
+        case .wh: "questionmark.bubble"
+        case .yesNo: "checkmark.bubble"
+        case .request: "hand.raised"
+        case .statement: "text.bubble"
+        case .alternativeTag: "arrow.triangle.branch"
+        }
+    }
+}
+
 nonisolated enum Level: Int, CaseIterable, Sendable {
     case l450 = 450
     case l500 = 500
@@ -96,7 +123,8 @@ nonisolated enum DrillFilter: Hashable, Sendable {
 
 /// 1セットの条件
 nonisolated struct QuizConfig: Hashable, Sendable {
-    var mode: DrillMode?            // nil = おまかせ（単語・文法の全分野、§3.2 [v1.2]）
+    var mode: DrillMode?            // nil = おまかせ（単語・文法の全分野、§3.2 [v1.2]。リスニングは含まない [v1.9]）
+
     var category: String?           // nil = ミックス
     var format: WordFormat?         // 単語のみ。nil = ランダム
     var filter: DrillFilter = .all

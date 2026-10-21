@@ -10,6 +10,8 @@ final class Speaker {
     private init() {}
 
     func speak(_ text: String, rate: Double) {
+        // 起動引数 `-speech NO`（UI テスト）では鳴らさない [v1.9]
+        guard ListeningPlayer.isAvailable else { return }
         Task {
             await AudioSession.activateIfNeeded()
             if synthesizer.isSpeaking { synthesizer.stopSpeaking(at: .immediate) }

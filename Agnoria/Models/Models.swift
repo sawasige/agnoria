@@ -92,6 +92,51 @@ final class Word {
     }
 }
 
+/// リスニング（応答問題）[v1.9]。問題ストア（ローカル）に入る
+@Model
+final class ListeningQuestion {
+    @Attribute(.unique) var id: String
+    var category: String
+    var question: String
+    var questionJa: String
+    var choices: [String]
+    var choicesJa: [String]
+    var answer: Int
+    var explanation: String
+    var level: Int
+    var isArchived: Bool
+
+    init(_ s: ListeningSnapshot) {
+        id = s.id
+        category = s.category
+        question = s.question
+        questionJa = s.questionJa
+        choices = s.choices
+        choicesJa = s.choicesJa
+        answer = s.answer
+        explanation = s.explanation
+        level = s.level
+        isArchived = false
+    }
+
+    func apply(_ s: ListeningSnapshot) {
+        category = s.category
+        question = s.question
+        questionJa = s.questionJa
+        choices = s.choices
+        choicesJa = s.choicesJa
+        answer = s.answer
+        explanation = s.explanation
+        level = s.level
+        isArchived = false
+    }
+
+    var snapshot: ListeningSnapshot {
+        ListeningSnapshot(id: id, category: category, question: question, questionJa: questionJa, choices: choices,
+                          choicesJa: choicesJa, answer: answer, explanation: explanation, level: level)
+    }
+}
+
 /// 学習履歴。問題の id（itemID）に紐づく独立したレコード。
 /// 問題本文を更新・アーカイブしても履歴は残る。
 /// **[v1.7]** iCloud 同期の制約（§2.3）: `@Attribute(.unique)` は使えず、全プロパティに既定値が要る。
@@ -174,11 +219,12 @@ nonisolated struct SessionResult: Codable, Hashable, Sendable {
 
 /// ストアの構成（§2.3 [v1.7]）。
 /// - 記録ストア `default.store`（1.0 からのファイルそのまま）: ItemProgress / StudySession。iCloud のプライベートデータベースに同期
-/// - 問題ストア `questions.store`: GrammarQuestion / Word。ローカルのみ（同梱 JSON から端末ごとに取り込む）
+/// - 問題ストア `questions.store`: GrammarQuestion / Word / ListeningQuestion [v1.9]。ローカルのみ（同梱 JSON から端末ごとに取り込む）
 /// 1.0 では 4 つのモデルが default.store に同居していた。問題の 2 モデルは軽量マイグレーションで default.store から外れ、
 /// 新しい questions.store に取り込み直す（AppModel.importBundledDataIfNeeded が fingerprint を消して再取り込みする）
 nonisolated enum AgnoriaSchema {
-    static let questionModels: [any PersistentModel.Type] = [GrammarQuestion.self, Word.self]
+    static let questionModels: [any PersistentModel.Type] = [GrammarQuestion.self, Word.self, ListeningQuestion.self]
+
     static let recordModels: [any PersistentModel.Type] = [ItemProgress.self, StudySession.self]
     static let models: [any PersistentModel.Type] = questionModels + recordModels
     static let cloudKitContainer = "iCloud.com.himatsubu.Agnoria"

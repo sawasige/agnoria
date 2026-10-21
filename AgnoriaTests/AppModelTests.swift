@@ -35,7 +35,25 @@ struct AppModelTests {
         #expect(sessions.first?.category == nil)
     }
 
-    @Test("単語・文法それぞれで10問セットが最後まで回り、セッションが保存される") func fullRun() async throws {
+    @Test("おまかせにリスニングは入らず、リスニングを指定すると 3 択の応答問題だけになる") func listeningRun() async throws {
+        let model = try await makeModel()
+        var rng = SeededRandomNumberGenerator(seed: 5)
+        for _ in 0..<5 {
+            #expect(!model.buildQuestions(.auto, using: &rng).contains { $0.isListening })
+            #expect(!model.buildQuestions(QuizConfig(mode: nil, category: nil, format: nil, filter: .wrongOnly), using: &rng)
+                .contains { $0.isListening })
+        }
+        let qs = model.buildQuestions(QuizConfig(mode: .listening, category: nil, format: nil), using: &rng)
+        #expect(qs.count == 10)
+        #expect(qs.allSatisfy { $0.isListening && $0.choices.count == 3 && $0.choicesJa?.count == 3 })
+        #expect(Set(qs.map(\.itemID)).count == 10)
+        // 分野を指定すると、到達帯 450 のその分野（6 問）だけ
+        let wh = model.buildQuestions(QuizConfig(mode: .listening, category: "WH 疑問文", format: nil), using: &rng)
+        #expect(wh.count == 6 && wh.allSatisfy { $0.categoryName == "WH 疑問文" })
+        #expect(model.stageStates()[.listening]?.byLevel[450]?.total == 30)
+    }
+
+    @Test("単語・文法・リスニングそれぞれで10問セットが最後まで回り、セッションが保存される") func fullRun() async throws {
         let model = try await makeModel()
         for mode in DrillMode.allCases {
             let run = try #require(model.startQuiz(QuizConfig(mode: mode, category: nil, format: nil)))
@@ -50,10 +68,11 @@ struct AppModelTests {
             #expect(run.correctCount == 10)
         }
         let sessions = try model.container.mainContext.fetch(FetchDescriptor<StudySession>())
-        #expect(sessions.count == 2)
+        #expect(sessions.count == DrillMode.allCases.count)
         #expect(sessions.allSatisfy { $0.results.count == 10 })
+
         let progress = try model.container.mainContext.fetch(FetchDescriptor<ItemProgress>())
-        #expect(progress.count == 20)
+        #expect(progress.count == 10 * DrillMode.allCases.count)
     }
 
     @Test("masteredAt 追加前に習得していた問題は起動時に補われる") func backfill() async throws {
