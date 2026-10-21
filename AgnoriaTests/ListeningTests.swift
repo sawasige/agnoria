@@ -39,7 +39,21 @@ struct ListeningTests {
         #expect(SetBuilder.allLevels[.listening] == Level.allValues)
     }
 
+    @Test("台本: 番号 → 問いかけ → 記号と応答 3 つ。番号と記号はナレーター、間は仕様どおり") func script() throws {
+        let s = ListeningScript.make(number: 10, question: "When is it due?", choices: ["Friday.", "Yes.", "Here."])
+        #expect(s.count == 8)
+        #expect(s.map(\.text) == ["Number 10.", "When is it due?", "A.", "Friday.", "B.", "Yes.", "C.", "Here."])
+        #expect(s.map(\.role) == [.narrator, .speaker, .narrator, .speaker, .narrator, .speaker, .narrator, .speaker])
+        #expect(s.map(\.part) == [.number, .question, .response(0), .response(0), .response(1), .response(1), .response(2), .response(2)])
+        #expect(s.map(\.pauseAfter) == [ListeningScript.pauseAfterNumber, ListeningScript.pauseAfterQuestion,
+                                        ListeningScript.pauseAfterLetter, ListeningScript.pauseBetweenResponses,
+                                        ListeningScript.pauseAfterLetter, ListeningScript.pauseBetweenResponses,
+                                        ListeningScript.pauseAfterLetter, 0])
+        #expect(ListeningScript.pauseAfterQuestion >= 1 && ListeningScript.pauseBetweenResponses >= 1, "本番並みの間")
+    }
+
     @Test("分野の記号とタイトル") func categories() {
+
         #expect(DrillMode.listening.categories.count == 5)
         #expect(DrillMode.symbol(for: "WH 疑問文") == "questionmark.bubble")
         #expect(DrillMode.listening.title == "リスニング")

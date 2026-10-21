@@ -1,18 +1,16 @@
 import AVFoundation
 import Observation
 
-/// リスニング（応答問題）の音声（§4.2 / §6 [v1.9]）。問いかけ → 間 → 応答 3 つを合成音声で順に読む。
-/// 今読んでいる部分（problem / 応答の番号）を公開し、画面はそれで再生中の応答を光らせる。
+/// リスニング（応答問題）の音声（§4.2 / §6 [v1.9]）。台本（ListeningScript: 番号 → 問いかけ → 記号と応答 3 つ）を合成音声で順に読む。
+/// 今読んでいる部分（番号 / 問いかけ / 応答の番号）を公開し、画面はそれで再生中の応答を光らせる。
 /// 再生は意図した操作なので、iOS ではマナーモードでも鳴る `.playback` にし、終わったら `.ambient` に戻す
 @MainActor
 @Observable
 final class ListeningPlayer: NSObject, AVSpeechSynthesizerDelegate {
     static let shared = ListeningPlayer()
 
-    enum Part: Equatable, Sendable {
-        case question
-        case response(Int)
-    }
+    typealias Part = ListeningPart
+
 
     /// 今読んでいる部分。読んでいなければ nil
     private(set) var playing: Part?
@@ -22,8 +20,6 @@ final class ListeningPlayer: NSObject, AVSpeechSynthesizerDelegate {
     private let synthesizer = AVSpeechSynthesizer()
     private var parts: [ObjectIdentifier: Part] = [:]
     private var lastUtterance: ObjectIdentifier?
-    /// 問いかけの後と応答の間の間（秒）
-    static let gap: TimeInterval = 0.9
 
     private override init() {
         super.init()
@@ -37,27 +33,23 @@ final class ListeningPlayer: NSObject, AVSpeechSynthesizerDelegate {
         return UserDefaults.standard.object(forKey: "speech") == nil || UserDefaults.standard.bool(forKey: "speech")
     }
 
-    /// 問いかけと応答を最初から読む。読んでいる途中なら止めて読み直す
-    func play(_ q: QuizQuestion, rate: Double) {
+    /// 問いかけと応答を最初から読む。読んでいる途中なら止めて読み直す。number はセット内の番号（1 から）
+    func play(_ q: QuizQuestion, number: Int, rate: Double) {
         cancel()
         guard Self.isAvailable else { return }
         questionID = q.id
         let pick = ListeningVoice.pick(seed: q.itemID, available: Self.availableVoices())
         let qVoice = pick.flatMap { AVSpeechSynthesisVoice(identifier: $0.question) } ?? AVSpeechSynthesisVoice(language: "en-US")
         let rVoice = pick.flatMap { AVSpeechSynthesisVoice(identifier: $0.responses) } ?? qVoice
-        var utterances: [(AVSpeechUtterance, Part)] = []
-        let question = AVSpeechUtterance(string: q.prompt)
-        question.voice = qVoice
-        question.rate = Float(rate)
-        question.postUtteranceDelay = Self.gap
-        utterances.append((question, .question))
-        for (i, text) in q.choices.enumerated() {
-            let u = AVSpeechUtterance(string: text)
-            u.voice = rVoice
+        // ナレーター（番号・記号）と問いかけは同じ声、応答は別の声
+        let utterances: [(AVSpeechUtterance, Part)] = ListeningScript.make(number: number, question: q.prompt, choices: q.choices).map { s in
+            let u = AVSpeechUtterance(string: s.text)
+            u.voice = (s.role == .speaker && s.part != .question) ? rVoice : qVoice
             u.rate = Float(rate)
-            u.postUtteranceDelay = Self.gap
-            utterances.append((u, .response(i)))
+            u.postUtteranceDelay = s.pauseAfter
+            return (u, s.part)
         }
+
         parts = Dictionary(uniqueKeysWithValues: utterances.map { (ObjectIdentifier($0.0), $0.1) })
         lastUtterance = utterances.last.map { ObjectIdentifier($0.0) }
         Task {
