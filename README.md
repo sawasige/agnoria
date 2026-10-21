@@ -57,7 +57,8 @@ xcodebuild -project Agnoria.xcodeproj -scheme Agnoria -destination 'platform=mac
 
 ### Firebase の設定ファイル
 
-利用状況の計測とクラッシュ報告（SPEC §7.1）は `Agnoria/GoogleService-Info.plist` があるときだけ動きます。このファイルはリポジトリにコミットしてあります（中身は Google が公開情報として扱うもの。API キーは Bundle ID で制限）。無いビルドでは計測が無効のまま普通に動きます。Debug ビルドは起動引数 `-analytics YES` を付けたときだけ送信します。`-debugCrash YES` を付けると Crashlytics の確認用にわざと落ちます（Debug のみ）。
+利用状況の計測とクラッシュ報告（SPEC §7.1）は `Agnoria/GoogleService-Info.plist` があるときだけ動きます。このファイルはリポジトリにコミットしてあります（中身は Google が公開情報として扱うもの。API キーは Bundle ID で制限）。無いビルドでは計測が無効のまま普通に動きます。Debug ビルドは起動引数 `-analytics YES` を付けたときだけ送信します。`-debugCrash YES` を付けると Crashlytics の確認用にわざと落ちます（Debug のみ）。`-debugSeedProgress YES` は記録を消して「学習が進んだ状態」のサンプル記録を作ります（ストア用スクリーンショットの撮影用。Debug のみ、シミュレータで `-cloudSync NO` と一緒に）。
+
 
 ### 実機へのインストール
 
