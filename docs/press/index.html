@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-ja="プレスキット - Agnoria" data-en="Press Kit - Agnoria">プレスキット - Agnoria</title>
+    <style>
+        :root { --bg: #fff; --text: #333; --text-muted: #666; --link: #3F51B5; --border: #888; --accent: #5C6BC0; --box-bg: #f5f5f7; }
+        @media (prefers-color-scheme: dark) {
+            :root { --bg: #0d0d0f; --text: #e8e8eb; --text-muted: #a1a1a8; --link: #8C9EFF; --border: #555; --accent: #9FA8DA; --box-bg: #1a1a1d; }
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 760px; margin: 0 auto; padding: 20px; line-height: 1.8; background: var(--bg); color: var(--text); }
+        h1 { color: var(--link); font-size: 1.5em; }
+        h2 { font-size: 1.2em; margin-top: 2em; }
+        a { color: var(--link); }
+        p { margin: 1em 0; }
+        .box { background: var(--box-bg); border-radius: 8px; padding: 12px 16px; }
+        .lang-toggle { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 4px 12px; color: inherit; cursor: pointer; font-family: inherit; font-size: 0.85em; float: right; }
+        nav { font-size: 0.9em; color: var(--text-muted); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+        .grid a img { width: 100%; height: auto; border-radius: 8px; display: block; }
+        .grid figcaption { font-size: 0.85em; color: var(--text-muted); }
+        .wide img { width: 100%; height: auto; border-radius: 8px; }
+        table { border-collapse: collapse; width: 100%; font-size: 0.95em; }
+        td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--box-bg); vertical-align: top; }
+        th { white-space: nowrap; color: var(--text-muted); font-weight: normal; }
+        .copy { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language">EN / 日本語</button>
+    <nav><a href="https://sawasige.github.io/">sawasige</a> / <a href="../index.html">Agnoria</a></nav>
+    <h1 data-ja="プレスキット" data-en="Press Kit">プレスキット</h1>
+    <p data-ja="Agnoria（アグノリア）の紹介文と画像です。記事やレビューで自由にお使いください。画像はそのまま、または切り抜いて掲載できます。" data-en="Copy and images for Agnoria. Feel free to use them in articles and reviews, as they are or cropped.">Agnoria（アグノリア）の紹介文と画像です。記事やレビューで自由にお使いください。画像はそのまま、または切り抜いて掲載できます。</p>
+
+    <h2 data-ja="基本情報" data-en="At a glance">基本情報</h2>
+    <table>
+        <tr><th data-ja="名前" data-en="Name">名前</th><td>Agnoria（アグノリア）</td></tr>
+        <tr><th data-ja="種類" data-en="Category">種類</th><td data-ja="教育 / 英語学習（TOEIC L&amp;R 450〜600 点帯向けのドリル）" data-en="Education / English learning (a drill for the TOEIC L&amp;R 450 to 600 range)">教育 / 英語学習（TOEIC L&amp;R 450〜600 点帯向けのドリル）</td></tr>
+        <tr><th data-ja="対応" data-en="Platforms">対応</th><td data-ja="iPhone・iPad（iOS / iPadOS 27 以上）。日本語" data-en="iPhone and iPad (iOS / iPadOS 27 or later). Japanese">iPhone・iPad（iOS / iPadOS 27 以上）。日本語</td></tr>
+        <tr><th data-ja="価格" data-en="Price">価格</th><td data-ja="無料。広告なし、課金なし、アカウント登録なし" data-en="Free. No ads, no in-app purchases, no account">無料。広告なし、課金なし、アカウント登録なし</td></tr>
+        <tr><th data-ja="公開" data-en="Released">公開</th><td data-ja="2026 年 10 月 16 日（1.0）。1.3 で応答問題を追加" data-en="October 16, 2026 (1.0). Version 1.3 adds question-response listening">2026 年 10 月 16 日（1.0）。1.3 で応答問題を追加</td></tr>
+        <tr><th data-ja="開発" data-en="Developer">開発</th><td data-ja="Shigeru Sawada（個人開発）" data-en="Shigeru Sawada (independent developer)">Shigeru Sawada（個人開発）</td></tr>
+        <tr><th>App Store</th><td><a href="https://apps.apple.com/jp/app/id6823061416">https://apps.apple.com/jp/app/id6823061416</a></td></tr>
+        <tr><th data-ja="公式サイト" data-en="Website">公式サイト</th><td><a href="https://sawasige.github.io/agnoria/">https://sawasige.github.io/agnoria/</a></td></tr>
+        <tr><th data-ja="ソース" data-en="Source">ソース</th><td><a href="https://github.com/sawasige/agnoria">https://github.com/sawasige/agnoria</a></td></tr>
+        <tr><th data-ja="連絡先" data-en="Contact">連絡先</th><td><a href="https://github.com/sawasige/agnoria/issues">GitHub Issues</a></td></tr>
+    </table>
+
+    <h2 data-ja="紹介文（100 字）" data-en="Short description">紹介文（100 字）</h2>
+    <div class="box"><p class="copy" data-ja="単語帳や問題集が続かなかった人のための英語ドリル。開いて「おまかせで10問」を押すだけ、1 回 3 分。TOEIC L&amp;R の 450 点帯の基本から 600 点へ順に進む。単語・文法・応答問題を収録。広告なし、無料。" data-en="An English drill for people who gave up on word lists and workbooks. Open it, tap “10 questions”, done in three minutes. From the TOEIC L&amp;R 450 basics up to 600, in order. Vocabulary, grammar and question-response. Free, no ads.">単語帳や問題集が続かなかった人のための英語ドリル。開いて「おまかせで10問」を押すだけ、1 回 3 分。TOEIC L&amp;R の 450 点帯の基本から 600 点へ順に進む。単語・文法・応答問題を収録。広告なし、無料。</p></div>
+
+    <h2 data-ja="紹介文（300 字）" data-en="Long description">紹介文（300 字）</h2>
+    <div class="box"><p class="copy" data-ja="Agnoria（アグノリア）は、単語帳や問題集が続かなかった人のための英語ドリルです。開いて「おまかせで10問」を押すだけで、まだ答えていない問題・間違えた問題・しばらく解いていない問題を今の実力に合わせて混ぜて出します。1 回 3 分。TOEIC L&amp;R が初めての人、まだ 450 点に届いていない人向けに、450 点帯の基本語彙と基本文法から始め、450・500・550・600 のスコア帯を単語・文法・応答問題それぞれで順に進みます。収録はビジネス英語の単語 400 語、Part 5 形式の文法 200 問、Part 2 形式の応答問題 120 問（端末の合成音声で出題）。学習の記録は iCloud で同期。Apple Intelligence 対応端末では解説の言い換えと類題の生成も。広告なし、課金なし、登録なし。" data-en="Agnoria is an English drill for people who gave up on word lists and workbooks. Open it and tap “10 questions”: the app mixes new items, misses and things you haven’t seen in a while, matched to your level. Three minutes a set. Made for first-time TOEIC L&amp;R takers and anyone not yet at 450, it starts with the basics of the 450 range and moves up through 450, 500, 550 and 600, separately for vocabulary, grammar and question-response. Inside: 400 business English words, 200 Part 5-style grammar questions and 120 Part 2-style question-response items read by the device’s speech synthesis. Progress syncs via iCloud. On Apple Intelligence devices, explanations can be rephrased and practice questions generated on-device. Free, no ads, no account.">Agnoria（アグノリア）は、単語帳や問題集が続かなかった人のための英語ドリルです。開いて「おまかせで10問」を押すだけで、まだ答えていない問題・間違えた問題・しばらく解いていない問題を今の実力に合わせて混ぜて出します。1 回 3 分。TOEIC L&amp;R が初めての人、まだ 450 点に届いていない人向けに、450 点帯の基本語彙と基本文法から始め、450・500・550・600 のスコア帯を単語・文法・応答問題それぞれで順に進みます。収録はビジネス英語の単語 400 語、Part 5 形式の文法 200 問、Part 2 形式の応答問題 120 問（端末の合成音声で出題）。学習の記録は iCloud で同期。Apple Intelligence 対応端末では解説の言い換えと類題の生成も。広告なし、課金なし、登録なし。</p></div>
+
+    <h2 data-ja="特徴" data-en="Highlights">特徴</h2>
+    <ul>
+        <li data-ja="何をやるか考えなくていい: 「おまかせで10問」が今の実力に合わせて出題" data-en="Nothing to decide: “10 questions” picks for your level">何をやるか考えなくていい: 「おまかせで10問」が今の実力に合わせて出題</li>
+        <li data-ja="1 回 3 分。連続学習日数と 2 週間の学習量、リマインダー通知" data-en="Three minutes a set, with streaks, a two-week chart and reminders">1 回 3 分。連続学習日数と 2 週間の学習量、リマインダー通知</li>
+        <li data-ja="450 点帯の基本から 600 点へ、単語・文法・応答問題それぞれで順に進むステージ制" data-en="Stages from the 450 basics to 600, tracked separately for vocabulary, grammar and question-response">450 点帯の基本から 600 点へ、単語・文法・応答問題それぞれで順に進むステージ制</li>
+        <li data-ja="応答問題は音声で出題。問いかけと応答で声が変わり、発音は en-US / en-GB / en-AU。文字は答えたあと" data-en="Question-response is audio only, with different voices for question and replies in en-US / en-GB / en-AU. Text appears after you answer">応答問題は音声で出題。問いかけと応答で声が変わり、発音は en-US / en-GB / en-AU。文字は答えたあと</li>
+        <li data-ja="iCloud 同期、ホーム画面ウィジェット、Apple Intelligence（端末内処理）" data-en="iCloud sync, Home Screen widget, Apple Intelligence (on-device)">iCloud 同期、ホーム画面ウィジェット、Apple Intelligence（端末内処理）</li>
+        <li data-ja="広告なし、課金なし、登録なし。開発者のサーバーとは通信しない" data-en="Free, no ads, no account, no developer server">広告なし、課金なし、登録なし。開発者のサーバーとは通信しない</li>
+    </ul>
+
+    <h2 data-ja="画像" data-en="Images">画像</h2>
+    <p data-ja="クリックで元のサイズを開きます。スクリーンショットは iPhone 17 Pro Max（1320×2868）。「枠なし」はキャプションと端末の枠が無い素の画面です。" data-en="Click for full size. Screenshots are iPhone 17 Pro Max (1320×2868). “Plain” versions have no caption or device frame.">クリックで元のサイズを開きます。スクリーンショットは iPhone 17 Pro Max（1320×2868）。「枠なし」はキャプションと端末の枠が無い素の画面です。</p>
+    <div class="grid">
+        <figure><a href="../assets/logo.png"><img src="../assets/logo.png" alt="Agnoria icon"></a><figcaption data-ja="アイコン（512）" data-en="Icon (512)">アイコン（512）</figcaption></figure>
+        <figure><a href="iphone-home.png"><img src="iphone-home.png" alt="Home"></a><figcaption data-ja="ホーム（<a href=&quot;iphone-home-raw.png&quot;>枠なし</a>）" data-en="Home (<a href=&quot;iphone-home-raw.png&quot;>plain</a>)" data-html>ホーム（<a href="iphone-home-raw.png">枠なし</a>）</figcaption></figure>
+        <figure><a href="iphone-start.png"><img src="iphone-start.png" alt="Choose and start"></a><figcaption data-ja="選んで始める（<a href=&quot;iphone-start-raw.png&quot;>枠なし</a>）" data-en="Choose and start (<a href=&quot;iphone-start-raw.png&quot;>plain</a>)" data-html>選んで始める（<a href="iphone-start-raw.png">枠なし</a>）</figcaption></figure>
+        <figure><a href="iphone-quiz.png"><img src="iphone-quiz.png" alt="Question"></a><figcaption data-ja="出題（<a href=&quot;iphone-quiz-raw.png&quot;>枠なし</a>）" data-en="Question (<a href=&quot;iphone-quiz-raw.png&quot;>plain</a>)" data-html>出題（<a href="iphone-quiz-raw.png">枠なし</a>）</figcaption></figure>
+        <figure><a href="iphone-answered.png"><img src="iphone-answered.png" alt="Explanation"></a><figcaption data-ja="回答後の解説（<a href=&quot;iphone-answered-raw.png&quot;>枠なし</a>）" data-en="Explanation (<a href=&quot;iphone-answered-raw.png&quot;>plain</a>)" data-html>回答後の解説（<a href="iphone-answered-raw.png">枠なし</a>）</figcaption></figure>
+        <figure><a href="iphone-listening.png"><img src="iphone-listening.png" alt="Question-response"></a><figcaption data-ja="応答問題（<a href=&quot;iphone-listening-raw.png&quot;>枠なし</a>）" data-en="Question-response (<a href=&quot;iphone-listening-raw.png&quot;>plain</a>)" data-html>応答問題（<a href="iphone-listening-raw.png">枠なし</a>）</figcaption></figure>
+        <figure><a href="iphone-stats.png"><img src="iphone-stats.png" alt="Progress"></a><figcaption data-ja="進捗（<a href=&quot;iphone-stats-raw.png&quot;>枠なし</a>）" data-en="Progress (<a href=&quot;iphone-stats-raw.png&quot;>plain</a>)" data-html>進捗（<a href="iphone-stats-raw.png">枠なし</a>）</figcaption></figure>
+    </div>
+    <p class="wide"><a href="hero-3x2.jpg"><img src="hero-3x2.jpg" alt="Agnoria key visual 3:2"></a></p>
+    <p class="wide"><a href="hero-21x9.jpg"><img src="hero-21x9.jpg" alt="Agnoria key visual 21:9"></a></p>
+    <p data-ja="キービジュアル（女神 Agenoria）: 3:2（3840×2560）と 21:9（3840×1646）。" data-en="Key visual (the goddess Agenoria): 3:2 (3840×2560) and 21:9 (3840×1646).">キービジュアル（女神 Agenoria）: 3:2（3840×2560）と 21:9（3840×1646）。</p>
+
+    <h2 data-ja="名前の由来" data-en="About the name">名前の由来</h2>
+    <p data-ja="ギリシャ語の Agnoia（無知）と、ローマの女神 Agenoria（子どもに学ぶ力を授ける）から。「無知から学び始める」の意。" data-en="From the Greek agnoia (ignorance) and Agenoria, the Roman goddess who gives children the power to learn: “to start learning from not knowing.”">ギリシャ語の Agnoia（無知）と、ローマの女神 Agenoria（子どもに学ぶ力を授ける）から。「無知から学び始める」の意。</p>
+
+    <p class="updated" data-ja="TOEIC は ETS の登録商標です。本アプリは ETS および IIBC とは関係ありません。" data-en="TOEIC is a registered trademark of ETS. This app is not affiliated with ETS or IIBC.">TOEIC は ETS の登録商標です。本アプリは ETS および IIBC とは関係ありません。</p>
+    <script>
+        var currentLang = 'ja';
+        function applyLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+                var val = el.getAttribute('data-' + lang);
+                if (val === null) return;
+                if (el.hasAttribute('data-html')) { el.innerHTML = val; } else { el.textContent = val; }
+            });
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('lang', lang); } catch (e) {}
+        }
+        window.toggleLang = function () { applyLang(currentLang === 'ja' ? 'en' : 'ja'); };
+        var saved = null;
+        try { saved = localStorage.getItem('lang'); } catch (e) {}
+        applyLang(saved || ((navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en'));
+    </script>
+</body>
+</html>
