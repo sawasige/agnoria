@@ -65,8 +65,10 @@ struct AgnoriaApp: App {
             .environment(model)
             .environment(model.settings)
             .task {
+                #if DEBUG
+                model.seedDebugProgressIfRequested()
+                #endif
                 model.prepareAtLaunch()
-
                 #if DEBUG
                 model.showDebugStageClearIfRequested()
                 model.crashIfRequested()

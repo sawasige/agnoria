@@ -369,7 +369,70 @@ final class AppModel {
     }
 
     #if DEBUG
+    /// 撮影用。起動引数 `-debugSeedProgress YES` で、記録を消して「学習が進んだ状態」のサンプル記録を作る
+    /// （単語・文法は 450 点帯クリア済みで 500 点帯の途中、応答問題は 450 点帯の途中、12 日連続、今日も学習済み）。
+    /// シミュレータ専用。`-cloudSync NO` と一緒に使う
+    func seedDebugProgressIfRequested() {
+        guard UserDefaults.standard.bool(forKey: "debugSeedProgress") else { return }
+        try? context.delete(model: ItemProgress.self)
+        try? context.delete(model: StudySession.self)
+        let cal = Calendar.current
+        let now = Date.now
+        var rng = SeededRandomNumberGenerator(seed: 7)
+        func day(_ ago: Int, hour: Int) -> Date {
+            cal.date(byAdding: .hour, value: hour, to: cal.date(byAdding: .day, value: -ago, to: cal.startOfDay(for: now))!)!
+        }
+        // 軸・帯ごとの (習得, 学習中, 苦手) の件数
+        let plan: [(DrillMode, Int, Int, Int, Int)] = [
+            (.word, 450, 88, 6, 4), (.word, 500, 38, 10, 6),
+            (.grammar, 450, 44, 3, 2), (.grammar, 500, 15, 6, 4),
+            (.listening, 450, 17, 5, 3),
+        ]
+        var seeded: [String] = []
+        for (mode, level, mastered, learning, struggling) in plan {
+            let ids = catalog.items(mode).filter { $0.level == level }.map(\.id).shuffled(using: &rng)
+            for (i, id) in ids.enumerated() {
+                let p = ItemProgress(itemID: id)
+                if i < mastered {
+                    p.recentResults = [true, true, true]
+                    p.totalAnswered = Int.random(in: 3...6, using: &rng); p.totalCorrect = p.totalAnswered - Int.random(in: 0...1, using: &rng)
+                    let d = day(Int.random(in: 0...11, using: &rng), hour: 20)
+                    p.masteredAt = d; p.lastAnsweredAt = d
+                } else if i < mastered + learning {
+                    p.recentResults = [true, false, true]
+                    p.totalAnswered = 3; p.totalCorrect = 2; p.lastAnsweredAt = day(Int.random(in: 0...3, using: &rng), hour: 21)
+                } else if i < mastered + learning + struggling {
+                    p.recentResults = [false, true, false]
+                    p.totalAnswered = 3; p.totalCorrect = 1; p.lastAnsweredAt = day(Int.random(in: 0...2, using: &rng), hour: 21)
+                } else {
+                    continue
+                }
+                context.insert(p)
+                seeded.append(id)
+            }
+        }
+        // 12 日連続（1 日 1〜3 セット）。日別グラフの山に変化を付ける
+        let setsPerDay = [2, 1, 2, 3, 1, 2, 2, 1, 3, 2, 1, 2]
+        for (ago, sets) in setsPerDay.enumerated() {
+            for s in 0..<sets {
+                let finished = day(ago, hour: 7 + s * 6)
+                let results = (0..<10).map { _ in
+                    SessionResult(itemID: seeded.randomElement(using: &rng) ?? "", isCorrect: Int.random(in: 0..<10, using: &rng) < 7,
+                                  chosenIndex: 0, elapsedMs: 4000)
+                }
+                context.insert(StudySession(startedAt: finished.addingTimeInterval(-200), finishedAt: finished, mode: nil,
+                                            category: nil, questionFormat: nil, results: results))
+            }
+        }
+        save("debugSeed")
+        settings.setUnlockedLevel(500, for: .word)
+        settings.setUnlockedLevel(500, for: .grammar)
+        settings.setUnlockedLevel(450, for: .listening)
+        settings.stageTracksMigrated = true
+    }
+
     /// Crashlytics の確認用。起動引数 `-debugCrash YES` を付けるとホーム表示直後にわざと落ちる（§7.1）。
+
     /// 報告は次回起動時に送られるので、落とした後にもう一度 `-analytics YES` で起動する
     func crashIfRequested() {
         guard UserDefaults.standard.bool(forKey: "debugCrash") else { return }
