@@ -16,14 +16,7 @@ enum Route: Hashable {
 }
 
 
-enum ImportState: Equatable, Sendable {
-    case idle
-    case running
-    case done
-    case failed(String)
-}
-
-/// アプリ全体の状態（MV）。ナビゲーション・取り込み・セットの開始と記録を担当
+/// アプリ全体の状態（MV）。ナビゲーション・セットの開始と記録を担当
 @MainActor
 @Observable
 final class AppModel {
@@ -32,9 +25,12 @@ final class AppModel {
     let analytics: UsageAnalytics
     /// 記録ストアが iCloud 同期の構成か（§2.3 [v1.7]）
     let cloudSync: Bool
+    /// 同梱の問題データ（§2.1 [v1.9]）。起動時に JSON から読む
+    let catalog: QuestionCatalog
+    /// 問題データを読めなかったときの説明（ホームに出す）。読めていれば nil
+    let catalogError: String?
     var path: [Route] = []
     var run: QuizRun?
-    var importState: ImportState = .idle
     var lastSavedSession: StudySession?
     /// 直近のセット完走で次の帯が開いた軸（結果画面の表示用。next が開いた帯）。次のセット開始で消す
     var lastUnlocked: [Stage.Clear] = []
@@ -45,11 +41,14 @@ final class AppModel {
 
     private var context: ModelContext { container.mainContext }
 
-    init(container: ModelContainer, settings: AppSettings, analytics: UsageAnalytics? = nil, cloudSync: Bool = false) {
+    init(container: ModelContainer, settings: AppSettings, analytics: UsageAnalytics? = nil, cloudSync: Bool = false,
+         catalog: QuestionCatalog = .empty, catalogError: String? = nil) {
         self.container = container
         self.settings = settings
         self.analytics = analytics ?? UsageAnalytics(settings: settings)
         self.cloudSync = cloudSync
+        self.catalog = catalog
+        self.catalogError = catalogError
         if cloudSync { observeRemoteChanges() }
         ReminderScheduler.shared.onOpen = { [weak self] in self?.analytics.log(.reminderOpened) }
     }
@@ -118,17 +117,11 @@ final class AppModel {
         if changed { save("merge") }
     }
 
-    // MARK: - 取り込み
+    // MARK: - 起動時の整備
 
-    /// 起動時にバックグラウンドで実行。JSON が前回と同じなら何もしない
-    func importBundledDataIfNeeded() async {
-        guard importState != .running else { return }
-        importState = .running
-        // 1.7 で問題データを別ストアに分けた。初回は fingerprint を消して新しいストアへ取り込み直す（§2.3）
-        if !settings.storesSplit {
-            settings.importedFingerprint = nil
-            settings.storesSplit = true
-        }
+    /// 起動時に 1 回。記録の補正と移行、ウィジェットの写し、通知の予約
+    func prepareAtLaunch() {
+        removeLegacyQuestionStore()
         backfillMasteredAt()
         mergeDuplicateRecords()
         // 1.8 で到達帯を軸ごとに分けた。初回は記録から軸ごとに求め直す（§3.4 [v1.8]）
@@ -136,25 +129,16 @@ final class AppModel {
             raiseUnlockedLevelsFromRecords()
             settings.stageTracksMigrated = true
         }
-        // 取り込みの要否にかかわらず、起動のたびにウィジェットの写しを書き直す（早期 return の経路でも）
-        defer {
-            refreshWidgetSnapshot()
-            refreshReminders()
+        refreshWidgetSnapshot()
+        refreshReminders()
+    }
+
+    /// 1.7〜1.8 の問題ストア（questions.store）と取り込みのキーを消す [v1.9]（§2.1、Issue #21）。無ければ何もしない
+    func removeLegacyQuestionStore() {
+        for url in AgnoriaSchema.legacyQuestionStoreURLs where FileManager.default.fileExists(atPath: url.path) {
+            try? FileManager.default.removeItem(at: url)
         }
-        do {
-            let payload = try BundleData.load()
-            if settings.importedFingerprint == payload.fingerprint {
-                importState = .done
-                return
-            }
-            let importer = DataImporter(modelContainer: container)
-            _ = try await importer.importData(payload)
-            settings.importedFingerprint = payload.fingerprint
-            importState = .done
-        } catch {
-            importState = .failed(String(describing: error))
-            analytics.record(error, "import")
-        }
+        settings.removeLegacyImportKeys()
     }
 
     // MARK: - ウィジェット
@@ -244,17 +228,13 @@ final class AppModel {
     func buildQuestions(_ config: QuizConfig, using rng: inout some RandomNumberGenerator) -> [QuizQuestion] {
         let progress = progressMap()
         let modes = config.mode.map { [$0] } ?? settings.autoModes
-
-        let grammar = modes.contains(.grammar) ? (try? context.fetch(FetchDescriptor<GrammarQuestion>(
-            predicate: #Predicate { !$0.isArchived }))) ?? [] : []
-        let words = modes.contains(.word) ? (try? context.fetch(FetchDescriptor<Word>(
-            predicate: #Predicate { !$0.isArchived }))) ?? [] : []
-        let listening = modes.contains(.listening) ? (try? context.fetch(FetchDescriptor<ListeningQuestion>(
-            predicate: #Predicate { !$0.isArchived }))) ?? [] : []
-        let grammarSnaps = Dictionary(uniqueKeysWithValues: grammar.map { ($0.id, $0.snapshot) })
-        let listeningSnaps = Dictionary(uniqueKeysWithValues: listening.map { ($0.id, $0.snapshot) })
-        let pool = words.map(\.snapshot)
-        let wordSnaps = Dictionary(uniqueKeysWithValues: pool.map { ($0.id, $0) })
+        let grammar = modes.contains(.grammar) ? catalog.grammar : []
+        let words = modes.contains(.word) ? catalog.words : []
+        let listening = modes.contains(.listening) ? catalog.listening : []
+        let grammarSnaps = catalog.grammarByID
+        let listeningSnaps = catalog.listeningByID
+        let pool = catalog.words
+        let wordSnaps = catalog.wordByID
 
         var candidates: [SetBuilder.Candidate] = []
         candidates += grammar.map {
@@ -427,18 +407,9 @@ final class AppModel {
     /// 軸ごとの全レベルの習得状況と、今取り組む帯（§3.4 [v1.8]）
     func stageStates() -> [DrillMode: StageState] {
         let progress = progressMap()
-        let grammar = (try? context.fetch(FetchDescriptor<GrammarQuestion>(
-            predicate: #Predicate { !$0.isArchived }))) ?? []
-        let words = (try? context.fetch(FetchDescriptor<Word>(
-            predicate: #Predicate { !$0.isArchived }))) ?? []
-        let listening = (try? context.fetch(FetchDescriptor<ListeningQuestion>(
-            predicate: #Predicate { !$0.isArchived }))) ?? []
-        let items: [DrillMode: [(id: String, level: Int)]] = [
-            .word: words.map { (id: $0.id, level: $0.level) },
-            .grammar: grammar.map { (id: $0.id, level: $0.level) },
-            .listening: listening.map { (id: $0.id, level: $0.level) },
-        ]
+        let items = catalog.levelItemsByMode
         return Dictionary(uniqueKeysWithValues: DrillMode.allCases.map { mode in
+
             let byLevel = MasteryStats.byLevel(items: items[mode] ?? [], progress: progress)
             let unlocked = settings.unlockedLevel(mode)
             return (mode, StageState(current: Stage.current(unlocked: unlocked, byLevel: byLevel),

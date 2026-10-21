@@ -23,7 +23,16 @@ struct AgnoriaApp: App {
             fatalError("SwiftData の初期化に失敗: \(error)")
         }
         ReminderScheduler.shared.activate()
-        _model = State(initialValue: AppModel(container: stores.container, settings: AppSettings(), cloudSync: stores.cloudSync))
+        // 問題データは同梱 JSON をメモリに読む（§2.1 [v1.9]）。読めなければ空のままホームで知らせる
+        var catalog = QuestionCatalog.empty
+        var catalogError: String?
+        do {
+            catalog = QuestionCatalog(try BundleData.load())
+        } catch {
+            catalogError = String(describing: error)
+        }
+        _model = State(initialValue: AppModel(container: stores.container, settings: AppSettings(), cloudSync: stores.cloudSync,
+                                              catalog: catalog, catalogError: catalogError))
     }
 
     var body: some Scene {
@@ -56,7 +65,8 @@ struct AgnoriaApp: App {
             .environment(model)
             .environment(model.settings)
             .task {
-                await model.importBundledDataIfNeeded()
+                model.prepareAtLaunch()
+
                 #if DEBUG
                 model.showDebugStageClearIfRequested()
                 model.crashIfRequested()

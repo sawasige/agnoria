@@ -34,7 +34,8 @@
 ## 開発環境
 
 - Xcode 27 / Swift 6（Swift 6 言語モード、Approachable Concurrency、MainActor 既定分離）
-- SwiftUI + SwiftData、MV アーキテクチャ（View + `@Observable` のストア）
+- SwiftUI + SwiftData（学習記録のみ。問題データは同梱 JSON をメモリに読む）、MV アーキテクチャ（View + `@Observable` のストア）
+
 - テストは Swift Testing（`import Testing`）
 - Bundle ID: `com.himatsubu.Agnoria`
 
@@ -77,7 +78,7 @@ Agnoria/
   App/        エントリポイント、AppModel（画面遷移・セット実行・履歴）、QuizRun
   Models/     SwiftData モデル、出題条件（DrillMode / QuizConfig）、スナップショット
   Logic/      純粋ロジック: 穴埋め、優先度、セット生成、習得段階、ステージ、連続日数、クリアまでの目安、リスニングの声の選び方
-  Data/       バンドル JSON の読み込みと SwiftData への取り込み（内容が変わったときのみ）
+  Data/       バンドル JSON の読み込みと検証、メモリ上の問題データ（QuestionCatalog）
   Services/   設定、音声セッション、効果音、読み上げ、リスニングの再生（ListeningPlayer）、Foundation Models、利用状況の計測とクラッシュ報告（UsageAnalytics）
   Views/      Home / Quiz / Result / Settings / Stats と共通部品（Shared）
   Resources/  Data/words.json, Data/grammar.json, Data/listening.json, Sounds/correct.caf, Sounds/wrong.caf
@@ -103,7 +104,7 @@ ci_scripts/       Xcode Cloud のスクリプト（アーカイブ後に dSYM �
 
 - アプリ内（`Agnoria/` 配下）に「TOEIC」の文字列を含めない。テストと `grep -rn TOEIC Agnoria/` で確認する
 
-JSON を変えると次回起動時に SHA-256 で差分を検出し、バックグラウンドで取り込みます。学習履歴は問題 ID で紐づくため、問題を更新しても消えません。
+問題データは起動時に JSON からメモリに読みます（SwiftData には入れません）。学習履歴は問題 ID で紐づくため、問題を更新しても消えません。JSON から消えた問題の履歴は残りますが、出題と集計には入りません。
 
 ## ドキュメント
 

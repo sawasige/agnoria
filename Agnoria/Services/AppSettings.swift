@@ -16,8 +16,9 @@ final class AppSettings {
         static func topStageCelebrated(_ mode: DrillMode) -> String { "topStageCelebrated.\(mode.rawValue)" }
         static let legacyTopStageCelebrated = "topStageCelebrated"
         static let stageTracksMigrated = "stageTracksMigrated"
-        static let importedFingerprint = "importedDataFingerprint"
-        static let storesSplit = "storesSplit"
+        /// 1.8 までの取り込みのキー。1.9 で消す（AppModel.removeLegacyQuestionStore）
+        static let legacyImportedFingerprint = "importedDataFingerprint"
+        static let legacyStoresSplit = "storesSplit"
         static let reviewRequestedVersion = "reviewRequestedVersion"
         static let reminderEnabled = "reminderEnabled"
         static let reminderMinutes = "reminderMinutes"
@@ -93,10 +94,10 @@ final class AppSettings {
         }
     }
 
-    /// 1.7 でストアを記録用と問題用に分けたか。false なら起動時に問題データを新しいストアへ取り込み直す（§2.3）
-    var storesSplit: Bool {
-        get { defaults.bool(forKey: Key.storesSplit) }
-        set { defaults.set(newValue, forKey: Key.storesSplit) }
+    /// 1.8 までの取り込みのキーを消す [v1.9]
+    func removeLegacyImportKeys() {
+        defaults.removeObject(forKey: Key.legacyImportedFingerprint)
+        defaults.removeObject(forKey: Key.legacyStoresSplit)
     }
 
     /// 学習のリマインダー通知（§4.9 [v1.8]）。既定はオフで、通知を許可したときにオンになる
@@ -121,10 +122,6 @@ final class AppSettings {
         set { defaults.set(newValue, forKey: Key.reviewRequestedVersion) }
     }
 
-    var importedFingerprint: String? {
-        get { defaults.string(forKey: Key.importedFingerprint) }
-        set { defaults.set(newValue, forKey: Key.importedFingerprint) }
-    }
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults

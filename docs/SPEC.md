@@ -48,7 +48,7 @@
 
 ### 2.1 バンドルJSON
 
-`Agnoria/Resources/Data/` 配下に `grammar.json` / `words.json` / **[v1.9]** `listening.json` を置く（synchronized folder なので Xcode に手で追加する必要はない）。起動時に SwiftData へ取り込む。
+`Agnoria/Resources/Data/` 配下に `grammar.json` / `words.json` / **[v1.9]** `listening.json` を置く（synchronized folder なので Xcode に手で追加する必要はない）。~~起動時に SwiftData へ取り込む~~ **[v1.9]** 起動時にメモリへ読む（`QuestionCatalog`。SwiftData には入れない。下の「取り込みルール」）。
 
 #### `grammar.json`（Part5 文法）
 ```json
@@ -109,29 +109,17 @@
 - `pos` は `名詞` / `動詞` / `形容詞` / `副詞` / `前置詞` / `接続詞`
 
 #### 取り込みルール
-- `id` を主キーに upsert。JSON側で問題文を修正したら次回起動時に反映される
-- 学習履歴（正誤・ブックマーク）は `id` に紐づくので、問題を更新しても履歴は消えない
-- JSON に存在しなくなった `id` は削除しない（履歴保護）。`isArchived = true` にして出題対象から外す。再び JSON に現れたら `isArchived = false` に戻す
-- **[v1.1]** 取り込みは毎起動時にバックグラウンドで行うが、2ファイルの SHA-256 が前回取り込み時と同じならスキップする（UserDefaults に保存）
+**[v1.9]** 問題データは SwiftData に取り込まず、起動時に同梱 JSON を読んでメモリ上の値型（`WordSnapshot` / `GrammarSnapshot` / `ListeningSnapshot`）で持つ（`QuestionCatalog`。id → 問題の辞書と軸ごとの一覧。読み込みは 400 + 200 + 120 件で数十 ms、テストで 0.5 秒未満を保証）。DB が要るのは iCloud で同期する学習記録だけで、問題データは読み取り専用の数百 KB（SPEC-REVIEW N11、Issue #21）。
+- 学習履歴（正誤・ブックマーク）は `id` に紐づくので、問題を更新しても履歴は消えない。JSON 側で問題文を直せば次回起動時に反映される
+- JSON に存在しなくなった `id` の記録は消さない（履歴保護）。出題と集計は JSON にある id だけを対象にするので、自然に外れる。再び JSON に現れれば記録ごと戻る（~~`isArchived`~~ は廃止）
+- 読めなかったとき（同梱漏れ・壊れた JSON）はホームに「問題データを読み込めません」と理由を出す。1.8 までの `questions.store` と取り込みのキー（fingerprint、`storesSplit`）は起動時に消す（`AppModel.removeLegacyQuestionStore`）
+- ~~**[v1.1]** 取り込みは毎起動時にバックグラウンドで行うが、2ファイルの SHA-256 が前回取り込み時と同じならスキップする~~ **[v1.9]** 廃止
 
 ### 2.2 SwiftData モデル
 
+**[v1.9]** SwiftData に入れるのは学習記録の 2 モデルだけ。問題データ（~~GrammarQuestion / Word / ListeningQuestion~~）は §2.1 のとおりメモリに持つ。
+
 ```
-GrammarQuestion
-  id: String (unique)
-  category, question, choices: [String], answer: Int, explanation, level: Int
-  isArchived: Bool
-
-Word
-  id: String (unique)
-  word, pos, meaning, example, exampleJa, distractors: [String], category, level: Int
-  isArchived: Bool
-
-ListeningQuestion         // [v1.9] 問題ストア（ローカル）
-  id: String (unique)
-  category, question, questionJa, choices: [String], choicesJa: [String], answer: Int, explanation, level: Int
-  isArchived: Bool
-
 ItemProgress              // [v1.1] リレーションではなく itemID で紐づける独立レコード
   itemID: String (unique) // GrammarQuestion.id / Word.id / ListeningQuestion.id [v1.9]
   recentResults: [Bool]   // 直近3回の正誤。古い順。最大3件
@@ -156,9 +144,9 @@ SessionResult
 ```
 
 **[v1.5]** CloudKit に載せるための変更（§2.3）:
-- `unique` 属性は使わない（CloudKit が対応しない）。`GrammarQuestion.id` / `Word.id` / `ItemProgress.itemID` の一意性は取り込みと取得のコードで保つ
+- `unique` 属性は使わない（CloudKit が対応しない）。`ItemProgress.itemID` の一意性は取得のコードで保つ
 - すべての保存プロパティに既定値を持たせる（`""` / `0` / `false` / `[]`）。optional にはしない
-- ストアを 2 つに分ける。**問題ストア**（GrammarQuestion, Word。ローカルのみ、同期しない）と**記録ストア**（ItemProgress, StudySession。CloudKit 同期）。モデル間の参照は `itemID` 文字列だけなので分けられる
+- ~~ストアを 2 つに分ける。**問題ストア**（GrammarQuestion, Word。ローカルのみ、同期しない）と**記録ストア**（ItemProgress, StudySession。CloudKit 同期）~~ **[v1.9]** 問題データは SwiftData から外した（§2.1）。残るのは記録ストアだけ
 
 ### 2.3 iCloud 同期 **[v1.5]**
 
@@ -171,7 +159,7 @@ SessionResult
 
 **同期する範囲**: ItemProgress と StudySession のみ。問題データは同梱 JSON から端末ごとに取り込む（iCloud に上げると端末ごとに二重になる）。設定（UserDefaults）は同期しない。到達帯（§3.4）は記録から再計算できるので、同期後に再計算して高い方に揃える
 
-**ストアの構成 [v1.7]**: 記録ストアは 1.0 からの `default.store` をそのまま使い、これに CloudKit を付ける（既存の記録は初回同期でそのまま上がる）。問題データは新しい `questions.store`（ローカルのみ）に移し、初回起動で fingerprint を消して同梱 JSON から取り込み直す（`AppSettings.storesSplit`）。`default.store` から GrammarQuestion / Word の 2 モデルが外れるのは軽量マイグレーションで通る。記録を別ストアへコピーする案は採らない（コピーの失敗経路が増えるだけで、問題データの取り込み直しは 1 秒未満）
+**ストアの構成 [v1.7]**: 記録ストアは 1.0 からの `default.store` をそのまま使い、これに CloudKit を付ける（既存の記録は初回同期でそのまま上がる）。問題データは新しい `questions.store`（ローカルのみ）に移し、初回起動で fingerprint を消して同梱 JSON から取り込み直す（`AppSettings.storesSplit`）。**[v1.9]** `questions.store` も廃止し、問題データはメモリに持つ（§2.1）。ファイルは起動時に消す。`default.store` から GrammarQuestion / Word の 2 モデルが外れるのは軽量マイグレーションで通る。記録を別ストアへコピーする案は採らない（コピーの失敗経路が増えるだけで、問題データの取り込み直しは 1 秒未満）
 
 **モデルの制約 [v1.7]**: CloudKit では `@Attribute(.unique)` を使えず、全プロパティに既定値か Optional が要る。`ItemProgress.itemID` の unique を外し、各プロパティに既定値を付けた。同じ itemID の重複は取得時にまとめる（`RecordMerge`、`AppModel.mergeDuplicateRecords`）。StudySession の `id` も同様に取得時に 1 件へ寄せる
 
@@ -214,7 +202,8 @@ SessionResult
 
 ```
 入力: mode（nil = おまかせ [v1.2]）, category（nilならミックス）, format（単語のみ）
-1. 対象 = isArchived == false かつ mode 一致（おまかせなら単語・文法の両方）かつ category 一致（ミックスなら全件）
+1. 対象 = 同梱 JSON にある問題（**[v1.9]** ~~isArchived == false~~）かつ mode 一致（おまかせなら単語・文法の両方）かつ category 一致（ミックスなら全件）
+
 2. 優先度スコアを付ける（d = 最後に答えてからの経過日数 / 14 を 0〜1 に丸めたもの [v1.2]）
      未回答:                    3
      直近3回に不正解あり:       2 + (不正解の数)

@@ -8,9 +8,6 @@ struct HomeView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.dynamicTypeSize) private var typeSize
 
-    @Query(filter: #Predicate<Word> { !$0.isArchived }) private var words: [Word]
-    @Query(filter: #Predicate<GrammarQuestion> { !$0.isArchived }) private var grammar: [GrammarQuestion]
-    @Query(filter: #Predicate<ListeningQuestion> { !$0.isArchived }) private var listening: [ListeningQuestion]
     @Query private var progress: [ItemProgress]
     @Query private var sessions: [StudySession]
 
@@ -18,13 +15,9 @@ struct HomeView: View {
     @State private var showStart = false
     @State private var showEmptyAlert = false
 
+    /// 到達帯までの問題（id・分野）
     private func items(_ mode: DrillMode) -> [(id: String, category: String)] {
-        let enabled = settings.enabledLevels(mode)
-        switch mode {
-        case .word: return words.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
-        case .grammar: return grammar.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
-        case .listening: return listening.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
-        }
+        model.catalog.categoryItems(mode, levels: settings.enabledLevels(mode))
     }
 
     var body: some View {
@@ -35,11 +28,8 @@ struct HomeView: View {
         let reviewIDs = reviewItems.map(\.id)
         let wrong = MasteryStats.wrongCount(itemIDs: reviewIDs, progress: pmap)
         let bookmarked = MasteryStats.bookmarkCount(itemIDs: reviewIDs, progress: pmap)
-        let hasItems = !words.isEmpty || !grammar.isEmpty || !listening.isEmpty
-        let tracks = Stage.tracks(items: [.word: words.map { (id: $0.id, level: $0.level) },
-                                          .grammar: grammar.map { (id: $0.id, level: $0.level) },
-                                          .listening: listening.map { (id: $0.id, level: $0.level) }],
-                                  progress: pmap, unlocked: settings.unlockedLevels)
+        let hasItems = !model.catalog.isEmpty
+        let tracks = Stage.tracks(items: model.catalog.levelItemsByMode, progress: pmap, unlocked: settings.unlockedLevels)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
 
@@ -47,13 +37,11 @@ struct HomeView: View {
             VStack(spacing: 16) {
                 header
 
-                if model.importState == .running, !hasItems {
-                    ProgressView("問題データを準備中…")
-                        .padding(.vertical, 40)
-                } else if case .failed(let message) = model.importState, !hasItems {
+                if !hasItems {
                     ContentUnavailableView("問題データを読み込めません", systemImage: "exclamationmark.triangle",
-                                           description: Text(message))
+                                           description: Text(model.catalogError ?? ""))
                 } else {
+
                     Button {
                         model.path = [.stats]
                     } label: {
