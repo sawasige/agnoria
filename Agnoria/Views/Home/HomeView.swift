@@ -1,7 +1,8 @@
 import SwiftUI
 import SwiftData
 
-/// ホーム（§4.1 [v1.4]）。状態を見るダッシュボード。学習の入口は画面下の固定バーだけ
+/// ホーム（§4.1 [v1.4]）。役割は 2 つだけ: スクロール領域は状態を見る **ダッシュボード**（タップはすべて進捗へ）、
+/// 画面下の固定バーは **学習開始**（おまかせ / 選んで始める）。ダッシュボードに学習開始の操作は置かない [v1.9]
 struct HomeView: View {
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
@@ -14,63 +15,52 @@ struct HomeView: View {
     @Query private var sessions: [StudySession]
 
     @State private var showSettings = false
+    @State private var showStart = false
     @State private var showEmptyAlert = false
 
-    private var wordItems: [(id: String, category: String)] {
-        let enabled = settings.enabledLevels(.word)
-        return words.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
-    }
-    private var grammarItems: [(id: String, category: String)] {
-        let enabled = settings.enabledLevels(.grammar)
-        return grammar.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
-    }
-    private var listeningItems: [(id: String, category: String)] {
-        let enabled = settings.enabledLevels(.listening)
-        return listening.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
+    private func items(_ mode: DrillMode) -> [(id: String, category: String)] {
+        let enabled = settings.enabledLevels(mode)
+        switch mode {
+        case .word: return words.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
+        case .grammar: return grammar.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
+        case .listening: return listening.filter { enabled.contains($0.level) }.map { ($0.id, $0.category) }
+        }
     }
 
     var body: some View {
         let pmap = Dictionary(progress.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, _ in a })
-        // 復習カードの件数はおまかせ・復習の対象（単語・文法。切り替えがオンならリスニングも）[v1.9]
-        let allItems = wordItems + grammarItems + (settings.autoIncludesListening ? listeningItems : [])
-        let overall = MasteryStats.summarize(items: allItems, progress: pmap)
-        let allIDs = allItems.map(\.id)
-        let wrong = MasteryStats.wrongCount(itemIDs: allIDs, progress: pmap)
-        let bookmarked = MasteryStats.bookmarkCount(itemIDs: allIDs, progress: pmap)
+        // 復習の件数はおまかせ・復習の対象（単語・文法。切り替えがオンならリスニングも）[v1.9]
+        let reviewItems = settings.autoModes.flatMap(items)
+        let overall = MasteryStats.summarize(items: reviewItems, progress: pmap)
+        let reviewIDs = reviewItems.map(\.id)
+        let wrong = MasteryStats.wrongCount(itemIDs: reviewIDs, progress: pmap)
+        let bookmarked = MasteryStats.bookmarkCount(itemIDs: reviewIDs, progress: pmap)
+        let hasItems = !words.isEmpty || !grammar.isEmpty || !listening.isEmpty
         let tracks = Stage.tracks(items: [.word: words.map { (id: $0.id, level: $0.level) },
                                           .grammar: grammar.map { (id: $0.id, level: $0.level) },
                                           .listening: listening.map { (id: $0.id, level: $0.level) }],
                                   progress: pmap, unlocked: settings.unlockedLevels)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
-        let estimates = estimates(tracks)
-        let showReview = overall.dueForReview > 0 || overall[.struggling] > 0 || wrong > 0 || bookmarked > 0
 
         ScrollView {
             VStack(spacing: 16) {
                 header
 
-                if model.importState == .running, allItems.isEmpty {
+                if model.importState == .running, !hasItems {
                     ProgressView("問題データを準備中…")
                         .padding(.vertical, 40)
-                } else if case .failed(let message) = model.importState, allItems.isEmpty {
+                } else if case .failed(let message) = model.importState, !hasItems {
                     ContentUnavailableView("問題データを読み込めません", systemImage: "exclamationmark.triangle",
                                            description: Text(message))
                 } else {
-                    ForEach(tracks) { track in
-                        Button {
-                            model.path = [.stats]
-                        } label: {
-                            StageCard(track: track, estimate: estimates[track.mode],
-                                      action: track.mode == .listening
-                                          ? StageCard.Action(title: "リスニングで 10 問", systemImage: "speaker.wave.2") {
-                                              start(QuizConfig(mode: .listening, category: nil, format: nil))
-                                          }
-                                          : nil)
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityHint("進捗の詳細を開く")
+                    Button {
+                        model.path = [.stats]
+                    } label: {
+                        StageSummaryCard(tracks: tracks)
                     }
+                    .buttonStyle(.plain)
+                    .accessibilityHint("進捗の詳細を開く")
 
                     HStack(spacing: 12) {
                         StreakCard(streak: streak)
@@ -80,18 +70,18 @@ struct HomeView: View {
                     Button {
                         model.path = [.stats]
                     } label: {
-                        DailyChart(days: daily, height: 110)
-                            .glassCard()
+                        VStack(alignment: .leading, spacing: 10) {
+                            DailyChart(days: daily, height: 110)
+                            if overall.dueForReview > 0 || overall[.struggling] > 0 {
+                                Text("復習待ち \(overall.dueForReview) ・ 苦手 \(overall[.struggling])")
+                                    .font(.caption.monospacedDigit())
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .glassCard()
                     }
                     .buttonStyle(.plain)
                     .accessibilityHint("進捗の詳細を開く")
-
-                    if showReview {
-                        ReviewCard(dueForReview: overall.dueForReview, struggling: overall[.struggling],
-                                   wrong: wrong, bookmarked: bookmarked) { filter in
-                            start(QuizConfig(mode: nil, category: nil, format: nil, filter: filter))
-                        }
-                    }
                 }
             }
             .padding()
@@ -100,7 +90,7 @@ struct HomeView: View {
         }
         .background { AppBackground() }
         .safeAreaInset(edge: .bottom) {
-            actionBar(tracks: tracks, disabled: allItems.isEmpty)
+            actionBar(tracks: tracks, disabled: !hasItems)
         }
         .navigationTitle("Agnoria")
         #if os(iOS)
@@ -115,10 +105,16 @@ struct HomeView: View {
         .sheet(isPresented: $showSettings) {
             SettingsView()
         }
+        .sheet(isPresented: $showStart) {
+            StartSheet(tracks: tracks, wrong: wrong, bookmarked: bookmarked) { config in
+                showStart = false
+                start(config)
+            }
+        }
         .alert("出題できる問題がありません", isPresented: $showEmptyAlert) {
             Button("OK", role: .cancel) {}
         } message: {
-            Text("設定の到達帯を広げるか、分野を選んでください。")
+            Text("設定の到達帯を広げるか、別の分野を選んでください。")
         }
     }
 
@@ -146,9 +142,9 @@ struct HomeView: View {
         .padding(.bottom, 2)
     }
 
-    // MARK: - 下部の固定バー
+    // MARK: - 下部の固定バー = 学習開始
 
-    /// 画面下に固定する学習の入口。おまかせ（主）と分野を選ぶ（副）
+    /// おまかせ（主）と、選んで始める（副。学習の選択シート §4.10）の 2 つだけ
     @ViewBuilder
     private func actionBar(tracks: [Stage.Track], disabled: Bool) -> some View {
         // 文字サイズがアクセシビリティ段階のときは横に並べず縦に積む（横だと文字が 1 字ずつ縦に折れる）
@@ -162,13 +158,11 @@ struct HomeView: View {
                         Label("おまかせで10問", systemImage: "sparkles")
                             .font(.headline)
                             .fontDesign(.rounded)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.8)
                         Text(autoHint(tracks))
                             .font(.caption)
                             .opacity(0.85)
                             .lineLimit(1)
-                            .minimumScaleFactor(0.75)
+                            .minimumScaleFactor(0.8)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -177,55 +171,27 @@ struct HomeView: View {
                 .disabled(disabled)
                 .accessibilityLabel("おまかせで10問。\(autoHint(tracks))")
 
-                // おまかせにリスニングを混ぜる切り替え（§3.2 [v1.9]）。設定の奥に置かず、おまかせの隣で切り替える
-                let listeningOn = settings.autoIncludesListening
                 Button {
-                    settings.autoIncludesListening.toggle()
-                    model.analytics.log(.settingsChanged(key: "autoIncludesListening"))
+                    showStart = true
                 } label: {
                     if stacked {
-                        Label("おまかせにリスニングを含める", systemImage: listeningOn ? "speaker.wave.2.fill" : "speaker.slash")
+                        Label("選んで始める", systemImage: "list.bullet")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                     } else {
                         VStack(spacing: 2) {
-                            Image(systemName: listeningOn ? "speaker.wave.2.fill" : "speaker.slash")
+                            Image(systemName: "list.bullet")
                                 .font(.headline)
-                            Text("音声")
+                            Text("選んで始める")
                                 .font(.caption2)
                         }
-                        .frame(minWidth: 36)
-                    }
-                }
-                .buttonStyle(.glass)
-                .tint(listeningOn ? Color.accentColor : nil)
-                .foregroundStyle(listeningOn ? Color.accentColor : Color.primary)
-                .disabled(disabled)
-                .accessibilityLabel("おまかせにリスニングを含める")
-                .accessibilityValue(listeningOn ? "オン" : "オフ")
-                .accessibilityIdentifier("autoListeningToggle")
-
-                Button {
-                    model.path = [.pick]
-                } label: {
-                    if stacked {
-                        Label("分野を選ぶ", systemImage: "square.grid.2x2")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                    } else {
-                        VStack(spacing: 2) {
-                            Image(systemName: "square.grid.2x2")
-                                .font(.headline)
-                            Text("分野")
-                                .font(.caption2)
-                        }
-                        .frame(minWidth: 36)
-
+                        .fixedSize()
                     }
                 }
                 .buttonStyle(.glass)
                 .disabled(disabled)
-                .accessibilityLabel("分野を選ぶ")
+                .accessibilityLabel("選んで始める")
+                .accessibilityHint("単語・文法・リスニング・復習から選ぶ")
             }
             .controlSize(.large)
         }
@@ -247,25 +213,6 @@ struct HomeView: View {
             else { groups.append((t.current, [t.mode.title])) }
         }
         return groups.map { "\($0.titles.joined(separator: "・")) \($0.level)" }.joined(separator: "・") + " 点帯が中心"
-
-    }
-
-    /// 軸ごとのクリアまでの目安。1 セットに占める割合は、到達帯までの問題数の比で見込む
-    private func estimates(_ tracks: [Stage.Track]) -> [DrillMode: Pace.Estimate] {
-        let idsByMode: [DrillMode: Set<String>] = [.word: Set(wordItems.map(\.id)), .grammar: Set(grammarItems.map(\.id)),
-                                                   .listening: Set(listeningItems.map(\.id))]
-
-        let total = Double(idsByMode.values.reduce(0) { $0 + $1.count })
-        let sessionDates = sessions.map(\.finishedAt)
-        var out: [DrillMode: Pace.Estimate] = [:]
-        for track in tracks {
-            let ids = idsByMode[track.mode] ?? []
-            guard total > 0, !ids.isEmpty else { continue }
-            out[track.mode] = Pace.estimate(remaining: Stage.remainingToClear(track.summary),
-                                            masteredDates: progress.filter { ids.contains($0.itemID) }.compactMap(\.masteredAt),
-                                            sessionDates: sessionDates, share: Double(ids.count) / total)
-        }
-        return out
     }
 
     private func start(_ config: QuizConfig) {
@@ -273,112 +220,67 @@ struct HomeView: View {
     }
 }
 
-// MARK: - ウィジェット
+// MARK: - ダッシュボードの部品
 
-/// 1 つの軸の今の帯の習得率・積み上げバー・次の帯まで・4 帯のミニ表示（軸ごとに 1 枚 [v1.8]）。
-/// [v1.9] 末尾に始めるボタンを置ける（リスニングの「リスニングで 10 問」）
-struct StageCard: View {
-    struct Action {
-        var title: String
-        var systemImage: String
-        var run: () -> Void
-    }
-
-    let track: Stage.Track
-    /// クリアまでの目安（§4.1）。クリア済みなら nil
-    var estimate: Pace.Estimate? = nil
-    /// カードの末尾のボタン。カード全体のタップ（進捗へ）より内側のボタンが先に反応する
-    var action: Action? = nil
-
-    private var stage: Int { track.current }
-    private var summary: MasterySummary { track.summary }
+/// 3 つの軸の帯の進みを 1 枚にまとめたカード（§4.1 [v1.9]）。軸ごとに 軸名・今の帯・習得率・バー・4 帯の記号。
+/// 末尾に、次の帯に一番近い軸の「あと N 問」を 1 行。クリアまでの目安は進捗画面（§4.6）
+struct StageSummaryCard: View {
+    let tracks: [Stage.Track]
     @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
-        // アクセシビリティ文字サイズでは見出しと帯の並びを縦に積む
         let stacked = typeSize.isAccessibilitySize
-        VStack(alignment: .leading, spacing: 12) {
-            AnyLayout(stacked ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .top))) {
-                VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 14) {
+            ForEach(tracks) { track in
+                VStack(alignment: .leading, spacing: 6) {
                     HStack(alignment: .firstTextBaseline, spacing: 6) {
                         Text(track.mode.title)
                             .font(.subheadline.weight(.semibold))
-                        Text("\(stage) 点帯の習得")
-                            .font(.subheadline)
+                        Text("\(track.current) 点帯")
+                            .font(.caption)
                             .foregroundStyle(.secondary)
-                    }
-                    HStack(alignment: .firstTextBaseline, spacing: 2) {
-                        Text("\(summary.masteredPercent)")
-                            .font(.system(size: 36, weight: .bold, design: .rounded).monospacedDigit())
+                        Spacer()
+                        Text("\(track.summary.masteredPercent)%")
+                            .font(.system(.headline, design: .rounded).weight(.bold).monospacedDigit())
                             .contentTransition(.numericText())
-                        Text("%")
-                            .font(.title3.weight(.semibold))
-                            .fontDesign(.rounded)
-                            .foregroundStyle(.secondary)
+                    }
+                    AnyLayout(stacked ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(spacing: 12))) {
+                        MasteryBar(summary: track.summary, height: 8)
+                        StageChips(state: { level in
+                            if level > track.unlocked { return .locked }
+                            if Stage.isCleared(track.byLevel[level] ?? MasterySummary()) { return .cleared }
+                            return level == track.current ? .current : .open
+                        })
+                        .fixedSize()
                     }
                 }
-                if !stacked { Spacer() }
-                stageRow
             }
-            MasteryBar(summary: summary, height: 12)
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(nextText)
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color.accentColor)
-                    if let estimateText {
-                        Text(estimateText)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                    }
-                }
+            HStack {
+                Text(nextText)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Color.accentColor)
                 Spacer()
                 Image(systemName: "chevron.right")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.tertiary)
             }
-            if let action {
-                Button(action: action.run) {
-                    Label(action.title, systemImage: action.systemImage)
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-                .accessibilityLabel(action.title)
-            }
         }
         .glassCard()
-        .accessibilityElement(children: action == nil ? .combine : .contain)
+        .accessibilityElement(children: .combine)
     }
 
-
-    /// 4 帯の状態を横に並べる（StageChips）
-    private var stageRow: some View {
-        StageChips(state: { level in
-            if level > track.unlocked { return .locked }
-            if Stage.isCleared(track.byLevel[level] ?? MasterySummary()) { return .cleared }
-            return level == stage ? .current : .open
-        })
-        .padding(.top, 4)
-    }
-
+    /// 次の帯に一番近い軸（残りの習得数が最少。0 は「進める」）。最上位をクリアした軸は対象外
     private var nextText: String {
-        if let next = Stage.next(after: stage) {
-            let remaining = Stage.remainingToClear(summary)
-            return remaining == 0
-                ? "\(next) 点帯へ進めます"
-                : "あと \(remaining) 問の習得で \(next) 点帯へ"
+        let candidates = tracks.compactMap { t -> (track: Stage.Track, next: Int, remaining: Int)? in
+            guard let next = Stage.next(after: t.current) else { return nil }
+            return (t, next, Stage.remainingToClear(t.summary))
         }
-        return Stage.isCleared(summary) ? "最上位の帯をクリア。復習で定着させよう" : "最上位の帯。ここを仕上げよう"
-    }
-
-    /// 「目安 約 40 セット・今のペースなら約 8 日」。まだ学習していなければセット数と 1 セットの所要時間だけ
-    private var estimateText: String? {
-        guard let estimate else { return nil }
-        if let days = estimate.days {
-            return "目安 約 \(estimate.sets) セット・今のペースなら\(Pace.daysText(days))"
+        guard let best = candidates.min(by: { $0.remaining < $1.remaining }) else {
+            return "すべての帯をクリア。復習で定着させよう"
         }
-        return "目安 約 \(estimate.sets) セット（1 セット 3〜4 分）"
+        return best.remaining == 0
+            ? "\(best.track.mode.title)は \(best.next) 点帯へ進めます"
+            : "あと \(best.remaining) 問の習得で\(best.track.mode.title) \(best.next) 点帯へ"
     }
 }
 
@@ -444,47 +346,5 @@ struct TodayCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .glassCard()
         .accessibilityElement(children: .combine)
-    }
-}
-
-/// 復習の入口。復習待ち・苦手の件数と、間違えた問題 / ブックマークのボタン
-struct ReviewCard: View {
-    let dueForReview: Int
-    let struggling: Int
-    let wrong: Int
-    let bookmarked: Int
-    let start: (DrillFilter) -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .firstTextBaseline) {
-                Label("復習", systemImage: "arrow.triangle.2.circlepath")
-                    .font(.headline)
-                Spacer()
-                Text("復習待ち \(dueForReview) ・ 苦手 \(struggling)")
-                    .font(.caption.monospacedDigit())
-                    .foregroundStyle(.secondary)
-            }
-            HStack(spacing: 12) {
-                Button { start(.wrongOnly) } label: {
-                    Label("間違えた \(wrong)", systemImage: "arrow.counterclockwise")
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                        .frame(maxWidth: .infinity)
-                }
-                .disabled(wrong == 0)
-
-                Button { start(.bookmarked) } label: {
-                    Label("ブックマーク \(bookmarked)", systemImage: "bookmark")
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                        .frame(maxWidth: .infinity)
-                }
-                .disabled(bookmarked == 0)
-            }
-            .buttonStyle(.bordered)
-            .controlSize(.large)
-        }
-        .glassCard()
     }
 }

@@ -1,8 +1,17 @@
 import SwiftUI
 import SwiftData
 
-/// 分野を選ぶ（§4.7 [v1.4]）。単語 / 文法 / リスニング [v1.9] → 出題形式（単語のみ）→ 分野タイル。ホームから切り出した
+/// 分野を選ぶ（§4.7 [v1.4]）。単語 / 文法 / リスニング [v1.9] → 出題形式（単語のみ）→ 分野タイル。
+/// [v1.9] 学習の選択シート（§4.10）から種類を指定して開く
 struct PickView: View {
+    /// 開始の処理。シートから開いたときはシートが閉じてから始めるため、呼び出し側が渡す
+    private let onStart: ((QuizConfig) -> Void)?
+
+    init(mode: DrillMode = .word, onStart: ((QuizConfig) -> Void)? = nil) {
+        _mode = State(initialValue: mode)
+        self.onStart = onStart
+    }
+
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
 
@@ -105,6 +114,8 @@ struct PickView: View {
     }
 
     private func start(_ config: QuizConfig) {
+        if let onStart { onStart(config); return }
         if model.startQuiz(config) == nil { showEmptyAlert = true }
     }
 }
+
