@@ -239,10 +239,12 @@ final class AppModel {
     }
 
     /// 候補をまとめて優先度抽出し、選ばれたものだけ問題化する。
-    /// config.mode が指定されていれば eligible でその軸に絞られる。nil（おまかせ）なら単語・文法が混ざる（リスニングは入れない [v1.9]）
+    /// config.mode が指定されていれば eligible でその軸に絞られる。nil（おまかせ・復習）なら単語・文法が混ざり、
+    /// ホームの切り替えがオンならリスニングも混ざる（§3.2 [v1.9]）
     func buildQuestions(_ config: QuizConfig, using rng: inout some RandomNumberGenerator) -> [QuizQuestion] {
         let progress = progressMap()
-        let modes = config.mode.map { [$0] } ?? DrillMode.autoModes
+        let modes = config.mode.map { [$0] } ?? settings.autoModes
+
         let grammar = modes.contains(.grammar) ? (try? context.fetch(FetchDescriptor<GrammarQuestion>(
             predicate: #Predicate { !$0.isArchived }))) ?? [] : []
         let words = modes.contains(.word) ? (try? context.fetch(FetchDescriptor<Word>(

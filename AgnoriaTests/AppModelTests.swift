@@ -47,7 +47,14 @@ struct AppModelTests {
         #expect(qs.count == 10)
         #expect(qs.allSatisfy { $0.isListening && $0.choices.count == 3 && $0.choicesJa?.count == 3 })
         #expect(Set(qs.map(\.itemID)).count == 10)
+        // ホームの切り替えをオンにすると、おまかせと復習にリスニングが混ざる
+        model.settings.autoIncludesListening = true
+        var seen = false
+        for _ in 0..<10 where !seen { seen = model.buildQuestions(.auto, using: &rng).contains { $0.isListening } }
+        #expect(seen)
+        model.settings.autoIncludesListening = false
         // 分野を指定すると、到達帯 450 のその分野（6 問）だけ
+
         let wh = model.buildQuestions(QuizConfig(mode: .listening, category: "WH 疑問文", format: nil), using: &rng)
         #expect(wh.count == 6 && wh.allSatisfy { $0.categoryName == "WH 疑問文" })
         #expect(model.stageStates()[.listening]?.byLevel[450]?.total == 30)

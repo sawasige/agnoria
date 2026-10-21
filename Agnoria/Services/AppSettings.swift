@@ -22,6 +22,7 @@ final class AppSettings {
         static let reminderEnabled = "reminderEnabled"
         static let reminderMinutes = "reminderMinutes"
         static let reminderPrompted = "reminderPrompted"
+        static let autoIncludesListening = "autoIncludesListening"
     }
 
     private let defaults: UserDefaults
@@ -58,6 +59,14 @@ final class AppSettings {
     var soundEffects: Bool {
         didSet { defaults.set(soundEffects, forKey: Key.soundEffects) }
     }
+
+    /// おまかせと復習（mode = nil のセット）にリスニングを混ぜるか（§3.2 [v1.9]）。ホームの下部バーで切り替える。既定はオフ（音を出せない場面の不意打ちを避ける）
+    var autoIncludesListening: Bool {
+        didSet { defaults.set(autoIncludesListening, forKey: Key.autoIncludesListening) }
+    }
+
+    /// おまかせと復習に混ぜる軸
+    var autoModes: [DrillMode] { DrillMode.autoModes(includingListening: autoIncludesListening) }
 
     /// 回答後の「左にスワイプでも次へ」のヒントを消したか（一度スワイプで進んだら true）[v1.4]
     var swipeHintDone: Bool {
@@ -129,6 +138,8 @@ final class AppSettings {
         autoSpeak = defaults.object(forKey: Key.autoSpeak) == nil ? true : defaults.bool(forKey: Key.autoSpeak)
         soundEffects = defaults.object(forKey: Key.soundEffects) == nil ? true : defaults.bool(forKey: Key.soundEffects)
         swipeHintDone = defaults.bool(forKey: Key.swipeHintDone)
+        autoIncludesListening = defaults.bool(forKey: Key.autoIncludesListening)
+
         reminderEnabled = defaults.bool(forKey: Key.reminderEnabled)
         // integer(forKey:) は起動引数（-reminderMinutes 1230 など、文字列で入る）も数として読む
         reminderMinutes = defaults.object(forKey: Key.reminderMinutes) == nil

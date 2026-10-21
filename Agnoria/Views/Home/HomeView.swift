@@ -31,8 +31,8 @@ struct HomeView: View {
 
     var body: some View {
         let pmap = Dictionary(progress.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, _ in a })
-        // 復習カードの件数はおまかせ・復習の対象（単語・文法）だけ。リスニングは分野画面から [v1.9]
-        let allItems = wordItems + grammarItems
+        // 復習カードの件数はおまかせ・復習の対象（単語・文法。切り替えがオンならリスニングも）[v1.9]
+        let allItems = wordItems + grammarItems + (settings.autoIncludesListening ? listeningItems : [])
         let overall = MasteryStats.summarize(items: allItems, progress: pmap)
         let allIDs = allItems.map(\.id)
         let wrong = MasteryStats.wrongCount(itemIDs: allIDs, progress: pmap)
@@ -61,7 +61,12 @@ struct HomeView: View {
                         Button {
                             model.path = [.stats]
                         } label: {
-                            StageCard(track: track, estimate: estimates[track.mode])
+                            StageCard(track: track, estimate: estimates[track.mode],
+                                      action: track.mode == .listening
+                                          ? StageCard.Action(title: "リスニングで 10 問", systemImage: "speaker.wave.2") {
+                                              start(QuizConfig(mode: .listening, category: nil, format: nil))
+                                          }
+                                          : nil)
                         }
                         .buttonStyle(.plain)
                         .accessibilityHint("進捗の詳細を開く")
@@ -157,10 +162,13 @@ struct HomeView: View {
                         Label("おまかせで10問", systemImage: "sparkles")
                             .font(.headline)
                             .fontDesign(.rounded)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                         Text(autoHint(tracks))
                             .font(.caption)
                             .opacity(0.85)
                             .lineLimit(1)
+                            .minimumScaleFactor(0.75)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -168,6 +176,34 @@ struct HomeView: View {
                 .keyboardShortcut(.defaultAction)
                 .disabled(disabled)
                 .accessibilityLabel("おまかせで10問。\(autoHint(tracks))")
+
+                // おまかせにリスニングを混ぜる切り替え（§3.2 [v1.9]）。設定の奥に置かず、おまかせの隣で切り替える
+                let listeningOn = settings.autoIncludesListening
+                Button {
+                    settings.autoIncludesListening.toggle()
+                    model.analytics.log(.settingsChanged(key: "autoIncludesListening"))
+                } label: {
+                    if stacked {
+                        Label("おまかせにリスニングを含める", systemImage: listeningOn ? "speaker.wave.2.fill" : "speaker.slash")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                    } else {
+                        VStack(spacing: 2) {
+                            Image(systemName: listeningOn ? "speaker.wave.2.fill" : "speaker.slash")
+                                .font(.headline)
+                            Text("音声")
+                                .font(.caption2)
+                        }
+                        .frame(minWidth: 36)
+                    }
+                }
+                .buttonStyle(.glass)
+                .tint(listeningOn ? Color.accentColor : nil)
+                .foregroundStyle(listeningOn ? Color.accentColor : Color.primary)
+                .disabled(disabled)
+                .accessibilityLabel("おまかせにリスニングを含める")
+                .accessibilityValue(listeningOn ? "オン" : "オフ")
+                .accessibilityIdentifier("autoListeningToggle")
 
                 Button {
                     model.path = [.pick]
@@ -181,9 +217,10 @@ struct HomeView: View {
                             Image(systemName: "square.grid.2x2")
                                 .font(.headline)
                             Text("分野")
-                                .font(.caption)
+                                .font(.caption2)
                         }
-                        .frame(minWidth: 52)
+                        .frame(minWidth: 36)
+
                     }
                 }
                 .buttonStyle(.glass)
@@ -199,11 +236,18 @@ struct HomeView: View {
         .frame(maxWidth: .infinity)
     }
 
-    /// 今のセットが何を中心に組まれるかの目安（おまかせに入る軸ごとの今の帯 [v1.8]）
+    /// 今のセットが何を中心に組まれるかの目安（おまかせに入る軸ごとの今の帯 [v1.8]。リスニングは切り替えがオンのとき）
     private func autoHint(_ tracks: [Stage.Track]) -> String {
-        let auto = tracks.filter { DrillMode.autoModes.contains($0.mode) }
+        let auto = tracks.filter { settings.autoModes.contains($0.mode) }
         if auto.allSatisfy({ $0.summary.total == 0 }) { return "問題がありません" }
-        return auto.map { "\($0.mode.title) \($0.current)" }.joined(separator: "・") + " 点帯が中心"
+        // 同じ帯の軸はまとめる（「単語・文法 450・リスニング 500 点帯が中心」）。3 軸でも 1 行に収まりやすい
+        var groups: [(level: Int, titles: [String])] = []
+        for t in auto {
+            if groups.last?.level == t.current { groups[groups.count - 1].titles.append(t.mode.title) }
+            else { groups.append((t.current, [t.mode.title])) }
+        }
+        return groups.map { "\($0.titles.joined(separator: "・")) \($0.level)" }.joined(separator: "・") + " 点帯が中心"
+
     }
 
     /// 軸ごとのクリアまでの目安。1 セットに占める割合は、到達帯までの問題数の比で見込む
@@ -231,11 +275,20 @@ struct HomeView: View {
 
 // MARK: - ウィジェット
 
-/// 1 つの軸の今の帯の習得率・積み上げバー・次の帯まで・4 帯のミニ表示（軸ごとに 1 枚 [v1.8]）
+/// 1 つの軸の今の帯の習得率・積み上げバー・次の帯まで・4 帯のミニ表示（軸ごとに 1 枚 [v1.8]）。
+/// [v1.9] 末尾に始めるボタンを置ける（リスニングの「リスニングで 10 問」）
 struct StageCard: View {
+    struct Action {
+        var title: String
+        var systemImage: String
+        var run: () -> Void
+    }
+
     let track: Stage.Track
     /// クリアまでの目安（§4.1）。クリア済みなら nil
     var estimate: Pace.Estimate? = nil
+    /// カードの末尾のボタン。カード全体のタップ（進捗へ）より内側のボタンが先に反応する
+    var action: Action? = nil
 
     private var stage: Int { track.current }
     private var summary: MasterySummary { track.summary }
@@ -284,10 +337,20 @@ struct StageCard: View {
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.tertiary)
             }
+            if let action {
+                Button(action: action.run) {
+                    Label(action.title, systemImage: action.systemImage)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                .accessibilityLabel(action.title)
+            }
         }
         .glassCard()
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: action == nil ? .combine : .contain)
     }
+
 
     /// 4 帯の状態を横に並べる（StageChips）
     private var stageRow: some View {

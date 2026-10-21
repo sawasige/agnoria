@@ -23,8 +23,14 @@ nonisolated enum DrillMode: String, CaseIterable, Codable, Hashable, Sendable {
         }
     }
 
-    /// おまかせ（mode = nil）と復習の絞り込みで混ぜる軸。リスニングは音が出せない場面があるので、分野画面から始めたときだけ
+    /// おまかせ（mode = nil）と復習の絞り込みで混ぜる軸の基本。リスニングは音が出せない場面があるので、
+    /// ホームの切り替え（`AppSettings.autoIncludesListening`）がオンのときだけ足す
     static let autoModes: [DrillMode] = [.word, .grammar]
+
+    static func autoModes(includingListening: Bool) -> [DrillMode] {
+        includingListening ? allCases : autoModes
+    }
+
 
     /// 分野タイル用の SF Symbols 名。ミックスなど不明な分野は square.grid.2x2
     static func symbol(for category: String) -> String {
