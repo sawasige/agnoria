@@ -14,6 +14,10 @@ struct StartSheet: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var typeSize
+    /// 中身の高さ。最初の高さをこれに合わせる（半分の高さだと末尾のトグルが切れるため）
+    @State private var contentHeight: CGFloat = 0
+    /// ナビゲーションバーとつまみの分
+    private static let chromeHeight: CGFloat = 72
 
     var body: some View {
         @Bindable var settings = settings
@@ -66,6 +70,7 @@ struct StartSheet: View {
                 .padding()
                 .frame(maxWidth: 720)
                 .frame(maxWidth: .infinity)
+                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { contentHeight = $0 }
             }
             .background { AppBackground() }
             .navigationTitle("選んで始める")
@@ -83,9 +88,11 @@ struct StartSheet: View {
             }
         }
         #if os(iOS)
-        .presentationDetents([.medium, .large])
+        // 中身がちょうど収まる高さで開き、収まらない端末や文字サイズでは全画面（それでも足りなければ中がスクロール）
+        .presentationDetents(contentHeight > 0 ? [.height(contentHeight + Self.chromeHeight), .large] : [.large])
         .presentationDragIndicator(.visible)
         #else
+
         .frame(minWidth: 440, minHeight: 520)
         #endif
     }
