@@ -43,7 +43,33 @@ nonisolated enum Pace {
         return Estimate(sets: sets, days: days)
     }
 
+    /// 軸ごとのクリアまでの目安（進捗画面 §4.6 [v1.9]。1.8 まではホーム）。
+    /// 1 セットに占める割合は、到達帯までの問題数の比で見込み、習得の実績もその軸の問題だけで数える
+    /// - Parameters:
+    ///   - idsByMode: 軸ごとの出題対象（到達帯まで）の id
+    ///   - masteredAt: 問題 id → 習得日時
+    static func estimates(tracks: [Stage.Track], idsByMode: [DrillMode: Set<String>], masteredAt: [String: Date],
+                          sessionDates: [Date], now: Date = .now, calendar: Calendar = .current) -> [DrillMode: Estimate] {
+        let total = Double(idsByMode.values.reduce(0) { $0 + $1.count })
+        var out: [DrillMode: Estimate] = [:]
+        for track in tracks {
+            let ids = idsByMode[track.mode] ?? []
+            guard total > 0, !ids.isEmpty else { continue }
+            out[track.mode] = estimate(remaining: Stage.remainingToClear(track.summary),
+                                       masteredDates: ids.compactMap { masteredAt[$0] },
+                                       sessionDates: sessionDates, share: Double(ids.count) / total, now: now, calendar: calendar)
+        }
+        return out
+    }
+
+    /// 表示用: 「目安 約 40 セット・今のペースなら約 8 日」。まだ学習していなければセット数と 1 セットの所要時間だけ
+    static func text(_ e: Estimate) -> String {
+        if let days = e.days { return "目安 約 \(e.sets) セット・今のペースなら\(daysText(days))" }
+        return "目安 約 \(e.sets) セット（1 セット 3〜4 分）"
+    }
+
     /// 表示用: 「約 N 日」、60 日以上は「約 N か月」
+
     static func daysText(_ days: Int) -> String {
         days < 60 ? "約 \(days) 日" : "約 \(Int((Double(days) / 30).rounded())) か月"
     }

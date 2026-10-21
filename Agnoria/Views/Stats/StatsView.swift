@@ -28,11 +28,17 @@ struct StatsView: View {
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
         let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
+        // クリアまでの目安（§4.1 → §4.6 [v1.9]）
+        let estimates = Pace.estimates(
+            tracks: tracks,
+            idsByMode: [.word: Set(wordItems.map(\.id)), .grammar: Set(grammarItems.map(\.id)), .listening: Set(listeningItems.map(\.id))],
+            masteredAt: Dictionary(progress.compactMap { p in p.masteredAt.map { (p.itemID, $0) } }, uniquingKeysWith: { a, _ in a }),
+            sessionDates: sessions.map(\.finishedAt))
 
         ScrollView {
             VStack(spacing: 16) {
                 overview(overall, streak: streak, totalCorrect: totalCorrect)
-                stageRows(tracks)
+                stageRows(tracks, estimates: estimates)
                 DailyChart(days: daily)
                     .glassCard()
                 categoryChart(title: "単語", mode: .word, items: wordItems, progress: pmap)
@@ -101,15 +107,26 @@ struct StatsView: View {
 
     // MARK: - ステージ
 
-    /// 軸ごとに 4 帯の行を並べる [v1.8]
-    private func stageRows(_ tracks: [Stage.Track]) -> some View {
+    /// 軸ごとに 4 帯の行を並べる [v1.8]。見出しの横に「あと N 問」、下にクリアまでの目安 [v1.9]
+    private func stageRows(_ tracks: [Stage.Track], estimates: [DrillMode: Pace.Estimate]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("ステージ").font(.headline)
             ForEach(tracks) { track in
-                Text(track.mode.title)
-                    .font(.subheadline.weight(.semibold))
-                    .padding(.top, track.mode == tracks.first?.mode ? 0 : 6)
+                HStack(alignment: .firstTextBaseline) {
+                    Text(track.mode.title)
+                        .font(.subheadline.weight(.semibold))
+                    Spacer()
+                    Text(nextText(track))
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
+                }
+                .padding(.top, track.mode == tracks.first?.mode ? 0 : 6)
                 levelRows(byLevel: track.byLevel, current: track.current, unlocked: track.unlocked, title: track.mode.title)
+                if let e = estimates[track.mode] {
+                    Text(Pace.text(e))
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
             Text("単語・文法・リスニングそれぞれ、習得率 80% で次の帯が開きます")
 
@@ -119,8 +136,17 @@ struct StatsView: View {
         .glassCard()
     }
 
+    private func nextText(_ track: Stage.Track) -> String {
+        if let next = Stage.next(after: track.current) {
+            let remaining = Stage.remainingToClear(track.summary)
+            return remaining == 0 ? "\(next) 点帯へ進めます" : "あと \(remaining) 問で \(next) 点帯へ"
+        }
+        return Stage.isCleared(track.summary) ? "最上位をクリア" : "最上位の帯"
+    }
+
     @ViewBuilder
     private func levelRows(byLevel: [Int: MasterySummary], current: Int, unlocked: Int, title: String) -> some View {
+
             ForEach(Stage.levels, id: \.self) { level in
                 let s = byLevel[level] ?? MasterySummary()
                 let locked = level > unlocked

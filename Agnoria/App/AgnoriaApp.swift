@@ -78,7 +78,7 @@ struct RootView: View {
                     case .stageClear: StageClearView()
                     case .result: ResultView()
                     case .stats: StatsView()
-                    case .pick: PickView()
+
                     }
                 }
         }

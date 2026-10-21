@@ -13,8 +13,8 @@ enum Route: Hashable {
     case stageClear
     case result
     case stats
-    case pick
 }
+
 
 enum ImportState: Equatable, Sendable {
     case idle
