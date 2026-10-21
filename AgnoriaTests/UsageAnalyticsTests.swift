@@ -38,7 +38,8 @@ struct UsageAnalyticsTests {
     @Test("Firebase の制約: イベント名は 40 字以内、パラメータ名は 40 字以内") func firebaseLimits() {
         let events: [UsageAnalytics.Event] = [
             .setStart(.auto), .setFinish(.auto, count: 1, correct: 1, durationSec: 1), .setAbort(.auto, answered: 0),
-            .stageClear(Stage.Clear(mode: .grammar, cleared: 450, next: 500)), .rephraseUsed, .practiceUsed, .speakTapped,
+            .stageClear(Stage.Clear(mode: .grammar, cleared: 450, next: 500)), .rephraseUsed, .practiceUsed, .speakTapped, .replayTapped,
+
             .bookmarkToggled(on: false), .historyReset, .settingsChanged(key: "autoSpeak"),
             .reviewRequested(.stageClear), .reviewRequested(.highScore), .reviewLinkOpened,
             .reminderPermission(granted: true), .reminderOpened,

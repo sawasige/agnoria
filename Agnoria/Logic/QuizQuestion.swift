@@ -13,6 +13,8 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
     /// 単語問題でこの問題に使った例文（3 つのうちの 1 つ）[v1.7]。解説と読み上げに使う
     let example: ExampleSentence?
     let choices: [String]
+    /// リスニングの応答の和訳（choices と同じ順）[v1.9]。他は nil
+    let choicesJa: [String]?
     let correctIndex: Int
     /// 文法: explanation / 単語: 意味（例文は word から）
     let explanation: String
@@ -23,8 +25,9 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
     var isPractice: Bool = false
 
     init(itemID: String, mode: DrillMode, wordFormat: WordFormat?, categoryName: String,
-         prompt: String, promptJa: String? = nil, choices: [String], correctIndex: Int, explanation: String,
-         word: WordSnapshot?, example: ExampleSentence? = nil, speechText: String?, isPractice: Bool = false) {
+         prompt: String, promptJa: String? = nil, choices: [String], choicesJa: [String]? = nil, correctIndex: Int,
+         explanation: String, word: WordSnapshot?, example: ExampleSentence? = nil, speechText: String?,
+         isPractice: Bool = false) {
         id = UUID()
         self.itemID = itemID
         self.mode = mode
@@ -33,6 +36,7 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
         self.prompt = prompt
         self.promptJa = promptJa
         self.choices = choices
+        self.choicesJa = choicesJa
         self.correctIndex = correctIndex
         self.explanation = explanation
         self.word = word
@@ -45,7 +49,23 @@ nonisolated struct QuizQuestion: Identifiable, Hashable, Sendable {
 
     /// 空欄（______）を正解で埋めた英文。空欄が無ければ prompt のまま
     var completedPrompt: String { prompt.replacingOccurrences(of: Cloze.blank, with: choices[correctIndex]) }
+
+    /// リスニング: 問いかけと応答を音声だけで出し、回答まで文字を見せない（§4.2 [v1.9]）
+    var isListening: Bool { mode == .listening }
 }
+
+/// リスニング（応答問題）の 1 問 [v1.9]。応答の並びをシャッフルし、和訳も同じ順に並べ替える
+nonisolated enum ListeningQuestionFactory {
+    static func make(_ l: ListeningSnapshot, using rng: inout some RandomNumberGenerator) -> QuizQuestion {
+        let (choices, correct) = ChoiceShuffler.shuffle(l.choices, correctIndex: l.answer, using: &rng)
+        let order = choices.map { c in l.choices.firstIndex(of: c) ?? 0 }
+        let ja = order.map { l.choicesJa.indices.contains($0) ? l.choicesJa[$0] : "" }
+        return QuizQuestion(itemID: l.id, mode: .listening, wordFormat: nil, categoryName: l.category,
+                            prompt: l.question, promptJa: l.questionJa, choices: choices, choicesJa: ja,
+                            correctIndex: correct, explanation: l.explanation, word: nil, speechText: nil)
+    }
+}
+
 
 nonisolated enum GrammarQuestionFactory {
     static func make(_ g: GrammarSnapshot, using rng: inout some RandomNumberGenerator) -> QuizQuestion {

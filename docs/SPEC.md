@@ -1,6 +1,6 @@
-# Agnoria — 仕様書 v1.8
+# Agnoria — 仕様書 v1.9
 
-> v1 からの変更点は `docs/SPEC-REVIEW.md` 参照。本文中の **[v1.1]** / **[v1.2]** / **[v1.3]** / **[v1.4]** / **[v1.5]** / **[v1.6]** / **[v1.7]** / **[v1.8]** が変更箇所。
+> v1 からの変更点は `docs/SPEC-REVIEW.md` 参照。本文中の **[v1.1]** / **[v1.2]** / **[v1.3]** / **[v1.4]** / **[v1.5]** / **[v1.6]** / **[v1.7]** / **[v1.8]** / **[v1.9]** が変更箇所。
 > v1.2（2026-10-13）: おまかせ出題・達成度の可視化・効果音・Liquid Glass UI。
 > v1.3（2026-10-13）: スコア帯を順に進むステージ、問題データを単語400・文法200に拡充。
 > v1.4（2026-10-13〜14）: ホームをダッシュボードにし、分野の選択を別画面へ。習得後の再学習、クリアまでの目安。
@@ -8,6 +8,7 @@
 > v1.6（2026-10-19〜）: 利用状況の計測とクラッシュ報告（§7.1、Firebase Analytics / Crashlytics）。ホーム画面のウィジェット（§4.6）。
 > v1.7（2026-10-19〜）: 学習記録の iCloud 自動同期を実装（§2.3）。v1.6 とあわせて App Store の 1.1 として出す。Mac 版はこの後。
 > v1.8（2026-10-20〜）: App Store の評価ダイアログ（§4.8）。スコア帯の進み具合を出題の種類（単語 / 文法）ごとの軸に分ける（§3.4）。学習のリマインダー通知（§4.9）。
+> v1.9（2026-10-21〜）: Part 2 形式の応答問題（リスニング）を 3 つ目の出題の種類として追加（§3.5、§4.2、§6）。音声は端末の合成音声。帯の軸はリスニングで 3 本目。
 
 ## 0. 概要
 
@@ -15,7 +16,7 @@
 |---|---|
 | アプリ名 | **Agnoria**（アグノリア） |
 | 由来 | ギリシャ語 Agnoia（無知）＋ ローマの女神 Agenoria（子どもに学ぶ力を授ける）。「無知から学び始める」の意 |
-| 目的 | TOEIC 450→600点帯の学習者が、スキマ時間に **単語** と **Part5形式の文法** を4択ドリルで繰り返す |
+| 目的 | TOEIC 450→600点帯の学習者が、スキマ時間に **単語** と **Part5形式の文法** を4択ドリルで繰り返す。**[v1.9]** **Part 2 形式の応答問題**（リスニング、3 択）も |
 | 対象 | まず開発者自身。あわよくば App Store 公開 |
 | 対応OS | **[v1.1]** iOS / iPadOS 27 以上（iPhone は縦画面のみ、iPad は全方向）/ macOS 27 以上（ネイティブ SwiftUI の1ターゲット。Mac Catalyst は使わない） |
 | 通信 | 開発者のサーバーとは通信しない。全データをバンドル同梱。広告なし、課金なし、アカウントなし。**[v1.5]** 学習記録は iCloud で同期（計画）、**[v1.6]** 機能の利用回数とクラッシュ情報だけを Firebase（Analytics / Crashlytics）に送る（§7.1） |
@@ -47,7 +48,7 @@
 
 ### 2.1 バンドルJSON
 
-`Agnoria/Resources/Data/` 配下に `grammar.json` / `words.json` を置く（synchronized folder なので Xcode に手で追加する必要はない）。起動時に SwiftData へ取り込む。
+`Agnoria/Resources/Data/` 配下に `grammar.json` / `words.json` / **[v1.9]** `listening.json` を置く（synchronized folder なので Xcode に手で追加する必要はない）。起動時に SwiftData へ取り込む。
 
 #### `grammar.json`（Part5 文法）
 ```json
@@ -65,6 +66,26 @@
 - `answer` は `choices` のインデックス（0始まり）
 - `category` は以下の5種（v1）: `品詞` / `前置詞・接続詞` / `語彙` / `時制・態` / `代名詞・関係詞`
 - `level` は 450 / 500 / 550 / 600 の4段階（目安スコア帯）
+
+#### `listening.json`（Part 2 形式の応答問題）**[v1.9]**
+```json
+{
+  "id": "lis-wh-001",
+  "category": "WH 疑問文",
+  "question": "When does the store open on Sundays?",
+  "question_ja": "日曜日は店は何時に開きますか。",
+  "choices": ["At 10 a.m.", "Yes, it's open.", "On Main Street."],
+  "choices_ja": ["午前 10 時です。", "はい、開いています。", "メイン通りです。"],
+  "answer": 0,
+  "explanation": "When で時を尋ねているので、開店時刻を答える At 10 a.m. が自然。Yes, it's open. は疑問詞の質問に Yes で答えていて、On Main Street. は Where への答え。",
+  "level": 450
+}
+```
+- 問いかけ 1 文と応答 3 つ（`choices`）。`answer` はインデックス。`choices_ja` は `choices` と同じ順の和訳
+- `category` は問いかけの型 5 種: `WH 疑問文` / `Yes・No 疑問文` / `依頼・提案` / `平叙文` / `選択・付加疑問文`
+- `explanation` は応答を A / B / C の文字で指さない（画面では順をシャッフルする）。英文をそのまま引いて説明する
+- 音声データは持たない。問いかけと応答は端末の合成音声で読む（§6）
+- 各帯 30 問（5 分野 × 6）。1 帯の問題数が単語（100）・文法（50）より少ないのは、音声の質を確かめてから増やすため
 
 #### `words.json`（単語）
 ```json
@@ -106,8 +127,13 @@ Word
   word, pos, meaning, example, exampleJa, distractors: [String], category, level: Int
   isArchived: Bool
 
+ListeningQuestion         // [v1.9] 問題ストア（ローカル）
+  id: String (unique)
+  category, question, questionJa, choices: [String], choicesJa: [String], answer: Int, explanation, level: Int
+  isArchived: Bool
+
 ItemProgress              // [v1.1] リレーションではなく itemID で紐づける独立レコード
-  itemID: String (unique) // GrammarQuestion.id または Word.id
+  itemID: String (unique) // GrammarQuestion.id / Word.id / ListeningQuestion.id [v1.9]
   recentResults: [Bool]   // 直近3回の正誤。古い順。最大3件
   totalCorrect: Int
   totalAnswered: Int
@@ -117,7 +143,7 @@ ItemProgress              // [v1.1] リレーションではなく itemID で紐
 StudySession              // 1セット＝10問の記録。完走したときだけ保存
   id: UUID
   startedAt, finishedAt: Date
-  mode: String            // "grammar" / "word"
+  mode: String            // "grammar" / "word" / "listening" [v1.9] / "auto"
   category: String?       // nil = ミックス
   questionFormat: String? // 単語のとき: "meaning" / "cloze" / "jaToEn"
   results: [SessionResult]  // [v1.1] Codable 構造体の配列として埋め込む
@@ -199,7 +225,7 @@ SessionResult
 4. 各問の選択肢の並びをシャッフル。正解のインデックスを記録
 ```
 
-- **[v1.2]** おまかせ（`QuizConfig.auto`）は単語・文法の全分野を1つの候補群にして上の手順で抽出する。単語の形式は1問ごとにランダム。「何を勉強するか」をユーザーが選ばなくて済むのが目的。未回答が最優先、次に間違い、放置した卒業問題は時間とともに復習に回る
+- **[v1.2]** おまかせ（`QuizConfig.auto`）は単語・文法の全分野を1つの候補群にして上の手順で抽出する。単語の形式は1問ごとにランダム。「何を勉強するか」をユーザーが選ばなくて済むのが目的。未回答が最優先、次に間違い、放置した卒業問題は時間とともに復習に回る。**[v1.9]** リスニング（§3.5）はおまかせと、ホームの復習（間違えた / ブックマーク。`mode = nil`）には入れない（`DrillMode.autoModes`）。音を出せない場面で突然音声の問題が出ると答えられないため。分野画面でリスニングを選んだときだけ出す
 - **[v1.2]** 習得段階（`Mastery`）: 未学習（未回答）/ 苦手（直近3回に不正解）/ 学習中（それ以外）/ 習得（直近3回すべて正解）。優先度と同じ判定を4段階に写しただけで、ロジックは持たない。「復習待ち」= 習得後 7 日以上経過
 - **[v1.4]** 一度習得した問題の扱い: はじめて3連続正解した日時を `ItemProgress.masteredAt` に残す。以後その問題は **直近の1回が正解なら習得**（3連続を待たない）、直近が不正解なら「学習中」（苦手には落とさない）で、次のセットに優先的に出る（重みは不正解と同じ）。復習で1回ミスしただけで未学習相当に落ちると、全体の習得率が 97〜99% で頭打ちになる（シミュレーションで確認）ため。更新前から習得していた問題には、起動時に最後の回答日時を `masteredAt` として補う（`AppModel.backfillMasteredAt`）
 - 対象が10件未満なら、あるだけ出す（最低1件）
@@ -225,13 +251,23 @@ SessionResult
 - 下の帯の習得率が落ちれば「今の帯」はそこへ戻る（到達帯は下がらない）
 - 設定で到達帯を手で変えられる（先に進む・戻る）。履歴リセットで 450 に戻る
 
-**軸ごとの帯 [v1.8]**: 上の決まりはすべて、出題の種類（`DrillMode`: 単語 / 文法）ごとの **軸** で別々に適用する。
-- 到達帯は軸ごと（`unlockedLevel.word` / `unlockedLevel.grammar`）。クリアは「その軸のその帯の問題の 80%」（単語は 1 帯 100 語、文法は 50 問）。最上位の演出も軸ごとに 1 回（`topStageCelebrated.word` など）
+**軸ごとの帯 [v1.8]**: 上の決まりはすべて、出題の種類（`DrillMode`: 単語 / 文法 / **[v1.9]** リスニング）ごとの **軸** で別々に適用する。
+- 到達帯は軸ごと（`unlockedLevel.word` / `unlockedLevel.grammar` / `unlockedLevel.listening`）。クリアは「その軸のその帯の問題の 80%」（単語は 1 帯 100 語、文法は 50 問、リスニングは 30 問）。最上位の演出も軸ごとに 1 回（`topStageCelebrated.word` など）
 - 出題対象は軸ごとの到達帯まで。おまかせの重みも、問題の軸の今の帯・到達帯で決める（軸の配分は優先度の重み任せ。決め打ちの比率は持たない）
 - セット完走時は、そのセットで出した軸だけクリアを判定する。2 軸を同時にクリアしたら演出は 1 画面にまとめる（§4.3.1）
 - 理由: 合算だと習得率はほぼ単語で決まり、文法が得意でも単語が追いつくまで進めない。また種類を足す（リスニングなど、Issue #30）ときに既存の軸の習得率を崩さず、軸を 1 本増やすだけで済む。同じ種類の問題を増やすとその軸の習得率は下がる（軸を分けても避けられない）
 - 移行: 1.2 までの合算の `unlockedLevel` は使わない。1.8 の初回起動で記録から軸ごとに求め直し（`Stage.unlockedFromRecords`、`stageTracksMigrated`）、古いキーを消す。利用者がまだ少ないので手動で変えた到達帯は引き継がない
 - iCloud 同期後の再計算（§2.3）も軸ごと
+
+### 3.5 リスニング（Part 2 形式の応答問題）**[v1.9]**
+
+短い問いかけ（または発言）を聞き、3 つの応答から最も自然なものを選ぶ。問いかけと応答は **音声だけ** で出し、文字は回答のあとに出す。
+
+- データは `listening.json`（§2.1）。応答の並びはセットごとにシャッフルし、和訳も同じ順に並べ替える（`ListeningQuestionFactory`）
+- 音声は端末の合成音声（`AVSpeechSynthesizer`）。問いかけ → 0.9 秒 → 応答 1 → 0.9 秒 → 応答 2 → 0.9 秒 → 応答 3 の順に読む。問いかけと応答で別の声、発音は問題ごとに en-US / en-GB / en-AU から決定的に選ぶ（§6）。録音は持たない（オフラインで動き、アプリのサイズも増えない。質が足りなければ録音に替える判断は SPEC-REVIEW N1）
+- 出題の候補・優先度・習得・帯のクリアは単語・文法と同じ（§3.2〜3.4）。軸は `listening`
+- おまかせと復習には混ぜない（§3.2）。分野画面（§4.7）の「リスニング」セグメントから、分野タイルかミックスで始める
+- 速度は設定の「読み上げの速度」と共通（§4.4）
 
 ---
 
@@ -249,11 +285,12 @@ SessionResult
 
 ### 4.2 クイズ
 - 進捗 `3 / 10`、現在の分野名
-- 問題文。文法は英文、単語は形式に応じた表示（§3.1）
-- 4択ボタン（縦並び）。タップで即確定
+- 問題文。文法は英文、単語は形式に応じた表示（§3.1）。**[v1.9]** リスニングは問題文の代わりに案内「問いかけと 3 つの応答を聞いて、いちばん自然な応答を選ぶ」と `聞く` ボタン（Mac は Space）。表示から 0.4 秒後に自動で再生し、読んでいる部分（問いかけの人物の記号、応答のスピーカーの記号）を光らせる。音量が 0 なら「音量が 0 になっています」。回答後は問いかけの英文に替わる
+- 4択ボタン（縦並び）。タップで即確定。**[v1.9]** リスニングは 3 択で、回答まで文を伏せて「応答 A」と表示。再生中でも押せる（押すと再生を止める）
 - 回答後:
   - 正解: 選んだ選択肢を緑。不正解: 選んだものを赤、正解を緑
-  - 解説を下に展開（文法: **[v1.7]** 空欄を正解で埋めた英文（正解を太字）+ `question_ja` + `explanation` / 単語: `meaning` + その問題で使った例文とその和訳 **[v1.7]**）。**[v1.7]** 以前は文法に和訳が無く、解説文に偶然訳が含まれる問題だけ訳が見えていた
+  - 解説を下に展開（文法: **[v1.7]** 空欄を正解で埋めた英文（正解を太字）+ `question_ja` + `explanation` / 単語: `meaning` + その問題で使った例文とその和訳 **[v1.7]** / リスニング **[v1.9]**: 問いかけ + 和訳 + 応答 3 つとその和訳（正解を緑）+ `explanation`）。**[v1.7]** 以前は文法に和訳が無く、解説文に偶然訳が含まれる問題だけ訳が見えていた
+  - **[v1.9]** 操作列の `読み上げ` はリスニングでは `もう一度聞く`（問いかけと応答を最初から読む）。自動読み上げ（§4.4）はリスニングには効かない
   - **[v1.1]** 画面下に固定の操作列が出る: `読み上げ`（例文がある場合）/ `ブックマーク`（済みなら「ブックマーク済み」と塗りつぶしアイコン）、その下に `次へ`（最終問では `結果を見る`）。解説が長くても操作列は動かない。右上のツールバーには置かない（片手では遠い）
   - **[v1.1]** 設定が ON なら回答と同時に例文を自動で読み上げる（デフォルト ON）。`次へ` で読み上げは止まる
   - **[v1.4]** 画面のどこでも左へスワイプすると `次へ` と同じ（最終問は結果へ）。**カードをめくる**動き: 今の問題は 1 枚のカード（持ち上げると不透明・角丸・影、指に合わせて最大 6 度傾く。傾けている間は環境値 `cardLifting` でカード内の Liquid Glass を平らな単色の塗りに置き換える: ガラスは回転すると回転前の外接矩形に膨らんで描かれ、行が縦に伸びて重なるため。また持ち上げ中は ScrollView ではなく、同じ内容をスクロール位置ごと再現した普通のビューを回転させる。通常時の描画は変えない）で、その下に次の問題のカードが小さく控えている（番号・形式名・進捗ドットは本物、問題文と選択肢は伏せ字 `redacted` で先に読めない。最終問の下は「結果」の予告）。指を離して成立すれば今のカードが画面外へ抜け、下のカードが本物に変わる。成立しなければ戻る。最初の動きで縦か横かを決め、横の間は縦スクロールを止める。回答前は効かない。初回だけ操作列に「← 左にスワイプでも次へ」のヒントを出し、一度スワイプで進んだら消す（`swipeHintDone`）。判定は `SwipeNext.triggers`（横 > 縦、左向き、60pt 以上または予測到達点 140pt 以上のフリック）。全幅の選択肢ボタンは横に動かしても指を離すと押下になるので、直前 0.3 秒以内にドラッグがあった押下は回答にしない（回答前に左スワイプしても誤答にならない）
@@ -311,8 +348,8 @@ SessionResult
 
 ### 4.7 分野を選ぶ **[v1.4]**
 ホームの `分野` から開く。v1.3 までホームにあった選択 UI をそのまま移した画面。
-- セグメント `単語` / `文法` → 単語のみ出題形式セグメント（意味 / 穴埋め / 日→英 / ランダム。デフォルトはランダム）→ 分野タイル（5つ）＋ `ミックス`。各タイルに分野アイコン・習得率（%）・ミニ積み上げバー・「習得 x / 全件」。到達帯より上の問題しかない分野は disabled
-- 末尾に「N 点帯までの問題から 10 問。到達帯は設定で変えられます」
+- セグメント `単語` / `文法` / **[v1.9]** `リスニング` → 単語のみ出題形式セグメント（意味 / 穴埋め / 日→英 / ランダム。デフォルトはランダム）→ 分野タイル（5つ）＋ `ミックス`。各タイルに分野アイコン・習得率（%）・ミニ積み上げバー・「習得 x / 全件」。到達帯より上の問題しかない分野は disabled
+- 末尾に「N 点帯までの問題から 10 問。到達帯は設定で変えられます」。**[v1.9]** リスニングではさらに「問いかけと応答を音声で出します。音の出せる場所で」
 - 選択（単語/文法・形式）は保存しない。開くたびに 単語 / ランダム に戻る
 - タイルで開始するとクイズへ（ナビゲーションはクイズに置き換わるので、結果画面の `ホームへ` でホームに戻る）
 
@@ -323,7 +360,7 @@ iOS のホーム画面に置く WidgetKit のウィジェット（ターゲッ�
 | サイズ | 表示 |
 |---|---|
 | small | 連続日数（炎のアイコン + 日数）と「今日も学習済み / 今日はまだ」。ホームの StreakCard と同じ内容 |
-| medium | 左に small と同じ、右に ~~今の帯（「500 点帯」「42% 習得」+ 進捗バー）と 4 帯の並び~~ **[v1.8]** 軸ごとに 1 段（「単語 500 点帯 42%」+ 進捗バー + 4 帯の記号。StageChips と同じ記号: クリア ✓ / 今の帯 ◉ / 開いている ○ / 未到達 🔒） |
+| medium | 左に small と同じ、右に ~~今の帯（「500 点帯」「42% 習得」+ 進捗バー）と 4 帯の並び~~ **[v1.8]** 軸ごとに 1 段（「単語 500 点帯 42%」+ 進捗バー + 4 帯の記号。StageChips と同じ記号: クリア ✓ / 今の帯 ◉ / 開いている ○ / 未到達 🔒）。**[v1.9]** 3 段（単語 / 文法 / リスニング） |
 | 写しが無いとき | 「アプリを開いて、今日の 10 問から」（インストール直後、まだアプリを開いていない） |
 
 **データの受け渡し**: 拡張はアプリのストアを開かない。アプリが `WidgetSnapshot`（最後に学習した日、その日を最終日とする連続日数、**[v1.8]** 軸ごとの `Track`（軸名、到達帯、今の帯、帯ごとの習得率とクリア済みか））を App Group `group.com.himatsubu.Agnoria` の UserDefaults に JSON で書き、`WidgetCenter.reloadAllTimelines()` を呼ぶ。書くのは起動時（取り込みの後）、セット完走、履歴リセット、設定で到達帯を変えたとき。型は `Shared/WidgetSnapshot.swift` でアプリと拡張の両方に入れ、写しを作る関数（Stage / Streak を使う）はアプリ側（`Agnoria/Logic/WidgetSnapshot+Make.swift`）。
@@ -372,6 +409,9 @@ StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で
 ## 6. 音声
 - `AVSpeechSynthesizer`、`AVSpeechSynthesisVoice(language: "en-US")`
 - 例文のみ読み上げ。単語単体の読み上げは v2
+- **[v1.9]** リスニング（§3.5）の声: `ListeningVoice.pick` が問題の id のハッシュで言語（en-US / en-GB / en-AU。端末に無い言語は除く）を決め、その言語で品質（premium > enhanced > default）の最も高い声を問いかけに使う。応答は同じ言語の別の性別の声 → 別の言語の声 → 同じ声、の順で探す。同じ問題は毎回同じ声。拡張音声が無い端末では compact の声になる（質は TestFlight で確認する。SPEC-REVIEW N1）。再生中の部分は `AVSpeechSynthesizerDelegate` の `didStart` で画面に伝える（`ListeningPlayer.playing`）
+- **[v1.9]** リスニングの再生中だけ `AVAudioSession` を `.playback`（マナーモードでも鳴る）にし、読み終えたら・止めたら `.ambient` に戻す（`AudioSession.set` / `restoreAmbient`）。利用者が「聞く」を押す、またはリスニングを選んで始めた意図した再生なので、サイレントスイッチで消えて答えられないより鳴る方を取る。効果音と例文の読み上げは従来どおり `.ambient`
+- **[v1.9]** 起動引数 `-speech NO` で読み上げとリスニングの再生を止める（UI テストの `launchQuiet()` が付ける。ユニットテストのホストでも止める）
 - **[v1.1]** マナーモード（サイレントスイッチ）に従う。`.ambient` カテゴリなので消音中は鳴らない。自動読み上げをデフォルト ON にしたため、意図せず音が出る経路を無くす。`AVAudioSession` は iOS のみなので `#if os(iOS)` で囲む
 - **[v1.2]** 効果音は `Resources/Sounds/correct.caf` / `wrong.caf`（44.1kHz 16bit、ピーク -6 dBFS）を `AVAudioPlayer` でプリロードして鳴らす。**[v1.5]** 音は正弦波合成から、macOS 内蔵の GM 音源をサンプラーで演奏して書き出したものに変更（正解: グロッケンの 2 音、不正解: マリンバの低い 2 音。作り方は `tools/sounds/`）。セッション設定は読み上げと共有（`AudioSession`）なので、効果音もマナーモードに従う
 - **[v1.5]** スコア帯クリアのファンファーレ `Resources/Sounds/fanfare.caf`（約 1.8 秒。ハープの上昇グリッサンドとグロッケンの和音。macOS 内蔵の GM 音源をサンプラーで演奏して書き出した音で、作り方は `tools/sounds/`）。効果音の設定に従い、鳴らし方は正解・不正解と同じ
@@ -404,20 +444,21 @@ StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で
 
 | イベント | パラメータ |
 |---|---|
-| `set_start` | mode（auto / word / grammar）, category（分野 id か mix）, format（meaning / cloze / jaToEn / random）, filter（all / wrong / bookmarked / retry） |
+| `set_start` | mode（auto / word / grammar / listening **[v1.9]**）, category（分野 id か mix）, format（meaning / cloze / jaToEn / random）, filter（all / wrong / bookmarked / retry） |
 | `set_finish` | 上に加えて count, correct, duration_sec |
 | `set_abort` | 上に加えて answered |
-| `stage_clear` | mode（word / grammar）**[v1.8]**、level, next（最上位は 0） |
+| `stage_clear` | mode（word / grammar / listening）**[v1.8]**、level, next（最上位は 0） |
 | `rephrase_used` / `practice_used` / `speak_tapped`（手動の読み上げのみ） | なし |
+| `replay_tapped` | なし **[v1.9]**（リスニングの `聞く` / `もう一度聞く`。自動再生は数えない） |
 | `bookmark_toggled` | on |
 | `history_reset` | なし |
-| `settings_changed` | key（soundEffects / autoSpeak / speechRate / unlockedLevel.word / unlockedLevel.grammar / reminderEnabled / reminderTime） |
+| `settings_changed` | key（soundEffects / autoSpeak / speechRate / unlockedLevel.word / unlockedLevel.grammar / unlockedLevel.listening / reminderEnabled / reminderTime） |
 | `review_requested` | trigger（stage_clear / high_score）**[v1.8]** |
 | `review_link_opened` | なし **[v1.8]** |
 | `reminder_permission` | granted（1 / 0）**[v1.8]** |
 | `reminder_opened` | なし **[v1.8]** |
 
-ユーザープロパティ: ~~`unlocked_level`~~ **[v1.8]** `unlocked_level_word` / `unlocked_level_grammar`。Firebase が自動で集める `first_open` / `session_start` / `screen_view` はそのまま。1 問ごとの回答イベントは量が多いので送らない。IDFA は使わない（`FirebaseAnalyticsCore` を使い AdSupport も IdentitySupport もリンクしない。ATT のダイアログは出さない）。
+ユーザープロパティ: ~~`unlocked_level`~~ **[v1.8]** `unlocked_level_word` / `unlocked_level_grammar` / **[v1.9]** `unlocked_level_listening`。Firebase が自動で集める `first_open` / `session_start` / `screen_view` はそのまま。1 問ごとの回答イベントは量が多いので送らない。IDFA は使わない（`FirebaseAnalyticsCore` を使い AdSupport も IdentitySupport もリンクしない。ATT のダイアログは出さない）。
 
 **送らない条件**（優先順）
 1. 同梱の `GoogleService-Info.plist` が無い（Firebase 未設定のビルド）
@@ -440,6 +481,7 @@ StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で
 - 初期目標: 文法 5分野 × 50問 = 250問、単語 5カテゴリ × 50語 = 250語。動いたら各100まで増やす
 - 初期データ **[v1.1]**: `grammar.json`（文法30問。5分野×6問、自作）、`words.json`（単語50語。旧 `words_sample.json`）
 - **[v1.3]** 単語 400（各スコア帯 100、各カテゴリ 80）、文法 200（各スコア帯 50、各分野 40）。既存の 80 問はそのまま残し、残りは Claude がスコア帯ごとに書いた（未レビュー）。単語の綴りは全体で一意。検証スクリプトでチェックした項目: 形式・id の重複・綴りの重複・穴埋めが作れること・誤答が意味と重複しないこと・正解位置の偏り・「TOEIC」不在
+- **[v1.9]** リスニング 120（各スコア帯 30、各分野 24）。Claude が帯ごとに書き、別のレビュー担当に「正解が 1 つだけ自然か」「誤答が Part 2 の典型（似た音・語の繰り返し・疑問詞の取り違え・Yes/No の誤用・時制や主語のずれ）になっているか」「和訳」「合成音声で読みにくい表記（略語・記号）が無いか」を検査させてから取り込んだ。解説は応答を A / B / C で指さない（テストで保証）
 - 生成は Claude Code に任せてよいが、以下をチェック:
   - 正解が一意であること（他の選択肢でも文法的に成立しないか）
   - `distractors` が意味的に近いこと
@@ -450,7 +492,8 @@ StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で
 ## 9. v2 以降（やらないことを明記）
 
 - Part6（長文穴埋め）
-- Part2（応答問題。TTS音声）
+- ~~Part2（応答問題。TTS音声）~~ → **[v1.9]** §3.5 で実装（合成音声）
+
 - ~~ウィジェット（今日やったか / 1問だけ）~~ → **[v1.6]** 今日やったか・連続日数・帯の進みを §4.6 で実装。「1 問だけ」の対話型は未着手
 - iPad 専用レイアウト（Split View などの2ペイン構成）
 - ~~iCloud 同期~~ → **[v1.5]** で実装（§2.3）

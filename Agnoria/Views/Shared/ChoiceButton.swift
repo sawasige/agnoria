@@ -1,12 +1,15 @@
 import SwiftUI
 
-/// 4択ボタン。Liquid Glass。回答後は正誤で色が変わる
+/// 4択ボタン。Liquid Glass。回答後は正誤で色が変わる。
+/// [v1.9] リスニングは回答まで文（text）を伏せ（revealed = false）、読み上げている応答をスピーカーの記号で示す（playing）
 struct ChoiceButton: View {
     enum State { case idle, correct, wrong, dimmed }
 
     let label: String       // A〜D
     let text: String
     let state: State
+    var revealed = true
+    var playing = false
     let action: () -> Void
     @Environment(\.cardLifting) private var lifting
 
@@ -20,14 +23,20 @@ struct ChoiceButton: View {
                     .background(badgeBackground, in: Circle())
                     .foregroundStyle(badgeForeground)
                     .accessibilityHidden(true)
-                Text(text)
+                Text(revealed ? text : "応答 \(label)")
                     .font(.body)
-                    .foregroundStyle(state == .dimmed ? Color.secondary : Color.primary)
+                    .foregroundStyle(!revealed || state == .dimmed ? Color.secondary : Color.primary)
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 0)
-                if state == .correct || state == .wrong {
+                if !revealed {
+                    Image(systemName: playing ? "speaker.wave.3.fill" : "speaker.wave.2")
+                        .font(.title3)
+                        .foregroundStyle(playing ? Color.accentColor : Color.secondary)
+                        .symbolEffect(.variableColor.iterative, isActive: playing)
+                        .frame(width: 28)
+                } else if state == .correct || state == .wrong {
                     Image(systemName: state == .correct ? "checkmark.circle.fill" : "xmark.circle.fill")
                         .font(.title3)
                         .foregroundStyle(state == .correct ? .green : .red)
@@ -46,8 +55,9 @@ struct ChoiceButton: View {
         .opacity(state == .dimmed ? 0.6 : 1)
         .scaleEffect(state == .correct || state == .wrong ? 1.02 : 1)
         .animation(.spring(duration: 0.35, bounce: 0.35), value: state)
-        .accessibilityLabel("\(label). \(text)")
-        .accessibilityValue(accessibilityValue)
+        .accessibilityLabel(revealed ? "\(label). \(text)" : "応答 \(label)")
+        .accessibilityValue(revealed ? accessibilityValue : (playing ? "再生中" : ""))
+
     }
 
     private var glass: Glass {

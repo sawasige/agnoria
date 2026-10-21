@@ -34,17 +34,17 @@ struct SettingsView: View {
                 } header: {
                     Text("ステージ")
                 } footer: {
-                    Text("単語と文法は別々に帯を進みます。おまかせと分野タイルは、それぞれの到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたい・戻りたいときはここで変えられます。")
+                    Text("単語・文法・リスニングは別々に帯を進みます。おまかせと分野タイルは、それぞれの到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたい・戻りたいときはここで変えられます。")
                 }
 
-                Section("音") {
+                Section {
                     Toggle("正解・不正解の効果音", isOn: $settings.soundEffects)
                         .accessibilityIdentifier("soundEffectsToggle")
                     Toggle("回答後に例文を自動で読み上げる", isOn: $settings.autoSpeak)
                         .accessibilityIdentifier("autoSpeakToggle")
                     VStack(alignment: .leading) {
                         Slider(value: $settings.speechRate, in: AppSettings.speechRateRange, step: 0.05) {
-                            Text("速度")
+                            Text("読み上げの速度")
                         } minimumValueLabel: {
                             Image(systemName: "tortoise")
                         } maximumValueLabel: {
@@ -57,7 +57,13 @@ struct SettingsView: View {
                     } label: {
                         Label("試し聞き", systemImage: "speaker.wave.2")
                     }
+                } header: {
+                    Text("音")
+                } footer: {
+                    Text("速度は例文の読み上げとリスニングの両方に効きます。リスニングは音の出せる場所で（マナーモードでも鳴ります）。")
                 }
+
+
 
                 Section {
                     Toggle("学習のリマインダー", isOn: Binding(

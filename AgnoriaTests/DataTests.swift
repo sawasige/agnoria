@@ -11,6 +11,7 @@ struct BundleDataTests {
         let payload = try BundleData.load(bundle: bundle)
         #expect(payload.words.count >= 50)
         #expect(payload.grammar.count >= 30)
+        #expect(payload.listening.count >= 30)
         let issues = BundleData.validate(payload)
         #expect(issues.isEmpty, "\(issues)")
     }
@@ -19,10 +20,32 @@ struct BundleDataTests {
         let payload = try BundleData.load(bundle: bundle)
         #expect(Set(payload.words.map(\.category)) == Set(WordCategory.allCases.map(\.rawValue)))
         #expect(Set(payload.grammar.map(\.category)) == Set(GrammarCategory.allCases.map(\.rawValue)))
+        #expect(Set(payload.listening.map(\.category)) == Set(ListeningCategory.allCases.map(\.rawValue)))
+    }
+
+    @Test("リスニングは各帯 30 問（5 分野 × 6）で、解説が選択肢を A / B / C で指さない") func listeningShape() throws {
+        let payload = try BundleData.load(bundle: bundle)
+        #expect(payload.listening.count == 120)
+        for level in Level.allCases {
+            let inLevel = payload.listening.filter { $0.level == level.rawValue }
+            #expect(inLevel.count == 30, "\(level.rawValue)")
+            for cat in ListeningCategory.allCases {
+                #expect(inLevel.filter { $0.category == cat.rawValue }.count == 6, "\(level.rawValue) \(cat.rawValue)")
+            }
+        }
+        // 画面では応答の順をシャッフルするので、解説は文字（A / B / C）ではなく応答の英文で指す
+        let letters = try Regex(#"(\(|（|\b)[ABC](\)|）|\b)"#)
+        for l in payload.listening {
+            #expect(!l.explanation.contains(letters), "\(l.id): \(l.explanation)")
+            #expect(l.choices.allSatisfy { $0.count <= 80 } && l.question.count <= 100, "\(l.id): 長すぎる")
+        }
+        // 正解の位置が偏っていない（シャッフルするので必須ではないが、データの癖を見る）
+        let positions = Dictionary(grouping: payload.listening, by: \.answer).mapValues(\.count)
+        #expect(positions.values.allSatisfy { $0 >= 25 }, "\(positions)")
     }
 
     @Test("商標名がデータに含まれない") func noTrademark() throws {
-        for name in ["words", "grammar"] {
+        for name in ["words", "grammar", "listening"] {
             let url = try #require(bundle.url(forResource: name, withExtension: "json"))
             let text = try String(contentsOf: url, encoding: .utf8)
             #expect(!text.contains("TOEIC"), "\(name).json")
@@ -45,9 +68,11 @@ struct BundleDataTests {
     }
 
     @Test("fingerprint は内容が変わると変わる") func fingerprintChanges() throws {
-        let a = try BundleData.decode(wordsData: Data("[]".utf8), grammarData: Data("[]".utf8))
-        let b = try BundleData.decode(wordsData: Data("[ ]".utf8), grammarData: Data("[]".utf8))
+        let a = try BundleData.decode(wordsData: Data("[]".utf8), grammarData: Data("[]".utf8), listeningData: Data("[]".utf8))
+        let b = try BundleData.decode(wordsData: Data("[ ]".utf8), grammarData: Data("[]".utf8), listeningData: Data("[]".utf8))
+        let c = try BundleData.decode(wordsData: Data("[]".utf8), grammarData: Data("[]".utf8), listeningData: Data("[ ]".utf8))
         #expect(a.fingerprint != b.fingerprint)
+        #expect(a.fingerprint != c.fingerprint)
     }
 }
 
@@ -61,21 +86,27 @@ struct ImporterTests {
         GrammarSnapshot(id: id, category: "品詞", question: "x ______ y", questionJa: "x a y の訳", choices: ["a", "b", "c", "d"],
                         answer: 0, explanation: "e", level: 450)
     }
+    private func makeListening(_ id: String) -> ListeningSnapshot {
+        ListeningSnapshot(id: id, category: "WH 疑問文", question: "When is it due?", questionJa: "いつですか。",
+                          choices: ["Friday.", "Yes.", "Here."], choicesJa: ["金曜です。", "はい。", "ここです。"],
+                          answer: 0, explanation: "e", level: 450)
+    }
+
 
     @Test("upsert と アーカイブ") func upsertAndArchive() async throws {
         let container = try AgnoriaSchema.makeContainer(inMemory: true)
         let importer = DataImporter(modelContainer: container)
 
         let first = BundleData.Payload(words: [makeWord("w1", "alpha"), makeWord("w2", "beta")],
-                                       grammar: [makeGrammar("g1")], fingerprint: "1")
+                                       grammar: [makeGrammar("g1")], listening: [makeListening("l1")], fingerprint: "1")
         let s1 = try await importer.importData(first)
-        #expect(s1 == .init(inserted: 3, updated: 0, archived: 0))
+        #expect(s1 == .init(inserted: 4, updated: 0, archived: 0))
 
-        // w2 を削除、w1 を更新、w3 を追加
+        // w2 を削除、w1 を更新、w3 を追加。リスニングは l1 を更新
         let second = BundleData.Payload(words: [makeWord("w1", "alpha2"), makeWord("w3", "gamma")],
-                                        grammar: [makeGrammar("g1")], fingerprint: "2")
+                                        grammar: [makeGrammar("g1")], listening: [makeListening("l1")], fingerprint: "2")
         let s2 = try await importer.importData(second)
-        #expect(s2 == .init(inserted: 1, updated: 2, archived: 1))
+        #expect(s2 == .init(inserted: 1, updated: 3, archived: 1))
 
         let context = ModelContext(container)
         let words = try context.fetch(FetchDescriptor<Word>(sortBy: [SortDescriptor(\.id)]))
@@ -90,10 +121,14 @@ struct ImporterTests {
         context.insert(p)
         try context.save()
         let third = BundleData.Payload(words: [makeWord("w1", "alpha2"), makeWord("w2", "beta"), makeWord("w3", "gamma")],
-                                       grammar: [makeGrammar("g1")], fingerprint: "3")
+                                       grammar: [makeGrammar("g1")], listening: [], fingerprint: "3")
         _ = try await importer.importData(third)
         let revived = try context.fetch(FetchDescriptor<Word>(predicate: #Predicate { $0.id == "w2" }))
         #expect(revived.first?.isArchived == false)
+        // JSON から消えたリスニングもアーカイブされる
+        let listening = try context.fetch(FetchDescriptor<ListeningQuestion>())
+        #expect(listening.count == 1 && listening.first?.isArchived == true)
+
         let progress = try context.fetch(FetchDescriptor<ItemProgress>())
         #expect(progress.count == 1)
         #expect(progress.first?.recentResults == [false])

@@ -129,7 +129,7 @@ private struct StageBlock: View {
     let snapshot: WidgetSnapshot
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 6) {
             ForEach(snapshot.tracks, id: \.title) { track in
                 TrackRow(track: track)
             }
@@ -240,7 +240,14 @@ extension WidgetSnapshot {
                 .init(level: 550, masteredRatio: 0.3, cleared: false),
                 .init(level: 600, masteredRatio: 0, cleared: false),
             ]),
+            .init(title: "リスニング", unlockedLevel: 450, currentLevel: 450, levels: [
+                .init(level: 450, masteredRatio: 0.2, cleared: false),
+                .init(level: 500, masteredRatio: 0, cleared: false),
+                .init(level: 550, masteredRatio: 0, cleared: false),
+                .init(level: 600, masteredRatio: 0, cleared: false),
+            ]),
         ],
+
         updatedAt: .now)
 }
 

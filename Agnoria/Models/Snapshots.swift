@@ -62,7 +62,27 @@ nonisolated struct GrammarSnapshot: Codable, Hashable, Sendable, Identifiable {
     }
 }
 
+/// リスニング（Part 2 形式の応答問題）の 1 問 [v1.9]。問いかけ 1 文と応答 3 つ。音声は端末の合成音声で作る
+nonisolated struct ListeningSnapshot: Codable, Hashable, Sendable, Identifiable {
+    var id: String
+    var category: String
+    var question: String
+    var questionJa: String
+    var choices: [String]
+    var choicesJa: [String]
+    var answer: Int
+    var explanation: String
+    var level: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id, category, question, choices, answer, explanation, level
+        case questionJa = "question_ja"
+        case choicesJa = "choices_ja"
+    }
+}
+
 nonisolated struct ProgressSnapshot: Hashable, Sendable {
+
     var itemID: String
     var recentResults: [Bool] = []
     var totalCorrect: Int = 0

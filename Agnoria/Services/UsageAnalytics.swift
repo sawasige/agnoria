@@ -16,6 +16,8 @@ final class UsageAnalytics {
         case rephraseUsed
         case practiceUsed
         case speakTapped
+        /// リスニングの「もう一度聞く」[v1.9]
+        case replayTapped
         case bookmarkToggled(on: Bool)
         case historyReset
         case settingsChanged(key: String)
@@ -33,6 +35,7 @@ final class UsageAnalytics {
             case .rephraseUsed: "rephrase_used"
             case .practiceUsed: "practice_used"
             case .speakTapped: "speak_tapped"
+            case .replayTapped: "replay_tapped"
             case .bookmarkToggled: "bookmark_toggled"
             case .historyReset: "history_reset"
             case .settingsChanged: "settings_changed"
@@ -61,12 +64,12 @@ final class UsageAnalytics {
                 return ["trigger": trigger.rawValue]
             case .reminderPermission(let granted):
                 return ["granted": granted ? 1 : 0]
-            case .rephraseUsed, .practiceUsed, .speakTapped, .historyReset, .reviewLinkOpened, .reminderOpened:
+            case .rephraseUsed, .practiceUsed, .speakTapped, .replayTapped, .historyReset, .reviewLinkOpened, .reminderOpened:
                 return [:]
             }
         }
 
-        /// mode: auto / word / grammar、category: 分野 id か mix、format: 単語の形式か random、filter: all / wrong / bookmarked
+        /// mode: auto / word / grammar / listening、category: 分野 id か mix、format: 単語の形式か random、filter: all / wrong / bookmarked
         static func configParams(_ c: QuizConfig) -> [String: Any] {
             let filter: String = switch c.filter {
             case .all: "all"
@@ -133,7 +136,8 @@ final class UsageAnalytics {
         Analytics.logEvent(event.name, parameters: event.params)
     }
 
-    /// 軸ごとの到達帯をユーザープロパティに（unlocked_level_word / unlocked_level_grammar）。帯が変わるたびに呼ぶ
+    /// 軸ごとの到達帯をユーザープロパティに（unlocked_level_word / unlocked_level_grammar / unlocked_level_listening）。帯が変わるたびに呼ぶ
+
     func syncUserProperties() {
         guard state == .active else { return }
         for mode in DrillMode.allCases {
