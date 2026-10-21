@@ -185,7 +185,8 @@ struct QuizView: View {
     private func questionBody(_ q: QuizQuestion, answer: QuizRun.Answer?, interactive: Bool) -> some View {
         VStack(alignment: .leading, spacing: 20) {
             if q.isListening {
-                ListeningPrompt(question: q, answered: answer != nil, interactive: interactive)
+                ListeningPrompt(question: q, number: (model.run?.questions.firstIndex(where: { $0.id == q.id }) ?? 0) + 1,
+                                answered: answer != nil, interactive: interactive)
             } else {
                 Text(q.prompt)
                     .font(q.wordFormat == .meaning
@@ -263,7 +264,7 @@ struct QuizView: View {
                 AnyLayout(stacked ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))) {
                     if q.isListening {
                         Button {
-                            ListeningPlayer.shared.play(q, rate: settings.speechRate)
+                            ListeningPlayer.shared.play(q, number: run.index + 1, rate: settings.speechRate)
                             model.analytics.log(.replayTapped)
                         } label: {
                             Label("もう一度聞く", systemImage: "speaker.wave.2")
@@ -431,6 +432,8 @@ struct QuizView: View {
 /// リスニングの問題文の場所（§4.2 [v1.9]）。回答前は案内と「聞く」ボタン、表示されたら自動で再生する。回答後は問いかけの英文
 struct ListeningPrompt: View {
     let question: QuizQuestion
+    /// セット内の番号（1 から）。「Number N.」と読む
+    let number: Int
     let answered: Bool
     /// 次のカードの伏せ字では false（自動再生しない）
     let interactive: Bool
@@ -440,6 +443,8 @@ struct ListeningPrompt: View {
 
     private var player: ListeningPlayer { ListeningPlayer.shared }
     private var playingThis: Bool { player.questionID == question.id && player.playing != nil }
+    /// 番号か問いかけを読んでいる
+    private var speakingQuestion: Bool { playingThis && (player.playing == .number || player.playing == .question) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -453,10 +458,10 @@ struct ListeningPrompt: View {
                     .accessibilityAddTraits(.isHeader)
             } else {
                 HStack(alignment: .center, spacing: 14) {
-                    Image(systemName: playingThis && player.playing == .question ? "person.wave.2.fill" : "person.wave.2")
+                    Image(systemName: speakingQuestion ? "person.wave.2.fill" : "person.wave.2")
                         .font(.system(size: 34))
-                        .foregroundStyle(playingThis && player.playing == .question ? Color.accentColor : Color.secondary)
-                        .symbolEffect(.variableColor.iterative, isActive: playingThis && player.playing == .question)
+                        .foregroundStyle(speakingQuestion ? Color.accentColor : Color.secondary)
+                        .symbolEffect(.variableColor.iterative, isActive: speakingQuestion)
                         .frame(width: 44)
                         .accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 4) {
@@ -498,9 +503,10 @@ struct ListeningPrompt: View {
         #if os(iOS)
         volumeZero = AVAudioSession.sharedInstance().outputVolume == 0
         #endif
-        player.play(question, rate: settings.speechRate)
+        player.play(question, number: number, rate: settings.speechRate)
     }
 }
+
 
 
 /// 10問ぶんの進捗ドット。回答済みは正誤の色、現在の問題はアクセント
