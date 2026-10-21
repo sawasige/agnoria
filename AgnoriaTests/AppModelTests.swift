@@ -3,17 +3,15 @@ import Testing
 import SwiftData
 @testable import Agnoria
 
-/// バンドルデータを in-memory の SwiftData に取り込み、セットが最後まで回ることを確認する
+/// 同梱の問題データをメモリに読み、in-memory の記録ストアでセットが最後まで回ることを確認する
 @Suite("AppModel 通し", .serialized)
 @MainActor
 struct AppModelTests {
     private func makeModel() async throws -> AppModel {
         let container = try AgnoriaSchema.makeContainer(inMemory: true)
         let defaults = UserDefaults(suiteName: "AppModelTests-\(UUID().uuidString)")!
-        let model = AppModel(container: container, settings: AppSettings(defaults: defaults))
         let payload = try BundleData.load(bundle: Bundle(for: ItemProgress.self))
-        _ = try await DataImporter(modelContainer: container).importData(payload)
-        return model
+        return AppModel(container: container, settings: AppSettings(defaults: defaults), catalog: QuestionCatalog(payload))
     }
 
     @Test("おまかせは単語と文法が混ざった10問になり、セッションは mode=auto で保存される") func autoRun() async throws {
@@ -187,22 +185,22 @@ struct AppModelTests {
         let container = try AgnoriaSchema.makeContainer(inMemory: true)
         let defaults = UserDefaults(suiteName: "AppModelTests-\(UUID().uuidString)")!
         defaults.set(550, forKey: "unlockedLevel")   // 1.2 までの合算の到達帯
-        let model = AppModel(container: container, settings: AppSettings(defaults: defaults))
         let payload = try BundleData.load(bundle: Bundle(for: ItemProgress.self))
-        _ = try await DataImporter(modelContainer: container).importData(payload)
+        let model = AppModel(container: container, settings: AppSettings(defaults: defaults), catalog: QuestionCatalog(payload))
         for id in payload.grammar.filter({ $0.level <= 500 }).map(\.id) {
+
             let p = model.progress(for: id)
             for _ in 0..<3 { p.record(isCorrect: true) }
         }
         #expect(!model.settings.stageTracksMigrated)
-        await model.importBundledDataIfNeeded()
+        model.prepareAtLaunch()
         #expect(model.settings.stageTracksMigrated)
         #expect(model.settings.unlockedLevel(.grammar) == 550)
         #expect(model.settings.unlockedLevel(.word) == Stage.first)
         #expect(defaults.object(forKey: "unlockedLevel") == nil)
         // 2 回目以降は求め直さない（手動で下げた帯を戻さない）
         model.settings.setUnlockedLevel(Stage.first, for: .grammar)
-        await model.importBundledDataIfNeeded()
+        model.prepareAtLaunch()
         #expect(model.settings.unlockedLevel(.grammar) == Stage.first)
     }
 

@@ -1,141 +1,8 @@
 import Foundation
 import SwiftData
 
-@Model
-final class GrammarQuestion {
-    @Attribute(.unique) var id: String
-    var category: String
-    var question: String
-    /// 空欄を正解で埋めた文の和訳 [v1.7]。既定値は軽量マイグレーション用
-    var questionJa: String = ""
-    var choices: [String]
-    var answer: Int
-    var explanation: String
-    var level: Int
-    var isArchived: Bool
-
-    init(_ s: GrammarSnapshot) {
-        id = s.id
-        category = s.category
-        question = s.question
-        questionJa = s.questionJa
-        choices = s.choices
-        answer = s.answer
-        explanation = s.explanation
-        level = s.level
-        isArchived = false
-    }
-
-    func apply(_ s: GrammarSnapshot) {
-        category = s.category
-        question = s.question
-        questionJa = s.questionJa
-        choices = s.choices
-        answer = s.answer
-        explanation = s.explanation
-        level = s.level
-        isArchived = false
-    }
-
-    var snapshot: GrammarSnapshot {
-        GrammarSnapshot(id: id, category: category, question: question, questionJa: questionJa, choices: choices,
-                        answer: answer, explanation: explanation, level: level)
-    }
-}
-
-@Model
-final class Word {
-    @Attribute(.unique) var id: String
-    var word: String
-    var pos: String
-    var meaning: String
-    var example: String
-    var exampleJa: String
-    /// 例文 3 つ [v1.7]。既定値は軽量マイグレーション用。空なら example / exampleJa の 1 つだけ
-    var examples: [ExampleSentence] = []
-    var distractors: [String]
-    var category: String
-    var level: Int
-    var isArchived: Bool
-
-    init(_ s: WordSnapshot) {
-        id = s.id
-        word = s.word
-        pos = s.pos
-        meaning = s.meaning
-        example = s.example
-        exampleJa = s.exampleJa
-        examples = s.examples
-        distractors = s.distractors
-        category = s.category
-        level = s.level
-        isArchived = false
-    }
-
-    func apply(_ s: WordSnapshot) {
-        word = s.word
-        pos = s.pos
-        meaning = s.meaning
-        example = s.example
-        exampleJa = s.exampleJa
-        examples = s.examples
-        distractors = s.distractors
-        category = s.category
-        level = s.level
-        isArchived = false
-    }
-
-    var snapshot: WordSnapshot {
-        WordSnapshot(id: id, word: word, pos: pos, meaning: meaning,
-                     examples: examples.isEmpty ? [ExampleSentence(en: example, ja: exampleJa)] : examples,
-                     distractors: distractors, category: category, level: level)
-    }
-}
-
-/// リスニング（応答問題）[v1.9]。問題ストア（ローカル）に入る
-@Model
-final class ListeningQuestion {
-    @Attribute(.unique) var id: String
-    var category: String
-    var question: String
-    var questionJa: String
-    var choices: [String]
-    var choicesJa: [String]
-    var answer: Int
-    var explanation: String
-    var level: Int
-    var isArchived: Bool
-
-    init(_ s: ListeningSnapshot) {
-        id = s.id
-        category = s.category
-        question = s.question
-        questionJa = s.questionJa
-        choices = s.choices
-        choicesJa = s.choicesJa
-        answer = s.answer
-        explanation = s.explanation
-        level = s.level
-        isArchived = false
-    }
-
-    func apply(_ s: ListeningSnapshot) {
-        category = s.category
-        question = s.question
-        questionJa = s.questionJa
-        choices = s.choices
-        choicesJa = s.choicesJa
-        answer = s.answer
-        explanation = s.explanation
-        level = s.level
-        isArchived = false
-    }
-
-    var snapshot: ListeningSnapshot {
-        ListeningSnapshot(id: id, category: category, question: question, questionJa: questionJa, choices: choices,
-                          choicesJa: choicesJa, answer: answer, explanation: explanation, level: level)
-    }
-}
+/// 問題データ（Word / GrammarQuestion / ListeningQuestion）は 1.9 で SwiftData から外し、同梱 JSON をメモリに持つ
+/// （`QuestionCatalog`、§2.1、Issue #21）。ここにあるのは iCloud で同期する学習記録だけ
 
 /// 学習履歴。問題の id（itemID）に紐づく独立したレコード。
 /// 問題本文を更新・アーカイブしても履歴は残る。
@@ -217,16 +84,11 @@ nonisolated struct SessionResult: Codable, Hashable, Sendable {
     var elapsedMs: Int
 }
 
-/// ストアの構成（§2.3 [v1.7]）。
+/// ストアの構成（§2.3 [v1.7] / [v1.9]）。
 /// - 記録ストア `default.store`（1.0 からのファイルそのまま）: ItemProgress / StudySession。iCloud のプライベートデータベースに同期
-/// - 問題ストア `questions.store`: GrammarQuestion / Word / ListeningQuestion [v1.9]。ローカルのみ（同梱 JSON から端末ごとに取り込む）
-/// 1.0 では 4 つのモデルが default.store に同居していた。問題の 2 モデルは軽量マイグレーションで default.store から外れ、
-/// 新しい questions.store に取り込み直す（AppModel.importBundledDataIfNeeded が fingerprint を消して再取り込みする）
+/// - 問題データは SwiftData に入れない [v1.9]（`QuestionCatalog`）。1.7〜1.8 の `questions.store` は起動時に消す（AppModel.removeLegacyQuestionStore）
 nonisolated enum AgnoriaSchema {
-    static let questionModels: [any PersistentModel.Type] = [GrammarQuestion.self, Word.self, ListeningQuestion.self]
-
-    static let recordModels: [any PersistentModel.Type] = [ItemProgress.self, StudySession.self]
-    static let models: [any PersistentModel.Type] = questionModels + recordModels
+    static let models: [any PersistentModel.Type] = [ItemProgress.self, StudySession.self]
     static let cloudKitContainer = "iCloud.com.himatsubu.Agnoria"
 
     struct Result {
@@ -243,26 +105,28 @@ nonisolated enum AgnoriaSchema {
         let schema = Schema(models)
         if inMemory {
             // cloudKitDatabase の既定は .automatic で、iCloud の entitlement があるビルド（テストのホストも）では CloudKit の
-            // 検証（unique 不可・既定値必須）が走って問題モデルで失敗する。インメモリは必ず .none
-            let questions = ModelConfiguration("questions", schema: Schema(questionModels), isStoredInMemoryOnly: true, cloudKitDatabase: .none)
-            let records = ModelConfiguration("records", schema: Schema(recordModels), isStoredInMemoryOnly: true, cloudKitDatabase: .none)
-            return Result(container: try ModelContainer(for: schema, configurations: [questions, records]), cloudSync: false)
+            // 検証が走る。インメモリは必ず .none
+            let records = ModelConfiguration("records", schema: schema, isStoredInMemoryOnly: true, cloudKitDatabase: .none)
+            return Result(container: try ModelContainer(for: schema, configurations: [records]), cloudSync: false)
         }
-        let dir = URL.applicationSupportDirectory
-        let questions = ModelConfiguration("questions", schema: Schema(questionModels),
-                                           url: dir.appending(path: "questions.store"), cloudKitDatabase: .none)
-        let recordsURL = dir.appending(path: "default.store")
+        let recordsURL = URL.applicationSupportDirectory.appending(path: "default.store")
         if cloudSync {
             // iCloud の entitlement（CloudKit コンテナ）が無いビルドでは、ここは throw ではなく後で別スレッドで落ちる。
             // 同期を切るのは起動引数 -cloudSync NO かテスト実行時（cloudSyncRequested）で、entitlement は必須
-            let records = ModelConfiguration("records", schema: Schema(recordModels), url: recordsURL,
+            let records = ModelConfiguration("records", schema: schema, url: recordsURL,
                                              cloudKitDatabase: .private(cloudKitContainer))
-            if let container = try? ModelContainer(for: schema, configurations: [questions, records]) {
+            if let container = try? ModelContainer(for: schema, configurations: [records]) {
                 return Result(container: container, cloudSync: true)
             }
         }
-        let records = ModelConfiguration("records", schema: Schema(recordModels), url: recordsURL, cloudKitDatabase: .none)
-        return Result(container: try ModelContainer(for: schema, configurations: [questions, records]), cloudSync: false)
+        let records = ModelConfiguration("records", schema: schema, url: recordsURL, cloudKitDatabase: .none)
+        return Result(container: try ModelContainer(for: schema, configurations: [records]), cloudSync: false)
+    }
+
+    /// 1.7〜1.8 の問題ストアのファイル。起動時に消す
+    static var legacyQuestionStoreURLs: [URL] {
+        let dir = URL.applicationSupportDirectory
+        return ["questions.store", "questions.store-shm", "questions.store-wal"].map { dir.appending(path: $0) }
     }
 
     /// 起動引数 `-cloudSync NO` で同期を切る（UI テストとシミュレータ作業用。利用者向けの設定ではない）。

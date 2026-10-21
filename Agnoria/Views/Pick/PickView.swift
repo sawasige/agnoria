@@ -15,9 +15,6 @@ struct PickView: View {
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
 
-    @Query(filter: #Predicate<Word> { !$0.isArchived }) private var words: [Word]
-    @Query(filter: #Predicate<GrammarQuestion> { !$0.isArchived }) private var grammar: [GrammarQuestion]
-    @Query(filter: #Predicate<ListeningQuestion> { !$0.isArchived }) private var listening: [ListeningQuestion]
     @Query private var progress: [ItemProgress]
 
     @State private var mode: DrillMode = .word
@@ -45,12 +42,9 @@ struct PickView: View {
     }
 
     private var items: [(id: String, category: String)] {
-        switch mode {
-        case .word: words.filter { settings.enabledLevels(.word).contains($0.level) }.map { ($0.id, $0.category) }
-        case .grammar: grammar.filter { settings.enabledLevels(.grammar).contains($0.level) }.map { ($0.id, $0.category) }
-        case .listening: listening.filter { settings.enabledLevels(.listening).contains($0.level) }.map { ($0.id, $0.category) }
-        }
+        model.catalog.categoryItems(mode, levels: settings.enabledLevels(mode))
     }
+
 
     var body: some View {
         let pmap = Dictionary(progress.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, _ in a })

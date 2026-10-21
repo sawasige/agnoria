@@ -76,62 +76,38 @@ struct BundleDataTests {
     }
 }
 
-@Suite("SwiftData 取り込み", .serialized)
-struct ImporterTests {
-    private func makeWord(_ id: String, _ word: String) -> WordSnapshot {
-        WordSnapshot(id: id, word: word, pos: "名詞", meaning: "m", example: "e \(word)", exampleJa: "j",
-                     distractors: ["a", "b", "c"], category: "ビジネス一般", level: 450)
+@Suite("問題データのカタログ")
+struct QuestionCatalogTests {
+    private var bundle: Bundle { Bundle(for: ItemProgress.self) }
+
+    @Test("同梱 JSON をメモリに読む。起動 1 秒以内の予算に収まる速さ") func loads() throws {
+        let clock = ContinuousClock()
+        var catalog = QuestionCatalog.empty
+        let elapsed = try clock.measure { catalog = QuestionCatalog(try BundleData.load(bundle: bundle)) }
+        #expect(elapsed < .milliseconds(500), "\(elapsed)")
+        #expect(catalog.words.count == 400 && catalog.grammar.count == 200 && catalog.listening.count == 120)
+        #expect(!catalog.isEmpty && QuestionCatalog.empty.isEmpty)
+        #expect(catalog.wordByID["w-0001"]?.word == "invoice")
+        #expect(catalog.grammarByID["pos-001"] != nil && catalog.listeningByID["lis-wh-001"] != nil)
     }
-    private func makeGrammar(_ id: String) -> GrammarSnapshot {
-        GrammarSnapshot(id: id, category: "品詞", question: "x ______ y", questionJa: "x a y の訳", choices: ["a", "b", "c", "d"],
-                        answer: 0, explanation: "e", level: 450)
+
+    @Test("軸ごとの集計用の一覧と、到達帯までの絞り込み") func items() throws {
+        let catalog = QuestionCatalog(try BundleData.load(bundle: bundle))
+        #expect(catalog.levelItemsByMode[.word]?.count == 400)
+        #expect(catalog.levelItemsByMode[.listening]?.count == 120)
+        #expect(catalog.categoryItems(.grammar, levels: [450]).count == 50)
+        #expect(catalog.categoryItems(.word, levels: [450, 500]).count == 200)
+        #expect(Set(catalog.categoryItems(.listening, levels: Level.allValues).map(\.category)) == Set(ListeningCategory.allCases.map(\.rawValue)))
     }
-    private func makeListening(_ id: String) -> ListeningSnapshot {
-        ListeningSnapshot(id: id, category: "WH 疑問文", question: "When is it due?", questionJa: "いつですか。",
-                          choices: ["Friday.", "Yes.", "Here."], choicesJa: ["金曜です。", "はい。", "ここです。"],
-                          answer: 0, explanation: "e", level: 450)
-    }
 
-
-    @Test("upsert と アーカイブ") func upsertAndArchive() async throws {
-        let container = try AgnoriaSchema.makeContainer(inMemory: true)
-        let importer = DataImporter(modelContainer: container)
-
-        let first = BundleData.Payload(words: [makeWord("w1", "alpha"), makeWord("w2", "beta")],
-                                       grammar: [makeGrammar("g1")], listening: [makeListening("l1")], fingerprint: "1")
-        let s1 = try await importer.importData(first)
-        #expect(s1 == .init(inserted: 4, updated: 0, archived: 0))
-
-        // w2 を削除、w1 を更新、w3 を追加。リスニングは l1 を更新
-        let second = BundleData.Payload(words: [makeWord("w1", "alpha2"), makeWord("w3", "gamma")],
-                                        grammar: [makeGrammar("g1")], listening: [makeListening("l1")], fingerprint: "2")
-        let s2 = try await importer.importData(second)
-        #expect(s2 == .init(inserted: 1, updated: 3, archived: 1))
-
-        let context = ModelContext(container)
-        let words = try context.fetch(FetchDescriptor<Word>(sortBy: [SortDescriptor(\.id)]))
-        #expect(words.map(\.id) == ["w1", "w2", "w3"])
-        #expect(words[0].word == "alpha2")
-        #expect(words[1].isArchived)
-        #expect(!words[2].isArchived)
-
-        // 履歴は id に紐づくので残る
-        let p = ItemProgress(itemID: "w2")
-        p.record(isCorrect: false)
-        context.insert(p)
-        try context.save()
-        let third = BundleData.Payload(words: [makeWord("w1", "alpha2"), makeWord("w2", "beta"), makeWord("w3", "gamma")],
-                                       grammar: [makeGrammar("g1")], listening: [], fingerprint: "3")
-        _ = try await importer.importData(third)
-        let revived = try context.fetch(FetchDescriptor<Word>(predicate: #Predicate { $0.id == "w2" }))
-        #expect(revived.first?.isArchived == false)
-        // JSON から消えたリスニングもアーカイブされる
-        let listening = try context.fetch(FetchDescriptor<ListeningQuestion>())
-        #expect(listening.count == 1 && listening.first?.isArchived == true)
-
-        let progress = try context.fetch(FetchDescriptor<ItemProgress>())
-        #expect(progress.count == 1)
-        #expect(progress.first?.recentResults == [false])
+    @Test("JSON に無い id の記録は集計に入らない（記録は消さない）") func unknownIDsIgnored() throws {
+        let catalog = QuestionCatalog(words: [], grammar: [], listening: [
+            ListeningSnapshot(id: "l1", category: "WH 疑問文", question: "q", questionJa: "j", choices: ["a", "b", "c"],
+                              choicesJa: ["a", "b", "c"], answer: 0, explanation: "e", level: 450)])
+        var done = ProgressSnapshot(itemID: "deleted"); done.recentResults = [true, true, true]
+        let progress = ["deleted": done, "l1": ProgressSnapshot(itemID: "l1")]
+        let s = MasteryStats.byLevel(items: catalog.levelItems(.listening), progress: progress)
+        #expect(s[450]?.total == 1 && s[450]?[.mastered] == 0)
     }
 }
 

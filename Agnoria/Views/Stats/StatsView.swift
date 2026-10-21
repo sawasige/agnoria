@@ -5,26 +5,20 @@ import Charts
 /// 進捗画面（§4.6 [v1.2]）。達成度（習得の内訳）と推移（日別の学習量）
 struct StatsView: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(AppModel.self) private var model
 
-    @Query(filter: #Predicate<Word> { !$0.isArchived }) private var words: [Word]
-    @Query(filter: #Predicate<GrammarQuestion> { !$0.isArchived }) private var grammar: [GrammarQuestion]
-    @Query(filter: #Predicate<ListeningQuestion> { !$0.isArchived }) private var listening: [ListeningQuestion]
     @Query private var progress: [ItemProgress]
     @Query(sort: \StudySession.finishedAt) private var sessions: [StudySession]
 
     var body: some View {
         let pmap = Dictionary(progress.map { ($0.itemID, $0.snapshot) }, uniquingKeysWith: { a, _ in a })
-        let wordLevels = settings.enabledLevels(.word)
-        let grammarLevels = settings.enabledLevels(.grammar)
-        let wordItems = words.filter { wordLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
-        let grammarItems = grammar.filter { grammarLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
-        let listeningLevels = settings.enabledLevels(.listening)
-        let listeningItems = listening.filter { listeningLevels.contains($0.level) }.map { (id: $0.id, category: $0.category) }
+        let catalog = model.catalog
+        let wordItems = catalog.categoryItems(.word, levels: settings.enabledLevels(.word))
+        let grammarItems = catalog.categoryItems(.grammar, levels: settings.enabledLevels(.grammar))
+        let listeningItems = catalog.categoryItems(.listening, levels: settings.enabledLevels(.listening))
         let overall = MasteryStats.summarize(items: wordItems + grammarItems + listeningItems, progress: pmap)
-        let tracks = Stage.tracks(items: [.word: words.map { (id: $0.id, level: $0.level) },
-                                          .grammar: grammar.map { (id: $0.id, level: $0.level) },
-                                          .listening: listening.map { (id: $0.id, level: $0.level) }],
-                                  progress: pmap, unlocked: settings.unlockedLevels)
+        let tracks = Stage.tracks(items: catalog.levelItemsByMode, progress: pmap, unlocked: settings.unlockedLevels)
+
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
         let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
