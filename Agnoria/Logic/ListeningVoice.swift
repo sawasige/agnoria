@@ -21,10 +21,23 @@ nonisolated enum ListeningVoice {
         var responses: String
     }
 
+    /// 聞き取りの練習に使える声か。ふつうの声（`com.apple.voice.`: compact / enhanced / premium）と Siri の声だけにし、
+    /// 機械的な Eloquence（Eddy / Grandma / Rocko など。iPhone にも入っている）と Mac の旧声・遊び声
+    /// （`com.apple.speech.synthesis.voice.`: Zarvox / Bells / Whisper など）は除く。どれも品質は default で見分けがつかない
+    static func isNatural(_ v: Candidate) -> Bool {
+        let id = v.identifier
+        if id.hasPrefix("com.apple.eloquence.") || id.hasPrefix("com.apple.speech.synthesis.voice.") { return false }
+        return id.hasPrefix("com.apple.voice.") || id.contains("siri")
+    }
+
     /// 問題の id から決定的に 2 つの声を選ぶ（同じ問題は毎回同じ声）。
-    /// 問いかけの言語は id のハッシュで選び、応答はできるだけ別の声（別の性別 → 別の言語の順で探す）
-    static func pick(seed: String, available: [Candidate]) -> Pick? {
+    /// 問いかけの言語は id のハッシュで選び、応答はできるだけ別の声（別の性別 → 別の言語の順で探す）。
+    /// 候補はふつうの声だけ（`isNatural`）。1 つも無ければ全部から選ぶ
+    static func pick(seed: String, available all: [Candidate]) -> Pick? {
+        let natural = all.filter(isNatural)
+        let available = natural.isEmpty ? all : natural
         guard !available.isEmpty else { return nil }
+
         let h = hash(seed)
         let langs = languages.filter { lang in available.contains { $0.language == lang } }
         guard !langs.isEmpty else {

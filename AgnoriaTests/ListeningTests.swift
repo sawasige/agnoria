@@ -95,7 +95,29 @@ struct ListeningVoiceTests {
         #expect(p.responses == "gb")
     }
 
+    @Test("機械的な Eloquence と Mac の遊び声は選ばず、ふつうの声だけから選ぶ") func excludesNoveltyVoices() throws {
+        let voices = [
+            voice("com.apple.eloquence.en-US.Eddy", "en-US", gender: 0), voice("com.apple.eloquence.en-GB.Grandma", "en-GB", gender: 0),
+            voice("com.apple.speech.synthesis.voice.Zarvox", "en-US", gender: 0), voice("com.apple.speech.synthesis.voice.Fred", "en-US", gender: 1),
+            voice("com.apple.voice.compact.en-US.Samantha", "en-US", gender: 2),
+            voice("com.apple.voice.super-compact.en-GB.Daniel", "en-GB", gender: 1),
+            voice("com.apple.voice.super-compact.en-AU.Karen", "en-AU", gender: 2),
+        ]
+        for i in 1...40 {
+            let p = try #require(ListeningVoice.pick(seed: "lis-\(i)", available: voices))
+            for id in [p.question, p.responses] {
+                #expect(id.hasPrefix("com.apple.voice."), "\(id)")
+            }
+            #expect(p.question != p.responses)
+        }
+        // ふつうの声が 1 つも無ければ、あるものから選ぶ
+        let only = [voice("com.apple.eloquence.en-US.Eddy", "en-US")]
+        #expect(ListeningVoice.pick(seed: "x", available: only)?.question == "com.apple.eloquence.en-US.Eddy")
+        #expect(ListeningVoice.isNatural(voice("com.apple.ttsbundle.siri_Nicky_en-US_compact", "en-US")))
+    }
+
     @Test("英語の声が 1 つしか無ければ両方同じ声、無ければ nil") func degenerate() {
+
         let one = ListeningVoice.pick(seed: "x", available: [voice("only", "en-US")])
         #expect(one == ListeningVoice.Pick(question: "only", responses: "only"))
         let foreign = ListeningVoice.pick(seed: "x", available: [voice("ja", "ja-JP")])

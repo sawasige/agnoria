@@ -410,7 +410,8 @@ StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で
 ## 6. 音声
 - `AVSpeechSynthesizer`、`AVSpeechSynthesisVoice(language: "en-US")`
 - 例文のみ読み上げ。単語単体の読み上げは v2
-- **[v1.9]** リスニング（§3.5）の声: `ListeningVoice.pick` が問題の id のハッシュで言語（en-US / en-GB / en-AU。端末に無い言語は除く）を決め、その言語で品質（premium > enhanced > default）の最も高い声を問いかけに使う。応答は同じ言語の別の性別の声 → 別の言語の声 → 同じ声、の順で探す。同じ問題は毎回同じ声。拡張音声が無い端末では compact の声になる（質は TestFlight で確認する。SPEC-REVIEW N1）。再生中の部分は `AVSpeechSynthesizerDelegate` の `didStart` で画面に伝える（`ListeningPlayer.playing`）
+- **[v1.9]** リスニング（§3.5）の声: `ListeningVoice.pick` が問題の id のハッシュで言語（en-US / en-GB / en-AU。端末に無い言語は除く）を決め、その言語で品質（premium > enhanced > default）の最も高い声を問いかけに使う。候補はふつうの声（識別子 `com.apple.voice.` と Siri）だけで、機械的な Eloquence（`com.apple.eloquence.`。iPhone にも 8 種入っている）と Mac の旧声・遊び声（`com.apple.speech.synthesis.voice.`）は除く（これらも品質は default で見分けがつかないため。SPEC-REVIEW N7）。
+応答は同じ言語の別の性別の声 → 別の言語の声 → 同じ声、の順で探す。同じ問題は毎回同じ声。拡張音声が無い端末では compact の声になる（質は TestFlight で確認する。SPEC-REVIEW N1）。再生中の部分は `AVSpeechSynthesizerDelegate` の `didStart` で画面に伝える（`ListeningPlayer.playing`）
 - **[v1.9]** リスニングの再生中だけ `AVAudioSession` を `.playback`（マナーモードでも鳴る）にし、読み終えたら・止めたら `.ambient` に戻す（`AudioSession.set` / `restoreAmbient`）。利用者が「聞く」を押す、またはリスニングを選んで始めた意図した再生なので、サイレントスイッチで消えて答えられないより鳴る方を取る。効果音と例文の読み上げは従来どおり `.ambient`
 - **[v1.9]** 起動引数 `-speech NO` で読み上げとリスニングの再生を止める（UI テストの `launchQuiet()` が付ける。ユニットテストのホストでも止める）
 - **[v1.1]** マナーモード（サイレントスイッチ）に従う。`.ambient` カテゴリなので消音中は鳴らない。自動読み上げをデフォルト ON にしたため、意図せず音が出る経路を無くす。`AVAudioSession` は iOS のみなので `#if os(iOS)` で囲む
