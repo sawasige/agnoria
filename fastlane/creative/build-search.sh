@@ -18,10 +18,11 @@ mock() {  # $1 src $2 dst $3 width（角丸スクショ + 黒ベゼル + 影）
 magick "$SRC" -filter Lanczos -resize x2560 -gravity NorthWest -crop 3840x2560+0+0 +repage "$WORK/bg.png"
 # 文字: 女神の右端（最大 x≈1920）から余白を取って x=2020 から。白い縁取りで雲の上でも読める
 TXT=( -gravity NorthWest -font "$FONT_JA"
-      -stroke white -strokewidth 22 -fill white -pointsize 270 -annotate +2020+400 "1日10問、" -annotate +2020+710 "3分で終わる"
-      -pointsize 100 -annotate +2026+1060 "英単語・文法・応答問題 450〜600点" -annotate +2026+1215 "今の実力に合わせて出題します"
-      -stroke none -fill '#1d2a6b' -pointsize 270 -annotate +2020+400 "1日10問、" -annotate +2020+710 "3分で終わる"
-      -fill '#2b3a7a' -pointsize 100 -annotate +2026+1060 "英単語・文法・応答問題 450〜600点" -annotate +2026+1215 "今の実力に合わせて出題します" )
+      -stroke white -strokewidth 22 -fill white -pointsize 270 -annotate +2020+400 "成長が、" -annotate +2020+710 "実感できる。"
+      -pointsize 100 -annotate +2026+1060 "英単語・文法・応答問題 450〜600点" -annotate +2026+1215 "1日10問、3分の英語ドリル"
+      -stroke none -fill '#1d2a6b' -pointsize 270 -annotate +2020+400 "成長が、" -annotate +2020+710 "実感できる。"
+      -fill '#2b3a7a' -pointsize 100 -annotate +2026+1060 "英単語・文法・応答問題 450〜600点" -annotate +2026+1215 "1日10問、3分の英語ドリル" )
+
 if [ "$MOCK" = mock ]; then
   mock "$REPO/fastlane/screenshots/ja/iPhone 17 Pro Max-01-home.png" "$WORK/p1.png" 1000
   magick "$WORK/bg.png" "$WORK/p1.png" -geometry +2720+1480 -composite "${TXT[@]}" -alpha off PNG24:"$OUT"

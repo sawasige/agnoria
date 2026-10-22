@@ -14,9 +14,10 @@ WORK=$(mktemp -d)
 magick "$SRC" -crop 1671x716+0+110 +repage -filter Lanczos -resize 3840x1646! "$WORK/bg.png"
 # 文字: x=1950 から（iPhone で切れる右端 3533 の手前に収める）。上の 330px はボタンの下なので y=480 から。白い縁取り
 TXT=( -gravity NorthWest -font "$FONT_JA"
-      -stroke white -strokewidth 16 -fill white -pointsize 200 -annotate +1950+480 "1日10問、" -annotate +1950+710 "3分で終わる"
-      -pointsize 86 -annotate +1954+980 "英単語・文法・応答問題 450〜600点" -annotate +1954+1095 "今の実力に合わせて出題します"
-      -stroke none -fill '#1d2a6b' -pointsize 200 -annotate +1950+480 "1日10問、" -annotate +1950+710 "3分で終わる"
-      -fill '#2b3a7a' -pointsize 86 -annotate +1954+980 "英単語・文法・応答問題 450〜600点" -annotate +1954+1095 "今の実力に合わせて出題します" )
+      -stroke white -strokewidth 16 -fill white -pointsize 200 -annotate +1950+480 "成長が、" -annotate +1950+710 "実感できる。"
+      -pointsize 86 -annotate +1954+980 "英単語・文法・応答問題 450〜600点" -annotate +1954+1095 "1日10問、3分の英語ドリル"
+      -stroke none -fill '#1d2a6b' -pointsize 200 -annotate +1950+480 "成長が、" -annotate +1950+710 "実感できる。"
+      -fill '#2b3a7a' -pointsize 86 -annotate +1954+980 "英単語・文法・応答問題 450〜600点" -annotate +1954+1095 "1日10問、3分の英語ドリル" )
+
 magick "$WORK/bg.png" "${TXT[@]}" -alpha off -strip PNG24:"$OUT"
 echo "wrote $OUT"
