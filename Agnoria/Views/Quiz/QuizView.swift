@@ -23,6 +23,8 @@ struct QuizView: View {
     @State private var scrollOffset: CGFloat = 0
     /// 最後に指が動いた時刻。全幅の選択肢ボタンは横に動かしても指を離すと押下になるので、直前にドラッグしていたら回答にしない
     @State private var lastDragAt = Date.distantPast
+    /// カード領域の幅（GeometryReader の外の修飾子で 2 列かどうかを見るため）
+    @State private var cardWidth: CGFloat = 0
 
     var body: some View {
         if let run = model.run {
@@ -58,23 +60,50 @@ struct QuizView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .simultaneousGesture(swipeGesture(run: run, width: width))
         }
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { cardWidth = $0 }
         .background { AppBackground() }
         .safeAreaInset(edge: .bottom) {
-            if answer != nil {
+            if answer != nil, !(cardWidth >= 700 && isCompactHeight) {
                 actionBar(run: run, question: q)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .overlay(alignment: .bottomTrailing) {
+            if answer != nil, cardWidth >= 700, isCompactHeight {
+                actionBar(run: run, question: q)
+                    .frame(width: cardWidth / 2)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        // 縦が短い横向きでは、タイトルバーを消して × だけ浮かせる（タイトルバーと操作列で縦の 4 割を使っていた）[v2.0]
+        .overlay(alignment: .topLeading) {
+            if isCompactHeight {
+                Button { confirmLeave = true } label: {
+                    Label("やめる", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                        .font(.body.weight(.semibold))
+                        .frame(width: 36, height: 36)
+                }
+                .buttonStyle(.glass)
+                .clipShape(.circle)
+                .padding(.leading, 8)
+                .padding(.top, 4)
+                .keyboardShortcut(.cancelAction)
             }
         }
         .animation(.default, value: answer != nil)
         .navigationTitle(run.config.categoryTitle)
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(isCompactHeight ? .hidden : .visible, for: .navigationBar)
         #endif
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button { confirmLeave = true } label: { Label("やめる", systemImage: "xmark") }
-                    .keyboardShortcut(.cancelAction)
+            if !isCompactHeight {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button { confirmLeave = true } label: { Label("やめる", systemImage: "xmark") }
+                        .keyboardShortcut(.cancelAction)
+                }
             }
         }
         .confirmationDialog("このセットをやめますか？", isPresented: $confirmLeave, titleVisibility: .visible) {
@@ -223,7 +252,10 @@ struct QuizView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
+            // タイトルバーを消しているときは、浮かせた × と重ならないように右へ寄せる
+            .padding(.leading, isCompactHeight ? 52 : 0)
             .accessibilityElement(children: .combine)
+
 
             ProgressDots(run: run, index: index)
                 .accessibilityHidden(true)
@@ -330,8 +362,7 @@ struct QuizView: View {
                             ListeningPlayer.shared.play(q, number: run.index + 1, rate: settings.speechRate)
                             model.analytics.log(.replayTapped)
                         } label: {
-                            Label("もう一度聞く", systemImage: "speaker.wave.2")
-                                .frame(maxWidth: .infinity)
+                            barLabel("もう一度聞く", "speaker.wave.2", iconOnly: oneRow)
                         }
                         .buttonStyle(.glass)
                     } else if let text = q.speechText {
@@ -339,22 +370,19 @@ struct QuizView: View {
                             Speaker.shared.speak(text, rate: settings.speechRate)
                             model.analytics.log(.speakTapped)
                         } label: {
-                            Label("読み上げ", systemImage: "speaker.wave.2")
-                                .frame(maxWidth: .infinity)
+                            barLabel("読み上げ", "speaker.wave.2", iconOnly: oneRow)
                         }
                         .buttonStyle(.glass)
                     }
                     if bookmarked {
                         Button { toggleBookmark(q) } label: {
-                            Label("ブックマーク済み", systemImage: "bookmark.fill")
-                                .frame(maxWidth: .infinity)
+                            barLabel("ブックマーク済み", "bookmark.fill", iconOnly: oneRow)
                         }
                         .buttonStyle(.glassProminent)
                         .tint(.orange)
                     } else {
                         Button { toggleBookmark(q) } label: {
-                            Label("ブックマーク", systemImage: "bookmark")
-                                .frame(maxWidth: .infinity)
+                            barLabel("ブックマーク", "bookmark", iconOnly: oneRow)
                         }
                         .buttonStyle(.glass)
                     }
@@ -389,6 +417,19 @@ struct QuizView: View {
         .padding(.bottom, 6)
         .frame(maxWidth: 720)
         .frame(maxWidth: .infinity)
+    }
+
+    /// 操作列のボタンのラベル。1 行に詰めるときは記号だけ（幅が半分しかない横向きで文字が縦に折れるため）
+    @ViewBuilder
+    private func barLabel(_ title: String, _ systemImage: String, iconOnly: Bool) -> some View {
+        if iconOnly {
+            Label(title, systemImage: systemImage)
+                .labelStyle(.iconOnly)
+                .frame(width: 40)
+        } else {
+            Label(title, systemImage: systemImage)
+                .frame(maxWidth: .infinity)
+        }
     }
 
     /// 次へ（最終問は結果へ）。ボタンからはカードを送る動きなしで切り替える（クロスフェード）
