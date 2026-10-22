@@ -599,15 +599,38 @@ final class AppModel {
         analytics.log(.bookmarkToggled(on: p.isBookmarked))
     }
 
+    /// 設定で到達帯を下げたときの「やり直し」（§3.4 / §4.4 [v2.0]、Issue #56）。
+    /// その軸の、level 以上の帯の問題の習得（直近の正誤と習得日時）を消して未学習に戻す。累計の回答数・正解数・ブックマーク・セットの記録は残す。
+    /// 到達帯を level にし、最上位の演出フラグを戻し、開始の帯が level より上なら level まで下げる
+    func restartStage(_ mode: DrillMode, from level: Int) {
+        let ids = Set(catalog.items(mode).filter { $0.level >= level }.map(\.id))
+        let rows = (try? context.fetch(FetchDescriptor<ItemProgress>())) ?? []
+        for p in rows where ids.contains(p.itemID) {
+            p.recentResults = []
+            p.masteredAt = nil
+        }
+        save("restartStage")
+        settings.setUnlockedLevel(level, for: mode)
+        settings.setTopStageCelebrated(false, for: mode)
+        if settings.startingLevel > level { settings.startingLevel = level }
+        lastUnlocked = []
+        pendingStageClears = []
+        analytics.log(.stageRestart(mode: mode, level: level))
+        analytics.syncUserProperties()
+        refreshWidgetSnapshot()
+    }
+
     /// 学習履歴のリセット（Progress と StudySession を全削除。問題データは残す）
     func resetHistory() throws {
         try context.delete(model: ItemProgress.self)
         try context.delete(model: StudySession.self)
         try context.save()
+        settings.startingLevel = Stage.first
         for mode in DrillMode.allCases {
             settings.setUnlockedLevel(Stage.first, for: mode)
             settings.setTopStageCelebrated(false, for: mode)
         }
+
         lastUnlocked = []
         pendingStageClears = []
         pendingReviewRequest = nil
