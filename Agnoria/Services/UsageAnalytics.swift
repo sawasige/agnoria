@@ -27,6 +27,8 @@ final class UsageAnalytics {
         case reminderOpened
         /// 初回の「今のスコアの目安」で選んだ開始の帯（あとで = 0）[v2.0]
         case startingLevel(Int)
+        /// 設定で到達帯を下げて、その帯からやり直した [v2.0]
+        case stageRestart(mode: DrillMode, level: Int)
 
         var name: String {
             switch self {
@@ -46,6 +48,7 @@ final class UsageAnalytics {
             case .reminderPermission: "reminder_permission"
             case .reminderOpened: "reminder_opened"
             case .startingLevel: "starting_level"
+            case .stageRestart: "stage_restart"
             }
         }
 
@@ -69,6 +72,9 @@ final class UsageAnalytics {
                 return ["granted": granted ? 1 : 0]
             case .startingLevel(let level):
                 return ["level": level]
+            case .stageRestart(let mode, let level):
+                return ["mode": mode.rawValue, "level": level]
+
 
             case .rephraseUsed, .practiceUsed, .speakTapped, .replayTapped, .historyReset, .reviewLinkOpened, .reminderOpened:
                 return [:]

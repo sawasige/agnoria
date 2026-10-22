@@ -74,7 +74,39 @@ struct AppModelTests {
         #expect(existing.settings.startingLevelAsked)
     }
 
+    @Test("設定で到達帯を下げると、その軸のその帯以上の習得が未学習に戻る。累計・ブックマーク・他の軸は残る") func restartStage() async throws {
+        let model = try await makeModel()
+        let payload = try BundleData.load(bundle: Bundle(for: ItemProgress.self))
+        // 単語 450 / 500 / 550 と文法 450 を 1 問ずつ習得済みにし、単語の到達帯を 550、開始の帯を 550 に
+        let w450 = try #require(payload.words.first { $0.level == 450 }?.id)
+        let w500 = try #require(payload.words.first { $0.level == 500 }?.id)
+        let w550 = try #require(payload.words.first { $0.level == 550 }?.id)
+        let g450 = try #require(payload.grammar.first { $0.level == 450 }?.id)
+        for id in [w450, w500, w550, g450] {
+            let p = model.progress(for: id)
+            for _ in 0..<3 { p.record(isCorrect: true) }
+            p.isBookmarked = true
+        }
+        model.settings.setUnlockedLevel(550, for: .word)
+        model.settings.startingLevel = 550
+        model.settings.setTopStageCelebrated(true, for: .word)
+
+        model.restartStage(.word, from: 500)
+
+        let w500p = model.progress(for: w500), w550p = model.progress(for: w550)
+        #expect(w500p.recentResults.isEmpty && w500p.masteredAt == nil, "500 点帯以上は未学習に")
+        #expect(w550p.recentResults.isEmpty && w550p.masteredAt == nil)
+        #expect(w500p.totalAnswered == 3 && w500p.totalCorrect == 3 && w500p.isBookmarked, "累計とブックマークは残る")
+        #expect(model.progress(for: w450).masteredAt != nil, "下の帯は残る")
+        #expect(model.progress(for: g450).masteredAt != nil, "他の軸は残る")
+        #expect(model.settings.unlockedLevel(.word) == 500)
+        #expect(model.settings.startingLevel == 500, "開始の帯も下がる")
+        #expect(!model.settings.topStageCelebrated.contains(.word))
+        #expect(model.stageStates()[.word]?.current == 500)
+    }
+
     @Test("おまかせにリスニングは入らず、リスニングを指定すると 3 択の応答問題だけになる") func listeningRun() async throws {
+
 
         let model = try await makeModel()
         var rng = SeededRandomNumberGenerator(seed: 5)

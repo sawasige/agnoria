@@ -43,6 +43,8 @@ struct UsageAnalyticsTests {
             .bookmarkToggled(on: false), .historyReset, .settingsChanged(key: "autoSpeak"),
             .reviewRequested(.stageClear), .reviewRequested(.highScore), .reviewLinkOpened,
             .reminderPermission(granted: true), .reminderOpened, .startingLevel(550), .startingLevel(0),
+            .stageRestart(mode: .word, level: 450),
+
 
         ]
         for e in events {

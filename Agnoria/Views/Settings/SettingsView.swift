@@ -13,6 +13,9 @@ struct SettingsView: View {
     @State private var confirmReset2 = false
     @State private var resetDone = false
     @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
+    /// 到達帯を下げようとしている軸と帯（確認してからやり直す §4.4 [v2.0]）
+    @State private var pendingRestart: (mode: DrillMode, level: Int)?
+    @State private var confirmRestart = false
 
     var body: some View {
         @Bindable var settings = settings
@@ -23,6 +26,12 @@ struct SettingsView: View {
                         Picker("\(mode.title)の到達帯", selection: Binding(
                             get: { settings.unlockedLevel(mode) },
                             set: { level in
+                                if level < settings.unlockedLevel(mode) {
+                                    // 下げる = その帯からやり直す。習得が消えるので確認してから
+                                    pendingRestart = (mode, level)
+                                    confirmRestart = true
+                                    return
+                                }
                                 settings.setUnlockedLevel(level, for: mode)
                                 model.analytics.log(.settingsChanged(key: "unlockedLevel.\(mode.rawValue)"))
                                 model.analytics.syncUserProperties()
@@ -34,8 +43,20 @@ struct SettingsView: View {
                 } header: {
                     Text("ステージ")
                 } footer: {
-                    Text("単語・文法・リスニングは別々に帯を進みます。おまかせと分野タイルは、それぞれの到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたい・戻りたいときはここで変えられます。")
+                    Text("単語・文法・リスニングは別々に帯を進みます。おまかせと分野タイルは、それぞれの到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたいときはここで上げられます。下げると、その帯からやり直し（その帯以上の習得をリセット）になります。")
                 }
+                .confirmationDialog(restartTitle, isPresented: $confirmRestart, titleVisibility: .visible) {
+                    Button("やり直す", role: .destructive) {
+                        if let r = pendingRestart { model.restartStage(r.mode, from: r.level) }
+                        pendingRestart = nil
+                    }
+                    Button("キャンセル", role: .cancel) { pendingRestart = nil }
+                } message: {
+                    if let r = pendingRestart {
+                        Text("\(r.level) 点帯以上の\(r.mode.title)の習得をリセットします。回答数・正解数・ブックマークは残ります。")
+                    }
+                }
+
 
                 Section {
                     Toggle("正解・不正解の効果音", isOn: $settings.soundEffects)
@@ -152,7 +173,13 @@ struct SettingsView: View {
         #endif
     }
 
+    private var restartTitle: String {
+        guard let r = pendingRestart else { return "" }
+        return "\(r.mode.title)を \(r.level) 点帯からやり直しますか？"
+    }
+
     private var cloudSyncLabel: String {
+
         switch model.cloudSyncStatus {
         case .syncing: "同期中"
         case .notSignedIn: "未サインイン"
