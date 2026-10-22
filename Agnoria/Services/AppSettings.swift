@@ -23,6 +23,8 @@ final class AppSettings {
         static let reminderEnabled = "reminderEnabled"
         static let reminderMinutes = "reminderMinutes"
         static let reminderPrompted = "reminderPrompted"
+        static let startingLevelAsked = "startingLevelAsked"
+        static let startingLevel = "startingLevel"
         static let autoIncludesListening = "autoIncludesListening"
     }
 
@@ -110,8 +112,25 @@ final class AppSettings {
         didSet { defaults.set(reminderMinutes, forKey: Key.reminderMinutes) }
     }
 
+    /// 初回に選んだ開始の帯（§3.4 [v2.0]）。これより下の帯は「今の帯」にならず、復習として混ざるだけ。既定 450
+    var startingLevel: Int {
+        get {
+            let v = defaults.integer(forKey: Key.startingLevel)
+            return Stage.levels.contains(v) ? v : Stage.first
+        }
+        set { defaults.set(newValue, forKey: Key.startingLevel) }
+    }
+
+    /// 初回起動で「今のスコアの目安」を尋ねたか（§4.1 [v2.0]）。記録のある端末では尋ねずに true にする
+
+    var startingLevelAsked: Bool {
+        get { defaults.bool(forKey: Key.startingLevelAsked) }
+        set { defaults.set(newValue, forKey: Key.startingLevelAsked) }
+    }
+
     /// 最初のセット完走後に、通知の許可を一度だけ尋ねたか
     var reminderPrompted: Bool {
+
         get { defaults.bool(forKey: Key.reminderPrompted) }
         set { defaults.set(newValue, forKey: Key.reminderPrompted) }
     }

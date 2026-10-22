@@ -13,6 +13,7 @@ struct HomeView: View {
 
     @State private var showSettings = false
     @State private var showStart = false
+    @State private var showStartingLevel = false
     @State private var showEmptyAlert = false
 
     /// 到達帯までの問題（id・分野）
@@ -29,7 +30,7 @@ struct HomeView: View {
         let wrong = MasteryStats.wrongCount(itemIDs: reviewIDs, progress: pmap)
         let bookmarked = MasteryStats.bookmarkCount(itemIDs: reviewIDs, progress: pmap)
         let hasItems = !model.catalog.isEmpty
-        let tracks = Stage.tracks(items: model.catalog.levelItemsByMode, progress: pmap, unlocked: settings.unlockedLevels)
+        let tracks = Stage.tracks(items: model.catalog.levelItemsByMode, progress: pmap, unlocked: settings.unlockedLevels, floor: settings.startingLevel)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
 
@@ -93,7 +94,15 @@ struct HomeView: View {
         .sheet(isPresented: $showSettings) {
             SettingsView()
         }
+        .sheet(isPresented: $showStartingLevel) {
+            StartingLevelSheet()
+        }
+        .task {
+            // 初回起動で 1 回だけ（§4.1 [v2.0]）。問題データが読めているときだけ
+            if hasItems, model.shouldAskStartingLevel { showStartingLevel = true }
+        }
         .sheet(isPresented: $showStart) {
+
             StartSheet(tracks: tracks, wrong: wrong, bookmarked: bookmarked) { config in
                 showStart = false
                 start(config)
