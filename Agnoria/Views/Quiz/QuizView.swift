@@ -118,16 +118,26 @@ struct QuizView: View {
                     .offset(y: -scrollOffset)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             } else {
-                ScrollView {
-                    cardContent(run: run, question: q, answer: answer, wide: wide)
-                }
-                .scrollDisabled(dragAxis == .horizontal)
-                .onScrollGeometryChange(for: CGFloat.self) { g in
-                    g.contentOffset.y + g.contentInsets.top
-                } action: { _, new in
-                    scrollOffset = new
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        cardContent(run: run, question: q, answer: answer, wide: wide)
+                            .id("cardTop")
+                    }
+                    .scrollDisabled(dragAxis == .horizontal)
+                    .onScrollGeometryChange(for: CGFloat.self) { g in
+                        g.contentOffset.y + g.contentInsets.top
+                    } action: { _, new in
+                        scrollOffset = new
+                    }
+                    // 2 列のとき、下のほうで答えると左上の解説が画面の外に残るので、回答したら上端まで戻す [v2.0]
+                    .onChange(of: answer != nil) { _, answered in
+                        if wide, answered, scrollOffset > 0 {
+                            withAnimation { proxy.scrollTo("cardTop", anchor: .top) }
+                        }
+                    }
                 }
             }
+
         }
         // 持ち上げて傾けている間、カード内の Liquid Glass を平らな塗りに置き換える。
         // ガラスは回転すると回転前の外接矩形に膨らんで描かれ、行が縦に伸びて重なるため
