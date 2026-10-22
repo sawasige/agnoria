@@ -13,9 +13,11 @@ magick "$DIR/background.png" -resize "${W}x${H}!" "$WORK/bg.png"
 B=$(( W < H ? W : H ))
 KS=$(( 96 * B / 1320 )); TS=$(( 64 * B / 1320 )); PAD=$(( 50 * B / 1320 ))
 TOP=$(( PAD + KS + TS + PAD * 2 ))
-# 画面: 残りの高さに収まるように縮小し、角丸 + ベゼル（iPhone の frameit 出力と同じく下は切れてよい）
+# 画面: 幅（左右 PAD×2）と残りの高さ（下にも PAD）の両方に収まるように縮小し、角丸 + ベゼル。画面全体を見せる
 BEZ=$(( 28 * B / 1320 )); R=$(( 110 * B / 1320 ))
-SW=$(( W - PAD * 4 )); SH=$(( SW * H / W ))
+SW=$(( W - PAD * 4 - BEZ * 2 )); SH=$(( SW * H / W ))
+MAXH=$(( H - TOP - PAD - BEZ * 2 ))
+if [ $SH -gt $MAXH ]; then SH=$MAXH; SW=$(( SH * W / H )); fi
 magick "$IN" -resize "${SW}x${SH}!" \( +clone -alpha extract -draw "fill black polygon 0,0 0,$R $R,0 fill white circle $R,$R $R,0" \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off -compose CopyOpacity -composite "$WORK/screen.png"
 magick -size "$(( SW + BEZ * 2 ))x$(( SH + BEZ * 2 ))" xc:none -fill "#1c1c1e" -draw "roundrectangle 0,0,$(( SW + BEZ * 2 - 1 )),$(( SH + BEZ * 2 - 1 )),$(( R + BEZ )),$(( R + BEZ ))" "$WORK/screen.png" -geometry "+${BEZ}+${BEZ}" -compose Over -composite "$WORK/device.png"
 magick "$WORK/bg.png" \
