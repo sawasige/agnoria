@@ -45,7 +45,7 @@ struct QuizView: View {
             let progress = min(1, max(0, -dragX / (width * 0.6)))
             ZStack(alignment: .top) {
                 if dragX < 0 {
-                    nextCard(run)
+                    nextCard(run, wide: wide)
                         .scaleEffect(0.92 + 0.08 * progress)
                         .opacity(0.5 + 0.5 * progress)
                         .allowsHitTesting(false)
@@ -158,19 +158,22 @@ struct QuizView: View {
     }
 
     /// カードの中身: 番号・問題文・4 択・回答後の解説。
-    /// wide なら回答後に 2 列（左: 正誤と解説、右: 問題と選択肢）。回答前は 1 列のまま中央に置き、回答で右へ寄る
+    /// wide なら最初から 2 列: 左に番号と進捗ドット（回答後はその下に正誤と解説）、右に問題と選択肢。
+    /// 回答しても問題は動かさず、解説が左に現れるだけにする（問題が右へ寄る動きは不自然だった）
     private func cardContent(run: QuizRun, question q: QuizQuestion, answer: QuizRun.Answer?, wide: Bool) -> some View {
         Group {
-            if wide, let answer {
+            if wide {
                 HStack(alignment: .top, spacing: 24) {
-                    explanationCard(answer: answer, question: q)
-                        .frame(maxWidth: .infinity, alignment: .top)
-                        .transition(.move(edge: .leading).combined(with: .opacity))
                     VStack(alignment: .leading, spacing: 20) {
                         questionHeader(run: run, index: run.index, question: q)
-                        questionBody(q, answer: answer, interactive: true)
+                        if let answer {
+                            explanationCard(answer: answer, question: q)
+                                .transition(.scale(scale: 0.96).combined(with: .opacity))
+                        }
                     }
-                    .frame(maxWidth: .infinity, alignment: .top)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    questionBody(q, answer: answer, interactive: true)
+                        .frame(maxWidth: .infinity, alignment: .top)
                 }
             } else {
                 VStack(alignment: .leading, spacing: 20) {
@@ -184,7 +187,7 @@ struct QuizView: View {
             }
         }
         .padding()
-        .frame(maxWidth: wide && answer != nil ? 1200 : 720)
+        .frame(maxWidth: wide ? 1200 : 720)
         .frame(maxWidth: .infinity)
         .animation(.default, value: answer != nil)
     }
@@ -275,7 +278,7 @@ struct QuizView: View {
 
     /// めくった下に見える次のカード。レイアウトは本物と同じだが、問題文と選択肢は伏せ字にして先に読めないようにする。
     /// 最終問の下は結果の予告
-    private func nextCard(_ run: QuizRun) -> some View {
+    private func nextCard(_ run: QuizRun, wide: Bool) -> some View {
         VStack(alignment: .leading, spacing: 20) {
             if run.isLast {
                 VStack(spacing: 12) {
@@ -290,16 +293,27 @@ struct QuizView: View {
                 .padding(.top, 120)
             } else {
                 let next = run.questions[run.index + 1]
-                questionHeader(run: run, index: run.index + 1, question: next)
-                questionBody(next, answer: nil, interactive: false)
-                    .redacted(reason: .placeholder)
+                if wide {
+                    HStack(alignment: .top, spacing: 24) {
+                        questionHeader(run: run, index: run.index + 1, question: next)
+                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                        questionBody(next, answer: nil, interactive: false)
+                            .redacted(reason: .placeholder)
+                            .frame(maxWidth: .infinity, alignment: .top)
+                    }
+                } else {
+                    questionHeader(run: run, index: run.index + 1, question: next)
+                    questionBody(next, answer: nil, interactive: false)
+                        .redacted(reason: .placeholder)
+                }
             }
         }
         .padding()
-        .frame(maxWidth: 720)
+        .frame(maxWidth: wide ? 1200 : 720)
         .frame(maxWidth: .infinity)
         .accessibilityHidden(true)
     }
+
 
     /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる。
     /// 縦が短い横向き（compact 高さ）では 読み上げ / ブックマーク / 次へ を 1 行に並べ、スワイプのヒントは出さない [v2.0]
