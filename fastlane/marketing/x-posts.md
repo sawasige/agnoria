@@ -19,3 +19,27 @@ https://apps.apple.com/jp/app/id6823061416
 TOEICが初めての人、まだ450点に届いていない人へ。Agnoria は450点帯の基本語彙と基本文法から始め、8割覚えたら次のスコア帯へ。今どこにいて、次まであと何問かが見えます。1回3分、無料
 https://apps.apple.com/jp/app/id6823061416
 #TOEIC #英語学習
+
+# 1.4 向け（iPhone Duo 対応。2026-10-22 提出、Duo は 10/23 発売）
+
+画像は `fastlane/screenshots/ja/` の Duo の枠付き（内側の回答後 `iPhone Duo-08-answered-inner_framed.png`、外側のホーム `iPhone Duo-02-home_framed.png`）。
+
+## 4. Duo 対応の告知（1.4 公開後。内側の 2 列表示の画像）137 字
+
+Agnoria 1.4、iPhone Duoに対応。開いた画面では解説を左、問題を右に並べ、スクロールせずに「なぜ違うか」まで読めます。閉じた画面と横向きも最適化。無料、広告なし
+https://apps.apple.com/jp/app/id6823061416
+#iPhoneDuo #TOEIC #英語学習
+
+## 5. Duo 発売日（10/23。閉じた画面と開いた画面を並べた画像）139 字
+
+iPhone Duo発売日。英語ドリル「Agnoria」はDuoの全ポーズに合わせて作り直しました。閉じても開いても、答えた瞬間に解説が見える。TOEIC 450〜600点、1回3分
+https://apps.apple.com/jp/app/id6823061416
+#iPhoneDuo #TOEIC #個人開発
+
+1.4 が未公開のうちに出すなら「作り直しました」→「作り直し、対応版を審査中です」。
+
+## 6. 初回のスコアの目安とやり直し（初回のシートか進捗の画像）138 字
+
+Agnoria 1.4は、初回に「今のスコアの目安」を聞いて、合ったスコア帯から始まります。550点までなら500点帯から。設定でスコア帯を下げれば、その帯からやり直し。成長が実感できる英語ドリル、無料
+https://apps.apple.com/jp/app/id6823061416
+#TOEIC #英語学習
