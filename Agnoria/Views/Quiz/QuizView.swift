@@ -7,6 +7,7 @@ struct QuizView: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var hSizeClass
+    @Environment(\.verticalSizeClass) private var vSizeClass
     #endif
     @State private var confirmLeave = false
     @State private var bookmarked = false
@@ -37,9 +38,9 @@ struct QuizView: View {
         let answer = run.currentAnswer
         GeometryReader { geo in
             let width = geo.size.width
-            // 横に広い画面（iPad・iPhone Duo の内側・Mac）では、回答後に解説を左、問題を右の 2 列にする（§4.2 [v2.0]）。
-            // 縦が短い横向きでは解説が選択肢の下に隠れてスクロールしないと読めないため。幅は regular かつ 700pt 以上
-            let wide = isRegularWidth && width >= 700
+            // 横に広い画面（iPad・iPhone Duo の内側・Mac・iPhone の横向き）では、回答後に解説を左、問題を右の 2 列にする（§4.2 [v2.0]）。
+            // 縦が短い横向きでは解説が選択肢の下に隠れてスクロールしないと読めないため。size class ではなく使える幅で決める（Apple の指針）
+            let wide = width >= 700
             // カードの重なり: 今の問題の下に次の問題（伏せ字）が小さく控えていて、めくるにつれて手前に出てくる
             let progress = min(1, max(0, -dragX / (width * 0.6)))
             ZStack(alignment: .top) {
@@ -95,11 +96,12 @@ struct QuizView: View {
     /// 今の問題のカード。通常は ScrollView。持ち上げて傾けている間は、同じ内容をスクロール位置ごと再現した
     /// 普通のビューに差し替えて回転させる（UIKit の ScrollView を回転させるとセーフエリアが回転後の枠から
     /// 計算し直され、内容の上下の余白が動いてしまうため）
-    private var isRegularWidth: Bool {
+    /// 縦が短い（iPhone の横向き）。操作列を 1 行に詰める
+    private var isCompactHeight: Bool {
         #if os(iOS)
-        hSizeClass == .regular
+        vSizeClass == .compact
         #else
-        true
+        false
         #endif
     }
 
@@ -289,13 +291,15 @@ struct QuizView: View {
         .accessibilityHidden(true)
     }
 
-    /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる
+    /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる。
+    /// 縦が短い横向き（compact 高さ）では 読み上げ / ブックマーク / 次へ を 1 行に並べ、スワイプのヒントは出さない [v2.0]
     @ViewBuilder
     private func actionBar(run: QuizRun, question q: QuizQuestion) -> some View {
         // アクセシビリティ文字サイズでは 読み上げ / ブックマーク を縦に積む
         let stacked = typeSize.isAccessibilitySize
+        let oneRow = isCompactHeight && !stacked
         GlassEffectContainer(spacing: 10) {
-            VStack(spacing: 10) {
+            AnyLayout(oneRow ? AnyLayout(HStackLayout(spacing: 10)) : AnyLayout(VStackLayout(spacing: 10))) {
                 AnyLayout(stacked ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))) {
                     if q.isListening {
                         Button {
@@ -333,7 +337,7 @@ struct QuizView: View {
                 }
 
                 #if os(iOS)
-                if !settings.swipeHintDone {
+                if !settings.swipeHintDone && !oneRow {
                     Text("← 左にスワイプでも次へ")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
@@ -353,8 +357,9 @@ struct QuizView: View {
                 .buttonStyle(.glassProminent)
                 .keyboardShortcut(.defaultAction)
             }
-            .controlSize(.large)
+            .controlSize(oneRow ? .regular : .large)
         }
+
         .padding(.horizontal)
         .padding(.top, 10)
         .padding(.bottom, 6)
