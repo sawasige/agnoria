@@ -9,11 +9,12 @@ read W H < <(magick identify -format "%w %h\n" "$IN")
 WORK=$(mktemp -d)
 # 背景: frameit と同じ background.png を出力サイズに
 magick "$DIR/background.png" -resize "${W}x${H}!" "$WORK/bg.png"
-# 文字の大きさは幅 1320（iPhone）での 96 / 64 を幅に比例させる
-KS=$(( 96 * W / 1320 )); TS=$(( 64 * W / 1320 )); PAD=$(( 50 * W / 1320 ))
+# 文字の大きさは幅 1320（iPhone 縦）での 96 / 64 を短辺に比例させる（横向きでも文字が大きくなりすぎない）
+B=$(( W < H ? W : H ))
+KS=$(( 96 * B / 1320 )); TS=$(( 64 * B / 1320 )); PAD=$(( 50 * B / 1320 ))
 TOP=$(( PAD + KS + TS + PAD * 2 ))
 # 画面: 残りの高さに収まるように縮小し、角丸 + ベゼル（iPhone の frameit 出力と同じく下は切れてよい）
-BEZ=$(( 28 * W / 1320 )); R=$(( 110 * W / 1320 ))
+BEZ=$(( 28 * B / 1320 )); R=$(( 110 * B / 1320 ))
 SW=$(( W - PAD * 4 )); SH=$(( SW * H / W ))
 magick "$IN" -resize "${SW}x${SH}!" \( +clone -alpha extract -draw "fill black polygon 0,0 0,$R $R,0 fill white circle $R,$R $R,0" \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off -compose CopyOpacity -composite "$WORK/screen.png"
 magick -size "$(( SW + BEZ * 2 ))x$(( SH + BEZ * 2 ))" xc:none -fill "#1c1c1e" -draw "roundrectangle 0,0,$(( SW + BEZ * 2 - 1 )),$(( SH + BEZ * 2 - 1 )),$(( R + BEZ )),$(( R + BEZ ))" "$WORK/screen.png" -geometry "+${BEZ}+${BEZ}" -compose Over -composite "$WORK/device.png"
