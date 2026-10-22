@@ -5,6 +5,10 @@ struct QuizView: View {
     @Environment(AppModel.self) private var model
     @Environment(AppSettings.self) private var settings
     @Environment(\.dynamicTypeSize) private var typeSize
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var hSizeClass
+    @Environment(\.verticalSizeClass) private var vSizeClass
+    #endif
     @State private var confirmLeave = false
     @State private var bookmarked = false
     @State private var feedbackCount = 0
@@ -19,6 +23,12 @@ struct QuizView: View {
     @State private var scrollOffset: CGFloat = 0
     /// 最後に指が動いた時刻。全幅の選択肢ボタンは横に動かしても指を離すと押下になるので、直前にドラッグしていたら回答にしない
     @State private var lastDragAt = Date.distantPast
+    /// カード領域の幅（GeometryReader の外の修飾子で 2 列かどうかを見るため）
+    @State private var cardWidth: CGFloat = 0
+    /// 解説カードのスクロール表示域での枠と、表示域の高さ（上下の inset を除く）。回答後に解説が見えていなければ送るため
+    @State private var explanationFrame: CGRect = .null
+    @State private var scrollVisibleHeight: CGFloat = 0
+    @State private var pendingExplanationScroll = false
 
     var body: some View {
         if let run = model.run {
@@ -34,40 +44,70 @@ struct QuizView: View {
         let answer = run.currentAnswer
         GeometryReader { geo in
             let width = geo.size.width
+            // 横に広い画面（iPad・iPhone Duo の内側・Mac・iPhone の横向き）では、回答後に解説を左、問題を右の 2 列にする（§4.2 [v2.0]）。
+            // 縦が短い横向きでは解説が選択肢の下に隠れてスクロールしないと読めないため。size class ではなく使える幅で決める（Apple の指針）
+            let wide = width >= 640
             // カードの重なり: 今の問題の下に次の問題（伏せ字）が小さく控えていて、めくるにつれて手前に出てくる
             let progress = min(1, max(0, -dragX / (width * 0.6)))
             ZStack(alignment: .top) {
                 if dragX < 0 {
-                    nextCard(run)
+                    nextCard(run, wide: wide)
                         .scaleEffect(0.92 + 0.08 * progress)
                         .opacity(0.5 + 0.5 * progress)
                         .allowsHitTesting(false)
                         .transition(.opacity)
                 }
-                currentCard(run: run, question: q, answer: answer, width: width, progress: progress)
+                currentCard(run: run, question: q, answer: answer, width: width, progress: progress, wide: wide)
                 .id(q.id)
                 .transition(.opacity)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .simultaneousGesture(swipeGesture(run: run, width: width))
         }
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { cardWidth = $0 }
         .background { AppBackground() }
         .safeAreaInset(edge: .bottom) {
-            if answer != nil {
+            if answer != nil, !(cardWidth >= 640 && isCompactHeight) {
                 actionBar(run: run, question: q)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .overlay(alignment: .bottomTrailing) {
+            if answer != nil, cardWidth >= 640, isCompactHeight {
+                actionBar(run: run, question: q)
+                    .frame(width: cardWidth / 2)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        // 縦が短い横向きでは、タイトルバーを消して × だけ浮かせる（タイトルバーと操作列で縦の 4 割を使っていた）[v2.0]
+        .overlay(alignment: .topLeading) {
+            if isCompactHeight {
+                Button { confirmLeave = true } label: {
+                    Label("やめる", systemImage: "xmark")
+                        .labelStyle(.iconOnly)
+                        .font(.body.weight(.semibold))
+                        .frame(width: 36, height: 36)
+                }
+                .buttonStyle(.glass)
+                .clipShape(.circle)
+                .padding(.leading, 8)
+                .padding(.top, 4)
+                .keyboardShortcut(.cancelAction)
             }
         }
         .animation(.default, value: answer != nil)
         .navigationTitle(run.config.categoryTitle)
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(isCompactHeight ? .hidden : .visible, for: .navigationBar)
         #endif
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button { confirmLeave = true } label: { Label("やめる", systemImage: "xmark") }
-                    .keyboardShortcut(.cancelAction)
+            if !isCompactHeight {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button { confirmLeave = true } label: { Label("やめる", systemImage: "xmark") }
+                        .keyboardShortcut(.cancelAction)
+                }
             }
         }
         .confirmationDialog("このセットをやめますか？", isPresented: $confirmLeave, titleVisibility: .visible) {
@@ -89,29 +129,63 @@ struct QuizView: View {
     /// 今の問題のカード。通常は ScrollView。持ち上げて傾けている間は、同じ内容をスクロール位置ごと再現した
     /// 普通のビューに差し替えて回転させる（UIKit の ScrollView を回転させるとセーフエリアが回転後の枠から
     /// 計算し直され、内容の上下の余白が動いてしまうため）
+    /// 縦が短い（iPhone の横向き）。操作列を 1 行に詰める
+    private var isCompactHeight: Bool {
+        #if os(iOS)
+        vSizeClass == .compact
+        #else
+        false
+        #endif
+    }
+
     private func currentCard(run: QuizRun, question q: QuizQuestion, answer: QuizRun.Answer?,
-                             width: CGFloat, progress: CGFloat) -> some View {
+                             width: CGFloat, progress: CGFloat, wide: Bool) -> some View {
         Group {
             if dragX < 0 {
                 // ScrollView の中と同じレイアウトにする: 幅を明示して高さは内容の自然な高さ。
                 // 幅が不定のまま高さだけ固定すると、文字サイズが大きいときに問題文が 1 行ぶんの高さで配置され、
                 // 描画は 2 行になって下の要素が上に寄る（実機で確認）
-                cardContent(run: run, question: q, answer: answer)
+                cardContent(run: run, question: q, answer: answer, wide: wide)
                     .frame(width: width)
                     .fixedSize(horizontal: false, vertical: true)
                     .offset(y: -scrollOffset)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             } else {
-                ScrollView {
-                    cardContent(run: run, question: q, answer: answer)
-                }
-                .scrollDisabled(dragAxis == .horizontal)
-                .onScrollGeometryChange(for: CGFloat.self) { g in
-                    g.contentOffset.y + g.contentInsets.top
-                } action: { _, new in
-                    scrollOffset = new
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        cardContent(run: run, question: q, answer: answer, wide: wide)
+                            .id("cardTop")
+                    }
+                    .scrollDisabled(dragAxis == .horizontal)
+                    .onScrollGeometryChange(for: CGFloat.self) { g in
+                        g.contentOffset.y + g.contentInsets.top
+                    } action: { _, new in
+                        scrollOffset = new
+                    }
+                    .onScrollGeometryChange(for: CGFloat.self) { g in
+                        g.visibleRect.height - g.contentInsets.top - g.contentInsets.bottom
+                    } action: { _, new in
+                        scrollVisibleHeight = new
+                    }
+                    // 回答したら解説が見えるようにする [v2.0]。2 列: 下のほうで答えると左上の解説が画面の外に残るので上端へ。
+                    // 1 列: 解説カードが操作列の上に出ていなければ、カードが入る位置まで送る（全部見えていれば動かさない）
+                    .onChange(of: answer != nil) { _, answered in
+                        guard answered else { return }
+                        if wide {
+                            if scrollOffset > 0 { withAnimation { proxy.scrollTo("cardTop", anchor: .top) } }
+                        } else {
+                            pendingExplanationScroll = true
+                            // 解説カードの出現と操作列の inset のアニメーション（約 0.35 秒）が終わってから、最終的な位置で判断する
+                            Task { @MainActor in
+                                try? await Task.sleep(for: .milliseconds(400))
+                                revealExplanationIfHidden(proxy)
+                            }
+                        }
+                    }
+                    .onChange(of: q.id) { _, _ in explanationFrame = .null; pendingExplanationScroll = false }
                 }
             }
+
         }
         // 持ち上げて傾けている間、カード内の Liquid Glass を平らな塗りに置き換える。
         // ガラスは回転すると回転前の外接矩形に膨らんで描かれ、行が縦に伸びて重なるため
@@ -131,36 +205,89 @@ struct QuizView: View {
         .rotationEffect(.degrees(Double(dragX / width) * 6), anchor: .bottom)
     }
 
-    /// カードの中身: 番号・問題文・4 択・回答後の解説
-    private func cardContent(run: QuizRun, question q: QuizQuestion, answer: QuizRun.Answer?) -> some View {
-        VStack(alignment: .leading, spacing: 20) {
-            questionHeader(run: run, index: run.index, question: q)
-            questionBody(q, answer: answer, interactive: true)
-
-            if let answer {
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack(spacing: 8) {
-                        Image(systemName: answer.isCorrect ? "checkmark.seal.fill" : "xmark.seal.fill")
-                            .font(.title2)
-                            .symbolEffect(.bounce, options: .nonRepeating, value: answer)
-                        Text(answer.isCorrect ? "正解" : "不正解")
-                            .font(.title3.weight(.bold))
-                            .fontDesign(.rounded)
+    /// カードの中身: 番号・問題文・4 択・回答後の解説。
+    /// wide なら最初から 2 列: 左に番号と進捗ドット（回答後はその下に正誤と解説）、右に問題と選択肢。
+    /// 回答しても問題は動かさず、解説が左に現れるだけにする（問題が右へ寄る動きは不自然だった）
+    private func cardContent(run: QuizRun, question q: QuizQuestion, answer: QuizRun.Answer?, wide: Bool) -> some View {
+        Group {
+            if wide {
+                HStack(alignment: .top, spacing: 24) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        questionHeader(run: run, index: run.index, question: q)
+                        if let answer {
+                            explanationCard(answer: answer, question: q)
+                                .transition(.scale(scale: 0.96).combined(with: .opacity))
+                        }
                     }
-                    .foregroundStyle(answer.isCorrect ? Color.green : Color.red)
-                    ExplanationView(question: q)
-                        .id(q.id)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    questionBody(q, answer: answer, interactive: true)
+                        .frame(maxWidth: .infinity, alignment: .top)
                 }
-                .fixedSize(horizontal: false, vertical: true)
-                .glassCard()
-                .transition(.scale(scale: 0.96).combined(with: .opacity))
+            } else {
+                VStack(alignment: .leading, spacing: 20) {
+                    questionHeader(run: run, index: run.index, question: q)
+                    questionBody(q, answer: answer, interactive: true)
+                    if let answer {
+                        explanationCard(answer: answer, question: q)
+                            .transition(.scale(scale: 0.96).combined(with: .opacity))
+                    }
+                }
             }
         }
         .padding()
-        .frame(maxWidth: 720)
+        .frame(maxWidth: wide ? 1200 : 720)
         .frame(maxWidth: .infinity)
         .animation(.default, value: answer != nil)
     }
+
+    /// 1 列で回答した直後、解説カードの見えている部分が 120pt に満たなければ、カードが入る位置まで送る
+    /// （カードが表示域に収まるなら下端合わせ、収まらなければ上端合わせ）。十分見えていれば動かさない
+    private func revealExplanationIfHidden(_ proxy: ScrollViewProxy) {
+        let f = explanationFrame
+        guard pendingExplanationScroll, !f.isNull, scrollVisibleHeight > 0 else { return }
+        pendingExplanationScroll = false
+        // .scrollView 座標は上の inset の下が原点なので、見えている下端 = 表示域の高さ
+        let bottom = scrollVisibleHeight
+        guard bottom - f.minY < 120, f.maxY > bottom else { return }
+        withAnimation { proxy.scrollTo("explanation", anchor: f.height <= scrollVisibleHeight ? .bottom : .top) }
+    }
+
+    /// 正誤と解説のカード。下にスワイプのヒント（初回だけ。操作列に置くと固定の高さを食うのでスクロールする側に）
+    private func explanationCard(answer: QuizRun.Answer, question q: QuizQuestion) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            explanationBody(answer: answer, question: q)
+            #if os(iOS)
+            if !settings.swipeHintDone {
+                Text("← 左にスワイプでも次へ")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+                    .transition(.opacity)
+            }
+            #endif
+        }
+        .id("explanation")
+        .onGeometryChange(for: CGRect.self) { $0.frame(in: .scrollView) } action: { explanationFrame = $0 }
+    }
+
+    private func explanationBody(answer: QuizRun.Answer, question q: QuizQuestion) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
+                Image(systemName: answer.isCorrect ? "checkmark.seal.fill" : "xmark.seal.fill")
+                    .font(.title2)
+                    .symbolEffect(.bounce, options: .nonRepeating, value: answer)
+                Text(answer.isCorrect ? "正解" : "不正解")
+                    .font(.title3.weight(.bold))
+                    .fontDesign(.rounded)
+            }
+            .foregroundStyle(answer.isCorrect ? Color.green : Color.red)
+            ExplanationView(question: q)
+                .id(q.id)
+        }
+        .fixedSize(horizontal: false, vertical: true)
+        .glassCard()
+    }
+
 
     /// 番号・形式名・進捗ドット
     private func questionHeader(run: QuizRun, index: Int, question q: QuizQuestion) -> some View {
@@ -173,7 +300,10 @@ struct QuizView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
+            // タイトルバーを消しているときは、浮かせた × と重ならないように右へ寄せる
+            .padding(.leading, isCompactHeight ? 52 : 0)
             .accessibilityElement(children: .combine)
+
 
             ProgressDots(run: run, index: index)
                 .accessibilityHidden(true)
@@ -228,7 +358,7 @@ struct QuizView: View {
 
     /// めくった下に見える次のカード。レイアウトは本物と同じだが、問題文と選択肢は伏せ字にして先に読めないようにする。
     /// 最終問の下は結果の予告
-    private func nextCard(_ run: QuizRun) -> some View {
+    private func nextCard(_ run: QuizRun, wide: Bool) -> some View {
         VStack(alignment: .leading, spacing: 20) {
             if run.isLast {
                 VStack(spacing: 12) {
@@ -243,32 +373,45 @@ struct QuizView: View {
                 .padding(.top, 120)
             } else {
                 let next = run.questions[run.index + 1]
-                questionHeader(run: run, index: run.index + 1, question: next)
-                questionBody(next, answer: nil, interactive: false)
-                    .redacted(reason: .placeholder)
+                if wide {
+                    HStack(alignment: .top, spacing: 24) {
+                        questionHeader(run: run, index: run.index + 1, question: next)
+                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                        questionBody(next, answer: nil, interactive: false)
+                            .redacted(reason: .placeholder)
+                            .frame(maxWidth: .infinity, alignment: .top)
+                    }
+                } else {
+                    questionHeader(run: run, index: run.index + 1, question: next)
+                    questionBody(next, answer: nil, interactive: false)
+                        .redacted(reason: .placeholder)
+                }
             }
         }
         .padding()
-        .frame(maxWidth: 720)
+        .frame(maxWidth: wide ? 1200 : 720)
         .frame(maxWidth: .infinity)
         .accessibilityHidden(true)
     }
 
-    /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる
+
+    /// 回答後に画面下へ固定表示する操作列。親指の届く位置に 読み上げ / ブックマーク / 次へ をまとめる。
+    /// 縦が短い横向き（compact 高さ）では 読み上げ / ブックマーク / 次へ を 1 行に並べ、スワイプのヒントは出さない [v2.0]
     @ViewBuilder
     private func actionBar(run: QuizRun, question q: QuizQuestion) -> some View {
-        // アクセシビリティ文字サイズでは 読み上げ / ブックマーク を縦に積む
+        // 1 行: 読み上げ（記号）/ ブックマーク（記号）/ 次へ [v2.0]。2 段 + ヒントだと 160〜190pt あり、背の低い画面で解説が隠れた。
+        // アクセシビリティ文字サイズでは 3 つを縦に積む
         let stacked = typeSize.isAccessibilitySize
+        let oneRow = !stacked
         GlassEffectContainer(spacing: 10) {
-            VStack(spacing: 10) {
+            AnyLayout(oneRow ? AnyLayout(HStackLayout(spacing: 10)) : AnyLayout(VStackLayout(spacing: 10))) {
                 AnyLayout(stacked ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))) {
                     if q.isListening {
                         Button {
                             ListeningPlayer.shared.play(q, number: run.index + 1, rate: settings.speechRate)
                             model.analytics.log(.replayTapped)
                         } label: {
-                            Label("もう一度聞く", systemImage: "speaker.wave.2")
-                                .frame(maxWidth: .infinity)
+                            barLabel("もう一度聞く", "speaker.wave.2", iconOnly: oneRow)
                         }
                         .buttonStyle(.glass)
                     } else if let text = q.speechText {
@@ -276,38 +419,24 @@ struct QuizView: View {
                             Speaker.shared.speak(text, rate: settings.speechRate)
                             model.analytics.log(.speakTapped)
                         } label: {
-                            Label("読み上げ", systemImage: "speaker.wave.2")
-                                .frame(maxWidth: .infinity)
+                            barLabel("読み上げ", "speaker.wave.2", iconOnly: oneRow)
                         }
                         .buttonStyle(.glass)
                     }
                     if bookmarked {
                         Button { toggleBookmark(q) } label: {
-                            Label("ブックマーク済み", systemImage: "bookmark.fill")
-                                .frame(maxWidth: .infinity)
+                            barLabel("ブックマーク済み", "bookmark.fill", iconOnly: oneRow)
                         }
                         .buttonStyle(.glassProminent)
                         .tint(.orange)
                     } else {
                         Button { toggleBookmark(q) } label: {
-                            Label("ブックマーク", systemImage: "bookmark")
-                                .frame(maxWidth: .infinity)
+                            barLabel("ブックマーク", "bookmark", iconOnly: oneRow)
                         }
                         .buttonStyle(.glass)
                     }
                 }
 
-                #if os(iOS)
-                if !settings.swipeHintDone {
-                    Text("← 左にスワイプでも次へ")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
-                        .glassEffect(.regular, in: .capsule)
-                        .transition(.opacity)
-                }
-                #endif
                 Button {
                     goNext(run)
                 } label: {
@@ -320,11 +449,25 @@ struct QuizView: View {
             }
             .controlSize(.large)
         }
+
         .padding(.horizontal)
         .padding(.top, 10)
         .padding(.bottom, 6)
         .frame(maxWidth: 720)
         .frame(maxWidth: .infinity)
+    }
+
+    /// 操作列のボタンのラベル。1 行に詰めるときは記号だけ（幅が半分しかない横向きで文字が縦に折れるため）
+    @ViewBuilder
+    private func barLabel(_ title: String, _ systemImage: String, iconOnly: Bool) -> some View {
+        if iconOnly {
+            Label(title, systemImage: systemImage)
+                .labelStyle(.iconOnly)
+                .frame(width: 40)
+        } else {
+            Label(title, systemImage: systemImage)
+                .frame(maxWidth: .infinity)
+        }
     }
 
     /// 次へ（最終問は結果へ）。ボタンからはカードを送る動きなしで切り替える（クロスフェード）
