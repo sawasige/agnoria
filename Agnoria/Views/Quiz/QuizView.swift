@@ -25,6 +25,10 @@ struct QuizView: View {
     @State private var lastDragAt = Date.distantPast
     /// カード領域の幅（GeometryReader の外の修飾子で 2 列かどうかを見るため）
     @State private var cardWidth: CGFloat = 0
+    /// 解説カードのスクロール表示域での枠と、表示域の高さ（上下の inset を除く）。回答後に解説が見えていなければ送るため
+    @State private var explanationFrame: CGRect = .null
+    @State private var scrollVisibleHeight: CGFloat = 0
+    @State private var pendingExplanationScroll = false
 
     var body: some View {
         if let run = model.run {
@@ -42,7 +46,7 @@ struct QuizView: View {
             let width = geo.size.width
             // 横に広い画面（iPad・iPhone Duo の内側・Mac・iPhone の横向き）では、回答後に解説を左、問題を右の 2 列にする（§4.2 [v2.0]）。
             // 縦が短い横向きでは解説が選択肢の下に隠れてスクロールしないと読めないため。size class ではなく使える幅で決める（Apple の指針）
-            let wide = width >= 700
+            let wide = width >= 640
             // カードの重なり: 今の問題の下に次の問題（伏せ字）が小さく控えていて、めくるにつれて手前に出てくる
             let progress = min(1, max(0, -dragX / (width * 0.6)))
             ZStack(alignment: .top) {
@@ -63,13 +67,13 @@ struct QuizView: View {
         .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { cardWidth = $0 }
         .background { AppBackground() }
         .safeAreaInset(edge: .bottom) {
-            if answer != nil, !(cardWidth >= 700 && isCompactHeight) {
+            if answer != nil, !(cardWidth >= 640 && isCompactHeight) {
                 actionBar(run: run, question: q)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
         .overlay(alignment: .bottomTrailing) {
-            if answer != nil, cardWidth >= 700, isCompactHeight {
+            if answer != nil, cardWidth >= 640, isCompactHeight {
                 actionBar(run: run, question: q)
                     .frame(width: cardWidth / 2)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -158,12 +162,27 @@ struct QuizView: View {
                     } action: { _, new in
                         scrollOffset = new
                     }
-                    // 2 列のとき、下のほうで答えると左上の解説が画面の外に残るので、回答したら上端まで戻す [v2.0]
+                    .onScrollGeometryChange(for: CGFloat.self) { g in
+                        g.visibleRect.height - g.contentInsets.top - g.contentInsets.bottom
+                    } action: { _, new in
+                        scrollVisibleHeight = new
+                    }
+                    // 回答したら解説が見えるようにする [v2.0]。2 列: 下のほうで答えると左上の解説が画面の外に残るので上端へ。
+                    // 1 列: 解説カードが操作列の上に出ていなければ、カードが入る位置まで送る（全部見えていれば動かさない）
                     .onChange(of: answer != nil) { _, answered in
-                        if wide, answered, scrollOffset > 0 {
-                            withAnimation { proxy.scrollTo("cardTop", anchor: .top) }
+                        guard answered else { return }
+                        if wide {
+                            if scrollOffset > 0 { withAnimation { proxy.scrollTo("cardTop", anchor: .top) } }
+                        } else {
+                            pendingExplanationScroll = true
+                            // 解説カードの出現と操作列の inset のアニメーション（約 0.35 秒）が終わってから、最終的な位置で判断する
+                            Task { @MainActor in
+                                try? await Task.sleep(for: .milliseconds(400))
+                                revealExplanationIfHidden(proxy)
+                            }
                         }
                     }
+                    .onChange(of: q.id) { _, _ in explanationFrame = .null; pendingExplanationScroll = false }
                 }
             }
 
@@ -221,8 +240,37 @@ struct QuizView: View {
         .animation(.default, value: answer != nil)
     }
 
-    /// 正誤と解説のカード
+    /// 1 列で回答した直後、解説カードの見えている部分が 120pt に満たなければ、カードが入る位置まで送る
+    /// （カードが表示域に収まるなら下端合わせ、収まらなければ上端合わせ）。十分見えていれば動かさない
+    private func revealExplanationIfHidden(_ proxy: ScrollViewProxy) {
+        let f = explanationFrame
+        guard pendingExplanationScroll, !f.isNull, scrollVisibleHeight > 0 else { return }
+        pendingExplanationScroll = false
+        // .scrollView 座標は上の inset の下が原点なので、見えている下端 = 表示域の高さ
+        let bottom = scrollVisibleHeight
+        guard bottom - f.minY < 120, f.maxY > bottom else { return }
+        withAnimation { proxy.scrollTo("explanation", anchor: f.height <= scrollVisibleHeight ? .bottom : .top) }
+    }
+
+    /// 正誤と解説のカード。下にスワイプのヒント（初回だけ。操作列に置くと固定の高さを食うのでスクロールする側に）
     private func explanationCard(answer: QuizRun.Answer, question q: QuizQuestion) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            explanationBody(answer: answer, question: q)
+            #if os(iOS)
+            if !settings.swipeHintDone {
+                Text("← 左にスワイプでも次へ")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+                    .transition(.opacity)
+            }
+            #endif
+        }
+        .id("explanation")
+        .onGeometryChange(for: CGRect.self) { $0.frame(in: .scrollView) } action: { explanationFrame = $0 }
+    }
+
+    private func explanationBody(answer: QuizRun.Answer, question q: QuizQuestion) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
                 Image(systemName: answer.isCorrect ? "checkmark.seal.fill" : "xmark.seal.fill")
@@ -351,9 +399,10 @@ struct QuizView: View {
     /// 縦が短い横向き（compact 高さ）では 読み上げ / ブックマーク / 次へ を 1 行に並べ、スワイプのヒントは出さない [v2.0]
     @ViewBuilder
     private func actionBar(run: QuizRun, question q: QuizQuestion) -> some View {
-        // アクセシビリティ文字サイズでは 読み上げ / ブックマーク を縦に積む
+        // 1 行: 読み上げ（記号）/ ブックマーク（記号）/ 次へ [v2.0]。2 段 + ヒントだと 160〜190pt あり、背の低い画面で解説が隠れた。
+        // アクセシビリティ文字サイズでは 3 つを縦に積む
         let stacked = typeSize.isAccessibilitySize
-        let oneRow = isCompactHeight && !stacked
+        let oneRow = !stacked
         GlassEffectContainer(spacing: 10) {
             AnyLayout(oneRow ? AnyLayout(HStackLayout(spacing: 10)) : AnyLayout(VStackLayout(spacing: 10))) {
                 AnyLayout(stacked ? AnyLayout(VStackLayout(spacing: 10)) : AnyLayout(HStackLayout(spacing: 10))) {
@@ -388,17 +437,6 @@ struct QuizView: View {
                     }
                 }
 
-                #if os(iOS)
-                if !settings.swipeHintDone && !oneRow {
-                    Text("← 左にスワイプでも次へ")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
-                        .glassEffect(.regular, in: .capsule)
-                        .transition(.opacity)
-                }
-                #endif
                 Button {
                     goNext(run)
                 } label: {
@@ -409,7 +447,7 @@ struct QuizView: View {
                 .buttonStyle(.glassProminent)
                 .keyboardShortcut(.defaultAction)
             }
-            .controlSize(oneRow ? .regular : .large)
+            .controlSize(.large)
         }
 
         .padding(.horizontal)
