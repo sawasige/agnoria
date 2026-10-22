@@ -421,7 +421,8 @@ StoreKit の `requestReview`（SwiftUI の `@Environment(\.requestReview)`）で
 - **[v1.9]** リスニングの再生中だけ `AVAudioSession` を `.playback`（マナーモードでも鳴る）にし、読み終えたら・止めたら `.ambient` に戻す（`AudioSession.set` / `restoreAmbient`）。利用者が「聞く」を押す、またはリスニングを選んで始めた意図した再生なので、サイレントスイッチで消えて答えられないより鳴る方を取る。効果音と例文の読み上げは従来どおり `.ambient`
 - **[v1.9]** 起動引数 `-speech NO` で読み上げとリスニングの再生を止める（UI テストの `launchQuiet()` が付ける。ユニットテストのホストでも止める）
 - **[v1.1]** マナーモード（サイレントスイッチ）に従う。`.ambient` カテゴリなので消音中は鳴らない。自動読み上げをデフォルト ON にしたため、意図せず音が出る経路を無くす。`AVAudioSession` は iOS のみなので `#if os(iOS)` で囲む
-- **[v1.2]** 効果音は `Resources/Sounds/correct.caf` / `wrong.caf`（44.1kHz 16bit、ピーク -6 dBFS）を `AVAudioPlayer` でプリロードして鳴らす。**[v1.5]** 音は正弦波合成から、macOS 内蔵の GM 音源をサンプラーで演奏して書き出したものに変更（正解: グロッケンの 2 音、不正解: マリンバの低い 2 音。作り方は `tools/sounds/`）。セッション設定は読み上げと共有（`AudioSession`）なので、効果音もマナーモードに従う
+- **[v1.2]** 効果音は `Resources/Sounds/correct.caf` / `wrong.caf`（44.1kHz 16bit、ピーク -6 dBFS）を `AVAudioPlayer` でプリロードして鳴らす。**[v1.5]** 音は正弦波合成から、macOS 内蔵の GM 音源をサンプラーで演奏して書き出したものに変更（正解: グロッケンの 2 音、不正解: マリンバの低い 2 音。作り方は `tools/sounds/`）。**[v2.0]** 不正解はマリンバの不協和音（増 4 度を 2 回）に変更。下がる完全 5 度は正解と聞き分けにくかった
+。セッション設定は読み上げと共有（`AudioSession`）なので、効果音もマナーモードに従う
 - **[v1.5]** スコア帯クリアのファンファーレ `Resources/Sounds/fanfare.caf`（約 1.8 秒。ハープの上昇グリッサンドとグロッケンの和音。macOS 内蔵の GM 音源をサンプラーで演奏して書き出した音で、作り方は `tools/sounds/`）。効果音の設定に従い、鳴らし方は正解・不正解と同じ
 - **[v1.4]** `AVAudioSession` の `setCategory` / `setActive` と `AVAudioPlayer` の `prepareToPlay` / `play` は内部で同期的にセッションを有効化し、メインスレッドで呼ぶと Xcode が「AVAudioSession Hang Risk」を報告する。`AudioSession` と `SoundEffects` は actor にして、これらをメインスレッド以外で実行する（View からは `SoundEffects.shared.play(_:)` を呼ぶだけで待たない）。シミュレータのログで、旧実装では 1 セット中に 5 件出ていた診断が 0 件になることを確認済み
 

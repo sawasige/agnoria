@@ -65,6 +65,8 @@ try render(name: "fanfare", tracks: [harp, glock], seconds: 2.8)
 
 // 正解: グロッケンの E6 → C7（聞き比べた 3 案のうち 1。他はチェレスタの和音、マリンバ）
 try render(name: "correct", tracks: [Track(program: 9, notes: [Note(t: 0, pitch: E6, vel: 100, dur: 0.25), Note(t: 0.11, pitch: C7, vel: 108, dur: 0.6)], volume: 0.9)], seconds: 1.2, reverbMix: 25)
-// 不正解: マリンバの低い C3 → G2（他はピチカート、ピアノ低音の不協和音）
-let C3: UInt8 = 48, G2: UInt8 = 43
-try render(name: "wrong", tracks: [Track(program: 12, notes: [Note(t: 0, pitch: C3, vel: 100, dur: 0.25), Note(t: 0.13, pitch: G2, vel: 96, dur: 0.4)], volume: 0.9)], seconds: 1.0, reverbMix: 10)
+// 不正解: マリンバの増 4 度（E3 + B♭2）を低く 2 回叩く [v2.0]。以前の C3 → G2（下がる完全 5 度）は協和音程で正解っぽく聞こえた。
+// 他の候補はピアノ低音の短 2 度（C2 + D♭2）、チューバの半音下がり（D2 → D♭2）
+let E3: UInt8 = 52, Bb2: UInt8 = 46
+try render(name: "wrong", tracks: [Track(program: 12, notes: [Note(t: 0, pitch: E3, vel: 104, dur: 0.3), Note(t: 0, pitch: Bb2, vel: 104, dur: 0.3), Note(t: 0.14, pitch: Bb2, vel: 90, dur: 0.3), Note(t: 0.14, pitch: E3, vel: 80, dur: 0.3)], volume: 0.9)], seconds: 1.0, reverbMix: 10)
+
