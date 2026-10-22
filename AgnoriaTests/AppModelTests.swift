@@ -46,6 +46,20 @@ struct AppModelTests {
         #expect(Stage.weightFactor(level: 450, current: 550, unlocked: 550) == 0.35)
         #expect(Stage.weightFactor(level: 550, current: 550, unlocked: 550) == 1)
 
+        // 設定で到達帯を 450 に戻しても、1 セットでクリアにはならない（クリアは 8 割習得で決まる）
+        for mode in DrillMode.allCases { model.settings.setUnlockedLevel(450, for: mode) }
+        #expect(model.stageStates()[.word]?.current == 450)
+        let run = try #require(model.startQuiz(QuizConfig(mode: .word, category: nil, format: nil)))
+        while !run.isFinished {
+            model.answerCurrent(run.current.correctIndex)
+            if !run.isLast { model.advance() }
+        }
+        model.finishRun()
+        #expect(model.pendingStageClears.isEmpty)
+        #expect(model.settings.unlockedLevel(.word) == 450)
+        #expect(model.path == [.result])
+
+
 
         // 「あとで」は 450 のまま
         let later = try await makeModel()
