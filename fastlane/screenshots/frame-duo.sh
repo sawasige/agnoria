@@ -18,15 +18,23 @@ BEZ=$(( 28 * B / 1320 )); R=$(( 150 * B / 1320 ))
 SW=$(( W - PAD * 4 - BEZ * 2 )); SH=$(( SW * H / W ))
 MAXH=$(( H - TOP - PAD - BEZ * 2 ))
 if [ $SH -gt $MAXH ]; then SH=$MAXH; SW=$(( SH * W / H )); fi
-magick "$IN" -resize "${SW}x${SH}!" \( +clone -alpha extract -draw "fill black polygon 0,0 0,$R $R,0 fill white circle $R,$R $R,0" \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off -compose CopyOpacity -composite "$WORK/screen.png"
+if [ $W -lt $H ]; then
+  # 閉じた状態: ヒンジ側（左）の角は小さく、右の角は大きい。左半分を小さい角丸、全体を大きい角丸で描いて合成する
+  RL=$(( R * 3 / 10 ))
+  magick -size "${SW}x${SH}" xc:black -fill white -draw "roundrectangle 0,0,$(( SW - 1 )),$(( SH - 1 )),$R,$R" -draw "roundrectangle 0,0,$(( SW / 2 )),$(( SH - 1 )),$RL,$RL" "$WORK/mask.png"
+else
+  magick -size "${SW}x${SH}" xc:black -fill white -draw "roundrectangle 0,0,$(( SW - 1 )),$(( SH - 1 )),$R,$R" "$WORK/mask.png"
+fi
+magick "$IN" -resize "${SW}x${SH}!" "$WORK/mask.png" -alpha off -compose CopyOpacity -composite "$WORK/screen.png"
 DW=$(( SW + BEZ * 2 )); DH=$(( SH + BEZ * 2 ))
 if [ $W -lt $H ]; then
   # 閉じた状態（外側）: 左に折りたたんだ裏側の半分が少しのぞく。右上にカメラの穴（シミュレータの見た目に合わせる。位置は画面幅の 0.90、高さの 0.073、半径は幅の 0.0435）
   OFF=$(( 10 * B / 1320 ))
   CX=$(( BEZ + SW * 902 / 1000 )); CY=$(( BEZ + SH * 73 / 1000 )); CR=$(( SW * 435 / 10000 ))
+  RB=$(( R + BEZ )); RLB=$(( RL + BEZ ))
   magick -size "$(( DW + OFF ))x$(( DH + OFF ))" xc:none \
-    -fill "#3a3a3c" -draw "roundrectangle 0,$OFF,$(( DW - 1 )),$(( DH + OFF - 1 )),$(( R + BEZ )),$(( R + BEZ ))" \
-    -fill "#1c1c1e" -draw "roundrectangle $OFF,0,$(( DW + OFF - 1 )),$(( DH - 1 )),$(( R + BEZ )),$(( R + BEZ ))" \
+    -fill "#3a3a3c" -draw "roundrectangle 0,$OFF,$(( DW - 1 )),$(( DH + OFF - 1 )),$RB,$RB" -draw "roundrectangle 0,$OFF,$(( DW / 2 )),$(( DH + OFF - 1 )),$RLB,$RLB" \
+    -fill "#1c1c1e" -draw "roundrectangle $OFF,0,$(( DW + OFF - 1 )),$(( DH - 1 )),$RB,$RB" -draw "roundrectangle $OFF,0,$(( DW / 2 + OFF )),$(( DH - 1 )),$RLB,$RLB" \
     "$WORK/screen.png" -geometry "+$(( BEZ + OFF ))+${BEZ}" -compose Over -composite \
     -fill "#000000" -draw "circle $(( CX + OFF )),$CY $(( CX + OFF + CR )),$CY" "$WORK/device.png"
 else
