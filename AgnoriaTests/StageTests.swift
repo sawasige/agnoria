@@ -45,6 +45,11 @@ struct StageTests {
         #expect(Stage.current(unlocked: 550, byLevel: [450: cleared, 500: open, 550: open]) == 500)
         #expect(Stage.current(unlocked: 550, byLevel: [450: cleared, 500: cleared, 550: cleared]) == 550)
         #expect(Stage.current(unlocked: 500, byLevel: [:]) == 450)
+        // 開始の帯より下は今の帯にしない [v2.0]
+        #expect(Stage.current(unlocked: 550, byLevel: [:], floor: 550) == 550)
+        #expect(Stage.current(unlocked: 550, byLevel: [500: cleared], floor: 500) == 550)
+        #expect(Stage.current(unlocked: 550, byLevel: [550: cleared], floor: 500) == 500)
+
     }
 
     @Test("クリアしたら次の帯が開く。最上位なら nil") func unlock() {

@@ -27,9 +27,10 @@ nonisolated enum Stage {
         max(0, Int((clearRatio * Double(s.total)).rounded(.up)) - s[.mastered])
     }
 
-    /// 今取り組む帯: 到達帯以下で未クリアの最も低い帯。すべてクリア済みなら到達帯
-    static func current(unlocked: Int, byLevel: [Int: MasterySummary]) -> Int {
-        for level in levels where level <= unlocked {
+    /// 今取り組む帯: 到達帯以下で未クリアの最も低い帯。すべてクリア済みなら到達帯。
+    /// [v2.0] `floor`（初回に選んだ開始の帯 §3.4）より下の帯は今の帯にしない（到達済みとして復習で混ざるだけ）
+    static func current(unlocked: Int, byLevel: [Int: MasterySummary], floor: Int = first) -> Int {
+        for level in levels where level >= floor && level <= unlocked {
             if !isCleared(byLevel[level] ?? MasterySummary()) { return level }
         }
         return unlocked
@@ -90,11 +91,12 @@ nonisolated enum Stage {
 
     /// 軸ごとの問題（id とレベル）と記録から、軸ごとの帯の状態を作る
     static func tracks(items: [DrillMode: [(id: String, level: Int)]], progress: [String: ProgressSnapshot],
-                       unlocked: [DrillMode: Int], now: Date = .now) -> [Track] {
+                       unlocked: [DrillMode: Int], floor: Int = first, now: Date = .now) -> [Track] {
         DrillMode.allCases.map { mode in
             let byLevel = MasteryStats.byLevel(items: items[mode] ?? [], progress: progress, now: now)
             let u = unlocked[mode] ?? first
-            return Track(mode: mode, unlocked: u, current: current(unlocked: u, byLevel: byLevel), byLevel: byLevel)
+            return Track(mode: mode, unlocked: u, current: current(unlocked: u, byLevel: byLevel, floor: floor), byLevel: byLevel)
         }
     }
+
 }

@@ -33,7 +33,35 @@ struct AppModelTests {
         #expect(sessions.first?.category == nil)
     }
 
+    @Test("初回起動では今のスコアの目安を尋ね、選んだ帯で 3 軸の到達帯をそろえる。記録があれば尋ねない") func startingLevel() async throws {
+        let model = try await makeModel()
+        #expect(model.shouldAskStartingLevel)
+        model.applyStartingLevel(.upTo600)
+        #expect(!model.shouldAskStartingLevel)
+        #expect(model.settings.startingLevelAsked)
+        for mode in DrillMode.allCases { #expect(model.settings.unlockedLevel(mode) == 550, "\(mode)") }
+        #expect(model.settings.startingLevel == 550)
+        #expect(model.stageStates()[.word]?.current == 550, "開始の帯より下は今の帯にしない（復習で混ざるだけ）")
+        // 下の帯は到達済みなので、おまかせでは復習の重み（0.35）で混ざる
+        #expect(Stage.weightFactor(level: 450, current: 550, unlocked: 550) == 0.35)
+        #expect(Stage.weightFactor(level: 550, current: 550, unlocked: 550) == 1)
+
+
+        // 「あとで」は 450 のまま
+        let later = try await makeModel()
+        later.applyStartingLevel(nil)
+        #expect(later.settings.startingLevelAsked)
+        #expect(later.settings.unlockedLevel(.word) == 450)
+
+        // 記録がある端末（更新で入れた人）では尋ねず、尋ねたことにする
+        let existing = try await makeModel()
+        existing.progress(for: "w-0001").record(isCorrect: true)
+        #expect(!existing.shouldAskStartingLevel)
+        #expect(existing.settings.startingLevelAsked)
+    }
+
     @Test("おまかせにリスニングは入らず、リスニングを指定すると 3 択の応答問題だけになる") func listeningRun() async throws {
+
         let model = try await makeModel()
         var rng = SeededRandomNumberGenerator(seed: 5)
         for _ in 0..<5 {

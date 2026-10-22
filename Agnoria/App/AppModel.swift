@@ -183,8 +183,73 @@ final class AppModel {
         return true
     }
 
+    // MARK: - 初回のスコアの目安（§4.1 [v2.0]、Issue #50）
+
+    /// 初回起動で「今のスコアの目安」を尋ねるか。記録が 1 件でもあれば尋ねない（1.3 からの更新で出さない）
+    var shouldAskStartingLevel: Bool {
+        guard Self.startingLevelPromptEnabled, !settings.startingLevelAsked else { return false }
+        if hasAnyRecords {
+            settings.startingLevelAsked = true
+            return false
+        }
+        return true
+    }
+
+    private var hasAnyRecords: Bool {
+        ((try? context.fetchCount(FetchDescriptor<ItemProgress>())) ?? 0) > 0
+            || ((try? context.fetchCount(FetchDescriptor<StudySession>())) ?? 0) > 0
+    }
+
+    /// 選択肢と、それぞれの開始の帯。「〜600」は 600 点帯を最後に残して 550 から
+    enum StartingLevelChoice: CaseIterable, Identifiable {
+        case never, upTo450, upTo550, upTo600
+        var id: Self { self }
+        var title: String {
+            switch self {
+            case .never: "受けたことがない"
+            case .upTo450: "450 点くらいまで"
+            case .upTo550: "550 点くらいまで"
+            case .upTo600: "600 点くらいまで"
+            }
+        }
+        var detail: String {
+            switch self {
+            case .never, .upTo450: "450 点帯の基本から"
+            case .upTo550: "500 点帯から（450 点帯は復習で混ざります）"
+            case .upTo600: "550 点帯から（下の帯は復習で混ざります）"
+            }
+        }
+        var level: Int {
+            switch self {
+            case .never, .upTo450: 450
+            case .upTo550: 500
+            case .upTo600: 550
+            }
+        }
+    }
+
+    /// 選んだ目安で、単語・文法・応答問題の到達帯をまとめて合わせる。nil（あとで）は 450 のまま
+    func applyStartingLevel(_ choice: StartingLevelChoice?) {
+        settings.startingLevelAsked = true
+        if let choice {
+            settings.startingLevel = choice.level
+            for mode in DrillMode.allCases where settings.unlockedLevel(mode) < choice.level {
+                settings.setUnlockedLevel(choice.level, for: mode)
+            }
+        }
+        analytics.log(.startingLevel(choice?.level ?? 0))
+        analytics.syncUserProperties()
+        refreshWidgetSnapshot()
+    }
+
+    /// 起動引数 `-startingLevelPrompt NO` で尋ねない（UI テストはこれで起動）
+    static var startingLevelPromptEnabled: Bool {
+        UserDefaults.standard.object(forKey: "startingLevelPrompt") == nil || UserDefaults.standard.bool(forKey: "startingLevelPrompt")
+    }
+
     /// 起動引数 `-reminderPrompt NO` で通知の許可を尋ねない（UI テストはこれで起動）
     static var reminderPromptEnabled: Bool {
+
         UserDefaults.standard.object(forKey: "reminderPrompt") == nil || UserDefaults.standard.bool(forKey: "reminderPrompt")
     }
 
@@ -475,7 +540,8 @@ final class AppModel {
 
             let byLevel = MasteryStats.byLevel(items: items[mode] ?? [], progress: progress)
             let unlocked = settings.unlockedLevel(mode)
-            return (mode, StageState(current: Stage.current(unlocked: unlocked, byLevel: byLevel),
+            return (mode, StageState(current: Stage.current(unlocked: unlocked, byLevel: byLevel, floor: settings.startingLevel),
+
                                      unlocked: unlocked, byLevel: byLevel))
         })
     }

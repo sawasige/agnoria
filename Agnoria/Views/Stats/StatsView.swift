@@ -17,7 +17,7 @@ struct StatsView: View {
         let grammarItems = catalog.categoryItems(.grammar, levels: settings.enabledLevels(.grammar))
         let listeningItems = catalog.categoryItems(.listening, levels: settings.enabledLevels(.listening))
         let overall = MasteryStats.summarize(items: wordItems + grammarItems + listeningItems, progress: pmap)
-        let tracks = Stage.tracks(items: catalog.levelItemsByMode, progress: pmap, unlocked: settings.unlockedLevels)
+        let tracks = Stage.tracks(items: catalog.levelItemsByMode, progress: pmap, unlocked: settings.unlockedLevels, floor: settings.startingLevel)
 
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))

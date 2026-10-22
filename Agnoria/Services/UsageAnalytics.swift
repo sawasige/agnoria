@@ -25,6 +25,8 @@ final class UsageAnalytics {
         case reviewLinkOpened
         case reminderPermission(granted: Bool)
         case reminderOpened
+        /// 初回の「今のスコアの目安」で選んだ開始の帯（あとで = 0）[v2.0]
+        case startingLevel(Int)
 
         var name: String {
             switch self {
@@ -43,6 +45,7 @@ final class UsageAnalytics {
             case .reviewLinkOpened: "review_link_opened"
             case .reminderPermission: "reminder_permission"
             case .reminderOpened: "reminder_opened"
+            case .startingLevel: "starting_level"
             }
         }
 
@@ -64,6 +67,9 @@ final class UsageAnalytics {
                 return ["trigger": trigger.rawValue]
             case .reminderPermission(let granted):
                 return ["granted": granted ? 1 : 0]
+            case .startingLevel(let level):
+                return ["level": level]
+
             case .rephraseUsed, .practiceUsed, .speakTapped, .replayTapped, .historyReset, .reviewLinkOpened, .reminderOpened:
                 return [:]
             }

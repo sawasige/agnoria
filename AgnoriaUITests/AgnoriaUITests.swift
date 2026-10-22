@@ -1,12 +1,13 @@
 import XCTest
 
 extension XCUIApplication {
-    /// 効果音と読み上げ（自動読み上げ・リスニングの再生）を切って起動する。UserDefaults の引数ドメインに入るだけなので、設定としては保存されない。
+    /// 効果音と読み上げ（自動読み上げ・リスニングの再生）、初回のスコアの目安の質問を切って起動する。UserDefaults の引数ドメインに入るだけなので、設定としては保存されない。
     /// UI テスト（画面確認用の一時テストも含む）はこれで起動して、テスト中に Mac から音を出さない
     @discardableResult
     static func launchQuiet() -> XCUIApplication {
         let app = XCUIApplication()
-        app.launchArguments += ["-soundEffects", "NO", "-autoSpeak", "NO", "-speech", "NO", "-analytics", "NO", "-cloudSync", "NO", "-reviewPrompt", "NO", "-reminderPrompt", "NO"]
+        app.launchArguments += ["-soundEffects", "NO", "-autoSpeak", "NO", "-speech", "NO", "-analytics", "NO", "-cloudSync", "NO", "-reviewPrompt", "NO", "-reminderPrompt", "NO", "-startingLevelPrompt", "NO"]
+
 
         app.launch()
         return app

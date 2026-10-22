@@ -42,7 +42,8 @@ struct UsageAnalyticsTests {
 
             .bookmarkToggled(on: false), .historyReset, .settingsChanged(key: "autoSpeak"),
             .reviewRequested(.stageClear), .reviewRequested(.highScore), .reviewLinkOpened,
-            .reminderPermission(granted: true), .reminderOpened,
+            .reminderPermission(granted: true), .reminderOpened, .startingLevel(550), .startingLevel(0),
+
         ]
         for e in events {
             #expect(e.name.count <= 40 && e.name.allSatisfy { $0.isLetter || $0.isNumber || $0 == "_" })
