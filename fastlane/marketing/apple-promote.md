@@ -1,6 +1,11 @@
-# Apple「App Store でのプロモーション」申請（developer.apple.com/contact/app-store/promote/）
+# Apple のフィーチャー申請（App Store Connect → アプリ → フィーチャー → ノミネート）
 
-1.3 が公開されてから出す。フォームの項目に合わせた文案（英語）。
+旧フォーム（developer.apple.com/contact/app-store/promote/）は廃止され、「Getting featured」の案内に転送される。申請は App Store Connect の「ノミネート」で行う（名前 → タイプ → 説明 1000 字 → 公開日 → 詳細ページで プラットフォーム・役立つ情報 500 字・補足資料のリンク → 提出）。Apple はリリースの 3 週間前までの申請を勧める。
+
+- 1.3: 2026-10-22 に「アプリの機能強化」で提出済み（ノミネート ID 859ed7b2-1471-4daa-bd7c-0a6d574d3e8c）。返事は来ない。採用されると App Store Connect のアプリに通知
+- 1.4 以降: 提出の 3 週間前に出す
+
+以下は説明欄に使った文案（英語）。
 
 - App name: Agnoria
 - App Store link: https://apps.apple.com/jp/app/id6823061416
