@@ -9,7 +9,7 @@
 
 ## Tell us about your app（300 語以内）
 
-Agnoria is a free, ad-free English drill for learners in Japan who are aiming at 450 to 600 on the TOEIC L&R test and who never managed to stick with word lists or workbooks. You open the app, tap “10 questions,” and answer: the app mixes new items, recent misses and things you haven’t seen in a while, matched to your level. A set takes about three minutes. Progress runs through four score stages (450, 500, 550, 600), tracked separately for vocabulary, grammar and question-response listening, so learners always see where they are and how many questions remain to the next stage.
+Agnoria is a free, ad-free English drill for learners in Japan aiming at 450 to 600 on the TOEIC L&R test. Its premise is that people quit when they cannot feel themselves improving, so every answer visibly adds to what the learner has mastered, and clearing a score stage is celebrated. You open the app, tap “10 questions,” and answer: the app mixes new items, recent misses and things you haven’t seen in a while, matched to your level. A set takes about three minutes. Progress runs through four score stages (450, 500, 550, 600), tracked separately for vocabulary, grammar and question-response listening, so learners always see where they are and how many questions remain to the next stage.
 
 Version 1.3 adds Part 2-style question-response listening: a short question and three replies are spoken by the device’s speech synthesis, with different voices and accents (US, UK, Australian) for the question and the replies, and the text is revealed only after answering.
 
