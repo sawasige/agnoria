@@ -23,11 +23,14 @@ nonisolated enum Pace {
     ///   - sessionDates: セット完走の日時（`StudySession.finishedAt`）
     ///   - share: この軸が 1 セットに占める割合の見込み（§3.4 [v1.8]）。既定値（1 セットの習得数）に掛ける。
     ///     masteredDates もその軸の問題の分だけを渡す
-    static func estimate(remaining: Int, masteredDates: [Date], sessionDates: [Date], share: Double = 1,
+    ///   - since: やり直した日時（§3.4 [v2.1]）。これより前のセットと習得は数えない。
+    ///     やり直しで習得の記録だけが消えてセットの記録は残るので、そのまま数えると 1 セットあたりの習得数が 0 に近づき、目安が異様に長くなる
+    static func estimate(remaining: Int, masteredDates: [Date], sessionDates: [Date], share: Double = 1, since: Date? = nil,
                          now: Date = .now, calendar: Calendar = .current) -> Estimate? {
         guard remaining > 0 else { return nil }
         let todayStart = calendar.startOfDay(for: now)
-        guard let windowStart = calendar.date(byAdding: .day, value: -(windowDays - 1), to: todayStart) else { return nil }
+        guard var windowStart = calendar.date(byAdding: .day, value: -(windowDays - 1), to: todayStart) else { return nil }
+        if let since, since > windowStart { windowStart = since }
         let recentSessions = sessionDates.filter { $0 >= windowStart }
         let recentMastered = masteredDates.filter { $0 >= windowStart }.count
 
@@ -48,8 +51,10 @@ nonisolated enum Pace {
     /// - Parameters:
     ///   - idsByMode: 軸ごとの出題対象（到達帯まで）の id
     ///   - masteredAt: 問題 id → 習得日時
+    ///   - restartedAt: 軸ごとのやり直しの日時（`AppSettings.stageRestartedAt`）
     static func estimates(tracks: [Stage.Track], idsByMode: [DrillMode: Set<String>], masteredAt: [String: Date],
-                          sessionDates: [Date], now: Date = .now, calendar: Calendar = .current) -> [DrillMode: Estimate] {
+                          sessionDates: [Date], restartedAt: [DrillMode: Date] = [:],
+                          now: Date = .now, calendar: Calendar = .current) -> [DrillMode: Estimate] {
         let total = Double(idsByMode.values.reduce(0) { $0 + $1.count })
         var out: [DrillMode: Estimate] = [:]
         for track in tracks {
@@ -57,7 +62,8 @@ nonisolated enum Pace {
             guard total > 0, !ids.isEmpty else { continue }
             out[track.mode] = estimate(remaining: Stage.remainingToClear(track.summary),
                                        masteredDates: ids.compactMap { masteredAt[$0] },
-                                       sessionDates: sessionDates, share: Double(ids.count) / total, now: now, calendar: calendar)
+                                       sessionDates: sessionDates, share: Double(ids.count) / total,
+                                       since: restartedAt[track.mode], now: now, calendar: calendar)
         }
         return out
     }

@@ -612,6 +612,7 @@ final class AppModel {
         save("restartStage")
         settings.setUnlockedLevel(level, for: mode)
         settings.setTopStageCelebrated(false, for: mode)
+        settings.setStageRestartedAt(.now, for: mode)
         if settings.startingLevel > level { settings.startingLevel = level }
         lastUnlocked = []
         pendingStageClears = []
@@ -629,6 +630,7 @@ final class AppModel {
         for mode in DrillMode.allCases {
             settings.setUnlockedLevel(Stage.first, for: mode)
             settings.setTopStageCelebrated(false, for: mode)
+            settings.setStageRestartedAt(nil, for: mode)
         }
 
         lastUnlocked = []

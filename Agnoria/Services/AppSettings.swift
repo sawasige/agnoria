@@ -26,6 +26,8 @@ final class AppSettings {
         static let startingLevelAsked = "startingLevelAsked"
         static let startingLevel = "startingLevel"
         static let autoIncludesListening = "autoIncludesListening"
+        /// [v2.1] 軸ごとの「やり直し」の日時（§3.4）。クリアまでの目安はこれより後の実績だけで出す
+        static func stageRestartedAt(_ mode: DrillMode) -> String { "stageRestartedAt.\(mode.rawValue)" }
     }
 
     private let defaults: UserDefaults
@@ -38,6 +40,15 @@ final class AppSettings {
     func setUnlockedLevel(_ level: Int, for mode: DrillMode) {
         unlockedLevels[mode] = level
         defaults.set(level, forKey: Key.unlockedLevel(mode))
+    }
+
+    /// 軸ごとの、設定で到達帯を下げてやり直した日時（§3.4 [v2.1]）。クリアまでの目安（`Pace`）はこれより後のセットと習得だけで数える。
+    /// やり直しで習得の記録は消えるがセットの記録は残るので、そのまま数えると「たくさんやって習得できていない」と見えて目安が異様に長くなるため
+    private(set) var stageRestartedAt: [DrillMode: Date]
+
+    func setStageRestartedAt(_ date: Date?, for mode: DrillMode) {
+        stageRestartedAt[mode] = date
+        defaults.set(date, forKey: Key.stageRestartedAt(mode))
     }
 
     /// 出題対象のレベル = その軸の到達帯まで
@@ -161,6 +172,9 @@ final class AppSettings {
         reminderMinutes = defaults.object(forKey: Key.reminderMinutes) == nil
             ? Reminder.defaultMinutes : min(max(defaults.integer(forKey: Key.reminderMinutes), 0), 24 * 60 - 1)
         topStageCelebrated = Set(DrillMode.allCases.filter { defaults.bool(forKey: Key.topStageCelebrated($0)) })
+        stageRestartedAt = Dictionary(uniqueKeysWithValues: DrillMode.allCases.compactMap { mode in
+            (defaults.object(forKey: Key.stageRestartedAt(mode)) as? Date).map { (mode, $0) }
+        })
     }
 
     static let speechRateRange: ClosedRange<Double> = 0.3...0.6
