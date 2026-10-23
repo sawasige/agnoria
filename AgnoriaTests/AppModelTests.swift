@@ -103,6 +103,8 @@ struct AppModelTests {
         #expect(model.settings.startingLevel == 500, "開始の帯も下がる")
         #expect(!model.settings.topStageCelebrated.contains(.word))
         #expect(model.stageStates()[.word]?.current == 500)
+        #expect(model.settings.stageRestartedAt[.word] != nil, "やり直しの日時を持つ（クリアまでの目安はこれ以後だけで数える）")
+        #expect(model.settings.stageRestartedAt[.grammar] == nil)
     }
 
     @Test("おまかせにリスニングは入らず、リスニングを指定すると 3 択の応答問題だけになる") func listeningRun() async throws {

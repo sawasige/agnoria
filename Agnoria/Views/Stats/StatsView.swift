@@ -27,7 +27,7 @@ struct StatsView: View {
             tracks: tracks,
             idsByMode: [.word: Set(wordItems.map(\.id)), .grammar: Set(grammarItems.map(\.id)), .listening: Set(listeningItems.map(\.id))],
             masteredAt: Dictionary(progress.compactMap { p in p.masteredAt.map { (p.itemID, $0) } }, uniquingKeysWith: { a, _ in a }),
-            sessionDates: sessions.map(\.finishedAt))
+            sessionDates: sessions.map(\.finishedAt), restartedAt: settings.stageRestartedAt)
 
         ScrollView {
             VStack(spacing: 16) {

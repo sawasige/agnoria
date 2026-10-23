@@ -43,6 +43,22 @@ struct PaceTests {
         #expect(e == Pace.Estimate(sets: 66, days: nil))
     }
 
+    @Test("やり直した日時より前のセットと習得は数えない。それ以後にセットがなければ日数は出さない") func sinceRestart() {
+        var sessions: [Date] = []
+        for d in 0..<14 { sessions += daysAgo(d, count: 5) }
+        // やり直しで習得の記録が消えた状態（習得 0、セット 70）をそのまま数えると perSet = 18 / 80 = 0.225 → 356 セット・72 日
+        let naive = Pace.estimate(remaining: 80, masteredDates: [], sessionDates: sessions, now: now, calendar: calendar)
+        #expect(naive == Pace.Estimate(sets: 356, days: 72))
+        // 3 日前にやり直し: それ以後のセット 15、習得 12 → perSet = (12 + 18) / (15 + 10) = 1.2 → 67 セット。5 セット/日 → 14 日
+        let restart = calendar.date(byAdding: .hour, value: -1, to: daysAgo(2)[0])!
+        let e = Pace.estimate(remaining: 80, masteredDates: daysAgo(1, count: 12), sessionDates: sessions, since: restart,
+                              now: now, calendar: calendar)
+        #expect(e == Pace.Estimate(sets: 67, days: 14))
+        // やり直した直後（それ以後のセットなし）は既定値でセット数だけ
+        let justNow = Pace.estimate(remaining: 80, masteredDates: [], sessionDates: sessions, since: now.addingTimeInterval(1), now: now, calendar: calendar)
+        #expect(justNow == Pace.Estimate(sets: 45, days: nil)) // 80 / 1.8 = 44.4
+    }
+
     @Test("日数の表示は 60 日から月に切り替わる") func text() {
         #expect(Pace.daysText(1) == "約 1 日")
         #expect(Pace.daysText(59) == "約 59 日")
