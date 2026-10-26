@@ -59,9 +59,21 @@ nonisolated enum BundleData {
             for (i, ex) in w.examples.enumerated() {
                 if ex.en.trimmingCharacters(in: .whitespaces).isEmpty || ex.ja.trimmingCharacters(in: .whitespaces).isEmpty {
                     issues.append("\(w.id): examples[\(i)] が空")
-                } else if Cloze.fill(ex.en, word: w.word) == nil {
-                    issues.append("\(w.id): examples[\(i)] に \(w.word) が見つからない（穴埋めにできない）")
+                } else if WordQuestionFactory.blanked(ex, word: w.word) == nil {
+                    issues.append("\(w.id): examples[\(i)] に \(ex.blank ?? w.word) が見つからない（穴埋めにできない）")
                 }
+                // [v2.2] 例文ごとの誤答: 3 つ、重複なし、空欄の語と別、空欄の語が無いのに誤答だけあるのは不可
+                if let d = ex.distractors {
+                    let all = ([ex.blank ?? ""] + d).map { $0.lowercased() }
+                    if ex.blank == nil { issues.append("\(w.id): examples[\(i)] に distractors があるのに blank がない") }
+                    if d.count != 3 || Set(all).count != 4 || d.contains(where: { $0.trimmingCharacters(in: .whitespaces).isEmpty }) {
+                        issues.append("\(w.id): examples[\(i)] の distractors は空欄の語と別の 3 つが必要")
+                    }
+                }
+            }
+            if let d = w.enDistractors {
+                let all = ([w.word] + d).map { $0.lowercased() }
+                if d.count != 3 || Set(all).count != 4 { issues.append("\(w.id): en_distractors は単語と別の 3 つが必要") }
             }
             if Set(w.examples.map(\.en)).count != w.examples.count { issues.append("\(w.id): examples が重複") }
             if w.distractors.contains(w.meaning) { issues.append("\(w.id): distractors に正解が含まれる") }

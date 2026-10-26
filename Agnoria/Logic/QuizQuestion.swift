@@ -96,8 +96,30 @@ nonisolated enum WordQuestionFactory {
 
     /// 例文 3 つから 1 つを選ぶ（§3.2 [v1.7]）。穴埋めは空欄にできる文だけが候補
     static func pickExample(_ w: WordSnapshot, forCloze: Bool, using rng: inout some RandomNumberGenerator) -> ExampleSentence? {
-        let candidates = w.examples.filter { !$0.en.isEmpty && (!forCloze || Cloze.fill($0.en, word: w.word) != nil) }
+        let candidates = w.examples.filter { !$0.en.isEmpty && (!forCloze || blanked($0, word: w.word) != nil) }
         return candidates.randomElement(using: &rng)
+    }
+
+    /// 穴埋めの問題文。[v2.2] データに空欄の語（`blank`）があればそれを、無ければ語形から推測して空欄にする
+    static func blanked(_ ex: ExampleSentence, word: String) -> String? {
+        if let b = ex.blank { return Cloze.blankOut(ex.en, token: b) }
+        return Cloze.fill(ex.en, word: word)
+    }
+
+    /// 穴埋めの選択肢（正解 + 誤答 3）。[v2.2] 例文にそろえた誤答があれば正解も例文中の形（shipped）で出す。
+    /// 無ければ従来どおり原形の正解と、同じ品詞の他の単語から選んだ誤答
+    static func clozeChoices(_ w: WordSnapshot, example ex: ExampleSentence, pool: [WordSnapshot],
+                             using rng: inout some RandomNumberGenerator) -> [String]? {
+        if let b = ex.blank, let d = ex.distractors, d.count == 3 { return [b] + d }
+        let others = distractorWords(for: w, pool: pool, using: &rng)
+        return others.count == 3 ? [w.word] + others.map(\.word) : nil
+    }
+
+    /// 日→英の選択肢（正解 + 誤答 3）。[v2.2] 単語に人手の誤答（`enDistractors`）があればそれを使う
+    static func jaToEnChoices(_ w: WordSnapshot, pool: [WordSnapshot], using rng: inout some RandomNumberGenerator) -> [String]? {
+        if let d = w.enDistractors, d.count == 3 { return [w.word] + d }
+        let others = distractorWords(for: w, pool: pool, using: &rng)
+        return others.count == 3 ? [w.word] + others.map(\.word) : nil
     }
 
     /// 形式に応じて1問を作る。cloze が作れない語は meaning にフォールバック
@@ -114,22 +136,20 @@ nonisolated enum WordQuestionFactory {
                                 explanation: w.meaning, word: w, example: ex, speechText: ex?.en)
         case .cloze:
             guard let ex = pickExample(w, forCloze: true, using: &rng),
-                  let blanked = Cloze.fill(ex.en, word: w.word) else {
+                  let blanked = blanked(ex, word: w.word),
+                  let options = clozeChoices(w, example: ex, pool: pool, using: &rng) else {
                 return make(w, format: .meaning, pool: pool, using: &rng)
             }
-            let others = distractorWords(for: w, pool: pool, using: &rng)
-            guard others.count == 3 else { return make(w, format: .meaning, pool: pool, using: &rng) }
-            let (choices, correct) = ChoiceShuffler.shuffle([w.word] + others.map(\.word),
-                                                            correctIndex: 0, using: &rng)
+            let (choices, correct) = ChoiceShuffler.shuffle(options, correctIndex: 0, using: &rng)
             return QuizQuestion(itemID: w.id, mode: .word, wordFormat: .cloze, categoryName: w.category,
                                 prompt: blanked, promptJa: ex.ja, choices: choices, correctIndex: correct,
                                 explanation: w.meaning, word: w, example: ex, speechText: ex.en)
         case .jaToEn:
-            let others = distractorWords(for: w, pool: pool, using: &rng)
-            guard others.count == 3 else { return make(w, format: .meaning, pool: pool, using: &rng) }
+            guard let options = jaToEnChoices(w, pool: pool, using: &rng) else {
+                return make(w, format: .meaning, pool: pool, using: &rng)
+            }
             let ex = pickExample(w, forCloze: false, using: &rng)
-            let (choices, correct) = ChoiceShuffler.shuffle([w.word] + others.map(\.word),
-                                                            correctIndex: 0, using: &rng)
+            let (choices, correct) = ChoiceShuffler.shuffle(options, correctIndex: 0, using: &rng)
             return QuizQuestion(itemID: w.id, mode: .word, wordFormat: .jaToEn, categoryName: w.category,
                                 prompt: w.meaning, choices: choices, correctIndex: correct,
                                 explanation: w.meaning, word: w, example: ex, speechText: ex?.en)

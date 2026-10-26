@@ -94,7 +94,7 @@ ci_scripts/       Xcode Cloud のスクリプト（アーカイブ後に dSYM �
 
 ## 問題データ
 
-`Agnoria/Resources/Data/` に単語 600 語・文法 200 問・リスニング 120 問を同梱しています（各スコア帯 150 語 / 50 問 / 30 問）。形式は [docs/SPEC.md](docs/SPEC.md) §2.1 を参照してください。
+`Agnoria/Resources/Data/` に単語 600 語・文法 200 問・リスニング 120 問を同梱しています（各スコア帯 150 語 / 50 問 / 30 問）。形式は [docs/SPEC.md](docs/SPEC.md) §2.1 を参照してください。単語の穴埋めの誤答は、各単語の誤答の原形（`en_distractors`）から `python3 tools/words/inflect-distractors.py Agnoria/Resources/Data/words.json review.txt` で例文ごとに作り直せます（空欄の活用形にそろえる）。語や誤答を変えたら `review.txt` を読み、誤答が文として成り立たないことを確かめてください。
 
 データを追加・修正するときの約束:
 

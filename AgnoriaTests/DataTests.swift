@@ -67,6 +67,28 @@ struct BundleDataTests {
         }
     }
 
+    @Test("[v2.2] すべての単語に日→英の誤答、すべての例文に空欄の語と活用をそろえた誤答がある") func wordDistractorsComplete() throws {
+        let payload = try BundleData.load(bundle: bundle)
+        for w in payload.words {
+            let lemmas = try #require(w.enDistractors, "\(w.id)")
+            #expect(lemmas.count == 3, "\(w.id)")
+            for ex in w.examples {
+                let blank = try #require(ex.blank, "\(w.id): \(ex.en)")
+                let d = try #require(ex.distractors, "\(w.id): \(ex.en)")
+                #expect(d.count == 3)
+                if blank.lowercased() == w.word.lowercased() {
+                    // 空欄が原形なら、誤答も原形（文頭なら頭だけ大文字）
+                    #expect(d.map { $0.lowercased() } == lemmas.map { $0.lowercased() }, "\(w.id): \(ex.en)")
+                } else {
+                    // 空欄が活用形なら、誤答も活用させてある
+                    #expect(zip(d, lemmas).allSatisfy { $0.lowercased() != $1.lowercased() }, "\(w.id): \(ex.en) \(d)")
+                }
+                // 文頭の空欄は誤答も大文字で始める（大文字小文字で正解が分からないように）
+                #expect(d.allSatisfy { $0.first!.isUppercase == blank.first!.isUppercase }, "\(w.id): \(ex.en)")
+            }
+        }
+    }
+
     @Test("fingerprint は内容が変わると変わる") func fingerprintChanges() throws {
         let a = try BundleData.decode(wordsData: Data("[]".utf8), grammarData: Data("[]".utf8), listeningData: Data("[]".utf8))
         let b = try BundleData.decode(wordsData: Data("[ ]".utf8), grammarData: Data("[]".utf8), listeningData: Data("[]".utf8))

@@ -27,6 +27,12 @@ nonisolated enum Cloze {
         return nil
     }
 
+    /// 例文中の語 `token`（大文字小文字も含めて完全一致する 1 語）を空欄にする [v2.2]。無ければ nil
+    static func blankOut(_ example: String, token: String) -> String? {
+        guard !token.isEmpty, let r = tokenRanges(in: example).first(where: { example[$0] == token }) else { return nil }
+        return example.replacingCharacters(in: r, with: blank)
+    }
+
     /// 単純な先頭一致ではなく、英語の規則的な語尾変化だけを許可する
     /// （"in" が "invoice" に化けるような誤置換を防ぐ）
     static func matchesInflection(token: String, word: String) -> Bool {

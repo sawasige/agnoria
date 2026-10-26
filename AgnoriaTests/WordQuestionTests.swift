@@ -96,6 +96,31 @@ struct WordQuestionFactoryTests {
         #expect(q.wordFormat == .meaning)
     }
 
+    @Test("[v2.2] 例文に空欄の語と誤答があれば、正解も誤答も例文中の活用形で出す") func clozeUsesExampleForms() {
+        var rng = SeededRandomNumberGenerator(seed: 7)
+        let w = WordSnapshot(id: "s", word: "ship", pos: "動詞", meaning: "発送する",
+                             examples: [.init(en: "Your items were shipped this morning.", ja: "品物は今朝発送されました。",
+                                              blank: "shipped", distractors: ["attended", "explained", "retired"])],
+                             distractors: ["梱包する", "注文する", "返品する"], category: "ビジネス一般", level: 450,
+                             enDistractors: ["attend", "explain", "retire"])
+        let q = WordQuestionFactory.make(w, format: .cloze, pool: pool, using: &rng)!
+        #expect(q.prompt == "Your items were ______ this morning.")
+        #expect(q.choices[q.correctIndex] == "shipped")
+        #expect(Set(q.choices) == ["shipped", "attended", "explained", "retired"])
+        #expect(q.completedPrompt == "Your items were shipped this morning.")
+        // 日→英は原形と人手の誤答
+        let j = WordQuestionFactory.make(w, format: .jaToEn, pool: pool, using: &rng)!
+        #expect(Set(j.choices) == ["ship", "attend", "explain", "retire"])
+        #expect(j.choices[j.correctIndex] == "ship")
+    }
+
+    @Test("[v2.2] 空欄の語はデータのとおりに空欄にする（語形の推測に頼らない）") func blankOutExact() {
+        #expect(Cloze.blankOut("We paid the invoice.", token: "paid") == "We ______ the invoice.")
+        #expect(Cloze.blankOut("Most stores open at ten.", token: "Most") == "______ stores open at ten.")
+        #expect(Cloze.blankOut("Almost all stores open.", token: "most") == nil, "語の一部は空欄にしない")
+        #expect(Cloze.blankOut("We paid the invoice.", token: "pay") == nil)
+    }
+
     @Test("ランダム形式は語ごとに決まる") func randomFormat() {
         var rng = SeededRandomNumberGenerator(seed: 6)
         let qs = SetBuilder.wordQuestions(pool, format: nil, pool: pool, using: &rng)
