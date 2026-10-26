@@ -157,7 +157,7 @@
     "examples": [
       {
         "en": "Revenue increased by ten percent last year.",
-        "ja": "昨年、売上は10%増加しました。",
+        "ja": "昨年、売上は 10%増加しました。",
         "blank": "Revenue",
         "distractors": [
           "Advice",
@@ -407,7 +407,7 @@
     "examples": [
       {
         "en": "The quarterly meeting will be held in March.",
-        "ja": "四半期会議は3 月に開催されます。",
+        "ja": "四半期会議は 3 月に開催されます。",
         "blank": "quarterly",
         "distractors": [
           "loyal",
@@ -707,7 +707,7 @@
     "examples": [
       {
         "en": "Your interview is scheduled for 10 A.M. on Tuesday.",
-        "ja": "あなたの面接は火曜日の午前10 時に予定されています。",
+        "ja": "あなたの面接は火曜日の午前 10 時に予定されています。",
         "blank": "interview",
         "distractors": [
           "invoice",
@@ -787,7 +787,7 @@
       }
     ],
     "distractors": [
-      "辞職する",
+      "転職する",
       "昇進する",
       "休暇を取る"
     ],
@@ -907,7 +907,7 @@
     "examples": [
       {
         "en": "Three candidates were selected for the final interview.",
-        "ja": "最終面接に3 人の候補者が選ばれました。",
+        "ja": "最終面接に 3 人の候補者が選ばれました。",
         "blank": "candidates",
         "distractors": [
           "brochures",
@@ -1157,7 +1157,7 @@
     "examples": [
       {
         "en": "About fifty people attended the seminar.",
-        "ja": "約50 人がセミナーに出席しました。",
+        "ja": "約 50 人がセミナーに出席しました。",
         "blank": "attended",
         "distractors": [
           "borrowed",
@@ -1607,7 +1607,7 @@
     "examples": [
       {
         "en": "The laptop comes with a two-year warranty.",
-        "ja": "そのノートパソコンには2 年間の保証が付いています。",
+        "ja": "そのノートパソコンには 2 年間の保証が付いています。",
         "blank": "warranty",
         "distractors": [
           "shipment",
@@ -1662,7 +1662,7 @@
         "distractors": [
           "attend",
           "explain",
-          "hire"
+          "arrive"
         ]
       },
       {
@@ -1672,7 +1672,7 @@
         "distractors": [
           "attend",
           "explain",
-          "hire"
+          "arrive"
         ]
       },
       {
@@ -1682,7 +1682,7 @@
         "distractors": [
           "attend",
           "explain",
-          "hire"
+          "arrive"
         ]
       }
     ],
@@ -1696,7 +1696,7 @@
     "en_distractors": [
       "attend",
       "explain",
-      "hire"
+      "arrive"
     ]
   },
   {
@@ -1757,7 +1757,7 @@
     "examples": [
       {
         "en": "Members receive a ten percent discount.",
-        "ja": "会員は10%の割引を受けられます。",
+        "ja": "会員は 10%の割引を受けられます。",
         "blank": "discount",
         "distractors": [
           "colleague",
@@ -1887,7 +1887,7 @@
       }
     ],
     "distractors": [
-      "会員登録",
+      "一括払い",
       "試用期間",
       "解約"
     ],
@@ -1957,7 +1957,7 @@
     "examples": [
       {
         "en": "The new model is available in three colors.",
-        "ja": "新モデルは3 色で入手できます。",
+        "ja": "新モデルは 3 色で入手できます。",
         "blank": "available",
         "distractors": [
           "absent",
@@ -2007,7 +2007,7 @@
     "examples": [
       {
         "en": "The two products have complementary features.",
-        "ja": "その2 つの製品は補い合う機能を持っています。",
+        "ja": "その 2 つの製品は補い合う機能を持っています。",
         "blank": "complementary",
         "distractors": [
           "complimentary",
@@ -2057,7 +2057,7 @@
     "examples": [
       {
         "en": "We decided to extend the deadline by one week.",
-        "ja": "締め切りを1 週間延長することにしました。",
+        "ja": "締め切りを 1 週間延長することにしました。",
         "blank": "extend",
         "distractors": [
           "assign",
@@ -2089,7 +2089,7 @@
     "distractors": [
       "費やす",
       "短縮する",
-      "延期する"
+      "中断する"
     ],
     "category": "混同しやすい語",
     "level": 500,
@@ -2110,7 +2110,7 @@
         "ja": "その会社はリモートワークに関する新しい方針を採用しました。",
         "blank": "adopted",
         "distractors": [
-          "adapted",
+          "reimbursed",
           "exchanged",
           "dispatched"
         ]
@@ -2120,7 +2120,7 @@
         "ja": "今年、多くの会社が週 4 日勤務を取り入れました。",
         "blank": "adopted",
         "distractors": [
-          "adapted",
+          "reimbursed",
           "exchanged",
           "dispatched"
         ]
@@ -2130,7 +2130,7 @@
         "ja": "取締役会はコンサルタントの提言を採用することにしました。",
         "blank": "adopt",
         "distractors": [
-          "adapt",
+          "reimburse",
           "exchange",
           "dispatch"
         ]
@@ -2144,7 +2144,7 @@
     "category": "混同しやすい語",
     "level": 550,
     "en_distractors": [
-      "adapt",
+      "reimburse",
       "exchange",
       "dispatch"
     ]
@@ -2407,7 +2407,7 @@
     "examples": [
       {
         "en": "Your membership will expire at the end of May.",
-        "ja": "あなたの会員資格は5 月末に期限が切れます。",
+        "ja": "あなたの会員資格は 5 月末に期限が切れます。",
         "blank": "expire",
         "distractors": [
           "resign",
@@ -2562,7 +2562,7 @@
         "distractors": [
           "contact",
           "hear",
-          "explain"
+          "retire"
         ]
       },
       {
@@ -2572,7 +2572,7 @@
         "distractors": [
           "contact",
           "hear",
-          "explain"
+          "retire"
         ]
       },
       {
@@ -2582,7 +2582,7 @@
         "distractors": [
           "contact",
           "hear",
-          "explain"
+          "retire"
         ]
       }
     ],
@@ -2596,7 +2596,7 @@
     "en_distractors": [
       "contact",
       "hear",
-      "explain"
+      "retire"
     ]
   },
   {
@@ -2807,7 +2807,7 @@
     "examples": [
       {
         "en": "Our company has three offices in Asia.",
-        "ja": "当社はアジアに3 つの事務所があります。",
+        "ja": "当社はアジアに 3 つの事務所があります。",
         "blank": "company",
         "distractors": [
           "promotion",
@@ -2957,7 +2957,7 @@
     "examples": [
       {
         "en": "Please sign both copies of the contract here.",
-        "ja": "契約書の2 部両方にここで署名してください。",
+        "ja": "契約書の 2 部両方にここで署名してください。",
         "blank": "sign",
         "distractors": [
           "hear",
@@ -2967,7 +2967,7 @@
       },
       {
         "en": "Visitors must sign their name at the front desk.",
-        "ja": "来訪者は受付で名前を署名しなければなりません。",
+        "ja": "来訪者は受付で名前を記入しなければなりません。",
         "blank": "sign",
         "distractors": [
           "hear",
@@ -3203,7 +3203,7 @@
     "id": "w-0065",
     "word": "during",
     "pos": "前置詞",
-    "meaning": "〜の間に",
+    "meaning": "〜の間（ずっと）・〜中に",
     "examples": [
       {
         "en": "Please turn off your phone during the presentation.",
@@ -3407,7 +3407,7 @@
     "examples": [
       {
         "en": "We plan to hire two new sales assistants in May.",
-        "ja": "5 月に新しい販売スタッフを2 人雇う予定です。",
+        "ja": "5 月に新しい販売スタッフを 2 人雇う予定です。",
         "blank": "hire",
         "distractors": [
           "retire",
@@ -3557,7 +3557,7 @@
     "examples": [
       {
         "en": "We train new workers on the system for two weeks in April.",
-        "ja": "4 月に新しい従業員にシステムの研修を2 週間行います。",
+        "ja": "4 月に新しい従業員にシステムの研修を 2 週間行います。",
         "blank": "train",
         "distractors": [
           "borrow",
@@ -3726,8 +3726,8 @@
         ]
       },
       {
-        "en": "You must apply before the end of the month.",
-        "ja": "月末までに応募する必要があります。",
+        "en": "You must apply for the position before the end of the month.",
+        "ja": "その職には月末までに応募する必要があります。",
         "blank": "apply",
         "distractors": [
           "retire",
@@ -3757,7 +3757,7 @@
     "examples": [
       {
         "en": "The position requires at least two years of experience.",
-        "ja": "その職には少なくとも2 年の経験が必要です。",
+        "ja": "その職には少なくとも 2 年の経験が必要です。",
         "blank": "position",
         "distractors": [
           "tax",
@@ -3857,7 +3857,7 @@
     "examples": [
       {
         "en": "Three new members will join our team in July.",
-        "ja": "7 月に新しいメンバーが3 人、私たちのチームに加わります。",
+        "ja": "7 月に新しいメンバーが 3 人、私たちのチームに加わります。",
         "blank": "join",
         "distractors": [
           "borrow",
@@ -3907,7 +3907,7 @@
     "examples": [
       {
         "en": "I am taking a vacation during the first week of August.",
-        "ja": "8 月の第1 週に休暇を取ります。",
+        "ja": "8 月の第 1 週に休暇を取ります。",
         "blank": "vacation",
         "distractors": [
           "prize",
@@ -4007,7 +4007,7 @@
     "examples": [
       {
         "en": "Two workers were absent because of the heavy snow.",
-        "ja": "大雪のため2 人の従業員が欠勤しました。",
+        "ja": "大雪のため 2 人の従業員が欠勤しました。",
         "blank": "absent",
         "distractors": [
           "cheap",
@@ -4207,7 +4207,7 @@
     "examples": [
       {
         "en": "The weekly meeting starts at ten in room B.",
-        "ja": "週例会議はB会議室で10 時に始まります。",
+        "ja": "週例会議はB会議室で 10 時に始まります。",
         "blank": "meeting",
         "distractors": [
           "report",
@@ -4857,7 +4857,7 @@
     "examples": [
       {
         "en": "The office will stay open until eight tonight.",
-        "ja": "オフィスは今夜8 時まで開いています。",
+        "ja": "オフィスは今夜 8 時まで開いています。",
         "blank": "until",
         "distractors": [
           "since",
@@ -5257,7 +5257,7 @@
     "examples": [
       {
         "en": "The shop is open from nine to seven on weekdays.",
-        "ja": "その店は平日の9 時から7 時まで営業しています。",
+        "ja": "その店は平日の 9 時から 7 時まで営業しています。",
         "blank": "open",
         "distractors": [
           "attached",
@@ -5607,7 +5607,7 @@
     "examples": [
       {
         "en": "Please choose a color from these five samples.",
-        "ja": "この5 つの見本から色を選んでください。",
+        "ja": "この 5 つの見本から色を選んでください。",
         "blank": "choose",
         "distractors": [
           "retire",
@@ -5807,7 +5807,7 @@
     "examples": [
       {
         "en": "Please bring the form to the service counter on the second floor.",
-        "ja": "その用紙を2 階のサービスカウンターまでお持ちください。",
+        "ja": "その用紙を 2 階のサービスカウンターまでお持ちください。",
         "blank": "counter",
         "distractors": [
           "receipt",
@@ -5926,8 +5926,8 @@
         ]
       },
       {
-        "en": "The company had to borrow money to build the new factory.",
-        "ja": "その会社は新工場を建てるために資金を借りなければなりませんでした。",
+        "en": "The company had to borrow money from the bank to build the new factory.",
+        "ja": "その会社は新工場を建てるために銀行から資金を借りなければなりませんでした。",
         "blank": "borrow",
         "distractors": [
           "lend",
@@ -6017,7 +6017,7 @@
       },
       {
         "en": "Did you hear the announcement about the new parking rules?",
-        "ja": "新しい駐車場の規則についての案内は聞こえましたか。",
+        "ja": "新しい駐車場の規則についての案内を聞きましたか。",
         "blank": "hear",
         "distractors": [
           "listen",
@@ -6110,7 +6110,7 @@
         "ja": "会議室の利用には少額の料金がかかります。",
         "blank": "fee",
         "distractors": [
-          "fare",
+          "cashier",
           "receipt",
           "topic"
         ]
@@ -6120,7 +6120,7 @@
         "ja": "そのクレジットカードの年会費は 5,000 円です。",
         "blank": "fee",
         "distractors": [
-          "fare",
+          "cashier",
           "receipt",
           "topic"
         ]
@@ -6130,7 +6130,7 @@
         "ja": "その銀行は振込 1 回につき 300 円の料金を取ります。",
         "blank": "fee",
         "distractors": [
-          "fare",
+          "cashier",
           "receipt",
           "topic"
         ]
@@ -6144,7 +6144,7 @@
     "category": "混同しやすい語",
     "level": 450,
     "en_distractors": [
-      "fare",
+      "cashier",
       "receipt",
       "topic"
     ]
@@ -6157,7 +6157,7 @@
     "examples": [
       {
         "en": "The bus fare to the airport is eight dollars.",
-        "ja": "空港までのバス運賃は8 ドルです。",
+        "ja": "空港までのバス運賃は 8 ドルです。",
         "blank": "fare",
         "distractors": [
           "fee",
@@ -6360,7 +6360,7 @@
         "ja": "明日オフィスに来るときは、IDカードを持ってきてください。",
         "blank": "bring",
         "distractors": [
-          "take",
+          "hire",
           "hear",
           "attend"
         ]
@@ -6370,7 +6370,7 @@
         "ja": "明日こちらに戻る際に、レシートの控えを持ってきていただけますか。",
         "blank": "bring",
         "distractors": [
-          "take",
+          "hire",
           "hear",
           "attend"
         ]
@@ -6380,7 +6380,7 @@
         "ja": "キャビネットからファイルを持ってきてもらえますか。",
         "blank": "bring",
         "distractors": [
-          "take",
+          "hire",
           "hear",
           "attend"
         ]
@@ -6394,7 +6394,7 @@
     "category": "混同しやすい語",
     "level": 450,
     "en_distractors": [
-      "take",
+      "hire",
       "hear",
       "attend"
     ]
@@ -6457,7 +6457,7 @@
     "examples": [
       {
         "en": "Our sales staff travel to Osaka twice a month.",
-        "ja": "当社の営業職員は月に2 回大阪へ出かけます。",
+        "ja": "当社の営業職員は月に 2 回大阪へ出かけます。",
         "blank": "travel",
         "distractors": [
           "listen",
@@ -6660,7 +6660,7 @@
         "ja": "新しいデスクは水曜日の朝に到着します。",
         "blank": "arrive",
         "distractors": [
-          "reach",
+          "lend",
           "agree",
           "hire"
         ]
@@ -6670,7 +6670,7 @@
         "ja": "お客様は夕方 6 時ごろホテルに到着します。",
         "blank": "arrive",
         "distractors": [
-          "reach",
+          "lend",
           "agree",
           "hire"
         ]
@@ -6680,7 +6680,7 @@
         "ja": "サンプルが到着したら知らせてください。",
         "blank": "arrive",
         "distractors": [
-          "reach",
+          "lend",
           "agree",
           "hire"
         ]
@@ -6694,7 +6694,7 @@
     "category": "混同しやすい語",
     "level": 450,
     "en_distractors": [
-      "reach",
+      "lend",
       "agree",
       "hire"
     ]
@@ -6710,7 +6710,7 @@
         "ja": "正午前に駅に着きます。",
         "blank": "reach",
         "distractors": [
-          "arrive",
+          "borrow",
           "explain",
           "sign"
         ]
@@ -6720,7 +6720,7 @@
         "ja": "道が空いていれば、10 時までに取引先のオフィスに着くはずです。",
         "blank": "reach",
         "distractors": [
-          "arrive",
+          "borrow",
           "explain",
           "sign"
         ]
@@ -6730,7 +6730,7 @@
         "ja": "トラックは午後早くには倉庫に着きます。",
         "blank": "reach",
         "distractors": [
-          "arrive",
+          "borrow",
           "explain",
           "sign"
         ]
@@ -6744,7 +6744,7 @@
     "category": "混同しやすい語",
     "level": 450,
     "en_distractors": [
-      "arrive",
+      "borrow",
       "explain",
       "sign"
     ]
@@ -7507,7 +7507,7 @@
     "examples": [
       {
         "en": "The factory's workforce has grown to over five hundred people.",
-        "ja": "その工場の全従業員は500 人以上に増えました。",
+        "ja": "その工場の全従業員は 500 人以上に増えました。",
         "blank": "workforce",
         "distractors": [
           "itinerary",
@@ -7607,7 +7607,7 @@
     "examples": [
       {
         "en": "The director approved my request for two weeks of vacation.",
-        "ja": "部長は私の2 週間の休暇申請を承認しました。",
+        "ja": "部長は私の 2 週間の休暇申請を承認しました。",
         "blank": "approved",
         "distractors": [
           "apologized",
@@ -7738,7 +7738,7 @@
     ],
     "distractors": [
       "責任者",
-      "代理店",
+      "来訪者",
       "役員"
     ],
     "category": "人事・採用",
@@ -7857,7 +7857,7 @@
     "examples": [
       {
         "en": "This job requires a teaching qualification and two years of practice.",
-        "ja": "この仕事には教員資格と2 年の実務が必要です。",
+        "ja": "この仕事には教員資格と 2 年の実務が必要です。",
         "blank": "qualification",
         "distractors": [
           "supplier",
@@ -7957,7 +7957,7 @@
     "examples": [
       {
         "en": "Team leaders evaluate each member's performance twice a year.",
-        "ja": "チームリーダーは年に2 回、各メンバーの業績を評価します。",
+        "ja": "チームリーダーは年に 2 回、各メンバーの業績を評価します。",
         "blank": "evaluate",
         "distractors": [
           "apologize",
@@ -8057,7 +8057,7 @@
     "examples": [
       {
         "en": "Bonuses are based on each employee's performance over the year.",
-        "ja": "賞与は各社員の1 年間の業績に基づいて決まります。",
+        "ja": "賞与は各社員の 1 年間の業績に基づいて決まります。",
         "blank": "performance",
         "distractors": [
           "retail",
@@ -8160,7 +8160,7 @@
         "ja": "忙しい休暇シーズンに対応するため、一時的なスタッフを雇いました。",
         "blank": "temporary",
         "distractors": [
-          "permanent",
+          "spacious",
           "loose",
           "satisfied"
         ]
@@ -8170,7 +8170,7 @@
         "ja": "道路の閉鎖は一時的なもので、金曜日に終わります。",
         "blank": "temporary",
         "distractors": [
-          "permanent",
+          "spacious",
           "loose",
           "satisfied"
         ]
@@ -8180,7 +8180,7 @@
         "ja": "彼女は 3 月までの一時的な契約で働いています。",
         "blank": "temporary",
         "distractors": [
-          "permanent",
+          "spacious",
           "loose",
           "satisfied"
         ]
@@ -8194,7 +8194,7 @@
     "category": "人事・採用",
     "level": 500,
     "en_distractors": [
-      "permanent",
+      "spacious",
       "loose",
       "satisfied"
     ]
@@ -9007,7 +9007,7 @@
     "examples": [
       {
         "en": "She has worked in retail for more than ten years.",
-        "ja": "彼女は10 年以上小売の仕事をしています。",
+        "ja": "彼女は 10 年以上小売の仕事をしています。",
         "blank": "retail",
         "distractors": [
           "advice",
@@ -9057,7 +9057,7 @@
     "examples": [
       {
         "en": "All merchandise on this shelf is twenty percent off today.",
-        "ja": "この棚の商品はすべて本日20 パーセント引きです。",
+        "ja": "この棚の商品はすべて本日 20 パーセント引きです。",
         "blank": "merchandise",
         "distractors": [
           "morale",
@@ -9157,7 +9157,7 @@
     "examples": [
       {
         "en": "You can find cleaning products in aisle seven.",
-        "ja": "掃除用品は7 番通路にあります。",
+        "ja": "掃除用品は 7 番通路にあります。",
         "blank": "aisle",
         "distractors": [
           "benefit",
@@ -9257,7 +9257,7 @@
     "examples": [
       {
         "en": "The company distributes its products through over three hundred stores.",
-        "ja": "その会社は300 以上の店舗を通じて製品を流通させています。",
+        "ja": "その会社は 300 以上の店舗を通じて製品を流通させています。",
         "blank": "distributes",
         "distractors": [
           "apologizes",
@@ -9757,7 +9757,7 @@
     "examples": [
       {
         "en": "The economic situation has improved over the past year.",
-        "ja": "経済の状況はこの1 年で改善しました。",
+        "ja": "経済の状況はこの 1 年で改善しました。",
         "blank": "economic",
         "distractors": [
           "economical",
@@ -9857,7 +9857,7 @@
     "examples": [
       {
         "en": "The company decided to raise prices by five percent next month.",
-        "ja": "会社は来月、価格を5 パーセント上げることを決めました。",
+        "ja": "会社は来月、価格を 5 パーセント上げることを決めました。",
         "blank": "raise",
         "distractors": [
           "rise",
@@ -10457,7 +10457,7 @@
     "examples": [
       {
         "en": "Besides the main office, we have two branches in Nagoya.",
-        "ja": "本社に加えて、名古屋に2 つの支店があります。",
+        "ja": "本社に加えて、名古屋に 2 つの支店があります。",
         "blank": "Besides",
         "distractors": [
           "Beside",
@@ -10607,7 +10607,7 @@
     "examples": [
       {
         "en": "All vendors must comply with our updated safety standards by the end of June.",
-        "ja": "すべての取引先は6 月末までに当社の改定された安全基準を遵守しなければなりません。",
+        "ja": "すべての取引先は 6 月末までに当社の改定された安全基準を遵守しなければなりません。",
         "blank": "comply",
         "distractors": [
           "restock",
@@ -10657,7 +10657,7 @@
     "examples": [
       {
         "en": "The company will reimburse employees for travel costs within two weeks of submission.",
-        "ja": "会社は提出から2 週間以内に従業員へ出張費を払い戻します。",
+        "ja": "会社は提出から 2 週間以内に従業員へ出張費を払い戻します。",
         "blank": "reimburse",
         "distractors": [
           "devise",
@@ -10757,7 +10757,7 @@
     "examples": [
       {
         "en": "Sales have increased for five consecutive quarters thanks to the new product line.",
-        "ja": "新製品ラインのおかげで、売上は5 四半期連続で増加しています。",
+        "ja": "新製品ラインのおかげで、売上は 5 四半期連続で増加しています。",
         "blank": "consecutive",
         "distractors": [
           "fragile",
@@ -10807,7 +10807,7 @@
     "examples": [
       {
         "en": "We have set a tentative launch date of March 15 for the mobile app.",
-        "ja": "モバイルアプリの発売日を仮に3 月15 日と設定しました。",
+        "ja": "モバイルアプリの発売日を仮に 3 月 15 日と設定しました。",
         "blank": "tentative",
         "distractors": [
           "legible",
@@ -10907,7 +10907,7 @@
     "examples": [
       {
         "en": "Total expenditure on office supplies fell by eight percent compared with last year.",
-        "ja": "事務用品への総支出は昨年と比べて8%減少しました。",
+        "ja": "事務用品への総支出は昨年と比べて 8%減少しました。",
         "blank": "expenditure",
         "distractors": [
           "lodging",
@@ -10957,7 +10957,7 @@
     "examples": [
       {
         "en": "The procurement team is reviewing bids from three potential parts manufacturers.",
-        "ja": "調達チームは3 社の部品メーカー候補からの入札を検討しています。",
+        "ja": "調達チームは 3 社の部品メーカー候補からの入札を検討しています。",
         "blank": "procurement",
         "distractors": [
           "morale",
@@ -11057,7 +11057,7 @@
     "examples": [
       {
         "en": "Moving to a smaller office will cut our overhead by nearly twenty percent.",
-        "ja": "より小さなオフィスに移転すれば、間接費を20%近く削減できます。",
+        "ja": "より小さなオフィスに移転すれば、間接費を 20%近く削減できます。",
         "blank": "overhead",
         "distractors": [
           "seniority",
@@ -11307,7 +11307,7 @@
     "examples": [
       {
         "en": "Construction of the new warehouse will commence in early September.",
-        "ja": "新しい倉庫の建設は9 月上旬に開始されます。",
+        "ja": "新しい倉庫の建設は 9 月上旬に開始されます。",
         "blank": "commence",
         "distractors": [
           "oversee",
@@ -11357,7 +11357,7 @@
     "examples": [
       {
         "en": "The report lists every liability the company must pay off within twelve months.",
-        "ja": "報告書には、会社が12 か月以内に返済しなければならないすべての負債が記載されています。",
+        "ja": "報告書には、会社が 12 か月以内に返済しなければならないすべての負債が記載されています。",
         "blank": "liability",
         "distractors": [
           "voucher",
@@ -11366,13 +11366,13 @@
         ]
       },
       {
-        "en": "The company sold two buildings to reduce its liability.",
+        "en": "The company sold two buildings to reduce its liabilities.",
         "ja": "その会社は負債を減らすために 2 棟のビルを売却しました。",
-        "blank": "liability",
+        "blank": "liabilities",
         "distractors": [
-          "voucher",
-          "layover",
-          "testimonial"
+          "vouchers",
+          "layovers",
+          "testimonials"
         ]
       },
       {
@@ -11407,7 +11407,7 @@
     "examples": [
       {
         "en": "Employees who have worked here for one year are eligible for paid leave.",
-        "ja": "ここで1 年間勤務した従業員は有給休暇の対象となります。",
+        "ja": "ここで 1 年間勤務した従業員は有給休暇の対象となります。",
         "blank": "eligible",
         "distractors": [
           "legible",
@@ -11507,7 +11507,7 @@
     "examples": [
       {
         "en": "Your annual performance appraisal is scheduled for the second week of December.",
-        "ja": "あなたの年次業績評価は12 月の第2 週に予定されています。",
+        "ja": "あなたの年次業績評価は 12 月の第 2 週に予定されています。",
         "blank": "appraisal",
         "distractors": [
           "voucher",
@@ -11557,7 +11557,7 @@
     "examples": [
       {
         "en": "New hires complete a three-month probation before receiving full benefits.",
-        "ja": "新入社員は、すべての福利厚生を受ける前に3 か月の試用期間を終えます。",
+        "ja": "新入社員は、すべての福利厚生を受ける前に 3 か月の試用期間を終えます。",
         "blank": "probation",
         "distractors": [
           "logistics",
@@ -11657,7 +11657,7 @@
     "examples": [
       {
         "en": "During her tenure as director, the department doubled its annual output.",
-        "ja": "彼女の部長在職期間中に、部門の年間生産量は2 倍になりました。",
+        "ja": "彼女の部長在職期間中に、部門の年間生産量は 2 倍になりました。",
         "blank": "tenure",
         "distractors": [
           "discrepancy",
@@ -11707,7 +11707,7 @@
     "examples": [
       {
         "en": "Staff who work on public holidays are compensated with an extra day off.",
-        "ja": "祝日に勤務したスタッフには、代休1 日で補償されます。",
+        "ja": "祝日に勤務したスタッフには、代休 1 日で補償されます。",
         "blank": "compensated",
         "distractors": [
           "implemented",
@@ -11757,7 +11757,7 @@
     "examples": [
       {
         "en": "Senior engineers mentor new graduates during their first six months here.",
-        "ja": "ベテランエンジニアは入社後最初の6 か月間、新卒者を指導します。",
+        "ja": "ベテランエンジニアは入社後最初の 6 か月間、新卒者を指導します。",
         "blank": "mentor",
         "distractors": [
           "streamline",
@@ -11807,7 +11807,7 @@
     "examples": [
       {
         "en": "Either party may terminate this agreement with thirty days' written notice.",
-        "ja": "いずれの当事者も30 日前の書面による通知でこの契約を終了させることができます。",
+        "ja": "いずれの当事者も 30 日前の書面による通知でこの契約を終了させることができます。",
         "blank": "terminate",
         "distractors": [
           "restock",
@@ -12007,7 +12007,7 @@
     "examples": [
       {
         "en": "The payroll department processes payments on the twenty-fifth of every month.",
-        "ja": "給与支払部門は毎月25 日に支払いを処理します。",
+        "ja": "給与支払部門は毎月 25 日に支払いを処理します。",
         "blank": "payroll",
         "distractors": [
           "morale",
@@ -12517,7 +12517,7 @@
       },
       {
         "en": "There is no consensus yet on where to hold the conference.",
-        "ja": "協議会をどこで開くかについて、まだ合意はありません。",
+        "ja": "会議をどこで開くかについて、まだ合意はありません。",
         "blank": "consensus",
         "distractors": [
           "voucher",
@@ -13160,7 +13160,7 @@
         "ja": "署名済みの書類を本日中にメール経由で送ってください。",
         "blank": "via",
         "distractors": [
-          "regarding",
+          "beside",
           "except",
           "during"
         ]
@@ -13170,7 +13170,7 @@
         "ja": "質問はすべてオンラインの用紙経由で送ってください。",
         "blank": "via",
         "distractors": [
-          "regarding",
+          "beside",
           "except",
           "during"
         ]
@@ -13180,7 +13180,7 @@
         "ja": "荷物はシンガポール経由で発送され、金曜日に届きました。",
         "blank": "via",
         "distractors": [
-          "regarding",
+          "beside",
           "except",
           "during"
         ]
@@ -13194,7 +13194,7 @@
     "category": "会議・連絡",
     "level": 550,
     "en_distractors": [
-      "regarding",
+      "beside",
       "except",
       "during"
     ]
@@ -13307,7 +13307,7 @@
     "examples": [
       {
         "en": "We sell our products at wholesale to shops in more than forty cities.",
-        "ja": "当社は40 以上の都市の店舗に製品を卸売で販売しています。",
+        "ja": "当社は 40 以上の都市の店舗に製品を卸売で販売しています。",
         "blank": "wholesale",
         "distractors": [
           "morale",
@@ -13407,7 +13407,7 @@
     "examples": [
       {
         "en": "Customers who return the survey will receive a voucher worth ten dollars.",
-        "ja": "アンケートを返送されたお客様には10 ドル分の引換券をお渡しします。",
+        "ja": "アンケートを返送されたお客様には 10 ドル分の引換券をお渡しします。",
         "blank": "voucher",
         "distractors": [
           "testimonial",
@@ -13457,7 +13457,7 @@
     "examples": [
       {
         "en": "Any defective item can be exchanged at the counter within fourteen days.",
-        "ja": "欠陥のある商品は14 日以内であればカウンターで交換できます。",
+        "ja": "欠陥のある商品は 14 日以内であればカウンターで交換できます。",
         "blank": "defective",
         "distractors": [
           "competent",
@@ -13639,7 +13639,7 @@
     "distractors": [
       "従業員",
       "競合他社",
-      "取引先"
+      "株主"
     ],
     "category": "店舗・顧客",
     "level": 600,
@@ -14211,7 +14211,7 @@
         "blank": "ensure",
         "distractors": [
           "assure",
-          "insure",
+          "endure",
           "adjourn"
         ]
       },
@@ -14221,7 +14221,7 @@
         "blank": "ensure",
         "distractors": [
           "assure",
-          "insure",
+          "endure",
           "adjourn"
         ]
       },
@@ -14231,7 +14231,7 @@
         "blank": "ensure",
         "distractors": [
           "assure",
-          "insure",
+          "endure",
           "adjourn"
         ]
       }
@@ -14245,7 +14245,7 @@
     "level": 550,
     "en_distractors": [
       "assure",
-      "insure",
+      "endure",
       "adjourn"
     ]
   },
@@ -14907,7 +14907,7 @@
     "examples": [
       {
         "en": "The advisory council meets twice a year to review our environmental goals.",
-        "ja": "諮問評議会は年に2 回集まり、当社の環境目標を見直します。",
+        "ja": "諮問評議会は年に 2 回集まり、当社の環境目標を見直します。",
         "blank": "council",
         "distractors": [
           "counsel",
@@ -15457,7 +15457,7 @@
     "examples": [
       {
         "en": "We decided to consolidate our three warehouses into a single distribution center.",
-        "ja": "当社は3 つの倉庫を1 つの物流センターに統合することを決定しました。",
+        "ja": "当社は 3 つの倉庫を 1 つの物流センターに統合することを決定しました。",
         "blank": "consolidate",
         "distractors": [
           "plummet",
@@ -15507,7 +15507,7 @@
     "examples": [
       {
         "en": "The finance team reported a shortfall of two million yen in the third quarter.",
-        "ja": "財務チームは第3 四半期に200 万円の不足額を報告しました。",
+        "ja": "財務チームは第 3 四半期に 200 万円の不足額を報告しました。",
         "blank": "shortfall",
         "distractors": [
           "directive",
@@ -15707,7 +15707,7 @@
     "examples": [
       {
         "en": "We automated the billing process, thereby freeing up two staff members.",
-        "ja": "請求処理を自動化し、それによって2 名のスタッフの手が空きました。",
+        "ja": "請求処理を自動化し、それによって 2 名のスタッフの手が空きました。",
         "blank": "thereby",
         "distractors": [
           "hereby",
@@ -15857,7 +15857,7 @@
     "examples": [
       {
         "en": "Both parties agreed to amend the delivery terms in the second clause.",
-        "ja": "双方は第2 条の納品条件を修正することに同意しました。",
+        "ja": "双方は第 2 条の納品条件を修正することに同意しました。",
         "blank": "amend",
         "distractors": [
           "preside",
@@ -16207,7 +16207,7 @@
     "examples": [
       {
         "en": "Each apprentice works alongside a senior technician for the first year.",
-        "ja": "各見習いは最初の1 年間、先輩技術者と一緒に働きます。",
+        "ja": "各見習いは最初の 1 年間、先輩技術者と一緒に働きます。",
         "blank": "apprentice",
         "distractors": [
           "excerpt",
@@ -16307,7 +16307,7 @@
     "examples": [
       {
         "en": "Laid-off workers will receive severance equal to two months of pay.",
-        "ja": "解雇される従業員は2 か月分の給与に相当する退職金を受け取ります。",
+        "ja": "解雇される従業員は 2 か月分の給与に相当する退職金を受け取ります。",
         "blank": "severance",
         "distractors": [
           "collateral",
@@ -16439,7 +16439,7 @@
     "distractors": [
       "履歴書",
       "推薦状",
-      "業績"
+      "給与明細"
     ],
     "category": "人事・採用",
     "level": 600,
@@ -16807,7 +16807,7 @@
     "examples": [
       {
         "en": "Managers may nominate one team member for the annual excellence award.",
-        "ja": "管理職は年間優秀賞にチームメンバー1 名を推薦できます。",
+        "ja": "管理職は年間優秀賞にチームメンバー 1 名を推薦できます。",
         "blank": "nominate",
         "distractors": [
           "accrue",
@@ -16907,7 +16907,7 @@
     "examples": [
       {
         "en": "Full-time employees accrue two vacation days for every month worked.",
-        "ja": "正社員は勤務1 か月ごとに2 日の休暇がたまります。",
+        "ja": "正社員は勤務 1 か月ごとに 2 日の休暇がたまります。",
         "blank": "accrue",
         "distractors": [
           "adhere",
@@ -17007,7 +17007,7 @@
     "examples": [
       {
         "en": "The board unanimously approved the proposal to open a second factory.",
-        "ja": "取締役会は第2 工場開設の提案を満場一致で承認しました。",
+        "ja": "取締役会は第 2 工場開設の提案を満場一致で承認しました。",
         "blank": "unanimously",
         "distractors": [
           "respectively",
@@ -17157,7 +17157,7 @@
     "examples": [
       {
         "en": "After lengthy deliberation, the committee chose the second design.",
-        "ja": "長い審議の後、委員会は2 番目のデザインを選びました。",
+        "ja": "長い審議の後、委員会は 2 番目のデザインを選びました。",
         "blank": "deliberation",
         "distractors": [
           "consignment",
@@ -17857,7 +17857,7 @@
     "examples": [
       {
         "en": "Let me reiterate that all expense claims are due by the fifth.",
-        "ja": "すべての経費請求は5 日が締め切りであることを繰り返し申し上げます。",
+        "ja": "すべての経費請求は 5 日が締め切りであることを繰り返し申し上げます。",
         "blank": "reiterate",
         "distractors": [
           "attain",
@@ -17957,7 +17957,7 @@
     "examples": [
       {
         "en": "Perishable goods must be refrigerated within one hour of delivery.",
-        "ja": "腐りやすい商品は配達から1 時間以内に冷蔵しなければなりません。",
+        "ja": "腐りやすい商品は配達から 1 時間以内に冷蔵しなければなりません。",
         "blank": "Perishable",
         "distractors": [
           "Inclement",
@@ -18207,7 +18207,7 @@
     "examples": [
       {
         "en": "The standard markup on imported furniture is about forty percent.",
-        "ja": "輸入家具の標準的な利幅は約40 パーセントです。",
+        "ja": "輸入家具の標準的な利幅は約 40 パーセントです。",
         "blank": "markup",
         "distractors": [
           "dividend",
@@ -18417,7 +18417,7 @@
       },
       {
         "en": "You can retrieve a lost password from the login page.",
-        "ja": "忘れたパスワードはログインページから取り出せます。",
+        "ja": "忘れたパスワードはログインページから取り戻せます。",
         "blank": "retrieve",
         "distractors": [
           "concur",
@@ -18757,7 +18757,7 @@
     "examples": [
       {
         "en": "Customers who pay upfront for a full year receive two months free.",
-        "ja": "1 年分を前払いで支払うお客様は2 か月分無料になります。",
+        "ja": "1 年分を前払いで支払うお客様は 2 か月分無料になります。",
         "blank": "upfront",
         "distractors": [
           "respectively",
@@ -19007,7 +19007,7 @@
     "examples": [
       {
         "en": "The company has had three successive CEOs in five years.",
-        "ja": "その会社では5 年間で3 人のCEOが相次いで交代しました。",
+        "ja": "その会社では 5 年間で 3 人のCEOが相次いで交代しました。",
         "blank": "successive",
         "distractors": [
           "perishable",
@@ -19203,11 +19203,11 @@
     "id": "w-0391",
     "word": "conscientious",
     "pos": "形容詞",
-    "meaning": "良心的な",
+    "meaning": "誠実で念入りな",
     "examples": [
       {
         "en": "She is a conscientious employee who double-checks every invoice.",
-        "ja": "彼女はすべての請求書を二重に確認する良心的な社員です。",
+        "ja": "彼女はすべての請求書を二重に確認する、誠実で念入りな社員です。",
         "blank": "conscientious",
         "distractors": [
           "perishable",
@@ -19217,7 +19217,7 @@
       },
       {
         "en": "A conscientious driver checks the truck before every trip.",
-        "ja": "良心的な運転手は毎回出発前にトラックを点検します。",
+        "ja": "念入りな運転手は、毎回出発前にトラックを点検します。",
         "blank": "conscientious",
         "distractors": [
           "perishable",
@@ -19227,7 +19227,7 @@
       },
       {
         "en": "He is conscientious about keeping his expense records up to date.",
-        "ja": "彼は経費の記録を最新に保つことに良心的に取り組んでいます。",
+        "ja": "彼は経費の記録をきちんと最新に保っています。",
         "blank": "conscientious",
         "distractors": [
           "perishable",
@@ -19307,7 +19307,7 @@
     "examples": [
       {
         "en": "Any baggage in excess of 20 kilograms will be charged extra on the business trip.",
-        "ja": "出張時に20 キロを超過する手荷物には追加料金がかかります。",
+        "ja": "出張時に 20 キロを超過する手荷物には追加料金がかかります。",
         "blank": "excess",
         "distractors": [
           "access",
@@ -19387,7 +19387,7 @@
       }
     ],
     "distractors": [
-      "考案",
+      "部品",
       "助言",
       "配線"
     ],
@@ -19457,7 +19457,7 @@
     "examples": [
       {
         "en": "The team attained its annual sales target two months early.",
-        "ja": "チームは年間売上目標を2 か月早く達成しました。",
+        "ja": "チームは年間売上目標を 2 か月早く達成しました。",
         "blank": "attained",
         "distractors": [
           "reassigned",
@@ -19557,7 +19557,7 @@
     "examples": [
       {
         "en": "The Tokyo and Osaka branches reported sales of 3 million and 2 million respectively.",
-        "ja": "東京支店と大阪支店はそれぞれ300 万と200 万の売上を報告しました。",
+        "ja": "東京支店と大阪支店はそれぞれ 300 万と 200 万の売上を報告しました。",
         "blank": "respectively",
         "distractors": [
           "respectfully",
@@ -21256,8 +21256,8 @@
     "meaning": "注意深く",
     "examples": [
       {
-        "en": "Please read the contract carefully before you sign it.",
-        "ja": "署名する前に契約書を注意深く読んでください。",
+        "en": "Please check the figures carefully before you send the report.",
+        "ja": "報告書を送る前に、数字を注意深く確認してください。",
         "blank": "carefully",
         "distractors": [
           "lately",
@@ -22066,8 +22066,8 @@
         ]
       },
       {
-        "en": "The bonus was shared among the five team members.",
-        "ja": "賞与は 5 人のチームメンバーの間で分けられました。",
+        "en": "The bonus was divided among all the staff.",
+        "ja": "賞与は全スタッフの間で分けられました。",
         "blank": "among",
         "distractors": [
           "between",
@@ -22360,9 +22360,9 @@
         "ja": "私から電話があったとウィルソンさんに伝えてください。",
         "blank": "tell",
         "distractors": [
-          "say",
+          "hear",
           "speak",
-          "explain"
+          "lend"
         ]
       },
       {
@@ -22370,9 +22370,9 @@
         "ja": "駅への道を教えていただけますか。",
         "blank": "tell",
         "distractors": [
-          "say",
+          "hear",
           "speak",
-          "explain"
+          "lend"
         ]
       },
       {
@@ -22380,9 +22380,9 @@
         "ja": "部長は初日に新しい職員に規則を伝えます。",
         "blank": "tells",
         "distractors": [
-          "says",
+          "hears",
           "speaks",
-          "explains"
+          "lends"
         ]
       }
     ],
@@ -22394,9 +22394,9 @@
     "category": "混同しやすい語",
     "level": 450,
     "en_distractors": [
-      "say",
+      "hear",
       "speak",
-      "explain"
+      "lend"
     ]
   },
   {
@@ -23587,7 +23587,7 @@
       }
     ],
     "distractors": [
-      "工場",
+      "展示会",
       "面接",
       "送別会"
     ],
@@ -24360,7 +24360,7 @@
         "ja": "最近、東京事務所に異動しました。",
         "blank": "recently",
         "distractors": [
-          "currently",
+          "unanimously",
           "approximately",
           "otherwise"
         ]
@@ -24370,7 +24370,7 @@
         "ja": "その店は最近改装されました。",
         "blank": "recently",
         "distractors": [
-          "currently",
+          "unanimously",
           "approximately",
           "otherwise"
         ]
@@ -24380,7 +24380,7 @@
         "ja": "最近発表された報告書を読みましたか。",
         "blank": "recently",
         "distractors": [
-          "currently",
+          "unanimously",
           "approximately",
           "otherwise"
         ]
@@ -24394,7 +24394,7 @@
     "category": "会議・連絡",
     "level": 500,
     "en_distractors": [
-      "currently",
+      "unanimously",
       "approximately",
       "otherwise"
     ]
@@ -25827,7 +25827,7 @@
       },
       {
         "en": "To make up for the inconvenience, we will give you a free voucher.",
-        "ja": "ご迷惑のおわびに、無料の割引券を差し上げます。",
+        "ja": "ご迷惑のおわびに、無料の引換券を差し上げます。",
         "blank": "inconvenience",
         "distractors": [
           "objection",
@@ -27410,7 +27410,7 @@
         "ja": "そのホテルは昨年大規模な改装を行いました。",
         "blank": "extensive",
         "distractors": [
-          "intensive",
+          "eager",
           "eligible",
           "adverse"
         ]
@@ -27420,7 +27420,7 @@
         "ja": "彼女は海外営業で幅広い経験を持っています。",
         "blank": "extensive",
         "distractors": [
-          "intensive",
+          "eager",
           "eligible",
           "adverse"
         ]
@@ -27430,7 +27430,7 @@
         "ja": "その図書館はビジネス書を豊富にそろえています。",
         "blank": "extensive",
         "distractors": [
-          "intensive",
+          "eager",
           "eligible",
           "adverse"
         ]
@@ -27444,7 +27444,7 @@
     "category": "混同しやすい語",
     "level": 550,
     "en_distractors": [
-      "intensive",
+      "eager",
       "eligible",
       "adverse"
     ]
@@ -28167,7 +28167,7 @@
       },
       {
         "en": "The apartment is close to shops, parks, and other amenities.",
-        "ja": "そのアパートは店や公園などの便利な施設に近い。",
+        "ja": "そのアパートは店や公園などの便利な施設の近くにあります。",
         "blank": "amenities",
         "distractors": [
           "tariffs",
@@ -29510,7 +29510,7 @@
         "ja": "何度も邪魔が入って、報告書を終えるのが難しかった。",
         "blank": "continual",
         "distractors": [
-          "continuous",
+          "perishable",
           "legible",
           "eminent"
         ]
@@ -29520,7 +29520,7 @@
         "ja": "騒音について苦情が繰り返し寄せられました。",
         "blank": "continual",
         "distractors": [
-          "continuous",
+          "perishable",
           "legible",
           "eminent"
         ]
@@ -29530,7 +29530,7 @@
         "ja": "古いプリンターは何度も修理が必要です。",
         "blank": "continual",
         "distractors": [
-          "continuous",
+          "perishable",
           "legible",
           "eminent"
         ]
@@ -29544,7 +29544,7 @@
     "category": "混同しやすい語",
     "level": 600,
     "en_distractors": [
-      "continuous",
+      "perishable",
       "legible",
       "eminent"
     ]
@@ -29560,7 +29560,7 @@
         "ja": "その工場は 24 時間休みなく稼働しています。",
         "blank": "continuous",
         "distractors": [
-          "continual",
+          "pertinent",
           "concise",
           "regretful"
         ]
@@ -29570,7 +29570,7 @@
         "ja": "その機械はお湯を途切れなく供給します。",
         "blank": "continuous",
         "distractors": [
-          "continual",
+          "pertinent",
           "concise",
           "regretful"
         ]
@@ -29580,7 +29580,7 @@
         "ja": "3 時間降り続いた雨のあと、その道路は閉鎖されました。",
         "blank": "continuous",
         "distractors": [
-          "continual",
+          "pertinent",
           "concise",
           "regretful"
         ]
@@ -29594,7 +29594,7 @@
     "category": "混同しやすい語",
     "level": 600,
     "en_distractors": [
-      "continual",
+      "pertinent",
       "concise",
       "regretful"
     ]
