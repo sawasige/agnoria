@@ -10798,5 +10798,5405 @@
     ],
     "category": "混同しやすい語",
     "level": 600
+  },
+  {
+    "id": "w-0409",
+    "word": "tax",
+    "pos": "名詞",
+    "meaning": "税金",
+    "examples": [
+      {
+        "en": "The price on the tag does not include tax.",
+        "ja": "値札の価格には税金が含まれていません。"
+      },
+      {
+        "en": "All employees must submit their tax forms by March 15.",
+        "ja": "全従業員は 3 月 15 日までに税金の書類を提出しなければなりません。"
+      },
+      {
+        "en": "The government plans to lower taxes on small businesses.",
+        "ja": "政府は中小企業にかかる税金を下げる予定です。"
+      }
+    ],
+    "distractors": [
+      "手数料",
+      "送料",
+      "利息"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0410",
+    "word": "account",
+    "pos": "名詞",
+    "meaning": "口座",
+    "examples": [
+      {
+        "en": "Your salary will be paid into your bank account on the 25th.",
+        "ja": "給料は 25 日に銀行口座に振り込まれます。"
+      },
+      {
+        "en": "Please enter your account number on the form.",
+        "ja": "用紙に口座番号を記入してください。"
+      },
+      {
+        "en": "The payment was sent from the company account this morning.",
+        "ja": "支払いは今朝、会社の口座から送金されました。"
+      }
+    ],
+    "distractors": [
+      "現金",
+      "小切手",
+      "給与明細"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0411",
+    "word": "total",
+    "pos": "名詞",
+    "meaning": "合計",
+    "examples": [
+      {
+        "en": "The total comes to 85 dollars, including tax.",
+        "ja": "合計は税込みで 85 ドルです。"
+      },
+      {
+        "en": "A total of 200 people attended the seminar.",
+        "ja": "合計 200 人がセミナーに出席しました。"
+      },
+      {
+        "en": "Please check the total before you sign the receipt.",
+        "ja": "領収書に署名する前に合計を確認してください。"
+      }
+    ],
+    "distractors": [
+      "平均",
+      "残高",
+      "差額"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0412",
+    "word": "package",
+    "pos": "名詞",
+    "meaning": "小包",
+    "examples": [
+      {
+        "en": "A package arrived for you while you were out.",
+        "ja": "外出中にあなた宛ての小包が届きました。"
+      },
+      {
+        "en": "Please sign here to receive the package.",
+        "ja": "小包を受け取るには、ここに署名してください。"
+      },
+      {
+        "en": "We will send the package by express mail.",
+        "ja": "小包は速達で送ります。"
+      }
+    ],
+    "distractors": [
+      "封筒",
+      "伝票",
+      "倉庫"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0413",
+    "word": "ship",
+    "pos": "動詞",
+    "meaning": "発送する",
+    "examples": [
+      {
+        "en": "We ship all orders within two business days.",
+        "ja": "すべてのご注文を 2 営業日以内に発送します。"
+      },
+      {
+        "en": "Your items were shipped this morning.",
+        "ja": "お客様の品物は今朝発送されました。"
+      },
+      {
+        "en": "The factory ships products to more than 20 countries.",
+        "ja": "その工場は 20 か国以上に製品を発送しています。"
+      }
+    ],
+    "distractors": [
+      "梱包する",
+      "注文する",
+      "返品する"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0414",
+    "word": "supply",
+    "pos": "名詞",
+    "meaning": "備品・用品",
+    "examples": [
+      {
+        "en": "Office supplies are kept in the cabinet next to the printer.",
+        "ja": "事務用品はプリンターの隣の戸棚にあります。"
+      },
+      {
+        "en": "We are running low on cleaning supplies.",
+        "ja": "掃除用品が少なくなってきています。"
+      },
+      {
+        "en": "Please order more supplies before the end of the month.",
+        "ja": "月末までに備品を追加で注文してください。"
+      }
+    ],
+    "distractors": [
+      "家具",
+      "書類",
+      "給料"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0415",
+    "word": "extra",
+    "pos": "形容詞",
+    "meaning": "追加の",
+    "examples": [
+      {
+        "en": "There is an extra charge for express delivery.",
+        "ja": "速達配送には追加料金がかかります。"
+      },
+      {
+        "en": "Could you bring some extra chairs to the meeting room?",
+        "ja": "会議室に追加の椅子を何脚か持ってきてもらえますか。"
+      },
+      {
+        "en": "Staff who work on holidays receive extra pay.",
+        "ja": "休日に働く職員は追加の給料を受け取ります。"
+      }
+    ],
+    "distractors": [
+      "無料の",
+      "特別な",
+      "割引の"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0416",
+    "word": "flight",
+    "pos": "名詞",
+    "meaning": "（飛行機の）便",
+    "examples": [
+      {
+        "en": "My flight to Singapore leaves at 8 a.m.",
+        "ja": "シンガポール行きの便は午前 8 時に出発します。"
+      },
+      {
+        "en": "The flight was canceled because of the storm.",
+        "ja": "嵐のため、その便は欠航になりました。"
+      },
+      {
+        "en": "Please arrive at the airport two hours before your flight.",
+        "ja": "便の出発 2 時間前までに空港にお越しください。"
+      }
+    ],
+    "distractors": [
+      "座席",
+      "搭乗券",
+      "乗り継ぎ"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0417",
+    "word": "passenger",
+    "pos": "名詞",
+    "meaning": "乗客",
+    "examples": [
+      {
+        "en": "Passengers must show their tickets before boarding.",
+        "ja": "乗客は搭乗前に航空券を見せなければなりません。"
+      },
+      {
+        "en": "The train can carry up to 500 passengers.",
+        "ja": "その電車は最大 500 人の乗客を運べます。"
+      },
+      {
+        "en": "All passengers should fasten their seat belts.",
+        "ja": "乗客の皆さまはシートベルトをお締めください。"
+      }
+    ],
+    "distractors": [
+      "運転手",
+      "客室乗務員",
+      "観光客"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0418",
+    "word": "luggage",
+    "pos": "名詞",
+    "meaning": "手荷物",
+    "examples": [
+      {
+        "en": "You can leave your luggage at the front desk.",
+        "ja": "手荷物はフロントでお預かりできます。"
+      },
+      {
+        "en": "Each passenger may bring one piece of carry-on luggage.",
+        "ja": "乗客 1 人につき、機内持ち込みの手荷物は 1 個までです。"
+      },
+      {
+        "en": "My luggage did not arrive on the same flight.",
+        "ja": "手荷物が同じ便で届きませんでした。"
+      }
+    ],
+    "distractors": [
+      "搭乗券",
+      "座席",
+      "運賃"
+    ],
+    "category": "ビジネス一般",
+    "level": 450
+  },
+  {
+    "id": "w-0419",
+    "word": "bill",
+    "pos": "名詞",
+    "meaning": "勘定・請求額",
+    "examples": [
+      {
+        "en": "Could we have the bill, please?",
+        "ja": "お勘定をお願いできますか。"
+      },
+      {
+        "en": "The electricity bill was higher than usual this month.",
+        "ja": "今月は電気代の請求額がいつもより高かった。"
+      },
+      {
+        "en": "Our manager paid the bill for the team dinner.",
+        "ja": "チームの夕食の勘定を部長が払いました。"
+      }
+    ],
+    "distractors": [
+      "釣り銭",
+      "予約",
+      "献立"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0420",
+    "word": "stock",
+    "pos": "名詞",
+    "meaning": "在庫",
+    "examples": [
+      {
+        "en": "That model is out of stock at the moment.",
+        "ja": "そのモデルはただいま在庫切れです。"
+      },
+      {
+        "en": "We have plenty of paper in stock.",
+        "ja": "紙の在庫は十分にあります。"
+      },
+      {
+        "en": "Please check the stock before you place the order.",
+        "ja": "注文する前に在庫を確認してください。"
+      }
+    ],
+    "distractors": [
+      "売上",
+      "見本",
+      "注文"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0421",
+    "word": "free",
+    "pos": "形容詞",
+    "meaning": "無料の",
+    "examples": [
+      {
+        "en": "Delivery is free for orders over 50 dollars.",
+        "ja": "50 ドル以上のご注文は配送が無料です。"
+      },
+      {
+        "en": "Customers can get a free coffee with any breakfast set.",
+        "ja": "朝食セットをご注文のお客様には無料でコーヒーをお付けします。"
+      },
+      {
+        "en": "The museum offers free admission on Sundays.",
+        "ja": "その美術館は日曜日は入館が無料です。"
+      }
+    ],
+    "distractors": [
+      "割引の",
+      "有料の",
+      "限定の"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0422",
+    "word": "reserve",
+    "pos": "動詞",
+    "meaning": "予約する",
+    "examples": [
+      {
+        "en": "I'd like to reserve a table for four at seven.",
+        "ja": "7 時に 4 名で席を予約したいのですが。"
+      },
+      {
+        "en": "We reserved a meeting room for Thursday afternoon.",
+        "ja": "木曜の午後に会議室を予約しました。"
+      },
+      {
+        "en": "Please reserve a hotel room near the conference center.",
+        "ja": "会議場の近くにホテルの部屋を予約してください。"
+      }
+    ],
+    "distractors": [
+      "取り消す",
+      "支払う",
+      "確認する"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0423",
+    "word": "parking",
+    "pos": "名詞",
+    "meaning": "駐車・駐車場",
+    "examples": [
+      {
+        "en": "Parking is available behind the building.",
+        "ja": "建物の裏に駐車場があります。"
+      },
+      {
+        "en": "Visitors should use the parking area on the second floor.",
+        "ja": "来客の方は 2 階の駐車場をご利用ください。"
+      },
+      {
+        "en": "Parking is not allowed in front of the entrance.",
+        "ja": "入口の前は駐車禁止です。"
+      }
+    ],
+    "distractors": [
+      "入口",
+      "受付",
+      "乗り場"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0424",
+    "word": "repair",
+    "pos": "動詞",
+    "meaning": "修理する",
+    "examples": [
+      {
+        "en": "The elevator is being repaired this week.",
+        "ja": "今週はエレベーターが修理中です。"
+      },
+      {
+        "en": "How much will it cost to repair the printer?",
+        "ja": "プリンターを修理するのにいくらかかりますか。"
+      },
+      {
+        "en": "We repair all kinds of bicycles.",
+        "ja": "あらゆる種類の自転車を修理します。"
+      }
+    ],
+    "distractors": [
+      "交換する",
+      "点検する",
+      "掃除する"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0425",
+    "word": "crowded",
+    "pos": "形容詞",
+    "meaning": "混雑した",
+    "examples": [
+      {
+        "en": "The store is always crowded on Saturday afternoons.",
+        "ja": "その店は土曜の午後はいつも混雑しています。"
+      },
+      {
+        "en": "The train was so crowded that I couldn't sit down.",
+        "ja": "電車がとても混んでいて座れませんでした。"
+      },
+      {
+        "en": "Let's go early before the restaurant gets crowded.",
+        "ja": "レストランが混む前に早めに行きましょう。"
+      }
+    ],
+    "distractors": [
+      "静かな",
+      "空いている",
+      "閉まっている"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0426",
+    "word": "convenient",
+    "pos": "形容詞",
+    "meaning": "便利な・都合のよい",
+    "examples": [
+      {
+        "en": "The hotel is in a convenient location near the station.",
+        "ja": "そのホテルは駅に近い便利な場所にあります。"
+      },
+      {
+        "en": "What time is convenient for you?",
+        "ja": "何時がご都合よろしいですか。"
+      },
+      {
+        "en": "Online ordering is convenient for busy customers.",
+        "ja": "オンライン注文は忙しいお客様に便利です。"
+      }
+    ],
+    "distractors": [
+      "快適な",
+      "高価な",
+      "必要な"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0427",
+    "word": "comfortable",
+    "pos": "形容詞",
+    "meaning": "快適な・心地よい",
+    "examples": [
+      {
+        "en": "These chairs are very comfortable.",
+        "ja": "この椅子はとても座り心地がいいです。"
+      },
+      {
+        "en": "The hotel rooms are clean and comfortable.",
+        "ja": "そのホテルの部屋は清潔で快適です。"
+      },
+      {
+        "en": "Please wear comfortable shoes for the factory tour.",
+        "ja": "工場見学には歩きやすい靴でお越しください。"
+      }
+    ],
+    "distractors": [
+      "便利な",
+      "広い",
+      "清潔な"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0428",
+    "word": "polite",
+    "pos": "形容詞",
+    "meaning": "礼儀正しい・丁寧な",
+    "examples": [
+      {
+        "en": "The staff at the hotel were very polite.",
+        "ja": "そのホテルの職員はとても礼儀正しかった。"
+      },
+      {
+        "en": "Please be polite when you answer the phone.",
+        "ja": "電話に出るときは丁寧に応対してください。"
+      },
+      {
+        "en": "We received a polite letter of apology from the store.",
+        "ja": "店から丁寧なおわびの手紙が届きました。"
+      }
+    ],
+    "distractors": [
+      "正直な",
+      "失礼な",
+      "陽気な"
+    ],
+    "category": "店舗・顧客",
+    "level": 450
+  },
+  {
+    "id": "w-0429",
+    "word": "introduce",
+    "pos": "動詞",
+    "meaning": "紹介する",
+    "examples": [
+      {
+        "en": "Let me introduce our new team member, Ms. Lee.",
+        "ja": "新しいチームメンバーのリーさんを紹介します。"
+      },
+      {
+        "en": "Each new employee introduced themselves at the morning meeting.",
+        "ja": "新入社員は朝礼で一人ずつ自己紹介しました。"
+      },
+      {
+        "en": "Mr. Kato introduced me to the sales manager.",
+        "ja": "加藤さんが私を営業部長に紹介してくれました。"
+      }
+    ],
+    "distractors": [
+      "歓迎する",
+      "推薦する",
+      "説明する"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0430",
+    "word": "assistant",
+    "pos": "名詞",
+    "meaning": "助手・アシスタント",
+    "examples": [
+      {
+        "en": "My assistant will send you the schedule.",
+        "ja": "私のアシスタントが予定表をお送りします。"
+      },
+      {
+        "en": "The company is hiring a part-time assistant for the sales team.",
+        "ja": "その会社は営業チームのパートの助手を募集しています。"
+      },
+      {
+        "en": "The manager asked her assistant to book a meeting room.",
+        "ja": "部長はアシスタントに会議室の予約を頼みました。"
+      }
+    ],
+    "distractors": [
+      "部長",
+      "顧客",
+      "研修生"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0431",
+    "word": "task",
+    "pos": "名詞",
+    "meaning": "仕事・作業",
+    "examples": [
+      {
+        "en": "Your first task is to read the safety manual.",
+        "ja": "最初の仕事は安全マニュアルを読むことです。"
+      },
+      {
+        "en": "Mr. Park gave each team member a different task.",
+        "ja": "パークさんはチームの各メンバーに別々の作業を割り当てました。"
+      },
+      {
+        "en": "Please finish this task by Friday.",
+        "ja": "この作業を金曜日までに終えてください。"
+      }
+    ],
+    "distractors": [
+      "休憩",
+      "給料",
+      "目標"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0432",
+    "word": "career",
+    "pos": "名詞",
+    "meaning": "経歴・キャリア",
+    "examples": [
+      {
+        "en": "She started her career as a bank clerk.",
+        "ja": "彼女は銀行員としてキャリアを始めました。"
+      },
+      {
+        "en": "The training program helps young employees plan their careers.",
+        "ja": "その研修は若手社員がキャリアを考えるのに役立ちます。"
+      },
+      {
+        "en": "He spent his whole career in the sales department.",
+        "ja": "彼は職業人生をずっと営業部で過ごしました。"
+      }
+    ],
+    "distractors": [
+      "給料",
+      "資格",
+      "学歴"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0433",
+    "word": "break",
+    "pos": "名詞",
+    "meaning": "休憩",
+    "examples": [
+      {
+        "en": "Let's take a ten-minute break.",
+        "ja": "10 分間休憩しましょう。"
+      },
+      {
+        "en": "Employees get a one-hour lunch break.",
+        "ja": "従業員は 1 時間の昼休憩をとれます。"
+      },
+      {
+        "en": "The meeting will continue after the break.",
+        "ja": "会議は休憩のあと続けます。"
+      }
+    ],
+    "distractors": [
+      "休日",
+      "残業",
+      "交代"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0434",
+    "word": "carefully",
+    "pos": "副詞",
+    "meaning": "注意深く",
+    "examples": [
+      {
+        "en": "Please read the contract carefully before you sign it.",
+        "ja": "署名する前に契約書を注意深く読んでください。"
+      },
+      {
+        "en": "The new staff member listened carefully to the instructions.",
+        "ja": "新しい職員は指示を注意深く聞きました。"
+      },
+      {
+        "en": "Please handle the boxes carefully because they contain glass.",
+        "ja": "ガラスが入っているので、箱は注意深く扱ってください。"
+      }
+    ],
+    "distractors": [
+      "すばやく",
+      "正確に",
+      "静かに"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0435",
+    "word": "already",
+    "pos": "副詞",
+    "meaning": "すでに",
+    "examples": [
+      {
+        "en": "The position has already been filled.",
+        "ja": "その職はすでに埋まっています。"
+      },
+      {
+        "en": "I have already sent the report to the manager.",
+        "ja": "部長にはすでに報告書を送りました。"
+      },
+      {
+        "en": "The train had already left when we arrived at the station.",
+        "ja": "私たちが駅に着いたときには、電車はすでに出発していました。"
+      }
+    ],
+    "distractors": [
+      "まだ",
+      "ようやく",
+      "最近"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0436",
+    "word": "ready",
+    "pos": "形容詞",
+    "meaning": "準備ができた",
+    "examples": [
+      {
+        "en": "Your order will be ready in ten minutes.",
+        "ja": "ご注文の品は 10 分でご用意できます。"
+      },
+      {
+        "en": "Are you ready for tomorrow's interview?",
+        "ja": "明日の面接の準備はできていますか。"
+      },
+      {
+        "en": "The meeting room is ready for the presentation.",
+        "ja": "会議室は発表の準備ができています。"
+      }
+    ],
+    "distractors": [
+      "忙しい",
+      "遅れた",
+      "空いている"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0437",
+    "word": "finally",
+    "pos": "副詞",
+    "meaning": "ついに・ようやく",
+    "examples": [
+      {
+        "en": "After three interviews, she finally got the job.",
+        "ja": "3 回の面接を経て、彼女はついにその仕事に就きました。"
+      },
+      {
+        "en": "The construction of the new office is finally finished.",
+        "ja": "新しいオフィスの工事がようやく終わりました。"
+      },
+      {
+        "en": "The delayed flight finally arrived at midnight.",
+        "ja": "遅れていた便が、ようやく真夜中に到着しました。"
+      }
+    ],
+    "distractors": [
+      "すでに",
+      "まもなく",
+      "たぶん"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0438",
+    "word": "usually",
+    "pos": "副詞",
+    "meaning": "ふだんは・たいてい",
+    "examples": [
+      {
+        "en": "I usually take the train to work.",
+        "ja": "ふだんは電車で通勤しています。"
+      },
+      {
+        "en": "The store is usually busy on weekends.",
+        "ja": "その店は週末はたいてい混んでいます。"
+      },
+      {
+        "en": "Staff meetings usually start at nine.",
+        "ja": "職員会議はたいてい 9 時に始まります。"
+      }
+    ],
+    "distractors": [
+      "ときどき",
+      "めったに〜ない",
+      "ついに"
+    ],
+    "category": "人事・採用",
+    "level": 450
+  },
+  {
+    "id": "w-0439",
+    "word": "contact",
+    "pos": "動詞",
+    "meaning": "連絡する",
+    "examples": [
+      {
+        "en": "Please contact me if you have any questions.",
+        "ja": "ご質問があれば私に連絡してください。"
+      },
+      {
+        "en": "We will contact you by e-mail within three days.",
+        "ja": "3 日以内にメールでご連絡します。"
+      },
+      {
+        "en": "She contacted the hotel to change her reservation.",
+        "ja": "彼女は予約を変更するためにホテルに連絡しました。"
+      }
+    ],
+    "distractors": [
+      "確認する",
+      "招待する",
+      "返信する"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0440",
+    "word": "cancel",
+    "pos": "動詞",
+    "meaning": "取り消す・中止する",
+    "examples": [
+      {
+        "en": "The afternoon meeting was canceled because the manager was sick.",
+        "ja": "部長が体調を崩したため、午後の会議は中止になりました。"
+      },
+      {
+        "en": "You can cancel your order within 24 hours.",
+        "ja": "ご注文は 24 時間以内なら取り消せます。"
+      },
+      {
+        "en": "If you need to cancel your appointment, please call us.",
+        "ja": "予約を取り消す必要がある場合は、お電話ください。"
+      }
+    ],
+    "distractors": [
+      "延期する",
+      "予約する",
+      "変更する"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0441",
+    "word": "delay",
+    "pos": "動詞",
+    "meaning": "遅らせる",
+    "examples": [
+      {
+        "en": "Our flight was delayed by two hours.",
+        "ja": "私たちの便は 2 時間遅れました。"
+      },
+      {
+        "en": "Heavy snow delayed the delivery of the parts.",
+        "ja": "大雪で部品の配達が遅れました。"
+      },
+      {
+        "en": "Please do not delay your payment.",
+        "ja": "お支払いを遅らせないでください。"
+      }
+    ],
+    "distractors": [
+      "早める",
+      "中止する",
+      "予約する"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0442",
+    "word": "update",
+    "pos": "名詞",
+    "meaning": "最新情報",
+    "examples": [
+      {
+        "en": "I will send you an update on the project tomorrow.",
+        "ja": "明日、プロジェクトの最新情報をお送りします。"
+      },
+      {
+        "en": "Thank you for the update.",
+        "ja": "最新情報をありがとうございます。"
+      },
+      {
+        "en": "The manager gave us a quick update at the start of the meeting.",
+        "ja": "部長は会議の冒頭で手短に最新情報を伝えました。"
+      }
+    ],
+    "distractors": [
+      "予定表",
+      "記録",
+      "要約"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0443",
+    "word": "notice",
+    "pos": "名詞",
+    "meaning": "お知らせ・掲示",
+    "examples": [
+      {
+        "en": "A notice about the fire drill was posted in the lobby.",
+        "ja": "避難訓練のお知らせがロビーに掲示されました。"
+      },
+      {
+        "en": "Please read the notice on the board before you leave.",
+        "ja": "帰る前に掲示板のお知らせを読んでください。"
+      },
+      {
+        "en": "The store will be closed until further notice.",
+        "ja": "その店は追ってお知らせするまで休業します。"
+      }
+    ],
+    "distractors": [
+      "招待状",
+      "申込書",
+      "議事録"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0444",
+    "word": "soon",
+    "pos": "副詞",
+    "meaning": "まもなく・もうすぐ",
+    "examples": [
+      {
+        "en": "The meeting will start soon.",
+        "ja": "会議はまもなく始まります。"
+      },
+      {
+        "en": "We hope to hear from you soon.",
+        "ja": "近いうちにお返事をいただけますと幸いです。"
+      },
+      {
+        "en": "A new store will open soon in the station building.",
+        "ja": "駅ビルにまもなく新しい店が開店します。"
+      }
+    ],
+    "distractors": [
+      "すでに",
+      "ようやく",
+      "ふだんは"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0445",
+    "word": "probably",
+    "pos": "副詞",
+    "meaning": "おそらく・たぶん",
+    "examples": [
+      {
+        "en": "The report will probably be finished by Friday.",
+        "ja": "報告書はおそらく金曜日までに仕上がります。"
+      },
+      {
+        "en": "It will probably rain this afternoon, so take an umbrella.",
+        "ja": "午後はたぶん雨なので、傘を持っていってください。"
+      },
+      {
+        "en": "Mr. Brown is probably still in the meeting.",
+        "ja": "ブラウンさんはたぶんまだ会議中です。"
+      }
+    ],
+    "distractors": [
+      "必ず",
+      "ほとんど〜ない",
+      "めったに〜ない"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0446",
+    "word": "directly",
+    "pos": "副詞",
+    "meaning": "直接",
+    "examples": [
+      {
+        "en": "Please send your questions directly to Ms. Chen.",
+        "ja": "質問はチェンさんに直接送ってください。"
+      },
+      {
+        "en": "You can buy tickets directly from our website.",
+        "ja": "チケットは当社のウェブサイトから直接購入できます。"
+      },
+      {
+        "en": "This bus goes directly to the airport.",
+        "ja": "このバスは空港へ直行します。"
+      }
+    ],
+    "distractors": [
+      "間接的に",
+      "あとで",
+      "一緒に"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0447",
+    "word": "immediately",
+    "pos": "副詞",
+    "meaning": "すぐに・ただちに",
+    "examples": [
+      {
+        "en": "Please reply to this e-mail immediately.",
+        "ja": "このメールにすぐ返信してください。"
+      },
+      {
+        "en": "The problem was fixed immediately.",
+        "ja": "問題はすぐに解決されました。"
+      },
+      {
+        "en": "If the alarm rings, leave the building immediately.",
+        "ja": "警報が鳴ったら、ただちに建物から出てください。"
+      }
+    ],
+    "distractors": [
+      "ゆっくりと",
+      "あとで",
+      "定期的に"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0448",
+    "word": "agree",
+    "pos": "動詞",
+    "meaning": "賛成する・同意する",
+    "examples": [
+      {
+        "en": "Everyone agreed with the plan.",
+        "ja": "全員がその計画に賛成しました。"
+      },
+      {
+        "en": "I agree that we need more staff.",
+        "ja": "人手がもっと必要だという点に同意します。"
+      },
+      {
+        "en": "The two companies agreed to work together.",
+        "ja": "2 社は協力することで合意しました。"
+      }
+    ],
+    "distractors": [
+      "反対する",
+      "話し合う",
+      "決める"
+    ],
+    "category": "会議・連絡",
+    "level": 450
+  },
+  {
+    "id": "w-0449",
+    "word": "between",
+    "pos": "前置詞",
+    "meaning": "（2つ）の間に",
+    "examples": [
+      {
+        "en": "The meeting will be held between 2 and 4 p.m.",
+        "ja": "会議は午後 2 時から 4 時の間に行われます。"
+      },
+      {
+        "en": "The bank is between the post office and the bookstore.",
+        "ja": "銀行は郵便局と書店の間にあります。"
+      },
+      {
+        "en": "There is a big difference between the two plans.",
+        "ja": "2 つの計画の間には大きな違いがあります。"
+      }
+    ],
+    "distractors": [
+      "（3つ以上）の間で",
+      "〜のそばに",
+      "〜の向かいに"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0450",
+    "word": "among",
+    "pos": "前置詞",
+    "meaning": "（3つ以上）の間で",
+    "examples": [
+      {
+        "en": "The new product is popular among young customers.",
+        "ja": "その新製品は若いお客様の間で人気があります。"
+      },
+      {
+        "en": "The bonus was shared among the five team members.",
+        "ja": "賞与は 5 人のチームメンバーの間で分けられました。"
+      },
+      {
+        "en": "She was chosen from among 50 applicants.",
+        "ja": "彼女は 50 人の応募者の中から選ばれました。"
+      }
+    ],
+    "distractors": [
+      "（2つ）の間に",
+      "〜を除いて",
+      "〜の近くに"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0451",
+    "word": "since",
+    "pos": "前置詞",
+    "meaning": "〜以来",
+    "examples": [
+      {
+        "en": "He has worked here since 2019.",
+        "ja": "彼は 2019 年からここで働いています。"
+      },
+      {
+        "en": "The store has been closed since Monday.",
+        "ja": "その店は月曜日から閉まっています。"
+      },
+      {
+        "en": "I have not seen her since the conference.",
+        "ja": "会議以来、彼女に会っていません。"
+      }
+    ],
+    "distractors": [
+      "〜まで",
+      "〜の間に",
+      "〜の前に"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0452",
+    "word": "ago",
+    "pos": "副詞",
+    "meaning": "（今から）〜前に",
+    "examples": [
+      {
+        "en": "I sent the e-mail an hour ago.",
+        "ja": "1 時間前にメールを送りました。"
+      },
+      {
+        "en": "She joined the company three years ago.",
+        "ja": "彼女は 3 年前に入社しました。"
+      },
+      {
+        "en": "The package arrived two days ago.",
+        "ja": "小包は 2 日前に届きました。"
+      }
+    ],
+    "distractors": [
+      "〜以来",
+      "まもなく",
+      "すでに"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0453",
+    "word": "near",
+    "pos": "前置詞",
+    "meaning": "〜の近くに",
+    "examples": [
+      {
+        "en": "Is there a bank near the hotel?",
+        "ja": "ホテルの近くに銀行はありますか。"
+      },
+      {
+        "en": "Our office is near the central station.",
+        "ja": "当社のオフィスは中央駅の近くにあります。"
+      },
+      {
+        "en": "Please park near the side entrance.",
+        "ja": "通用口の近くに駐車してください。"
+      }
+    ],
+    "distractors": [
+      "〜から遠くに",
+      "〜の間に",
+      "〜の向かいに"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0454",
+    "word": "nearby",
+    "pos": "形容詞",
+    "meaning": "近くの",
+    "examples": [
+      {
+        "en": "We had lunch at a nearby restaurant.",
+        "ja": "近くのレストランで昼食をとりました。"
+      },
+      {
+        "en": "Guests can use the nearby parking area.",
+        "ja": "お客様は近くの駐車場をご利用いただけます。"
+      },
+      {
+        "en": "Several nearby stores are having a sale this weekend.",
+        "ja": "近くのいくつかの店が今週末に特売をします。"
+      }
+    ],
+    "distractors": [
+      "遠くの",
+      "地元の",
+      "便利な"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0455",
+    "word": "still",
+    "pos": "副詞",
+    "meaning": "まだ・今でも",
+    "examples": [
+      {
+        "en": "Are you still working on the report?",
+        "ja": "まだ報告書に取り組んでいますか。"
+      },
+      {
+        "en": "The position is still open.",
+        "ja": "その職はまだ募集中です。"
+      },
+      {
+        "en": "We are still waiting for the delivery.",
+        "ja": "まだ配達を待っています。"
+      }
+    ],
+    "distractors": [
+      "すでに",
+      "もう〜ない",
+      "ついに"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0456",
+    "word": "tell",
+    "pos": "動詞",
+    "meaning": "伝える・教える",
+    "examples": [
+      {
+        "en": "Please tell Mr. Wilson that I called.",
+        "ja": "私から電話があったとウィルソンさんに伝えてください。"
+      },
+      {
+        "en": "Could you tell me the way to the station?",
+        "ja": "駅への道を教えていただけますか。"
+      },
+      {
+        "en": "The manager tells new staff about the rules on their first day.",
+        "ja": "部長は初日に新しい職員に規則を伝えます。"
+      }
+    ],
+    "distractors": [
+      "尋ねる",
+      "話し合う",
+      "聞こえる"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0457",
+    "word": "most",
+    "pos": "形容詞",
+    "meaning": "ほとんどの・大部分の",
+    "examples": [
+      {
+        "en": "Most employees take their vacation in August.",
+        "ja": "ほとんどの従業員は 8 月に休暇をとります。"
+      },
+      {
+        "en": "Most of our customers live in this area.",
+        "ja": "当店のお客様の大部分はこの地域に住んでいます。"
+      },
+      {
+        "en": "Most stores in the mall open at 10 a.m.",
+        "ja": "ショッピングモールのほとんどの店は午前 10 時に開店します。"
+      }
+    ],
+    "distractors": [
+      "すべての",
+      "いくつかの",
+      "ほとんど〜ない"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0458",
+    "word": "prize",
+    "pos": "名詞",
+    "meaning": "賞・賞品",
+    "examples": [
+      {
+        "en": "She won first prize in the design contest.",
+        "ja": "彼女はデザインコンテストで 1 等賞を取りました。"
+      },
+      {
+        "en": "The winner will receive a prize of 500 dollars.",
+        "ja": "優勝者には 500 ドルの賞金が贈られます。"
+      },
+      {
+        "en": "Prizes will be given to the top three sales teams.",
+        "ja": "上位 3 つの営業チームに賞品が贈られます。"
+      }
+    ],
+    "distractors": [
+      "価格",
+      "割引",
+      "料金"
+    ],
+    "category": "混同しやすい語",
+    "level": 450
+  },
+  {
+    "id": "w-0459",
+    "word": "accountant",
+    "pos": "名詞",
+    "meaning": "会計士",
+    "examples": [
+      {
+        "en": "Our accountant will check the figures before the report is sent.",
+        "ja": "報告書を送る前に、会計士が数字を確認します。"
+      },
+      {
+        "en": "The company hired an accountant to prepare its tax returns.",
+        "ja": "その会社は確定申告の準備のために会計士を雇いました。"
+      },
+      {
+        "en": "Please send the receipts to the accountant by the end of the month.",
+        "ja": "月末までに領収書を会計士に送ってください。"
+      }
+    ],
+    "distractors": [
+      "弁護士",
+      "銀行員",
+      "秘書"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0460",
+    "word": "payment",
+    "pos": "名詞",
+    "meaning": "支払い",
+    "examples": [
+      {
+        "en": "Payment is due within 30 days of delivery.",
+        "ja": "お支払いは納品から 30 日以内です。"
+      },
+      {
+        "en": "We accept payment by credit card or bank transfer.",
+        "ja": "お支払いはクレジットカードか銀行振込でお受けしています。"
+      },
+      {
+        "en": "Your payment has been received. Thank you.",
+        "ja": "お支払いを確認しました。ありがとうございます。"
+      }
+    ],
+    "distractors": [
+      "請求",
+      "返金",
+      "見積もり"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0461",
+    "word": "warehouse",
+    "pos": "名詞",
+    "meaning": "倉庫",
+    "examples": [
+      {
+        "en": "All orders are packed and shipped from our warehouse in Osaka.",
+        "ja": "すべての注文は大阪の倉庫で梱包・発送されます。"
+      },
+      {
+        "en": "The warehouse is full, so we need to rent more space.",
+        "ja": "倉庫がいっぱいなので、もっとスペースを借りる必要があります。"
+      },
+      {
+        "en": "Forklifts are used to move boxes around the warehouse.",
+        "ja": "倉庫内で箱を運ぶのにフォークリフトが使われています。"
+      }
+    ],
+    "distractors": [
+      "工場",
+      "店舗",
+      "事務所"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0462",
+    "word": "destination",
+    "pos": "名詞",
+    "meaning": "目的地・行き先",
+    "examples": [
+      {
+        "en": "The train will reach its final destination at 6 p.m.",
+        "ja": "列車は午後 6 時に終点に到着します。"
+      },
+      {
+        "en": "Please write the destination address clearly on the label.",
+        "ja": "ラベルに届け先の住所をはっきり書いてください。"
+      },
+      {
+        "en": "Kyoto is a popular destination for business travelers.",
+        "ja": "京都は出張者に人気の行き先です。"
+      }
+    ],
+    "distractors": [
+      "出発地",
+      "乗り継ぎ",
+      "経由地"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0463",
+    "word": "balance",
+    "pos": "名詞",
+    "meaning": "残高・残額",
+    "examples": [
+      {
+        "en": "You can check your account balance online.",
+        "ja": "口座の残高はオンラインで確認できます。"
+      },
+      {
+        "en": "Please pay the balance by the end of the month.",
+        "ja": "月末までに残額をお支払いください。"
+      },
+      {
+        "en": "After you pay the deposit, the balance is due on arrival.",
+        "ja": "手付金を払ったあと、残額は到着時にお支払いいただきます。"
+      }
+    ],
+    "distractors": [
+      "合計",
+      "利息",
+      "手数料"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0464",
+    "word": "export",
+    "pos": "動詞",
+    "meaning": "輸出する",
+    "examples": [
+      {
+        "en": "The company exports cars to Europe and Asia.",
+        "ja": "その会社は欧州とアジアに車を輸出しています。"
+      },
+      {
+        "en": "Most of the coffee grown here is exported.",
+        "ja": "ここで栽培されるコーヒーの大半は輸出されます。"
+      },
+      {
+        "en": "We plan to export our products to South America next year.",
+        "ja": "来年、南米に製品を輸出する予定です。"
+      }
+    ],
+    "distractors": [
+      "輸入する",
+      "生産する",
+      "販売する"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0465",
+    "word": "annual",
+    "pos": "形容詞",
+    "meaning": "年 1 回の・年間の",
+    "examples": [
+      {
+        "en": "The annual meeting is held every April.",
+        "ja": "年次総会は毎年 4 月に開かれます。"
+      },
+      {
+        "en": "Her annual salary increased after the promotion.",
+        "ja": "昇進後、彼女の年俸は上がりました。"
+      },
+      {
+        "en": "The store's annual sale takes place every summer.",
+        "ja": "その店の年に一度のセールは毎年夏に行われます。"
+      }
+    ],
+    "distractors": [
+      "四半期ごとの",
+      "毎月の",
+      "臨時の"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0466",
+    "word": "domestic",
+    "pos": "形容詞",
+    "meaning": "国内の",
+    "examples": [
+      {
+        "en": "Domestic flights leave from Terminal 2.",
+        "ja": "国内線は第 2 ターミナルから出発します。"
+      },
+      {
+        "en": "Sales in the domestic market have increased.",
+        "ja": "国内市場での売上が伸びました。"
+      },
+      {
+        "en": "Domestic orders usually arrive within three days.",
+        "ja": "国内のご注文はたいてい 3 日以内に届きます。"
+      }
+    ],
+    "distractors": [
+      "海外の",
+      "地方の",
+      "国際的な"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0467",
+    "word": "overseas",
+    "pos": "副詞",
+    "meaning": "海外へ・海外で",
+    "examples": [
+      {
+        "en": "She often travels overseas on business.",
+        "ja": "彼女はよく海外に出張します。"
+      },
+      {
+        "en": "The company plans to expand overseas next year.",
+        "ja": "その会社は来年、海外に進出する予定です。"
+      },
+      {
+        "en": "Many of our products are made overseas.",
+        "ja": "当社の製品の多くは海外で作られています。"
+      }
+    ],
+    "distractors": [
+      "国内で",
+      "地元で",
+      "近くで"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0468",
+    "word": "accurate",
+    "pos": "形容詞",
+    "meaning": "正確な",
+    "examples": [
+      {
+        "en": "Please make sure the figures in the report are accurate.",
+        "ja": "報告書の数字が正確か確かめてください。"
+      },
+      {
+        "en": "The weather forecast was not very accurate.",
+        "ja": "天気予報はあまり正確ではありませんでした。"
+      },
+      {
+        "en": "We need accurate information before we make a decision.",
+        "ja": "決定を下す前に正確な情報が必要です。"
+      }
+    ],
+    "distractors": [
+      "迅速な",
+      "詳細な",
+      "大まかな"
+    ],
+    "category": "ビジネス一般",
+    "level": 500
+  },
+  {
+    "id": "w-0469",
+    "word": "receptionist",
+    "pos": "名詞",
+    "meaning": "受付係",
+    "examples": [
+      {
+        "en": "Please check in with the receptionist when you arrive.",
+        "ja": "到着したら受付係に申し出てください。"
+      },
+      {
+        "en": "The hotel receptionist gave us a map of the city.",
+        "ja": "ホテルの受付係が市内の地図をくれました。"
+      },
+      {
+        "en": "We are looking for a friendly receptionist for our clinic.",
+        "ja": "当院では感じのよい受付係を募集しています。"
+      }
+    ],
+    "distractors": [
+      "警備員",
+      "清掃員",
+      "会計係"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0470",
+    "word": "renovate",
+    "pos": "動詞",
+    "meaning": "改装する",
+    "examples": [
+      {
+        "en": "The restaurant will be closed for two weeks while it is renovated.",
+        "ja": "改装のため、レストランは 2 週間休業します。"
+      },
+      {
+        "en": "The hotel renovated all of its guest rooms last year.",
+        "ja": "そのホテルは昨年、全客室を改装しました。"
+      },
+      {
+        "en": "We plan to renovate the lobby next spring.",
+        "ja": "来春ロビーを改装する予定です。"
+      }
+    ],
+    "distractors": [
+      "建設する",
+      "移転する",
+      "解体する"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0471",
+    "word": "install",
+    "pos": "動詞",
+    "meaning": "設置する・取り付ける",
+    "examples": [
+      {
+        "en": "A technician will install the new air conditioner on Monday.",
+        "ja": "月曜日に技術者が新しいエアコンを取り付けます。"
+      },
+      {
+        "en": "Security cameras were installed at every entrance.",
+        "ja": "すべての入口に防犯カメラが設置されました。"
+      },
+      {
+        "en": "Please install the latest version of the software.",
+        "ja": "ソフトウェアの最新版をインストールしてください。"
+      }
+    ],
+    "distractors": [
+      "修理する",
+      "撤去する",
+      "注文する"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0472",
+    "word": "facility",
+    "pos": "名詞",
+    "meaning": "施設",
+    "examples": [
+      {
+        "en": "The hotel has excellent sports facilities.",
+        "ja": "そのホテルには立派なスポーツ施設があります。"
+      },
+      {
+        "en": "The new research facility will open in May.",
+        "ja": "新しい研究施設は 5 月に開設されます。"
+      },
+      {
+        "en": "Guests can use the fitness facility free of charge.",
+        "ja": "宿泊客はフィットネス施設を無料で利用できます。"
+      }
+    ],
+    "distractors": [
+      "料金",
+      "会員",
+      "予約"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0473",
+    "word": "appliance",
+    "pos": "名詞",
+    "meaning": "家電製品",
+    "examples": [
+      {
+        "en": "The store sells kitchen appliances such as microwaves and toasters.",
+        "ja": "その店は電子レンジやトースターなどの台所用家電を販売しています。"
+      },
+      {
+        "en": "All appliances come with a one-year warranty.",
+        "ja": "すべての家電製品に 1 年間の保証が付いています。"
+      },
+      {
+        "en": "Please turn off all electrical appliances before you leave the office.",
+        "ja": "退社前にすべての電化製品の電源を切ってください。"
+      }
+    ],
+    "distractors": [
+      "家具",
+      "文房具",
+      "食料品"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0474",
+    "word": "spacious",
+    "pos": "形容詞",
+    "meaning": "広々とした",
+    "examples": [
+      {
+        "en": "The new office is bright and spacious.",
+        "ja": "新しいオフィスは明るく広々としています。"
+      },
+      {
+        "en": "All rooms have a spacious bathroom.",
+        "ja": "全室に広々とした浴室があります。"
+      },
+      {
+        "en": "The restaurant moved to a more spacious location.",
+        "ja": "そのレストランはもっと広い場所に移転しました。"
+      }
+    ],
+    "distractors": [
+      "狭い",
+      "明るい",
+      "古い"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0475",
+    "word": "valid",
+    "pos": "形容詞",
+    "meaning": "有効な",
+    "examples": [
+      {
+        "en": "This coupon is valid until the end of the month.",
+        "ja": "このクーポンは月末まで有効です。"
+      },
+      {
+        "en": "You need a valid passport to travel abroad.",
+        "ja": "海外旅行には有効なパスポートが必要です。"
+      },
+      {
+        "en": "The ticket is valid for one trip only.",
+        "ja": "その切符は 1 回の乗車にのみ有効です。"
+      }
+    ],
+    "distractors": [
+      "無効な",
+      "新しい",
+      "限定の"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0476",
+    "word": "fully",
+    "pos": "副詞",
+    "meaning": "完全に・すっかり",
+    "examples": [
+      {
+        "en": "The hotel is fully booked for the holiday weekend.",
+        "ja": "その連休はホテルが満室です。"
+      },
+      {
+        "en": "The new factory will be fully operational by July.",
+        "ja": "新工場は 7 月までに全面稼働します。"
+      },
+      {
+        "en": "Please make sure the battery is fully charged.",
+        "ja": "電池が完全に充電されているか確認してください。"
+      }
+    ],
+    "distractors": [
+      "部分的に",
+      "一時的に",
+      "わずかに"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0477",
+    "word": "unfortunately",
+    "pos": "副詞",
+    "meaning": "あいにく・残念ながら",
+    "examples": [
+      {
+        "en": "Unfortunately, the item you ordered is out of stock.",
+        "ja": "あいにく、ご注文の品は在庫切れです。"
+      },
+      {
+        "en": "Unfortunately, we cannot offer a refund for this item.",
+        "ja": "残念ながら、この商品は返金できません。"
+      },
+      {
+        "en": "The show was canceled, unfortunately.",
+        "ja": "残念ながら、公演は中止になりました。"
+      }
+    ],
+    "distractors": [
+      "幸いにも",
+      "実は",
+      "念のため"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0478",
+    "word": "attractive",
+    "pos": "形容詞",
+    "meaning": "魅力的な",
+    "examples": [
+      {
+        "en": "The store offers attractive discounts to members.",
+        "ja": "その店は会員に魅力的な割引を提供しています。"
+      },
+      {
+        "en": "The new packaging is more attractive to young customers.",
+        "ja": "新しいパッケージは若いお客様にとってより魅力的です。"
+      },
+      {
+        "en": "The company offers an attractive salary and benefits.",
+        "ja": "その会社は魅力的な給与と福利厚生を提供しています。"
+      }
+    ],
+    "distractors": [
+      "退屈な",
+      "高価な",
+      "地味な"
+    ],
+    "category": "店舗・顧客",
+    "level": 500
+  },
+  {
+    "id": "w-0479",
+    "word": "trainee",
+    "pos": "名詞",
+    "meaning": "研修生",
+    "examples": [
+      {
+        "en": "Each trainee will be assigned to a different department.",
+        "ja": "研修生はそれぞれ別の部署に配属されます。"
+      },
+      {
+        "en": "The trainees will spend their first week at the head office.",
+        "ja": "研修生は最初の 1 週間を本社で過ごします。"
+      },
+      {
+        "en": "Ms. Ito meets with the trainees every afternoon to answer questions.",
+        "ja": "伊藤さんは毎日午後、研修生と会って質問に答えます。"
+      }
+    ],
+    "distractors": [
+      "指導員",
+      "応募者",
+      "正社員"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0480",
+    "word": "workshop",
+    "pos": "名詞",
+    "meaning": "研修会・講習会",
+    "examples": [
+      {
+        "en": "All managers must attend a leadership workshop next month.",
+        "ja": "全管理職は来月、リーダーシップ研修会に出席しなければなりません。"
+      },
+      {
+        "en": "The workshop will cover basic computer skills.",
+        "ja": "その講習会では基本的なコンピューター技能を扱います。"
+      },
+      {
+        "en": "About 30 people signed up for the writing workshop.",
+        "ja": "文章講習会には約 30 人が申し込みました。"
+      }
+    ],
+    "distractors": [
+      "工場",
+      "面接",
+      "送別会"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0481",
+    "word": "experienced",
+    "pos": "形容詞",
+    "meaning": "経験豊富な",
+    "examples": [
+      {
+        "en": "We are looking for an experienced chef who has worked in a hotel kitchen for at least five years.",
+        "ja": "ホテルの厨房で 5 年以上働いた、経験豊富な料理人を募集しています。"
+      },
+      {
+        "en": "She is the most experienced member of our sales team.",
+        "ja": "彼女は営業チームで最も経験豊富なメンバーです。"
+      },
+      {
+        "en": "New staff work with experienced employees during their first month.",
+        "ja": "新しい職員は最初の 1 か月、経験豊富な従業員と一緒に働きます。"
+      }
+    ],
+    "distractors": [
+      "未経験の",
+      "若い",
+      "熱心な"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0482",
+    "word": "responsible",
+    "pos": "形容詞",
+    "meaning": "責任がある・担当している",
+    "examples": [
+      {
+        "en": "Mr. Lopez is responsible for training new staff.",
+        "ja": "ロペスさんは新しい職員の研修を担当しています。"
+      },
+      {
+        "en": "Who is responsible for ordering office supplies?",
+        "ja": "事務用品の注文は誰の担当ですか。"
+      },
+      {
+        "en": "The team leader is responsible for the safety of all workers.",
+        "ja": "班長は全作業員の安全に責任があります。"
+      }
+    ],
+    "distractors": [
+      "必要な",
+      "有名な",
+      "可能な"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0483",
+    "word": "flexible",
+    "pos": "形容詞",
+    "meaning": "柔軟な・融通のきく",
+    "examples": [
+      {
+        "en": "The company offers flexible working hours.",
+        "ja": "その会社は柔軟な勤務時間を取り入れています。"
+      },
+      {
+        "en": "Our schedule is flexible, so we can meet any day next week.",
+        "ja": "予定は融通がきくので、来週ならいつでもお会いできます。"
+      },
+      {
+        "en": "Applicants should be flexible and able to work on weekends.",
+        "ja": "応募者は柔軟に対応でき、週末も勤務できる方が望ましいです。"
+      }
+    ],
+    "distractors": [
+      "厳しい",
+      "規則的な",
+      "一定の"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0484",
+    "word": "assign",
+    "pos": "動詞",
+    "meaning": "割り当てる・配属する",
+    "examples": [
+      {
+        "en": "The manager assigned each of us a different project.",
+        "ja": "部長は私たち一人一人に別々のプロジェクトを割り当てました。"
+      },
+      {
+        "en": "New employees are assigned to a department after training.",
+        "ja": "新入社員は研修後に部署に配属されます。"
+      },
+      {
+        "en": "Please assign two people to help at the reception desk.",
+        "ja": "受付の手伝いに 2 人割り当ててください。"
+      }
+    ],
+    "distractors": [
+      "昇進させる",
+      "解雇する",
+      "評価する"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0485",
+    "word": "achieve",
+    "pos": "動詞",
+    "meaning": "達成する",
+    "examples": [
+      {
+        "en": "The sales team achieved its goal for the year.",
+        "ja": "営業チームは年間目標を達成しました。"
+      },
+      {
+        "en": "We cannot achieve these results without your help.",
+        "ja": "皆さんの協力なしには、この成果は達成できません。"
+      },
+      {
+        "en": "Hard work helped her achieve success in her career.",
+        "ja": "努力のおかげで、彼女はキャリアで成功を収めました。"
+      }
+    ],
+    "distractors": [
+      "計画する",
+      "発表する",
+      "断念する"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0486",
+    "word": "punctual",
+    "pos": "形容詞",
+    "meaning": "時間を守る",
+    "examples": [
+      {
+        "en": "Our trains are known for being punctual.",
+        "ja": "当社の列車は時間に正確なことで知られています。"
+      },
+      {
+        "en": "Please be punctual for the interview.",
+        "ja": "面接には時間どおりにお越しください。"
+      },
+      {
+        "en": "He is always punctual and has never missed a deadline.",
+        "ja": "彼はいつも時間を守り、締め切りに遅れたことがありません。"
+      }
+    ],
+    "distractors": [
+      "礼儀正しい",
+      "勤勉な",
+      "正直な"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0487",
+    "word": "permanent",
+    "pos": "形容詞",
+    "meaning": "常勤の・恒久的な",
+    "examples": [
+      {
+        "en": "After a year as a temporary worker, he was offered a permanent position.",
+        "ja": "臨時職員として 1 年働いたあと、彼は常勤の職を提示されました。"
+      },
+      {
+        "en": "The changes to the schedule are permanent, not just for this month.",
+        "ja": "予定の変更は今月だけでなく、今後もずっと続きます。"
+      },
+      {
+        "en": "The museum's permanent collection includes more than 500 paintings.",
+        "ja": "その美術館の常設展示には 500 点を超える絵画があります。"
+      }
+    ],
+    "distractors": [
+      "一時的な",
+      "部分的な",
+      "自主的な"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0488",
+    "word": "regularly",
+    "pos": "副詞",
+    "meaning": "定期的に",
+    "examples": [
+      {
+        "en": "The equipment is checked regularly for safety.",
+        "ja": "その機器は安全のため定期的に点検されています。"
+      },
+      {
+        "en": "Managers meet regularly with their team members.",
+        "ja": "管理職はチームのメンバーと定期的に面談します。"
+      },
+      {
+        "en": "Please back up your files regularly.",
+        "ja": "ファイルは定期的にバックアップしてください。"
+      }
+    ],
+    "distractors": [
+      "一度だけ",
+      "急に",
+      "偶然に"
+    ],
+    "category": "人事・採用",
+    "level": 500
+  },
+  {
+    "id": "w-0489",
+    "word": "attendee",
+    "pos": "名詞",
+    "meaning": "出席者・参加者",
+    "examples": [
+      {
+        "en": "Each attendee will receive a copy of the agenda.",
+        "ja": "出席者には一人一人に議題の写しが配られます。"
+      },
+      {
+        "en": "The conference had more than 300 attendees.",
+        "ja": "その会議には 300 人を超える参加者がいました。"
+      },
+      {
+        "en": "Attendees are asked to arrive 15 minutes early.",
+        "ja": "参加者は 15 分前にお越しください。"
+      }
+    ],
+    "distractors": [
+      "主催者",
+      "講演者",
+      "欠席者"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0490",
+    "word": "mention",
+    "pos": "動詞",
+    "meaning": "言及する・話に出す",
+    "examples": [
+      {
+        "en": "Ms. Green mentioned the new project at the meeting.",
+        "ja": "グリーンさんは会議で新しいプロジェクトについて触れました。"
+      },
+      {
+        "en": "Did he mention when the report is due?",
+        "ja": "報告書の期限がいつか、彼は言っていましたか。"
+      },
+      {
+        "en": "As I mentioned in my e-mail, the office will be closed on Friday.",
+        "ja": "メールでお伝えしたとおり、金曜日は事務所が休みです。"
+      }
+    ],
+    "distractors": [
+      "隠す",
+      "質問する",
+      "否定する"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0491",
+    "word": "arrange",
+    "pos": "動詞",
+    "meaning": "手配する・取り決める",
+    "examples": [
+      {
+        "en": "I will arrange a meeting with the client next week.",
+        "ja": "来週、取引先との打ち合わせを手配します。"
+      },
+      {
+        "en": "The hotel can arrange a taxi to the airport.",
+        "ja": "ホテルで空港までのタクシーを手配できます。"
+      },
+      {
+        "en": "We arranged for the documents to be delivered by noon.",
+        "ja": "書類が正午までに届くよう手配しました。"
+      }
+    ],
+    "distractors": [
+      "取り消す",
+      "延期する",
+      "断る"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0492",
+    "word": "detail",
+    "pos": "名詞",
+    "meaning": "詳細",
+    "examples": [
+      {
+        "en": "Please contact us for more details.",
+        "ja": "詳細はお問い合わせください。"
+      },
+      {
+        "en": "We will discuss the details of the contract tomorrow.",
+        "ja": "契約の詳細は明日話し合います。"
+      },
+      {
+        "en": "The program includes details of each session.",
+        "ja": "プログラムには各講演の詳細が載っています。"
+      }
+    ],
+    "distractors": [
+      "要約",
+      "結論",
+      "目的"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0493",
+    "word": "instead",
+    "pos": "副詞",
+    "meaning": "代わりに",
+    "examples": [
+      {
+        "en": "The meeting room was busy, so we met in the cafeteria instead.",
+        "ja": "会議室がふさがっていたので、代わりに社員食堂で会いました。"
+      },
+      {
+        "en": "Mr. Lee could not attend, so Ms. Kim went instead.",
+        "ja": "リーさんが出席できなかったので、代わりにキムさんが行きました。"
+      },
+      {
+        "en": "Instead of printing the report, please send it by e-mail.",
+        "ja": "報告書を印刷する代わりに、メールで送ってください。"
+      }
+    ],
+    "distractors": [
+      "さらに",
+      "同時に",
+      "その結果"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0494",
+    "word": "slightly",
+    "pos": "副詞",
+    "meaning": "わずかに・少し",
+    "examples": [
+      {
+        "en": "The new model is only slightly more expensive than the old one.",
+        "ja": "新型は旧型よりほんの少し高いだけです。"
+      },
+      {
+        "en": "Sales were slightly lower than last month, but still above our target.",
+        "ja": "売上は先月よりわずかに低かったものの、目標は上回りました。"
+      },
+      {
+        "en": "The start time has been changed slightly, from 9:00 to 9:15.",
+        "ja": "開始時刻が 9 時から 9 時 15 分に少しだけ変わりました。"
+      }
+    ],
+    "distractors": [
+      "大幅に",
+      "完全に",
+      "急に"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0495",
+    "word": "approximately",
+    "pos": "副詞",
+    "meaning": "およそ・約",
+    "examples": [
+      {
+        "en": "The flight takes approximately three hours.",
+        "ja": "飛行時間はおよそ 3 時間です。"
+      },
+      {
+        "en": "Approximately 100 people attended the meeting.",
+        "ja": "会議には約 100 人が出席しました。"
+      },
+      {
+        "en": "The repairs will cost approximately 2,000 dollars.",
+        "ja": "修理費は約 2,000 ドルかかります。"
+      }
+    ],
+    "distractors": [
+      "正確に",
+      "ちょうど",
+      "少なくとも"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0496",
+    "word": "recently",
+    "pos": "副詞",
+    "meaning": "最近（〜した）",
+    "examples": [
+      {
+        "en": "I recently moved to the Tokyo office.",
+        "ja": "最近、東京事務所に異動しました。"
+      },
+      {
+        "en": "The store was recently renovated.",
+        "ja": "その店は最近改装されました。"
+      },
+      {
+        "en": "Have you read the recently published report?",
+        "ja": "最近発表された報告書を読みましたか。"
+      }
+    ],
+    "distractors": [
+      "まもなく",
+      "ついに",
+      "長い間"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0497",
+    "word": "highly",
+    "pos": "副詞",
+    "meaning": "大いに・非常に",
+    "examples": [
+      {
+        "en": "I highly recommend this restaurant.",
+        "ja": "このレストランを大いにお勧めします。"
+      },
+      {
+        "en": "She is a highly skilled engineer.",
+        "ja": "彼女は非常に腕のいい技術者です。"
+      },
+      {
+        "en": "The new product has been highly successful.",
+        "ja": "新製品は大成功を収めています。"
+      }
+    ],
+    "distractors": [
+      "わずかに",
+      "ときどき",
+      "簡単に"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0498",
+    "word": "separately",
+    "pos": "副詞",
+    "meaning": "別々に",
+    "examples": [
+      {
+        "en": "The two items will be shipped separately.",
+        "ja": "2 つの品物は別々に発送されます。"
+      },
+      {
+        "en": "Each applicant will be interviewed separately.",
+        "ja": "応募者は一人ずつ別々に面接を受けます。"
+      },
+      {
+        "en": "Drinks are charged separately.",
+        "ja": "お飲み物は別料金です。"
+      }
+    ],
+    "distractors": [
+      "一緒に",
+      "同時に",
+      "直接"
+    ],
+    "category": "会議・連絡",
+    "level": 500
+  },
+  {
+    "id": "w-0499",
+    "word": "personal",
+    "pos": "形容詞",
+    "meaning": "個人的な・私用の",
+    "examples": [
+      {
+        "en": "Please do not use the office phone for personal calls.",
+        "ja": "会社の電話を私用の電話に使わないでください。"
+      },
+      {
+        "en": "Employees may not keep personal items in the warehouse.",
+        "ja": "従業員は倉庫に私物を置いてはいけません。"
+      },
+      {
+        "en": "All personal information will be kept confidential.",
+        "ja": "個人情報はすべて厳重に管理されます。"
+      }
+    ],
+    "distractors": [
+      "人事の",
+      "公式の",
+      "共通の"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0500",
+    "word": "compete",
+    "pos": "動詞",
+    "meaning": "競争する",
+    "examples": [
+      {
+        "en": "Many companies compete for the same customers.",
+        "ja": "多くの会社が同じ顧客を奪い合っています。"
+      },
+      {
+        "en": "Small shops find it hard to compete with large supermarkets.",
+        "ja": "小さな店にとって、大型スーパーと競争するのは難しいことです。"
+      },
+      {
+        "en": "Five teams are competing in the sales contest.",
+        "ja": "5 つのチームが販売コンテストで競っています。"
+      }
+    ],
+    "distractors": [
+      "完了する",
+      "協力する",
+      "比較する"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0501",
+    "word": "complete",
+    "pos": "動詞",
+    "meaning": "完了する・記入する",
+    "examples": [
+      {
+        "en": "Please complete the form and return it by Friday.",
+        "ja": "用紙に記入して金曜日までに返送してください。"
+      },
+      {
+        "en": "The new bridge was completed last month.",
+        "ja": "新しい橋は先月完成しました。"
+      },
+      {
+        "en": "It will take two weeks to complete the project.",
+        "ja": "そのプロジェクトを完了するには 2 週間かかります。"
+      }
+    ],
+    "distractors": [
+      "競争する",
+      "中断する",
+      "提出する"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0502",
+    "word": "expect",
+    "pos": "動詞",
+    "meaning": "予期する・見込む",
+    "examples": [
+      {
+        "en": "We expect sales to increase next year.",
+        "ja": "来年は売上が伸びると見込んでいます。"
+      },
+      {
+        "en": "The package is expected to arrive tomorrow.",
+        "ja": "小包は明日届く見込みです。"
+      },
+      {
+        "en": "I didn't expect so many people to come.",
+        "ja": "こんなに多くの人が来るとは予想していませんでした。"
+      }
+    ],
+    "distractors": [
+      "除外する",
+      "受け入れる",
+      "延期する"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0503",
+    "word": "quite",
+    "pos": "副詞",
+    "meaning": "かなり",
+    "examples": [
+      {
+        "en": "The hotel was quite expensive, but the service was excellent.",
+        "ja": "そのホテルはかなり高かったが、サービスはすばらしかった。"
+      },
+      {
+        "en": "It is quite difficult to find parking near the station.",
+        "ja": "駅の近くで駐車場を見つけるのはかなり難しい。"
+      },
+      {
+        "en": "The new manager is quite popular with the staff.",
+        "ja": "新しい部長は職員にかなり人気があります。"
+      }
+    ],
+    "distractors": [
+      "静かに",
+      "めったに〜ない",
+      "ほんの少し"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0504",
+    "word": "quiet",
+    "pos": "形容詞",
+    "meaning": "静かな",
+    "examples": [
+      {
+        "en": "Please keep quiet in the library.",
+        "ja": "図書館では静かにしてください。"
+      },
+      {
+        "en": "We need a quiet room for the interview.",
+        "ja": "面接用に静かな部屋が必要です。"
+      },
+      {
+        "en": "The restaurant is usually quiet on Monday evenings.",
+        "ja": "そのレストランは月曜の夜はたいてい静かです。"
+      }
+    ],
+    "distractors": [
+      "かなりの",
+      "混雑した",
+      "騒がしい"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0505",
+    "word": "later",
+    "pos": "副詞",
+    "meaning": "あとで",
+    "examples": [
+      {
+        "en": "I'll call you back later.",
+        "ja": "あとで折り返し電話します。"
+      },
+      {
+        "en": "The results will be announced later this week.",
+        "ja": "結果は今週後半に発表されます。"
+      },
+      {
+        "en": "Two days later, the package arrived.",
+        "ja": "2 日後に小包が届きました。"
+      }
+    ],
+    "distractors": [
+      "早めに",
+      "すぐに",
+      "以前に"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0506",
+    "word": "latter",
+    "pos": "名詞",
+    "meaning": "後者",
+    "examples": [
+      {
+        "en": "We looked at two offices and chose the latter because it was closer to the station.",
+        "ja": "事務所を 2 か所見て、駅に近い後者に決めました。"
+      },
+      {
+        "en": "Of the two plans, the latter is cheaper.",
+        "ja": "2 つの案のうち、後者のほうが安い。"
+      },
+      {
+        "en": "You can pay by cash or card, but the latter is faster.",
+        "ja": "現金でもカードでも払えますが、後者のほうが早いです。"
+      }
+    ],
+    "distractors": [
+      "前者",
+      "両方",
+      "半分"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0507",
+    "word": "site",
+    "pos": "名詞",
+    "meaning": "用地・現場",
+    "examples": [
+      {
+        "en": "Workers must wear helmets at the construction site.",
+        "ja": "建設現場では作業員はヘルメットを着用しなければなりません。"
+      },
+      {
+        "en": "The company bought a site for its new factory.",
+        "ja": "その会社は新工場の用地を購入しました。"
+      },
+      {
+        "en": "The engineer visits the site every morning.",
+        "ja": "技術者は毎朝現場を訪れます。"
+      }
+    ],
+    "distractors": [
+      "景色",
+      "設計図",
+      "本社"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0508",
+    "word": "suite",
+    "pos": "名詞",
+    "meaning": "スイートルーム（続き部屋）",
+    "examples": [
+      {
+        "en": "The president stayed in a suite on the top floor.",
+        "ja": "社長は最上階のスイートルームに泊まりました。"
+      },
+      {
+        "en": "Each suite has a living room and a kitchen.",
+        "ja": "各スイートには居間と台所があります。"
+      },
+      {
+        "en": "We booked a suite for the visiting clients.",
+        "ja": "来訪する取引先のためにスイートルームを予約しました。"
+      }
+    ],
+    "distractors": [
+      "一人部屋",
+      "会議室",
+      "宴会場"
+    ],
+    "category": "混同しやすい語",
+    "level": 500
+  },
+  {
+    "id": "w-0509",
+    "word": "fiscal",
+    "pos": "形容詞",
+    "meaning": "会計年度の・財政の",
+    "examples": [
+      {
+        "en": "Our fiscal year begins in April.",
+        "ja": "当社の会計年度は 4 月に始まります。"
+      },
+      {
+        "en": "The company reported record profits for the fiscal year.",
+        "ja": "その会社はその会計年度に過去最高の利益を計上しました。"
+      },
+      {
+        "en": "The board discussed the fiscal plan for next year.",
+        "ja": "取締役会は来年度の財政計画について話し合いました。"
+      }
+    ],
+    "distractors": [
+      "臨時の",
+      "法的な",
+      "個人的な"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0510",
+    "word": "audit",
+    "pos": "名詞",
+    "meaning": "会計監査",
+    "examples": [
+      {
+        "en": "The annual audit will take place next month.",
+        "ja": "年次の会計監査は来月行われます。"
+      },
+      {
+        "en": "An outside firm was hired to conduct the audit.",
+        "ja": "監査を行うために外部の会社が雇われました。"
+      },
+      {
+        "en": "The audit found several errors in the expense reports.",
+        "ja": "監査で経費報告書にいくつかの誤りが見つかりました。"
+      }
+    ],
+    "distractors": [
+      "予算案",
+      "納税",
+      "融資"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0511",
+    "word": "freight",
+    "pos": "名詞",
+    "meaning": "貨物・運送料",
+    "examples": [
+      {
+        "en": "The freight will be delivered by truck.",
+        "ja": "貨物はトラックで配送されます。"
+      },
+      {
+        "en": "Freight charges are included in the price.",
+        "ja": "運送料は価格に含まれています。"
+      },
+      {
+        "en": "Air freight is faster but more expensive than sea freight.",
+        "ja": "航空貨物は船便より速いが高くつきます。"
+      }
+    ],
+    "distractors": [
+      "乗客",
+      "郵便",
+      "燃料"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0512",
+    "word": "transaction",
+    "pos": "名詞",
+    "meaning": "取引",
+    "examples": [
+      {
+        "en": "All transactions are recorded in the system.",
+        "ja": "すべての取引はシステムに記録されます。"
+      },
+      {
+        "en": "There is a small fee for each transaction.",
+        "ja": "取引ごとに少額の手数料がかかります。"
+      },
+      {
+        "en": "The bank will contact you if it notices an unusual transaction.",
+        "ja": "普段と違う取引があれば、銀行から連絡があります。"
+      }
+    ],
+    "distractors": [
+      "契約書",
+      "口座",
+      "利益"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0513",
+    "word": "deduct",
+    "pos": "動詞",
+    "meaning": "差し引く・控除する",
+    "examples": [
+      {
+        "en": "Taxes are deducted from your salary each month.",
+        "ja": "税金は毎月給料から差し引かれます。"
+      },
+      {
+        "en": "The cost of the damage will be deducted from your deposit.",
+        "ja": "損害の費用は保証金から差し引かれます。"
+      },
+      {
+        "en": "We will deduct the shipping fee from your refund.",
+        "ja": "返金額から送料を差し引きます。"
+      }
+    ],
+    "distractors": [
+      "追加する",
+      "支払う",
+      "払い戻す"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0514",
+    "word": "quote",
+    "pos": "名詞",
+    "meaning": "見積もり（額）",
+    "examples": [
+      {
+        "en": "We asked three companies for a quote.",
+        "ja": "3 社に見積もりを依頼しました。"
+      },
+      {
+        "en": "The quote includes installation and delivery.",
+        "ja": "見積もりには設置と配送が含まれています。"
+      },
+      {
+        "en": "Please send us a written quote by Friday.",
+        "ja": "金曜日までに書面で見積もりを送ってください。"
+      }
+    ],
+    "distractors": [
+      "請求書",
+      "領収書",
+      "注文書"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0515",
+    "word": "logistics",
+    "pos": "名詞",
+    "meaning": "物流・業務の段取り",
+    "examples": [
+      {
+        "en": "She works in the logistics department of a shipping company.",
+        "ja": "彼女は運送会社の物流部門で働いています。"
+      },
+      {
+        "en": "The new warehouse will improve our logistics.",
+        "ja": "新しい倉庫で当社の物流が改善されます。"
+      },
+      {
+        "en": "Mr. Ali is handling the logistics of the conference.",
+        "ja": "アリさんが会議の段取りを担当しています。"
+      }
+    ],
+    "distractors": [
+      "広告",
+      "人事",
+      "経理"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0516",
+    "word": "lodging",
+    "pos": "名詞",
+    "meaning": "宿泊（施設）",
+    "examples": [
+      {
+        "en": "The company will pay for your travel and lodging.",
+        "ja": "交通費と宿泊費は会社が負担します。"
+      },
+      {
+        "en": "Lodging is provided for all workshop participants.",
+        "ja": "研修会の参加者全員に宿泊施設が用意されます。"
+      },
+      {
+        "en": "We are looking for affordable lodging near the venue.",
+        "ja": "会場の近くで手頃な宿泊先を探しています。"
+      }
+    ],
+    "distractors": [
+      "交通",
+      "食事",
+      "娯楽"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0517",
+    "word": "layover",
+    "pos": "名詞",
+    "meaning": "（乗り継ぎの）待ち時間",
+    "examples": [
+      {
+        "en": "We have a three-hour layover in Seoul.",
+        "ja": "ソウルで 3 時間の乗り継ぎ待ちがあります。"
+      },
+      {
+        "en": "The flight to New York includes a short layover in Vancouver.",
+        "ja": "ニューヨーク行きの便はバンクーバーで短時間の乗り継ぎがあります。"
+      },
+      {
+        "en": "I used my layover to answer e-mails at the airport.",
+        "ja": "乗り継ぎの待ち時間を使って空港でメールに返信しました。"
+      }
+    ],
+    "distractors": [
+      "搭乗口",
+      "欠航",
+      "手荷物"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0518",
+    "word": "substantial",
+    "pos": "形容詞",
+    "meaning": "相当な・かなりの",
+    "examples": [
+      {
+        "en": "The company made a substantial profit last year.",
+        "ja": "その会社は昨年かなりの利益を上げました。"
+      },
+      {
+        "en": "A substantial number of customers asked for a refund.",
+        "ja": "相当数の顧客が返金を求めました。"
+      },
+      {
+        "en": "The new system will save a substantial amount of time.",
+        "ja": "新しいシステムでかなりの時間が節約できます。"
+      }
+    ],
+    "distractors": [
+      "わずかな",
+      "一時的な",
+      "予想外の"
+    ],
+    "category": "ビジネス一般",
+    "level": 550
+  },
+  {
+    "id": "w-0519",
+    "word": "malfunction",
+    "pos": "名詞",
+    "meaning": "故障・不具合",
+    "examples": [
+      {
+        "en": "The delay was caused by a machine malfunction.",
+        "ja": "遅れは機械の故障が原因でした。"
+      },
+      {
+        "en": "Please report any malfunction to the maintenance team.",
+        "ja": "不具合があれば保守担当に報告してください。"
+      },
+      {
+        "en": "A malfunction in the elevator was fixed this morning.",
+        "ja": "エレベーターの不具合は今朝直りました。"
+      }
+    ],
+    "distractors": [
+      "点検",
+      "交換",
+      "保証"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0520",
+    "word": "replacement",
+    "pos": "名詞",
+    "meaning": "交換品・後任",
+    "examples": [
+      {
+        "en": "If the item is damaged, we will send you a replacement.",
+        "ja": "品物に破損があれば、交換品をお送りします。"
+      },
+      {
+        "en": "We need to find a replacement for Ms. Wong before she retires.",
+        "ja": "ウォンさんが退職する前に後任を見つける必要があります。"
+      },
+      {
+        "en": "Replacement parts are available from our website.",
+        "ja": "交換部品は当社のウェブサイトで入手できます。"
+      }
+    ],
+    "distractors": [
+      "返金",
+      "修理",
+      "割引"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0521",
+    "word": "durable",
+    "pos": "形容詞",
+    "meaning": "耐久性のある・長持ちする",
+    "examples": [
+      {
+        "en": "These boots are made of durable leather.",
+        "ja": "このブーツは丈夫な革でできています。"
+      },
+      {
+        "en": "We chose this carpet because it is durable and easy to clean.",
+        "ja": "このカーペットは長持ちし掃除も楽なので選びました。"
+      },
+      {
+        "en": "The company is known for making durable products that last for years.",
+        "ja": "その会社は何年も使える丈夫な製品を作ることで知られています。"
+      }
+    ],
+    "distractors": [
+      "壊れやすい",
+      "軽い",
+      "安価な"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0522",
+    "word": "inspect",
+    "pos": "動詞",
+    "meaning": "点検する・検査する",
+    "examples": [
+      {
+        "en": "The fire department inspects the building every year.",
+        "ja": "消防署が毎年建物を点検します。"
+      },
+      {
+        "en": "All products are inspected before they leave the factory.",
+        "ja": "すべての製品は工場から出荷される前に検査されます。"
+      },
+      {
+        "en": "Please inspect the package for damage when it arrives.",
+        "ja": "荷物が届いたら破損がないか調べてください。"
+      }
+    ],
+    "distractors": [
+      "修理する",
+      "設計する",
+      "撤去する"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0523",
+    "word": "vacant",
+    "pos": "形容詞",
+    "meaning": "空いている・使われていない",
+    "examples": [
+      {
+        "en": "There are several vacant offices on the third floor.",
+        "ja": "3 階にはいくつか空き事務所があります。"
+      },
+      {
+        "en": "The store has been vacant since the previous tenant left.",
+        "ja": "前の借り手が出てから、その店舗は空いたままです。"
+      },
+      {
+        "en": "Excuse me, is this seat vacant?",
+        "ja": "すみません、この席は空いていますか。"
+      }
+    ],
+    "distractors": [
+      "満員の",
+      "予約済みの",
+      "改装中の"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0524",
+    "word": "affordable",
+    "pos": "形容詞",
+    "meaning": "（値段が）手頃な",
+    "examples": [
+      {
+        "en": "The hotel offers comfortable rooms at affordable prices.",
+        "ja": "そのホテルは快適な部屋を手頃な価格で提供しています。"
+      },
+      {
+        "en": "We want to make healthy food affordable for everyone.",
+        "ja": "健康的な食品を誰にとっても手頃な値段にしたいと考えています。"
+      },
+      {
+        "en": "This model is the most affordable option in our lineup.",
+        "ja": "このモデルは当社の製品の中で最も手頃な選択肢です。"
+      }
+    ],
+    "distractors": [
+      "高価な",
+      "豪華な",
+      "有料の"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0525",
+    "word": "inconvenience",
+    "pos": "名詞",
+    "meaning": "不便・迷惑",
+    "examples": [
+      {
+        "en": "We apologize for any inconvenience.",
+        "ja": "ご不便をおかけして申し訳ありません。"
+      },
+      {
+        "en": "The road work caused some inconvenience to local businesses.",
+        "ja": "道路工事は地元の店に多少の迷惑をかけました。"
+      },
+      {
+        "en": "To make up for the inconvenience, we will give you a free voucher.",
+        "ja": "ご迷惑のおわびに、無料の割引券を差し上げます。"
+      }
+    ],
+    "distractors": [
+      "遅延",
+      "苦情",
+      "謝罪"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0526",
+    "word": "utility",
+    "pos": "名詞",
+    "meaning": "光熱費・公益事業",
+    "examples": [
+      {
+        "en": "The rent does not include utilities.",
+        "ja": "家賃に光熱費は含まれていません。"
+      },
+      {
+        "en": "Utility costs rise in the winter.",
+        "ja": "冬は光熱費が上がります。"
+      },
+      {
+        "en": "The utility company will repair the power line tomorrow.",
+        "ja": "電力会社が明日、電線を修理します。"
+      }
+    ],
+    "distractors": [
+      "家賃",
+      "保険料",
+      "税金"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0527",
+    "word": "temporarily",
+    "pos": "副詞",
+    "meaning": "一時的に",
+    "examples": [
+      {
+        "en": "The store is temporarily closed for renovation.",
+        "ja": "改装のため、その店は一時休業しています。"
+      },
+      {
+        "en": "This service is temporarily unavailable.",
+        "ja": "このサービスは一時的にご利用いただけません。"
+      },
+      {
+        "en": "The main entrance will be temporarily closed during the repairs.",
+        "ja": "工事中、正面入口は一時的に閉鎖されます。"
+      }
+    ],
+    "distractors": [
+      "永久に",
+      "定期的に",
+      "完全に"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0528",
+    "word": "conveniently",
+    "pos": "副詞",
+    "meaning": "便利に・都合よく",
+    "examples": [
+      {
+        "en": "The hotel is conveniently located near the airport.",
+        "ja": "そのホテルは空港の近くの便利な場所にあります。"
+      },
+      {
+        "en": "The shop is conveniently open until midnight.",
+        "ja": "その店は便利なことに夜 12 時まで開いています。"
+      },
+      {
+        "en": "All the documents are conveniently stored in one folder.",
+        "ja": "書類はすべて 1 つのフォルダーに便利にまとめてあります。"
+      }
+    ],
+    "distractors": [
+      "偶然に",
+      "静かに",
+      "離れて"
+    ],
+    "category": "店舗・顧客",
+    "level": 550
+  },
+  {
+    "id": "w-0529",
+    "word": "enroll",
+    "pos": "動詞",
+    "meaning": "登録する・入会する",
+    "examples": [
+      {
+        "en": "Employees can enroll in the training program online.",
+        "ja": "従業員はオンラインで研修プログラムに登録できます。"
+      },
+      {
+        "en": "More than 50 staff members enrolled in the English course.",
+        "ja": "50 人を超える職員が英語講座に登録しました。"
+      },
+      {
+        "en": "Please enroll by March 31 to receive the discount.",
+        "ja": "割引を受けるには 3 月 31 日までにお申し込みください。"
+      }
+    ],
+    "distractors": [
+      "退会する",
+      "卒業する",
+      "欠席する"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0530",
+    "word": "supervise",
+    "pos": "動詞",
+    "meaning": "監督する・管理する",
+    "examples": [
+      {
+        "en": "Ms. Rossi supervises a team of ten engineers.",
+        "ja": "ロッシさんは 10 人の技術者のチームを監督しています。"
+      },
+      {
+        "en": "New workers are closely supervised during their first week.",
+        "ja": "新しい作業員は最初の 1 週間、しっかり監督されます。"
+      },
+      {
+        "en": "Who will supervise the project while Mr. Kim is away?",
+        "ja": "キムさんの不在中、誰がプロジェクトを管理しますか。"
+      }
+    ],
+    "distractors": [
+      "補佐する",
+      "採用する",
+      "評価する"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0531",
+    "word": "competent",
+    "pos": "形容詞",
+    "meaning": "有能な・能力のある",
+    "examples": [
+      {
+        "en": "She is a competent manager who is respected by her staff.",
+        "ja": "彼女は部下に尊敬されている有能な管理職です。"
+      },
+      {
+        "en": "We need a competent translator for the contract.",
+        "ja": "契約書の翻訳には有能な翻訳者が必要です。"
+      },
+      {
+        "en": "All drivers must be competent in using the new navigation system.",
+        "ja": "運転手は全員、新しいナビシステムを使いこなせなければなりません。"
+      }
+    ],
+    "distractors": [
+      "経験の浅い",
+      "気難しい",
+      "内気な"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0532",
+    "word": "motivated",
+    "pos": "形容詞",
+    "meaning": "意欲のある・やる気のある",
+    "examples": [
+      {
+        "en": "We are looking for highly motivated sales staff.",
+        "ja": "意欲の高い営業職員を募集しています。"
+      },
+      {
+        "en": "A good manager keeps the team motivated.",
+        "ja": "よい管理職はチームのやる気を保ちます。"
+      },
+      {
+        "en": "Motivated employees tend to work harder.",
+        "ja": "意欲のある従業員はよく働く傾向があります。"
+      }
+    ],
+    "distractors": [
+      "退屈した",
+      "疲れた",
+      "不満な"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0533",
+    "word": "productive",
+    "pos": "形容詞",
+    "meaning": "生産的な・実りのある",
+    "examples": [
+      {
+        "en": "Thank you for a productive meeting.",
+        "ja": "実りのある会議をありがとうございました。"
+      },
+      {
+        "en": "The new software has made our staff more productive.",
+        "ja": "新しいソフトウェアで職員の生産性が上がりました。"
+      },
+      {
+        "en": "Many people are more productive in the morning.",
+        "ja": "多くの人は午前中のほうが仕事がはかどります。"
+      }
+    ],
+    "distractors": [
+      "退屈な",
+      "短い",
+      "形式的な"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0534",
+    "word": "commitment",
+    "pos": "名詞",
+    "meaning": "献身・熱意",
+    "examples": [
+      {
+        "en": "We thank Mr. Davis for his commitment to the company over 30 years.",
+        "ja": "30 年にわたる会社への献身に対し、デイビスさんに感謝します。"
+      },
+      {
+        "en": "The company has a strong commitment to customer service.",
+        "ja": "その会社は顧客サービスに強く力を注いでいます。"
+      },
+      {
+        "en": "This position requires a lot of time and commitment.",
+        "ja": "この職には多くの時間と熱意が必要です。"
+      }
+    ],
+    "distractors": [
+      "欠勤",
+      "不満",
+      "報酬"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0535",
+    "word": "reward",
+    "pos": "動詞",
+    "meaning": "報いる・ほうびを与える",
+    "examples": [
+      {
+        "en": "The company rewards employees who meet their sales goals.",
+        "ja": "その会社は販売目標を達成した従業員に報いています。"
+      },
+      {
+        "en": "Her hard work was rewarded with a promotion.",
+        "ja": "彼女の努力は昇進で報われました。"
+      },
+      {
+        "en": "We want to reward our loyal customers with special discounts.",
+        "ja": "お得意様に特別割引でお礼をしたいと考えています。"
+      }
+    ],
+    "distractors": [
+      "罰する",
+      "解雇する",
+      "監督する"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0536",
+    "word": "promote",
+    "pos": "動詞",
+    "meaning": "昇進させる・宣伝する",
+    "examples": [
+      {
+        "en": "Ms. Tanaka was promoted to sales manager last month.",
+        "ja": "田中さんは先月、営業部長に昇進しました。"
+      },
+      {
+        "en": "The company is promoting its new product on social media.",
+        "ja": "その会社はソーシャルメディアで新製品を宣伝しています。"
+      },
+      {
+        "en": "Staff who show strong leadership may be promoted.",
+        "ja": "強い指導力を示した職員は昇進することがあります。"
+      }
+    ],
+    "distractors": [
+      "降格させる",
+      "雇う",
+      "異動させる"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0537",
+    "word": "absence",
+    "pos": "名詞",
+    "meaning": "不在・欠勤",
+    "examples": [
+      {
+        "en": "Ms. Patel will lead the meeting in Mr. Wood's absence.",
+        "ja": "ウッドさんの不在中は、パテルさんが会議を進めます。"
+      },
+      {
+        "en": "Please report any absence to your supervisor by 9 a.m.",
+        "ja": "欠勤する場合は午前 9 時までに上司に報告してください。"
+      },
+      {
+        "en": "He returned to work after a two-week absence.",
+        "ja": "彼は 2 週間の休みのあと仕事に復帰しました。"
+      }
+    ],
+    "distractors": [
+      "出席",
+      "遅刻",
+      "残業"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0538",
+    "word": "independently",
+    "pos": "副詞",
+    "meaning": "自主的に・独立して",
+    "examples": [
+      {
+        "en": "Applicants must be able to work independently.",
+        "ja": "応募者は自分の判断で仕事を進められることが必要です。"
+      },
+      {
+        "en": "Each team will review the proposal independently.",
+        "ja": "各チームはそれぞれ独立して提案書を検討します。"
+      },
+      {
+        "en": "The shop is independently owned and operated.",
+        "ja": "その店は独立経営です。"
+      }
+    ],
+    "distractors": [
+      "一緒に",
+      "指示どおりに",
+      "交代で"
+    ],
+    "category": "人事・採用",
+    "level": 550
+  },
+  {
+    "id": "w-0539",
+    "word": "brainstorm",
+    "pos": "動詞",
+    "meaning": "（アイデアを）出し合う",
+    "examples": [
+      {
+        "en": "Let's brainstorm ideas for the new advertising campaign.",
+        "ja": "新しい広告キャンペーンのアイデアを出し合いましょう。"
+      },
+      {
+        "en": "The team brainstormed ways to cut costs.",
+        "ja": "チームはコスト削減の方法を出し合いました。"
+      },
+      {
+        "en": "We spent an hour brainstorming names for the product.",
+        "ja": "製品名のアイデアを 1 時間かけて出し合いました。"
+      }
+    ],
+    "distractors": [
+      "投票する",
+      "発表する",
+      "反論する"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0540",
+    "word": "conclude",
+    "pos": "動詞",
+    "meaning": "締めくくる・結論を下す",
+    "examples": [
+      {
+        "en": "The president concluded the meeting by thanking everyone.",
+        "ja": "社長は皆に感謝の言葉を述べて会議を締めくくりました。"
+      },
+      {
+        "en": "The report concluded that the project was too expensive.",
+        "ja": "報告書は、その計画は費用がかかりすぎると結論づけました。"
+      },
+      {
+        "en": "The conference will conclude with a dinner on Friday.",
+        "ja": "会議は金曜日の夕食会で締めくくられます。"
+      }
+    ],
+    "distractors": [
+      "始める",
+      "延期する",
+      "中断する"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0541",
+    "word": "verify",
+    "pos": "動詞",
+    "meaning": "確かめる・検証する",
+    "examples": [
+      {
+        "en": "Please verify your e-mail address by clicking the link.",
+        "ja": "リンクをクリックしてメールアドレスを確認してください。"
+      },
+      {
+        "en": "We need to verify the figures before the report is published.",
+        "ja": "報告書を公表する前に数字を検証する必要があります。"
+      },
+      {
+        "en": "The hotel verified our reservation over the phone.",
+        "ja": "ホテルは電話で予約を確認しました。"
+      }
+    ],
+    "distractors": [
+      "修正する",
+      "報告する",
+      "推測する"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0542",
+    "word": "propose",
+    "pos": "動詞",
+    "meaning": "提案する",
+    "examples": [
+      {
+        "en": "Mr. Lee proposed a new schedule for the project.",
+        "ja": "リーさんはプロジェクトの新しい日程を提案しました。"
+      },
+      {
+        "en": "The committee proposed changes to the policy.",
+        "ja": "委員会は方針の変更を提案しました。"
+      },
+      {
+        "en": "I propose that we hold the meeting online.",
+        "ja": "会議をオンラインで開くことを提案します。"
+      }
+    ],
+    "distractors": [
+      "拒否する",
+      "承認する",
+      "撤回する"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0543",
+    "word": "draft",
+    "pos": "名詞",
+    "meaning": "草稿・下書き",
+    "examples": [
+      {
+        "en": "Please send me the first draft of the report by Monday.",
+        "ja": "月曜日までに報告書の最初の草稿を送ってください。"
+      },
+      {
+        "en": "The draft will be reviewed by the legal department.",
+        "ja": "下書きは法務部が確認します。"
+      },
+      {
+        "en": "This is only a draft, so please let me know if you have any comments.",
+        "ja": "これは下書きにすぎないので、ご意見があればお知らせください。"
+      }
+    ],
+    "distractors": [
+      "最終版",
+      "署名",
+      "写し"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0544",
+    "word": "feedback",
+    "pos": "名詞",
+    "meaning": "意見・感想",
+    "examples": [
+      {
+        "en": "We welcome your feedback on our new service.",
+        "ja": "新しいサービスについてのご意見をお待ちしています。"
+      },
+      {
+        "en": "The manager gave helpful feedback on my presentation.",
+        "ja": "部長は私の発表について役に立つ意見をくれました。"
+      },
+      {
+        "en": "Customer feedback has been very positive.",
+        "ja": "お客様の感想はとても好評です。"
+      }
+    ],
+    "distractors": [
+      "報酬",
+      "予定",
+      "指示"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0545",
+    "word": "attendance",
+    "pos": "名詞",
+    "meaning": "出席（者数）",
+    "examples": [
+      {
+        "en": "Attendance at the monthly meeting is required.",
+        "ja": "月例会議への出席は必須です。"
+      },
+      {
+        "en": "Attendance at this year's trade show was higher than expected.",
+        "ja": "今年の見本市の来場者数は予想を上回りました。"
+      },
+      {
+        "en": "Please record your attendance on the sheet at the door.",
+        "ja": "入口の用紙に出席を記入してください。"
+      }
+    ],
+    "distractors": [
+      "欠席",
+      "予約",
+      "参加費"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0546",
+    "word": "periodically",
+    "pos": "副詞",
+    "meaning": "定期的に・時々",
+    "examples": [
+      {
+        "en": "The safety rules are reviewed periodically.",
+        "ja": "安全規則は定期的に見直されます。"
+      },
+      {
+        "en": "Please check your e-mail periodically for updates.",
+        "ja": "最新情報がないか、時々メールを確認してください。"
+      },
+      {
+        "en": "The software is updated periodically to fix problems.",
+        "ja": "不具合を直すため、ソフトウェアは定期的に更新されます。"
+      }
+    ],
+    "distractors": [
+      "一度だけ",
+      "突然",
+      "ずっと"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0547",
+    "word": "simultaneously",
+    "pos": "副詞",
+    "meaning": "同時に",
+    "examples": [
+      {
+        "en": "The meeting was broadcast simultaneously in three offices.",
+        "ja": "会議は 3 つの事務所に同時に中継されました。"
+      },
+      {
+        "en": "The new model will be released simultaneously in Japan and Korea.",
+        "ja": "新モデルは日本と韓国で同時に発売されます。"
+      },
+      {
+        "en": "It is difficult to manage several projects simultaneously.",
+        "ja": "いくつものプロジェクトを同時に管理するのは難しい。"
+      }
+    ],
+    "distractors": [
+      "順番に",
+      "別々に",
+      "後で"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0548",
+    "word": "mutually",
+    "pos": "副詞",
+    "meaning": "互いに・相互に",
+    "examples": [
+      {
+        "en": "We hope to build a mutually beneficial relationship.",
+        "ja": "互いに利益のある関係を築きたいと考えています。"
+      },
+      {
+        "en": "The meeting time was mutually agreed by both companies.",
+        "ja": "打ち合わせの時間は両社の合意で決まりました。"
+      },
+      {
+        "en": "Let's find a mutually convenient time to talk.",
+        "ja": "お互いに都合のよい話し合いの時間を見つけましょう。"
+      }
+    ],
+    "distractors": [
+      "一方的に",
+      "偶然に",
+      "独自に"
+    ],
+    "category": "会議・連絡",
+    "level": 550
+  },
+  {
+    "id": "w-0549",
+    "word": "legible",
+    "pos": "形容詞",
+    "meaning": "（文字が）読みやすい",
+    "examples": [
+      {
+        "en": "Please make sure your handwriting is legible.",
+        "ja": "字は読みやすく書いてください。"
+      },
+      {
+        "en": "The receipt was so old that the numbers were barely legible.",
+        "ja": "領収書が古すぎて、数字がほとんど読めませんでした。"
+      },
+      {
+        "en": "Labels must be clear and legible.",
+        "ja": "ラベルははっきりと読みやすくなければなりません。"
+      }
+    ],
+    "distractors": [
+      "資格のある",
+      "有効な",
+      "詳しい"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0550",
+    "word": "imply",
+    "pos": "動詞",
+    "meaning": "ほのめかす・暗に示す",
+    "examples": [
+      {
+        "en": "The manager implied that there might be job cuts.",
+        "ja": "部長は人員削減があるかもしれないとほのめかしました。"
+      },
+      {
+        "en": "His silence seemed to imply that he disagreed.",
+        "ja": "彼の沈黙は反対であることを暗に示しているようでした。"
+      },
+      {
+        "en": "The report implies that sales will fall next year.",
+        "ja": "報告書は来年売上が落ちることを示唆しています。"
+      }
+    ],
+    "distractors": [
+      "推測する",
+      "断言する",
+      "否定する"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0551",
+    "word": "infer",
+    "pos": "動詞",
+    "meaning": "推測する・推論する",
+    "examples": [
+      {
+        "en": "What can we infer from these sales figures?",
+        "ja": "この売上の数字から何が推測できますか。"
+      },
+      {
+        "en": "From her e-mail, I inferred that the meeting was canceled.",
+        "ja": "彼女のメールから、会議は中止になったのだと推測しました。"
+      },
+      {
+        "en": "Readers can infer the writer's opinion from the last paragraph.",
+        "ja": "読み手は最後の段落から書き手の意見を推測できます。"
+      }
+    ],
+    "distractors": [
+      "ほのめかす",
+      "証明する",
+      "説明する"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0552",
+    "word": "further",
+    "pos": "形容詞",
+    "meaning": "さらなる・それ以上の",
+    "examples": [
+      {
+        "en": "For further information, please visit our website.",
+        "ja": "さらに詳しい情報は当社のウェブサイトをご覧ください。"
+      },
+      {
+        "en": "We need further discussion before we decide.",
+        "ja": "決定する前に、さらに話し合う必要があります。"
+      },
+      {
+        "en": "Please contact me if you have any further questions.",
+        "ja": "さらにご質問があれば、ご連絡ください。"
+      }
+    ],
+    "distractors": [
+      "最初の",
+      "最後の",
+      "以前の"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0553",
+    "word": "loan",
+    "pos": "名詞",
+    "meaning": "融資・ローン",
+    "examples": [
+      {
+        "en": "The bank approved a loan to expand the factory.",
+        "ja": "銀行は工場拡張のための融資を承認しました。"
+      },
+      {
+        "en": "She took out a loan to start her own business.",
+        "ja": "彼女は自分の事業を始めるためにローンを組みました。"
+      },
+      {
+        "en": "The loan must be repaid within five years.",
+        "ja": "その融資は 5 年以内に返済しなければなりません。"
+      }
+    ],
+    "distractors": [
+      "預金",
+      "利益",
+      "寄付"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0554",
+    "word": "historic",
+    "pos": "形容詞",
+    "meaning": "歴史的に重要な",
+    "examples": [
+      {
+        "en": "The hotel is located in a historic building from the 1800s.",
+        "ja": "そのホテルは 1800 年代の歴史的な建物の中にあります。"
+      },
+      {
+        "en": "The merger was a historic moment for both companies.",
+        "ja": "その合併は両社にとって歴史的な出来事でした。"
+      },
+      {
+        "en": "Tours of the historic district start at 10 a.m.",
+        "ja": "歴史地区の見学ツアーは午前 10 時に始まります。"
+      }
+    ],
+    "distractors": [
+      "歴史に関する",
+      "近代的な",
+      "一時的な"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0555",
+    "word": "stationary",
+    "pos": "形容詞",
+    "meaning": "静止した・動かない",
+    "examples": [
+      {
+        "en": "Please remain seated until the bus is stationary.",
+        "ja": "バスが停止するまで座ったままでお待ちください。"
+      },
+      {
+        "en": "The truck was stationary when the accident happened.",
+        "ja": "事故が起きたとき、トラックは止まっていました。"
+      },
+      {
+        "en": "Exercise on a stationary bike is popular among office workers.",
+        "ja": "会社員の間でエアロバイクでの運動が人気です。"
+      }
+    ],
+    "distractors": [
+      "文房具の",
+      "移動式の",
+      "臨時の"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0556",
+    "word": "cite",
+    "pos": "動詞",
+    "meaning": "引用する・挙げる",
+    "examples": [
+      {
+        "en": "The article cited a recent survey of 1,000 workers.",
+        "ja": "その記事は最近の 1,000 人の労働者への調査を引用していました。"
+      },
+      {
+        "en": "Please cite the source of the data in your report.",
+        "ja": "報告書にはデータの出典を記してください。"
+      },
+      {
+        "en": "Many customers cited low prices as the main reason for shopping here.",
+        "ja": "多くの客が、ここで買い物をする主な理由に安さを挙げました。"
+      }
+    ],
+    "distractors": [
+      "訪れる",
+      "削除する",
+      "見る"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0557",
+    "word": "extensive",
+    "pos": "形容詞",
+    "meaning": "広範な・大規模な",
+    "examples": [
+      {
+        "en": "The hotel underwent extensive renovations last year.",
+        "ja": "そのホテルは昨年大規模な改装を行いました。"
+      },
+      {
+        "en": "She has extensive experience in international sales.",
+        "ja": "彼女は海外営業で幅広い経験を持っています。"
+      },
+      {
+        "en": "The library has an extensive collection of business books.",
+        "ja": "その図書館はビジネス書を豊富にそろえています。"
+      }
+    ],
+    "distractors": [
+      "集中的な",
+      "小規模な",
+      "短期の"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0558",
+    "word": "intensive",
+    "pos": "形容詞",
+    "meaning": "集中的な",
+    "examples": [
+      {
+        "en": "New staff take an intensive two-week training course.",
+        "ja": "新しい職員は 2 週間の集中研修を受けます。"
+      },
+      {
+        "en": "The project requires intensive work over the next month.",
+        "ja": "その計画は今後 1 か月、集中的な作業が必要です。"
+      },
+      {
+        "en": "She took an intensive English course before moving abroad.",
+        "ja": "彼女は海外に移る前に英語の集中講座を受けました。"
+      }
+    ],
+    "distractors": [
+      "広範な",
+      "任意の",
+      "基礎的な"
+    ],
+    "category": "混同しやすい語",
+    "level": 550
+  },
+  {
+    "id": "w-0559",
+    "word": "consignment",
+    "pos": "名詞",
+    "meaning": "発送品・委託販売",
+    "examples": [
+      {
+        "en": "The consignment of spare parts arrived at the port yesterday.",
+        "ja": "予備部品の積み荷が昨日港に着きました。"
+      },
+      {
+        "en": "We sell these items on consignment, so we pay the maker only when they are sold.",
+        "ja": "これらの品は委託販売なので、売れたときにだけメーカーに支払います。"
+      },
+      {
+        "en": "Each consignment is checked before it leaves the warehouse.",
+        "ja": "発送品はそれぞれ倉庫を出る前に検査されます。"
+      }
+    ],
+    "distractors": [
+      "在庫",
+      "返品",
+      "見本"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0560",
+    "word": "remittance",
+    "pos": "名詞",
+    "meaning": "送金",
+    "examples": [
+      {
+        "en": "Please include the invoice number with your remittance.",
+        "ja": "送金の際は請求書番号を添えてください。"
+      },
+      {
+        "en": "We have not yet received your remittance for the May order.",
+        "ja": "5 月の注文分のご送金をまだ受け取っておりません。"
+      },
+      {
+        "en": "Remittances to overseas suppliers are handled by the finance department.",
+        "ja": "海外の仕入れ先への送金は財務部が担当します。"
+      }
+    ],
+    "distractors": [
+      "請求",
+      "預金",
+      "借入"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0561",
+    "word": "depreciation",
+    "pos": "名詞",
+    "meaning": "減価償却・価値の低下",
+    "examples": [
+      {
+        "en": "The depreciation of the equipment is calculated over five years.",
+        "ja": "その設備の減価償却は 5 年で計算されます。"
+      },
+      {
+        "en": "Cars suffer rapid depreciation in their first year.",
+        "ja": "車は最初の 1 年で急速に価値が下がります。"
+      },
+      {
+        "en": "The report shows the depreciation of the company's vehicles.",
+        "ja": "報告書には会社の車両の減価償却が示されています。"
+      }
+    ],
+    "distractors": [
+      "値上げ",
+      "利息",
+      "投資"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0562",
+    "word": "fluctuate",
+    "pos": "動詞",
+    "meaning": "変動する",
+    "examples": [
+      {
+        "en": "Fuel prices fluctuate from month to month.",
+        "ja": "燃料価格は月ごとに変動します。"
+      },
+      {
+        "en": "Sales tend to fluctuate depending on the season.",
+        "ja": "売上は季節によって変動しがちです。"
+      },
+      {
+        "en": "The exchange rate has fluctuated sharply this week.",
+        "ja": "今週、為替レートが大きく変動しました。"
+      }
+    ],
+    "distractors": [
+      "安定する",
+      "停止する",
+      "回復する"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0563",
+    "word": "projected",
+    "pos": "形容詞",
+    "meaning": "予測された・見込みの",
+    "examples": [
+      {
+        "en": "Projected sales for next year are 20 percent higher.",
+        "ja": "来年の売上見込みは 20 パーセント高くなっています。"
+      },
+      {
+        "en": "The projected cost of the new building is 3 million dollars.",
+        "ja": "新しい建物の予想費用は 300 万ドルです。"
+      },
+      {
+        "en": "We are two weeks behind the projected schedule.",
+        "ja": "見込みの日程より 2 週間遅れています。"
+      }
+    ],
+    "distractors": [
+      "実際の",
+      "過去の",
+      "確定した"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0564",
+    "word": "bulk",
+    "pos": "名詞",
+    "meaning": "大量・大部分",
+    "examples": [
+      {
+        "en": "We offer discounts for orders in bulk.",
+        "ja": "大量注文には割引があります。"
+      },
+      {
+        "en": "Buying paper in bulk saves money.",
+        "ja": "紙をまとめ買いするとお金の節約になります。"
+      },
+      {
+        "en": "The bulk of our sales come from online orders.",
+        "ja": "当社の売上の大部分はオンライン注文によるものです。"
+      }
+    ],
+    "distractors": [
+      "少量",
+      "見本",
+      "一部"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0565",
+    "word": "contingency",
+    "pos": "名詞",
+    "meaning": "不測の事態・緊急時",
+    "examples": [
+      {
+        "en": "We have a contingency plan in case the system fails.",
+        "ja": "システムが故障した場合に備えて緊急時の計画があります。"
+      },
+      {
+        "en": "Part of the budget is set aside for contingencies.",
+        "ja": "予算の一部は不測の事態に備えて取ってあります。"
+      },
+      {
+        "en": "The manager prepared for every contingency before the event.",
+        "ja": "部長はイベントの前にあらゆる不測の事態に備えました。"
+      }
+    ],
+    "distractors": [
+      "定例",
+      "予算",
+      "長期目標"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0566",
+    "word": "incur",
+    "pos": "動詞",
+    "meaning": "（費用・損失を）負う",
+    "examples": [
+      {
+        "en": "Travel expenses incurred during the trip will be reimbursed.",
+        "ja": "出張中にかかった旅費は払い戻されます。"
+      },
+      {
+        "en": "Late payments will incur a fee of 20 dollars.",
+        "ja": "支払いが遅れると 20 ドルの手数料がかかります。"
+      },
+      {
+        "en": "The company incurred heavy losses last year.",
+        "ja": "その会社は昨年大きな損失を出しました。"
+      }
+    ],
+    "distractors": [
+      "削減する",
+      "回収する",
+      "見積もる"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0567",
+    "word": "itemize",
+    "pos": "動詞",
+    "meaning": "明細を書く・項目別にする",
+    "examples": [
+      {
+        "en": "Please itemize all expenses on the form.",
+        "ja": "用紙にすべての経費の明細を記入してください。"
+      },
+      {
+        "en": "The bill was itemized so we could see each charge.",
+        "ja": "勘定は項目別になっていて、各料金が分かりました。"
+      },
+      {
+        "en": "An itemized receipt is required for reimbursement.",
+        "ja": "払い戻しには明細付きの領収書が必要です。"
+      }
+    ],
+    "distractors": [
+      "合計する",
+      "省略する",
+      "承認する"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0568",
+    "word": "embark",
+    "pos": "動詞",
+    "meaning": "乗り出す・乗船する",
+    "examples": [
+      {
+        "en": "The company is embarking on a major expansion in Asia.",
+        "ja": "その会社はアジアでの大規模な拡大に乗り出しています。"
+      },
+      {
+        "en": "Passengers may embark from 2 p.m.",
+        "ja": "乗客は午後 2 時から乗船できます。"
+      },
+      {
+        "en": "She embarked on a new career in marketing.",
+        "ja": "彼女はマーケティングで新たなキャリアに踏み出しました。"
+      }
+    ],
+    "distractors": [
+      "撤退する",
+      "下船する",
+      "延期する"
+    ],
+    "category": "ビジネス一般",
+    "level": 600
+  },
+  {
+    "id": "w-0569",
+    "word": "refurbish",
+    "pos": "動詞",
+    "meaning": "改装する・新品同様に修理する",
+    "examples": [
+      {
+        "en": "The hotel lobby was refurbished last year.",
+        "ja": "ホテルのロビーは昨年改装されました。"
+      },
+      {
+        "en": "We sell refurbished laptops at a lower price.",
+        "ja": "整備済みのノートパソコンを低価格で販売しています。"
+      },
+      {
+        "en": "The company plans to refurbish all of its stores by 2028.",
+        "ja": "その会社は 2028 年までに全店舗を改装する予定です。"
+      }
+    ],
+    "distractors": [
+      "解体する",
+      "売却する",
+      "設計する"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0570",
+    "word": "ergonomic",
+    "pos": "形容詞",
+    "meaning": "人間工学に基づいた",
+    "examples": [
+      {
+        "en": "All desks come with ergonomic chairs.",
+        "ja": "すべての机に人間工学に基づいた椅子が付いています。"
+      },
+      {
+        "en": "The keyboard has an ergonomic design to reduce hand pain.",
+        "ja": "そのキーボードは手の痛みを減らす人間工学的な設計です。"
+      },
+      {
+        "en": "Ergonomic office furniture can help prevent back problems.",
+        "ja": "人間工学に基づいた事務用家具は腰痛の予防に役立ちます。"
+      }
+    ],
+    "distractors": [
+      "経済的な",
+      "伝統的な",
+      "装飾的な"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0571",
+    "word": "inclement",
+    "pos": "形容詞",
+    "meaning": "（天候が）荒れた・悪い",
+    "examples": [
+      {
+        "en": "The outdoor concert was canceled due to inclement weather.",
+        "ja": "荒天のため、屋外コンサートは中止になりました。"
+      },
+      {
+        "en": "In case of inclement weather, the event will be held indoors.",
+        "ja": "悪天候の場合、イベントは屋内で行われます。"
+      },
+      {
+        "en": "Flights may be delayed because of inclement conditions.",
+        "ja": "悪天候のため、便が遅れる可能性があります。"
+      }
+    ],
+    "distractors": [
+      "穏やかな",
+      "季節の",
+      "予想どおりの"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0572",
+    "word": "amenity",
+    "pos": "名詞",
+    "meaning": "（快適な）設備・アメニティ",
+    "examples": [
+      {
+        "en": "The hotel's amenities include a pool and a fitness center.",
+        "ja": "そのホテルの設備にはプールとフィットネスセンターがあります。"
+      },
+      {
+        "en": "The apartment is close to shops, parks, and other amenities.",
+        "ja": "そのアパートは店や公園などの便利な施設に近い。"
+      },
+      {
+        "en": "Free Wi-Fi is a basic amenity that guests expect.",
+        "ja": "無料の Wi-Fi は宿泊客が期待する基本的な設備です。"
+      }
+    ],
+    "distractors": [
+      "料金",
+      "規則",
+      "苦情"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0573",
+    "word": "occupancy",
+    "pos": "名詞",
+    "meaning": "使用率・入居率",
+    "examples": [
+      {
+        "en": "The hotel had an occupancy rate of 90 percent last month.",
+        "ja": "そのホテルの先月の客室稼働率は 90 パーセントでした。"
+      },
+      {
+        "en": "Maximum occupancy of this room is 50 people.",
+        "ja": "この部屋の最大収容人数は 50 人です。"
+      },
+      {
+        "en": "Office occupancy in the city center has increased.",
+        "ja": "都心部の事務所の入居率が上がりました。"
+      }
+    ],
+    "distractors": [
+      "料金",
+      "立地",
+      "設備"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0574",
+    "word": "evacuate",
+    "pos": "動詞",
+    "meaning": "避難させる・退避する",
+    "examples": [
+      {
+        "en": "All employees were evacuated during the fire drill.",
+        "ja": "避難訓練の間、全従業員が避難しました。"
+      },
+      {
+        "en": "Please evacuate the building using the nearest exit.",
+        "ja": "最寄りの出口から建物の外へ避難してください。"
+      },
+      {
+        "en": "Guests were asked to evacuate their rooms because of a gas leak.",
+        "ja": "ガス漏れのため、宿泊客は部屋から避難するよう求められました。"
+      }
+    ],
+    "distractors": [
+      "集合させる",
+      "封鎖する",
+      "点検する"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0575",
+    "word": "obsolete",
+    "pos": "形容詞",
+    "meaning": "時代遅れの・廃れた",
+    "examples": [
+      {
+        "en": "The old software is now obsolete.",
+        "ja": "古いソフトウェアは今では時代遅れです。"
+      },
+      {
+        "en": "We replaced our obsolete equipment with new machines.",
+        "ja": "時代遅れの設備を新しい機械に入れ替えました。"
+      },
+      {
+        "en": "Many paper forms have become obsolete since we moved online.",
+        "ja": "オンラインに移行してから、多くの紙の書式が使われなくなりました。"
+      }
+    ],
+    "distractors": [
+      "最新の",
+      "高価な",
+      "耐久性のある"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0576",
+    "word": "unattended",
+    "pos": "形容詞",
+    "meaning": "放置された・付き添いのない",
+    "examples": [
+      {
+        "en": "Please do not leave your luggage unattended.",
+        "ja": "手荷物を放置しないでください。"
+      },
+      {
+        "en": "Unattended bags will be removed by security staff.",
+        "ja": "放置された荷物は警備員が撤去します。"
+      },
+      {
+        "en": "Children must not be left unattended in the play area.",
+        "ja": "遊び場に子どもだけを残さないでください。"
+      }
+    ],
+    "distractors": [
+      "予約された",
+      "施錠された",
+      "返却された"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0577",
+    "word": "intermittently",
+    "pos": "副詞",
+    "meaning": "断続的に",
+    "examples": [
+      {
+        "en": "It rained intermittently throughout the day.",
+        "ja": "一日中、断続的に雨が降りました。"
+      },
+      {
+        "en": "The Internet connection has been working only intermittently.",
+        "ja": "インターネットの接続が途切れ途切れにしか使えていません。"
+      },
+      {
+        "en": "The machine stops intermittently, so we called a technician.",
+        "ja": "機械が断続的に止まるので、技術者を呼びました。"
+      }
+    ],
+    "distractors": [
+      "継続的に",
+      "一度だけ",
+      "急激に"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0578",
+    "word": "inadvertently",
+    "pos": "副詞",
+    "meaning": "うっかり・不注意で",
+    "examples": [
+      {
+        "en": "We inadvertently sent you the wrong item.",
+        "ja": "誤って違う商品をお送りしてしまいました。"
+      },
+      {
+        "en": "The customer's name was inadvertently left off the list.",
+        "ja": "お客様のお名前がうっかり一覧から漏れていました。"
+      },
+      {
+        "en": "I inadvertently deleted the file, so I had to write it again.",
+        "ja": "うっかりファイルを消してしまい、書き直さなければなりませんでした。"
+      }
+    ],
+    "distractors": [
+      "故意に",
+      "慎重に",
+      "正式に"
+    ],
+    "category": "店舗・顧客",
+    "level": 600
+  },
+  {
+    "id": "w-0579",
+    "word": "commensurate",
+    "pos": "形容詞",
+    "meaning": "（〜に）見合った・釣り合った",
+    "examples": [
+      {
+        "en": "Salary will be commensurate with experience.",
+        "ja": "給与は経験に応じて決定します。"
+      },
+      {
+        "en": "She received a bonus commensurate with her performance.",
+        "ja": "彼女は成績に見合った賞与を受け取りました。"
+      },
+      {
+        "en": "The new duties come with a commensurate increase in pay.",
+        "ja": "新しい職務には、それに見合った昇給が伴います。"
+      }
+    ],
+    "distractors": [
+      "不足した",
+      "固定の",
+      "一律の"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0580",
+    "word": "remuneration",
+    "pos": "名詞",
+    "meaning": "報酬",
+    "examples": [
+      {
+        "en": "The remuneration package includes health insurance.",
+        "ja": "報酬には健康保険も含まれます。"
+      },
+      {
+        "en": "Board members receive remuneration for attending meetings.",
+        "ja": "取締役は会議への出席に対して報酬を受け取ります。"
+      },
+      {
+        "en": "The job offers competitive remuneration and flexible hours.",
+        "ja": "その仕事は他社に引けを取らない報酬と柔軟な勤務時間を提供しています。"
+      }
+    ],
+    "distractors": [
+      "罰金",
+      "寄付",
+      "税金"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0581",
+    "word": "incumbent",
+    "pos": "名詞",
+    "meaning": "現職者",
+    "examples": [
+      {
+        "en": "The incumbent will retire at the end of the year.",
+        "ja": "現職者は年末に退職します。"
+      },
+      {
+        "en": "The incumbent has held the position for ten years.",
+        "ja": "現職者はその地位に 10 年就いています。"
+      },
+      {
+        "en": "We will begin interviewing candidates before the incumbent leaves.",
+        "ja": "現職者が辞める前に候補者の面接を始めます。"
+      }
+    ],
+    "distractors": [
+      "後任者",
+      "応募者",
+      "研修生"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0582",
+    "word": "attrition",
+    "pos": "名詞",
+    "meaning": "（人員の）自然減・離職",
+    "examples": [
+      {
+        "en": "The company plans to reduce staff through attrition rather than layoffs.",
+        "ja": "その会社は解雇ではなく自然減で人員を減らす予定です。"
+      },
+      {
+        "en": "High attrition is a problem in the retail industry.",
+        "ja": "小売業界では高い離職率が問題です。"
+      },
+      {
+        "en": "Attrition rates fell after salaries were raised.",
+        "ja": "給与が上がってから離職率が下がりました。"
+      }
+    ],
+    "distractors": [
+      "解雇",
+      "採用",
+      "昇進"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0583",
+    "word": "mandatory",
+    "pos": "形容詞",
+    "meaning": "義務的な・必須の",
+    "examples": [
+      {
+        "en": "Attendance at the safety training is mandatory for all staff.",
+        "ja": "安全研修への出席は全職員に義務づけられています。"
+      },
+      {
+        "en": "Wearing a helmet is mandatory in this area.",
+        "ja": "この区域ではヘルメットの着用が必須です。"
+      },
+      {
+        "en": "The company introduced mandatory retirement at 65.",
+        "ja": "その会社は 65 歳の定年制を導入しました。"
+      }
+    ],
+    "distractors": [
+      "任意の",
+      "一時的な",
+      "推奨の"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0584",
+    "word": "adept",
+    "pos": "形容詞",
+    "meaning": "熟達した・上手な",
+    "examples": [
+      {
+        "en": "She is adept at handling difficult customers.",
+        "ja": "彼女は難しいお客様の対応に長けています。"
+      },
+      {
+        "en": "We need someone who is adept at using design software.",
+        "ja": "デザインソフトの扱いに熟達した人が必要です。"
+      },
+      {
+        "en": "He quickly became adept at managing the team's budget.",
+        "ja": "彼はすぐにチームの予算管理が上手になりました。"
+      }
+    ],
+    "distractors": [
+      "不慣れな",
+      "熱心な",
+      "内気な"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0585",
+    "word": "proactively",
+    "pos": "副詞",
+    "meaning": "先を見越して・積極的に",
+    "examples": [
+      {
+        "en": "We encourage staff to proactively suggest improvements.",
+        "ja": "職員には改善案を積極的に出すよう勧めています。"
+      },
+      {
+        "en": "The team proactively contacted customers about the delay.",
+        "ja": "チームは遅れについて先回りして顧客に連絡しました。"
+      },
+      {
+        "en": "Managers should address problems proactively before they grow.",
+        "ja": "管理職は問題が大きくなる前に先手を打って対処すべきです。"
+      }
+    ],
+    "distractors": [
+      "受け身で",
+      "後から",
+      "偶然に"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0586",
+    "word": "oversee",
+    "pos": "動詞",
+    "meaning": "監督する・統括する",
+    "examples": [
+      {
+        "en": "Ms. Garcia will oversee the opening of the new branch.",
+        "ja": "ガルシアさんが新支店の開設を統括します。"
+      },
+      {
+        "en": "He oversees a staff of 40 people.",
+        "ja": "彼は 40 人の職員を監督しています。"
+      },
+      {
+        "en": "A project manager was hired to oversee the construction.",
+        "ja": "建設を監督するためにプロジェクト責任者が雇われました。"
+      }
+    ],
+    "distractors": [
+      "補佐する",
+      "中止する",
+      "外注する"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0587",
+    "word": "commend",
+    "pos": "動詞",
+    "meaning": "称賛する・ほめる",
+    "examples": [
+      {
+        "en": "The president commended the team for its hard work.",
+        "ja": "社長はチームの努力を称賛しました。"
+      },
+      {
+        "en": "Mr. Ford was commended for his quick response to the emergency.",
+        "ja": "フォードさんは緊急時の素早い対応をほめられました。"
+      },
+      {
+        "en": "We commend all the volunteers who helped at the event.",
+        "ja": "イベントを手伝ってくださったボランティアの皆さんを称えます。"
+      }
+    ],
+    "distractors": [
+      "非難する",
+      "解雇する",
+      "警告する"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0588",
+    "word": "relocate",
+    "pos": "動詞",
+    "meaning": "移転する・転勤させる",
+    "examples": [
+      {
+        "en": "The company will relocate its headquarters to Osaka.",
+        "ja": "その会社は本社を大阪に移転します。"
+      },
+      {
+        "en": "Several employees were relocated to the new factory.",
+        "ja": "数人の従業員が新工場に転勤になりました。"
+      },
+      {
+        "en": "We are relocating to a larger office next month.",
+        "ja": "来月、より広い事務所に移転します。"
+      }
+    ],
+    "distractors": [
+      "拡張する",
+      "閉鎖する",
+      "改装する"
+    ],
+    "category": "人事・採用",
+    "level": 600
+  },
+  {
+    "id": "w-0589",
+    "word": "concur",
+    "pos": "動詞",
+    "meaning": "同意する・意見が一致する",
+    "examples": [
+      {
+        "en": "The committee concurred with the manager's recommendation.",
+        "ja": "委員会は部長の勧告に同意しました。"
+      },
+      {
+        "en": "I concur that we should delay the launch.",
+        "ja": "発売を遅らせるべきだという点に同意します。"
+      },
+      {
+        "en": "Most experts concur that prices will rise next year.",
+        "ja": "ほとんどの専門家は来年物価が上がるという点で意見が一致しています。"
+      }
+    ],
+    "distractors": [
+      "異議を唱える",
+      "延期する",
+      "要約する"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0590",
+    "word": "addendum",
+    "pos": "名詞",
+    "meaning": "補遺・追加条項",
+    "examples": [
+      {
+        "en": "An addendum to the contract was signed yesterday.",
+        "ja": "昨日、契約の追加条項に署名がなされました。"
+      },
+      {
+        "en": "Please read the addendum attached to the report.",
+        "ja": "報告書に添付された補遺をお読みください。"
+      },
+      {
+        "en": "The addendum explains the changes to the schedule.",
+        "ja": "補遺には日程の変更が説明されています。"
+      }
+    ],
+    "distractors": [
+      "目次",
+      "草稿",
+      "表紙"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0591",
+    "word": "excerpt",
+    "pos": "名詞",
+    "meaning": "抜粋",
+    "examples": [
+      {
+        "en": "Here is an excerpt from the president's speech.",
+        "ja": "こちらは社長の演説からの抜粋です。"
+      },
+      {
+        "en": "The newsletter includes excerpts from customer reviews.",
+        "ja": "会報にはお客様の口コミの抜粋が載っています。"
+      },
+      {
+        "en": "Please read the excerpt and answer the questions below.",
+        "ja": "抜粋を読んで、下の質問に答えてください。"
+      }
+    ],
+    "distractors": [
+      "全文",
+      "要約",
+      "注釈"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0592",
+    "word": "briefing",
+    "pos": "名詞",
+    "meaning": "状況説明（会）",
+    "examples": [
+      {
+        "en": "There will be a short briefing before the tour begins.",
+        "ja": "見学が始まる前に短い説明があります。"
+      },
+      {
+        "en": "The manager held a briefing on the new safety rules.",
+        "ja": "部長は新しい安全規則について説明会を開きました。"
+      },
+      {
+        "en": "All staff must attend the morning briefing.",
+        "ja": "全職員は朝の説明会に出席しなければなりません。"
+      }
+    ],
+    "distractors": [
+      "送別会",
+      "面接",
+      "祝賀会"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0593",
+    "word": "succinctly",
+    "pos": "副詞",
+    "meaning": "簡潔に",
+    "examples": [
+      {
+        "en": "Please explain your idea succinctly.",
+        "ja": "考えを簡潔に説明してください。"
+      },
+      {
+        "en": "The report succinctly summarizes the results of the survey.",
+        "ja": "報告書は調査結果を簡潔にまとめています。"
+      },
+      {
+        "en": "She answered every question clearly and succinctly.",
+        "ja": "彼女はすべての質問に明確かつ簡潔に答えました。"
+      }
+    ],
+    "distractors": [
+      "詳細に",
+      "曖昧に",
+      "繰り返し"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0594",
+    "word": "duly",
+    "pos": "副詞",
+    "meaning": "正式に・しかるべく",
+    "examples": [
+      {
+        "en": "Your comments have been duly noted.",
+        "ja": "ご意見は確かに承りました。"
+      },
+      {
+        "en": "The contract was duly signed by both parties.",
+        "ja": "契約は双方によって正式に署名されました。"
+      },
+      {
+        "en": "The new members were duly elected at the annual meeting.",
+        "ja": "新しい役員は年次総会で正式に選出されました。"
+      }
+    ],
+    "distractors": [
+      "非公式に",
+      "遅れて",
+      "偶然に"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0595",
+    "word": "ratify",
+    "pos": "動詞",
+    "meaning": "承認する・批准する",
+    "examples": [
+      {
+        "en": "The board will ratify the agreement next week.",
+        "ja": "取締役会は来週その合意を承認します。"
+      },
+      {
+        "en": "The new contract was ratified by the union.",
+        "ja": "新しい契約は組合によって承認されました。"
+      },
+      {
+        "en": "Both countries have ratified the trade agreement.",
+        "ja": "両国はその貿易協定を批准しました。"
+      }
+    ],
+    "distractors": [
+      "却下する",
+      "起草する",
+      "延期する"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0596",
+    "word": "unforeseen",
+    "pos": "形容詞",
+    "meaning": "予期しない・不測の",
+    "examples": [
+      {
+        "en": "Due to unforeseen circumstances, the event has been canceled.",
+        "ja": "予期せぬ事情により、イベントは中止となりました。"
+      },
+      {
+        "en": "The project was delayed by unforeseen problems.",
+        "ja": "プロジェクトは予期しない問題で遅れました。"
+      },
+      {
+        "en": "Please keep some money aside for unforeseen expenses.",
+        "ja": "不測の出費に備えて、いくらかお金を取っておいてください。"
+      }
+    ],
+    "distractors": [
+      "予定どおりの",
+      "定期的な",
+      "軽微な"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0597",
+    "word": "pending",
+    "pos": "形容詞",
+    "meaning": "保留中の・未決定の",
+    "examples": [
+      {
+        "en": "The decision is pending approval from the board.",
+        "ja": "その決定は取締役会の承認待ちです。"
+      },
+      {
+        "en": "There are three pending orders in the system.",
+        "ja": "システムには保留中の注文が 3 件あります。"
+      },
+      {
+        "en": "The contract remains pending until both sides sign it.",
+        "ja": "双方が署名するまで、契約は未決定のままです。"
+      }
+    ],
+    "distractors": [
+      "完了した",
+      "公開された",
+      "却下された"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0598",
+    "word": "provisional",
+    "pos": "形容詞",
+    "meaning": "暫定的な・仮の",
+    "examples": [
+      {
+        "en": "The provisional schedule may change.",
+        "ja": "暫定の日程は変更になる可能性があります。"
+      },
+      {
+        "en": "Here are the provisional results of the survey.",
+        "ja": "こちらが調査の暫定結果です。"
+      },
+      {
+        "en": "She was given a provisional contract for three months.",
+        "ja": "彼女は 3 か月の仮契約を結びました。"
+      }
+    ],
+    "distractors": [
+      "最終的な",
+      "公式の",
+      "恒久的な"
+    ],
+    "category": "会議・連絡",
+    "level": 600
+  },
+  {
+    "id": "w-0599",
+    "word": "continual",
+    "pos": "形容詞",
+    "meaning": "（断続的に）繰り返される",
+    "examples": [
+      {
+        "en": "The continual interruptions made it hard to finish the report.",
+        "ja": "何度も邪魔が入って、報告書を終えるのが難しかった。"
+      },
+      {
+        "en": "We received continual complaints about the noise.",
+        "ja": "騒音について苦情が繰り返し寄せられました。"
+      },
+      {
+        "en": "The old printer needs continual repairs.",
+        "ja": "古いプリンターは何度も修理が必要です。"
+      }
+    ],
+    "distractors": [
+      "途切れない",
+      "一時的な",
+      "まれな"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0600",
+    "word": "continuous",
+    "pos": "形容詞",
+    "meaning": "途切れない・連続した",
+    "examples": [
+      {
+        "en": "The factory runs on a continuous 24-hour schedule.",
+        "ja": "その工場は 24 時間休みなく稼働しています。"
+      },
+      {
+        "en": "The machine provides a continuous supply of hot water.",
+        "ja": "その機械はお湯を途切れなく供給します。"
+      },
+      {
+        "en": "After three hours of continuous rain, the road was closed.",
+        "ja": "3 時間降り続いた雨のあと、その道路は閉鎖されました。"
+      }
+    ],
+    "distractors": [
+      "繰り返される",
+      "時々の",
+      "部分的な"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0601",
+    "word": "discreet",
+    "pos": "形容詞",
+    "meaning": "慎重な・口が堅い",
+    "examples": [
+      {
+        "en": "Please be discreet when discussing salaries.",
+        "ja": "給与について話すときは慎重にしてください。"
+      },
+      {
+        "en": "Our staff provide discreet service to all hotel guests.",
+        "ja": "当ホテルの職員はすべての宿泊客に控えめで行き届いたサービスを提供します。"
+      },
+      {
+        "en": "He made a discreet inquiry about the position.",
+        "ja": "彼はその職について内々に問い合わせました。"
+      }
+    ],
+    "distractors": [
+      "目立つ",
+      "不注意な",
+      "率直な"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0602",
+    "word": "eminent",
+    "pos": "形容詞",
+    "meaning": "著名な・高名な",
+    "examples": [
+      {
+        "en": "An eminent economist will speak at the conference.",
+        "ja": "著名な経済学者が会議で講演します。"
+      },
+      {
+        "en": "The hospital hired an eminent surgeon from Germany.",
+        "ja": "その病院はドイツから高名な外科医を招きました。"
+      },
+      {
+        "en": "The book was written by an eminent scientist.",
+        "ja": "その本は著名な科学者によって書かれました。"
+      }
+    ],
+    "distractors": [
+      "差し迫った",
+      "無名の",
+      "若手の"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0603",
+    "word": "averse",
+    "pos": "形容詞",
+    "meaning": "（〜を）嫌って",
+    "examples": [
+      {
+        "en": "Our clients are averse to taking big risks.",
+        "ja": "当社の顧客は大きなリスクを取ることを嫌います。"
+      },
+      {
+        "en": "The manager is not averse to trying new ideas.",
+        "ja": "部長は新しいアイデアを試すことをいといません。"
+      },
+      {
+        "en": "Many investors are averse to uncertainty.",
+        "ja": "多くの投資家は不確実なことを嫌います。"
+      }
+    ],
+    "distractors": [
+      "不利な",
+      "熱心な",
+      "慣れた"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0604",
+    "word": "comprise",
+    "pos": "動詞",
+    "meaning": "〜から成る・〜を占める",
+    "examples": [
+      {
+        "en": "The committee comprises five members.",
+        "ja": "委員会は 5 人のメンバーから成ります。"
+      },
+      {
+        "en": "The package comprises a laptop, a mouse, and a carrying case.",
+        "ja": "セットはノートパソコン、マウス、持ち運び用ケースから成ります。"
+      },
+      {
+        "en": "Women comprise 60 percent of our workforce.",
+        "ja": "女性が当社の従業員の 60 パーセントを占めています。"
+      }
+    ],
+    "distractors": [
+      "〜を省く",
+      "〜を比べる",
+      "〜に妥協する"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0605",
+    "word": "regrettable",
+    "pos": "形容詞",
+    "meaning": "残念な・遺憾な",
+    "examples": [
+      {
+        "en": "It is regrettable that the event had to be canceled.",
+        "ja": "イベントが中止になったのは残念なことです。"
+      },
+      {
+        "en": "The delay was a regrettable mistake on our part.",
+        "ja": "遅れは当社側の遺憾な誤りでした。"
+      },
+      {
+        "en": "This regrettable situation will not happen again.",
+        "ja": "このような残念な事態は二度と起こしません。"
+      }
+    ],
+    "distractors": [
+      "後悔している",
+      "満足な",
+      "意外な"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0606",
+    "word": "regretful",
+    "pos": "形容詞",
+    "meaning": "後悔している・残念に思う",
+    "examples": [
+      {
+        "en": "He was regretful about missing the meeting.",
+        "ja": "彼は会議に出られなかったことを悔やんでいました。"
+      },
+      {
+        "en": "She sounded regretful when she turned down the job offer.",
+        "ja": "彼女はその仕事の申し出を断るとき残念そうでした。"
+      },
+      {
+        "en": "The manager felt regretful that he had not listened to his team.",
+        "ja": "部長はチームの意見を聞かなかったことを後悔していました。"
+      }
+    ],
+    "distractors": [
+      "遺憾な",
+      "満足した",
+      "感謝している"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0607",
+    "word": "elicit",
+    "pos": "動詞",
+    "meaning": "引き出す",
+    "examples": [
+      {
+        "en": "The survey was designed to elicit honest opinions from staff.",
+        "ja": "その調査は職員から率直な意見を引き出すように作られました。"
+      },
+      {
+        "en": "The new ad campaign elicited a strong response from customers.",
+        "ja": "新しい広告キャンペーンは顧客から大きな反応を引き出しました。"
+      },
+      {
+        "en": "The interviewer asked open questions to elicit more details.",
+        "ja": "面接官はより詳しい話を引き出すために自由回答の質問をしました。"
+      }
+    ],
+    "distractors": [
+      "隠す",
+      "禁止する",
+      "要約する"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
+  },
+  {
+    "id": "w-0608",
+    "word": "consistent",
+    "pos": "形容詞",
+    "meaning": "一貫した・安定した",
+    "examples": [
+      {
+        "en": "The quality of our products is consistent.",
+        "ja": "当社の製品の品質は安定しています。"
+      },
+      {
+        "en": "Her work has been consistent throughout the year.",
+        "ja": "彼女の仕事ぶりは一年を通して安定しています。"
+      },
+      {
+        "en": "The results are consistent with last year's survey.",
+        "ja": "結果は昨年の調査と一致しています。"
+      }
+    ],
+    "distractors": [
+      "しつこい",
+      "不規則な",
+      "一時的な"
+    ],
+    "category": "混同しやすい語",
+    "level": 600
   }
 ]

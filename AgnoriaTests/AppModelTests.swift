@@ -16,9 +16,11 @@ struct AppModelTests {
 
     @Test("おまかせは単語と文法が混ざった10問になり、セッションは mode=auto で保存される") func autoRun() async throws {
         let model = try await makeModel()
+        // 単語と文法は 1 つの候補群から重みで選ぶ（決め打ちの比率はない）ので、1 セットだけだと片方に偏ることがある。5 セットで見る
         var rng = SeededRandomNumberGenerator(seed: 11)
-        let qs = model.buildQuestions(.auto, using: &rng)
-        #expect(qs.count == 10)
+        let sets = (0..<5).map { _ in model.buildQuestions(.auto, using: &rng) }
+        #expect(sets.allSatisfy { $0.count == 10 })
+        let qs = sets.flatMap { $0 }
         #expect(qs.contains { $0.mode == .word })
         #expect(qs.contains { $0.mode == .grammar })
 

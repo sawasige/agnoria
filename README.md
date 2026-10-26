@@ -94,7 +94,7 @@ ci_scripts/       Xcode Cloud のスクリプト（アーカイブ後に dSYM �
 
 ## 問題データ
 
-`Agnoria/Resources/Data/` に単語 400 語・文法 200 問・リスニング 120 問を同梱しています（各スコア帯 100 語 / 50 問 / 30 問）。形式は [docs/SPEC.md](docs/SPEC.md) §2.1 を参照してください。
+`Agnoria/Resources/Data/` に単語 600 語・文法 200 問・リスニング 120 問を同梱しています（各スコア帯 150 語 / 50 問 / 30 問）。形式は [docs/SPEC.md](docs/SPEC.md) §2.1 を参照してください。
 
 データを追加・修正するときの約束:
 
