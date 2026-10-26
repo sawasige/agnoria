@@ -4,6 +4,14 @@ import Foundation
 nonisolated struct ExampleSentence: Codable, Hashable, Sendable {
     var en: String
     var ja: String
+    /// [v2.2] 穴埋めで空欄にする語（例文中の形のまま。shipped など）。無ければ `Cloze.fill` の推測に任せる
+    var blank: String?
+    /// [v2.2] 穴埋めの誤答 3 つ。`blank` と同じ活用形にそろえてある（packed / ordered / returned）
+    var distractors: [String]?
+
+    init(en: String, ja: String, blank: String? = nil, distractors: [String]? = nil) {
+        self.en = en; self.ja = ja; self.blank = blank; self.distractors = distractors
+    }
 }
 
 /// バンドル JSON の 1 要素 / SwiftData から切り出した値型。actor 間を安全に渡せる。
@@ -17,6 +25,8 @@ nonisolated struct WordSnapshot: Codable, Hashable, Sendable, Identifiable {
     var distractors: [String]
     var category: String
     var level: Int
+    /// [v2.2] 日→英の誤答（英単語の原形 3 つ）。3 つの例文のどれにも入らない語を人手で選んである
+    var enDistractors: [String]?
 
     var example: String {
         get { examples.first?.en ?? "" }
@@ -28,9 +38,9 @@ nonisolated struct WordSnapshot: Codable, Hashable, Sendable, Identifiable {
     }
 
     init(id: String, word: String, pos: String, meaning: String, examples: [ExampleSentence],
-         distractors: [String], category: String, level: Int) {
+         distractors: [String], category: String, level: Int, enDistractors: [String]? = nil) {
         self.id = id; self.word = word; self.pos = pos; self.meaning = meaning; self.examples = examples
-        self.distractors = distractors; self.category = category; self.level = level
+        self.distractors = distractors; self.category = category; self.level = level; self.enDistractors = enDistractors
     }
 
     /// 例文 1 つで作る（テストと旧データ用）
@@ -42,6 +52,7 @@ nonisolated struct WordSnapshot: Codable, Hashable, Sendable, Identifiable {
 
     enum CodingKeys: String, CodingKey {
         case id, word, pos, meaning, examples, distractors, category, level
+        case enDistractors = "en_distractors"
     }
 }
 

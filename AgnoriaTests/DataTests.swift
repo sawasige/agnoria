@@ -67,6 +67,28 @@ struct BundleDataTests {
         }
     }
 
+    @Test("[v2.2] すべての単語に日→英の誤答、すべての例文に空欄の語と活用をそろえた誤答がある") func wordDistractorsComplete() throws {
+        let payload = try BundleData.load(bundle: bundle)
+        for w in payload.words {
+            let lemmas = try #require(w.enDistractors, "\(w.id)")
+            #expect(lemmas.count == 3, "\(w.id)")
+            for ex in w.examples {
+                let blank = try #require(ex.blank, "\(w.id): \(ex.en)")
+                let d = try #require(ex.distractors, "\(w.id): \(ex.en)")
+                #expect(d.count == 3)
+                if blank.lowercased() == w.word.lowercased() {
+                    // 空欄が原形なら、誤答も原形（文頭なら頭だけ大文字）
+                    #expect(d.map { $0.lowercased() } == lemmas.map { $0.lowercased() }, "\(w.id): \(ex.en)")
+                } else {
+                    // 空欄が活用形なら、誤答も活用させてある
+                    #expect(zip(d, lemmas).allSatisfy { $0.lowercased() != $1.lowercased() }, "\(w.id): \(ex.en) \(d)")
+                }
+                // 文頭の空欄は誤答も大文字で始める（大文字小文字で正解が分からないように）
+                #expect(d.allSatisfy { $0.first!.isUppercase == blank.first!.isUppercase }, "\(w.id): \(ex.en)")
+            }
+        }
+    }
+
     @Test("fingerprint は内容が変わると変わる") func fingerprintChanges() throws {
         let a = try BundleData.decode(wordsData: Data("[]".utf8), grammarData: Data("[]".utf8), listeningData: Data("[]".utf8))
         let b = try BundleData.decode(wordsData: Data("[ ]".utf8), grammarData: Data("[]".utf8), listeningData: Data("[]".utf8))
@@ -85,7 +107,7 @@ struct QuestionCatalogTests {
         var catalog = QuestionCatalog.empty
         let elapsed = try clock.measure { catalog = QuestionCatalog(try BundleData.load(bundle: bundle)) }
         #expect(elapsed < .milliseconds(500), "\(elapsed)")
-        #expect(catalog.words.count == 400 && catalog.grammar.count == 200 && catalog.listening.count == 120)
+        #expect(catalog.words.count == 600 && catalog.grammar.count == 200 && catalog.listening.count == 120)
         #expect(!catalog.isEmpty && QuestionCatalog.empty.isEmpty)
         #expect(catalog.wordByID["w-0001"]?.word == "invoice")
         #expect(catalog.grammarByID["pos-001"] != nil && catalog.listeningByID["lis-wh-001"] != nil)
@@ -93,10 +115,10 @@ struct QuestionCatalogTests {
 
     @Test("軸ごとの集計用の一覧と、到達帯までの絞り込み") func items() throws {
         let catalog = QuestionCatalog(try BundleData.load(bundle: bundle))
-        #expect(catalog.levelItemsByMode[.word]?.count == 400)
+        #expect(catalog.levelItemsByMode[.word]?.count == 600)
         #expect(catalog.levelItemsByMode[.listening]?.count == 120)
         #expect(catalog.categoryItems(.grammar, levels: [450]).count == 50)
-        #expect(catalog.categoryItems(.word, levels: [450, 500]).count == 200)
+        #expect(catalog.categoryItems(.word, levels: [450, 500]).count == 300)
         #expect(Set(catalog.categoryItems(.listening, levels: Level.allValues).map(\.category)) == Set(ListeningCategory.allCases.map(\.rawValue)))
     }
 

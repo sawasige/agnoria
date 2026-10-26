@@ -178,15 +178,15 @@
     "choices": [
       "She liked it, but she wants a lower price.",
       "I'll propose a new date.",
-      "I'll ask the client tomorrow."
+      "The client's office is downtown."
     ],
     "choices_ja": [
       "気に入ったけれど、価格を下げてほしいそうです。",
       "新しい日程を提案します。",
-      "明日お客様に聞いてみます。"
+      "お客様の事務所は中心街にあります。"
     ],
     "answer": 0,
-    "explanation": "What で内容を尋ねているので、顧客の反応を伝える She liked it, but she wants a lower price. が自然。I'll propose a new date. は proposal と似た音の propose を使った引っかけで、I'll ask the client tomorrow. は client を繰り返して未来の話にすり替えている。",
+    "explanation": "What で内容を尋ねているので、顧客の反応を伝える She liked it, but she wants a lower price. が自然。I'll propose a new date. は proposal と似た音の propose を使った引っかけで、The client's office is downtown. は client を繰り返して場所を答えている。",
     "level": 500
   },
   {
@@ -371,7 +371,7 @@
       "The warehouse closes at six."
     ],
     "choices_ja": [
-      "それは パクさんの判断だったのでは。",
+      "それはパクさんの判断だったのでは。",
       "日曜までには終わります。",
       "倉庫は 6 時に閉まります。"
     ],
@@ -404,17 +404,17 @@
     "question": "Where did you end up storing the extra trade show banners?",
     "question_ja": "展示会の余った横断幕は結局どこにしまったのですか。",
     "choices": [
-      "Haven't you seen the closet by the loading dock?",
+      "Check the closet by the loading dock.",
       "The show ran out of brochures early.",
       "We'll store them next month."
     ],
     "choices_ja": [
-      "搬入口のそばの物置を見ていませんか。",
+      "搬入口のそばの物置を見てください。",
       "展示会では早々にパンフレットが足りなくなりました。",
       "来月しまう予定です。"
     ],
     "answer": 0,
-    "explanation": "Where で保管場所を尋ねているので、Haven't you seen the closet by the loading dock? と場所を問い返す形で示す応答が自然。The show ran out of brochures early. は show を繰り返しただけ、We'll store them next month. は過去の質問に未来で答えている。",
+    "explanation": "Where で保管場所を尋ねているので、Check the closet by the loading dock. と場所を示す応答が自然。The show ran out of brochures early. は show を繰り返しただけ、We'll store them next month. は過去の質問に未来で答えている。",
     "level": 600
   },
   {
@@ -1052,15 +1052,15 @@
     "choices": [
       "Sorry, I'm visiting my parents that day.",
       "The switch is on the wall.",
-      "Yes, Saturday is a busy day."
+      "It's on the second shelf."
     ],
     "choices_ja": [
       "ごめんなさい。その日は両親のところに行くんです。",
       "スイッチは壁にあります。",
-      "はい、土曜日は忙しい日です。"
+      "2 段目の棚にあります。"
     ],
     "answer": 0,
-    "explanation": "Would you mind で頼んでいるので、理由を添えて断る Sorry, I'm visiting my parents that day. が自然。The switch is on the wall. は switching と switch の似た音を使った引っかけで、Yes, Saturday is a busy day. は Saturday を繰り返しただけで返事になっていない。",
+    "explanation": "Would you mind で頼んでいるので、理由を添えて断る Sorry, I'm visiting my parents that day. が自然。The switch is on the wall. は switching と switch、It's on the second shelf. は shifts と shelf の似た音を使った引っかけ。",
     "level": 500
   },
   {
@@ -1402,7 +1402,7 @@
       "はい、コールセンターは 9 時に開きます。"
     ],
     "answer": 1,
-    "explanation": "電話があったという報告に対して、質問で返す Did she leave a message? が自然。I'm going out for lunch. は out を繰り返した自分の予定で、Yes, the call center opens at nine. は平叙文に Yes で始め、call を繰り返しただけ。",
+    "explanation": "電話があったという報告に対して、質問で返す Did she leave a message? が自然。I'm going out for lunch. は out を繰り返した自分の予定で、Yes, the call center opens at nine. は call を繰り返して営業時間を答えているだけで、電話の報告とかみ合わない。",
     "level": 450
   },
   {
@@ -1413,15 +1413,15 @@
     "choices": [
       "It's from the new shop downstairs.",
       "I need three copies.",
-      "Yes, it's 3 dollars."
+      "Every Tuesday morning."
     ],
     "choices_ja": [
       "下の新しい店のものなんです。",
       "コピーが 3 部必要です。",
-      "はい、3 ドルです。"
+      "毎週火曜の朝です。"
     ],
     "answer": 0,
-    "explanation": "感想に対して、説明を添えて応じる It's from the new shop downstairs. が自然。I need three copies. は coffee と copies の似た音を使った引っかけで、Yes, it's 3 dollars. は平叙文に Yes で答えていて、値段も聞かれていない。",
+    "explanation": "感想に対して、説明を添えて応じる It's from the new shop downstairs. が自然。I need three copies. は coffee と copies の似た音を使った引っかけで、Every Tuesday morning. は聞かれていない時を答えていて話がかみ合わない。",
     "level": 450
   },
   {
@@ -1630,7 +1630,7 @@
       "はい、ホールは先週塗装されました。"
     ],
     "answer": 1,
-    "explanation": "不足を知らせる平叙文なので、We could borrow some from the training room. と対処を提案する応答が自然。The chairperson arrives at noon. は chairs と chairperson の似た音、Yes, the hall was painted last week. は疑問文でないのに Yes で始めたうえ hall を繰り返しただけ。",
+    "explanation": "不足を知らせる平叙文なので、We could borrow some from the training room. と対処を提案する応答が自然。The chairperson arrives at noon. は chairs と chairperson の似た音、Yes, the hall was painted last week. は hall を繰り返しただけで、椅子の不足とかみ合わない。",
     "level": 550
   },
   {
@@ -1649,7 +1649,7 @@
       "それなら明日は残業ですね。"
     ],
     "answer": 2,
-    "explanation": "締め切りが早まった知らせなので、Then we'll need to work late tomorrow. と対処を述べる応答が自然。I proposed to her last spring. は proposal と proposed の似た音、No, Friday is fine with me. は疑問文でないのに No で始めたうえ Friday を繰り返しただけ。",
+    "explanation": "締め切りが早まった知らせなので、Then we'll need to work late tomorrow. と対処を述べる応答が自然。I proposed to her last spring. は proposal と proposed の似た音、No, Friday is fine with me. は Friday を繰り返しただけで、締め切りが水曜に早まった話とかみ合わない。",
     "level": 550
   },
   {
@@ -1687,7 +1687,7 @@
       "そろそろ他社の見積もりを取る時期かもしれませんね。"
     ],
     "answer": 2,
-    "explanation": "値上げの知らせなので、Maybe it's time to get other quotes. と対処を提案する応答が自然。Yes, I got a raise in March. は疑問文でないのに Yes で始めたうえ raised と raise の似た音を使い、The price tags are in the drawer. は prices を繰り返しただけ。",
+    "explanation": "値上げの知らせなので、Maybe it's time to get other quotes. と対処を提案する応答が自然。Yes, I got a raise in March. は raised と raise（昇給）の似た音を使った引っかけで、The price tags are in the drawer. は prices を繰り返しただけ。",
     "level": 550
   },
   {
@@ -1725,7 +1725,7 @@
       "とりあえず灰色のものでいいですか。"
     ],
     "answer": 2,
-    "explanation": "在庫切れの知らせなので、Would gray ones do for now? と代わりを提案して問い返す応答が自然。I usually run before work. は run を別の意味で繰り返しただけ、Yes, she blew out the candles. は疑問文でないのに Yes で始めたうえ blue と blew の似た音を使った引っかけ。",
+    "explanation": "在庫切れの知らせなので、Would gray ones do for now? と代わりを提案して問い返す応答が自然。I usually run before work. は run を別の意味で繰り返しただけ、Yes, she blew out the candles. は blue と blew の似た音を使った引っかけ。",
     "level": 600
   },
   {
@@ -1744,7 +1744,7 @@
       "いいえ、そろそろ昼食の時間です。"
     ],
     "answer": 0,
-    "explanation": "不満を述べる平叙文なので、Tell me about it, I gave up after an hour. と同感を示す応答が自然。The old building was torn down. は old を繰り返しただけ、No, it's about time for lunch. は疑問文でないのに No で始めたうえ timesheet と time の似た音を使った引っかけ。",
+    "explanation": "不満を述べる平叙文なので、Tell me about it, I gave up after an hour. と同感を示す応答が自然。The old building was torn down. は old を繰り返しただけ、No, it's about time for lunch. は timesheet と time の似た音を使った引っかけ。",
     "level": 600
   },
   {
@@ -1782,7 +1782,7 @@
       "はい、10 時 15 分です。"
     ],
     "answer": 0,
-    "explanation": "良い結果の報告なので、That should make the shareholders happy. と受けて感想を述べる応答が自然。I figured you'd be late. は figures と figured の似た音、Yes, a quarter past ten. は疑問文でないのに Yes で始めたうえ quarterly と quarter の似た音を使った引っかけ。",
+    "explanation": "良い結果の報告なので、That should make the shareholders happy. と受けて感想を述べる応答が自然。I figured you'd be late. は figures と figured の似た音、Yes, a quarter past ten. は quarterly と quarter の似た音を使った引っかけ。",
     "level": 600
   },
   {
@@ -1905,17 +1905,17 @@
     "question": "You've met Mr. Okada before, haven't you?",
     "question_ja": "以前に岡田さんに会ったことがありますよね。",
     "choices": [
-      "He's a good man.",
+      "The meeting room is booked.",
       "I'll meet him tomorrow.",
       "Yes, at last year's conference."
     ],
     "choices_ja": [
-      "いい人ですよ。",
+      "会議室は予約済みです。",
       "明日、彼に会います。",
       "はい、去年の会議で。"
     ],
     "answer": 2,
-    "explanation": "付加疑問文で確認しているので、Yes, at last year's conference. が自然。He's a good man. は Mr. Okada から連想した説明で、I'll meet him tomorrow. は過去の経験の確認に未来で答えている。",
+    "explanation": "付加疑問文で確認しているので、Yes, at last year's conference. が自然。The meeting room is booked. は met と meeting の似た音を使った引っかけで、I'll meet him tomorrow. は過去の経験の確認に未来で答えている。",
     "level": 450
   },
   {
@@ -2073,7 +2073,7 @@
   {
     "id": "lis-alt-014",
     "category": "選択・付加疑問文",
-    "question": "The audit team is coming on the fifteenth, isn't it?",
+    "question": "The audit team is coming on the fifteenth, aren't they?",
     "question_ja": "監査チームが来るのは 15 日ですよね。",
     "choices": [
       "Fifteen copies will be plenty.",
@@ -2162,7 +2162,7 @@
       "予算会議は 4 時です。"
     ],
     "answer": 0,
-    "explanation": "否定形の付加疑問文で承認の有無を確認しているので、Not yet, he wants more details. と状況を伝える応答が自然。He proved it was a mistake. は approve と proved の似た音、The budget meeting is at four. は budget を繰り返して時刻を答えている。",
+    "explanation": "否定文に付けた付加疑問で承認の有無を確認しているので、Not yet, he wants more details. と状況を伝える応答が自然。He proved it was a mistake. は approve と proved の似た音、The budget meeting is at four. は budget を繰り返して時刻を答えている。",
     "level": 550
   },
   {
@@ -2200,7 +2200,7 @@
       "はい、車をバックで出しました。"
     ],
     "answer": 0,
-    "explanation": "否定形の付加疑問文で辞退していないかを確認しているので、Not as far as I know. と知る限りではと答える応答が自然。The key is under the mat. は keynote と key の似た音、Yes, I backed the car out. は backed out を別の意味で繰り返しただけ。",
+    "explanation": "否定文に付けた付加疑問で辞退していないかを確認しているので、Not as far as I know. と知る限りではと答える応答が自然。The key is under the mat. は keynote と key の似た音、Yes, I backed the car out. は backed out を別の意味で繰り返しただけ。",
     "level": 600
   },
   {
@@ -2233,7 +2233,7 @@
       "It's safe to go over there."
     ],
     "choices_ja": [
-      "それは リベラさんの担当だと思っていました。",
+      "それはリベラさんの担当だと思っていました。",
       "小切手は今朝決済されました。",
       "あちらへ行っても安全ですよ。"
     ],

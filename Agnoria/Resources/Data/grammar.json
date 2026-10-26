@@ -1001,7 +1001,7 @@
       "for"
     ],
     "answer": 3,
-    "explanation": "be responsible for で「〜に責任がある」。responsible の後に of や to は続かない。",
+    "explanation": "be responsible for で「〜を担当している・〜に責任がある」。後ろに担当する仕事（preparing the report）が来るときは for を使う。be responsible to は「（人）に対して責任を負う」で、後ろは人になる。",
     "level": 500
   },
   {
@@ -1466,7 +1466,7 @@
       "decorate"
     ],
     "answer": 1,
-    "explanation": "パスワードを「定期的に更新する」ので update。every ninety days が cue で、negotiate（交渉する）や assemble（組み立てる）はパスワードには使えない。",
+    "explanation": "パスワードを「定期的に更新する」ので update。every ninety days が手がかりで、negotiate（交渉する）や assemble（組み立てる）はパスワードには使えない。",
     "level": 500
   },
   {
@@ -1691,7 +1691,7 @@
       "on"
     ],
     "answer": 1,
-    "explanation": "「規則に従う」は comply with で決まった連語。regulations という目的語が cue で、to や for は comply と結びつかない。",
+    "explanation": "「規則に従う」は comply with で決まった連語。with を決めているのは動詞 comply で、to や for は comply と結びつかない。",
     "level": 550
   },
   {
@@ -2006,7 +2006,7 @@
       "accompanied"
     ],
     "answer": 0,
-    "explanation": "visitors は職員に「同行される」側なので受動の不定詞 to be accompanied。by a staff member が cue で、能動の to accompany では意味が逆になる。",
+    "explanation": "visitors は職員に「同行される」側なので受動の不定詞 to be accompanied。by a staff member が手がかりで、能動の to accompany では意味が逆になる。",
     "level": 550
   },
   {
@@ -2021,7 +2021,7 @@
       "has repaved"
     ],
     "answer": 1,
-    "explanation": "駐車場は業者によって「舗装し直される」側なので受動態で、tomorrow から未来形 will be repaved。by a contractor が受動の cue。",
+    "explanation": "駐車場は業者によって「舗装し直される」側なので受動態で、tomorrow から未来形 will be repaved。by a contractor が受動の手がかり。",
     "level": 550
   },
   {
@@ -2186,7 +2186,7 @@
       "expired"
     ],
     "answer": 2,
-    "explanation": "「予想を15%上回った」なので exceeded。by nearly fifteen percent という差を表す語句が cue で、examined（調べた）では差の表現と結びつかない。",
+    "explanation": "「予想を15%上回った」なので exceeded。by nearly fifteen percent という差を表す語句が手がかりで、examined（調べた）では差の表現と結びつかない。",
     "level": 550
   },
   {
@@ -2666,7 +2666,7 @@
       "another"
     ],
     "answer": 0,
-    "explanation": "二人が互いに祝い合ったので「お互い」を表す each other。themselves では「自分自身を祝った」となり意味が合わない。each other と one another は今では同じように使える。",
+    "explanation": "二人が互いに祝い合ったので「お互い」を表す each other。themselves では「自分自身を祝った」となり意味が合わない。another だけでは「お互い」の意味にならない（one another なら可）。",
     "level": 600
   },
   {
@@ -2801,7 +2801,7 @@
       "has been signed"
     ],
     "answer": 3,
-    "explanation": "Once に導かれる時の副詞節では未来のことも現在形で表すので has been signed。will be signed は時の副詞節内で使えない。",
+    "explanation": "Once に導かれる時の副詞節では、未来のことも現在形や現在完了形で表す。契約は「署名される」側なので受動の has been signed。will be signed は時の副詞節では使わず、能動の signs では契約が署名することになり、had been signed は時制が合わない。",
     "level": 600
   },
   {
