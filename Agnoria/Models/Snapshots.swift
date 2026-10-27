@@ -45,9 +45,9 @@ nonisolated struct WordSnapshot: Codable, Hashable, Sendable, Identifiable {
 
     /// 例文 1 つで作る（テストと旧データ用）
     init(id: String, word: String, pos: String, meaning: String, example: String, exampleJa: String,
-         distractors: [String], category: String, level: Int) {
+         distractors: [String], category: String, level: Int, enDistractors: [String]? = nil) {
         self.init(id: id, word: word, pos: pos, meaning: meaning, examples: [ExampleSentence(en: example, ja: exampleJa)],
-                  distractors: distractors, category: category, level: level)
+                  distractors: distractors, category: category, level: level, enDistractors: enDistractors)
     }
 
     enum CodingKeys: String, CodingKey {
