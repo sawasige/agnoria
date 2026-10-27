@@ -283,6 +283,11 @@ struct QuizView: View {
             .foregroundStyle(answer.isCorrect ? Color.green : Color.red)
             ExplanationView(question: q)
                 .id(q.id)
+            // 間違えた直後がいちばん類題を解きたい場面（§5 [v2.2]）
+            if !answer.isCorrect, PracticeButton.isOffered(for: q), let w = q.word {
+                PracticeButton(word: w)
+                    .id(q.id)
+            }
         }
         .fixedSize(horizontal: false, vertical: true)
         .glassCard()
@@ -550,6 +555,7 @@ struct QuizView: View {
                 Speaker.shared.speak(text, rate: settings.speechRate)
             }
         }
+        if !a.isCorrect, PracticeButton.isOffered(for: run.current) { AIAssist.prewarmPractice() }
         AccessibilityNotification.Announcement(a.isCorrect ? "正解" : "不正解。正解は \(QuizQuestion.choiceLabels[run.current.correctIndex])").post()
     }
 

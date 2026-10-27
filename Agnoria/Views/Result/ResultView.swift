@@ -4,9 +4,6 @@ import StoreKit
 struct ResultView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.requestReview) private var requestReview
-    @State private var practice: QuizQuestion?
-    @State private var aiHidden = !AIAssist.isAvailable
-    @State private var generatingFor: String?
 
     var body: some View {
         if let run = model.run {
@@ -63,10 +60,7 @@ struct ResultView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("間違えた問題").font(.headline)
                         ForEach(wrong, id: \.question.id) { a in
-                            WrongAnswerRow(answer: a, aiHidden: aiHidden,
-                                           generating: generatingFor == a.question.itemID) {
-                                Task { await generatePractice(for: a.question) }
-                            }
+                            WrongAnswerRow(answer: a)
                         }
                     }
                 }
@@ -107,8 +101,8 @@ struct ResultView: View {
         .background { AppBackground() }
         .navigationTitle("結果")
         .navigationBarBackButtonHidden(true)
-        .sheet(item: $practice) { q in
-            PracticeQuestionView(question: q)
+        .onAppear {
+            if wrong.contains(where: { PracticeButton.isOffered(for: $0.question) }) { AIAssist.prewarmPractice() }
         }
         .task {
             // 結果を見てから頼む（§4.8 / §4.9 [v1.8]）。その前に画面を離れたら頼まない。
@@ -131,25 +125,10 @@ struct ResultView: View {
         default: return "苦手が見つかった。もう1セットいこう"
         }
     }
-
-    private func generatePractice(for question: QuizQuestion) async {
-        guard let w = question.word else { return }
-        generatingFor = question.itemID
-        defer { generatingFor = nil }
-        model.analytics.log(.practiceUsed)
-        if let q = await AIAssist.practiceCloze(for: w) {
-            practice = q
-        } else {
-            aiHidden = true
-        }
-    }
 }
 
 struct WrongAnswerRow: View {
     let answer: QuizRun.Answer
-    let aiHidden: Bool
-    let generating: Bool
-    let onPractice: () -> Void
     @State private var expanded = false
 
     var body: some View {
@@ -165,17 +144,8 @@ struct WrongAnswerRow: View {
                     Text(q.choices[answer.chosenIndex]).font(.body).foregroundStyle(.red)
                 }
                 ExplanationView(question: q)
-                if !aiHidden, q.wordFormat == .cloze, q.word != nil {
-                    Button(action: onPractice) {
-                        if generating {
-                            ProgressView().controlSize(.small)
-                        } else {
-                            Label("類題を出す", systemImage: "sparkles")
-                        }
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                    .disabled(generating)
+                if PracticeButton.isOffered(for: q), let w = q.word {
+                    PracticeButton(word: w)
                 }
             }
             .padding(.top, 6)
