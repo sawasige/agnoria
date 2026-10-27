@@ -471,12 +471,12 @@
     "question_ja": "プリンターのインクが切れていたので、ウッドさんは新しいカートリッジを買いに出かけました。",
     "choices": [
       "or",
-      "but",
+      "unless",
       "so",
       "because"
     ],
     "answer": 2,
-    "explanation": "「インクが切れていた」の結果として「買いに出かけた」とつなぐ so が正解。because を入れると買いに出たことがインク切れの理由になり、but は対照、or は「または」を表すので意味が通らない。",
+    "explanation": "「インクが切れていた」の結果として「買いに出かけた」とつなぐ so が正解。because を入れると買いに出たことがインク切れの理由になり、unless は「〜しない限り」、or は「または」を表すので意味が通らない。",
     "level": 450
   },
   {
@@ -2691,12 +2691,12 @@
     "question_ja": "部署の全員が出席できるよう、会議はより広い部屋に移されました。",
     "choices": [
       "so that",
-      "in case",
+      "unless",
       "even if",
       "as though"
     ],
     "answer": 0,
-    "explanation": "「全員が出席できるように」という目的を表すので so that。in case は「〜する場合に備えて」、even if は「たとえ〜でも」、as though は「まるで〜かのように」で、部屋を移した理由として意味が合わない。",
+    "explanation": "「全員が出席できるように」という目的を表すので so that。unless は「〜しない限り」、even if は「たとえ〜でも」、as though は「まるで〜かのように」で、部屋を移した理由として意味が合わない。",
     "level": 550
   },
   {
@@ -3797,8 +3797,8 @@
   {
     "id": "prep-802",
     "category": "前置詞・接続詞",
-    "question": "______ the high cost of the new equipment, the factory decided to lease two machines rather than buy them.",
-    "question_ja": "新しい設備は高額なため、工場は 2 台を購入せずリースすることに決めました。",
+    "question": "______ the high cost of the new equipment, the factory decided not to buy it this year.",
+    "question_ja": "新しい設備は高額なため、工場は今年はそれを購入しないことに決めました。",
     "choices": [
       "Instead of",
       "In spite of",
@@ -3806,7 +3806,7 @@
       "In addition to"
     ],
     "answer": 2,
-    "explanation": "高額であることが購入せずリースする理由なので、原因を表す because of「〜のために」が正解。in spite of「〜にもかかわらず」は逆の関係（高いのに）を表すので、高いから買わないという流れに合わない。instead of「〜の代わりに」、in addition to「〜に加えて」も意味が通らない。",
+    "explanation": "高額であることが今年は買わない理由なので、原因を表す because of「〜のために」が正解。in spite of「〜にもかかわらず」では「高いのに買わない」となり、逆接の関係が成り立たない。instead of「〜の代わりに」、in addition to「〜に加えて」も意味が通らない。",
     "level": 600
   },
   {
