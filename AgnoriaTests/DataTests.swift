@@ -107,7 +107,7 @@ struct QuestionCatalogTests {
         var catalog = QuestionCatalog.empty
         let elapsed = try clock.measure { catalog = QuestionCatalog(try BundleData.load(bundle: bundle)) }
         #expect(elapsed < .milliseconds(500), "\(elapsed)")
-        #expect(catalog.words.count == 600 && catalog.grammar.count == 200 && catalog.listening.count == 120)
+        #expect(catalog.words.count == 600 && catalog.grammar.count == 300 && catalog.listening.count == 120)
         #expect(!catalog.isEmpty && QuestionCatalog.empty.isEmpty)
         #expect(catalog.wordByID["w-0001"]?.word == "invoice")
         #expect(catalog.grammarByID["pos-001"] != nil && catalog.listeningByID["lis-wh-001"] != nil)
@@ -117,7 +117,7 @@ struct QuestionCatalogTests {
         let catalog = QuestionCatalog(try BundleData.load(bundle: bundle))
         #expect(catalog.levelItemsByMode[.word]?.count == 600)
         #expect(catalog.levelItemsByMode[.listening]?.count == 120)
-        #expect(catalog.categoryItems(.grammar, levels: [450]).count == 50)
+        #expect(catalog.categoryItems(.grammar, levels: [450]).count == 75)
         #expect(catalog.categoryItems(.word, levels: [450, 500]).count == 300)
         #expect(Set(catalog.categoryItems(.listening, levels: Level.allValues).map(\.category)) == Set(ListeningCategory.allCases.map(\.rawValue)))
     }
