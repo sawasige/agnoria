@@ -150,6 +150,111 @@
     "level": 450
   },
   {
+    "id": "pos-501",
+    "category": "品詞",
+    "question": "The shop on Main Street sells ______ furniture at low prices.",
+    "question_ja": "メインストリートのその店は、魅力的な家具を手頃な価格で販売しています。",
+    "choices": [
+      "attract",
+      "attraction",
+      "attractively",
+      "attractive"
+    ],
+    "answer": 3,
+    "explanation": "名詞 furniture の前に置いて修飾する形容詞 attractive が正解。動詞 attract や副詞 attractively は名詞を前から修飾できない。",
+    "level": 450
+  },
+  {
+    "id": "pos-502",
+    "category": "品詞",
+    "question": "The ticket agent showed great ______ while explaining the new fare system to an elderly passenger.",
+    "question_ja": "窓口の係員は、新しい運賃の仕組みを年配の乗客に説明する間、とても辛抱強く対応しました。",
+    "choices": [
+      "patient",
+      "patiently",
+      "patience",
+      "impatient"
+    ],
+    "answer": 2,
+    "explanation": "形容詞 great の後ろで showed の目的語になる名詞 patience「忍耐」が正解。impatient は形容詞、patiently は副詞なので目的語になれない。patient は形容詞「辛抱強い」のほか名詞「患者」もあるが、数えられる名詞なので冠詞のない great patient の形にならず、「患者を見せた」では意味も通らない。",
+    "level": 450
+  },
+  {
+    "id": "pos-503",
+    "category": "品詞",
+    "question": "The new express train is ______ popular with business travelers.",
+    "question_ja": "新しい特急列車は、出張客にたいへん人気があります。",
+    "choices": [
+      "extremely",
+      "extreme",
+      "extremes",
+      "extremity"
+    ],
+    "answer": 0,
+    "explanation": "形容詞 popular を前から修飾する副詞 extremely が正解。形容詞 extreme は別の形容詞を修飾できず、名詞 extremes や extremity は意味も形も合わない。",
+    "level": 450
+  },
+  {
+    "id": "pos-504",
+    "category": "品詞",
+    "question": "The store will ______ its opening hours during the holiday season.",
+    "question_ja": "その店は、休暇シーズンの間、営業時間を延長します。",
+    "choices": [
+      "extension",
+      "extensive",
+      "extensively",
+      "extend"
+    ],
+    "answer": 3,
+    "explanation": "助動詞 will の後ろは動詞の原形なので extend が正解。名詞 extension や形容詞 extensive は will の後ろに置けず、目的語 its opening hours も取れない。",
+    "level": 450
+  },
+  {
+    "id": "pos-505",
+    "category": "品詞",
+    "question": "Several ______ attended the product demonstration in the lobby.",
+    "question_ja": "何人かの来場者が、ロビーでの製品の実演に参加しました。",
+    "choices": [
+      "visitors",
+      "visit",
+      "visited",
+      "visiting"
+    ],
+    "answer": 0,
+    "explanation": "Several「いくつかの」の後ろで文の主語になる複数名詞 visitors「来場者」が正解。visit は名詞「訪問」でもあるが単数形なので Several の後ろに置けず、「訪問が参加した」では意味も通らない。分詞 visited や visiting は Several の後ろで主語になれない。",
+    "level": 450
+  },
+  {
+    "id": "pos-506",
+    "category": "品詞",
+    "question": "The hotel lobby looks very ______ after the renovation.",
+    "question_ja": "改装後、ホテルのロビーはとてもモダンに見えます。",
+    "choices": [
+      "modernly",
+      "modernize",
+      "modern",
+      "modernization"
+    ],
+    "answer": 2,
+    "explanation": "looks の後ろで主語の様子を表す補語には形容詞 modern が入る。副詞 modernly は補語になれず、動詞 modernize や名詞 modernization は very の後ろに置けない。",
+    "level": 450
+  },
+  {
+    "id": "pos-507",
+    "category": "品詞",
+    "question": "Customer ______ is the top priority for our sales staff.",
+    "question_ja": "顧客満足は、当社の販売スタッフにとって最優先事項です。",
+    "choices": [
+      "satisfy",
+      "satisfied",
+      "satisfying",
+      "satisfaction"
+    ],
+    "answer": 3,
+    "explanation": "Customer と組んで文の主語になる名詞 satisfaction が正解。動詞 satisfy や形容詞 satisfied、satisfying は主語になれない。",
+    "level": 450
+  },
+  {
     "id": "prep-003",
     "category": "前置詞・接続詞",
     "question": "The invoice must be paid ______ thirty days of the delivery date.",
@@ -297,6 +402,81 @@
     ],
     "answer": 2,
     "explanation": "後ろの or と組んで「AかBか」を表すのは either ... or。both は and、neither は nor と組むので不可。",
+    "level": 450
+  },
+  {
+    "id": "prep-501",
+    "category": "前置詞・接続詞",
+    "question": "The new café is located ______ the bank and the post office.",
+    "question_ja": "新しいカフェは、銀行と郵便局の間にあります。",
+    "choices": [
+      "among",
+      "between",
+      "across",
+      "through"
+    ],
+    "answer": 1,
+    "explanation": "A and B と組んで「A と B の間に」を表す between が正解。among は 3 つ以上のものの間に使い、A and B の 2 つには使わない。across「〜を横切って、〜の向こう側に」や through「〜を通り抜けて」は、2 つの建物の間という位置を表さない。",
+    "level": 450
+  },
+  {
+    "id": "prep-502",
+    "category": "前置詞・接続詞",
+    "question": "The gift shop is open from 10 a.m. ______ 8 p.m. every day.",
+    "question_ja": "ギフトショップは毎日、午前 10 時から午後 8 時まで営業しています。",
+    "choices": [
+      "at",
+      "to",
+      "on",
+      "in"
+    ],
+    "answer": 1,
+    "explanation": "from と組んで「〜から…まで」を表す to が正解。at は一つの時刻を示すだけで、from と組んで終わりの時刻は表せない。on は曜日や日付、in は月や年など幅のある期間に使い、時刻の前には置かない。",
+    "level": 450
+  },
+  {
+    "id": "prep-503",
+    "category": "前置詞・接続詞",
+    "question": "Please finish the report ______ the manager comes back.",
+    "question_ja": "部長が戻るまでに報告書を仕上げてください。",
+    "choices": [
+      "until",
+      "by the time",
+      "during",
+      "while"
+    ],
+    "answer": 1,
+    "explanation": "finish「仕上げる」は一度で終わる動作なので、期限「〜するまでに」を表す by the time が正解。until は「〜するまでずっと」と動作の継続を表すので finish とは合わない。during は前置詞で節を続けられず、while「〜する間」は期限を表さない。",
+    "level": 450
+  },
+  {
+    "id": "prep-504",
+    "category": "前置詞・接続詞",
+    "question": "Ms. Ono traveled to the conference in Osaka ______ train.",
+    "question_ja": "小野さんは大阪での会議に電車で行きました。",
+    "choices": [
+      "by",
+      "on",
+      "in",
+      "with"
+    ],
+    "answer": 0,
+    "explanation": "交通手段を冠詞なしで表す by train が正解。on や in は on the train のように冠詞が必要で、with は交通手段を表さない。",
+    "level": 450
+  },
+  {
+    "id": "prep-505",
+    "category": "前置詞・接続詞",
+    "question": "The printer was out of ink, ______ Mr. Wood went out to buy a new cartridge.",
+    "question_ja": "プリンターのインクが切れていたので、ウッドさんは新しいカートリッジを買いに出かけました。",
+    "choices": [
+      "or",
+      "unless",
+      "so",
+      "because"
+    ],
+    "answer": 2,
+    "explanation": "「インクが切れていた」の結果として「買いに出かけた」とつなぐ so が正解。because を入れると買いに出たことがインク切れの理由になり、unless は「〜しない限り」、or は「または」を表すので意味が通らない。",
     "level": 450
   },
   {
@@ -450,6 +630,66 @@
     "level": 450
   },
   {
+    "id": "pron-501",
+    "category": "代名詞・関係詞",
+    "question": "Please help ______ to coffee and snacks in the break room.",
+    "question_ja": "休憩室のコーヒーと軽食をご自由にお召し上がりください。",
+    "choices": [
+      "yourself",
+      "you",
+      "your",
+      "yours"
+    ],
+    "answer": 0,
+    "explanation": "help oneself to 〜で「〜を自由に取って食べる」。命令文の主語 you と同じ人を指すので再帰代名詞 yourself が正解。目的格 you、所有格 your、所有代名詞 yours はこの形で使えない。",
+    "level": 450
+  },
+  {
+    "id": "pron-502",
+    "category": "代名詞・関係詞",
+    "question": "Customers ______ sign up for our newsletter will receive a free gift.",
+    "question_ja": "ニュースレターに登録したお客様は、無料のプレゼントを受け取れます。",
+    "choices": [
+      "which",
+      "whose",
+      "who",
+      "what"
+    ],
+    "answer": 2,
+    "explanation": "人を表す Customers を先行詞とし、sign up の主語になる関係代名詞 who が正解。which は物に使い、whose は後ろに名詞が必要。what は先行詞を含むので Customers の後ろには置けない。",
+    "level": 450
+  },
+  {
+    "id": "pron-503",
+    "category": "代名詞・関係詞",
+    "question": "The bag ______ I bought at the airport was on sale.",
+    "question_ja": "空港で買ったかばんはセール品でした。",
+    "choices": [
+      "who",
+      "whose",
+      "where",
+      "which"
+    ],
+    "answer": 3,
+    "explanation": "物の The bag を先行詞とし、bought の目的語になる関係代名詞 which が正解。who は人に使い、whose は後ろに名詞が必要。where は関係副詞で後ろに目的語の欠けていない文が続くので、bought の目的語が欠けたこの形には合わない。",
+    "level": 450
+  },
+  {
+    "id": "pron-504",
+    "category": "代名詞・関係詞",
+    "question": "The two hotels are well known for ______ beautiful gardens.",
+    "question_ja": "その 2 つのホテルは美しい庭園でよく知られています。",
+    "choices": [
+      "they",
+      "them",
+      "their",
+      "themselves"
+    ],
+    "answer": 2,
+    "explanation": "名詞 gardens の前に置いて「それらのホテルの」と所有を表す所有格 their が正解。主格 they、目的格 them、再帰代名詞 themselves は名詞の前に置けない。",
+    "level": 450
+  },
+  {
     "id": "tense-001",
     "category": "時制・態",
     "question": "Our office ______ to a larger building two years ago.",
@@ -597,6 +837,111 @@
     ],
     "answer": 2,
     "explanation": "usually「ふだん」は習慣を表すので現在形で、主語が三人称単数なので goes。go は主語と形が合わず、went は過去、is going は今行っている動作を表すため合わない。",
+    "level": 450
+  },
+  {
+    "id": "tense-501",
+    "category": "時制・態",
+    "question": "The shipment has not ______ yet, so we cannot check the items.",
+    "question_ja": "荷物がまだ届いていないので、品物を確認できません。",
+    "choices": [
+      "arrive",
+      "arrives",
+      "arrived",
+      "arriving"
+    ],
+    "answer": 2,
+    "explanation": "has not の後ろに過去分詞を置いて現在完了の否定にするので arrived が正解。原形 arrive、三人称単数の現在形 arrives、-ing 形 arriving は has not の後ろに置けない。",
+    "level": 450
+  },
+  {
+    "id": "tense-502",
+    "category": "時制・態",
+    "question": "English and Chinese ______ at the front desk of this hotel.",
+    "question_ja": "このホテルのフロントでは、英語と中国語が話されています。",
+    "choices": [
+      "are spoken",
+      "speak",
+      "spoke",
+      "is speaking"
+    ],
+    "answer": 0,
+    "explanation": "主語の言語は「話される」側なので受動態 are spoken が正解。speak や spoke は能動態で、言語が自分で話すことになり意味が通らない。is speaking も能動態で、さらに主語 English and Chinese は複数なので is と合わない。",
+    "level": 450
+  },
+  {
+    "id": "tense-503",
+    "category": "時制・態",
+    "question": "Please call me as soon as the taxi ______ at the hotel entrance.",
+    "question_ja": "タクシーがホテルの玄関に着いたらすぐ、電話してください。",
+    "choices": [
+      "arrived",
+      "arrives",
+      "will arrive",
+      "arriving"
+    ],
+    "answer": 1,
+    "explanation": "時を表す as soon as の節では未来のことも現在形で表すので arrives が正解。will arrive は時の節の中では使わず、arrived は過去、arriving は動詞の形が足りない。",
+    "level": 450
+  },
+  {
+    "id": "tense-504",
+    "category": "時制・態",
+    "question": "Our team is ______ to visit the factory next Thursday.",
+    "question_ja": "私たちのチームは、来週の木曜日に工場を訪問する予定です。",
+    "choices": [
+      "going",
+      "go",
+      "went",
+      "gone"
+    ],
+    "answer": 0,
+    "explanation": "be going to 〜「〜する予定だ」の形で going が正解。go や went は is の後ろに置けず、gone は to visit と組んで予定を表せない。",
+    "level": 450
+  },
+  {
+    "id": "tense-505",
+    "category": "時制・態",
+    "question": "The winners of the photo contest will ______ on our website next week.",
+    "question_ja": "写真コンテストの受賞者は、来週当社のウェブサイトで発表されます。",
+    "choices": [
+      "be announced",
+      "announce",
+      "announced",
+      "announcing"
+    ],
+    "answer": 0,
+    "explanation": "受賞者は「発表される」側なので will の後ろに受動態を置く be announced が正解。announce は能動態で目的語もなく、announced や announcing は will の直後に置けない。",
+    "level": 450
+  },
+  {
+    "id": "tense-506",
+    "category": "時制・態",
+    "question": "We ______ many positive reviews since we opened the new café in April.",
+    "question_ja": "4 月に新しいカフェを開いてから、たくさんの好意的なレビューをいただいています。",
+    "choices": [
+      "receive",
+      "received",
+      "have received",
+      "will receive"
+    ],
+    "answer": 2,
+    "explanation": "since we opened ...「開店してから今まで」と継続を表すので現在完了 have received。receive は現在の習慣、received は過去の一時点、will receive は未来を表し、since と合わない。",
+    "level": 450
+  },
+  {
+    "id": "tense-507",
+    "category": "時制・態",
+    "question": "Mr. Ford ______ lunch in the cafeteria when I called him at noon.",
+    "question_ja": "正午に私が電話したとき、フォードさんは社員食堂で昼食をとっているところでした。",
+    "choices": [
+      "was having",
+      "has",
+      "is having",
+      "will have"
+    ],
+    "answer": 0,
+    "explanation": "when I called「電話したとき」という過去の時点に進行中だった動作なので過去進行形 was having が正解。has と is having は現在、will have は未来を表すので called と合わない。",
     "level": 450
   },
   {
@@ -750,6 +1095,36 @@
     "level": 450
   },
   {
+    "id": "vocab-501",
+    "category": "語彙",
+    "question": "Please ______ your seat belt while the bus is moving.",
+    "question_ja": "バスの走行中はシートベルトをお締めください。",
+    "choices": [
+      "fasten",
+      "lend",
+      "carry",
+      "borrow"
+    ],
+    "answer": 0,
+    "explanation": "seat belt と結びつき「締める」を表す fasten が正解。lend「貸す」、borrow「借りる」、carry「運ぶ、持ち歩く」は走行中のシートベルトの扱いとして意味が通らない。",
+    "level": 450
+  },
+  {
+    "id": "vocab-502",
+    "category": "語彙",
+    "question": "Our online store offers free ______ on all orders over 50 dollars.",
+    "question_ja": "当社のオンラインストアでは、50 ドルを超えるご注文はすべて配送料無料です。",
+    "choices": [
+      "salary",
+      "interview",
+      "receipt",
+      "delivery"
+    ],
+    "answer": 3,
+    "explanation": "オンラインストアの注文に対して無料になるのは「配送」の delivery が正解。salary「給料」や interview「面接」は注文と結びつかず、receipt「領収書」は注文額によって無料になるものではない。",
+    "level": 450
+  },
+  {
     "id": "pos-002",
     "category": "品詞",
     "question": "The new printer works ______ even when several people use it at once.",
@@ -897,6 +1272,111 @@
     ],
     "answer": 1,
     "explanation": "名詞句 name badges を修飾するので形容詞 visible。副詞 visibly は名詞を修飾できない。",
+    "level": 500
+  },
+  {
+    "id": "pos-601",
+    "category": "品詞",
+    "question": "The hotel staff paid close ______ to every guest's request.",
+    "question_ja": "ホテルのスタッフは、すべての宿泊客の要望に細かく気を配りました。",
+    "choices": [
+      "attentive",
+      "attention",
+      "attentively",
+      "attend"
+    ],
+    "answer": 1,
+    "explanation": "動詞 paid の目的語で、形容詞 close に修飾される名詞 attention が正解（pay attention to 〜「〜に注意を払う」）。形容詞 attentive や副詞 attentively は目的語になれず、動詞 attend は paid の後に置けない。",
+    "level": 500
+  },
+  {
+    "id": "pos-602",
+    "category": "品詞",
+    "question": "The new manager already seems very ______ with the details of the project.",
+    "question_ja": "新しいマネージャーは、もうプロジェクトの細部をよく把握しているようです。",
+    "choices": [
+      "familiarity",
+      "familiarly",
+      "familiarize",
+      "familiar"
+    ],
+    "answer": 3,
+    "explanation": "seems の後には主語の状態を表す形容詞が来るので familiar（be familiar with 〜「〜をよく知っている」）。副詞 familiarly は補語になれず、名詞 familiarity は very で修飾できない。動詞の原形 familiarize は seems の直後に置けない。",
+    "level": 500
+  },
+  {
+    "id": "pos-603",
+    "category": "品詞",
+    "question": "The new laptops are ______ light, so staff can carry them easily on business trips.",
+    "question_ja": "新しいノートパソコンは驚くほど軽いので、スタッフは出張に楽に持っていけます。",
+    "choices": [
+      "surprisingly",
+      "surprising",
+      "surprise",
+      "surprised"
+    ],
+    "answer": 0,
+    "explanation": "形容詞 light を修飾するのは副詞 surprisingly。形容詞 surprising や surprised は別の形容詞を修飾できず、名詞・動詞の surprise も light の前に置けない。",
+    "level": 500
+  },
+  {
+    "id": "pos-604",
+    "category": "品詞",
+    "question": "The company announced the ______ of its delivery service to three more cities.",
+    "question_ja": "その会社は、配送サービスをさらに 3 つの都市に広げることを発表しました。",
+    "choices": [
+      "expand",
+      "expansive",
+      "expansion",
+      "expansively"
+    ],
+    "answer": 2,
+    "explanation": "冠詞 the と前置詞 of の間には名詞が入るので expansion「拡大」。動詞 expand、形容詞 expansive、副詞 expansively は the の後で名詞の位置に入らない。",
+    "level": 500
+  },
+  {
+    "id": "pos-605",
+    "category": "品詞",
+    "question": "We received more than fifty ______ for the sales position.",
+    "question_ja": "営業職の募集には、50 人を超える応募者が集まりました。",
+    "choices": [
+      "apply",
+      "applicable",
+      "applicants",
+      "applied"
+    ],
+    "answer": 2,
+    "explanation": "more than fifty の後ろで received の目的語になる複数名詞 applicants「応募者」。動詞 apply・applied や形容詞 applicable は名詞の位置に入らない。",
+    "level": 500
+  },
+  {
+    "id": "pos-606",
+    "category": "品詞",
+    "question": "The new booking system makes it ______ for customers to change their reservations.",
+    "question_ja": "新しい予約システムにより、お客様は予約を簡単に変更できるようになりました。",
+    "choices": [
+      "easy",
+      "easily",
+      "ease",
+      "easiness"
+    ],
+    "answer": 0,
+    "explanation": "make it 〜 for A to do の形で、it の状態を表す補語には形容詞が来るので easy。副詞 easily は補語になれず、名詞 ease や easiness では「仕組みが容易さそのもの」となり、for customers to do の形と合わない。",
+    "level": 500
+  },
+  {
+    "id": "pos-607",
+    "category": "品詞",
+    "question": "The airline has ______ increased its fees for checked baggage.",
+    "question_ja": "その航空会社は、預け荷物の料金をわずかに値上げしました。",
+    "choices": [
+      "slightly",
+      "slight",
+      "slightness",
+      "slighted"
+    ],
+    "answer": 0,
+    "explanation": "has と過去分詞 increased の間に入って動詞を修飾するのは副詞 slightly。形容詞 slight は動詞を修飾できず、名詞 slightness や過去分詞 slighted（軽んじられた）もこの位置に入らない。",
     "level": 500
   },
   {
@@ -1050,6 +1530,81 @@
     "level": 500
   },
   {
+    "id": "prep-601",
+    "category": "前置詞・接続詞",
+    "question": "The store is open ______ 9 a.m. and 8 p.m. on weekdays.",
+    "question_ja": "その店は平日、午前 9 時から午後 8 時まで営業しています。",
+    "choices": [
+      "from",
+      "among",
+      "during",
+      "between"
+    ],
+    "answer": 3,
+    "explanation": "between A and B で「A と B の間」。from は from A to B の形で使い and とは組まない。among は 3 つ以上のものの間に使い、during は後ろに期間を表す名詞を 1 つ取るので A and B の形にならない。",
+    "level": 500
+  },
+  {
+    "id": "prep-602",
+    "category": "前置詞・接続詞",
+    "question": "______ the new software, staff can now finish their reports much faster.",
+    "question_ja": "新しいソフトウェアのおかげで、スタッフは今では報告書をずっと早く仕上げられます。",
+    "choices": [
+      "Thanks to",
+      "Although",
+      "Even if",
+      "Unless"
+    ],
+    "answer": 0,
+    "explanation": "後ろが名詞 the new software なので、前置詞の働きをする thanks to「〜のおかげで」が正解。although・even if・unless は接続詞で、後ろに主語と動詞のある節が必要。",
+    "level": 500
+  },
+  {
+    "id": "prep-603",
+    "category": "前置詞・接続詞",
+    "question": "Many employees now take the train ______ driving to work.",
+    "question_ja": "今では多くの社員が、車で通勤する代わりに電車を使っています。",
+    "choices": [
+      "because of",
+      "instead of",
+      "in spite of",
+      "according to"
+    ],
+    "answer": 1,
+    "explanation": "車の代わりに電車を使うので instead of「〜の代わりに」。because of や in spite of では車で通勤することが理由や逆接になり意味が通らず、according to は「〜によると」で情報の出どころを表すので合わない。",
+    "level": 500
+  },
+  {
+    "id": "prep-604",
+    "category": "前置詞・接続詞",
+    "question": "Hotel guests can check in early ______ a room is available.",
+    "question_ja": "部屋が空いていれば、宿泊客は早めにチェックインできます。",
+    "choices": [
+      "unless",
+      "despite",
+      "during",
+      "if"
+    ],
+    "answer": 3,
+    "explanation": "「部屋が空いていれば」という条件なので接続詞 if。unless では「空いていなければ」となり逆の意味になる。despite と during は前置詞で節を取れない。",
+    "level": 500
+  },
+  {
+    "id": "prep-605",
+    "category": "前置詞・接続詞",
+    "question": "The bank is directly ______ from the post office on Main Street.",
+    "question_ja": "その銀行は、メイン通りの郵便局の真向かいにあります。",
+    "choices": [
+      "next",
+      "across",
+      "near",
+      "between"
+    ],
+    "answer": 1,
+    "explanation": "across from 〜で「〜の向かいに」。next は next to、near は直後に名詞を置き、どちらも from とは組まない。between は between A and B の形で 2 つのものを必要とする。",
+    "level": 500
+  },
+  {
     "id": "pron-003",
     "category": "代名詞・関係詞",
     "question": "The technician ______ repaired our copier last week was very polite.",
@@ -1197,6 +1752,66 @@
     ],
     "answer": 3,
     "explanation": "動詞が単数形 has been なので単数扱いの Each of。All や Most of the applicants は複数扱いで have となる。",
+    "level": 500
+  },
+  {
+    "id": "pron-601",
+    "category": "代名詞・関係詞",
+    "question": "The company announced that ______ profits rose by 10 percent last year.",
+    "question_ja": "その会社は、昨年の利益が 10 パーセント増えたと発表しました。",
+    "choices": [
+      "it's",
+      "it",
+      "itself",
+      "its"
+    ],
+    "answer": 3,
+    "explanation": "名詞 profits の前に置いて「その会社の」を表すのは所有格 its。it's は it is の短縮形、it は主格・目的格、itself は再帰代名詞で、どれも名詞の前に置いて所有を表せない。",
+    "level": 500
+  },
+  {
+    "id": "pron-602",
+    "category": "代名詞・関係詞",
+    "question": "The hotel ______ we stayed at during the conference was close to the station.",
+    "question_ja": "会議の間に泊まったホテルは、駅の近くでした。",
+    "choices": [
+      "where",
+      "which",
+      "who",
+      "what"
+    ],
+    "answer": 1,
+    "explanation": "stayed at の前置詞 at の目的語が欠けているので、ものを表す関係代名詞 which。where は関係副詞で、後ろに欠けている名詞がない完全な文が来るので、at と組まない。who は人、what は先行詞を含むので hotel の後には置けない。",
+    "level": 500
+  },
+  {
+    "id": "pron-603",
+    "category": "代名詞・関係詞",
+    "question": "These shoes are a little too small. Do you have larger ______?",
+    "question_ja": "この靴は少し小さすぎます。もっと大きいものはありますか。",
+    "choices": [
+      "one",
+      "it",
+      "ones",
+      "them"
+    ],
+    "answer": 2,
+    "explanation": "複数形の shoes を指し、形容詞 larger の後に置けるのは ones。one は単数の名詞の代わりで、it や them は形容詞の後に置けない。",
+    "level": 500
+  },
+  {
+    "id": "pron-604",
+    "category": "代名詞・関係詞",
+    "question": "Three of the ten new employees started on Monday, and ______ will all join next week.",
+    "question_ja": "10 人の新入社員のうち 3 人は月曜日に働き始め、残りの人たちは全員来週加わります。",
+    "choices": [
+      "the other",
+      "the others",
+      "another",
+      "other"
+    ],
+    "answer": 1,
+    "explanation": "10 人のうち 3 人を除いた「残り全員（複数）」を表す代名詞 the others。all があるので主語は複数。the other は残りが 1 人のときに使い、another は「もう 1 人」で単数、other は単独では主語にならない。",
     "level": 500
   },
   {
@@ -1350,6 +1965,111 @@
     "level": 500
   },
   {
+    "id": "tense-601",
+    "category": "時制・態",
+    "question": "Mr. Kim ______ never visited Japan before he joined our Tokyo office last year.",
+    "question_ja": "キムさんは、昨年東京支社に入るまで一度も日本を訪れたことがありませんでした。",
+    "choices": [
+      "has",
+      "had",
+      "is",
+      "will"
+    ],
+    "answer": 1,
+    "explanation": "昨年東京支社に入った（過去）時点より前の経験を表すので過去完了 had visited。has は現在完了で過去の基準点と合わず、is と will は過去分詞 visited と組んで「訪れた」の意味を作れない。",
+    "level": 500
+  },
+  {
+    "id": "tense-602",
+    "category": "時制・態",
+    "question": "Ms. Ito cannot come to the phone right now because she ______ a client.",
+    "question_ja": "伊藤さんは今お客様と打ち合わせ中のため、電話に出られません。",
+    "choices": [
+      "meets",
+      "met",
+      "has met",
+      "is meeting"
+    ],
+    "answer": 3,
+    "explanation": "right now「今まさに」行っている最中の動作なので現在進行形 is meeting。meets は習慣、met は過去、has met は完了を表し、今電話に出られない理由にならない。",
+    "level": 500
+  },
+  {
+    "id": "tense-603",
+    "category": "時制・態",
+    "question": "All the seats on the evening flight to Seoul have already ______.",
+    "question_ja": "ソウル行きの夕方の便は、すでに全席予約で埋まっています。",
+    "choices": [
+      "booked",
+      "been booked",
+      "booking",
+      "book"
+    ],
+    "answer": 1,
+    "explanation": "座席は「予約される」側なので現在完了の受動態 have been booked。have booked では座席が予約したことになり意味が通らない。",
+    "level": 500
+  },
+  {
+    "id": "tense-604",
+    "category": "時制・態",
+    "question": "If the weather ______ good tomorrow, the company picnic will be held in the park.",
+    "question_ja": "明日天気が良ければ、会社のピクニックは公園で行われます。",
+    "choices": [
+      "will be",
+      "was",
+      "is",
+      "has been"
+    ],
+    "answer": 2,
+    "explanation": "未来の条件を表す if 節では、未来のことでも現在形を使うので is。この用法の if 節に will be は使わず、was は tomorrow と時制が合わず、has been は現在完了で明日のことを表せない。",
+    "level": 500
+  },
+  {
+    "id": "tense-605",
+    "category": "時制・態",
+    "question": "The current office building ______ about forty years ago.",
+    "question_ja": "今のオフィスビルは、およそ 40 年前に建てられました。",
+    "choices": [
+      "built",
+      "has been built",
+      "is built",
+      "was built"
+    ],
+    "answer": 3,
+    "explanation": "ビルは「建てられる」側で、ago が過去の一時点を示すので過去の受動態 was built。has been built は ago と一緒に使えず、能動態 built では目的語がなく、現在形 is built は ago と時制が合わない。",
+    "level": 500
+  },
+  {
+    "id": "tense-606",
+    "category": "時制・態",
+    "question": "Damaged items ______ within 30 days of purchase.",
+    "question_ja": "破損した商品は、購入から 30 日以内であれば返品できます。",
+    "choices": [
+      "can return",
+      "returning",
+      "have returned",
+      "can be returned"
+    ],
+    "answer": 3,
+    "explanation": "商品は「返品される」側なので助動詞のついた受動態 can be returned。can return では商品が自ら戻ることになり意味が通らない。returning は動詞の -ing 形だけで述語にならず、have returned も能動態で「商品が戻ってきた」という意味になる。",
+    "level": 500
+  },
+  {
+    "id": "tense-607",
+    "category": "時制・態",
+    "question": "When the new menu ______ next week, customers will be able to order vegetarian dishes.",
+    "question_ja": "来週新しいメニューが導入されると、お客様はベジタリアン料理を注文できるようになります。",
+    "choices": [
+      "introduces",
+      "will introduce",
+      "is introduced",
+      "will be introduced"
+    ],
+    "answer": 2,
+    "explanation": "メニューは「導入される」側なので受動態が必要。さらに時を表す when 節では未来のことも現在形で表すので is introduced。introduces と will introduce は能動態でメニューが何かを導入することになり、will be introduced は when 節の中では使わない。",
+    "level": 500
+  },
+  {
     "id": "vocab-003",
     "category": "語彙",
     "question": "All visitors must wear a name ______ while they are inside the factory.",
@@ -1497,6 +2217,36 @@
     ],
     "answer": 1,
     "explanation": "「追加シフトを組む」原因は注文の「急増」increase。in orders と結びつき増減を表せるのは increase のみで、inquiry（問い合わせ）では理由にならない。",
+    "level": 500
+  },
+  {
+    "id": "vocab-601",
+    "category": "語彙",
+    "question": "Guests can ______ the business center 24 hours a day by using their room key.",
+    "question_ja": "宿泊客は、部屋の鍵を使って 24 時間ビジネスセンターを利用できます。",
+    "choices": [
+      "attend",
+      "access",
+      "arrive",
+      "apply"
+    ],
+    "answer": 1,
+    "explanation": "access で「（場所や施設に）入る、利用する」。attend（出席する）は会議などに使い、arrive は目的語を取らず arrive at が必要、apply は「申し込む」で施設を目的語にしない。",
+    "level": 500
+  },
+  {
+    "id": "vocab-602",
+    "category": "語彙",
+    "question": "Please show your boarding ______ and passport at the gate.",
+    "question_ja": "搭乗口では、搭乗券とパスポートをご提示ください。",
+    "choices": [
+      "receipt",
+      "pass",
+      "fee",
+      "desk"
+    ],
+    "answer": 1,
+    "explanation": "boarding pass で「搭乗券」。receipt（領収書）や fee（料金）は boarding と結びつかず搭乗口で見せるものでもない。desk（カウンター）は場所なので提示できない。",
     "level": 500
   },
   {
@@ -1650,6 +2400,111 @@
     "level": 550
   },
   {
+    "id": "pos-701",
+    "category": "品詞",
+    "question": "Ms. Kato's ______ of the market trends helped the team adjust its pricing strategy.",
+    "question_ja": "加藤さんによる市場動向の分析が、チームが価格戦略を見直す助けになりました。",
+    "choices": [
+      "analysis",
+      "analyze",
+      "analytical",
+      "analytically"
+    ],
+    "answer": 0,
+    "explanation": "所有格 Ms. Kato's の後ろで of 〜 を伴い主語になるのは名詞 analysis。形容詞 analytical では修飾する名詞がなく、動詞 analyze や副詞 analytically は所有格の後に置けない。",
+    "level": 550
+  },
+  {
+    "id": "pos-702",
+    "category": "品詞",
+    "question": "The factory has made ______ improvements to its safety procedures this year.",
+    "question_ja": "工場は今年、安全手順を大きく改善しました。",
+    "choices": [
+      "signify",
+      "significantly",
+      "significance",
+      "significant"
+    ],
+    "answer": 3,
+    "explanation": "名詞 improvements を修飾するので形容詞 significant「大きな」。副詞 significantly は名詞を修飾できず、動詞 signify や名詞 significance は名詞の前に置けない。",
+    "level": 550
+  },
+  {
+    "id": "pos-703",
+    "category": "品詞",
+    "question": "Please make sure that your password remains ______ and is not shared with anyone.",
+    "question_ja": "パスワードは秘密にしておき、誰とも共有しないようにしてください。",
+    "choices": [
+      "confide",
+      "confidentially",
+      "confidential",
+      "confidentiality"
+    ],
+    "answer": 2,
+    "explanation": "remain の後ろで主語 password の状態を表す補語になるのは形容詞 confidential。副詞 confidentially は補語になれず、名詞 confidentiality ではパスワード＝機密性となり意味が通らない。",
+    "level": 550
+  },
+  {
+    "id": "pos-704",
+    "category": "品詞",
+    "question": "Store managers should ______ this month's sales figures with those of the previous year.",
+    "question_ja": "店長は、今月の売上高を前年の数字と比較する必要があります。",
+    "choices": [
+      "comparison",
+      "comparable",
+      "compare",
+      "comparatively"
+    ],
+    "answer": 2,
+    "explanation": "助動詞 should の後には動詞の原形が必要なので compare。compare A with B で「A を B と比べる」。名詞 comparison、形容詞 comparable、副詞 comparatively は should の後に動詞の代わりとして置けない。",
+    "level": 550
+  },
+  {
+    "id": "pos-705",
+    "category": "品詞",
+    "question": "The company offers ______ salaries to attract skilled engineers from abroad.",
+    "question_ja": "その会社は、海外から優秀なエンジニアを集めるため、他社に負けない給与を提示しています。",
+    "choices": [
+      "compete",
+      "competition",
+      "competitive",
+      "competitively"
+    ],
+    "answer": 2,
+    "explanation": "名詞 salaries を修飾するのは形容詞 competitive。副詞 competitively は名詞を修飾できず、動詞 compete も名詞の前には置けない。",
+    "level": 550
+  },
+  {
+    "id": "pos-706",
+    "category": "品詞",
+    "question": "The sales team has ______ exceeded its monthly target since the beginning of the year.",
+    "question_ja": "営業チームは、年初から毎月の目標を安定して上回っています。",
+    "choices": [
+      "consistent",
+      "consistency",
+      "consist",
+      "consistently"
+    ],
+    "answer": 3,
+    "explanation": "has と過去分詞 exceeded の間に入り、動詞を修飾するのは副詞 consistently。形容詞 consistent や名詞 consistency はこの位置に置けず、動詞 consist を入れると動詞が二つ並んでしまう。",
+    "level": 550
+  },
+  {
+    "id": "pos-707",
+    "category": "品詞",
+    "question": "Our ______ will contact you within two business days to schedule a delivery time.",
+    "question_ja": "2 営業日以内に担当者からご連絡し、配達の日時を決めさせていただきます。",
+    "choices": [
+      "represent",
+      "representative",
+      "representation",
+      "representing"
+    ],
+    "answer": 1,
+    "explanation": "連絡してくるのは人なので、人を表す名詞 representative「担当者」。representation は「代表すること、表現」という抽象的な名詞で、人として連絡する主語にならない。所有格 Our の後ろには名詞が必要なので、動詞 represent や representing は入らない。",
+    "level": 550
+  },
+  {
     "id": "prep-002",
     "category": "前置詞・接続詞",
     "question": "______ the heavy rain, the outdoor event started on time.",
@@ -1797,6 +2652,81 @@
     ],
     "answer": 1,
     "explanation": "後ろに主語と動詞を持つ節が続くので接続詞 Although。However や Nevertheless は副詞で節を導けず、Despite は前置詞で名詞しか続かない。",
+    "level": 550
+  },
+  {
+    "id": "prep-701",
+    "category": "前置詞・接続詞",
+    "question": "______ the new policy, all employees must wear their ID badges at all times.",
+    "question_ja": "新しい規定により、全従業員は常に社員証を身に着けなければなりません。",
+    "choices": [
+      "Under",
+      "Over",
+      "Into",
+      "Above"
+    ],
+    "answer": 0,
+    "explanation": "under the policy で「規定のもとで、規定により」。over、into、above は位置や方向を表し、規定に従うという意味にならない。",
+    "level": 550
+  },
+  {
+    "id": "prep-702",
+    "category": "前置詞・接続詞",
+    "question": "______ printing the handouts, the speaker sent the slides to all participants by e-mail.",
+    "question_ja": "講演者は配布資料を印刷する代わりに、スライドを参加者全員にメールで送りました。",
+    "choices": [
+      "Rather",
+      "Except",
+      "In addition",
+      "Instead of"
+    ],
+    "answer": 3,
+    "explanation": "「印刷する代わりにメールで送った」なので Instead of。In addition は to がないと動名詞を続けられず、Rather や Except もこの形で動名詞を導けない。",
+    "level": 550
+  },
+  {
+    "id": "prep-703",
+    "category": "前置詞・接続詞",
+    "question": "The meeting was moved to a larger room ______ everyone in the department could attend.",
+    "question_ja": "部署の全員が出席できるよう、会議はより広い部屋に移されました。",
+    "choices": [
+      "so that",
+      "unless",
+      "even if",
+      "as though"
+    ],
+    "answer": 0,
+    "explanation": "「全員が出席できるように」という目的を表すので so that。unless は「〜しない限り」、even if は「たとえ〜でも」、as though は「まるで〜かのように」で、部屋を移した理由として意味が合わない。",
+    "level": 550
+  },
+  {
+    "id": "prep-704",
+    "category": "前置詞・接続詞",
+    "question": "The museum offers free guided tours every afternoon ______ the summer season.",
+    "question_ja": "その博物館は、夏のシーズン中は毎日午後に無料のガイドツアーを行っています。",
+    "choices": [
+      "among",
+      "between",
+      "onto",
+      "throughout"
+    ],
+    "answer": 3,
+    "explanation": "「夏のシーズンの間ずっと」と期間全体を表すので throughout。among や between は複数のものの「間」を表し、期間を表す名詞とは結びつかない。onto は「〜の上へ」と移動の方向を表し、期間には使えない。",
+    "level": 550
+  },
+  {
+    "id": "prep-705",
+    "category": "前置詞・接続詞",
+    "question": "______ you travel by train or by car, the hotel is easy to reach from the city center.",
+    "question_ja": "電車でも車でも、ホテルへは市の中心部から簡単に行けます。",
+    "choices": [
+      "Either",
+      "Whether",
+      "Both",
+      "Neither"
+    ],
+    "answer": 1,
+    "explanation": "whether A or B で「A であれ B であれ」という譲歩の副詞節を作るので Whether。Either は either A or B の形で語句を並べるだけで、この位置で節を導けない。Both は both A and B、Neither は neither A nor B と組む語で、or とも合わず節も導けない。",
     "level": 550
   },
   {
@@ -1950,6 +2880,66 @@
     "level": 550
   },
   {
+    "id": "pron-701",
+    "category": "代名詞・関係詞",
+    "question": "The store manager listened carefully to ______ the customer said about the defective product.",
+    "question_ja": "店長は、不良品について客が言ったことを注意深く聞きました。",
+    "choices": [
+      "which",
+      "that",
+      "whose",
+      "what"
+    ],
+    "answer": 3,
+    "explanation": "先行詞がなく、前置詞 to の目的語となる「〜すること」を表すのは関係代名詞 what。which や that は先行詞が必要で、whose は後ろに名詞が要る。",
+    "level": 550
+  },
+  {
+    "id": "pron-702",
+    "category": "代名詞・関係詞",
+    "question": "The candidate with ______ we spoke yesterday has accepted our job offer.",
+    "question_ja": "昨日私たちが話をした候補者が、内定を受け入れました。",
+    "choices": [
+      "whom",
+      "who",
+      "which",
+      "whose"
+    ],
+    "answer": 0,
+    "explanation": "前置詞 with の直後に置く人の関係代名詞は目的格 whom。who は前置詞の直後には置けない（who を使うなら the candidate who we spoke with と前置詞を後ろに回す）。which は人を先行詞にとらず、whose は後ろに名詞が必要。",
+    "level": 550
+  },
+  {
+    "id": "pron-703",
+    "category": "代名詞・関係詞",
+    "question": "Please feel free to take ______ brochures you need from the rack by the entrance.",
+    "question_ja": "入口近くのラックから、必要なパンフレットはどれでもご自由にお取りください。",
+    "choices": [
+      "whoever",
+      "however",
+      "whatever",
+      "whenever"
+    ],
+    "answer": 2,
+    "explanation": "名詞 brochures の前に置いて「どんな〜でも」を表すのは whatever。whoever は人を指し、however と whenever は名詞を修飾できない。",
+    "level": 550
+  },
+  {
+    "id": "pron-704",
+    "category": "代名詞・関係詞",
+    "question": "Of the five applicants we interviewed, ______ had experience in hotel management.",
+    "question_ja": "面接した 5 人の応募者のうち、ホテル経営の経験がある人は 1 人もいませんでした。",
+    "choices": [
+      "no",
+      "nothing",
+      "neither",
+      "none"
+    ],
+    "answer": 3,
+    "explanation": "三人以上のうち「誰も〜ない」を表し、単独で主語になれるのは none。neither は二者について使い、no は名詞の前にしか置けず、nothing は人を指さない。",
+    "level": 550
+  },
+  {
     "id": "tense-005",
     "category": "時制・態",
     "question": "By the time the client arrived, the staff ______ the meeting room.",
@@ -2097,6 +3087,111 @@
     ],
     "answer": 1,
     "explanation": "主語 it（会議室）は準備される側で、今まさに進行中なので現在進行形の受動態 is being prepared。is preparing や has prepared は能動態で、会議室が何かを準備する意味になってしまう。",
+    "level": 550
+  },
+  {
+    "id": "tense-701",
+    "category": "時制・態",
+    "question": "Two new copiers ______ on the third floor, so staff no longer need to wait in line.",
+    "question_ja": "3 階に新しいコピー機が 2 台設置されたので、スタッフはもう並んで待つ必要がありません。",
+    "choices": [
+      "have installed",
+      "have been installed",
+      "are installing",
+      "installed"
+    ],
+    "answer": 1,
+    "explanation": "コピー機は「設置される」側で、その結果が今に続いているので現在完了の受動態 have been installed。have installed や installed では、コピー機が何かを設置したことになる。are installing も能動の進行形で、コピー機が設置作業をしている意味になってしまう。",
+    "level": 550
+  },
+  {
+    "id": "tense-702",
+    "category": "時制・態",
+    "question": "Ms. Lee ______ clients in Singapore all next week, so please send any urgent requests to her assistant.",
+    "question_ja": "リーさんは来週いっぱいシンガポールで顧客回りをする予定ですので、急ぎのご依頼はアシスタントにお送りください。",
+    "choices": [
+      "has visited",
+      "visited",
+      "will be visiting",
+      "was visiting"
+    ],
+    "answer": 2,
+    "explanation": "all next week「来週の間ずっと」と未来のある期間に続く動作なので未来進行形 will be visiting。has visited・visited・was visiting はいずれも過去や現在までのことを表し、next week と合わない。",
+    "level": 550
+  },
+  {
+    "id": "tense-703",
+    "category": "時制・態",
+    "question": "Many customers dislike ______ on hold for a long time when they call the support line.",
+    "question_ja": "サポート窓口に電話したときに長く保留にされるのを嫌がるお客様は多いです。",
+    "choices": [
+      "being kept",
+      "keeping",
+      "to keep",
+      "kept"
+    ],
+    "answer": 0,
+    "explanation": "dislike は動名詞を目的語にとり、客は保留に「される」側なので動名詞の受動形 being kept。keeping では客が誰かを保留にする意味になる。dislike は通常 to 不定詞を目的語にとらないので to keep も不可。過去分詞 kept は単独では dislike の目的語になれない。",
+    "level": 550
+  },
+  {
+    "id": "tense-704",
+    "category": "時制・態",
+    "question": "The city museum ______ for renovation since January and will reopen in May.",
+    "question_ja": "市立博物館は 1 月から改装のため閉館しており、5 月に再開します。",
+    "choices": [
+      "has been closed",
+      "closes",
+      "was closing",
+      "will close"
+    ],
+    "answer": 0,
+    "explanation": "since January「1 月から今まで」続いている状態なので現在完了 has been closed。since と組み合わせられるのは完了形で、closes や was closing は使えない。will close は未来のことで、since January と合わない。",
+    "level": 550
+  },
+  {
+    "id": "tense-705",
+    "category": "時制・態",
+    "question": "We had the air conditioner in the lobby ______ by a technician before the summer season began.",
+    "question_ja": "夏のシーズンが始まる前に、技術者にロビーのエアコンを修理してもらいました。",
+    "choices": [
+      "repair",
+      "repairing",
+      "repaired",
+      "to repair"
+    ],
+    "answer": 2,
+    "explanation": "have ＋ 物 ＋ 過去分詞で「物を〜してもらう」。エアコンは技術者に「修理される」側なので repaired。原形 repair や repairing ではエアコンが修理する側になってしまう。to repair は「修理すべきエアコンがあった」という意味になり、by a technician とつながらない。",
+    "level": 550
+  },
+  {
+    "id": "tense-706",
+    "category": "時制・態",
+    "question": "Mr. Diaz ______ the proposal to the client last Friday, and he is still waiting for a reply.",
+    "question_ja": "ディアスさんは先週の金曜日に顧客に提案書を送り、まだ返事を待っています。",
+    "choices": [
+      "sends",
+      "has sent",
+      "sent",
+      "will send"
+    ],
+    "answer": 2,
+    "explanation": "last Friday という過去の特定の時点を表す語があるので過去形 sent。現在完了 has sent は last Friday のような過去の時点と一緒に使えない。現在形 sends や未来の will send も last Friday と合わない。",
+    "level": 550
+  },
+  {
+    "id": "tense-707",
+    "category": "時制・態",
+    "question": "When I visited the factory last month, a new production line ______.",
+    "question_ja": "先月私が工場を訪れたとき、新しい生産ラインが設置されているところでした。",
+    "choices": [
+      "was being installed",
+      "was installing",
+      "is installed",
+      "has been installing"
+    ],
+    "answer": 0,
+    "explanation": "生産ラインは「設置される」側で、訪問した過去の時点で進行中だったので過去進行形の受動態 was being installed。was installing は能動で、ラインが何かを設置する意味になる。is installed は現在形、has been installing は現在完了進行形の能動で、どちらも last month の過去の場面に合わない。",
     "level": 550
   },
   {
@@ -2250,6 +3345,36 @@
     "level": 550
   },
   {
+    "id": "vocab-701",
+    "category": "語彙",
+    "question": "The museum ______ an admission fee of 15 dollars for adults.",
+    "question_ja": "その博物館は、大人から 15 ドルの入館料を取っています。",
+    "choices": [
+      "costs",
+      "charges",
+      "pays",
+      "spends"
+    ],
+    "answer": 1,
+    "explanation": "charge a fee で「料金を請求する」。cost は「（物が）費用がかかる」で博物館を主語に料金を取る意味にならず、pays（払う）や spends（使う）は払う側の動詞。",
+    "level": 550
+  },
+  {
+    "id": "vocab-702",
+    "category": "語彙",
+    "question": "Please make sure that your passport is still ______ before booking an international flight.",
+    "question_ja": "国際線を予約する前に、パスポートがまだ有効であることを確認してください。",
+    "choices": [
+      "valid",
+      "vacant",
+      "vague",
+      "various"
+    ],
+    "answer": 0,
+    "explanation": "パスポートが「有効な」状態であることを表すのは valid。vacant（空いている）、vague（あいまいな）、various（さまざまな）はパスポートの説明として意味が合わない。",
+    "level": 550
+  },
+  {
     "id": "pos-006",
     "category": "品詞",
     "question": "The report was ______ longer than the one submitted last quarter.",
@@ -2397,6 +3522,111 @@
     ],
     "answer": 2,
     "explanation": "所有格 its の後ろには名詞 proximity（近さ）。proximity to で「〜への近さ」。形容詞 proximate は所有格の直後に単独で置けない。",
+    "level": 600
+  },
+  {
+    "id": "pos-801",
+    "category": "品詞",
+    "question": "The hotel staff were ______ helpful when our conference schedule changed at the last minute.",
+    "question_ja": "会議の日程が直前に変わったとき、ホテルのスタッフは非常に親切に対応してくれました。",
+    "choices": [
+      "exceptionally",
+      "exceptional",
+      "exception",
+      "except"
+    ],
+    "answer": 0,
+    "explanation": "形容詞 helpful を修飾するのは副詞 exceptionally「並外れて」。形容詞 exceptional は形容詞を修飾できず、名詞 exception や前置詞・接続詞の except もこの位置には置けない。",
+    "level": 600
+  },
+  {
+    "id": "pos-802",
+    "category": "品詞",
+    "question": "Ms. Hara has shown remarkable ______ in managing the company's overseas expansion project.",
+    "question_ja": "原さんは、会社の海外展開プロジェクトの管理で際立った能力を発揮してきました。",
+    "choices": [
+      "competent",
+      "competently",
+      "competence",
+      "compete"
+    ],
+    "answer": 2,
+    "explanation": "形容詞 remarkable に修飾され、動詞 has shown の目的語になるのは名詞 competence「能力」。形容詞 competent や副詞 competently は目的語になれず、動詞 compete も形容詞の後に置けない。",
+    "level": 600
+  },
+  {
+    "id": "pos-803",
+    "category": "品詞",
+    "question": "The updated instructions have made the assembly process considerably ______ for new factory workers.",
+    "question_ja": "説明書が新しくなったことで、新しく入った工場の作業員にとって組み立ての手順がかなり簡単になりました。",
+    "choices": [
+      "simply",
+      "simplify",
+      "simpler",
+      "simplicity"
+    ],
+    "answer": 2,
+    "explanation": "make ＋ 目的語 ＋ 補語で「〜を…にする」。補語になり considerably に修飾されるのは形容詞の比較級 simpler。副詞 simply は補語になれない。make ＋ 目的語 ＋ 動詞の原形の形もあるが、simplify は目的語が必要な他動詞で、手順が何かを簡単にするという意味にもならない。名詞 simplicity では「手順＝簡単さ」となり意味が通らない。",
+    "level": 600
+  },
+  {
+    "id": "pos-804",
+    "category": "品詞",
+    "question": "Despite the economic slowdown, sales at the downtown store have remained ______ throughout the year.",
+    "question_ja": "景気の減速にもかかわらず、中心街の店舗の売上は 1 年を通して安定を保っています。",
+    "choices": [
+      "stability",
+      "stably",
+      "stabilize",
+      "stable"
+    ],
+    "answer": 3,
+    "explanation": "remain の後には状態を表す補語の形容詞が来るので stable。副詞 stably は補語になれず、動詞 stabilize は remain の後に置けない。名詞 stability では「売上が安定性のままだ」となり意味が通らない。",
+    "level": 600
+  },
+  {
+    "id": "pos-805",
+    "category": "品詞",
+    "question": "Product samples are ______ sent to our regular customers before each new line is released.",
+    "question_ja": "新しい製品ラインが発売される前には、常連のお客様に決まって試供品をお送りしています。",
+    "choices": [
+      "routinely",
+      "routine",
+      "routines",
+      "routinize"
+    ],
+    "answer": 0,
+    "explanation": "be 動詞と過去分詞 sent の間で動詞を修飾するのは副詞 routinely「決まって、定期的に」。形容詞・名詞の routine や名詞 routines、動詞 routinize はこの位置に置けない。",
+    "level": 600
+  },
+  {
+    "id": "pos-806",
+    "category": "品詞",
+    "question": "The two companies have agreed to work ______ on the development of the new product line.",
+    "question_ja": "2 社は、新しい製品ラインの開発で協力して取り組むことに合意しました。",
+    "choices": [
+      "collaborate",
+      "collaboratively",
+      "collaborative",
+      "collaboration"
+    ],
+    "answer": 1,
+    "explanation": "自動詞 work を修飾するので副詞 collaboratively「協力して」。形容詞 collaborative は動詞を修飾できず、動詞 collaborate や名詞 collaboration は work の直後に置けない。",
+    "level": 600
+  },
+  {
+    "id": "pos-807",
+    "category": "品詞",
+    "question": "The renovation of the hotel lobby was completed ______ ahead of schedule.",
+    "question_ja": "ホテルのロビーの改装は、予定よりかなり早く完了しました。",
+    "choices": [
+      "substantial",
+      "substance",
+      "substantiate",
+      "substantially"
+    ],
+    "answer": 3,
+    "explanation": "ahead of schedule を修飾して「かなり早く」を表すのは副詞 substantially。形容詞 substantial、名詞 substance、動詞 substantiate は副詞句を修飾できない。",
     "level": 600
   },
   {
@@ -2550,6 +3780,81 @@
     "level": 600
   },
   {
+    "id": "prep-801",
+    "category": "前置詞・接続詞",
+    "question": "The registration fee is the same for all participants, ______ of how many sessions they attend.",
+    "question_ja": "参加費は、出席するセッションの数にかかわらず、すべての参加者で同じです。",
+    "choices": [
+      "regardless",
+      "despite",
+      "however",
+      "although"
+    ],
+    "answer": 0,
+    "explanation": "regardless of で「〜にかかわらず」。despite は of を伴わず、however と although は後ろに of を取れない。",
+    "level": 600
+  },
+  {
+    "id": "prep-802",
+    "category": "前置詞・接続詞",
+    "question": "______ the high cost of the new equipment, the factory decided not to buy it this year.",
+    "question_ja": "新しい設備は高額なため、工場は今年はそれを購入しないことに決めました。",
+    "choices": [
+      "Instead of",
+      "In spite of",
+      "Because of",
+      "In addition to"
+    ],
+    "answer": 2,
+    "explanation": "高額であることが今年は買わない理由なので、原因を表す because of「〜のために」が正解。in spite of「〜にもかかわらず」では「高いのに買わない」となり、逆接の関係が成り立たない。instead of「〜の代わりに」、in addition to「〜に加えて」も意味が通らない。",
+    "level": 600
+  },
+  {
+    "id": "prep-803",
+    "category": "前置詞・接続詞",
+    "question": "______ the renovation is complete, the café can seat up to eighty customers.",
+    "question_ja": "改装が終わったので、そのカフェは最大 80 人の客が座れるようになりました。",
+    "choices": [
+      "Even though",
+      "Unless",
+      "Now that",
+      "So that"
+    ],
+    "answer": 2,
+    "explanation": "「改装が終わった今は」と理由を表す接続詞 now that。even though（〜にもかかわらず）や unless（〜しない限り）は意味が合わない。so that は「〜するために」と目的を表すが、改装が終わったことは目的ではなく、意味が通らない。",
+    "level": 600
+  },
+  {
+    "id": "prep-804",
+    "category": "前置詞・接続詞",
+    "question": "______ the event of a fire alarm, hotel guests should leave the building by the nearest stairway.",
+    "question_ja": "火災警報が鳴った場合、ホテルの宿泊客は最寄りの階段から建物の外に出てください。",
+    "choices": [
+      "On",
+      "At",
+      "In",
+      "By"
+    ],
+    "answer": 2,
+    "explanation": "in the event of で「〜の場合には」という定型表現。event と組んでこの意味を表す前置詞は in で、on、at、by は使わない。",
+    "level": 600
+  },
+  {
+    "id": "prep-805",
+    "category": "前置詞・接続詞",
+    "question": "All staff will be on leave during the holiday week, ______ for a few members who will handle urgent orders.",
+    "question_ja": "休暇の週は、急ぎの注文に対応する数名を除いて、スタッフ全員が休みを取ります。",
+    "choices": [
+      "unless",
+      "without",
+      "except",
+      "besides"
+    ],
+    "answer": 2,
+    "explanation": "except for で「〜を除いて」。unless は接続詞で for と組まず、besides や without も後ろに for を取らない。",
+    "level": 600
+  },
+  {
     "id": "pron-304",
     "category": "代名詞・関係詞",
     "question": "______ is chosen as team leader will be responsible for preparing the weekly progress report.",
@@ -2697,6 +4002,66 @@
     ],
     "answer": 3,
     "explanation": "カンマの後で節をつなぎ、物（warehouses）を指して前置詞 of の目的語になる関係代名詞は which。them では文がつながらず、whom は人を指し、that は前置詞の後に置けない。",
+    "level": 600
+  },
+  {
+    "id": "pron-801",
+    "category": "代名詞・関係詞",
+    "question": "The survey results show that ______ our customers value most is fast and friendly service.",
+    "question_ja": "調査結果から、お客様が最も重視しているのは、迅速で感じのよいサービスであることがわかります。",
+    "choices": [
+      "which",
+      "who",
+      "that",
+      "what"
+    ],
+    "answer": 3,
+    "explanation": "空所から most までが is の主語になり、value の目的語が欠けているので、先行詞を含む関係代名詞 what「〜するもの」。which や that は先行詞が必要で、who は人を表す。",
+    "level": 600
+  },
+  {
+    "id": "pron-802",
+    "category": "代名詞・関係詞",
+    "question": "The supplier, the quality of ______ products has improved greatly, will be awarded the new contract.",
+    "question_ja": "製品の品質が大きく向上したその納入業者が、新しい契約を受注します。",
+    "choices": [
+      "which",
+      "whom",
+      "whose",
+      "that"
+    ],
+    "answer": 2,
+    "explanation": "the quality of の後で名詞 products と結びつき「その業者の製品」を表すのは所有格の関係代名詞 whose。which・whom・that は名詞の前に置いて所有を表せない。",
+    "level": 600
+  },
+  {
+    "id": "pron-803",
+    "category": "代名詞・関係詞",
+    "question": "Prices at our new store are considerably lower than ______ of our main competitors.",
+    "question_ja": "当店の新しい店舗の価格は、主な競合店の価格よりかなり安くなっています。",
+    "choices": [
+      "those",
+      "that",
+      "them",
+      "these"
+    ],
+    "answer": 0,
+    "explanation": "比較の対象は prices で複数なので、同じ名詞の繰り返しを避ける those of を使う。that of は単数名詞を受け、them は of で修飾できない。",
+    "level": 600
+  },
+  {
+    "id": "pron-804",
+    "category": "代名詞・関係詞",
+    "question": "Please do not give the access code to ______ outside the department.",
+    "question_ja": "入室用の暗証番号は、部署の外の人には誰にも教えないでください。",
+    "choices": [
+      "whoever",
+      "anyone",
+      "each",
+      "few"
+    ],
+    "answer": 1,
+    "explanation": "否定の文で「誰にも（〜ない）」を表すのは anyone で、outside the department が後ろから修飾する。whoever は「〜する人は誰でも」という関係詞で、後ろに動詞が必要。each は「（すでに出た集団の）それぞれ」を指す語で、「誰か一般の人」の意味にはならない。few は「ほとんどいない」で、否定の文に合わない。",
     "level": 600
   },
   {
@@ -2850,6 +4215,111 @@
     "level": 600
   },
   {
+    "id": "tense-801",
+    "category": "時制・態",
+    "question": "If the order ______ before noon, it will be shipped from our warehouse on the same day.",
+    "question_ja": "正午までにご注文いただければ、当日中に倉庫から発送いたします。",
+    "choices": [
+      "is placed",
+      "will be placed",
+      "places",
+      "placed"
+    ],
+    "answer": 0,
+    "explanation": "条件を表す If 節では未来のことも現在形で表し、注文は「される」側なので受動の is placed。will be placed は条件節では使わず、能動の places や placed では注文が何かを置くことになる。",
+    "level": 600
+  },
+  {
+    "id": "tense-802",
+    "category": "時制・態",
+    "question": "When the inspectors arrived, the damaged equipment had already ______.",
+    "question_ja": "検査官が到着したときには、損傷した機器はすでに撤去されていました。",
+    "choices": [
+      "removed",
+      "removing",
+      "be removed",
+      "been removed"
+    ],
+    "answer": 3,
+    "explanation": "検査官の到着（過去）より前に終わっていたことで、機器は「撤去される」側なので過去完了の受動態 had been removed。had removed では機器が何かを撤去することになり、had removing や had be removed という形はない。",
+    "level": 600
+  },
+  {
+    "id": "tense-803",
+    "category": "時制・態",
+    "question": "Mr. Yamada ______ work at our Osaka branch before he moved to the head office.",
+    "question_ja": "山田さんは、本社に移る前は大阪支店で働いていました。",
+    "choices": [
+      "is used to",
+      "used to",
+      "was used",
+      "using"
+    ],
+    "answer": 1,
+    "explanation": "「以前は〜していた（今はしていない）」という過去の習慣を表すのは used to ＋ 動詞の原形。be used to は「〜に慣れている」で後ろに名詞か動名詞が来る。was used は受動態で work と組まず、using では動詞が足りない。",
+    "level": 600
+  },
+  {
+    "id": "tense-804",
+    "category": "時制・態",
+    "question": "The agenda for the sales conference ______ yet, so the speakers' names are not listed on the website.",
+    "question_ja": "営業会議の議題はまだ確定していないため、講演者の名前はウェブサイトに載っていません。",
+    "choices": [
+      "did not finalize",
+      "has not been finalized",
+      "has not finalized",
+      "was not finalizing"
+    ],
+    "answer": 1,
+    "explanation": "yet と組んで現在までの未完了を表す現在完了で、議題は「確定される」側なので受動の has not been finalized。has not finalized、did not finalize、was not finalizing はどれも能動態で、議題が何かを確定することになってしまう。",
+    "level": 600
+  },
+  {
+    "id": "tense-805",
+    "category": "時制・態",
+    "question": "Several clients said they appreciated ______ about the delivery delay before it affected their orders.",
+    "question_ja": "何社かの取引先は、注文に影響が出る前に配送の遅れについて知らせてもらえてありがたかったと言いました。",
+    "choices": [
+      "informing",
+      "to be informed",
+      "informed",
+      "being informed"
+    ],
+    "answer": 3,
+    "explanation": "appreciate は動名詞を目的語に取り、取引先は「知らされる」側なので受動の動名詞 being informed。appreciate は不定詞を取らないので to be informed は不可で、informing では取引先が知らせる側になる。",
+    "level": 600
+  },
+  {
+    "id": "tense-806",
+    "category": "時制・態",
+    "question": "The new lunch menu will not be introduced until all the kitchen staff ______ their training.",
+    "question_ja": "新しいランチメニューは、厨房スタッフ全員が研修を終えるまで導入されません。",
+    "choices": [
+      "have completed",
+      "will have completed",
+      "had completed",
+      "completed"
+    ],
+    "answer": 0,
+    "explanation": "until に導かれる時の副詞節では、未来の完了も現在完了で表すので have completed。will have completed は時の副詞節では使わず、had completed や completed は過去を表し主節の未来と合わない。",
+    "level": 600
+  },
+  {
+    "id": "tense-807",
+    "category": "時制・態",
+    "question": "The road construction in front of the shopping center ______ to last until the end of September.",
+    "question_ja": "ショッピングセンター前の道路工事は、9 月末まで続く見込みです。",
+    "choices": [
+      "is expected",
+      "expects",
+      "is expecting",
+      "has expected"
+    ],
+    "answer": 0,
+    "explanation": "工事は「見込まれる」側なので be expected to「〜すると見込まれている」の受動 is expected。expects や is expecting、has expected では工事が予想する主体になってしまう。",
+    "level": 600
+  },
+  {
     "id": "vocab-006",
     "category": "語彙",
     "question": "Employees who travel abroad are ______ to a daily allowance for meals.",
@@ -2997,6 +4467,36 @@
     ],
     "answer": 0,
     "explanation": "be recognized for 〜で「〜を評価される、表彰される」。realized（実現された・気づかれた）や reminded（思い出させられた）は人の功績をたたえる意味にならない。",
+    "level": 600
+  },
+  {
+    "id": "vocab-801",
+    "category": "語彙",
+    "question": "A detailed ______ for the three-day tour, including departure times and hotel names, is available at the front desk.",
+    "question_ja": "出発時刻やホテル名を含む 3 日間のツアーの詳しい旅程表は、フロントでお受け取りいただけます。",
+    "choices": [
+      "inventory",
+      "itinerary",
+      "incentive",
+      "invoice"
+    ],
+    "answer": 1,
+    "explanation": "出発時刻や宿泊先が載ったツアーの「旅程表」は itinerary。inventory（在庫目録）、incentive（奨励金、動機づけ）、invoice（請求書）は、出発時刻やホテル名を含むものではない。",
+    "level": 600
+  },
+  {
+    "id": "vocab-802",
+    "category": "語彙",
+    "question": "Due to ______ weather conditions, all outdoor activities at the resort have been canceled for today.",
+    "question_ja": "悪天候のため、本日のリゾートの屋外アクティビティはすべて中止となりました。",
+    "choices": [
+      "strict",
+      "rigid",
+      "sincere",
+      "severe"
+    ],
+    "answer": 3,
+    "explanation": "weather conditions を修飾して「厳しい、荒れた」天候を表すのは severe。strict や rigid は規則や態度の厳しさに使い、天候には使わない。sincere は「誠実な」で人の態度を表す。",
     "level": 600
   }
 ]
