@@ -53,7 +53,7 @@ struct HomeView: View {
                     .accessibilityHint("進捗の詳細を開く")
 
                     HStack(spacing: 12) {
-                        StreakCard(streak: streak)
+                        StreakCard(streak: streak, daysAway: Streak.daysAway(sessionDates: sessions.map(\.finishedAt)))
                         TodayCard(today: daily.last, gained: gains.today)
                     }
 
@@ -282,30 +282,48 @@ struct StageSummaryCard: View {
     }
 }
 
-/// 連続学習日数。今日まだやっていなければ目立たせる
+/// 連続学習日数。今日まだやっていなければ目立たせる。
+/// しばらくあいて開いたら（`Streak.welcomeBackDays` 日以上）「連続 0 日」ではなく「おかえりなさい」と迎える [v2.4]
 struct StreakCard: View {
     let streak: Streak.Result
+    var daysAway: Int? = nil
+
+    private var welcomeBack: Bool {
+        !streak.doneToday && (daysAway ?? 0) >= Streak.welcomeBackDays
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("連続")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Image(systemName: "flame.fill")
-                    .foregroundStyle(streak.doneToday ? Color.orange : Color.secondary)
-                Text("\(streak.days)")
-                    .font(.system(size: 30, weight: .bold, design: .rounded).monospacedDigit())
-                    .contentTransition(.numericText())
-                Text("日")
-                    .font(.headline)
-                    .fontDesign(.rounded)
-                    .foregroundStyle(.secondary)
+            if welcomeBack {
+                Text("おかえりなさい")
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .frame(minHeight: 36, alignment: .leading)
+                Text("今日の 10 問から再開")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.orange)
+            } else {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Image(systemName: "flame.fill")
+                        .foregroundStyle(streak.doneToday ? Color.orange : Color.secondary)
+                    Text("\(streak.days)")
+                        .font(.system(size: 30, weight: .bold, design: .rounded).monospacedDigit())
+                        .contentTransition(.numericText())
+                    Text("日")
+                        .font(.headline)
+                        .fontDesign(.rounded)
+                        .foregroundStyle(.secondary)
+                }
+                Text(streak.doneToday ? "今日も学習済み" : "今日はまだ")
+                    .font(.caption)
+                    .fontWeight(streak.doneToday ? .regular : .semibold)
+                    .foregroundStyle(streak.doneToday ? Color.secondary : Color.orange)
             }
-            Text(streak.doneToday ? "今日も学習済み" : "今日はまだ")
-                .font(.caption)
-                .fontWeight(streak.doneToday ? .regular : .semibold)
-                .foregroundStyle(streak.doneToday ? Color.secondary : Color.orange)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .glassCard()

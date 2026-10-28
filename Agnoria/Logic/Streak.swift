@@ -20,6 +20,32 @@ nonisolated enum Streak {
         }
         return Result(days: count, doneToday: doneToday)
     }
+
+    /// これまでの最長の連続日数（今の連続も含む）[v2.4]
+    static func longest(sessionDates: [Date], calendar: Calendar = .current) -> Int {
+        let days = Set(sessionDates.map { calendar.startOfDay(for: $0) }).sorted()
+        var best = 0, run = 0
+        var previous: Date?
+        for day in days {
+            if let previous, calendar.date(byAdding: .day, value: 1, to: previous) == day {
+                run += 1
+            } else {
+                run = 1
+            }
+            best = max(best, run)
+            previous = day
+        }
+        return best
+    }
+
+    /// この日数以上あいて開いたら、ホームの連続カードで「おかえりなさい」と迎える [v2.4]
+    static let welcomeBackDays = 3
+
+    /// 最後に学習した日から今日までの日数（今日学習済みなら 0）。記録が無ければ nil [v2.4]
+    static func daysAway(sessionDates: [Date], today: Date = .now, calendar: Calendar = .current) -> Int? {
+        guard let last = sessionDates.max() else { return nil }
+        return calendar.dateComponents([.day], from: calendar.startOfDay(for: last), to: calendar.startOfDay(for: today)).day
+    }
 }
 
 /// レベル称号（§4.5）。演出のみ

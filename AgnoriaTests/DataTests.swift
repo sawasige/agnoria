@@ -156,6 +156,18 @@ struct StreakTests {
     @Test func empty() {
         #expect(Streak.compute(sessionDates: [], today: day(0), calendar: cal) == .init(days: 0, doneToday: false))
     }
+    @Test("最長の連続日数は過去の連続も今の連続も見る。同じ日の複数セットは 1 日") func longest() {
+        let past = [day(-20), day(-19, hour: 8), day(-19, hour: 20), day(-18), day(-17), day(-16)]  // 5 日
+        #expect(Streak.longest(sessionDates: past + [day(-1), day(0)], calendar: cal) == 5)
+        #expect(Streak.longest(sessionDates: past + (-6...0).map { day($0) }, calendar: cal) == 7)
+        #expect(Streak.longest(sessionDates: [day(-3)], calendar: cal) == 1)
+        #expect(Streak.longest(sessionDates: [], calendar: cal) == 0)
+    }
+    @Test("最後の学習から今日までの日数。今日なら 0、記録が無ければ nil") func daysAway() {
+        #expect(Streak.daysAway(sessionDates: [day(-5), day(0, hour: 8)], today: day(0, hour: 22), calendar: cal) == 0)
+        #expect(Streak.daysAway(sessionDates: [day(-5), day(-3, hour: 23)], today: day(0, hour: 1), calendar: cal) == 3)
+        #expect(Streak.daysAway(sessionDates: [], today: day(0), calendar: cal) == nil)
+    }
     @Test func ranks() {
         #expect(Rank.title(totalCorrect: 0) == "Kore")
         #expect(Rank.title(totalCorrect: 100) == "Kore, Learning")
