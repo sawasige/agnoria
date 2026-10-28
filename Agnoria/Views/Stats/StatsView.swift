@@ -21,6 +21,7 @@ struct StatsView: View {
 
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
+        let longest = Streak.longest(sessionDates: sessions.map(\.finishedAt))
         let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
         let gains = MasteryStats.gains(masteredDates: progress.compactMap(\.masteredAt))
         // クリアまでの目安（§4.1 → §4.6 [v1.9]）
@@ -32,7 +33,7 @@ struct StatsView: View {
 
         ScrollView {
             VStack(spacing: 16) {
-                overview(overall, streak: streak, totalCorrect: totalCorrect, gains: gains)
+                overview(overall, streak: streak, longest: longest, totalCorrect: totalCorrect, gains: gains)
                 stageRows(tracks, estimates: estimates)
                 DailyChart(days: daily)
                     .glassCard()
@@ -53,7 +54,7 @@ struct StatsView: View {
 
     // MARK: - 達成度
 
-    private func overview(_ s: MasterySummary, streak: Streak.Result, totalCorrect: Int, gains: MasteryGains) -> some View {
+    private func overview(_ s: MasterySummary, streak: Streak.Result, longest: Int, totalCorrect: Int, gains: MasteryGains) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .firstTextBaseline) {
                 Text("習得")
@@ -81,10 +82,10 @@ struct StatsView: View {
                     .foregroundStyle(.secondary)
             }
             Divider()
-            HStack(spacing: 24) {
+            HStack(alignment: .top, spacing: 24) {
                 stat("累計回答", "\(s.answered)")
                 stat("累計正解", "\(s.correct)")
-                stat("連続日数", "\(streak.days)日")
+                stat("連続日数", "\(streak.days)日", note: longestNote(streak: streak, longest: longest))
                 stat("復習待ち", "\(s.dueForReview)")
             }
             HStack(spacing: 4) {
@@ -101,12 +102,24 @@ struct StatsView: View {
         .accessibilityElement(children: .combine)
     }
 
-    private func stat(_ title: String, _ value: String) -> some View {
+    private func stat(_ title: String, _ value: String, note: Text? = nil) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(value).font(.title3.weight(.semibold).monospacedDigit()).fontDesign(.rounded)
             Text(title).font(.caption2).foregroundStyle(.secondary)
+            if let note {
+                note.font(.caption2.monospacedDigit())
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    /// 連続日数の下の最長 [v2.4]。今の連続が最長なら「最長を更新中」
+    private func longestNote(streak: Streak.Result, longest: Int) -> Text? {
+        guard longest > 0 else { return nil }
+        if streak.days > 0, streak.days >= longest {
+            return Text("最長を更新中").fontWeight(.semibold).foregroundStyle(.orange)
+        }
+        return Text("最長 \(longest)日").foregroundStyle(.secondary)
     }
 
     // MARK: - ステージ

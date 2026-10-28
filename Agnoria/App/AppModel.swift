@@ -442,13 +442,15 @@ final class AppModel {
     #if DEBUG
     /// 撮影用。起動引数 `-debugSeedProgress YES` で、記録を消して「学習が進んだ状態」のサンプル記録を作る
     /// （単語・文法は 450 点帯クリア済みで 500 点帯の途中、応答問題は 450 点帯の途中、12 日連続、今日も学習済み）。
-    /// シミュレータ専用。`-cloudSync NO` と一緒に使う
+    /// シミュレータ専用。`-cloudSync NO` と一緒に使う。`-debugSeedAwayDays 4` を足すと記録全体を 4 日前にずらす
+    /// （しばらくあいて開いた状態。ホームの「おかえりなさい」の確認用 [v2.4]）
     func seedDebugProgressIfRequested() {
         guard UserDefaults.standard.bool(forKey: "debugSeedProgress") else { return }
         try? context.delete(model: ItemProgress.self)
         try? context.delete(model: StudySession.self)
         let cal = Calendar.current
-        let now = Date.now
+        let away = UserDefaults.standard.integer(forKey: "debugSeedAwayDays")
+        let now = cal.date(byAdding: .day, value: -away, to: .now)!
         var rng = SeededRandomNumberGenerator(seed: 7)
         func day(_ ago: Int, hour: Int) -> Date {
             cal.date(byAdding: .hour, value: hour, to: cal.date(byAdding: .day, value: -ago, to: cal.startOfDay(for: now))!)!
