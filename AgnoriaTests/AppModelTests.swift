@@ -158,6 +158,29 @@ struct AppModelTests {
         #expect(progress.count == 10 * DrillMode.allCases.count)
     }
 
+    @Test("セット完走で、このセットで新しく習得した数を残し、次のセット開始で消す") func setGain() async throws {
+        let model = try await makeModel()
+        let config = QuizConfig(mode: .grammar, category: nil, format: nil)
+        let run = try #require(model.startQuiz(config))
+        // 半分の問題は前に 2 回正解済み → このセットの正解で習得になる
+        let primed = run.questions.prefix(5).map(\.itemID)
+        for id in primed {
+            let p = model.progress(for: id)
+            p.record(isCorrect: true, at: run.startedAt.addingTimeInterval(-86_400))
+            p.record(isCorrect: true, at: run.startedAt.addingTimeInterval(-86_400))
+        }
+        while !run.isFinished {
+            model.answerCurrent(run.current.correctIndex)
+            if !run.isLast { model.advance() }
+        }
+        model.finishRun()
+        #expect(model.lastSetGain.newlyMastered == 5)
+        #expect(model.lastSetGain.nearlyMastered == 0, "残り 5 問は 1 回正解しただけ")
+
+        _ = try #require(model.startQuiz(config))
+        #expect(model.lastSetGain.newlyMastered == 0)
+    }
+
     @Test("masteredAt 追加前に習得していた問題は起動時に補われる") func backfill() async throws {
         let model = try await makeModel()
         let ctx = model.container.mainContext

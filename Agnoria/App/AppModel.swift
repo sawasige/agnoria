@@ -34,6 +34,8 @@ final class AppModel {
     var lastSavedSession: StudySession?
     /// 直近のセット完走で次の帯が開いた軸（結果画面の表示用。next が開いた帯）。次のセット開始で消す
     var lastUnlocked: [Stage.Clear] = []
+    /// 直近のセット完走で増えた習得（結果画面の表示用 §4.3 [v2.4]）。次のセット開始で消す
+    var lastSetGain: (newlyMastered: Int, nearlyMastered: Int) = (0, 0)
     /// 直近のセット完走でクリアしたスコア帯（専用画面の演出用 §4.3.1 [v1.5]）。軸ごとに 1 件 [v1.8]。次のセット開始とホームで消す
     var pendingStageClears: [Stage.Clear] = []
     /// 結果画面で評価ダイアログを頼むきっかけ（§4.8 [v1.8]）。結果画面が頼んだら消す
@@ -278,6 +280,7 @@ final class AppModel {
         let questions = buildQuestions(config, using: &rng)
         guard !questions.isEmpty else { return nil }
         lastUnlocked = []
+        lastSetGain = (0, 0)
         pendingStageClears = []
         pendingReviewRequest = nil
         let run = QuizRun(config: config, questions: questions)
@@ -368,6 +371,9 @@ final class AppModel {
         context.insert(session)
         save("session")
         lastSavedSession = session
+        let ids = run.questions.filter { !$0.isPractice }.map(\.itemID)
+        lastSetGain = MasteryStats.setGain(itemIDs: ids, progress: Dictionary(ids.map { ($0, progress(for: $0).snapshot) }, uniquingKeysWith: { a, _ in a }),
+                                           since: run.startedAt)
         analytics.log(.setFinish(run.config, count: run.answers.count,
                                  correct: run.answers.filter(\.isCorrect).count,
                                  durationSec: Int(session.finishedAt.timeIntervalSince(session.startedAt))))
@@ -615,6 +621,7 @@ final class AppModel {
         settings.setStageRestartedAt(.now, for: mode)
         if settings.startingLevel > level { settings.startingLevel = level }
         lastUnlocked = []
+        lastSetGain = (0, 0)
         pendingStageClears = []
         analytics.log(.stageRestart(mode: mode, level: level))
         analytics.syncUserProperties()
@@ -634,6 +641,7 @@ final class AppModel {
         }
 
         lastUnlocked = []
+        lastSetGain = (0, 0)
         pendingStageClears = []
         pendingReviewRequest = nil
         analytics.log(.historyReset)

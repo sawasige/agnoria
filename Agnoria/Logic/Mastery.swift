@@ -121,4 +121,44 @@ nonisolated enum MasteryStats {
     static func bookmarkCount(itemIDs: [String], progress: [String: ProgressSnapshot]) -> Int {
         itemIDs.filter { progress[$0]?.isBookmarked ?? false }.count
     }
+
+    /// 今日・今週・先週に新しく習得した問題の数（§4.1 / §4.6 [v2.4]）。`masteredAt`（はじめて習得した日時）で数えるので、
+    /// 学習中に戻って再び習得したものは数え直さない。週の始まりはカレンダーの設定に従う
+    static func gains(masteredDates: [Date], today: Date = .now, calendar: Calendar = .current) -> MasteryGains {
+        let todayStart = calendar.startOfDay(for: today)
+        guard let week = calendar.dateInterval(of: .weekOfYear, for: today),
+              let lastWeekStart = calendar.date(byAdding: .weekOfYear, value: -1, to: week.start) else {
+            return MasteryGains()
+        }
+        var out = MasteryGains()
+        for d in masteredDates {
+            if d >= todayStart { out.today += 1 }
+            if d >= week.start { out.thisWeek += 1 } else if d >= lastWeekStart { out.lastWeek += 1 }
+        }
+        return out
+    }
+
+    /// 1 セットで増えた習得（結果画面 §4.3 [v2.4]）。
+    /// - newlyMastered: セット開始後にはじめて習得した問題（`masteredAt` が開始以後）
+    /// - nearlyMastered: 一度も習得していず、直近 2 回正解で、あと 1 回の正解で習得になる問題
+    static func setGain(itemIDs: [String], progress: [String: ProgressSnapshot], since start: Date) -> (newlyMastered: Int, nearlyMastered: Int) {
+        var newly = 0, nearly = 0
+        for id in Set(itemIDs) {
+            guard let p = progress[id] else { continue }
+            if let m = p.masteredAt {
+                if m >= start { newly += 1 }
+            } else if p.recentResults.count >= Priority.recentWindow - 1,
+                      p.recentResults.suffix(Priority.recentWindow - 1).allSatisfy({ $0 }) {
+                nearly += 1
+            }
+        }
+        return (newly, nearly)
+    }
+}
+
+/// 期間ごとに新しく習得した問題の数（§4.1 / §4.6 [v2.4]）
+nonisolated struct MasteryGains: Hashable, Sendable {
+    var today = 0
+    var thisWeek = 0
+    var lastWeek = 0
 }

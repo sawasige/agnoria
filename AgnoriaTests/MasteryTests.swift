@@ -75,4 +75,39 @@ struct MasteryTests {
         #expect(days.last?.answered == 3 && days.last?.correct == 1)
         #expect(MasteryStats.daily(sessions: [], days: 1, today: today, calendar: cal).last?.answered == 0)
     }
+
+    @Test("今日・今週・先週に新しく習得した数を masteredAt で数える。週の始まりはカレンダーに従う") func gains() {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        cal.firstWeekday = 2  // 月曜始まり
+        func d(_ day: Int, _ hour: Int = 12) -> Date { cal.date(from: DateComponents(year: 2026, month: 10, day: day, hour: hour))! }
+        let today = d(28, 20)  // 水曜
+        let dates = [d(28, 9), d(28, 0), d(27), d(26, 0), d(25, 23), d(19), d(18), d(12)]
+        let g = MasteryStats.gains(masteredDates: dates, today: today, calendar: cal)
+        #expect(g.today == 2)
+        #expect(g.thisWeek == 4, "26 日（月）0 時から")
+        #expect(g.lastWeek == 2, "19 日（月）〜25 日（日）")
+        cal.firstWeekday = 1  // 日曜始まりなら 25 日も今週
+        #expect(MasteryStats.gains(masteredDates: dates, today: today, calendar: cal).thisWeek == 5)
+        #expect(MasteryStats.gains(masteredDates: [], today: today, calendar: cal) == MasteryGains())
+    }
+
+    @Test("1 セットで増えた習得: 開始後にはじめて習得した数と、あと 1 回の正解で習得になる数") func setGain() {
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+        func p(_ id: String, _ results: [Bool], mastered: Date? = nil) -> ProgressSnapshot {
+            ProgressSnapshot(itemID: id, recentResults: results, masteredAt: mastered)
+        }
+        let progress: [String: ProgressSnapshot] = [
+            "new": p("new", [true, true, true], mastered: start.addingTimeInterval(60)),
+            "old": p("old", [true, true, true], mastered: start.addingTimeInterval(-86_400)),  // 前から習得
+            "near": p("near", [false, true, true]),
+            "near2": p("near2", [true, true]),
+            "one": p("one", [true]),
+            "relapsed": p("relapsed", [true, false, true], mastered: start.addingTimeInterval(-86_400)),  // 再習得は数えない
+        ]
+        let ids = ["new", "new", "old", "near", "near2", "one", "relapsed", "missing"]
+        let g = MasteryStats.setGain(itemIDs: ids, progress: progress, since: start)
+        #expect(g.newlyMastered == 1)
+        #expect(g.nearlyMastered == 2)
+    }
 }

@@ -22,6 +22,7 @@ struct StatsView: View {
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
         let totalCorrect = progress.reduce(0) { $0 + $1.totalCorrect }
+        let gains = MasteryStats.gains(masteredDates: progress.compactMap(\.masteredAt))
         // クリアまでの目安（§4.1 → §4.6 [v1.9]）
         let estimates = Pace.estimates(
             tracks: tracks,
@@ -31,7 +32,7 @@ struct StatsView: View {
 
         ScrollView {
             VStack(spacing: 16) {
-                overview(overall, streak: streak, totalCorrect: totalCorrect)
+                overview(overall, streak: streak, totalCorrect: totalCorrect, gains: gains)
                 stageRows(tracks, estimates: estimates)
                 DailyChart(days: daily)
                     .glassCard()
@@ -52,7 +53,7 @@ struct StatsView: View {
 
     // MARK: - 達成度
 
-    private func overview(_ s: MasterySummary, streak: Streak.Result, totalCorrect: Int) -> some View {
+    private func overview(_ s: MasterySummary, streak: Streak.Result, totalCorrect: Int, gains: MasteryGains) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .firstTextBaseline) {
                 Text("習得")
@@ -70,6 +71,15 @@ struct StatsView: View {
             }
             MasteryBar(summary: s, height: 14)
             MasteryLegend(summary: s)
+            // 今週増えた習得 [v2.4]。習得率は 1 セットでは動きにくいので、増えた数で進みを見せる
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                Label("今週 +\(gains.thisWeek) 問を習得", systemImage: "sparkles")
+                    .font(.subheadline.weight(.semibold).monospacedDigit())
+                    .foregroundStyle(gains.thisWeek > 0 ? Color.green : Color.secondary)
+                Text("先週 +\(gains.lastWeek)")
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(.secondary)
+            }
             Divider()
             HStack(spacing: 24) {
                 stat("累計回答", "\(s.answered)")
