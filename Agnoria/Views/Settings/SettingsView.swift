@@ -13,7 +13,7 @@ struct SettingsView: View {
     @State private var confirmReset2 = false
     @State private var resetDone = false
     @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
-    /// 到達帯を下げようとしている軸と帯（確認してからやり直す §4.4 [v2.0]）
+    /// やり直そうとしている軸と帯（確認してからやり直す §4.4 [v2.0] [v2.5]）
     @State private var pendingRestart: (mode: DrillMode, level: Int)?
     @State private var confirmRestart = false
 
@@ -23,39 +23,55 @@ struct SettingsView: View {
             Form {
                 Section {
                     ForEach(DrillMode.allCases, id: \.self) { mode in
+                        // 先に進むだけ。戻る・今の帯からやり直すのは下の「やり直す…」から [v2.5]
                         Picker("\(mode.title)の到達帯", selection: Binding(
                             get: { settings.unlockedLevel(mode) },
                             set: { level in
-                                if level < settings.unlockedLevel(mode) {
-                                    // 下げる = その帯からやり直す。習得が消えるので確認してから
-                                    pendingRestart = (mode, level)
-                                    confirmRestart = true
-                                    return
-                                }
+                                guard level > settings.unlockedLevel(mode) else { return }
                                 settings.setUnlockedLevel(level, for: mode)
                                 model.analytics.log(.settingsChanged(key: "unlockedLevel.\(mode.rawValue)"))
                                 model.analytics.syncUserProperties()
                                 model.refreshWidgetSnapshot()
                             })) {
-                            ForEach(Stage.levels, id: \.self) { Text("\($0) 点帯").tag($0) }
+                            ForEach(Stage.levels.filter { $0 >= settings.unlockedLevel(mode) }, id: \.self) { Text("\($0) 点帯").tag($0) }
+                        }
+                    }
+                    // やり直し = 軸と帯（450 から今の到達帯まで）を選ぶ。習得が消えるので確認してから §4.4 [v2.5]
+                    Menu {
+                        ForEach(DrillMode.allCases, id: \.self) { mode in
+                            Menu(mode.title) {
+                                ForEach(Stage.levels.filter { $0 <= settings.unlockedLevel(mode) }, id: \.self) { level in
+                                    Button("\(level) 点帯から") {
+                                        pendingRestart = (mode, level)
+                                        confirmRestart = true
+                                    }
+                                }
+                            }
+                        }
+                    } label: {
+                        // 行のどこを押しても開くように、行の幅いっぱいにする
+                        Text("やり直す…")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(.rect)
+                    }
+                    .accessibilityIdentifier("stageRestartMenu")
+                    .confirmationDialog(restartTitle, isPresented: $confirmRestart, titleVisibility: .visible) {
+                        Button("やり直す", role: .destructive) {
+                            if let r = pendingRestart { model.restartStage(r.mode, from: r.level) }
+                            pendingRestart = nil
+                        }
+                        Button("キャンセル", role: .cancel) { pendingRestart = nil }
+                    } message: {
+                        if let r = pendingRestart {
+                            Text("\(r.level) 点帯以上の\(r.mode.title)の習得をリセットします。回答数・正解数・ブックマークは残ります。")
                         }
                     }
                 } header: {
                     Text("ステージ")
                 } footer: {
-                    Text("単語・文法・リスニングは別々に帯を進みます。おまかせと分野タイルは、それぞれの到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたいときはここで上げられます。下げると、その帯からやり直し（その帯以上の習得をリセット）になります。")
+                    Text("単語・文法・リスニングは別々に帯を進みます。おまかせと分野タイルは、それぞれの到達帯までのスコア帯から出題します。帯の習得率が 80% になると自動で次の帯へ進みます。先に進みたいときはここで上げられます。「やり直す」では、選んだ帯以上の習得をリセットして、その帯から学び直せます。")
                 }
-                .confirmationDialog(restartTitle, isPresented: $confirmRestart, titleVisibility: .visible) {
-                    Button("やり直す", role: .destructive) {
-                        if let r = pendingRestart { model.restartStage(r.mode, from: r.level) }
-                        pendingRestart = nil
-                    }
-                    Button("キャンセル", role: .cancel) { pendingRestart = nil }
-                } message: {
-                    if let r = pendingRestart {
-                        Text("\(r.level) 点帯以上の\(r.mode.title)の習得をリセットします。回答数・正解数・ブックマークは残ります。")
-                    }
-                }
+
 
 
                 Section {

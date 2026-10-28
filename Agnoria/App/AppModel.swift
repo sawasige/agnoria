@@ -607,7 +607,7 @@ final class AppModel {
         analytics.log(.bookmarkToggled(on: p.isBookmarked))
     }
 
-    /// 設定で到達帯を下げたときの「やり直し」（§3.4 / §4.4 [v2.0]、Issue #56）。
+    /// 設定の「やり直す…」（§3.4 / §4.4 [v2.0] [v2.5]、Issue #56）。今の到達帯からも、それより下の帯からも選べる。
     /// その軸の、level 以上の帯の問題の習得（直近の正誤と習得日時）を消して未学習に戻す。累計の回答数・正解数・ブックマーク・セットの記録は残す。
     /// 到達帯を level にし、最上位の演出フラグを戻し、開始の帯が level より上なら level まで下げる
     func restartStage(_ mode: DrillMode, from level: Int) {
