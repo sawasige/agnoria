@@ -33,6 +33,7 @@ struct HomeView: View {
         let tracks = Stage.tracks(items: model.catalog.levelItemsByMode, progress: pmap, unlocked: settings.unlockedLevels, floor: settings.startingLevel)
         let daily = MasteryStats.daily(sessions: sessions.map { ($0.finishedAt, $0.results) })
         let streak = Streak.compute(sessionDates: sessions.map(\.finishedAt))
+        let gains = MasteryStats.gains(masteredDates: progress.compactMap(\.masteredAt))
 
         ScrollView {
             VStack(spacing: 16) {
@@ -53,7 +54,7 @@ struct HomeView: View {
 
                     HStack(spacing: 12) {
                         StreakCard(streak: streak)
-                        TodayCard(today: daily.last)
+                        TodayCard(today: daily.last, gained: gains.today)
                     }
 
                     Button {
@@ -312,14 +313,22 @@ struct StreakCard: View {
     }
 }
 
-/// 今日の回答数と正解率
+/// 今日の回答数と正解率。今日新しく習得した数があれば添える [v2.4]
 struct TodayCard: View {
     let today: DayStat?
+    var gained = 0
 
     private var answered: Int { today?.answered ?? 0 }
     private var accuracy: Int? {
         guard let today, today.answered > 0 else { return nil }
         return Int((Double(today.correct) / Double(today.answered) * 100).rounded())
+    }
+
+    /// 3 行目。カードの高さを連続のカードと揃えるため、習得の数は正解率と同じ行に添える
+    private var caption: Text {
+        guard let accuracy else { return Text("1 セット 10 問から") }
+        guard gained > 0 else { return Text("正解率 \(accuracy)%") }
+        return Text("正解率 \(accuracy)% ・ \(Text("習得 +\(gained)").fontWeight(.semibold).foregroundStyle(.green))")
     }
 
     var body: some View {
@@ -336,7 +345,7 @@ struct TodayCard: View {
                     .fontDesign(.rounded)
                     .foregroundStyle(.secondary)
             }
-            Text(accuracy.map { "正解率 \($0)%" } ?? "1 セット 10 問から")
+            caption
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }

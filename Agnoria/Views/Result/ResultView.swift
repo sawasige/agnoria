@@ -39,6 +39,8 @@ struct ResultView: View {
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("\(run.questions.count)問中\(run.correctCount)問正解。\(message(correct: run.correctCount, total: run.questions.count))")
 
+                gainLine(model.lastSetGain)
+
                 ForEach(model.lastUnlocked, id: \.self) { opened in
                     if let level = opened.next {
                         HStack(spacing: 10) {
@@ -112,6 +114,20 @@ struct ResultView: View {
             if await model.askReminderIfNeeded() { return }
             guard model.consumeReviewRequest() else { return }
             requestReview()
+        }
+    }
+
+    /// このセットで増えた習得（§4.3 [v2.4]）。0 なら、あと 1 回の正解で習得になる問題の数。どちらも 0 なら出さない
+    @ViewBuilder
+    private func gainLine(_ gain: (newlyMastered: Int, nearlyMastered: Int)) -> some View {
+        if gain.newlyMastered > 0 {
+            Label("このセットで \(gain.newlyMastered) 問を新しく習得", systemImage: "sparkles")
+                .font(.subheadline.weight(.semibold).monospacedDigit())
+                .foregroundStyle(.green)
+        } else if gain.nearlyMastered > 0 {
+            Label("あと 1 回の正解で習得できる問題が \(gain.nearlyMastered) 問", systemImage: "sparkles")
+                .font(.subheadline.monospacedDigit())
+                .foregroundStyle(.secondary)
         }
     }
 
