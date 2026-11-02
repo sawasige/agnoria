@@ -107,7 +107,7 @@
         }
 
         .hero-overlay-tagline {
-            font-size: clamp(0.75rem, 1.4vw, 1.1rem);
+            font-size: clamp(0.68rem, 1.4vw, 1.1rem);
             font-weight: 500;
             line-height: 1.5;
         }
@@ -119,14 +119,14 @@
         }
 
         .hero-overlay-icon {
-            width: clamp(40px, 7vw, 88px);
-            height: clamp(40px, 7vw, 88px);
+            width: clamp(28px, 7vw, 88px);
+            height: clamp(28px, 7vw, 88px);
             border-radius: clamp(8px, 1.4vw, 20px);
             box-shadow: 0 4px 14px rgba(0,0,0,0.2);
         }
 
         .hero-overlay-name {
-            font-size: clamp(2rem, 6.5vw, 4.5rem);
+            font-size: clamp(1.4rem, 6.5vw, 4.5rem);
             font-weight: 800;
             letter-spacing: -0.02em;
             color: white;
@@ -243,6 +243,24 @@
             margin-bottom: 12px;
             letter-spacing: -0.02em;
             color: var(--heading);
+        }
+
+        /* アプリ名とサブタイトルを分け、途中で折り返さないようにする */
+        .brand-intro h1 .name,
+        .brand-intro h1 .sub {
+            display: block;
+        }
+
+        .brand-intro h1 .sub {
+            font-size: 0.55em;
+            font-weight: 700;
+            letter-spacing: 0;
+            margin-top: 4px;
+        }
+
+        /* 狭い画面で折り返すときは区切りの位置で（ヒーローの文字とタイトルで共用） */
+        .nw {
+            display: inline-block;
         }
 
         .brand-intro .lead {
@@ -587,8 +605,8 @@
             <div class="hero-overlay">
                 <p class="hero-overlay-tagline"
                    data-html
-                   data-ja="成長が、実感できる。<br>1日10問、3分で終わる英語ドリル。"
-                   data-en="Feel yourself getting better.<br>Ten questions a day, done in three minutes.">成長が、実感できる。<br>1日10問、3分で終わる英語ドリル。</p>
+                   data-ja="成長が、実感できる。<br><span class=&quot;nw&quot;>1日10問、</span><span class=&quot;nw&quot;>3分で終わる英語ドリル。</span>"
+                   data-en="Feel yourself getting better.<br>Ten questions a day, done in three minutes.">成長が、実感できる。<br><span class="nw">1日10問、</span><span class="nw">3分で終わる英語ドリル。</span></p>
                 <div class="hero-overlay-lockup">
                     <picture>
                         <source srcset="assets/logo-dark.png" media="(prefers-color-scheme: dark)">
@@ -597,8 +615,9 @@
                     <span class="hero-overlay-name">Agnoria</span>
                 </div>
                 <p class="hero-overlay-subtitle"
-                   data-ja="英単語・文法・応答問題 450〜600点"
-                   data-en="Business English vocabulary, grammar and question-response, 450 to 600">英単語と文法 450〜600点</p>
+                   data-html
+                   data-ja="<span class=&quot;nw&quot;>英単語・文法・応答問題</span> <span class=&quot;nw&quot;>450〜600点</span>"
+                   data-en="Business English vocabulary, grammar and question-response, 450 to 600"><span class="nw">英単語・文法・応答問題</span> <span class="nw">450〜600点</span></p>
             </div>
         </div>
         <a href="https://apps.apple.com/app/id6823061416">
@@ -613,7 +632,9 @@
     </section>
 
     <section class="brand-intro">
-        <h1 data-ja="Agnoria 英単語・文法・応答問題 450〜600点" data-en="Agnoria — Vocabulary, Grammar and Question-Response, 450 to 600">Agnoria 英単語・文法・応答問題 450〜600点</h1>
+        <h1 data-html
+            data-ja="<span class=&quot;name&quot;>Agnoria</span><span class=&quot;sub&quot;><span class=&quot;nw&quot;>英単語・文法・応答問題</span> <span class=&quot;nw&quot;>450〜600点</span></span>"
+            data-en="<span class=&quot;name&quot;>Agnoria</span><span class=&quot;sub&quot;>Vocabulary, Grammar and Question-Response, 450 to 600</span>"><span class="name">Agnoria</span><span class="sub"><span class="nw">英単語・文法・応答問題</span> <span class="nw">450〜600点</span></span></h1>
         <p class="lead" data-ja="開いて、おまかせの10問に答えるだけ。" data-en="Open the app and answer today&#39;s ten.">開いて、おまかせの10問に答えるだけ。</p>
         <p class="body" data-html
            data-ja="続かなかったのは、成長を実感できなかったから。Agnoria は、答えるたびに習得が積み上がり、450点帯から600点までスコア帯を一つずつ上がるので、成長が実感できます。今の実力に合わせて10問を選んで出すので、開いて答えるだけ。1回3分。TOEIC L&amp;R が初めての人、450〜600点の壁で止まっている人向け。<span class=&quot;highlight&quot;>広告なし、無料。</span>"
